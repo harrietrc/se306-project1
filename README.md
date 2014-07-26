@@ -1,8 +1,6 @@
 # Software Engineering Design 2
 Department of Electrical and Computer Engineering, University of Auckland
-### Project 1: Group robotic behavior simulation using Robot Operating System (ROS)
-
-<hr/>
+## Project 1: Group robotic behavior simulation using Robot Operating System (ROS)
 
 ### Table of Contents
 * [ROS Project](#about)
