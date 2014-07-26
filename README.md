@@ -1,10 +1,9 @@
 # Software Engineering Design 2
-## SOFTENG 306
+### SOFTENG 306
 ### Project 1: Group robotic behavior simulation using Robot Operating System (ROS)
-==============
 Department of Electrical and Computer Engineering, University of Auckland
 
-## Table of Contents
+### Table of Contents
 * [ROS Project](#about)
 * [Team Members](#team-members)
 
