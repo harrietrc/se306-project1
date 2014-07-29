@@ -24,9 +24,7 @@ Software Designer<br/><br/>
 Software Designer<br/><br/>
 <strong>Kester Balmes</strong><br/>
 Quality Engineer, Tester<br/><br/>
-<strong>Rj Rojos</strong><br/>
+<strong>Rodel Jasper Rojos</strong><br/>
 Quality Engineer, Tester<br/><br/>
 <strong>Govindalf Von Samarasinghe</strong><br/>
 Installer, Configuration Manager<br/><br/>
-<strong>Robin Feng</strong><br/>
-robin is robin
