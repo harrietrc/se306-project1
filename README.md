@@ -10,15 +10,23 @@
 In this project, we simulate small groups of robots that show simple collective behaviours, as explored in Swarm Robotics. The robots achieve collective behaviour through message exchanges. This is simulated in a graphical simulator.
 
 ## <a name="team-members"></a>Team Members
-<strong>Dae Kyung Kim</strong><br/>
-Software Engineer<br/><br/>
+<strong>Samanyu Kansara</strong><br/>
+Project Lead<br/><br/>
 <strong>John Lee</strong><br/>
 Solutions Architect<br/><br/>
+<strong>Harriet Robinson-Chen</strong><br/>
+Systems Analyst, Documentalist<br/><br/>
 <strong>Alan Lau</strong><br/>
-User Experience Designer<br/><br/>
+Planner, Systems Analyst<br/><br/>
 <strong>Mustafa Shehadeh</strong><br/>
-Swag Expert<br/><br/>
+Software Designer<br/><br/>
+<strong>Dae Kyung Kim</strong><br/>
+Software Designer<br/><br/>
 <strong>Kester Balmes</strong><br/>
-Quality Assurance<br/><br/>
+Quality Engineer, Tester<br/><br/>
+<strong>Rj Rojos</strong><br/>
+Quality Engineer, Tester<br/><br/>
+<strong>Govindalf Von Samarasinghe</strong><br/>
+Installer, Configuration Manager<br/><br/>
 <strong>Robin Feng</strong><br/>
-just some guy who wanted to be in our group
+robin is robin
