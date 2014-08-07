@@ -10,14 +10,17 @@
 //velocity of the robot
 double linear_x;
 double angular_z;
+
 double goal_x;
 double goal_y;
 double goal_theta;
+
 
 //pose of the robot
 double px;
 double py;
 double theta;
+
 double cur_angle;
 double init_vector_x;
 double init_vector_y;
@@ -62,6 +65,7 @@ void StageLaser_callback(sensor_msgs::LaserScan msg)
 
 int main(int argc, char **argv)
 {
+
  //initialize robot parameters
 
 	//Initial pose. This is same as the pose that you used in the world file to set	the robot pose.
