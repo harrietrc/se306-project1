@@ -16,7 +16,6 @@ double goal_x;
 double goal_y;
 double goal_theta;
 
-
 //current pose and orientation of the robot
 double px;
 double py;
@@ -78,9 +77,6 @@ int main(int argc, char **argv)
 	px = 10;
 	py = 10;
 	cur_angle = 0;
-
-	//Checks if stuff
-	isSet = false;
 
 	//Goal 
 	goal_x = 0;
