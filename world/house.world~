@@ -71,6 +71,10 @@ floorplan
 # throw in a robot
 myRobot( pose [ 10.000 10.000 0.000 0.000 ] name "r0" color "blue")
 myRobot( pose [ 15.000 20.000 0.000 0.000 ] name "r1" color "green")
+<<<<<<< HEAD
 myRobot( pose [ 10.000 30.000 0.000 0.000 ] name "r2" color "black")
 myRobot( pose [ 25.000 16.000 0.000 0.000 ] name "r3" color "yellow")
 myRobot( pose [ 5.000 28.000 0.000 0.000 ] name "r4" color "brown")
+=======
+
+>>>>>>> 37fd2c92386886ab617f993dd0e5ac0264b3d15b
