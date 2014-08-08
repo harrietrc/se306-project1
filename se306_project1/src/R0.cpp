@@ -11,24 +11,24 @@
 double linear_x;
 double angular_z;
 
+//goal pose and orientation
 double goal_x;
 double goal_y;
 double goal_theta;
 
 
-//pose of the robot
+//current pose and orientation of the robot
 double px;
 double py;
-double theta;
-
 double cur_angle;
+
+//Initial and goal vectors used to calculate goal theta
 double init_vector_x;
 double init_vector_y;
 double goal_vector_x;
 double goal_vector_y;
-double dot;
 
-double w;
+double dot;
 
 
 void StageOdom_callback(nav_msgs::Odometry msg)
@@ -40,7 +40,8 @@ void StageOdom_callback(nav_msgs::Odometry msg)
 		cur_angle = (2*M_PI)-acos(msg.pose.pose.orientation.w) * 2;
 	}	
 
-	//ROUNDINGSHIT cur_angle = ((int)(cur_angle * 10 + .5) / 10.0);
+	//Rounding to 3 decimal places
+	cur_angle = ((int)(cur_angle * 1000 + .5) / 1000.0);
 	
 	//When the robot is facing the correct direction, start moving
 	if (goal_theta == cur_angle) {
@@ -48,10 +49,15 @@ void StageOdom_callback(nav_msgs::Odometry msg)
 		linear_x = 0.2;
 	}
 	
-	//When robot reaches the goal, stop moving
-	if ((px == goal_x) && (py == goal_y)) {	
-		linear_x = 0;
-	
+	//Update the current position
+	px = msg.pose.pose.position.x;
+	py = msg.pose.pose.position.y;
+
+	//When robot reaches the goal, stop moving (with a leeway of 0.4)
+	if ((px <= goal_x + 0.2) && (px >= goal_x - 0.2)) {	
+		if ((py <= goal_y + 0.2) && (py >= goal_y - 0.2)) {		
+			linear_x = 0;
+		}
 	}
 
 }
@@ -73,6 +79,9 @@ int main(int argc, char **argv)
 	py = 10;
 	cur_angle = 0;
 
+	//Checks if stuff
+	isSet = false;
+
 	//Goal 
 	goal_x = 0;
 	goal_y = 0;
@@ -89,13 +98,15 @@ int main(int argc, char **argv)
 	//Calculating angle for robot to face to the goal
 	goal_theta = acos(dot/sqrt(pow(goal_vector_x,2) + pow(goal_vector_y,2)));
 	//rounding goal_theta to two decimal places
+	goal_theta = ((int)(goal_theta * 1000 + .5) / 1000.0);
 	
 	//Initial velocity
 	linear_x = 0;
-	angular_z = 0.2;
-
+	angular_z = 0.001;
+	
+	//Align local system to global coordinates
 	goal_x = goal_x - px;
-	goal_y = goal_x - py;  
+	goal_y = goal_y - py;  
 	
 	//You must call ros::init() first of all. ros::init() function needs to see argc and argv. The third argument is the name of the node
 	ros::init(argc, argv, "RobotNode0");
@@ -111,7 +122,7 @@ int main(int argc, char **argv)
 	ros::Subscriber StageOdo_sub = n.subscribe<nav_msgs::Odometry>("robot_0/odom",1000, StageOdom_callback);
 	ros::Subscriber StageLaser_sub = n.subscribe<sensor_msgs::LaserScan>("robot_0/base_scan",1000,StageLaser_callback);
 
-	ros::Rate loop_rate(10);
+	ros::Rate loop_rate(1000);
 
 	//a count of howmany messages we have sent
 	int count = 0;
