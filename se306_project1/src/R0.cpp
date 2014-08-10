@@ -57,6 +57,8 @@ void StageOdom_callback(nav_msgs::Odometry msg)
 	if (!(px == kitchen_corner[0] && py == kitchen_corner[1])) //If not at goal, keep going
 	{
 		ret = move(goal_x, goal_y, cur_angle, goal_theta, px, py);
+		linear_x = ret.first;
+		angular_z = ret.second;
 	} 
 	else //When goal reached, move to next goal
 	{
