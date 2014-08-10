@@ -198,4 +198,4 @@ if [ ! -z "$_SETUP_SH_ERROR" ]; then
   false
 fi
 
-export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:/afs/ec.auckland.ac.nz/users/e/b/ebal155/unixhome/Desktop/se306-project1q
+export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:/afs/ec.auckland.ac.nz/users/e/b/ebal155/unixhome/Desktop/se306-project1

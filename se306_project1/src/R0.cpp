@@ -51,6 +51,8 @@ void StageOdom_callback(nav_msgs::Odometry msg)
 	px = msg.pose.pose.position.x;
 	py = msg.pose.pose.position.y;
 	
+	ROS_INFO("px: %f", px);
+	ROS_INFO("py: %f", py);
 
 	if (!(px == kitchen_corner[0] && py == kitchen_corner[1])) //If not at goal, keep going
 	{
@@ -125,8 +127,8 @@ int main(int argc, char **argv)
 	cur_angle = 0;
 
 	//Goal 
-	goal_x = 0;
-	goal_y = 0;
+	goal_x = kitchen_corner[0];
+	goal_y = kitchen_corner[1];
 
 	goal_theta = calc_goal(goal_x, goal_y, cur_angle, px, py);
 	
