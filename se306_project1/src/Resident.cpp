@@ -3,6 +3,7 @@
 #include <geometry_msgs/Twist.h>
 #include <nav_msgs/Odometry.h>
 #include <sensor_msgs/LaserScan.h>
+#include "se306_project1/Resident-msg.h" // Resident-msg.msg 
 
 #include <sstream>
 #include "math.h"
@@ -27,6 +28,7 @@ Class Resident : public Agent {
 	
 	int health = 100;
 	int boredom = 100;
+	int hunger = 100;
 	void StageOdom_callback(nav_msgs::Odometry msg)
 	{
 		//This is the call back function to process odometry messages coming from Stage. 	
@@ -66,6 +68,9 @@ Class Resident : public Agent {
 	//to stage
 	ros::Publisher RobotNode_stage_pub = n.advertise<geometry_msgs::Twist>("robot_0/cmd_vel",1000); 
 	
+	//custom message/topic publisher "robot_0/state" for now
+	ros::Publisher Resident_pub = n.advertise<se306_project1::Resident-msg>("robot_0/state",1000); 
+	
 	//subscribe to listen to messages coming from stage
 	ros::Subscriber StageOdo_sub = n.subscribe<nav_msgs::Odometry>("robot_0/odom",1000, StageOdom_callback);
 	ros::Subscriber StageLaser_sub = n.subscribe<sensor_msgs::LaserScan>("robot_0/base_scan",1000,StageLaser_callback);
@@ -88,6 +93,20 @@ Class Resident : public Agent {
 		//publish the message
 		RobotNode_stage_pub.publish(RobotNode_cmdvel);
 		
+		//custom resident message object
+		se306_project1::Resident-msg ResidentMsg;
+		ResidentMsg.robot_id = robot_id;
+		ResidentMsg.health = health;
+		ResidentMsg.boredom = boredom;
+		ResidentMsg.hunger = hunger;
+		ResidentMsg.x = px;
+		ResidentMsg.y = py;
+		ResidentMsg.theta = theta;
+		ResidentMsg.robot_type = "Resident";
+		
+		//custom resident message publisher
+		Resident_pub.publish(ResidentMsg);
+		
 		ros::spinOnce();
 	
 		loop_rate.sleep();
@@ -99,6 +118,7 @@ Class Resident : public Agent {
 	}
 	
 	// Return type of robot
+	// MIGHT HAVE TO RETURN A STRING BECAUSE ROS DOESN'T SUPPORT ENUM IN MESSAGES
 	Type get_Type(){
 	
 	}
