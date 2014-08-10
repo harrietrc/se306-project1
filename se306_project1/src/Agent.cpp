@@ -39,7 +39,8 @@ Class Agent {
 		//you can access the range data from msg.ranges[i]. i = sample number
 		
 	}
-	
+
+
 	int main(int argc, char **argv)
 	{
 	
