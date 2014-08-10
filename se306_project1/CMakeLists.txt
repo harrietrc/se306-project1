@@ -17,7 +17,7 @@ set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 
 #uncomment if you have defined messages
-rosbuild_genmsg()
+#rosbuild_genmsg() #!!! I commented this out in order to make it build. Should it be uncommented? - Harriet
 #uncomment if you have defined services
 #rosbuild_gensrv()
 
@@ -29,5 +29,4 @@ rosbuild_genmsg()
 #rosbuild_add_executable(example examples/example.cpp)
 #target_link_libraries(example ${PROJECT_NAME})
 #rosbuild_add_executable(Resident src/Resident.cpp)
-rosbuild_add_executable(R0 src/R0.cpp)
-#rosbuild_add_executable(R1 src/R1.cpp)
+rosbuild_add_executable(R0 src/R0.cpp src/time_conversion.cpp)
