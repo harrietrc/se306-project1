@@ -17,25 +17,18 @@ double goal_x;
 double goal_y;
 double goal_theta;
 
-
 //current pose and orientation of the robot
 double px;
 double py;
 double cur_angle;
 
-//Initial and goal vectors used to calculate goal theta
-double init_vector_x;
-double init_vector_y;
-double goal_vector_x;
-double goal_vector_y;
+
 
 double kitchen[2] = {45,5};
 double kitchen_corner[2] = {32, 5};
 double home_centre[2] = {32, 25};
 double bed_corner[2] = {32, 40};
 double toilet[2] = {10,40};
-
-double dot;
 
 
 void StageOdom_callback(nav_msgs::Odometry msg)
@@ -76,19 +69,21 @@ void StageLaser_callback(sensor_msgs::LaserScan msg)
 	//you can access the range data from msg.ranges[i]. i = sample number
 }
 
-int main(int argc, char **argv)
+void move()
 {
 
- //initialize robot parameters
+}
 
-	//Initial pose. This is same as the pose that you used in the world file to set	the robot pose.
-	px = 23;
-	py = 14;
-	cur_angle = 0;
+double calc_goal(double goal_x, double goal_y, double cur_angle, double px, double py) 
+{
 
-	//Goal 
-	goal_x = 0;
-	goal_y = 0;
+	//Initial and goal vectors used to calculate goal theta
+	double init_vector_x;
+	double init_vector_y;
+	double goal_vector_x;
+	double goal_vector_y;
+	double dot;
+	double goal_theta;
 
 	//Finding the vector that the robot is facing and the goal vector
 	init_vector_x = cos(cur_angle);
@@ -103,6 +98,25 @@ int main(int argc, char **argv)
 	goal_theta = acos(dot/sqrt(pow(goal_vector_x,2) + pow(goal_vector_y,2)));
 	//rounding goal_theta to two decimal places
 	goal_theta = ((int)(goal_theta * 1000 + .5) / 1000.0);
+
+	return goal_theta;
+}
+
+int main(int argc, char **argv)
+{
+
+ //initialize robot parameters
+
+	//Initial pose. This is same as the pose that you used in the world file to set	the robot pose.
+	px = 32;
+	py = 25;
+	cur_angle = 0;
+
+	//Goal 
+	goal_x = 0;
+	goal_y = 0;
+
+	goal_theta = calc_goal(goal_x, goal_y, cur_angle, px, py);
 	
 	//Initial velocity
 	linear_x = 0;
