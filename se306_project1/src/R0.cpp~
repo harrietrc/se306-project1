@@ -21,22 +21,23 @@ double px;
 double py;
 double cur_angle;
 
+std::pair<double, double> ret;	
+
 double kitchen[2] = {45,5};
 double kitchen_corner[2] = {32, 5};
 double home_centre[2] = {32, 25};
 double bed_corner[2] = {32, 40};
 double toilet[2] = {10,40};
 
-double moveX(double goal_x, double goal_y, double cur_angle, double goal_theta, double px, double py);
-double moveZ(double goal_x, double goal_y, double cur_angle, double goal_theta, double px, double py);
+std::pair<double, double> move(double goal_x, double goal_y, double cur_angle, double goal_theta, double px, double py);
+//double moveZ(double goal_x, double goal_y, double cur_angle, double goal_theta, double px, double py);
 double calc_goal(double goal_x, double goal_y, double cur_angle, double px, double py); 
 void StageOdom_callback(nav_msgs::Odometry msg); 
 
 
 void StageOdom_callback(nav_msgs::Odometry msg)
 {
-	
-	//std::pair<double, double> ret;	
+	ret = std::make_pair(0, 0); //initialize pair. Used to get return.
 
 	//Converting from quaternion to radians
 	cur_angle = acos(msg.pose.pose.orientation.w) * 2;
@@ -54,76 +55,36 @@ void StageOdom_callback(nav_msgs::Odometry msg)
 
 	if (!(px == kitchen_corner[0] && py == kitchen_corner[1])) //If not at goal, keep going
 	{
-		//ret = move(goal_x, goal_y, cur_angle, goal_theta, px, py);
-		linear_x = moveX(goal_x, goal_y, cur_angle, goal_theta, px, py);
-		angular_z =  moveZ(goal_x, goal_y, cur_angle, goal_theta, px, py);
+		ret = move(goal_x, goal_y, cur_angle, goal_theta, px, py);
 	} 
 	else //When goal reached, move to next goal
 	{
 		goal_x = kitchen[0];
 		goal_y = kitchen[1];
 	}
-
 }
 
-//Keeps robot moving by changing linear_x
-double moveX(double goal_x, double goal_y, double cur_angle, double goal_theta, double px, double py) 
+//Keeps robot moving by changing linear_x and angular_z
+std::pair<double, double> move(double goal_x, double goal_y, double cur_angle, double goal_theta, double px, double py) 
 {
 
-
-	double _angular_z;
-	double _linear_x;
-	//Return value of move() function, contains linear_x and angular_x. Defines how robot movees between goals.
-	//std::pair<double, double> ret;
+ 	std::pair <double,double> _ret (0, 0); //Return value of move() function, contains linear_x and angular_x. Defines how robot movees between goals.
 
 	//When the robot is facing the correct direction, start moving
 	if (goal_theta == cur_angle) {
-		_angular_z = 0; //angular_z
-		_linear_x = 0.2; //linear_x
+		_ret.first = 0.2; //linear_x
+		_ret.second = 0; //angular_z
 	}
 	
-
 	//When robot reaches the goal, stop moving (with a leeway of 0.4)
 	if ((px <= goal_x + 0.2) && (px >= goal_x - 0.2)) {	
 		if ((py <= goal_y + 0.2) && (py >= goal_y - 0.2)) {		
-			_linear_x = 0; //linear_x
+			_ret.first = 0; //linear_x
 		}
 	}
 	
-	//Make a pair in order to return it
-	//ret = std::make_pair (linear_x,angular_z);
-	return _linear_x +_angular_z - angular_z; //C++ shenanigans compensation
+	return _ret; 
 }
-
-//Keeps robot moving by changing angular_z
-double moveZ(double goal_x, double goal_y, double cur_angle, double goal_theta, double px, double py) 
-{
-	
-	double _angular_z;
-	double _linear_x;
-	//Return value of move() function, contains linear_x and angular_x. Defines how robot movees between goals.
-	//std::pair<double, double> ret;
-
-	//When the robot is facing the correct direction, start moving
-	if (goal_theta == cur_angle) {
-		_angular_z = 0; //angular_z
-		_linear_x = 0.2; //linear_x
-	}
-	
-
-	//When robot reaches the goal, stop moving (with a leeway of 0.4)
-	if ((px <= goal_x + 0.2) && (px >= goal_x - 0.2)) {	
-		if ((py <= goal_y + 0.2) && (py >= goal_y - 0.2)) {		
-			_linear_x = 0; //linear_x
-		}
-	}
-	
-	//Make a pair in order to return it
-	//ret = std::make_pair (linear_x,angular_z);
-	return _angular_z + _linear_x - _linear_x; //C++ shenanigans compensation
-
-}
-
 
 double calc_goal(double goal_x, double goal_y, double cur_angle, double px, double py) 
 {
