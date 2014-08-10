@@ -19,7 +19,6 @@ double goal_theta;
 
 
 //current pose and orientation of the robot
->>>>>>> 37fd2c92386886ab617f993dd0e5ac0264b3d15b
 double px;
 double py;
 double cur_angle;
@@ -31,16 +30,6 @@ double goal_vector_x;
 double goal_vector_y;
 
 double dot;
-
-
-double cur_angle;
-double init_vector_x;
-double init_vector_y;
-double goal_vector_x;
-double goal_vector_y;
-double dot;
-
-double w;
 
 
 void StageOdom_callback(nav_msgs::Odometry msg)
@@ -87,8 +76,8 @@ int main(int argc, char **argv)
  //initialize robot parameters
 
 	//Initial pose. This is same as the pose that you used in the world file to set	the robot pose.
-	px = 10;
-	py = 10;
+	px = 23;
+	py = 14;
 	cur_angle = 0;
 
 	//Goal 
