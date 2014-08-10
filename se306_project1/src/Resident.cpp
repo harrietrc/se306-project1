@@ -68,8 +68,8 @@ Class Resident : public Agent {
 	//to stage
 	ros::Publisher RobotNode_stage_pub = n.advertise<geometry_msgs::Twist>("robot_0/cmd_vel",1000); 
 	
-	//custom message/topic publisher "robot_0/state" for now
-	ros::Publisher Resident_pub = n.advertise<se306_project1::Resident-msg>("robot_0/state",1000); 
+	//custom message/topic publisher "resident/state" for now
+	ros::Publisher Resident_pub = n.advertise<se306_project1::Resident-msg>("resident/state",1000); 
 	
 	//subscribe to listen to messages coming from stage
 	ros::Subscriber StageOdo_sub = n.subscribe<nav_msgs::Odometry>("robot_0/odom",1000, StageOdom_callback);

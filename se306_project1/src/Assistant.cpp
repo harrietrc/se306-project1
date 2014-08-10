@@ -42,6 +42,20 @@ Class Assistant : public Agent {
 		
 	}
 	
+	//custom resident callback function, you get the message object that was sent from Resident
+	void resident_callback(se306_project1::Resident-msg msg)
+	{
+		// do something with the values
+		// ResidentMsg.robot_id = robot_id;
+		// ResidentMsg.health = health;
+		// ResidentMsg.boredom = boredom;
+		// ResidentMsg.hunger = hunger;
+		// ResidentMsg.x = px;
+		// ResidentMsg.y = py;
+		// ResidentMsg.theta = theta;
+		// ResidentMsg.robot_type = "Resident";
+	}
+	
 	int main(int argc, char **argv)
 	{
 	
@@ -68,6 +82,9 @@ Class Assistant : public Agent {
 	//subscribe to listen to messages coming from stage
 	ros::Subscriber StageOdo_sub = n.subscribe<nav_msgs::Odometry>("robot_0/odom",1000, StageOdom_callback);
 	ros::Subscriber StageLaser_sub = n.subscribe<sensor_msgs::LaserScan>("robot_0/base_scan",1000,StageLaser_callback);
+	
+	//custom Resident subscriber to "resident/state"
+	ros::Subscriber Resident_sub = n.subscribe<se306_project1::Resident-msg>("resident/state",1000,resident_callback);
 	
 	ros::Rate loop_rate(10);
 	
