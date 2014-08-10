@@ -29,6 +29,12 @@ double init_vector_y;
 double goal_vector_x;
 double goal_vector_y;
 
+double kitchen[2] = {45,5};
+double kitchen_corner[2] = {32, 5};
+double home_centre[2] = {32, 25};
+double bed_corner[2] = {32, 40};
+double toilet[2] = {10,40};
+
 double dot;
 
 

@@ -29,6 +29,11 @@ double init_vector_y;
 double goal_vector_x;
 double goal_vector_y;
 
+double kitchen[2] = {45,5};
+double kitchen_corner[2] = {32, 5};
+double home_centre[2] = {32, 25};
+double bed_corner[2] = {32, 40};
+
 double dot;
 
 
@@ -76,8 +81,8 @@ int main(int argc, char **argv)
  //initialize robot parameters
 
 	//Initial pose. This is same as the pose that you used in the world file to set	the robot pose.
-	px = 25;
-	py = 34;
+	px = 23;
+	py = 14;
 	cur_angle = 0;
 
 	//Goal 
