@@ -60,8 +60,8 @@ void StageOdom_callback(nav_msgs::Odometry msg)
 	
 	//ROS_INFO("px: %f", px);
 	//ROS_INFO("py: %f", py);
-	ROS_INFO("Current angle: %f", cur_angle);
-	ROS_INFO("Goal theta: %f", goal_theta);
+	//ROS_INFO("Current angle: %f", cur_angle);
+	//ROS_INFO("Goal theta: %f", goal_theta);
 	//ROS_INFO("goal x: %f", goal_x);
 	//ROS_INFO("goal y: %f", goal_y);
 	
@@ -85,7 +85,6 @@ void StageOdom_callback(nav_msgs::Odometry msg)
 					goal_theta = val - goal_pair.first;
 				}
 			}
-			//goal_theta = 0;
 			is_called = false;
 		}
 
@@ -95,6 +94,7 @@ void StageOdom_callback(nav_msgs::Odometry msg)
 			goal_theta = 0;
 		}
 	}
+	
 	else //Do this until goal is reached
 	{	
 		is_called = true;
@@ -102,6 +102,11 @@ void StageOdom_callback(nav_msgs::Odometry msg)
 		ret = move(goal_x, goal_y, cur_angle, goal_theta, px, py);	
 		linear_x = ret.first;
 		angular_z = ret.second;
+		if ((px <= kitchen[0] + 0.2) && (px >= kitchen[0] - 0.2) && (py <= kitchen[1] + 0.2) && (py >= kitchen[1] - 0.2)) {	
+			linear_x = 0;
+			angular_z = 0;
+			ROS_INFO("Linear x: %f", linear_x);
+		}
 	}
 
 }
