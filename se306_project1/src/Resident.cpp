@@ -29,6 +29,8 @@
 	int boredom = 100;
 	int hunger = 100;
 	
+	int hungerReductionRate = 1; //1 hunger point reduction per second
+	
 	void StageOdom_callback(nav_msgs::Odometry msg)
 	{
 		//This is the call back function to process odometry messages coming from Stage. 	
@@ -93,13 +95,14 @@
 		//publish the message
 		RobotNode_stage_pub.publish(RobotNode_cmdvel);
 		
-		//custom resident message object
-
+		if (count % (10 / hungerReductionRate) == 0){
+				hunger -= 1;
+		}
 		
 		
 		std_msgs::String msg;
 	    std::stringstream ss;
-	    ss << "Hello world" << health;
+	    ss << "Hello world" << hunger;
 	    msg.data = ss.str();
 	    
 		//custom resident message publisher
