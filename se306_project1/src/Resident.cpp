@@ -3,12 +3,11 @@
 #include <geometry_msgs/Twist.h>
 #include <nav_msgs/Odometry.h>
 #include <sensor_msgs/LaserScan.h>
-#include "se306_project1/Resident-msg.h" // Resident-msg.msg 
+//#include "se306_project1/ResidentMsg.h" // Resident-msg.msg 
 
 #include <sstream>
 #include "math.h"
 
-Class Resident : public Agent {
 	//velocity of the robot
 	double linear_x;
 	double angular_z;
@@ -19,16 +18,17 @@ Class Resident : public Agent {
 	double theta;
 	
 	// Enumeration of type of robot
-	enum Type{FRIEND, RELATIVE, DOCTOR, NURSE, CAREGIVER, ASSISTANT, RESIDENT};
+	// enum Type{FRIEND, RELATIVE, DOCTOR, NURSE, CAREGIVER, ASSISTANT, RESIDENT};
 	
 	int robot_id;
 	
 	// Enum or string? to be specified
-	String status;
+	//String status;
 	
 	int health = 100;
 	int boredom = 100;
 	int hunger = 100;
+	
 	void StageOdom_callback(nav_msgs::Odometry msg)
 	{
 		//This is the call back function to process odometry messages coming from Stage. 	
@@ -69,7 +69,7 @@ Class Resident : public Agent {
 	ros::Publisher RobotNode_stage_pub = n.advertise<geometry_msgs::Twist>("robot_0/cmd_vel",1000); 
 	
 	//custom message/topic publisher "resident/state" for now
-	ros::Publisher Resident_pub = n.advertise<se306_project1::Resident-msg>("resident/state",1000); 
+	ros::Publisher Resident_pub = n.advertise<std_msgs::String>("residentStatus",1000); 
 	
 	//subscribe to listen to messages coming from stage
 	ros::Subscriber StageOdo_sub = n.subscribe<nav_msgs::Odometry>("robot_0/odom",1000, StageOdom_callback);
@@ -89,23 +89,21 @@ Class Resident : public Agent {
 		//messages to stage
 		RobotNode_cmdvel.linear.x = linear_x;
 		RobotNode_cmdvel.angular.z = angular_z;
-	        
+	    
 		//publish the message
 		RobotNode_stage_pub.publish(RobotNode_cmdvel);
 		
 		//custom resident message object
-		se306_project1::Resident-msg ResidentMsg;
-		ResidentMsg.robot_id = robot_id;
-		ResidentMsg.health = health;
-		ResidentMsg.boredom = boredom;
-		ResidentMsg.hunger = hunger;
-		ResidentMsg.x = px;
-		ResidentMsg.y = py;
-		ResidentMsg.theta = theta;
-		ResidentMsg.robot_type = "Resident";
+
 		
+		
+		std_msgs::String msg;
+	    std::stringstream ss;
+	    ss << "Hello world" << health;
+	    msg.data = ss.str();
+	    
 		//custom resident message publisher
-		Resident_pub.publish(ResidentMsg);
+		Resident_pub.publish(msg);
 		
 		ros::spinOnce();
 	
@@ -119,33 +117,32 @@ Class Resident : public Agent {
 	
 	// Return type of robot
 	// MIGHT HAVE TO RETURN A STRING BECAUSE ROS DOESN'T SUPPORT ENUM IN MESSAGES
-	Type get_Type(){
+	//Type get_Type(){
 	
-	}
+	//}
 	
 	// Get id of robot
-	int get_id(){
-	
-	}
+	//int get_id(){
+
+	//}
 	
 	// Wakes up
-	void wake_up(){
+	//void wake_up(){
 		
-	}
+	//}
 	
 	// Eat
-	void eat(){
+	//void eat(){
 	
-	}
+	//}
 	
 	// Takes medicine
-	void take_medicine(){
+	//void take_medicine(){
 	
-	}
+	//}
 	
 	// Accepts entertainment
-	void accept_entertainment(){
+	//void accept_entertainment(){
 	
-	}
+	//}
 
-};

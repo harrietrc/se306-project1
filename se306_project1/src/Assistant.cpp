@@ -3,12 +3,11 @@
 #include <geometry_msgs/Twist.h>
 #include <nav_msgs/Odometry.h>
 #include <sensor_msgs/LaserScan.h>
-#include "se306_project1/Resident-msg.h" // Resident-msg.msg 
+//#include "se306_project1/ResidentMsg.h" // Resident-msg.msg 
 
 #include <sstream>
 #include "math.h"
 
-Class Assistant : public Agent {
 	//velocity of the robot
 	double linear_x;
 	double angular_z;
@@ -19,13 +18,13 @@ Class Assistant : public Agent {
 	double theta;
 	
 	// Enumeration of type of robot
-	enum Type{FRIEND, RELATIVE, DOCTOR, NURSE, CAREGIVER, ASSISTANT, RESIDENT};
+	//enum Type{FRIEND, RELATIVE, DOCTOR, NURSE, CAREGIVER, ASSISTANT, RESIDENT};
 	
-	int robot_id;
-	int numOfAssistants;
+	int robot_id = 10;
+	//int numOfAssistants;
 	
 	// Enum or string? to be specified
-	String Status;
+	//String Status;
 	
 	void StageOdom_callback(nav_msgs::Odometry msg)
 	{
@@ -44,10 +43,10 @@ Class Assistant : public Agent {
 	}
 	
 	//custom resident callback function, you get the message object that was sent from Resident
-	void resident_callback(se306_project1::Resident-msg msg)
+	void residentStatusCallback(const std_msgs::String::ConstPtr& msg)
 	{
 		// do something with the values
-		// ResidentMsg.robot_id = robot_id;
+		// msg.robot_id = robot_id;
 		// ResidentMsg.health = health;
 		// ResidentMsg.boredom = boredom;
 		// ResidentMsg.hunger = hunger;
@@ -55,6 +54,7 @@ Class Assistant : public Agent {
 		// ResidentMsg.y = py;
 		// ResidentMsg.theta = theta;
 		// ResidentMsg.robot_type = "Resident";
+		ROS_INFO("Working [%s]", msg->data.c_str());
 	}
 	
 	int main(int argc, char **argv)
@@ -71,7 +71,7 @@ Class Assistant : public Agent {
 		angular_z = 0.2;
 		
 	//You must call ros::init() first of all. ros::init() function needs to see argc and argv. The third argument is the name of the node
-	ros::init(argc, argv, "RobotNode0");
+	ros::init(argc, argv, "RobotNode1");
 	
 	//NodeHandle is the main access point to communicate with ros.
 	ros::NodeHandle n;
@@ -85,7 +85,7 @@ Class Assistant : public Agent {
 	ros::Subscriber StageLaser_sub = n.subscribe<sensor_msgs::LaserScan>("robot_0/base_scan",1000,StageLaser_callback);
 	
 	//custom Resident subscriber to "resident/state"
-	ros::Subscriber Resident_sub = n.subscribe<se306_project1::Resident-msg>("resident/state",1000,resident_callback);
+	ros::Subscriber Resident_sub = n.subscribe<std_msgs::String>("residentStatus",1000,residentStatusCallback);
 	
 	ros::Rate loop_rate(10);
 	
@@ -115,36 +115,34 @@ Class Assistant : public Agent {
 	
 	}
 	
-	// Return type of robot
-	Type get_Type(){
+	//// Return type of robot
+	//Type get_Type(){
 	
-	}
+	//}
 	
-	// Get id of robot
-	int get_id(){
+	//// Get id of robot
+	//int get_id(){
 	
-	}
+	//}
 	
-	// Gives medication to the resident
-	void give_medication(){
+	//// Gives medication to the resident
+	//void give_medication(){
 		
-	}
+	//}
 	
-	// Cooks for the resident
-	void cook(){
+	//// Cooks for the resident
+	//void cook(){
 	
-	}
+	//}
 	
-	// Entertain the resident
-	void entertain(){
+	//// Entertain the resident
+	//void entertain(){
 	
-	}
+	//}
 	
-	// Gives companionship to resident
-	void give_companionship(){
+	//// Gives companionship to resident
+	//void give_companionship(){
 	
-	}
-	
+	//}
 	
 
-};
