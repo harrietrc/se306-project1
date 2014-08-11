@@ -22,11 +22,20 @@ double px;
 double py;
 double cur_angle;
 
+int cc = 0; //current_checkpoint = 0;
 
-bool is_called = true;
+bool is_called = true; 
 
 std::pair<double,bool> goal_pair;
 std::pair<double, double> ret;	
+
+int checkpoints[5][2] = {  
+{30, 25}, 
+{30, 7}, 
+{43, 7},
+{30, 7},
+{30, 25}  
+};
 
 double kitchen[2] = {43,7};
 double kitchen_corner[2] = {30, 7};
@@ -55,8 +64,8 @@ void StageOdom_callback(nav_msgs::Odometry msg)
 	cur_angle = ((int)(cur_angle * 1000 + .5) / 1000.0);
 	
 	//Update the current position
-	px = msg.pose.pose.position.x + home_centre[0];
-	py = msg.pose.pose.position.y + home_centre[1];
+	px = msg.pose.pose.position.x + checkpoints[cc][0];
+	py = msg.pose.pose.position.y + checkpoints[cc][1];
 	
 	//ROS_INFO("px: %f", px);
 	//ROS_INFO("py: %f", py);
@@ -66,9 +75,11 @@ void StageOdom_callback(nav_msgs::Odometry msg)
 	//ROS_INFO("goal y: %f", goal_y);
 	
 	//What to do when goal reached	
-	if ((px <= kitchen_corner[0] + 0.2) && (px >= kitchen_corner[0] - 0.2) && (py <= kitchen_corner[1] + 0.2) && (py >= kitchen_corner[1] - 0.2)) {	
-		goal_x = kitchen[0];
-		goal_y = kitchen[1];
+	if ((px <= checkpoints[cc+1][0] + 0.2) && (px >= checkpoints[cc+1][0] - 0.2) && (py <= checkpoints[cc+1][1] + 0.2) && (py >= checkpoints[cc+1][1] - 0.2)) {	
+		goal_x = checkpoints[cc+2][0];
+		goal_y = checkpoints[cc+2][1];
+		
+		//cc++;
 
 		if (is_called)
 		{	
@@ -102,7 +113,7 @@ void StageOdom_callback(nav_msgs::Odometry msg)
 		ret = move(goal_x, goal_y, cur_angle, goal_theta, px, py);	
 		linear_x = ret.first;
 		angular_z = ret.second;
-		if ((px <= kitchen[0] + 1) && (px >= kitchen[0] - 1) && (py <= kitchen[1] + 1) && (py >= kitchen[1] - 1)) {	
+		if ((px <= checkpoints[cc+2][0] + 1) && (px >= checkpoints[cc+2][0] - 1) && (py <= checkpoints[cc+2][1] + 1) && (py >= checkpoints[cc+2][1] - 1)) {	
 			linear_x = 0;
 			angular_z = 0;
 			ROS_INFO("Linear x: %f", linear_x);
@@ -191,13 +202,13 @@ int main(int argc, char **argv)
 	goal_pair = std::make_pair(0, false);
 
 	//Initial pose. This is same as the pose that you used in the world file to set	the robot pose.
-	px = home_centre[0];
-	py = home_centre[1];
+	px = checkpoints[cc][0];
+	py = checkpoints[cc][1];
 	cur_angle = 0;
 
 	//Goal 
-	goal_x = kitchen_corner[0];
-	goal_y = kitchen_corner[1];
+	goal_x = checkpoints[cc+1][0];
+	goal_y = checkpoints[cc+1][1];
 
 	goal_pair = calc_goal(goal_x, goal_y, cur_angle, px, py);
 	goal_theta = goal_pair.first;	
