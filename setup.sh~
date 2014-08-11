@@ -23,7 +23,8 @@ if [ x"$_ROSINSTALL_IN_RECURSION" != x"recurse" ] ; then
   export ROS_PACKAGE_PATH=
 fi
 
-export ROS_WORKSPACE=/afs/ec.auckland.ac.nz/users/e/b/ebal155/unixhome/Desktop/se306-project1
+export ROS_WORKSPACE=/afs/ec.auckland.ac.nz/users/m/s/mshe140/unixhome/se306-project1
+
 if [ ! "$ROS_MASTER_URI" ] ; then export ROS_MASTER_URI=http://localhost:11311 ; fi
 unset ROS_ROOT
 
@@ -167,7 +168,9 @@ EOPYTHON`
 unset _ROS_PACKAGE_PATH_ROSINSTALL
 
 # restore ROS_WORKSPACE in case other setup.sh changed/unset it
-export ROS_WORKSPACE=/afs/ec.auckland.ac.nz/users/e/b/ebal155/unixhome/Desktop/se306-project1
+
+export ROS_WORKSPACE=/afs/ec.auckland.ac.nz/users/m/s/mshe140/unixhome/se306-project1
+
 
 # if setup.sh did not set ROS_ROOT (pre-fuerte)
 if [ -z "${ROS_ROOT}" ]; then
@@ -195,5 +198,9 @@ if [ ! -z "$_SETUP_SH_ERROR" ]; then
   # return failure code when sourcing file
   false
 fi
+<<<<<<< HEAD
 
 export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:/afs/ec.auckland.ac.nz/users/e/b/ebal155/unixhome/Desktop/se306-project1
+=======
+export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:~/se306-project1/
+>>>>>>> 89261d5baace9542a0fe965a8cd8d97f3dbca7a7
