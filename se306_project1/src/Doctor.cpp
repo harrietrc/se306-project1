@@ -68,7 +68,7 @@
 		angular_z = 0.2;
 		
 	//You must call ros::init() first of all. ros::init() function needs to see argc and argv. The third argument is the name of the node
-	ros::init(argc, argv, "RobotNode0");
+	ros::init(argc, argv, "Doctor");
 	
 	//NodeHandle is the main access point to communicate with ros.
 	ros::NodeHandle n;
