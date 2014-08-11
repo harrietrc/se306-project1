@@ -7,7 +7,7 @@
 #include <sstream>
 #include "math.h"
 
-Class Doctor : public Visitor {
+//Class Doctor : public Visitor {
 	//velocity of the robot
 	double linear_x;
 	double angular_z;
@@ -28,8 +28,8 @@ Class Doctor : public Visitor {
 		//This is the call back function to process odometry messages coming from Stage. 	
 		px = 5 + msg.pose.pose.position.x;
 		py =10 + msg.pose.pose.position.y;
-		ROS_INFO("Current x position is: %f", px);
-		ROS_INFO("Current y position is: %f", py);
+		//ROS_INFO("Current x position is: %f", px);
+		//ROS_INFO("Current y position is: %f", py);
 	}
 	
 	void StageLaser_callback(sensor_msgs::LaserScan msg)
@@ -37,6 +37,21 @@ Class Doctor : public Visitor {
 		//This is the callback function to process laser scan messages
 		//you can access the range data from msg.ranges[i]. i = sample number
 		
+	}
+	
+	//custom resident callback function, you get the message object that was sent from Resident
+	void residentStatusCallback(const std_msgs::String::ConstPtr& msg)
+	{
+		// do something with the values
+		// msg.robot_id = robot_id;
+		// ResidentMsg.health = health;
+		// ResidentMsg.boredom = boredom;
+		// ResidentMsg.hunger = hunger;
+		// ResidentMsg.x = px;
+		// ResidentMsg.y = py;
+		// ResidentMsg.theta = theta;
+		// ResidentMsg.robot_type = "Resident";
+		ROS_INFO("Working [%s]", msg->data.c_str());
 	}
 	
 	int main(int argc, char **argv)
@@ -66,6 +81,9 @@ Class Doctor : public Visitor {
 	ros::Subscriber StageOdo_sub = n.subscribe<nav_msgs::Odometry>("robot_0/odom",1000, StageOdom_callback);
 	ros::Subscriber StageLaser_sub = n.subscribe<sensor_msgs::LaserScan>("robot_0/base_scan",1000,StageLaser_callback);
 	
+	//custom Resident subscriber to "resident/state"
+	ros::Subscriber Resident_sub = n.subscribe<std_msgs::String>("residentStatus",1000,residentStatusCallback);
+	
 	ros::Rate loop_rate(10);
 	
 	//a count of howmany messages we have sent
@@ -94,6 +112,7 @@ Class Doctor : public Visitor {
 	
 	}
 	
+	/*
 	// Return type of robot
 	Type get_Type(){
 	
@@ -108,5 +127,4 @@ Class Doctor : public Visitor {
 	void restore_Health(){
 		
 	}
-
-};
+	*/
