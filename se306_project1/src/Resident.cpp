@@ -30,6 +30,7 @@
 	int hunger = 100;
 	
 	int hungerReductionRate = 1; //1 hunger point reduction per second
+	int healthReductionRate = 0.1; // 0.1 health point reduction per second
 	
 	void StageOdom_callback(nav_msgs::Odometry msg)
 	{
@@ -95,8 +96,10 @@
 		//publish the message
 		RobotNode_stage_pub.publish(RobotNode_cmdvel);
 		
-		if (count % (10 / hungerReductionRate) == 0){
-				hunger -= 1;
+		// Reduces hunger every second
+		if (count % 10 == 0){
+				hunger -= hungerReductionRate;
+				health -= healthReductionRate;
 		}
 		
 		
