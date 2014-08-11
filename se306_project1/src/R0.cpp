@@ -125,7 +125,6 @@ int main(int argc, char **argv)
 		//messages to stage
 		RobotNode_cmdvel.linear.x = linear_x;
 		RobotNode_cmdvel.angular.z = angular_z;
-		ROS_INFO("dude");
 		//publish the message
 		RobotNode_stage_pub.publish(RobotNode_cmdvel);
 		
