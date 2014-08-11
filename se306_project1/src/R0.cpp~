@@ -75,10 +75,20 @@ void StageOdom_callback(nav_msgs::Odometry msg)
 			
 			val = goal_theta;
 			goal_pair = calc_goal(goal_x, goal_y, cur_angle, px, py);
-			goal_theta = val + goal_pair.first;
-			goal_theta = 0;
+			if (goal_pair.second == false){
+				goal_theta = val + goal_pair.first;
+			}
+			else{
+				if(goal_pair.first >= val){
+					goal_theta = 6.283 + val - goal_pair.first;
+				} else {			
+					goal_theta = val - goal_pair.first;
+				}
+			}
+			//goal_theta = 0;
 			is_called = false;
 		}
+
 
 
 		if (goal_theta == 6.283) {
@@ -154,6 +164,9 @@ std::pair <double,bool> calc_goal(double goal_x, double goal_y, double cur_angle
 	
 	if (cross < 0) {
 		is_clockwise = true;
+	}
+	else{
+		is_clockwise = false;
 	}
 
 	//rounding goal_theta to two decimal places
