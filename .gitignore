@@ -12,7 +12,6 @@ msg/.*ActionResult\.msg$
 msg/.*Feedback\.msg$
 msg/.*Goal\.msg$
 msg/.*Result\.msg$
-msg/_.*\.py$
 
 \.pcd$
 .pyc$
