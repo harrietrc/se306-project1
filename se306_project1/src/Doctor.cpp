@@ -8,9 +8,8 @@
 #include <sstream>
 #include "math.h"
 
-//#define HEALTH_LIMIT 50
+class Doctor {
 
-//Class Doctor : public Visitor {
 	//velocity of the robot
 	double linear_x;
 	double angular_z;
@@ -56,13 +55,10 @@
 		// ResidentMsg.robot_type = "Resident";
 		//ROS_INFO("Working [%s]", msg->data.c_str());
 		ROS_INFO("Resident health is: %d", msg.health);
-		//if (msg.health < HEALTH_LIMIT){
-			
-		//}
-		
 	}
 	
-	int main(int argc, char **argv)
+	public:
+	int run(int argc, char **argv)
 	{
 	
 	 //initialize robot parameters
@@ -86,14 +82,14 @@
 	ros::Publisher RobotNode_stage_pub = n.advertise<geometry_msgs::Twist>("robot_0/cmd_vel",1000); 
 	
 	//subscribe to listen to messages coming from stage
-	ros::Subscriber StageOdo_sub = n.subscribe<nav_msgs::Odometry>("robot_0/odom",1000, StageOdom_callback);
-	ros::Subscriber StageLaser_sub = n.subscribe<sensor_msgs::LaserScan>("robot_0/base_scan",1000,StageLaser_callback);
+	ros::Subscriber StageOdo_sub = n.subscribe<nav_msgs::Odometry>("robot_0/odom",1000, &Doctor::StageOdom_callback, this);
+	ros::Subscriber StageLaser_sub = n.subscribe<sensor_msgs::LaserScan>("robot_0/base_scan",1000,&Doctor::StageLaser_callback, this);
 	
 	//custom Resident subscriber to "resident/state"
 	//ros::Subscriber Resident_sub = n.subscribe<std_msgs::String>("residentStatus",1000,residentStatusCallback);
 	
 	//custom Resident subscriber to "resident/state"
-	ros::Subscriber resident_sub = n.subscribe<se306_project1::ResidentMsg>("residentStatus",1000,residentStatusCallback);
+	ros::Subscriber resident_sub = n.subscribe<se306_project1::ResidentMsg>("residentStatus",1000,&Doctor::residentStatusCallback, this);
 	
 	ros::Rate loop_rate(10);
 	
@@ -139,3 +135,12 @@
 		
 	}
 	*/
+};
+
+/* 
+	Redirects to main function (run()) of the node.
+*/
+int main(int argc, char **argv) {
+	Doctor *a = new Doctor;
+	a->Doctor::run(argc, argv);
+}

@@ -9,8 +9,7 @@
 #include "math.h"
 #include "time_conversion.hpp"
 
-//#define HUNGER_LIMIT = 60
-
+class Assistant {
 
 	//velocity of the robot
 	double linear_x;
@@ -49,19 +48,16 @@
 	//custom resident callback function, you get the message object that was sent from Resident
 	void residentStatusCallback(se306_project1::ResidentMsg msg)
 	{
-		 //do something with the values
-		 //msg.robot_id = robot_id;
-		 //ResidentMsg.health = health;
-		 //ResidentMsg.boredom = boredom;
-		 //ResidentMsg.hunger = hunger;
-		 //ResidentMsg.x = px;
-		 //ResidentMsg.y = py;
-		 //ResidentMsg.theta = theta;
-		 //ResidentMsg.robot_type = "Resident";
-		ROS_INFO("Resident hunger is: %d", msg.hunger);
-		//if (msg.hunger < HUNGER_LIMIT){
-
-		//}
+		// do something with the values
+		// msg.robot_id = robot_id;
+		// ResidentMsg.health = health;
+		// ResidentMsg.boredom = boredom;
+		// ResidentMsg.hunger = hunger;
+		// ResidentMsg.x = px;
+		// ResidentMsg.y = py;
+		// ResidentMsg.theta = theta;
+		// ResidentMsg.robot_type = "Resident";
+		ROS_INFO("Resident hunger is: %d", msg.health);
 
 	}
 
@@ -74,7 +70,7 @@
 	NOT CURRENTLY SUPPORTED: Events on certain days (other than every x number of days), non-periodic events 
 							 during the defined period (startTime - endTime)
 	*/
-	void testCallback1(const ros::TimerEvent&) {
+	void medicationCallback(const ros::TimerEvent&) {
 		int startTime = time_conversion::simHoursToRealSecs(6); // Start callback at 6am
 		int endTime = time_conversion::simHoursToRealSecs(12); // Stop callback at 12pm
 
@@ -83,15 +79,15 @@
 
 		// Behaviour should only occur if the simulation time is between the specified start and end times.
 		if (((tnow % dlen) > startTime) && ((tnow % dlen) < endTime)) { // Note that this will run at the end of the duration specified for the timer.
-			ROS_INFO("providing medication: "); 
+			ROS_INFO("providing medication"); 
 			std::ostringstream s;
 			s << tnow; 
-			ROS_INFO(s.str().c_str()); // Just shows elapsed seconds
-			ros::Duration(5).sleep();
+			//ROS_INFO(s.str().c_str()); // Just shows elapsed seconds
 		}
 	}
 	
-	int main(int argc, char **argv)
+	public:
+	int run(int argc, char **argv)
 	{
 	
 	 //initialize robot parameters
@@ -115,11 +111,11 @@
 	ros::Publisher RobotNode_stage_pub = n.advertise<geometry_msgs::Twist>("robot_0/cmd_vel",1000); 
 	
 	//subscribe to listen to messages coming from stage
-	ros::Subscriber StageOdo_sub = n.subscribe<nav_msgs::Odometry>("robot_0/odom",1000, StageOdom_callback);
-	ros::Subscriber StageLaser_sub = n.subscribe<sensor_msgs::LaserScan>("robot_0/base_scan",1000,StageLaser_callback);
+	ros::Subscriber StageOdo_sub = n.subscribe<nav_msgs::Odometry>("robot_0/odom",1000, &Assistant::StageOdom_callback, this);
+	ros::Subscriber StageLaser_sub = n.subscribe<sensor_msgs::LaserScan>("robot_0/base_scan",1000,&Assistant::StageLaser_callback, this);
 	
 	//custom Resident subscriber to "resident/state"
-	ros::Subscriber Resident_sub = n.subscribe<se306_project1::ResidentMsg>("residentStatus",1000,residentStatusCallback);
+	ros::Subscriber Resident_sub = n.subscribe<se306_project1::ResidentMsg>("residentStatus",1000,&Assistant::residentStatusCallback, this);
 	
 	ros::Rate loop_rate(10);
 	
@@ -132,7 +128,7 @@
 
 	// Periodic callback
 	int dur2 = time_conversion::simHoursToRealSecs(2); // Perform callback every 2 simulation hours
-	ros::Timer medicationTimer = n.createTimer(ros::Duration(dur2), testCallback1); 
+	ros::Timer medicationTimer = n.createTimer(ros::Duration(dur2), &Assistant::medicationCallback, this); 
 	
 	while (ros::ok())
 	{
@@ -182,5 +178,12 @@
 	//void give_companionship(){
 	
 	//}
-	
+};	
 
+/* 
+	Redirects to main function (run()) of the node.
+*/
+int main(int argc, char **argv) {
+	Assistant *a = new Assistant;
+	a->Assistant::run(argc, argv);
+}

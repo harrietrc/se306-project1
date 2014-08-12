@@ -8,6 +8,8 @@
 #include <sstream>
 #include "math.h"
 
+class Resident {
+
 	//velocity of the robot
 	double linear_x;
 	double angular_z;
@@ -25,12 +27,12 @@
 	// Enum or string? to be specified
 	//String status;
 	
-	double health = 100;
-	double boredom = 100;
-	double hunger = 100;
+	int health = 100;
+	int boredom = 100;
+	int hunger = 100;
 	
-	double hungerReductionRate = 1; //1 hunger point reduction per second
-	double healthReductionRate = 0.1; // 0.1 health point reduction per second
+	int hungerReductionRate = 1; //1 hunger point reduction per second
+	int healthReductionRate = 1; // 0.1 health point reduction per second
 	
 	void StageOdom_callback(nav_msgs::Odometry msg)
 	{
@@ -48,7 +50,8 @@
 		
 	}
 	
-	int main(int argc, char **argv)
+	public:
+	int run(int argc, char **argv)
 	{
 	
 	 //initialize robot parameters
@@ -76,8 +79,8 @@
 	ros::Publisher resident_pub = n.advertise<se306_project1::ResidentMsg>("residentStatus",1000); 
 	
 	//subscribe to listen to messages coming from stage
-	ros::Subscriber StageOdo_sub = n.subscribe<nav_msgs::Odometry>("robot_0/odom",1000, StageOdom_callback);
-	ros::Subscriber StageLaser_sub = n.subscribe<sensor_msgs::LaserScan>("robot_0/base_scan",1000,StageLaser_callback);
+	ros::Subscriber StageOdo_sub = n.subscribe<nav_msgs::Odometry>("robot_0/odom",1000, &Resident::StageOdom_callback, this);
+	ros::Subscriber StageLaser_sub = n.subscribe<sensor_msgs::LaserScan>("robot_0/base_scan",1000,&Resident::StageLaser_callback, this);
 	
 	ros::Rate loop_rate(10);
 	
@@ -158,4 +161,12 @@
 	//void accept_entertainment(){
 	
 	//}
+};
 
+/* 
+	Redirects to main function (run()) of the node.
+*/
+int main(int argc, char **argv) {
+	Resident *a = new Resident;
+	a->Resident::run(argc, argv);
+}
