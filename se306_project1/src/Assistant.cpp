@@ -44,7 +44,7 @@
 	}
 	
 	//custom resident callback function, you get the message object that was sent from Resident
-	void residentStatusCallback(const std_msgs::String::ConstPtr& msg)
+	void residentStatusCallback(se306_project1::ResidentMsg msg)
 	{
 		// do something with the values
 		// msg.robot_id = robot_id;
@@ -55,7 +55,8 @@
 		// ResidentMsg.y = py;
 		// ResidentMsg.theta = theta;
 		// ResidentMsg.robot_type = "Resident";
-		ROS_INFO("Working [%s]", msg->data.c_str());
+		ROS_INFO("Resident hunger is: %d", msg.health);
+
 	}
 
 	/* 
@@ -112,7 +113,7 @@
 	ros::Subscriber StageLaser_sub = n.subscribe<sensor_msgs::LaserScan>("robot_0/base_scan",1000,StageLaser_callback);
 	
 	//custom Resident subscriber to "resident/state"
-	ros::Subscriber Resident_sub = n.subscribe<std_msgs::String>("residentStatus",1000,residentStatusCallback);
+	ros::Subscriber Resident_sub = n.subscribe<se306_project1::ResidentMsg>("residentStatus",1000,residentStatusCallback);
 	
 	ros::Rate loop_rate(10);
 	

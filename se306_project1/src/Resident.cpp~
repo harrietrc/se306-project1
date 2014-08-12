@@ -3,12 +3,11 @@
 #include <geometry_msgs/Twist.h>
 #include <nav_msgs/Odometry.h>
 #include <sensor_msgs/LaserScan.h>
-#include "se306_project1/ResidentMsg.h"
+#include "se306_project1/ResidentMsg.h" 
 
 #include <sstream>
 #include "math.h"
 
-//Class Doctor : public Visitor {
 	//velocity of the robot
 	double linear_x;
 	double angular_z;
@@ -19,18 +18,27 @@
 	double theta;
 	
 	// Enumeration of type of robot
-	enum Type{FRIEND, RELATIVE, DOCTOR, NURSE, CAREGIVER, ASSISTANT, RESIDENT};
+	// enum Type{FRIEND, RELATIVE, DOCTOR, NURSE, CAREGIVER, ASSISTANT, RESIDENT};
 	
 	int robot_id;
-	int numOfDoctors;
+	
+	// Enum or string? to be specified
+	//String status;
+	
+	int health = 100;
+	int boredom = 100;
+	int hunger = 100;
+	
+	int hungerReductionRate = 1; //1 hunger point reduction per second
+	int healthReductionRate = 1; // 0.1 health point reduction per second
 	
 	void StageOdom_callback(nav_msgs::Odometry msg)
 	{
 		//This is the call back function to process odometry messages coming from Stage. 	
 		px = 5 + msg.pose.pose.position.x;
 		py =10 + msg.pose.pose.position.y;
-		//ROS_INFO("Current x position is: %f", px);
-		//ROS_INFO("Current y position is: %f", py);
+		ROS_INFO("Current x position is: %f", px);
+		ROS_INFO("Current y position is: %f", py);
 	}
 	
 	void StageLaser_callback(sensor_msgs::LaserScan msg)
@@ -38,22 +46,6 @@
 		//This is the callback function to process laser scan messages
 		//you can access the range data from msg.ranges[i]. i = sample number
 		
-	}
-	
-	//custom resident callback function, you get the message object that was sent from Resident
-	void residentStatusCallback(se306_project1::ResidentMsg msg)
-	{
-		// do something with the values
-		// msg.robot_id = robot_id;
-		// ResidentMsg.health = health;
-		// ResidentMsg.boredom = boredom;
-		// ResidentMsg.hunger = hunger;
-		// ResidentMsg.x = px;
-		// ResidentMsg.y = py;
-		// ResidentMsg.theta = theta;
-		// ResidentMsg.robot_type = "Resident";
-		//ROS_INFO("Working [%s]", msg->data.c_str());
-		ROS_INFO("Resident health is: %d", msg.health);
 	}
 	
 	int main(int argc, char **argv)
@@ -70,7 +62,7 @@
 		angular_z = 0.2;
 		
 	//You must call ros::init() first of all. ros::init() function needs to see argc and argv. The third argument is the name of the node
-	ros::init(argc, argv, "Doctor");
+	ros::init(argc, argv, "RobotNode0");
 	
 	//NodeHandle is the main access point to communicate with ros.
 	ros::NodeHandle n;
@@ -79,15 +71,13 @@
 	//to stage
 	ros::Publisher RobotNode_stage_pub = n.advertise<geometry_msgs::Twist>("robot_0/cmd_vel",1000); 
 	
+	//custom message/topic publisher "resident/state" for now
+	ros::Publisher Resident_pub = n.advertise<std_msgs::String>("residentStatus",1000); 
+	ros::Publisher resident_pub = n.advertise<se306_project1::ResidentMsg>("residentStatus",1000); 
+	
 	//subscribe to listen to messages coming from stage
 	ros::Subscriber StageOdo_sub = n.subscribe<nav_msgs::Odometry>("robot_0/odom",1000, StageOdom_callback);
 	ros::Subscriber StageLaser_sub = n.subscribe<sensor_msgs::LaserScan>("robot_0/base_scan",1000,StageLaser_callback);
-	
-	//custom Resident subscriber to "resident/state"
-	//ros::Subscriber Resident_sub = n.subscribe<std_msgs::String>("residentStatus",1000,residentStatusCallback);
-	
-	//custom Resident subscriber to "resident/state"
-	ros::Subscriber resident_sub = n.subscribe<se306_project1::ResidentMsg>("residentStatus",1000,residentStatusCallback);
 	
 	ros::Rate loop_rate(10);
 	
@@ -103,9 +93,30 @@
 		//messages to stage
 		RobotNode_cmdvel.linear.x = linear_x;
 		RobotNode_cmdvel.angular.z = angular_z;
-	        
+	    
 		//publish the message
 		RobotNode_stage_pub.publish(RobotNode_cmdvel);
+		
+		// Reduces hunger every second
+		if (count % 10 == 0){
+				hunger -= hungerReductionRate;
+				health -= healthReductionRate;
+		}
+		
+		
+		//std_msgs::String msg;
+	    //std::stringstream ss;
+	    //ss << "Hello world" << hunger;
+	    //msg.data = ss.str();
+	    
+		custom resident message publisher
+		Resident_pub.publish(msg);
+		se306_project1::ResidentMsg msg; 
+		msg.health = health;
+		msg.hunger = hunger;
+
+		// resident_pub.publish(msg);
+		
 		
 		ros::spinOnce();
 	
@@ -117,19 +128,34 @@
 	
 	}
 	
-	/*
 	// Return type of robot
-	Type get_Type(){
+	// MIGHT HAVE TO RETURN A STRING BECAUSE ROS DOESN'T SUPPORT ENUM IN MESSAGES
+	//Type get_Type(){
 	
-	}
+	//}
 	
 	// Get id of robot
-	int get_id(){
+	//int get_id(){
+
+	//}
 	
-	}
-	
-	// Restores health of the resident
-	void restore_Health(){
+	// Wakes up
+	//void wake_up(){
 		
-	}
-	*/
+	//}
+	
+	// Eat
+	//void eat(){
+	
+	//}
+	
+	// Takes medicine
+	//void take_medicine(){
+	
+	//}
+	
+	// Accepts entertainment
+	//void accept_entertainment(){
+	
+	//}
+
