@@ -7,6 +7,7 @@
 
 #include <sstream>
 #include "math.h"
+#include "time_conversion.hpp"
 
 	//velocity of the robot
 	double linear_x;
@@ -56,6 +57,32 @@
 		// ResidentMsg.robot_type = "Resident";
 		ROS_INFO("Working [%s]", msg->data.c_str());
 	}
+
+	/* 
+	Model for all periodic events - start time, stop time, period. The issue with this at the moment is that
+	any behaviour defined here will occur at the end of the duration provided when creating the timer. This
+	could easily solved if this method had access to the value of that duration - I'll look into solving this
+	later. It's more of a usabiity issue than a usefulness one, as you can  adjust the startTime and endTime
+	but I'd prefer it to be more intuitive.
+	NOT CURRENTLY SUPPORTED: Events on certain days (other than every x number of days), non-periodic events 
+							 during the defined period (startTime - endTime)
+	*/
+	void testCallback1(const ros::TimerEvent&) {
+		int startTime = time_conversion::simHoursToRealSecs(6); // Start callback at 6am
+		int endTime = time_conversion::simHoursToRealSecs(12); // Stop callback at 12pm
+
+		int tnow = ros::Time::now().toSec(); // The simulation time now
+		int dlen = time_conversion::getDayLength(); // The length of a simulation day, in seconds
+
+		// Behaviour should only occur if the simulation time is between the specified start and end times.
+		if (((tnow % dlen) > startTime) && ((tnow % dlen) < endTime)) { // Note that this will run at the end of the duration specified for the timer.
+			ROS_INFO("providing medication: "); 
+			std::ostringstream s;
+			s << tnow; 
+			ROS_INFO(s.str().c_str()); // Just shows elapsed seconds
+			ros::Duration(5).sleep();
+		}
+	}
 	
 	int main(int argc, char **argv)
 	{
@@ -95,6 +122,10 @@
 	////messages
 	//velocity of this RobotNode
 	geometry_msgs::Twist RobotNode_cmdvel;
+
+	// Periodic callback
+	int dur2 = time_conversion::simHoursToRealSecs(2); // Perform callback every 2 simulation hours
+	ros::Timer medicationTimer = n.createTimer(ros::Duration(dur2), testCallback1); 
 	
 	while (ros::ok())
 	{

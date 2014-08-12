@@ -72,7 +72,7 @@
 	ros::Publisher RobotNode_stage_pub = n.advertise<geometry_msgs::Twist>("robot_0/cmd_vel",1000); 
 	
 	//custom message/topic publisher "resident/state" for now
-	//ros::Publisher Resident_pub = n.advertise<std_msgs::String>("residentStatus",1000); 
+	ros::Publisher Resident_pub = n.advertise<std_msgs::String>("residentStatus",1000); 
 	ros::Publisher resident_pub = n.advertise<se306_project1::ResidentMsg>("residentStatus",1000); 
 	
 	//subscribe to listen to messages coming from stage
@@ -109,13 +109,13 @@
 	    //ss << "Hello world" << hunger;
 	    //msg.data = ss.str();
 	    
-		//custom resident message publisher
-		//Resident_pub.publish(msg);
-		se306_project1::ResidentMsg msg;
+		custom resident message publisher
+		Resident_pub.publish(msg);
+		se306_project1::ResidentMsg msg; 
 		msg.health = health;
 		msg.hunger = hunger;
 
-		resident_pub.publish(msg);
+		// resident_pub.publish(msg);
 		
 		
 		ros::spinOnce();
