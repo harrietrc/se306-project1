@@ -3,7 +3,7 @@
 #include <geometry_msgs/Twist.h>
 #include <nav_msgs/Odometry.h>
 #include <sensor_msgs/LaserScan.h>
-//#include "se306_project1/ResidentMsg.h" // Resident-msg.msg 
+#include "se306_project1/ResidentMsg.h" 
 
 #include <sstream>
 #include "math.h"
@@ -30,7 +30,7 @@
 	int hunger = 100;
 	
 	int hungerReductionRate = 1; //1 hunger point reduction per second
-	int healthReductionRate = 0.1; // 0.1 health point reduction per second
+	int healthReductionRate = 1; // 0.1 health point reduction per second
 	
 	void StageOdom_callback(nav_msgs::Odometry msg)
 	{
@@ -72,7 +72,8 @@
 	ros::Publisher RobotNode_stage_pub = n.advertise<geometry_msgs::Twist>("robot_0/cmd_vel",1000); 
 	
 	//custom message/topic publisher "resident/state" for now
-	ros::Publisher Resident_pub = n.advertise<std_msgs::String>("residentStatus",1000); 
+	//ros::Publisher Resident_pub = n.advertise<std_msgs::String>("residentStatus",1000); 
+	ros::Publisher resident_pub = n.advertise<se306_project1::ResidentMsg>("residentStatus",1000); 
 	
 	//subscribe to listen to messages coming from stage
 	ros::Subscriber StageOdo_sub = n.subscribe<nav_msgs::Odometry>("robot_0/odom",1000, StageOdom_callback);
@@ -103,13 +104,19 @@
 		}
 		
 		
-		std_msgs::String msg;
-	    std::stringstream ss;
-	    ss << "Hello world" << hunger;
-	    msg.data = ss.str();
+		//std_msgs::String msg;
+	    //std::stringstream ss;
+	    //ss << "Hello world" << hunger;
+	    //msg.data = ss.str();
 	    
 		//custom resident message publisher
-		Resident_pub.publish(msg);
+		//Resident_pub.publish(msg);
+		se306_project1::ResidentMsg msg;
+		msg.health = health;
+		msg.hunger = hunger;
+
+		resident_pub.publish(msg);
+		
 		
 		ros::spinOnce();
 	

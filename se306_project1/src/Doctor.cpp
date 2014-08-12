@@ -3,6 +3,7 @@
 #include <geometry_msgs/Twist.h>
 #include <nav_msgs/Odometry.h>
 #include <sensor_msgs/LaserScan.h>
+#include "se306_project1/ResidentMsg.h"
 
 #include <sstream>
 #include "math.h"
@@ -40,7 +41,7 @@
 	}
 	
 	//custom resident callback function, you get the message object that was sent from Resident
-	void residentStatusCallback(const std_msgs::String::ConstPtr& msg)
+	void residentStatusCallback(se306_project1::ResidentMsg msg)
 	{
 		// do something with the values
 		// msg.robot_id = robot_id;
@@ -51,7 +52,9 @@
 		// ResidentMsg.y = py;
 		// ResidentMsg.theta = theta;
 		// ResidentMsg.robot_type = "Resident";
-		ROS_INFO("Working [%s]", msg->data.c_str());
+		//ROS_INFO("Working [%s]", msg->data.c_str());
+		ROS_INFO("Resident health is: %d", msg.health);
+		ROS_INFO("Resident hunger is: %d", msg.health);
 	}
 	
 	int main(int argc, char **argv)
@@ -82,7 +85,10 @@
 	ros::Subscriber StageLaser_sub = n.subscribe<sensor_msgs::LaserScan>("robot_0/base_scan",1000,StageLaser_callback);
 	
 	//custom Resident subscriber to "resident/state"
-	ros::Subscriber Resident_sub = n.subscribe<std_msgs::String>("residentStatus",1000,residentStatusCallback);
+	//ros::Subscriber Resident_sub = n.subscribe<std_msgs::String>("residentStatus",1000,residentStatusCallback);
+	
+	//custom Resident subscriber to "resident/state"
+	ros::Subscriber health_sub = n.subscribe<se306_project1::ResidentMsg>("residentStatus",1000,residentHealthCallback);
 	
 	ros::Rate loop_rate(10);
 	
