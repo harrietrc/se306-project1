@@ -1,3 +1,20 @@
+Skip to content
+ 
+This repository 
+Explore
+Gist
+Blog
+Help
+Govindalf Govindalf
+ 
+ 
+10  Unwatch 
+  Star 3
+ Fork 0clee842/se306-project1 PRIVATE
+ branch: master   se306-project1 / setup.sh
+Earl Balmes ebal155 5 days ago Move robot from current position to a specified point
+2 contributors  Govindalf  Earl Balmes
+200 lines (169 sloc)  6.966 kb RawBlameHistory  
 #!/usr/bin/env sh
 # THIS IS AN AUTO-GENERATED FILE
 # IT IS UNLIKELY YOU WANT TO EDIT THIS FILE BY HAND
@@ -23,8 +40,12 @@ if [ x"$_ROSINSTALL_IN_RECURSION" != x"recurse" ] ; then
   export ROS_PACKAGE_PATH=
 fi
 
+<<<<<<< HEAD
 export ROS_WORKSPACE=/afs/ec.auckland.ac.nz/users/m/s/mshe140/unixhome/se306-project1
 
+=======
+export ROS_WORKSPACE=/afs/ec.auckland.ac.nz/users/g/s/gsam265/unixhome/se306-project1
+>>>>>>> dcd521595d52b11cf55f67a59fe4bc4f4805a6fd
 if [ ! "$ROS_MASTER_URI" ] ; then export ROS_MASTER_URI=http://localhost:11311 ; fi
 unset ROS_ROOT
 
@@ -168,9 +189,13 @@ EOPYTHON`
 unset _ROS_PACKAGE_PATH_ROSINSTALL
 
 # restore ROS_WORKSPACE in case other setup.sh changed/unset it
+<<<<<<< HEAD
 
 export ROS_WORKSPACE=/afs/ec.auckland.ac.nz/users/m/s/mshe140/unixhome/se306-project1
 
+=======
+export ROS_WORKSPACE=/afs/ec.auckland.ac.nz/users/g/s/gsam265/unixhome/se306-project1
+>>>>>>> dcd521595d52b11cf55f67a59fe4bc4f4805a6fd
 
 # if setup.sh did not set ROS_ROOT (pre-fuerte)
 if [ -z "${ROS_ROOT}" ]; then
@@ -200,7 +225,11 @@ if [ ! -z "$_SETUP_SH_ERROR" ]; then
 fi
 <<<<<<< HEAD
 
+<<<<<<< HEAD
 export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:/afs/ec.auckland.ac.nz/users/e/b/ebal155/unixhome/Desktop/se306-project1
 =======
 export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:~/se306-project1/
 >>>>>>> 89261d5baace9542a0fe965a8cd8d97f3dbca7a7
+=======
+export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:/afs/ec.auckland.ac.nz/users/g/s/gsam265/unixhome/se306-project1
+>>>>>>> dcd521595d52b11cf55f67a59fe4bc4f4805a6fd

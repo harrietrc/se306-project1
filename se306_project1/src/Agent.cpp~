@@ -40,6 +40,23 @@ Class Agent {
 		
 	}
 
+double move(double goal_x, double goal_y, double cur_angle, double goal_theta, double px, double py) 
+{
+
+	double aangular_z;
+	double alinear_x;
+
+	//angular_z = 444.0;
+	//linear_x = 0.0;
+	
+	//When the robot is facing the correct direction, start moving
+	//if (goal_theta == cur_angle) {
+	//	angular_z = 0.54165455;
+	//	linear_x = 0.2;
+	//}
+
+	return (double)aangular_z;
+}
 
 	int main(int argc, char **argv)
 	{
