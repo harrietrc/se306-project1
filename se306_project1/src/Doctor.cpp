@@ -88,7 +88,7 @@
 	//ros::Subscriber Resident_sub = n.subscribe<std_msgs::String>("residentStatus",1000,residentStatusCallback);
 	
 	//custom Resident subscriber to "resident/state"
-	ros::Subscriber health_sub = n.subscribe<se306_project1::ResidentMsg>("residentStatus",1000,residentHealthCallback);
+	ros::Subscriber resident_sub = n.subscribe<se306_project1::ResidentMsg>("residentStatus",1000,residentStatusCallback);
 	
 	ros::Rate loop_rate(10);
 	
