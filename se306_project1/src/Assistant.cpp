@@ -9,6 +9,9 @@
 #include "math.h"
 #include "time_conversion.hpp"
 
+//#define HUNGER_LIMIT = 60
+
+
 	//velocity of the robot
 	double linear_x;
 	double angular_z;
@@ -46,16 +49,19 @@
 	//custom resident callback function, you get the message object that was sent from Resident
 	void residentStatusCallback(se306_project1::ResidentMsg msg)
 	{
-		// do something with the values
-		// msg.robot_id = robot_id;
-		// ResidentMsg.health = health;
-		// ResidentMsg.boredom = boredom;
-		// ResidentMsg.hunger = hunger;
-		// ResidentMsg.x = px;
-		// ResidentMsg.y = py;
-		// ResidentMsg.theta = theta;
-		// ResidentMsg.robot_type = "Resident";
-		ROS_INFO("Resident hunger is: %d", msg.health);
+		 //do something with the values
+		 //msg.robot_id = robot_id;
+		 //ResidentMsg.health = health;
+		 //ResidentMsg.boredom = boredom;
+		 //ResidentMsg.hunger = hunger;
+		 //ResidentMsg.x = px;
+		 //ResidentMsg.y = py;
+		 //ResidentMsg.theta = theta;
+		 //ResidentMsg.robot_type = "Resident";
+		ROS_INFO("Resident hunger is: %d", msg.hunger);
+		//if (msg.hunger < HUNGER_LIMIT){
+
+		//}
 
 	}
 

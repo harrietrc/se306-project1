@@ -1,2 +1,2 @@
-int32 healthPoints
-int32 hungerPoints
+float32 health
+float32 hunger

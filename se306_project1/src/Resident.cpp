@@ -25,12 +25,12 @@
 	// Enum or string? to be specified
 	//String status;
 	
-	int health = 100;
-	int boredom = 100;
-	int hunger = 100;
+	double health = 100;
+	double boredom = 100;
+	double hunger = 100;
 	
-	int hungerReductionRate = 1; //1 hunger point reduction per second
-	int healthReductionRate = 1; // 0.1 health point reduction per second
+	double hungerReductionRate = 1; //1 hunger point reduction per second
+	double healthReductionRate = 0.1; // 0.1 health point reduction per second
 	
 	void StageOdom_callback(nav_msgs::Odometry msg)
 	{

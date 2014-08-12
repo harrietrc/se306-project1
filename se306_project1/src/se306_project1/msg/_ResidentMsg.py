@@ -6,15 +6,15 @@ import struct
 
 
 class ResidentMsg(genpy.Message):
-  _md5sum = "b8c8f737bb397bd01be1ddda082b5465"
+  _md5sum = "40a349f0cc70adffe60c16b55c9931f2"
   _type = "se306_project1/ResidentMsg"
   _has_header = False #flag to mark the presence of a Header object
-  _full_text = """int32 health
-int32 hunger
+  _full_text = """float64 health
+float64 hunger
 
 """
   __slots__ = ['health','hunger']
-  _slot_types = ['int32','int32']
+  _slot_types = ['float64','float64']
 
   def __init__(self, *args, **kwds):
     """
@@ -34,12 +34,12 @@ int32 hunger
       super(ResidentMsg, self).__init__(*args, **kwds)
       #message fields cannot be None, assign default values for those that are
       if self.health is None:
-        self.health = 0
+        self.health = 0.
       if self.hunger is None:
-        self.hunger = 0
+        self.hunger = 0.
     else:
-      self.health = 0
-      self.hunger = 0
+      self.health = 0.
+      self.hunger = 0.
 
   def _get_types(self):
     """
@@ -54,7 +54,7 @@ int32 hunger
     """
     try:
       _x = self
-      buff.write(_struct_2i.pack(_x.health, _x.hunger))
+      buff.write(_struct_2d.pack(_x.health, _x.hunger))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(_x))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(_x))))
 
@@ -67,8 +67,8 @@ int32 hunger
       end = 0
       _x = self
       start = end
-      end += 8
-      (_x.health, _x.hunger,) = _struct_2i.unpack(str[start:end])
+      end += 16
+      (_x.health, _x.hunger,) = _struct_2d.unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -82,7 +82,7 @@ int32 hunger
     """
     try:
       _x = self
-      buff.write(_struct_2i.pack(_x.health, _x.hunger))
+      buff.write(_struct_2d.pack(_x.health, _x.hunger))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(_x))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(_x))))
 
@@ -96,11 +96,11 @@ int32 hunger
       end = 0
       _x = self
       start = end
-      end += 8
-      (_x.health, _x.hunger,) = _struct_2i.unpack(str[start:end])
+      end += 16
+      (_x.health, _x.hunger,) = _struct_2d.unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
 
 _struct_I = genpy.struct_I
-_struct_2i = struct.Struct("<2i")
+_struct_2d = struct.Struct("<2d")

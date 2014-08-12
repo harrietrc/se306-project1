@@ -8,6 +8,8 @@
 #include <sstream>
 #include "math.h"
 
+//#define HEALTH_LIMIT 50
+
 //Class Doctor : public Visitor {
 	//velocity of the robot
 	double linear_x;
@@ -54,6 +56,10 @@
 		// ResidentMsg.robot_type = "Resident";
 		//ROS_INFO("Working [%s]", msg->data.c_str());
 		ROS_INFO("Resident health is: %d", msg.health);
+		//if (msg.health < HEALTH_LIMIT){
+			
+		//}
+		
 	}
 	
 	int main(int argc, char **argv)
