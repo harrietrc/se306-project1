@@ -3,7 +3,7 @@
 #include <geometry_msgs/Twist.h>
 #include <nav_msgs/Odometry.h>
 #include <sensor_msgs/LaserScan.h>
-//#include "se306_project1/ResidentMsg.h" // Resident-msg.msg 
+#include "se306_project1/ResidentMsg.h" // Resident-msg.msg 
 
 #include <sstream>
 #include "math.h"

@@ -17,7 +17,7 @@ set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 
 #uncomment if you have defined messages
-#rosbuild_genmsg() #!!! I commented this out in order to make it build. Should it be uncommented? - Harriet
+rosbuild_genmsg() #!!! I commented this out in order to make it build. Should it be uncommented? - Harriet
 #uncomment if you have defined services
 #rosbuild_gensrv()
 
@@ -28,7 +28,13 @@ set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 #rosbuild_link_boost(${PROJECT_NAME} thread)
 #rosbuild_add_executable(example examples/example.cpp)
 #target_link_libraries(example ${PROJECT_NAME})
+<<<<<<< HEAD
 rosbuild_add_executable(Resident src/Resident.cpp src/time_conversion.cpp)
 rosbuild_add_executable(Assistant src/Assistant.cpp  src/time_conversion.cpp)
 #rosbuild_add_executable(Doctor src/Doctor.cpp)
+=======
+rosbuild_add_executable(Resident src/Resident.cpp)
+#rosbuild_add_executable(Assistant src/Assistant.cpp)
+rosbuild_add_executable(Doctor src/Doctor.cpp)
+>>>>>>> ee5b35e0dd29aa23fdcdb5731d1471e7fcc4b943
 #rosbuild_add_executable(R0 src/R0.cpp src/time_conversion.cpp)
