@@ -8,37 +8,18 @@
 #include <sstream>
 #include "math.h"
 #include "time_conversion.hpp"
+#include "Assistant.h"
 
-class Assistant {
-
-	//velocity of the robot
-	double linear_x;
-	double angular_z;
-	
-	//pose of the robot
-	double px;
-	double py;
-	double theta;
-	
-	// Enumeration of type of robot
-	//enum Type{FRIEND, RELATIVE, DOCTOR, NURSE, CAREGIVER, ASSISTANT, RESIDENT};
-	
-	//int robot_id = 10;
-	//int numOfAssistants;
-	
-	// Enum or string? to be specified
-	//String Status;
-	
-	void StageOdom_callback(nav_msgs::Odometry msg)
+	void Assistant::StageOdom_callback(nav_msgs::Odometry msg)
 	{
 		//This is the call back function to process odometry messages coming from Stage. 	
-		//px = 5 + msg.pose.pose.position.x;
-		//py =10 + msg.pose.pose.position.y;
+		px = 5 + msg.pose.pose.position.x;
+		py =10 + msg.pose.pose.position.y;
 		//ROS_INFO("Current x position is: %f", px);
 		//ROS_INFO("Current y position is: %f", py);
 	}
 	
-	void StageLaser_callback(sensor_msgs::LaserScan msg)
+	void Assistant::StageLaser_callback(sensor_msgs::LaserScan msg)
 	{
 		//This is the callback function to process laser scan messages
 		//you can access the range data from msg.ranges[i]. i = sample number
@@ -46,7 +27,7 @@ class Assistant {
 	}
 	
 	//custom resident callback function, you get the message object that was sent from Resident
-	void residentStatusCallback(se306_project1::ResidentMsg msg)
+	void Assistant::residentStatusCallback(se306_project1::ResidentMsg msg)
 	{
 		// do something with the values
 		// msg.robot_id = robot_id;
@@ -56,7 +37,6 @@ class Assistant {
 		// ResidentMsg.x = px;
 		// ResidentMsg.y = py;
 		// ResidentMsg.theta = theta;
-		// ResidentMsg.robot_type = "Resident";
 		ROS_INFO("Resident hunger is: %d", msg.health);
 
 	}
@@ -70,7 +50,7 @@ class Assistant {
 	NOT CURRENTLY SUPPORTED: Events on certain days (other than every x number of days), non-periodic events 
 							 during the defined period (startTime - endTime)
 	*/
-	void medicationCallback(const ros::TimerEvent&) {
+	void Assistant::medicationCallback(const ros::TimerEvent&) {
 		int startTime = time_conversion::simHoursToRealSecs(6); // Start callback at 6am
 		int endTime = time_conversion::simHoursToRealSecs(12); // Stop callback at 12pm
 
@@ -86,8 +66,7 @@ class Assistant {
 		}
 	}
 	
-	public:
-	int run(int argc, char **argv)
+	int Assistant::run(int argc, char **argv)
 	{
 	
 	 //initialize robot parameters
@@ -101,7 +80,7 @@ class Assistant {
 		angular_z = 0.2;
 		
 	//You must call ros::init() first of all. ros::init() function needs to see argc and argv. The third argument is the name of the node
-	ros::init(argc, argv, "RobotNode1");
+	ros::init(argc, argv, "Assistant");
 	
 	//NodeHandle is the main access point to communicate with ros.
 	ros::NodeHandle n;
@@ -131,10 +110,10 @@ class Assistant {
 	ros::Timer medicationTimer = n.createTimer(ros::Duration(dur2), &Assistant::medicationCallback, this); 
 
 	// // Testing getting parameters
-	// std::string robotname;
- //   	n.getParam("robotname", robotname);
- //   	ROS_INFO("Name: ");
- //   	ROS_INFO(robotname.c_str());
+		// std::string robotname;
+	 //   	n.getParam("robotname", robotname);
+	 //   	ROS_INFO("Name: ");
+	 //   	ROS_INFO(robotname.c_str());
 	
 	while (ros::ok())
 	{
@@ -154,42 +133,11 @@ class Assistant {
 	return 0;
 	
 	}
-	
-	//// Return type of robot
-	//Type get_Type(){
-	
-	//}
-	
-	//// Get id of robot
-	//int get_id(){
-	
-	//}
-	
-	//// Gives medication to the resident
-	//void give_medication(){
-		
-	//}
-	
-	//// Cooks for the resident
-	//void cook(){
-	
-	//}
-	
-	//// Entertain the resident
-	//void entertain(){
-	
-	//}
-	
-	//// Gives companionship to resident
-	//void give_companionship(){
-	
-	//}
-};	
 
 /* 
 	Redirects to main function (run()) of the node.
 */
 int main(int argc, char **argv) {
-	Assistant *a = new Assistant;
+	Assistant *a = new Assistant();
 	a->Assistant::run(argc, argv);
 }

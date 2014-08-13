@@ -7,25 +7,9 @@
 
 #include <sstream>
 #include "math.h"
-
-class Doctor {
-
-	//velocity of the robot
-	double linear_x;
-	double angular_z;
+#include "Doctor.h"
 	
-	//pose of the robot
-	double px;
-	double py;
-	double theta;
-	
-	// Enumeration of type of robot
-	enum Type{FRIEND, RELATIVE, DOCTOR, NURSE, CAREGIVER, ASSISTANT, RESIDENT};
-	
-	int robot_id;
-	int numOfDoctors;
-	
-	void StageOdom_callback(nav_msgs::Odometry msg)
+	void Doctor::StageOdom_callback(nav_msgs::Odometry msg)
 	{
 		//This is the call back function to process odometry messages coming from Stage. 	
 		px = 5 + msg.pose.pose.position.x;
@@ -34,7 +18,7 @@ class Doctor {
 		//ROS_INFO("Current y position is: %f", py);
 	}
 	
-	void StageLaser_callback(sensor_msgs::LaserScan msg)
+	void Doctor::StageLaser_callback(sensor_msgs::LaserScan msg)
 	{
 		//This is the callback function to process laser scan messages
 		//you can access the range data from msg.ranges[i]. i = sample number
@@ -42,7 +26,7 @@ class Doctor {
 	}
 	
 	//custom resident callback function, you get the message object that was sent from Resident
-	void residentStatusCallback(se306_project1::ResidentMsg msg)
+	void Doctor::residentStatusCallback(se306_project1::ResidentMsg msg)
 	{
 		// do something with the values
 		// msg.robot_id = robot_id;
@@ -56,9 +40,8 @@ class Doctor {
 		//ROS_INFO("Working [%s]", msg->data.c_str());
 		ROS_INFO("Resident health is: %d", msg.health);
 	}
-	
-	public:
-	int run(int argc, char **argv)
+
+	int Doctor::run(int argc, char **argv)
 	{
 	
 	 //initialize robot parameters
@@ -119,23 +102,6 @@ class Doctor {
 	
 	}
 	
-	/*
-	// Return type of robot
-	Type get_Type(){
-	
-	}
-	
-	// Get id of robot
-	int get_id(){
-	
-	}
-	
-	// Restores health of the resident
-	void restore_Health(){
-		
-	}
-	*/
-};
 
 /* 
 	Redirects to main function (run()) of the node.

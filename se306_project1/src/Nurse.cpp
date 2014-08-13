@@ -6,24 +6,9 @@
 
 #include <sstream>
 #include "math.h"
+#include "Nurse.h"
 
-Class Nurse : public Visitor {
-	//velocity of the robot
-	double linear_x;
-	double angular_z;
-	
-	//pose of the robot
-	double px;
-	double py;
-	double theta;
-	
-	// Enumeration of type of robot
-	enum Type{FRIEND, RELATIVE, DOCTOR, NURSE, CAREGIVER, ASSISTANT, RESIDENT};
-	
-	int robot_id;
-	int numOfNurses;
-	
-	void StageOdom_callback(nav_msgs::Odometry msg)
+	void Nurse::StageOdom_callback(nav_msgs::Odometry msg)
 	{
 		//This is the call back function to process odometry messages coming from Stage. 	
 		px = 5 + msg.pose.pose.position.x;
@@ -32,14 +17,14 @@ Class Nurse : public Visitor {
 		ROS_INFO("Current y position is: %f", py);
 	}
 	
-	void StageLaser_callback(sensor_msgs::LaserScan msg)
+	void Nurse::StageLaser_callback(sensor_msgs::LaserScan msg)
 	{
 		//This is the callback function to process laser scan messages
 		//you can access the range data from msg.ranges[i]. i = sample number
 		
 	}
 	
-	int main(int argc, char **argv)
+	int Nurse::run(int argc, char **argv)
 	{
 	
 	 //initialize robot parameters
@@ -53,7 +38,7 @@ Class Nurse : public Visitor {
 		angular_z = 0.2;
 		
 	//You must call ros::init() first of all. ros::init() function needs to see argc and argv. The third argument is the name of the node
-	ros::init(argc, argv, "RobotNode0");
+	ros::init(argc, argv, "Nurse");
 	
 	//NodeHandle is the main access point to communicate with ros.
 	ros::NodeHandle n;
@@ -63,8 +48,8 @@ Class Nurse : public Visitor {
 	ros::Publisher RobotNode_stage_pub = n.advertise<geometry_msgs::Twist>("robot_0/cmd_vel",1000); 
 	
 	//subscribe to listen to messages coming from stage
-	ros::Subscriber StageOdo_sub = n.subscribe<nav_msgs::Odometry>("robot_0/odom",1000, StageOdom_callback);
-	ros::Subscriber StageLaser_sub = n.subscribe<sensor_msgs::LaserScan>("robot_0/base_scan",1000,StageLaser_callback);
+	ros::Subscriber StageOdo_sub = n.subscribe<nav_msgs::Odometry>("robot_0/odom",1000, &Nurse::StageOdom_callback,this);
+	ros::Subscriber StageLaser_sub = n.subscribe<sensor_msgs::LaserScan>("robot_0/base_scan",1000,&Nurse::StageLaser_callback,this);
 	
 	ros::Rate loop_rate(10);
 	
@@ -94,19 +79,10 @@ Class Nurse : public Visitor {
 	
 	}
 	
-	// Return type of robot
-	Type get_Type(){
-	
-	}
-	
-	// Get id of robot
-	int get_id(){
-	
-	}
-	
-	// Restores health of the resident
-	void restore_Health(){
-		
-	}
-
-};
+/* 
+	Redirects to main function (run()) of the node.
+*/
+int main(int argc, char **argv) {
+	Nurse *a = new Nurse();
+	a->Nurse::run(argc, argv);
+}

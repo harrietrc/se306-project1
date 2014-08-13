@@ -7,34 +7,9 @@
 
 #include <sstream>
 #include "math.h"
-
-class Resident {
-
-	//velocity of the robot
-	double linear_x;
-	double angular_z;
+#include "Resident.h"	
 	
-	//pose of the robot
-	double px;
-	double py;
-	double theta;
-	
-	// Enumeration of type of robot
-	// enum Type{FRIEND, RELATIVE, DOCTOR, NURSE, CAREGIVER, ASSISTANT, RESIDENT};
-	
-	int robot_id;
-	
-	// Enum or string? to be specified
-	//String status;
-	
-	int health = 100;
-	int boredom = 100;
-	int hunger = 100;
-	
-	int hungerReductionRate = 1; //1 hunger point reduction per second
-	int healthReductionRate = 1; // 0.1 health point reduction per second
-	
-	void StageOdom_callback(nav_msgs::Odometry msg)
+	void Resident::StageOdom_callback(nav_msgs::Odometry msg)
 	{
 		//This is the call back function to process odometry messages coming from Stage. 	
 		px = 5 + msg.pose.pose.position.x;
@@ -43,15 +18,14 @@ class Resident {
 		ROS_INFO("Current y position is: %f", py);
 	}
 	
-	void StageLaser_callback(sensor_msgs::LaserScan msg)
+	void Resident::StageLaser_callback(sensor_msgs::LaserScan msg)
 	{
 		//This is the callback function to process laser scan messages
 		//you can access the range data from msg.ranges[i]. i = sample number
 		
 	}
 	
-	public:
-	int run(int argc, char **argv)
+	int Resident::run(int argc, char **argv)
 	{
 	
 	 //initialize robot parameters
@@ -63,9 +37,13 @@ class Resident {
 		//Initial velocity
 		linear_x = 0.2;
 		angular_z = 0.2;
+
+		health = 100;
+		boredom = 100;
+		hunger = 100;
 		
 	//You must call ros::init() first of all. ros::init() function needs to see argc and argv. The third argument is the name of the node
-	ros::init(argc, argv, "RobotNode0");
+	ros::init(argc, argv, "Resident");
 	
 	//NodeHandle is the main access point to communicate with ros.
 	ros::NodeHandle n;
@@ -91,6 +69,8 @@ class Resident {
 	//velocity of this RobotNode
 	geometry_msgs::Twist RobotNode_cmdvel;
 	
+	int hungerReductionRate = 1; //1 hunger point reduction per second
+	int healthReductionRate = 1; // 0.1 health point reduction per second
 	while (ros::ok())
 	{
 		//messages to stage
@@ -130,43 +110,11 @@ class Resident {
 	return 0;
 	
 	}
-	
-	// Return type of robot
-	// MIGHT HAVE TO RETURN A STRING BECAUSE ROS DOESN'T SUPPORT ENUM IN MESSAGES
-	//Type get_Type(){
-	
-	//}
-	
-	// Get id of robot
-	//int get_id(){
-
-	//}
-	
-	// Wakes up
-	//void wake_up(){
-		
-	//}
-	
-	// Eat
-	//void eat(){
-	
-	//}
-	
-	// Takes medicine
-	//void take_medicine(){
-	
-	//}
-	
-	// Accepts entertainment
-	//void accept_entertainment(){
-	
-	//}
-};
 
 /* 
 	Redirects to main function (run()) of the node.
 */
 int main(int argc, char **argv) {
-	Resident *a = new Resident;
+	Resident *a = new Resident();
 	a->Resident::run(argc, argv);
 }
