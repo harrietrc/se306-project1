@@ -16,6 +16,10 @@ msg/.*Result\.msg$
 \.pcd$
 .pyc$
 
+#frames
+frames.gv
+frames.pdf
+
 #setup.sh depends on where you installed ros
 setup.sh
 
@@ -52,3 +56,5 @@ qtcreator-*
 
 # Catkin custom files
 CATKIN_IGNORE
+setup.sh~
+se306_project1/CMakeLists.txt~

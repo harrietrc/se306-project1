@@ -37,7 +37,7 @@ void Assistant::residentStatusCallback(se306_project1::ResidentMsg msg)
 	// ResidentMsg.x = px;
 	// ResidentMsg.y = py;
 	// ResidentMsg.theta = theta;
-	ROS_INFO("Resident hunger is: %d", msg.hunger);
+	ROS_INFO("Resident hunger is: %d", msg.health);
 
 }
 
