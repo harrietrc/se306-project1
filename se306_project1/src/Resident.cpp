@@ -12,15 +12,41 @@
 #include <stdlib.h>
 #include "time_conversion.hpp"
 #include "Resident.h"	
+
+//velocity of the robot
+double linear_x;
+double angular_z;
+
+//goal pose and orientation
+double goal_x;
+double goal_y;
+double goal_angle;
+bool isSet = false;
+
+//current pose and orientation of the robot
+double px;
+double py;
+double cur_angle;
+
+int cc = 1; //current_checkpoint = 0;
+
+std::pair<double, double> ret;	
+
+int checkpoints[5][2] = {  
+{30, 25}, 
+{35, 35}, 
+{12, 42},
+{30, 42},
+{30, 25}  
+};
+
+std::pair<double, double> move(double goal_x, double goal_y, double cur_angle, double goal_angle, double px, double py);
+double calc_goal_angle(double goal_x, double goal_y, double cur_angle, double px, double py); 
+void StageOdom_callback(nav_msgs::Odometry msg); 
 	
 void Resident::StageOdom_callback(nav_msgs::Odometry msg)
 {
-	if (running ) {
-	return;
-	}
-	running = true;
 	ret = std::make_pair(0, 0); //initialize pair. Used to get return.
-	//double val = 0;
 
 	//Converting from quaternion to radians
 	cur_angle = acos(msg.pose.pose.orientation.w) * 2;
@@ -35,45 +61,25 @@ void Resident::StageOdom_callback(nav_msgs::Odometry msg)
 	px = msg.pose.pose.position.x + checkpoints[0][0];
 	py = msg.pose.pose.position.y + checkpoints[0][1];
 	
-
 	//When goal reached
 	if ((px <= goal_x + 0.5) && (px >= goal_x - 0.5) && (py <= goal_y + 0.5) && (py >= goal_y - 0.5)) {
 	isSet = false;
-	if (cc == 4) { //If at last checkpoint
-		linear_x = 0;
-		
-	} else {
-		cc++; //Increment checkpoint index
-	}
-	goal_x = checkpoints[cc][0];
-	ROS_INFO("GOAL_X %f",goal_x);
-	goal_y = checkpoints[cc][1];
+		if (cc == 4) { //If at last checkpoint
+			linear_x = 0;
+		} else {
+			cc++; //Increment checkpoint index
+		}
+		goal_x = checkpoints[cc][0];
+		goal_y = checkpoints[cc][1];
+	
+		//Account for delay by subtracting delay values from current pose and orientation
+		goal_angle = calc_goal_angle(goal_x, goal_y, cur_angle - M_PI/20, px - 0.1, py - 0.1);
 
-	if (is_called) {
-		//Adjusts for delay between publish and subscribe	
-		//val = goal_angle;
-		goal_pair = calc_goal(goal_x, goal_y, cur_angle - M_PI/20, px - 0.1, py - 0.1);
-		goal_angle = goal_pair.first;
-
-		is_called = false;
-	}
-
-	if (goal_angle >= 6.283) {
-		goal_angle = goal_angle - 6.283;
-	}
-	//ret = move(goal_x, goal_y, cur_angle, goal_angle, px, py);
-	//linear_x = ret.first;
-	//	angular_z = ret.second;	
 	} else { //Do this until goal is reached
-		
-		is_called = true;
-		//val = 0;
 		ret = move(goal_x, goal_y, cur_angle, goal_angle, px, py);	
 		linear_x = ret.first;
 		angular_z = ret.second;
 	}
-
-	running = false;
 }
 
 void Resident::StageLaser_callback(sensor_msgs::LaserScan msg)
@@ -93,13 +99,11 @@ void Resident::doctor_callback(se306_project1::DoctorMsg msg)
 //Keeps robot moving by changing linear_x and angular_z
 std::pair<double, double> Resident::move(double goal_x, double goal_y, double cur_angle, double goal_angle, double px, double py) 
 {	
- //contains linear_x and angular_x. Defines how robot movees between goals.	
-	
 	std::pair<double,double>_ret = std::make_pair(0, 0); //initialize pair. Used to get return.
 	double moveSpeed = M_PI/2;
 	moveSpeed = ((int)(moveSpeed * 1000 + .5) / 1000.0);
-	//When the robot is facing the correct direction, start moving
 
+	//When the robot is facing the correct direction, start moving
 	double threshold = cur_angle-moveSpeed/10;
 	threshold = ((int)(threshold * 1000 + .5) / 1000.0);
 
@@ -122,45 +126,28 @@ std::pair<double, double> Resident::move(double goal_x, double goal_y, double cu
 
 
 	if ((px-0.1 <= goal_x + 0.5) && (px-0.1 >= goal_x - 0.5) && (py-0.1 <= goal_y + 0.5) && (py-0.1 >= goal_y - 0.5)) {	
-			_ret.first = 0; //linear_x
+			_ret.first = 0; 
 			isSet = false;
-			// ROS_INFO("are you in yet? the sequel");
-		
 	}
 
 	return _ret; 
 }
 
-std::pair <double,bool> Resident::calc_goal(double goal_x, double goal_y, double cur_angle, double px, double py) 
+double calc_goal_angle(double goal_x, double goal_y, double cur_angle, double px, double py) 
 {
-
-	std::pair <double,bool> _ret (0, false);
 
 	//Initial and goal vectors used to calculate goal theta
 	double init_vector_x;
 	double init_vector_y;
 	double goal_vector_x;
 	double goal_vector_y;
-	//double dot;
 	double goal_angle;
-	double cross = 0;
-	bool is_clockwise = false;
 	
-
 	//Finding the vector that the robot is facing and the goal vector
 	init_vector_x = cos(cur_angle);
 	init_vector_y = sin(cur_angle);
 	goal_vector_x = goal_x - px;
 	goal_vector_y = goal_y - py;
-
-	cross = (init_vector_x * goal_vector_y) - (goal_vector_x * init_vector_y);
-	
-	if (cross < 0) {
-		is_clockwise = true;
-	}
-	else{
-		is_clockwise = false;
-	}
 	
 	goal_angle = atan2(goal_vector_y, goal_vector_x); //pi <= goal_angle < -pi
 	if (goal_angle < 0) {
@@ -172,11 +159,8 @@ std::pair <double,bool> Resident::calc_goal(double goal_x, double goal_y, double
 
 	//rounding goal_angle to three decimal places
 	goal_angle = ((int)(goal_angle * 1000 + .5) / 1000.0);
-
-	_ret.first = goal_angle;
-	_ret.second = is_clockwise;
-
-	return _ret;
+	
+	return goal_angle;
 }
 
 /*
@@ -189,31 +173,23 @@ void Resident::randomCheckpointCallback(const ros::TimerEvent&) {
 
 int Resident::run(int argc, char **argv)
 {
-	//initialize robot parameters
-	running = false;
-	isSet = false;
 
-	cc = 1; //current_checkpoint = 0;
+	 //initialize robot parameters
 
-	is_called = true; 
-
-	goal_pair = std::make_pair(0, false);
-	
-	//Initial pose. This is same as the pose that you used in the world file to set	the robot pose.
+	//Initial pose. This is the same as the pose used in the world file.
 	px = checkpoints[cc-1][0];
 	py = checkpoints[cc-1][1];
 	cur_angle = 0;
-	
-	//Goal 
+
+	//Set goal pose 
 	goal_x = checkpoints[cc][0];
 	goal_y = checkpoints[cc][1];
 
-	goal_pair = calc_goal(goal_x, goal_y, cur_angle, px, py);
-	goal_angle = goal_pair.first;
-	
-	//Initial velocity
+	goal_angle = calc_goal_angle(goal_x, goal_y, cur_angle, px, py);
+
+	//Initial velocities
 	linear_x = 0;
-	angular_z = 0.001;
+	angular_z = 0;
 	
 	//Align local system to global coordinates
 
