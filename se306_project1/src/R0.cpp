@@ -35,17 +35,11 @@ std::pair<double, double> ret;
 
 int checkpoints[5][2] = {  
 {30, 25}, 
-{30, 7}, 
-{43, 7},
-{30, 7},
+{30, 42}, 
+{12, 42},
+{30, 42},
 {30, 25}  
 };
-
-double kitchen[2] = {43,7};
-double kitchen_corner[2] = {30, 7};
-double home_centre[2] = {30, 25};
-double bed_corner[2] = {32, 40};
-double toilet[2] = {10,40};
 
 std::pair<double, double> move(double goal_x, double goal_y, double cur_angle, double goal_angle, double px, double py);
 std::pair<double,bool> calc_goal(double goal_x, double goal_y, double cur_angle, double px, double py); 
@@ -75,7 +69,7 @@ void StageOdom_callback(nav_msgs::Odometry msg)
 	py = msg.pose.pose.position.y + checkpoints[0][1];
 	
 	//ROS_INFO("angular z: %f", angular_z);
-ROS_INFO("---------------------------------------------");
+/*ROS_INFO("---------------------------------------------");
 	ROS_INFO("px: %f", px);
 	ROS_INFO("py: %f", py);
 	ROS_INFO("goal x: %f", goal_x);
@@ -83,11 +77,11 @@ ROS_INFO("---------------------------------------------");
 	ROS_INFO("Current angle: %f", cur_angle);
 	ROS_INFO("Goal theta:   %f", goal_angle);
 ROS_INFO("---------------------------------------------");
-
+*/
 
 	//When goal reached
 	if ((px <= goal_x + 0.5) && (px >= goal_x - 0.5) && (py <= goal_y + 0.5) && (py >= goal_y - 0.5)) {
-	
+	isSet = false;
 		if (cc == 4) { //If at last checkpoint
 			linear_x = 0;
 			
@@ -95,12 +89,13 @@ ROS_INFO("---------------------------------------------");
 			cc++; //Increment checkpoint index
 		}
 		goal_x = checkpoints[cc][0];
+		ROS_INFO("GOAL_X %f",goal_x);
 		goal_y = checkpoints[cc][1];
 
 		if (is_called) {
 			//Adjusts for delay between publish and subscribe	
 			//val = goal_angle;
-			goal_pair = calc_goal(goal_x, goal_y, cur_angle, px, py);
+			goal_pair = calc_goal(goal_x, goal_y, cur_angle - M_PI/20, px - 0.1, py - 0.1);
 			goal_angle = goal_pair.first;
 			//if (goal_pair.second == false) {
 			//	goal_angle = val + goal_pair.first;
@@ -117,9 +112,9 @@ ROS_INFO("---------------------------------------------");
 		if (goal_angle >= 6.283) {
 			goal_angle = goal_angle - 6.283;
 		}
-		ret = move(goal_x, goal_y, cur_angle, goal_angle, px, py);
-				linear_x = ret.first;
-		angular_z = ret.second;	
+		//ret = move(goal_x, goal_y, cur_angle, goal_angle, px, py);
+		//linear_x = ret.first;
+	//	angular_z = ret.second;	
 	} else { //Do this until goal is reached
 		
 		is_called = true;
@@ -150,12 +145,19 @@ std::pair<double, double> move(double goal_x, double goal_y, double cur_angle, d
 		_ret.first = 3; //linear_x
 		_ret.second = 0; //angular_z
 		isSet = true;
+	} else if ((goal_angle <= cur_angle + 0.3) && (goal_angle >= cur_angle - 0.3) )  {
+		_ret.first = 0; //linear_x
+		_ret.second = fabs(goal_angle - cur_angle); //angular_z
+		if (goal_angle == cur_angle) {
+			isSet = true;		
+		}
+
 	} else {
 		_ret.first = 0; //linear_x
 		_ret.second = moveSpeed; //angular_z
 		isSet = false;
 	}
-	
+
 	//if (goal_pair.second) {
 	//	_ret.second = _ret.second * -1;
 	//}
@@ -167,8 +169,14 @@ std::pair<double, double> move(double goal_x, double goal_y, double cur_angle, d
 	ROS_INFO("py: %f",py);
 	ROS_INFO("goal_x: %f",goal_x);
 	ROS_INFO("px: %f",px);
+	ROS_INFO("angle Vel1: %f", _ret.second);
+	ROS_INFO("threshold: %f",threshold);
+	ROS_INFO("goal_angle: %f",goal_angle);
+	ROS_INFO("cur_angle: %f",cur_angle);
 	ROS_INFO("##################");
-	if ((px <= goal_x + 0.5) && (px >= goal_x - 0.5) && (py <= goal_y + 0.5) && (py >= goal_y - 0.5)) {	
+
+
+	if ((px-0.1 <= goal_x + 0.5) && (px-0.1 >= goal_x - 0.5) && (py-0.1 <= goal_y + 0.5) && (py-0.1 >= goal_y - 0.5)) {	
 			_ret.first = 0; //linear_x
 			isSet = false;
 			ROS_INFO("are you in yet? the sequel");
