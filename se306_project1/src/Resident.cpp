@@ -225,6 +225,14 @@ std::pair <double,bool> calc_goal(double goal_x, double goal_y, double cur_angle
 	return _ret;
 }
 
+/*
+	Simple model of resident - resident should move to a random checkpoint every once in a while. Will be replaced with a
+	more complex and realistic model later.
+*/
+void randomCheckpointCallback(const ros::TimerEvent&) {
+		
+}
+
 int main(int argc, char **argv)
 {
 
@@ -271,6 +279,10 @@ int main(int argc, char **argv)
 	////messages
 	//velocity of this RobotNode
 	geometry_msgs::Twist RobotNode_cmdvel;
+
+	// Periodic callback
+	int dur2 = time_conversion::simHoursToRealSecs(2); // Perform callback every 2 simulation hours
+	ros::Timer medicationTimer = n.createTimer(ros::Duration(dur2), randomCheckpointCallback); 
 
 	while (ros::ok())
 	{
