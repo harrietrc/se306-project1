@@ -76,14 +76,14 @@ void StageOdom_callback(nav_msgs::Odometry msg)
 	py = msg.pose.pose.position.y + checkpoints[0][1];
 	
 	//ROS_INFO("angular z: %f", angular_z);
-ROS_INFO("---------------------------------------------");
-	ROS_INFO("px: %f", px);
-	ROS_INFO("py: %f", py);
-	ROS_INFO("goal x: %f", goal_x);
-	ROS_INFO("goal y: %f", goal_y);
-	ROS_INFO("Current angle: %f", cur_angle);
-	ROS_INFO("Goal theta:   %f", goal_angle);
-ROS_INFO("---------------------------------------------");
+// ROS_INFO("---------------------------------------------");
+// 	ROS_INFO("px: %f", px);
+// 	ROS_INFO("py: %f", py);
+// 	ROS_INFO("goal x: %f", goal_x);
+// 	ROS_INFO("goal y: %f", goal_y);
+// 	ROS_INFO("Current angle: %f", cur_angle);
+// 	ROS_INFO("Goal theta:   %f", goal_angle);
+// ROS_INFO("---------------------------------------------");
 
 
 	//When goal reached
@@ -163,12 +163,12 @@ std::pair<double, double> move(double goal_x, double goal_y, double cur_angle, d
 
 	//When robot reaches the goal, stop moving (with a leeway of 0.4)
 	
-	ROS_INFO("##################");
-	ROS_INFO("goal_y: %f",goal_y);
-	ROS_INFO("py: %f",py);
-	ROS_INFO("goal_x: %f",goal_x);
-	ROS_INFO("px: %f",px);
-	ROS_INFO("##################");
+	// ROS_INFO("##################");
+	// ROS_INFO("goal_y: %f",goal_y);
+	// ROS_INFO("py: %f",py);
+	// ROS_INFO("goal_x: %f",goal_x);
+	// ROS_INFO("px: %f",px);
+	// ROS_INFO("##################");
 	if ((px <= goal_x + 0.5) && (px >= goal_x - 0.5) && (py <= goal_y + 0.5) && (py >= goal_y - 0.5)) {	
 			_ret.first = 0; //linear_x
 			isSet = false;
@@ -232,7 +232,7 @@ std::pair <double,bool> calc_goal(double goal_x, double goal_y, double cur_angle
 	more complex and realistic model later.
 */
 void randomCheckpointCallback(const ros::TimerEvent&) {
-	
+	ROS_INFO("hello");
 }
 
 int main(int argc, char **argv)
