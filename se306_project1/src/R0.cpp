@@ -6,7 +6,6 @@
 
 #include <sstream>
 #include "math.h"
-#include "time_conversion.hpp"
 
 //velocity of the robot
 double linear_x;
@@ -34,46 +33,6 @@ void StageLaser_callback(sensor_msgs::LaserScan msg)
 	
 }
 
-/* 
-	Model for all periodic events - start time, stop time, period. The issue with this at the moment is that
-	any behaviour defined here will occur at the end of the duration provided when creating the timer. This
-	could easily solved if this method had access to the value of that duration - I'll look into solving this
-	later. It's more of a usabiity issue than a usefulness one, as you can  adjust the startTime and endTime
-	but I'd prefer it to be more intuitive.
-	NOT CURRENTLY SUPPORTED: Events on certain days (other than every x number of days), non-periodic events 
-							 during the defined period (startTime - endTime)
-*/
-void testCallback1(const ros::TimerEvent&) {
-	int startTime = time_conversion::simHoursToRealSecs(6); // Start callback at 6am
-	int endTime = time_conversion::simHoursToRealSecs(12); // Stop callback at 12pm
-
-	int tnow = ros::Time::now().toSec(); // The simulation time now
-	int dlen = time_conversion::getDayLength(); // The length of a simulation day, in seconds
-
-	// Behaviour should only occur if the simulation time is between the specified start and end times.
-	if (((tnow % dlen) > startTime) && ((tnow % dlen) < endTime)) { // Note that this will run at the end of the duration specified for the timer.
-		ROS_INFO("providing medication: "); 
-		std::ostringstream s;
-		s << tnow; 
-		ROS_INFO(s.str().c_str()); // Just shows elapsed seconds
-		ros::Duration(5).sleep();
-	}
-}
-
-void testCallback2(const ros::TimerEvent&) {
-	int startTime = time_conversion::simHoursToRealSecs(0); // Start callback at 6am
-	int endTime = time_conversion::simHoursToRealSecs(24); // Stop callback at 12pm
-
-	int tnow = ros::Time::now().toSec(); // The simulation time now
-	int dlen = time_conversion::getDayLength(); // The length of a simulation day, in seconds
-
-	if (((tnow % dlen) > startTime) && ((tnow % dlen) < endTime)) {
-		ROS_INFO("visiting resident: ");
-		std::ostringstream s;
-		s << tnow; 
-		ROS_INFO(s.str().c_str());
-	}
-}
 
 int main(int argc, char **argv)
 {
@@ -94,6 +53,9 @@ ros::init(argc, argv, "RobotNode0");
 //NodeHandle is the main access point to communicate with ros.
 ros::NodeHandle n;
 
+// Testing getting/setting parameters
+system("rosrun se306_project1 Assistant robotname:='Botty'");
+
 //advertise() function will tell ROS that you want to publish on a given topic_
 //to stage
 ros::Publisher RobotNode_stage_pub = n.advertise<geometry_msgs::Twist>("robot_0/cmd_vel",1000); 
@@ -111,11 +73,6 @@ int count = 0;
 //velocity of this RobotNode
 geometry_msgs::Twist RobotNode_cmdvel;
 
-// Timers for event scheduling. Timers that run callback at the same time will have those callbacks queued.
-int dur1 = time_conversion::simHoursToRealSecs(4);
-ros::Timer visitTimer = n.createTimer(ros::Duration(dur1), testCallback2);
-int dur2 = time_conversion::simHoursToRealSecs(2); // Perform callback every 2 simulation hours
-ros::Timer medicationTimer = n.createTimer(ros::Duration(dur2), testCallback1); 
 
 while (ros::ok())
 {

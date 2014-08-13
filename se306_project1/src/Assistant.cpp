@@ -23,7 +23,7 @@ class Assistant {
 	// Enumeration of type of robot
 	//enum Type{FRIEND, RELATIVE, DOCTOR, NURSE, CAREGIVER, ASSISTANT, RESIDENT};
 	
-	int robot_id = 10;
+	//int robot_id = 10;
 	//int numOfAssistants;
 	
 	// Enum or string? to be specified
@@ -32,8 +32,8 @@ class Assistant {
 	void StageOdom_callback(nav_msgs::Odometry msg)
 	{
 		//This is the call back function to process odometry messages coming from Stage. 	
-		px = 5 + msg.pose.pose.position.x;
-		py =10 + msg.pose.pose.position.y;
+		//px = 5 + msg.pose.pose.position.x;
+		//py =10 + msg.pose.pose.position.y;
 		//ROS_INFO("Current x position is: %f", px);
 		//ROS_INFO("Current y position is: %f", py);
 	}
@@ -129,6 +129,12 @@ class Assistant {
 	// Periodic callback
 	int dur2 = time_conversion::simHoursToRealSecs(2); // Perform callback every 2 simulation hours
 	ros::Timer medicationTimer = n.createTimer(ros::Duration(dur2), &Assistant::medicationCallback, this); 
+
+	// // Testing getting parameters
+	// std::string robotname;
+ //   	n.getParam("robotname", robotname);
+ //   	ROS_INFO("Name: ");
+ //   	ROS_INFO(robotname.c_str());
 	
 	while (ros::ok())
 	{
