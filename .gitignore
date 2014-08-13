@@ -21,6 +21,10 @@ msg/_.*\.py$
 frames.gv
 frames.pdf
 
+#eclipse
+.metadata
+.pydevproject
+
 #setup.sh depends on where you installed ros
 setup.sh
 
