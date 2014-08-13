@@ -142,7 +142,7 @@ std::pair<double, double> move(double goal_x, double goal_y, double cur_angle, d
 	threshold = ((int)(threshold * 1000 + .5) / 1000.0);
 
 	if ((goal_angle  == threshold) || isSet) {
-		_ret.first = 3; //linear_x
+		_ret.first = 5; //linear_x
 		_ret.second = 0; //angular_z
 		isSet = true;
 	} else if ((goal_angle <= cur_angle + 0.3) && (goal_angle >= cur_angle - 0.3) )  {
