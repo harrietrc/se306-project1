@@ -18,6 +18,8 @@ double goal_x;
 double goal_y;
 double goal_angle;
 
+bool running = false;
+bool isSet = false;
 
 //current pose and orientation of the robot
 double px;
@@ -52,6 +54,10 @@ void StageOdom_callback(nav_msgs::Odometry msg);
 
 void StageOdom_callback(nav_msgs::Odometry msg)
 {
+	if (running ) {
+		return;
+	}
+	running = true;
 	ret = std::make_pair(0, 0); //initialize pair. Used to get return.
 	//double val = 0;
 
@@ -111,7 +117,9 @@ ROS_INFO("---------------------------------------------");
 		if (goal_angle >= 6.283) {
 			goal_angle = goal_angle - 6.283;
 		}
-
+		ret = move(goal_x, goal_y, cur_angle, goal_angle, px, py);
+				linear_x = ret.first;
+		angular_z = ret.second;	
 	} else { //Do this until goal is reached
 		
 		is_called = true;
@@ -120,19 +128,32 @@ ROS_INFO("---------------------------------------------");
 		linear_x = ret.first;
 		angular_z = ret.second;
 	}
+
+	running = false;
 }
 
 
 //Keeps robot moving by changing linear_x and angular_z
 std::pair<double, double> move(double goal_x, double goal_y, double cur_angle, double goal_angle, double px, double py) 
 {	
- 	std::pair <double,double> _ret (0, 0.001); //Return value of move() function, contains linear_x and angular_x. Defines how robot movees between goals.	
-
+ //contains linear_x and angular_x. Defines how robot movees between goals.	
+	
+	std::pair<double,double>_ret = std::make_pair(0, 0); //initialize pair. Used to get return.
+	double moveSpeed = M_PI/2;
+	moveSpeed = ((int)(moveSpeed * 1000 + .5) / 1000.0);
 	//When the robot is facing the correct direction, start moving
 
-	if (goal_angle == cur_angle) {
-		_ret.first = 0.5; //linear_x
+	double threshold = cur_angle-moveSpeed/10;
+	threshold = ((int)(threshold * 1000 + .5) / 1000.0);
+
+	if ((goal_angle  == threshold) || isSet) {
+		_ret.first = 3; //linear_x
 		_ret.second = 0; //angular_z
+		isSet = true;
+	} else {
+		_ret.first = 0; //linear_x
+		_ret.second = moveSpeed; //angular_z
+		isSet = false;
 	}
 	
 	//if (goal_pair.second) {
@@ -140,10 +161,18 @@ std::pair<double, double> move(double goal_x, double goal_y, double cur_angle, d
 	//}
 
 	//When robot reaches the goal, stop moving (with a leeway of 0.4)
-	if ((px <= goal_x + 0.5) && (px >= goal_x - 0.5)) {	
-		if ((py <= goal_y + 0.5) && (py >= goal_y - 0.5)) {		
+	
+	ROS_INFO("##################");
+	ROS_INFO("goal_y: %f",goal_y);
+	ROS_INFO("py: %f",py);
+	ROS_INFO("goal_x: %f",goal_x);
+	ROS_INFO("px: %f",px);
+	ROS_INFO("##################");
+	if ((px <= goal_x + 0.5) && (px >= goal_x - 0.5) && (py <= goal_y + 0.5) && (py >= goal_y - 0.5)) {	
 			_ret.first = 0; //linear_x
-		}
+			isSet = false;
+			ROS_INFO("are you in yet? the sequel");
+		
 	}
 
 	return _ret; 
@@ -171,12 +200,6 @@ std::pair <double,bool> calc_goal(double goal_x, double goal_y, double cur_angle
 	goal_vector_x = goal_x - px;
 	goal_vector_y = goal_y - py;
 
-	//Finding dot product between init_vector and goal_vector
-	//dot = (goal_vector_x*init_vector_x) + (goal_vector_y*init_vector_y);		
-
-	//Calculating angle for robot to face to the goal
-	//goal_angle = acos(dot/sqrt(pow(goal_vector_x,2) + pow(goal_vector_y,2)));
-
 	cross = (init_vector_x * goal_vector_y) - (goal_vector_x * init_vector_y);
 	
 	if (cross < 0) {
@@ -186,26 +209,6 @@ std::pair <double,bool> calc_goal(double goal_x, double goal_y, double cur_angle
 		is_clockwise = false;
 	}
 	
-	//if (goal_vector_x == 0) {
-	//	goal_angle = M_PI/2;
-	//}else{
-	//	goal_angle = atan(abs(goal_vector_y)/abs(goal_vector_x));	
-	//}	
-	
-
-	//ROS_INFO("Tan Angle: %f", goal_angle);
-
-	//if ((goal_vector_x < 0) && (goal_vector_y <= 0)) {
-	//	goal_angle = M_PI - goal_angle;
-	//}else if ((goal_vector_x <= 0) && (goal_vector_y > 0)) {
-	//	goal_angle = M_PI + goal_angle;
-	//}else if ((goal_vector_x > 0) && (goal_vector_y > 0)) {
-	//	goal_angle = (2*M_PI) - goal_angle;
-	//}
-
-	ROS_INFO("goal vec x: %f", goal_vector_x);
-	ROS_INFO("goal vec y: %f", goal_vector_y);
-
 	goal_angle = atan2(goal_vector_y, goal_vector_x); //pi <= goal_angle < -pi
 	if (goal_angle < 0) {
 		goal_angle = 2 * M_PI + goal_angle; //Remove sign, then add to pi
