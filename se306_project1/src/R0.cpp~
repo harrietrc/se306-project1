@@ -17,8 +17,6 @@ double angular_z;
 double goal_x;
 double goal_y;
 double goal_angle;
-
-bool running = false;
 bool isSet = false;
 
 //current pose and orientation of the robot
@@ -28,13 +26,11 @@ double cur_angle;
 
 int cc = 1; //current_checkpoint = 0;
 
-bool is_called = true; 
-
 std::pair<double, double> ret;	
 
 int checkpoints[5][2] = {  
 {30, 25}, 
-{30, 42}, 
+{35, 30}, 
 {12, 42},
 {30, 42},
 {30, 25}  
@@ -47,10 +43,7 @@ void StageOdom_callback(nav_msgs::Odometry msg);
 
 void StageOdom_callback(nav_msgs::Odometry msg)
 {
-
-
 	ret = std::make_pair(0, 0); //initialize pair. Used to get return.
-
 
 	//Converting from quaternion to radians
 	cur_angle = acos(msg.pose.pose.orientation.w) * 2;
@@ -65,34 +58,21 @@ void StageOdom_callback(nav_msgs::Odometry msg)
 	px = msg.pose.pose.position.x + checkpoints[0][0];
 	py = msg.pose.pose.position.y + checkpoints[0][1];
 	
-
-
 	//When goal reached
 	if ((px <= goal_x + 0.5) && (px >= goal_x - 0.5) && (py <= goal_y + 0.5) && (py >= goal_y - 0.5)) {
 	isSet = false;
 		if (cc == 4) { //If at last checkpoint
 			linear_x = 0;
-			
 		} else {
 			cc++; //Increment checkpoint index
 		}
 		goal_x = checkpoints[cc][0];
 		goal_y = checkpoints[cc][1];
-
-		if (is_called) {
-
-			goal_angle = calc_goal_angle(goal_x, goal_y, cur_angle - M_PI/20, px - 0.1, py - 0.1);
-
-			is_called = false;
-		}
-
-		if (goal_angle >= 6.283) {
-			goal_angle = goal_angle - 6.283;
-		}
+	
+		//Account for delay by subtracting delay values from current pose and orientation
+		goal_angle = calc_goal_angle(goal_x, goal_y, cur_angle - M_PI/20, px - 0.1, py - 0.1);
 
 	} else { //Do this until goal is reached
-		
-		is_called = true;
 		ret = move(goal_x, goal_y, cur_angle, goal_angle, px, py);	
 		linear_x = ret.first;
 		angular_z = ret.second;
@@ -165,8 +145,6 @@ double calc_goal_angle(double goal_x, double goal_y, double cur_angle, double px
 	//rounding goal_angle to three decimal places
 	goal_angle = ((int)(goal_angle * 1000 + .5) / 1000.0);
 	
-
-
 	return goal_angle;
 }
 
