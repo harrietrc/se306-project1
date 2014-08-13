@@ -3,7 +3,8 @@
 #include <geometry_msgs/Twist.h>
 #include <nav_msgs/Odometry.h>
 #include <sensor_msgs/LaserScan.h>
-#include "se306_project1/ResidentMsg.h" 
+#include "se306_project1/ResidentMsg.h"
+#include "se306_project1/DoctorMsg.h"
 
 #include <sstream>
 #include "math.h"
@@ -14,8 +15,8 @@ void Resident::StageOdom_callback(nav_msgs::Odometry msg)
 	//This is the call back function to process odometry messages coming from Stage. 	
 	px = 5 + msg.pose.pose.position.x;
 	py =10 + msg.pose.pose.position.y;
-	ROS_INFO("Current x position is: %f", px);
-	ROS_INFO("Current y position is: %f", py);
+	//ROS_INFO("Current x position is: %f", px);
+	//ROS_INFO("Current y position is: %f", py);
 }
 
 void Resident::StageLaser_callback(sensor_msgs::LaserScan msg)
@@ -23,6 +24,13 @@ void Resident::StageLaser_callback(sensor_msgs::LaserScan msg)
 	//This is the callback function to process laser scan messages
 	//you can access the range data from msg.ranges[i]. i = sample number
 	
+}
+
+//doctor will heal resident when they are next to each other
+void Resident::doctor_callback(se306_project1::DoctorMsg msg)
+{
+	if (msg.healResident == true)
+	 	health = 100;
 }
 
 int Resident::run(int argc, char **argv)
@@ -58,6 +66,9 @@ int Resident::run(int argc, char **argv)
 	//subscribe to listen to messages coming from stage
 	ros::Subscriber StageOdo_sub = n.subscribe<nav_msgs::Odometry>("robot_0/odom",1000, &Resident::StageOdom_callback, this);
 	ros::Subscriber StageLaser_sub = n.subscribe<sensor_msgs::LaserScan>("robot_0/base_scan",1000,&Resident::StageLaser_callback, this);
+
+	//subscribe to doctor messages
+	ros::Subscriber doctor_sub = n.subscribe<se306_project1::DoctorMsg>("healResident",1000, &Resident::doctor_callback, this);
 
 	ros::Rate loop_rate(10);
 

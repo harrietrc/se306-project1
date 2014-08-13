@@ -4,6 +4,7 @@
 #include <nav_msgs/Odometry.h>
 #include <sensor_msgs/LaserScan.h>
 #include "se306_project1/ResidentMsg.h"
+#include "se306_project1/DoctorMsg.h"
 
 #include <sstream>
 #include "math.h"
@@ -28,17 +29,15 @@ void Doctor::StageLaser_callback(sensor_msgs::LaserScan msg)
 //custom resident callback function, you get the message object that was sent from Resident
 void Doctor::residentStatusCallback(se306_project1::ResidentMsg msg)
 {
-	// do something with the values
-	// msg.robot_id = robot_id;
-	// ResidentMsg.health = health;
-	// ResidentMsg.boredom = boredom;
-	// ResidentMsg.hunger = hunger;
-	// ResidentMsg.x = px;
-	// ResidentMsg.y = py;
-	// ResidentMsg.theta = theta;
-	// ResidentMsg.robot_type = "Resident";
-	//ROS_INFO("Working [%s]", msg->data.c_str());
-	ROS_INFO("Resident health is: %d", msg.health);
+	// if (msg.health < 20) { // emergency
+	// 	Doctor visits()/moves() to the Resident
+	// 	if Doctor is next to Resident
+	// 		bool healResident = true;
+	//		if (msg.health > 20) {
+	//			leave() // go outside of house?
+	// else
+	// 	healResident = false;
+	
 }
 
 int Doctor::run(int argc, char **argv)
@@ -52,6 +51,9 @@ int Doctor::run(int argc, char **argv)
 	//Initial velocity
 	linear_x = 0.2;
 	angular_z = 0.2;
+
+	//boolean to indicate whether doctor should heal the resident
+	healResident = false;
 		
 	//You must call ros::init() first of all. ros::init() function needs to see argc and argv. The third argument is the name of the node
 	ros::init(argc, argv, "Doctor");
@@ -62,6 +64,9 @@ int Doctor::run(int argc, char **argv)
 	//advertise() function will tell ROS that you want to publish on a given topic_
 	//to stage
 	ros::Publisher RobotNode_stage_pub = n.advertise<geometry_msgs::Twist>("robot_0/cmd_vel",1000); 
+
+	// Resident subscribes to this topic. Indicates whether Doctor should heal Resident
+	ros::Publisher doctor_pub = n.advertise<se306_project1::DoctorMsg>("healResident",1000);
 
 	//subscribe to listen to messages coming from stage
 	ros::Subscriber StageOdo_sub = n.subscribe<nav_msgs::Odometry>("robot_0/odom",1000, &Doctor::StageOdom_callback, this);
@@ -90,6 +95,11 @@ int Doctor::run(int argc, char **argv)
 			
 		//publish the message
 		RobotNode_stage_pub.publish(RobotNode_cmdvel);
+
+		//setup and publish a doctor msg to resident
+		se306_project1::DoctorMsg msg;
+		msg.healResident = healResident;
+		doctor_pub.publish(msg);
 		
 		ros::spinOnce();
 

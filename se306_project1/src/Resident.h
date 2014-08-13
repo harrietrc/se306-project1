@@ -11,6 +11,7 @@ class Resident : public Agent
 		void StageOdom_callback(nav_msgs::Odometry msg);
 		void StageLaser_callback(sensor_msgs::LaserScan msg);
 		int run(int argc, char **argv);
+		void doctor_callback(se306_project1::DoctorMsg msg);
 
 		// Return type of robot
 		// MIGHT HAVE TO RETURN A STRING BECAUSE ROS DOESN'T SUPPORT ENUM IN MESSAGES
