@@ -77,8 +77,7 @@ void testCallback2(const ros::TimerEvent&) {
 
 int main(int argc, char **argv)
 {
-
- //initialize robot parameters
+	//initialize robot parameters
 	//Initial pose. This is same as the pose that you used in the world file to set	the robot pose.
 	theta = M_PI/2.0;
 	px = 10;
@@ -88,49 +87,49 @@ int main(int argc, char **argv)
 	linear_x = 0.2;
 	angular_z = 0.2;
 	
-//You must call ros::init() first of all. ros::init() function needs to see argc and argv. The third argument is the name of the node
-ros::init(argc, argv, "RobotNode0");
+	//You must call ros::init() first of all. ros::init() function needs to see argc and argv. The third argument is the name of the node
+	ros::init(argc, argv, "RobotNode0");
 
-//NodeHandle is the main access point to communicate with ros.
-ros::NodeHandle n;
+	//NodeHandle is the main access point to communicate with ros.
+	ros::NodeHandle n;
 
-//advertise() function will tell ROS that you want to publish on a given topic_
-//to stage
-ros::Publisher RobotNode_stage_pub = n.advertise<geometry_msgs::Twist>("robot_0/cmd_vel",1000); 
+	//advertise() function will tell ROS that you want to publish on a given topic_
+	//to stage
+	ros::Publisher RobotNode_stage_pub = n.advertise<geometry_msgs::Twist>("robot_0/cmd_vel",1000); 
 
-//subscribe to listen to messages coming from stage
-ros::Subscriber StageOdo_sub = n.subscribe<nav_msgs::Odometry>("robot_0/odom",1000, StageOdom_callback);
-ros::Subscriber StageLaser_sub = n.subscribe<sensor_msgs::LaserScan>("robot_0/base_scan",1000,StageLaser_callback);
+	//subscribe to listen to messages coming from stage
+	ros::Subscriber StageOdo_sub = n.subscribe<nav_msgs::Odometry>("robot_0/odom",1000, StageOdom_callback);
+	ros::Subscriber StageLaser_sub = n.subscribe<sensor_msgs::LaserScan>("robot_0/base_scan",1000,StageLaser_callback);
 
-ros::Rate loop_rate(10);
+	ros::Rate loop_rate(10);
 
-//a count of howmany messages we have sent
-int count = 0;
+	//a count of howmany messages we have sent
+	int count = 0;
 
-////messages
-//velocity of this RobotNode
-geometry_msgs::Twist RobotNode_cmdvel;
+	////messages
+	//velocity of this RobotNode
+	geometry_msgs::Twist RobotNode_cmdvel;
 
-// Timers for event scheduling. Timers that run callback at the same time will have those callbacks queued.
-int dur1 = time_conversion::simHoursToRealSecs(4);
-ros::Timer visitTimer = n.createTimer(ros::Duration(dur1), testCallback2);
-int dur2 = time_conversion::simHoursToRealSecs(2); // Perform callback every 2 simulation hours
-ros::Timer medicationTimer = n.createTimer(ros::Duration(dur2), testCallback1); 
+	// Timers for event scheduling. Timers that run callback at the same time will have those callbacks queued.
+	int dur1 = time_conversion::simHoursToRealSecs(4);
+	ros::Timer visitTimer = n.createTimer(ros::Duration(dur1), testCallback2);
+	int dur2 = time_conversion::simHoursToRealSecs(2); // Perform callback every 2 simulation hours
+	ros::Timer medicationTimer = n.createTimer(ros::Duration(dur2), testCallback1); 
 
-while (ros::ok())
-{
-	//messages to stage
-	RobotNode_cmdvel.linear.x = linear_x;
-	RobotNode_cmdvel.angular.z = angular_z;
-        
-	//publish the message
-	RobotNode_stage_pub.publish(RobotNode_cmdvel);
-	
-	ros::spinOnce();
+	while (ros::ok())
+	{
+		//messages to stage
+		RobotNode_cmdvel.linear.x = linear_x;
+		RobotNode_cmdvel.angular.z = angular_z;
+			
+		//publish the message
+		RobotNode_stage_pub.publish(RobotNode_cmdvel);
+		
+		ros::spinOnce();
 
-	loop_rate.sleep();
-	++count;
-}
+		loop_rate.sleep();
+		++count;
+	}
 
 return 0;
 
