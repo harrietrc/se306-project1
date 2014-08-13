@@ -7,9 +7,14 @@
 
 #include "ros/ros.h"
 
+namespace AgentConst {
+	enum AgentType { RESIDENT, ASSISTANT, DOCTOR };
+}
+
 class AgentFactory {
 public:
 //	AgentFactory();
 //	virtual ~AgentFactory();
 	void createMockAgent();
+	int createAgent(AgentConst::AgentType agentType);
 };

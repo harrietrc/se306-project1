@@ -2,10 +2,24 @@
 
 #include "ros/ros.h"
 
-int main(int argc, char** argv)
-//int main()
-{
-    AgentFactory af1;
-    af1.createMockAgent();
-    return 0;
+std::map<AgentConst::AgentType, int> nodeList;
+
+void initializeNodeList();
+
+int main(int argc, char** argv) {
+	initializeNodeList();
+
+	AgentConst::AgentType agentType = AgentConst::DOCTOR;
+	AgentFactory agentFactory;
+	nodeList[agentType] = nodeList[agentType] + agentFactory.createAgent(agentType);
+
+	std::cout << "now we have " << nodeList[AgentConst::DOCTOR] << "doctor(s)\n";
+
+	return 0;
+}
+
+void initializeNodeList() {
+	nodeList[AgentConst::RESIDENT] = 0;
+	nodeList[AgentConst::DOCTOR] = 0;
+	nodeList[AgentConst::RESIDENT] = 0;
 }

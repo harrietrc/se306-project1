@@ -5,9 +5,9 @@
  *      Author: john
  */
 
+#include <string>
 
 class ProcessManager {
 public:
-	ProcessManager();
-	virtual ~ProcessManager();
+	int nodeProcess(std::string executableName);
 };
