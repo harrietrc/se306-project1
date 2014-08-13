@@ -48,12 +48,10 @@ void StageOdom_callback(nav_msgs::Odometry msg);
 
 void StageOdom_callback(nav_msgs::Odometry msg)
 {
-	if (running ) {
-		return;
-	}
-	running = true;
+
+
 	ret = std::make_pair(0, 0); //initialize pair. Used to get return.
-	//double val = 0;
+
 
 	//Converting from quaternion to radians
 	cur_angle = acos(msg.pose.pose.orientation.w) * 2;
@@ -68,16 +66,7 @@ void StageOdom_callback(nav_msgs::Odometry msg)
 	px = msg.pose.pose.position.x + checkpoints[0][0];
 	py = msg.pose.pose.position.y + checkpoints[0][1];
 	
-	//ROS_INFO("angular z: %f", angular_z);
-/*ROS_INFO("---------------------------------------------");
-	ROS_INFO("px: %f", px);
-	ROS_INFO("py: %f", py);
-	ROS_INFO("goal x: %f", goal_x);
-	ROS_INFO("goal y: %f", goal_y);
-	ROS_INFO("Current angle: %f", cur_angle);
-	ROS_INFO("Goal theta:   %f", goal_angle);
-ROS_INFO("---------------------------------------------");
-*/
+
 
 	//When goal reached
 	if ((px <= goal_x + 0.5) && (px >= goal_x - 0.5) && (py <= goal_y + 0.5) && (py >= goal_y - 0.5)) {
@@ -93,28 +82,17 @@ ROS_INFO("---------------------------------------------");
 		goal_y = checkpoints[cc][1];
 
 		if (is_called) {
-			//Adjusts for delay between publish and subscribe	
-			//val = goal_angle;
+
 			goal_pair = calc_goal(goal_x, goal_y, cur_angle - M_PI/20, px - 0.1, py - 0.1);
 			goal_angle = goal_pair.first;
-			//if (goal_pair.second == false) {
-			//	goal_angle = val + goal_pair.first;
-			//} else {
-			//	if(goal_pair.first >= val){
-			//		goal_angle = 6.283 + val - goal_pair.first;
-			//	} else {			
-			//		goal_angle = val - goal_pair.first;
-			//	}
-			//}
+
 			is_called = false;
 		}
 
 		if (goal_angle >= 6.283) {
 			goal_angle = goal_angle - 6.283;
 		}
-		//ret = move(goal_x, goal_y, cur_angle, goal_angle, px, py);
-		//linear_x = ret.first;
-	//	angular_z = ret.second;	
+
 	} else { //Do this until goal is reached
 		
 		is_called = true;
@@ -123,8 +101,6 @@ ROS_INFO("---------------------------------------------");
 		linear_x = ret.first;
 		angular_z = ret.second;
 	}
-
-	running = false;
 }
 
 
@@ -158,26 +134,9 @@ std::pair<double, double> move(double goal_x, double goal_y, double cur_angle, d
 		isSet = false;
 	}
 
-	//if (goal_pair.second) {
-	//	_ret.second = _ret.second * -1;
-	//}
-
-	//When robot reaches the goal, stop moving (with a leeway of 0.4)
-	
-	ROS_INFO("##################");
-	ROS_INFO("goal_y: %f",goal_y);
-	ROS_INFO("py: %f",py);
-	ROS_INFO("goal_x: %f",goal_x);
-	ROS_INFO("px: %f",px);
-	ROS_INFO("angle Vel1: %f", _ret.second);
-	ROS_INFO("threshold: %f",threshold);
-	ROS_INFO("goal_angle: %f",goal_angle);
-	ROS_INFO("cur_angle: %f",cur_angle);
-	ROS_INFO("##################");
-
 
 	if ((px-0.1 <= goal_x + 0.5) && (px-0.1 >= goal_x - 0.5) && (py-0.1 <= goal_y + 0.5) && (py-0.1 >= goal_y - 0.5)) {	
-			_ret.first = 0; //linear_x
+			_ret.first = 0; 
 			isSet = false;
 			ROS_INFO("are you in yet? the sequel");
 		

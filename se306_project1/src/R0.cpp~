@@ -48,10 +48,8 @@ void StageOdom_callback(nav_msgs::Odometry msg);
 
 void StageOdom_callback(nav_msgs::Odometry msg)
 {
-	if (running ) {
-		return;
-	}
-	running = true;
+
+
 	ret = std::make_pair(0, 0); //initialize pair. Used to get return.
 	//double val = 0;
 
@@ -123,8 +121,6 @@ ROS_INFO("---------------------------------------------");
 		linear_x = ret.first;
 		angular_z = ret.second;
 	}
-
-	running = false;
 }
 
 
@@ -142,7 +138,7 @@ std::pair<double, double> move(double goal_x, double goal_y, double cur_angle, d
 	threshold = ((int)(threshold * 1000 + .5) / 1000.0);
 
 	if ((goal_angle  == threshold) || isSet) {
-		_ret.first = 3; //linear_x
+		_ret.first = 5; //linear_x
 		_ret.second = 0; //angular_z
 		isSet = true;
 	} else if ((goal_angle <= cur_angle + 0.3) && (goal_angle >= cur_angle - 0.3) )  {
