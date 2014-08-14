@@ -4,6 +4,7 @@
 #include <nav_msgs/Odometry.h>
 #include <sensor_msgs/LaserScan.h>
 #include "se306_project1/ResidentMsg.h"
+#include "se306_project1/AssistantMsg.h"
 
 #include <sstream>
 #include "math.h"
@@ -167,8 +168,16 @@ void Assistant::residentStatusCallback(se306_project1::ResidentMsg msg)
 	// ResidentMsg.x = px;
 	// ResidentMsg.y = py;
 	// ResidentMsg.theta = theta;
-	ROS_INFO("Resident hunger is: %d", msg.hunger);
-
+	//ROS_INFO("Resident hunger is: %d", msg.hunger);
+	if(msg.hunger < 60 && cooking ==false)
+	{
+		cooking = true;
+		ROS_INFO("Resident is hungry, hunger = %d", msg.hunger);
+		ROS_INFO("Assistant is cooking");
+	} else if (msg.hunger >= 60)
+	{
+		cooking = false;
+	}
 }
 
 /* 
@@ -198,6 +207,7 @@ void Assistant::medicationCallback(const ros::TimerEvent&) {
 
 int Assistant::run(int argc, char **argv)
 {
+
 	//Initial pose. This is the same as the pose used in the world file.
 	px = checkpoints[cc-1][0];
 	py = checkpoints[cc-1][1];
@@ -212,6 +222,9 @@ int Assistant::run(int argc, char **argv)
 	//Initial velocities
 	linear_x = 0;
 	angular_z = 0;
+
+	//initialize robot parameters
+	cooking = false;
 		
 	//You must call ros::init() first of all. ros::init() function needs to see argc and argv. The third argument is the name of the node
 	ros::init(argc, argv, "Assistant");
@@ -222,6 +235,8 @@ int Assistant::run(int argc, char **argv)
 	//advertise() function will tell ROS that you want to publish on a given topic_
 	//to stage
 	ros::Publisher RobotNode_stage_pub = n.advertise<geometry_msgs::Twist>("robot_0/cmd_vel",1000); 
+
+	ros::Publisher assistant_pub = n.advertise<se306_project1::AssistantMsg>("assistantStatus",1000);
 
 	//subscribe to listen to messages coming from stage
 	ros::Subscriber StageOdo_sub = n.subscribe<nav_msgs::Odometry>("robot_0/odom",1000, &Assistant::StageOdom_callback, this);
@@ -234,6 +249,7 @@ int Assistant::run(int argc, char **argv)
 
 	//a count of howmany messages we have sent
 	int count = 0;
+	int i = 0;
 
 	////messages
 	//velocity of this RobotNode
@@ -258,6 +274,19 @@ int Assistant::run(int argc, char **argv)
 		//publish the message
 		RobotNode_stage_pub.publish(RobotNode_cmdvel);
 		
+		se306_project1::AssistantMsg msg;
+		msg.cooking = cooking;
+
+		//status = "Cooking";
+		if (cooking == true && count % 10 == 0){
+			i += 1;
+			if (i == 30)
+			{
+				assistant_pub.publish(msg);
+				ROS_INFO("Food is ready");
+				i = 0;
+			}
+		}
 		ros::spinOnce();
 
 		loop_rate.sleep();

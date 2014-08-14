@@ -14,7 +14,7 @@ class Resident : public Agent
 		double py;
 		double goal_angle;
 
-		bool running;
+		//bool running;
 		bool isSet;
 
 		//current pose and orientation of the robot
@@ -28,12 +28,12 @@ class Resident : public Agent
 		std::pair<double, double> ret;	
 
 		int checkpoints[5][2] = {  
-		{30, 25}, 
-		{30, 42}, 
-		{12, 42},
-		{30, 42},
-		{30, 25}  
-		};
+				{30, 25},
+				{35, 35},
+				{12, 42},
+				{30, 42},
+				{30, 25}
+				};
 
 	public:
 		void StageOdom_callback(nav_msgs::Odometry msg);
@@ -43,6 +43,7 @@ class Resident : public Agent
 		double calc_goal_angle(double goal_x, double goal_y, double cur_angle, double px, double py);
 		std::pair<double, double> move(double goal_x, double goal_y, double cur_angle, double goal_angle, double px, double py);
 		void randomCheckpointCallback(const ros::TimerEvent&);
+		void assistant_callback(se306_project1::AssistantMsg msg);
 
 		// Return type of robot
 		// MIGHT HAVE TO RETURN A STRING BECAUSE ROS DOESN'T SUPPORT ENUM IN MESSAGES

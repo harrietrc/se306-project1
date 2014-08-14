@@ -1,8 +1,10 @@
 #include "Agent.h"
+#include "std_msgs/String.h"
 
 class Assistant : public Agent
 {
-		protected:
+
+	protected:
 		int health;
 		int boredom;
 		int hunger;
@@ -35,6 +37,9 @@ class Assistant : public Agent
 		{30, 25}  
 		};
 		
+		bool cooking;
+
+
 	public:
 		void StageOdom_callback(nav_msgs::Odometry msg);
 		void StageLaser_callback(sensor_msgs::LaserScan msg);
