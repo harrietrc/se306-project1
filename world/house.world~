@@ -64,7 +64,7 @@ floorplan
 ( 
   name "swarm"
   bitmap "house.pgm"
-  size [50.000 50.000 0.500]
+  size [50.000 70.000 0.500]
   pose [ 25.000 25.000 0.000 0.000 ]
 )
 
