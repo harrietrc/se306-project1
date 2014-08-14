@@ -175,7 +175,16 @@ std::pair<double, double> Resident::move(double goal_x, double goal_y, double cu
 	//When the robot is facing the correct direction, start moving
 	double threshold = cur_angle-moveSpeed/10;
 	threshold = ((int)(threshold * 1000 + .5) / 1000.0);
-
+	ROS_INFO("##################");
+	ROS_INFO("goal_y: %f",goal_y);
+	ROS_INFO("py: %f",py);
+	ROS_INFO("goal_x: %f",goal_x);
+	ROS_INFO("px: %f",px);
+	ROS_INFO("angle Vel1: %f", _ret.second);
+	ROS_INFO("threshold: %f",threshold);
+	ROS_INFO("goal_angle: %f",goal_angle);
+	ROS_INFO("cur_angle: %f",cur_angle);
+	ROS_INFO("##################");
 
 	if ((goal_angle  == threshold) || isSet) {
 		_ret.first = 5; //linear_x

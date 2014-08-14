@@ -29,8 +29,8 @@ class Resident : public Agent
 
 		int checkpoints[3][2] = {  
 				{47, 43},
-				{47, 18},
-				{22, 18}
+				{47, 20},
+				{32, 20}
 				};
 
 
