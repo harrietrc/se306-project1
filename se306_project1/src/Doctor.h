@@ -23,6 +23,13 @@ class Doctor : public Visitor
 
 		int cc; //current_checkpoint = 0;
 
+		int checkpoints[4][2] = {
+			{10, -7},
+			{10, 1},
+			{30, 20},
+			{30, 25}
+			};
+
 		bool is_called; 
 
 		std::pair<double,bool> goal_pair;
