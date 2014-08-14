@@ -30,7 +30,7 @@ class Assistant : public Agent
 		std::pair<double, double> ret;	
 
 		int checkpoints[11][2] = {  
-		{30, 25}, 
+		{30, 25},
 		{30, 7}, 
 		{40, 7},
 		{40, 8},

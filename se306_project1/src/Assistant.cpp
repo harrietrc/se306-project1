@@ -21,6 +21,7 @@ double goal_y;
 double goal_angle;
 bool isSet = false;
 int foodIsDelivered = 0;
+bool moveToPoint = false;
 
 //current pose and orientation of the robot
 double px;
@@ -189,14 +190,15 @@ void Assistant::residentStatusCallback(se306_project1::ResidentMsg msg)
 	std::pair<double, double> velocityValues;	
 	velocityValues = std::make_pair(0, 0);
 	
+	
 	if ((sqrt(pow((msg.x - px),2) + pow((msg.y - py),2)) < 2.5) && foodIsDelivered == 0){
 		linear_x = 0;
 		angular_z = 0;
-		
-		goal_x = checkpoints[cc+1][0];
-		goal_y = checkpoints[cc+1][1];
+		moveToPoint = true;
+		goal_x = px;
+		goal_y = py;
 		foodIsReady = 1;
-	} else { 
+	} 
 	
 	if(msg.hunger < 90 && cooking ==false)
 	{
@@ -209,14 +211,11 @@ void Assistant::residentStatusCallback(se306_project1::ResidentMsg msg)
 		cooking = false;
 	}
 	
-	if (cooking) {
+	if (cooking || moveToPoint) {
 		velocityValues = movePath(checkpoints, 	11);
 		linear_x = velocityValues.first;
 		angular_z = velocityValues.second;
-		//ROS_INFO("Assistant is cooking");
-
 	}
-}
 
 }
 

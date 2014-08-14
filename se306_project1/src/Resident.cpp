@@ -143,8 +143,9 @@ void Resident::StageOdom_callback(nav_msgs::Odometry msg)
 	cur_angle = ((int)(cur_angle * 1000 + .5) / 1000.0);
 	
 	//Update the current position
-	px = msg.pose.pose.position.x + checkpoints[0][0];
-	py = msg.pose.pose.position.y + checkpoints[0][1];
+	px = msg.pose.pose.position.x + 34;//checkpoints[0][0];
+	py = msg.pose.pose.position.y + 20; //checkpoints[0][1];
+	
 
 }
 
@@ -338,17 +339,20 @@ int Resident::run(int argc, char **argv)
 		
 		// Reduces hunger every second
 		if (count % 100 == 0){
-				hunger -= hungerReductionRate;
-				health -= healthReductionRate;
+				hunger -= hungerReductionRate * 10;
+				health -= healthReductionRate * 10;
 		}
 			std::pair<double, double> velocityValues;	
 			velocityValues = std::make_pair(0, 0);
 		if (hunger < 90) {
-			velocityValues = movePath(checkpoints, 	3);
+			//ROS_INFO("hunger");
+		/*	velocityValues = movePath(checkpoints, 	3);
 			linear_x = velocityValues.first;
 			angular_z = velocityValues.second;
+			*/
 		}
-		
+		linear_x = 0;
+		angular_z=0;
 		//std_msgs::String msg;
 		//std::stringstream ss;
 		//ss << "Hello world" << hunger;
