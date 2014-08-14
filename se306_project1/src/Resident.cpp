@@ -30,14 +30,14 @@ double px;
 double py;
 double cur_angle;
 
-
-int cc = 1; //current_checkpoint = 0;
-
 		int checkpoints[3][2] = {  
 				{47, 43},
-				{47, 18},
-				{22, 18}
+				{47, 20},
+				{34, 20}
 				};
+
+
+int cc = 1; //current_checkpoint = 0;
 				
 std::pair<double, double> move(double goal_x, double goal_y, double cur_angle, double goal_angle, double px, double py);
 double calc_goal_angle(double goal_x, double goal_y, double cur_angle, double px, double py); 
@@ -67,8 +67,8 @@ std::pair<double, double> Resident::movePath(int path[][2], int pathLength) {
 		} else {
 			cc++; //Increment checkpoint index
 		}
-		goal_x = path[cc][0];
-		goal_y = path[cc][1];
+			goal_x = path[cc][0];
+			goal_y = path[cc][1];
 	
 		//Account for delay by subtracting delay values from current pose and orientation
 		goal_angle = calc_goal_angle(goal_x, goal_y, cur_angle - M_PI/20, px - 0.1, py - 0.1); 
@@ -186,10 +186,10 @@ std::pair<double, double> Resident::move(double goal_x, double goal_y, double cu
 	ROS_INFO("py: %f",py);
 	ROS_INFO("goal_x: %f",goal_x);
 	ROS_INFO("px: %f",px);
-	ROS_INFO("angle Vel1: %f", _ret.second);
-	ROS_INFO("threshold: %f",threshold);
-	ROS_INFO("goal_angle: %f",goal_angle);
-	ROS_INFO("cur_angle: %f",cur_angle);
+//	ROS_INFO("angle Vel1: %f", _ret.second);
+//	ROS_INFO("threshold: %f",threshold);
+//	ROS_INFO("goal_angle: %f",goal_angle);
+//	ROS_INFO("cur_angle: %f",cur_angle);
 	ROS_INFO("##################");
 
 	if ((goal_angle  == threshold) || isSet) {
@@ -260,9 +260,6 @@ void Resident::randomCheckpointCallback(const ros::TimerEvent&) {
 int Resident::run(int argc, char **argv)
 {
 
-	 //initialize robot parameters
-	isSet = false;
-	cc = 1; //current_checkpoint = 0;
 
 	//Initial pose. This is the same as the pose used in the world file.
 	px = checkpoints[cc-1][0];
@@ -340,7 +337,7 @@ int Resident::run(int argc, char **argv)
 		}
 			std::pair<double, double> velocityValues;	
 			velocityValues = std::make_pair(0, 0);
-		if (hunger < 60) {
+		if (hunger < 90) {
 			velocityValues = movePath(checkpoints, 	3);
 			linear_x = velocityValues.first;
 			angular_z = velocityValues.second;

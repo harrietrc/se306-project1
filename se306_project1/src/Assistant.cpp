@@ -172,10 +172,10 @@ void Assistant::residentStatusCallback(se306_project1::ResidentMsg msg)
 	
 	
 	
-	if(msg.hunger < 60 && cooking ==false)
+	if(msg.hunger < 90 && cooking ==false)
 	{
 		cooking = true;
-		velocityValues = movePath(checkpoints, 	9);
+		velocityValues = movePath(checkpoints, 	10);
 		linear_x = velocityValues.first;
 		angular_z = velocityValues.second;
 	
