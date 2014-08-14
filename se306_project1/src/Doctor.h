@@ -1,4 +1,5 @@
 #include "Visitor.h"
+#include "std_msgs/String.h"
 
 class Doctor : public Visitor
 {
@@ -21,13 +22,19 @@ class Doctor : public Visitor
 		//current pose and orientation of the robot
 		double cur_angle;
 
-		int cc; //current_checkpoint = 0;
+		int cc = 1; //current_checkpoint = 0;
 
 		bool is_called; 
 
 		std::pair<double,bool> goal_pair;
 		std::pair<double, double> ret;	
 
+			int checkpoints[4][2] = {
+				{10, -7},
+				{10, 2},
+				{30, 20},
+				{30, 25}
+				};
 
 	public:
 		void StageOdom_callback(nav_msgs::Odometry msg);
@@ -37,7 +44,7 @@ class Doctor : public Visitor
 		double calc_goal_angle(double goal_x, double goal_y, double cur_angle, double px, double py);
 		std::pair<double, double> move(double goal_x, double goal_y, double cur_angle, double goal_angle, double px, double py);
 		void randomCheckpointCallback(const ros::TimerEvent&);
-
+		std::pair<double, double>  movePath(int path[][2], int pathLength);
 		void residentStatusCallback(se306_project1::ResidentMsg msg);
 		void medicationCallback(const ros::TimerEvent&);
 
