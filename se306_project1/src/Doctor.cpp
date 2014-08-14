@@ -37,11 +37,12 @@ void Doctor::residentStatusCallback(se306_project1::ResidentMsg msg)
 	//			leave() // go outside of house?
 	// else
 	// 	healResident = false;
-	if (msg.health < 50 && healResident == false) // emergency
+	if (msg.health < 20 && healResident == false) // emergency
 	{
 		healResident = true;
 		ROS_INFO("Resident is in critical condition (EMERGENCY)");
-	} else if (msg.health >= 50)
+		ROS_INFO("Resident health is: %d", msg.health);
+	} else if (msg.health >= 20)
 	{
 		healResident = false;
 	}
@@ -52,7 +53,7 @@ int Doctor::run(int argc, char **argv)
 {
 	//initialize robot parameters
 	//Initial pose. This is same as the pose that you used in the world file to set	the robot pose.
-	theta = M_PI/2.0;
+	//theta = M_PI/2.0;
 	px = 10;
 	py = 20;
 	
