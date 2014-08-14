@@ -34,13 +34,12 @@ int cc = 1; //current_checkpoint = 0;
 
 std::pair<double, double> ret;	
 
-int checkpoints[5][2] = {  
-{30, 25}, 
-{35, 35}, 
-{12, 42},
-{30, 42},
-{30, 25}  
-};
+		int checkpoints[3][2] = {  
+				{47, 43},
+				{47, 18},
+				{22, 18}
+				};
+
 
 std::pair<double, double> move(double goal_x, double goal_y, double cur_angle, double goal_angle, double px, double py);
 double calc_goal_angle(double goal_x, double goal_y, double cur_angle, double px, double py); 
@@ -122,7 +121,7 @@ void Resident::StageOdom_callback(nav_msgs::Odometry msg)
 	//When goal reached
 	if ((px <= goal_x + 0.5) && (px >= goal_x - 0.5) && (py <= goal_y + 0.5) && (py >= goal_y - 0.5)) {
 	isSet = false;
-		if (cc == 4) { //If at last checkpoint
+		if (cc == 2) { //If at last checkpoint
 			linear_x = 0;
 		} else {
 			cc++; //Increment checkpoint index
@@ -176,6 +175,16 @@ std::pair<double, double> Resident::move(double goal_x, double goal_y, double cu
 	//When the robot is facing the correct direction, start moving
 	double threshold = cur_angle-moveSpeed/10;
 	threshold = ((int)(threshold * 1000 + .5) / 1000.0);
+	ROS_INFO("##################");
+	ROS_INFO("goal_y: %f",goal_y);
+	ROS_INFO("py: %f",py);
+	ROS_INFO("goal_x: %f",goal_x);
+	ROS_INFO("px: %f",px);
+	ROS_INFO("angle Vel1: %f", _ret.second);
+	ROS_INFO("threshold: %f",threshold);
+	ROS_INFO("goal_angle: %f",goal_angle);
+	ROS_INFO("cur_angle: %f",cur_angle);
+	ROS_INFO("##################");
 
 	if ((goal_angle  == threshold) || isSet) {
 		_ret.first = 5; //linear_x
@@ -277,15 +286,15 @@ int Resident::run(int argc, char **argv)
 
 	//advertise() function will tell ROS that you want to publish on a given topic_
 	//to stage
-	ros::Publisher RobotNode_stage_pub = n.advertise<geometry_msgs::Twist>("robot_0/cmd_vel",1000); 
+	ros::Publisher RobotNode_stage_pub = n.advertise<geometry_msgs::Twist>("robot_1/cmd_vel",1000); 
 
 	//custom message/topic publisher "resident/state" for now
 	//ros::Publisher Resident_pub = n.advertise<std_msgs::String>("residentStatus",1000); 
 	ros::Publisher resident_pub = n.advertise<se306_project1::ResidentMsg>("residentStatus",1000); 
 
 	//subscribe to listen to messages coming from stage
-	ros::Subscriber StageOdo_sub = n.subscribe<nav_msgs::Odometry>("robot_0/odom",1000, &Resident::StageOdom_callback, this);
-	ros::Subscriber StageLaser_sub = n.subscribe<sensor_msgs::LaserScan>("robot_0/base_scan",1000,&Resident::StageLaser_callback, this);
+	ros::Subscriber StageOdo_sub = n.subscribe<nav_msgs::Odometry>("robot_1/odom",1000, &Resident::StageOdom_callback, this);
+	ros::Subscriber StageLaser_sub = n.subscribe<sensor_msgs::LaserScan>("robot_1/base_scan",1000,&Resident::StageLaser_callback, this);
 
 	//subscribe to doctor messages
 	ros::Subscriber doctor_sub = n.subscribe<se306_project1::DoctorMsg>("healResident",1000, &Resident::doctor_callback, this);

@@ -30,13 +30,6 @@ int cc = 1; //current_checkpoint = 0;
 
 std::pair<double, double> ret;	
 
-int checkpoints[5][2] = {  
-{30, 25}, 
-{35, 35}, 
-{12, 42},
-{30, 42},
-{30, 25}  
-};
 
 std::pair<double, double> move(double goal_x, double goal_y, double cur_angle, double goal_angle, double px, double py);
 double calc_goal_angle(double goal_x, double goal_y, double cur_angle, double px, double py); 
@@ -62,7 +55,7 @@ void Assistant::StageOdom_callback(nav_msgs::Odometry msg)
 	//When goal reached
 	if ((px <= goal_x + 0.5) && (px >= goal_x - 0.5) && (py <= goal_y + 0.5) && (py >= goal_y - 0.5)) {
 	isSet = false;
-		if (cc == 4) { //If at last checkpoint
+		if (cc == 8) { //If at last checkpoint
 			linear_x = 0;
 		} else {
 			cc++; //Increment checkpoint index

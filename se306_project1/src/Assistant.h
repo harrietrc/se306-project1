@@ -29,14 +29,18 @@ class Assistant : public Agent
 		std::pair<double,bool> goal_pair;
 		std::pair<double, double> ret;	
 
-		int checkpoints[5][2] = {  
+		int checkpoints[9][2] = {  
 		{30, 25}, 
-		{30, 42}, 
-		{12, 42},
-		{30, 42},
+		{30, 7}, 
+		{40, 7},
+		{40, 8},
+		{38,8},
+		{38,7},
+		{40,7},
+		{30,7},
 		{30, 25}  
 		};
-		
+
 		bool cooking;
 
 
@@ -45,6 +49,7 @@ class Assistant : public Agent
 		void StageLaser_callback(sensor_msgs::LaserScan msg);
 		int run(int argc, char **argv);
 
+		
 		double calc_goal_angle(double goal_x, double goal_y, double cur_angle, double px, double py);
 		std::pair<double, double> move(double goal_x, double goal_y, double cur_angle, double goal_angle, double px, double py);
 		void randomCheckpointCallback(const ros::TimerEvent&);
