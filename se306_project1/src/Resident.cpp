@@ -158,21 +158,23 @@ void Resident::StageLaser_callback(sensor_msgs::LaserScan msg)
 //doctor will heal resident when they are next to each other
 void Resident::doctor_callback(se306_project1::DoctorMsg msg)
 {
-	if (msg.healResident == true)
+	/*if (msg.healResident == true)
 	{
 	 	health = 100;
 		ROS_INFO("Resident healed by Doctor, health = 100");
 	}
+	*/
 }
 
 void Resident::assistant_callback(se306_project1::AssistantMsg msg)
 {
-	/*if (msg.cooking == true)
+	if (msg.FoodDelivered == 1)
 	{
 		hunger = 100;
-		ROS_INFO("Resident eating food, hunger = 100");
+		ROS_INFO("Resident has received food");
+		ROS_INFO("Resident hunger: %d",hunger);
 	}
-	*/
+	
 }
 
 //Keeps robot moving by changing linear_x and angular_z
@@ -335,7 +337,7 @@ int Resident::run(int argc, char **argv)
 		RobotNode_stage_pub.publish(RobotNode_cmdvel);
 		
 		// Reduces hunger every second
-		if (count % 10 == 0){
+		if (count % 100 == 0){
 				hunger -= hungerReductionRate;
 				health -= healthReductionRate;
 		}
