@@ -34,6 +34,11 @@ std::pair<double, double> move(double goal_x, double goal_y, double cur_angle, d
 double calc_goal_angle(double goal_x, double goal_y, double cur_angle, double px, double py); 
 void StageOdom_callback(nav_msgs::Odometry msg); 
 
+/**
+*	@brief Updates the Assistant's x position, y position, and angle to reflect its current pose.
+*	@note Rounding is used to calculate the current angle. This approximation is accounted for by using threshholds when processing angles.
+*	@param msg Odometry message from odom topic
+*/
 void Assistant::StageOdom_callback(nav_msgs::Odometry msg)
 {
 	//Converting from quaternion to radians
@@ -53,9 +58,15 @@ void Assistant::StageOdom_callback(nav_msgs::Odometry msg)
 	
 }
 
-std::pair<double, double> Assistant::movePath(int path[][2], int pathLength) {
-		
-		
+/**
+*	@brief Causes the robot to move until the goal is reached.
+*	When the goal is reached, the next checkpoint becomes the goal or if the list of checkpoints is exhausted, the robot returns
+*	to its initial position (the first checkpoint)
+*	@param path[][2] An array of checkpoints that forms a path.
+*	@param pathLength The number of checkpoints in the path (-1, as counting starts at 0)
+*	@return linear_x and angular_z
+*/
+std::pair<double, double> Assistant::movePath(int path[][2], int pathLength) {	
 	
 	std::pair<double, double> ret;	
 	ret = std::make_pair(0, 0); //initialize pair. Used to get return.
@@ -89,7 +100,16 @@ std::pair<double, double> Assistant::movePath(int path[][2], int pathLength) {
 }
 
 
-//Keeps robot moving by changing linear_x and angular_z
+/**
+*	@brief Keeps the robot moving by changing linear_x ad angular_z.
+*	@param goal_x The x position of the robot's goal
+*	@param goal_y The y position of the robot's goal
+* 	@param cur_angle The robot's current facing, in reference to the co-ordinate system.
+*	@param goal_angle The angle that the robot must face in order to reach the goal.
+*	@param px Initial x position
+*	@param py Initial y position
+*	@return _ret linear_x and angular_z
+*/
 std::pair<double, double> Assistant::move(double goal_x, double goal_y, double cur_angle, double goal_angle, double px, double py) 
 {		
 	
@@ -128,6 +148,16 @@ std::pair<double, double> Assistant::move(double goal_x, double goal_y, double c
 	return _ret; 
 }
 
+/**
+*	@brief Given the robot's current angle, this function calculates the angle to the goal.
+*	cur_angle, goal_x, goal_y, px, and py are class fields but are also passed as parameters.
+*	@param goal_x The x co-ordinate of the goal
+*	@param goal_y The y co-ordinate of the goal
+*	@param cur_angle The robot's current angle, in reference to the co-ordinate system
+*	@param px The robot's initial x position
+*	@param py The robot's initial y position
+*	@param goal_angle The angle that the robot must rotate to face the goal, in reference to the co-ordinate system.
+*/
 double Assistant::calc_goal_angle(double goal_x, double goal_y, double cur_angle, double px, double py) 
 {
 
@@ -158,15 +188,25 @@ double Assistant::calc_goal_angle(double goal_x, double goal_y, double cur_angle
 	return goal_angle;
 }
 
-
+/**
+*	@brief Callback function to process laser scan messsages.
+*	You can access the range data from msg.ranges[i]. i = sample number
+*	@note Currently blank as it is not in use. Navigation operates through a checkpoint system.
+*	@param msg Single scan from a planar laser range finder
+*/
 void Assistant::StageLaser_callback(sensor_msgs::LaserScan msg)
 {
 	//This is the callback function to process laser scan messages
 	//you can access the range data from msg.ranges[i]. i = sample number
-	
 }
 
-//custom resident callback function, you get the message object that was sent from Resident
+/**
+*	@brief Callback function that unpacks and processes resident status messages.
+*	Assistant should subscribe to the ResidentMsg topic in order for this callback to be called. ResidentMsg is published by the Resident.
+*	@note Currently this callback processes only resident hunger, controlling the cooking behaviour. More behaviours 
+*	can be implemented later.
+*	@param msg A custom ResidentMsg message that contains information about the resident's current status.
+*/
 void Assistant::residentStatusCallback(se306_project1::ResidentMsg msg)
 {
 	// do something with the values
@@ -211,14 +251,13 @@ void Assistant::residentStatusCallback(se306_project1::ResidentMsg msg)
 
 }
 
-/* 
-Model for all periodic events - start time, stop time, period. The issue with this at the moment is that
-any behaviour defined here will occur at the end of the duration provided when creating the timer. This
-could easily solved if this method had access to the value of that duration - I'll look into solving this
-later. It's more of a usabiity issue than a usefulness one, as you can  adjust the startTime and endTime
-but I'd prefer it to be more intuitive.
-NOT CURRENTLY SUPPORTED: Events on certain days (other than every x number of days), non-periodic events 
-						 during the defined period (startTime - endTime)
+/**
+*	@brief Periodic callback for the provision of medication that should act as a model for all periodic events.
+*	Called by the ros::Timer in the run() function. Can specify start time, end time, and period.
+*	@note The callback is called at the end of the duration specified for the timer.
+*	@remark This could be adjustd in the future to allow for events that occur only on certain days - currently it accommodates
+*	only for events that occur every x days (or multiple times per day).
+*	@param TimerEvent& TimerEvent generated by a ros::Timer.
 */
 void Assistant::medicationCallback(const ros::TimerEvent&) {
 	int startTime = time_conversion::simHoursToRealSecs(6); // Start callback at 6am
@@ -236,6 +275,10 @@ void Assistant::medicationCallback(const ros::TimerEvent&) {
 	}
 }
 
+/**
+*	@brief Main function for the Assistant process.
+*	Controls node setup and periodic events.
+*/
 int Assistant::run(int argc, char **argv)
 {
 
@@ -340,8 +383,8 @@ int Assistant::run(int argc, char **argv)
 
 }
 
-/* 
-	Redirects to main function (run()) of the node.
+/**
+*	@brief Redirects to main function (run()) of the node.
 */
 int main(int argc, char **argv) {
 	Assistant *a = new Assistant();

@@ -27,12 +27,12 @@ double py;
 double cur_angle;
 int cc = 1; //current_checkpoint = 0;
 
+std::pair<double, double> ret;	
+
 std::pair<double, double> move(double goal_x, double goal_y, double cur_angle, double goal_angle, double px, double py);
 double calc_goal_angle(double goal_x, double goal_y, double cur_angle, double px, double py); 
 void StageOdom_callback(nav_msgs::Odometry msg); 
 
-<<<<<<< HEAD
-=======
 int readyToHeal = 0;
 int residentHealed = 0;
 int moveToPoint = 0;
@@ -42,7 +42,6 @@ int checkpoints[3][2] = {
 		{10, 0},
 		{10, -7}
 	};
->>>>>>> 6f4325dfcc39ce8764a381daccd2cd95122ba38d
 	
 void Doctor::StageOdom_callback(nav_msgs::Odometry msg)
 {
@@ -197,7 +196,6 @@ void Doctor::residentStatusCallback(se306_project1::ResidentMsg msg)
 	} 
 	
 	if(msg.health < 90 && healing ==false)
->>>>>>> 6f4325dfcc39ce8764a381daccd2cd95122ba38d
 	{
 		healing = true;
 		velocityValues = movePath(checkpoints, 	3);
@@ -209,23 +207,14 @@ void Doctor::residentStatusCallback(se306_project1::ResidentMsg msg)
 		
 	}
 	
-<<<<<<< HEAD
-	if (healResident) {
-		velocityValues = movePath(checkpoints, 	4);
-		linear_x = velocityValues.first;
-		angular_z = velocityValues.second;
-		ROS_INFO("Doctor is healing");
-	}
 
-=======
 	if (healing || moveToPoint) {
 		velocityValues = movePath(checkpoints, 	3);
 		linear_x = velocityValues.first;
 		angular_z = velocityValues.second;
 	}
 	
-	
->>>>>>> 6f4325dfcc39ce8764a381daccd2cd95122ba38d
+
 }
 
 int Doctor::run(int argc, char **argv)
