@@ -143,8 +143,8 @@ void Resident::StageOdom_callback(nav_msgs::Odometry msg)
 	cur_angle = ((int)(cur_angle * 1000 + .5) / 1000.0);
 	
 	//Update the current position
-	px = msg.pose.pose.position.x + 34;//checkpoints[0][0];
-	py = msg.pose.pose.position.y + 20; //checkpoints[0][1];
+	px = msg.pose.pose.position.x + checkpoints[0][0];
+	py = msg.pose.pose.position.y + checkpoints[0][1];
 	
 
 }
@@ -159,12 +159,13 @@ void Resident::StageLaser_callback(sensor_msgs::LaserScan msg)
 //doctor will heal resident when they are next to each other
 void Resident::doctor_callback(se306_project1::DoctorMsg msg)
 {
-	/*if (msg.healResident == true)
+	/* (msg.healResident == 1)
 	{
 	 	health = 100;
 		ROS_INFO("Resident healed by Doctor, health = 100");
 	}
 	*/
+	
 }
 
 void Resident::assistant_callback(se306_project1::AssistantMsg msg)
@@ -199,6 +200,7 @@ std::pair<double, double> Resident::move(double goal_x, double goal_y, double cu
 //	ROS_INFO("cur_angle: %f",cur_angle);
 	ROS_INFO("##################");
 */
+
 	if ((goal_angle  == threshold) || isSet) {
 		_ret.first = 5; //linear_x
 		_ret.second = 0; //angular_z
@@ -346,9 +348,6 @@ int Resident::run(int argc, char **argv)
 			velocityValues = std::make_pair(0, 0);
 		if (hunger < 90) {
 			//ROS_INFO("hunger");
-			velocityValues = movePath(checkpoints, 	3);
-			linear_x = velocityValues.first;
-			angular_z = velocityValues.second;
 			
 		}
 		linear_x = 0;

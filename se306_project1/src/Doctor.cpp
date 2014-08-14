@@ -19,19 +19,27 @@ double goal_x;
 double goal_y;
 double goal_angle;
 bool isSet = false;
-
+bool healing = false;
+ 
 //current pose and orientation of the robot
 double px;
 double py;
 double cur_angle;
-
 int cc = 1; //current_checkpoint = 0;
 
 std::pair<double, double> move(double goal_x, double goal_y, double cur_angle, double goal_angle, double px, double py);
 double calc_goal_angle(double goal_x, double goal_y, double cur_angle, double px, double py); 
 void StageOdom_callback(nav_msgs::Odometry msg); 
 
+int readyToHeal = 0;
+int residentHealed = 0;
+int moveToPoint = 0;
 
+int checkpoints[3][2] = {  
+		{10, -7},
+		{10, 0},
+		{10, -7}
+	};
 	
 void Doctor::StageOdom_callback(nav_msgs::Odometry msg)
 {
@@ -44,10 +52,10 @@ void Doctor::StageOdom_callback(nav_msgs::Odometry msg)
 	//Rounding to 3 decimal places
 	cur_angle = ((int)(cur_angle * 1000 + .5) / 1000.0);
 	
-	
 	//Update the current position
 	px = msg.pose.pose.position.x + checkpoints[0][0];
 	py = msg.pose.pose.position.y + checkpoints[0][1];
+	
 }
 
 std::pair<double, double> Doctor::movePath(int path[][2], int pathLength) {
@@ -59,7 +67,7 @@ std::pair<double, double> Doctor::movePath(int path[][2], int pathLength) {
 	
 	//When goal reached
 	if ((px <= goal_x + 0.5) && (px >= goal_x - 0.5) && (py <= goal_y + 0.5) && (py >= goal_y - 0.5)) {
-	isSet = false;
+		isSet = false;
 		if (cc == pathLength) { //If at last checkpoint
 			linear_x = 0;
 		} else {
@@ -83,6 +91,7 @@ std::pair<double, double> Doctor::movePath(int path[][2], int pathLength) {
 //Keeps robot moving by changing linear_x and angular_z
 std::pair<double, double> Doctor::move(double goal_x, double goal_y, double cur_angle, double goal_angle, double px, double py) 
 {		
+
 	
 	std::pair<double,double>_ret = std::make_pair(0, 0); //initialize pair. Used to get return.
 	double moveSpeed = M_PI/2;
@@ -91,29 +100,44 @@ std::pair<double, double> Doctor::move(double goal_x, double goal_y, double cur_
 	//When the robot is facing the correct direction, start moving
 	double threshold = cur_angle;//cur_angle-moveSpeed/10;
 	//threshold = ((int)(threshold * 1000 + .5) / 1000.0);
-
+	ROS_INFO("##################");
+	ROS_INFO("threshold: %f",threshold);
+	ROS_INFO("goal_angle: %f",goal_angle);
+	ROS_INFO("cur_angle: %f",cur_angle);
+	ROS_INFO("##################");
 	if ((goal_angle  == threshold) || isSet) {
+		ROS_INFO("First If Statement");
 		_ret.first = 5; //linear_x
 		_ret.second = 0; //angular_z
 		isSet = true;
 	} else if ((goal_angle <= cur_angle + 0.6) && (goal_angle >= cur_angle - 0.6) )  {
 		_ret.first = 0; //linear_x
+				ROS_INFO("Second If Statement");
+
 		_ret.second = fabs(cur_angle - goal_angle);//0.001; //angular_z
 		if (goal_angle == cur_angle) {
-			isSet = true;		
+			isSet = true;	
+			ROS_INFO("Third If Statement");
+	
 		}
 
 	} else {
 		_ret.first = 0; //linear_x
 		_ret.second = moveSpeed; //angular_z
+		ROS_INFO("fourth If Statement");
+
 		isSet = false;
 	}
 
 
 	if ((px-0.1 <= goal_x + 0.5) && (px-0.1 >= goal_x - 0.5) && (py-0.1 <= goal_y + 0.5) && (py-0.1 >= goal_y - 0.5)) {	
+			ROS_INFO("fifth If Statement");
+
 			_ret.first = 0; 
 			isSet = false;
 	}
+
+
 
 	return _ret; 
 }
@@ -158,23 +182,39 @@ void Doctor::StageLaser_callback(sensor_msgs::LaserScan msg)
 //custom resident callback function, you get the message object that was sent from Resident
 void Doctor::residentStatusCallback(se306_project1::ResidentMsg msg)
 {
-	// if (msg.health < 20) { // emergency
-	// 	Doctor visits()/moves() to the Resident
-	// 	if Doctor is next to Resident
-	// 		bool healResident = true;
-	//		if (msg.health > 20) {
-	//			leave() // go outside of house?
-	// else
-	// 	healResident = false;
-	if (msg.health < 20 && healResident == false) // emergency
+
+	
+	std::pair<double, double> velocityValues;	
+	velocityValues = std::make_pair(0, 0);
+	
+	
+	if ((sqrt(pow((msg.x - px),2) + pow((msg.y - py),2)) < 2.5) && residentHealed== 0){
+		linear_x = 0;
+		angular_z = 0;
+		moveToPoint = true;
+		goal_x = px;
+		goal_y = py;
+		readyToHeal= 1;
+	} 
+	
+	if(msg.health < 90 && healing ==false)
 	{
-		healResident = true;
-		ROS_INFO("Resident is in critical condition (EMERGENCY)");
-		ROS_INFO("Resident health is: %d", msg.health);
-	} else if (msg.health >= 20)
+		healing = true;
+		velocityValues = movePath(checkpoints, 	3);
+		linear_x = velocityValues.first;
+		angular_z = velocityValues.second;
+	} else if (msg.health >= 90)
 	{
-		healResident = false;
+		healing = false;
+		
 	}
+	
+	if (healing || moveToPoint) {
+		velocityValues = movePath(checkpoints, 	3);
+		linear_x = velocityValues.first;
+		angular_z = velocityValues.second;
+	}
+	
 	
 }
 
@@ -230,7 +270,7 @@ int Doctor::run(int argc, char **argv)
 	////messages
 	//velocity of this RobotNode
 	geometry_msgs::Twist RobotNode_cmdvel;
-
+	se306_project1::DoctorMsg aMsg;
 	while (ros::ok())
 	{
 		//messages to stage
@@ -241,20 +281,16 @@ int Doctor::run(int argc, char **argv)
 		RobotNode_stage_pub.publish(RobotNode_cmdvel);
 
 		//setup and publish a doctor msg to resident
-		se306_project1::DoctorMsg msg;
-		msg.healResident = healResident;
-		doctor_pub.publish(msg);
-		
-		if (healResident == true && count % 10 == 0){
-					i += 1;
-					if (i == 10)
-					{
-						doctor_pub.publish(msg);
-						ROS_INFO("Doctor used heal on Resident");
-						i = 0;
-					}
-		}
 
+		if (readyToHeal == 1) {
+			aMsg.healResident = readyToHeal;
+			readyToHeal = 0;
+			doctor_pub.publish(aMsg);
+			residentHealed = 1;
+		}
+		
+		
+		
 		ros::spinOnce();
 
 		loop_rate.sleep();

@@ -49,6 +49,8 @@ void Assistant::StageOdom_callback(nav_msgs::Odometry msg)
 	//Update the current position
 	px = msg.pose.pose.position.x + checkpoints[0][0];
 	py = msg.pose.pose.position.y + checkpoints[0][1];
+
+	
 }
 
 std::pair<double, double> Assistant::movePath(int path[][2], int pathLength) {
@@ -209,6 +211,7 @@ void Assistant::residentStatusCallback(se306_project1::ResidentMsg msg)
 	} else if (msg.hunger >= 60)
 	{
 		cooking = false;
+		
 	}
 	
 	if (cooking || moveToPoint) {
