@@ -5,45 +5,15 @@
 #include <sensor_msgs/LaserScan.h>
 #include "se306_project1/ResidentMsg.h"
 #include "se306_project1/DoctorMsg.h"
+#include "se306_project1/AssistantMsg.h"
 
 #include <sstream>
 #include "math.h"
 #include <cmath>
 #include <stdlib.h>
 #include "time_conversion.hpp"
-#include "Resident.h"	
+#include "Resident.h"
 
-//velocity of the robot
-double linear_x;
-double angular_z;
-
-//goal pose and orientation
-double goal_x;
-double goal_y;
-double goal_angle;
-bool isSet = false;
-
-//current pose and orientation of the robot
-double px;
-double py;
-double cur_angle;
-
-int cc = 1; //current_checkpoint = 0;
-
-std::pair<double, double> ret;	
-
-int checkpoints[5][2] = {  
-{30, 25}, 
-{35, 35}, 
-{12, 42},
-{30, 42},
-{30, 25}  
-};
-
-std::pair<double, double> move(double goal_x, double goal_y, double cur_angle, double goal_angle, double px, double py);
-double calc_goal_angle(double goal_x, double goal_y, double cur_angle, double px, double py); 
-void StageOdom_callback(nav_msgs::Odometry msg); 
-	
 void Resident::StageOdom_callback(nav_msgs::Odometry msg)
 {
 	ret = std::make_pair(0, 0); //initialize pair. Used to get return.
@@ -96,6 +66,15 @@ void Resident::doctor_callback(se306_project1::DoctorMsg msg)
 	 	health = 100;
 }
 
+void Resident::assistant_callback(se306_project1::AssistantMsg msg)
+{
+	if (msg.cooking == true)
+	{
+		hunger = 100;
+		ROS_INFO("Resident eating food, hunger = 100");
+	}
+}
+
 //Keeps robot moving by changing linear_x and angular_z
 std::pair<double, double> Resident::move(double goal_x, double goal_y, double cur_angle, double goal_angle, double px, double py) 
 {	
@@ -133,7 +112,7 @@ std::pair<double, double> Resident::move(double goal_x, double goal_y, double cu
 	return _ret; 
 }
 
-double calc_goal_angle(double goal_x, double goal_y, double cur_angle, double px, double py) 
+double Resident::calc_goal_angle(double goal_x, double goal_y, double cur_angle, double px, double py)
 {
 
 	//Initial and goal vectors used to calculate goal theta
@@ -168,13 +147,15 @@ double calc_goal_angle(double goal_x, double goal_y, double cur_angle, double px
 	more complex and realistic model later.
 */
 void Resident::randomCheckpointCallback(const ros::TimerEvent&) {
-	ROS_INFO("hello");
+	//ROS_INFO("hello");
 }
 
 int Resident::run(int argc, char **argv)
 {
 
 	 //initialize robot parameters
+	isSet = false;
+	cc = 1; //current_checkpoint = 0;
 
 	//Initial pose. This is the same as the pose used in the world file.
 	px = checkpoints[cc-1][0];
@@ -216,6 +197,8 @@ int Resident::run(int argc, char **argv)
 
 	//subscribe to doctor messages
 	ros::Subscriber doctor_sub = n.subscribe<se306_project1::DoctorMsg>("healResident",1000, &Resident::doctor_callback, this);
+
+	ros::Subscriber assistant_sub = n.subscribe<se306_project1::AssistantMsg>("assistantStatus",1000, &Resident::assistant_callback, this);
 
 	//ros::Rate loop_rate(10);
 	ros::Rate loop_rate(1000);
