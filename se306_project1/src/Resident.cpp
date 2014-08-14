@@ -339,17 +339,17 @@ int Resident::run(int argc, char **argv)
 		
 		// Reduces hunger every second
 		if (count % 100 == 0){
-				hunger -= hungerReductionRate * 10;
-				health -= healthReductionRate * 10;
+				hunger -= hungerReductionRate;
+				health -= healthReductionRate;
 		}
 			std::pair<double, double> velocityValues;	
 			velocityValues = std::make_pair(0, 0);
 		if (hunger < 90) {
 			//ROS_INFO("hunger");
-		/*	velocityValues = movePath(checkpoints, 	3);
+			velocityValues = movePath(checkpoints, 	3);
 			linear_x = velocityValues.first;
 			angular_z = velocityValues.second;
-			*/
+			
 		}
 		linear_x = 0;
 		angular_z=0;
