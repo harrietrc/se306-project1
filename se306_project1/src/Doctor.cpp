@@ -37,6 +37,14 @@ void Doctor::residentStatusCallback(se306_project1::ResidentMsg msg)
 	//			leave() // go outside of house?
 	// else
 	// 	healResident = false;
+	if (msg.health < 50 && healResident == false) // emergency
+	{
+		healResident = true;
+		ROS_INFO("Resident is in critical condition (EMERGENCY)");
+	} else if (msg.health >= 50)
+	{
+		healResident = false;
+	}
 	
 }
 
@@ -82,6 +90,7 @@ int Doctor::run(int argc, char **argv)
 
 	//a count of howmany messages we have sent
 	int count = 0;
+	int i =0;
 
 	////messages
 	//velocity of this RobotNode
@@ -101,6 +110,16 @@ int Doctor::run(int argc, char **argv)
 		msg.healResident = healResident;
 		doctor_pub.publish(msg);
 		
+		if (healResident == true && count % 10 == 0){
+					i += 1;
+					if (i == 10)
+					{
+						doctor_pub.publish(msg);
+						ROS_INFO("Doctor used heal on Resident");
+						i = 0;
+					}
+		}
+
 		ros::spinOnce();
 
 		loop_rate.sleep();
