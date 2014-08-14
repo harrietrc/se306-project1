@@ -35,9 +35,16 @@ int readyToHeal = 0;
 int residentHealed = 0;
 int moveToPoint = 0;
 
-int checkpoints[3][2] = {  
-		{10, -7},
-		{10, 0},
+int checkpoints[10][2] = {  
+		{10,-7},
+		{10, 5},
+		{25,12},
+		{25,25},
+		{34,20},
+		{25,25},
+		{25,25},
+		{25,12},
+		{10,5},
 		{10, -7}
 	};
 	
@@ -184,8 +191,7 @@ void Doctor::residentStatusCallback(se306_project1::ResidentMsg msg)
 	
 	std::pair<double, double> velocityValues;	
 	velocityValues = std::make_pair(0, 0);
-	
-
+		
 	if ((sqrt(pow((msg.x - px),2) + pow((msg.y - py),2)) < 2.5) && residentHealed == 0){
 		linear_x = 0;
 		angular_z = 0;
@@ -195,20 +201,20 @@ void Doctor::residentStatusCallback(se306_project1::ResidentMsg msg)
 		readyToHeal= 1;
 	} 
 	
-	if(msg.health < 90 && healing ==false)
+	if(msg.health < 55 && healing ==false)
 	{
+		ROS_INFO("Doctor is on the way");
 		healing = true;
-		velocityValues = movePath(checkpoints, 	3);
+		velocityValues = movePath(checkpoints, 	10);
 		linear_x = velocityValues.first;
 		angular_z = velocityValues.second;
 	} else if (msg.health >= 90)
 	{
 		healing = false;
-		
 	}
 	
 	if (healing || moveToPoint) {
-		velocityValues = movePath(checkpoints, 	3);
+		velocityValues = movePath(checkpoints, 	10);
 		linear_x = velocityValues.first;
 		angular_z = velocityValues.second;
 	}

@@ -143,8 +143,8 @@ void Resident::StageOdom_callback(nav_msgs::Odometry msg)
 	cur_angle = ((int)(cur_angle * 1000 + .5) / 1000.0);
 	
 	//Update the current position
-	px = msg.pose.pose.position.x + 10;//checkpoints[0][0];
-	py = msg.pose.pose.position.y + 0;//checkpoints[0][1];
+	px = msg.pose.pose.position.x + checkpoints[0][0];
+	py = msg.pose.pose.position.y + checkpoints[0][1];
 	
 
 }
@@ -159,12 +159,12 @@ void Resident::StageLaser_callback(sensor_msgs::LaserScan msg)
 //doctor will heal resident when they are next to each other
 void Resident::doctor_callback(se306_project1::DoctorMsg msg)
 {
-	/* (msg.healResident == 1)
+	 if (msg.healResident == 1)
 	{
 	 	health = 100;
 		ROS_INFO("Resident healed by Doctor, health = 100");
 	}
-	*/
+	
 	
 }
 
@@ -174,7 +174,6 @@ void Resident::assistant_callback(se306_project1::AssistantMsg msg)
 	{
 		hunger = 100;
 		ROS_INFO("Resident has received food");
-		ROS_INFO("Resident hunger: %d",hunger);
 	}
 	
 }
@@ -189,17 +188,6 @@ std::pair<double, double> Resident::move(double goal_x, double goal_y, double cu
 	//When the robot is facing the correct direction, start moving
 	double threshold = cur_angle;//-moveSpeed/10;
 	//threshold = ((int)(threshold * 1000 + .5) / 1000.0);
-/*	ROS_INFO("##################");
-	ROS_INFO("goal_y: %f",goal_y);
-	ROS_INFO("py: %f",py);
-	ROS_INFO("goal_x: %f",goal_x);
-	ROS_INFO("px: %f",px);
-//	ROS_INFO("angle Vel1: %f", _ret.second);
-//	ROS_INFO("threshold: %f",threshold);
-//	ROS_INFO("goal_angle: %f",goal_angle);
-//	ROS_INFO("cur_angle: %f",cur_angle);
-	ROS_INFO("##################");
-*/
 
 	if ((goal_angle  == threshold) || isSet) {
 		_ret.first = 5; //linear_x
@@ -327,8 +315,8 @@ int Resident::run(int argc, char **argv)
 	int dur2 = time_conversion::simHoursToRealSecs(2); // Perform callback every 2 simulation hours
 	ros::Timer medicationTimer = n.createTimer(ros::Duration(dur2), &Resident::randomCheckpointCallback, this); 
 
-	int hungerReductionRate = 1; //1 hunger point reduction per second
-	int healthReductionRate = 1; // 0.1 health point reduction per second
+	int hungerReductionRate = 2; //1 hunger point reduction per second
+	int healthReductionRate = 2; // 0.1 health point reduction per second
 
 	while (ros::ok())
 	{
@@ -347,17 +335,10 @@ int Resident::run(int argc, char **argv)
 			std::pair<double, double> velocityValues;	
 			velocityValues = std::make_pair(0, 0);
 		if (hunger < 90) {
-			//ROS_INFO("hunger");
-			
+			velocityValues = movePath(checkpoints, 	3);
+			linear_x = velocityValues.first;
+			angular_z = velocityValues.second;			
 		}
-		linear_x = 0;
-		angular_z=0;
-		//std_msgs::String msg;
-		//std::stringstream ss;
-		//ss << "Hello world" << hunger;
-		//msg.data = ss.str();
-		
-		//custom resident message publisher
 		
 		se306_project1::ResidentMsg msg; 
 		msg.health = health;

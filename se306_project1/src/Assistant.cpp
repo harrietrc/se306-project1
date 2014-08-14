@@ -202,13 +202,14 @@ void Assistant::residentStatusCallback(se306_project1::ResidentMsg msg)
 		foodIsReady = 1;
 	} 
 	
-	if(msg.hunger < 90 && cooking ==false)
+	if(msg.hunger < 90 && cooking == false)
 	{
+		ROS_INFO("Assistant is on the way to the kitchen");
 		cooking = true;
 		velocityValues = movePath(checkpoints, 	11);
 		linear_x = velocityValues.first;
 		angular_z = velocityValues.second;
-	} else if (msg.hunger >= 60)
+	} else if (msg.hunger >= 90)
 	{
 		cooking = false;
 		
@@ -240,7 +241,6 @@ void Assistant::medicationCallback(const ros::TimerEvent&) {
 
 	// Behaviour should only occur if the simulation time is between the specified start and end times.
 	if (((tnow % dlen) > startTime) && ((tnow % dlen) < endTime)) { // Note that this will run at the end of the duration specified for the timer.
-		ROS_INFO("providing medication"); 
 		std::ostringstream s;
 		s << tnow; 
 		//ROS_INFO(s.str().c_str()); // Just shows elapsed seconds
