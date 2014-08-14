@@ -100,38 +100,29 @@ std::pair<double, double> Doctor::move(double goal_x, double goal_y, double cur_
 	//When the robot is facing the correct direction, start moving
 	double threshold = cur_angle;//cur_angle-moveSpeed/10;
 	//threshold = ((int)(threshold * 1000 + .5) / 1000.0);
-	ROS_INFO("##################");
-	ROS_INFO("threshold: %f",threshold);
-	ROS_INFO("goal_angle: %f",goal_angle);
-	ROS_INFO("cur_angle: %f",cur_angle);
-	ROS_INFO("##################");
+
 	if ((goal_angle  == threshold) || isSet) {
-		ROS_INFO("First If Statement");
 		_ret.first = 5; //linear_x
 		_ret.second = 0; //angular_z
 		isSet = true;
 	} else if ((goal_angle <= cur_angle + 0.6) && (goal_angle >= cur_angle - 0.6) )  {
 		_ret.first = 0; //linear_x
-				ROS_INFO("Second If Statement");
 
 		_ret.second = fabs(cur_angle - goal_angle);//0.001; //angular_z
 		if (goal_angle == cur_angle) {
 			isSet = true;	
-			ROS_INFO("Third If Statement");
 	
 		}
 
 	} else {
 		_ret.first = 0; //linear_x
 		_ret.second = moveSpeed; //angular_z
-		ROS_INFO("fourth If Statement");
 
 		isSet = false;
 	}
 
 
 	if ((px-0.1 <= goal_x + 0.5) && (px-0.1 >= goal_x - 0.5) && (py-0.1 <= goal_y + 0.5) && (py-0.1 >= goal_y - 0.5)) {	
-			ROS_INFO("fifth If Statement");
 
 			_ret.first = 0; 
 			isSet = false;
