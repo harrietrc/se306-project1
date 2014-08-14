@@ -20,6 +20,8 @@ double goal_x;
 double goal_y;
 double goal_angle;
 bool isSet = false;
+int foodIsDelivered = 0;
+bool moveToPoint = false;
 
 //current pose and orientation of the robot
 double px;
@@ -27,7 +29,7 @@ double py;
 double cur_angle;
 
 int cc = 1; //current_checkpoint = 0;
-
+int foodIsReady = 0;
 std::pair<double, double> move(double goal_x, double goal_y, double cur_angle, double goal_angle, double px, double py);
 double calc_goal_angle(double goal_x, double goal_y, double cur_angle, double px, double py); 
 void StageOdom_callback(nav_msgs::Odometry msg); 
@@ -97,20 +99,6 @@ std::pair<double, double> Assistant::move(double goal_x, double goal_y, double c
 	double threshold = cur_angle;//cur_angle-moveSpeed/10;
 	//threshold = ((int)(threshold * 1000 + .5) / 1000.0);
 //threshold = ((int)(threshold * 1000 + .5) / 1000.0);
-
-	/*#DEBUG
-	ROS_INFO("##################");
-	ROS_INFO("goal_y: %f",goal_y);
-	ROS_INFO("py: %f",py);
-	ROS_INFO("goal_x: %f",goal_x);
-	ROS_INFO("px: %f",px);
-//	ROS_INFO("angle Vel1: %f", _ret.second);
-//	ROS_INFO("threshold: %f",threshold);
-	ROS_INFO("goal_angle: %f",goal_angle);
-	ROS_INFO("cur_angle: %f",cur_angle);
-	ROS_INFO("##################");
-	*/
-	
 	if ((goal_angle  == threshold) || isSet) {
 		_ret.first = 5; //linear_x
 		_ret.second = 0; //angular_z
@@ -191,28 +179,32 @@ void Assistant::residentStatusCallback(se306_project1::ResidentMsg msg)
 	velocityValues = std::make_pair(0, 0);
 	
 	
+	if ((sqrt(pow((msg.x - px),2) + pow((msg.y - py),2)) < 2.5) && foodIsDelivered == 0){
+		linear_x = 0;
+		angular_z = 0;
+		moveToPoint = true;
+		goal_x = px;
+		goal_y = py;
+		foodIsReady = 1;
+	} 
 	
 	if(msg.hunger < 90 && cooking ==false)
 	{
 		cooking = true;
-		velocityValues = movePath(checkpoints, 	10);
+		velocityValues = movePath(checkpoints, 	11);
 		linear_x = velocityValues.first;
 		angular_z = velocityValues.second;
-	
-		//#DEBUG ROS_INFO("Resident is hungry, hunger = %d", msg.hunger);
 	} else if (msg.hunger >= 60)
 	{
 		cooking = false;
 	}
 	
-	if (cooking) {
-		velocityValues = movePath(checkpoints, 	10);
+	if (cooking || moveToPoint) {
+		velocityValues = movePath(checkpoints, 	11);
 		linear_x = velocityValues.first;
 		angular_z = velocityValues.second;
-		//ROS_INFO("Assistant is cooking");
-
 	}
-	
+
 }
 
 /* 
@@ -289,6 +281,8 @@ int Assistant::run(int argc, char **argv)
 	////messages
 	//velocity of this RobotNode
 	geometry_msgs::Twist RobotNode_cmdvel;
+	
+	se306_project1::AssistantMsg aMsg;
 
 	// Periodic callback
 	int dur2 = time_conversion::simHoursToRealSecs(2); // Perform callback every 2 simulation hours
@@ -309,18 +303,24 @@ int Assistant::run(int argc, char **argv)
 		//publish the message
 		RobotNode_stage_pub.publish(RobotNode_cmdvel);
 		
-		se306_project1::AssistantMsg msg;
-		msg.cooking = cooking;
-
+		//se306_project1::AssistantMsg msg;
+		//msg.cooking = cooking;
+	
 		//status = "Cooking";
-		if (cooking == true && count % 10 == 0){
+	/*	if (cooking == true && count % 10 == 0){
 			i += 1;
 			if (i == 30)
 			{
 				assistant_pub.publish(msg);
-				//#DEBUG ROS_INFO("Food is ready");
 				i = 0;
 			}
+		}
+		*/
+		if (foodIsReady == 1) {
+			aMsg.FoodDelivered = foodIsReady;
+			foodIsReady = 0;
+			assistant_pub.publish(aMsg);
+			foodIsDelivered = 1;
 		}
 		ros::spinOnce();
 

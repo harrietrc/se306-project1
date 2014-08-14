@@ -29,8 +29,8 @@ class Assistant : public Agent
 		std::pair<double,bool> goal_pair;
 		std::pair<double, double> ret;	
 
-		int checkpoints[10][2] = {  
-		{30, 25}, 
+		int checkpoints[11][2] = {  
+		{30, 25},
 		{30, 7}, 
 		{40, 7},
 		{40, 8},
@@ -39,7 +39,8 @@ class Assistant : public Agent
 		{40,7},
 		{30,7},
 		{30, 25},
-		{34,20}
+		{34,20},
+		{30, 25}
 		};
 
 		bool cooking;
