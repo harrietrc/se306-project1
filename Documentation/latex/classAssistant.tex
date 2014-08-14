@@ -1,0 +1,329 @@
+\hypertarget{classAssistant}{\section{Assistant Class Reference}
+\label{classAssistant}\index{Assistant@{Assistant}}
+}
+
+
+Class for robot assistants.  
+
+
+
+
+{\ttfamily \#include $<$Assistant.\-h$>$}
+
+Inheritance diagram for Assistant\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classAssistant}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classAssistant_ad016061136f3fa5c3ed733e23a54aa00}{Stage\-Odom\-\_\-callback} (nav\-\_\-msgs\-::\-Odometry msg)
+\begin{DoxyCompactList}\small\item\em Updates the \hyperlink{classAssistant}{Assistant}'s x position, y position, and angle to reflect its current pose. \end{DoxyCompactList}\item 
+void \hyperlink{classAssistant_aaf1fe61dc3d3aac3f0ec603531ad9ad7}{Stage\-Laser\-\_\-callback} (sensor\-\_\-msgs\-::\-Laser\-Scan msg)
+\begin{DoxyCompactList}\small\item\em Callback function to process laser scan messsages. You can access the range data from msg.\-ranges\mbox{[}i\mbox{]}. i = sample number. \end{DoxyCompactList}\item 
+\hypertarget{classAssistant_a50eec4c3693b7b2c7d363ef4848a5815}{int \hyperlink{classAssistant_a50eec4c3693b7b2c7d363ef4848a5815}{run} (int argc, char $\ast$$\ast$argv)}\label{classAssistant_a50eec4c3693b7b2c7d363ef4848a5815}
+
+\begin{DoxyCompactList}\small\item\em Main function for the \hyperlink{classAssistant}{Assistant} process. Controls node setup and periodic events. \end{DoxyCompactList}\item 
+double \hyperlink{classAssistant_a8fce345025f32bcd0e45d83960d4b3f7}{calc\-\_\-goal\-\_\-angle} (double \hyperlink{classAssistant_a1a1f1fe48d0eb6a6a39b7fbdb2ef6641}{goal\-\_\-x}, double \hyperlink{classAssistant_a1b6ce5d7c3124140be8d351c847fe91c}{goal\-\_\-y}, double \hyperlink{classAssistant_a451a20f551c43d0b6810c8208fe84773}{cur\-\_\-angle}, double \hyperlink{classAssistant_a694fdaa5fb378340c42b7f75716cd1ce}{px}, double \hyperlink{classAssistant_ae092b444c226b5ffbdf454ad24f630d6}{py})
+\begin{DoxyCompactList}\small\item\em Given the robot's current angle, this function calculates the angle to the goal. cur\-\_\-angle, goal\-\_\-x, goal\-\_\-y, px, and py are class fields but are also passed as parameters. \end{DoxyCompactList}\item 
+std\-::pair$<$ double, double $>$ \hyperlink{classAssistant_ac420c9d5551f0ef6925d9a58a5b4854a}{move} (double \hyperlink{classAssistant_a1a1f1fe48d0eb6a6a39b7fbdb2ef6641}{goal\-\_\-x}, double \hyperlink{classAssistant_a1b6ce5d7c3124140be8d351c847fe91c}{goal\-\_\-y}, double \hyperlink{classAssistant_a451a20f551c43d0b6810c8208fe84773}{cur\-\_\-angle}, double \hyperlink{classAssistant_ae4468e02db193f0ffa0ca17a249f802d}{goal\-\_\-angle}, double \hyperlink{classAssistant_a694fdaa5fb378340c42b7f75716cd1ce}{px}, double \hyperlink{classAssistant_ae092b444c226b5ffbdf454ad24f630d6}{py})
+\begin{DoxyCompactList}\small\item\em Keeps the robot moving by changing linear\-\_\-x ad angular\-\_\-z. \end{DoxyCompactList}\item 
+\hypertarget{classAssistant_a320ca71cccf4964b341820db82b4b604}{void {\bfseries random\-Checkpoint\-Callback} (const ros\-::\-Timer\-Event \&)}\label{classAssistant_a320ca71cccf4964b341820db82b4b604}
+
+\item 
+std\-::pair$<$ double, double $>$ \hyperlink{classAssistant_a921c4b094867a4ebc62e404e772d002c}{move\-Path} (int path\mbox{[}$\,$\mbox{]}\mbox{[}2\mbox{]}, int path\-Length)
+\begin{DoxyCompactList}\small\item\em Causes the robot to move until the goal is reached. When the goal is reached, the next checkpoint becomes the goal or if the list of checkpoints is exhausted, the robot returns to its initial position (the first checkpoint) \end{DoxyCompactList}\item 
+void \hyperlink{classAssistant_ae4f0887ad0748940571fdf9ed1013766}{resident\-Status\-Callback} (\hyperlink{structse306__project1_1_1ResidentMsg__}{se306\-\_\-project1\-::\-Resident\-Msg} msg)
+\begin{DoxyCompactList}\small\item\em Callback function that unpacks and processes resident status messages. \hyperlink{classAssistant}{Assistant} should subscribe to the Resident\-Msg topic in order for this callback to be called. Resident\-Msg is published by the \hyperlink{classResident}{Resident}. \end{DoxyCompactList}\item 
+void \hyperlink{classAssistant_ae9b3476194ec440164926085a87a81f0}{medication\-Callback} (const ros\-::\-Timer\-Event \&)
+\begin{DoxyCompactList}\small\item\em Periodic callback for the provision of medication that should act as a model for all periodic events. Called by the ros\-::\-Timer in the \hyperlink{classAssistant_a50eec4c3693b7b2c7d363ef4848a5815}{run()} function. Can specify start time, end time, and period. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{classAssistant_a13877ed73a684f59171c686186110870}{health}
+\item 
+int \hyperlink{classAssistant_a1f237fcda74950177c10cc26ea778863}{boredom}
+\item 
+int \hyperlink{classAssistant_ad109fd18cc762f9b9f7e64b626ec5d48}{hunger}
+\item 
+double \hyperlink{classAssistant_a1a1f1fe48d0eb6a6a39b7fbdb2ef6641}{goal\-\_\-x}
+\item 
+double \hyperlink{classAssistant_a1b6ce5d7c3124140be8d351c847fe91c}{goal\-\_\-y}
+\item 
+double \hyperlink{classAssistant_a694fdaa5fb378340c42b7f75716cd1ce}{px}
+\item 
+double \hyperlink{classAssistant_ae092b444c226b5ffbdf454ad24f630d6}{py}
+\item 
+double \hyperlink{classAssistant_ae4468e02db193f0ffa0ca17a249f802d}{goal\-\_\-angle}
+\item 
+\hypertarget{classAssistant_a23a1a8275bd6637f9d51e64fc77541d9}{bool {\bfseries running}}\label{classAssistant_a23a1a8275bd6637f9d51e64fc77541d9}
+
+\item 
+bool \hyperlink{classAssistant_a939484adfb9673d2608282124ef348b9}{is\-Set}
+\item 
+double \hyperlink{classAssistant_a451a20f551c43d0b6810c8208fe84773}{cur\-\_\-angle}
+\item 
+\hypertarget{classAssistant_a6ab1f06230072f8b32d6a0a7c8421f6e}{int {\bfseries cc}}\label{classAssistant_a6ab1f06230072f8b32d6a0a7c8421f6e}
+
+\item 
+\hypertarget{classAssistant_af2f914caf84e27c9e14fdb2367ef9efe}{bool {\bfseries is\-\_\-called}}\label{classAssistant_af2f914caf84e27c9e14fdb2367ef9efe}
+
+\item 
+\hypertarget{classAssistant_ab02623d3ac8868e28de116fe0b00f509}{std\-::pair$<$ double, bool $>$ {\bfseries goal\-\_\-pair}}\label{classAssistant_ab02623d3ac8868e28de116fe0b00f509}
+
+\item 
+std\-::pair$<$ double, double $>$ \hyperlink{classAssistant_a741527493a17d0f6dc512c03a2055fc1}{ret}
+\item 
+int \hyperlink{classAssistant_ac3c8eb895beffec2e70b25184c7fcae9}{checkpoints} \mbox{[}10\mbox{]}\mbox{[}2\mbox{]}
+\begin{DoxyCompactList}\small\item\em Set of checkpoints that the nodes can move to in the map. Gives x position and y position for each co-\/ordinate. \end{DoxyCompactList}\item 
+bool \hyperlink{classAssistant_af9a992d4b1c5036ed73c57c7e1c5c258}{cooking}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Class for robot assistants. 
+
+\subsection{Member Function Documentation}
+\hypertarget{classAssistant_a8fce345025f32bcd0e45d83960d4b3f7}{\index{Assistant@{Assistant}!calc\-\_\-goal\-\_\-angle@{calc\-\_\-goal\-\_\-angle}}
+\index{calc\-\_\-goal\-\_\-angle@{calc\-\_\-goal\-\_\-angle}!Assistant@{Assistant}}
+\subsubsection[{calc\-\_\-goal\-\_\-angle}]{\setlength{\rightskip}{0pt plus 5cm}double Assistant\-::calc\-\_\-goal\-\_\-angle (
+\begin{DoxyParamCaption}
+\item[{double}]{goal\-\_\-x, }
+\item[{double}]{goal\-\_\-y, }
+\item[{double}]{cur\-\_\-angle, }
+\item[{double}]{px, }
+\item[{double}]{py}
+\end{DoxyParamCaption}
+)}}\label{classAssistant_a8fce345025f32bcd0e45d83960d4b3f7}
+
+
+Given the robot's current angle, this function calculates the angle to the goal. cur\-\_\-angle, goal\-\_\-x, goal\-\_\-y, px, and py are class fields but are also passed as parameters. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em goal\-\_\-x} & The x co-\/ordinate of the goal \\
+\hline
+{\em goal\-\_\-y} & The y co-\/ordinate of the goal \\
+\hline
+{\em cur\-\_\-angle} & The robot's current angle, in reference to the co-\/ordinate system \\
+\hline
+{\em px} & The robot's initial x position \\
+\hline
+{\em py} & The robot's initial y position \\
+\hline
+{\em goal\-\_\-angle} & The angle that the robot must rotate to face the goal, in reference to the co-\/ordinate system. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classAssistant_ae9b3476194ec440164926085a87a81f0}{\index{Assistant@{Assistant}!medication\-Callback@{medication\-Callback}}
+\index{medication\-Callback@{medication\-Callback}!Assistant@{Assistant}}
+\subsubsection[{medication\-Callback}]{\setlength{\rightskip}{0pt plus 5cm}void Assistant\-::medication\-Callback (
+\begin{DoxyParamCaption}
+\item[{const ros\-::\-Timer\-Event \&}]{}
+\end{DoxyParamCaption}
+)}}\label{classAssistant_ae9b3476194ec440164926085a87a81f0}
+
+
+Periodic callback for the provision of medication that should act as a model for all periodic events. Called by the ros\-::\-Timer in the \hyperlink{classAssistant_a50eec4c3693b7b2c7d363ef4848a5815}{run()} function. Can specify start time, end time, and period. 
+
+\begin{DoxyNote}{Note}
+The callback is called at the end of the duration specified for the timer. 
+\end{DoxyNote}
+\begin{DoxyRemark}{Remarks}
+This could be adjustd in the future to allow for events that occur only on certain days -\/ currently it accommodates only for events that occur every x days (or multiple times per day). 
+\end{DoxyRemark}
+
+\begin{DoxyParams}{Parameters}
+{\em Timer\-Event\&} & Timer\-Event generated by a ros\-::\-Timer. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classAssistant_ac420c9d5551f0ef6925d9a58a5b4854a}{\index{Assistant@{Assistant}!move@{move}}
+\index{move@{move}!Assistant@{Assistant}}
+\subsubsection[{move}]{\setlength{\rightskip}{0pt plus 5cm}std\-::pair$<$ double, double $>$ Assistant\-::move (
+\begin{DoxyParamCaption}
+\item[{double}]{goal\-\_\-x, }
+\item[{double}]{goal\-\_\-y, }
+\item[{double}]{cur\-\_\-angle, }
+\item[{double}]{goal\-\_\-angle, }
+\item[{double}]{px, }
+\item[{double}]{py}
+\end{DoxyParamCaption}
+)}}\label{classAssistant_ac420c9d5551f0ef6925d9a58a5b4854a}
+
+
+Keeps the robot moving by changing linear\-\_\-x ad angular\-\_\-z. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em goal\-\_\-x} & The x position of the robot's goal \\
+\hline
+{\em goal\-\_\-y} & The y position of the robot's goal \\
+\hline
+{\em cur\-\_\-angle} & The robot's current facing, in reference to the co-\/ordinate system. \\
+\hline
+{\em goal\-\_\-angle} & The angle that the robot must face in order to reach the goal. \\
+\hline
+{\em px} & Initial x position \\
+\hline
+{\em py} & Initial y position \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\-\_\-ret linear\-\_\-x and angular\-\_\-z 
+\end{DoxyReturn}
+\hypertarget{classAssistant_a921c4b094867a4ebc62e404e772d002c}{\index{Assistant@{Assistant}!move\-Path@{move\-Path}}
+\index{move\-Path@{move\-Path}!Assistant@{Assistant}}
+\subsubsection[{move\-Path}]{\setlength{\rightskip}{0pt plus 5cm}std\-::pair$<$ double, double $>$ Assistant\-::move\-Path (
+\begin{DoxyParamCaption}
+\item[{int}]{path\mbox{[}$\,$\mbox{]}\mbox{[}2\mbox{]}, }
+\item[{int}]{path\-Length}
+\end{DoxyParamCaption}
+)}}\label{classAssistant_a921c4b094867a4ebc62e404e772d002c}
+
+
+Causes the robot to move until the goal is reached. When the goal is reached, the next checkpoint becomes the goal or if the list of checkpoints is exhausted, the robot returns to its initial position (the first checkpoint) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path\mbox{[}$\,$\mbox{]}\mbox{[}2\mbox{]}} & An array of checkpoints that forms a path. \\
+\hline
+{\em path\-Length} & The number of checkpoints in the path (-\/1, as counting starts at 0) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+linear\-\_\-x and angular\-\_\-z 
+\end{DoxyReturn}
+\hypertarget{classAssistant_ae4f0887ad0748940571fdf9ed1013766}{\index{Assistant@{Assistant}!resident\-Status\-Callback@{resident\-Status\-Callback}}
+\index{resident\-Status\-Callback@{resident\-Status\-Callback}!Assistant@{Assistant}}
+\subsubsection[{resident\-Status\-Callback}]{\setlength{\rightskip}{0pt plus 5cm}void Assistant\-::resident\-Status\-Callback (
+\begin{DoxyParamCaption}
+\item[{{\bf se306\-\_\-project1\-::\-Resident\-Msg}}]{msg}
+\end{DoxyParamCaption}
+)}}\label{classAssistant_ae4f0887ad0748940571fdf9ed1013766}
+
+
+Callback function that unpacks and processes resident status messages. \hyperlink{classAssistant}{Assistant} should subscribe to the Resident\-Msg topic in order for this callback to be called. Resident\-Msg is published by the \hyperlink{classResident}{Resident}. 
+
+\begin{DoxyNote}{Note}
+Currently this callback processes only resident hunger, controlling the cooking behaviour. More behaviours can be implemented later. 
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & A custom Resident\-Msg message that contains information about the resident's current status. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classAssistant_aaf1fe61dc3d3aac3f0ec603531ad9ad7}{\index{Assistant@{Assistant}!Stage\-Laser\-\_\-callback@{Stage\-Laser\-\_\-callback}}
+\index{Stage\-Laser\-\_\-callback@{Stage\-Laser\-\_\-callback}!Assistant@{Assistant}}
+\subsubsection[{Stage\-Laser\-\_\-callback}]{\setlength{\rightskip}{0pt plus 5cm}void Assistant\-::\-Stage\-Laser\-\_\-callback (
+\begin{DoxyParamCaption}
+\item[{sensor\-\_\-msgs\-::\-Laser\-Scan}]{msg}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classAssistant_aaf1fe61dc3d3aac3f0ec603531ad9ad7}
+
+
+Callback function to process laser scan messsages. You can access the range data from msg.\-ranges\mbox{[}i\mbox{]}. i = sample number. 
+
+\begin{DoxyNote}{Note}
+Currently blank as it is not in use. Navigation operates through a checkpoint system. 
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & Single scan from a planar laser range finder \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classAgent}{Agent}.
+
+\hypertarget{classAssistant_ad016061136f3fa5c3ed733e23a54aa00}{\index{Assistant@{Assistant}!Stage\-Odom\-\_\-callback@{Stage\-Odom\-\_\-callback}}
+\index{Stage\-Odom\-\_\-callback@{Stage\-Odom\-\_\-callback}!Assistant@{Assistant}}
+\subsubsection[{Stage\-Odom\-\_\-callback}]{\setlength{\rightskip}{0pt plus 5cm}void Assistant\-::\-Stage\-Odom\-\_\-callback (
+\begin{DoxyParamCaption}
+\item[{nav\-\_\-msgs\-::\-Odometry}]{msg}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classAssistant_ad016061136f3fa5c3ed733e23a54aa00}
+
+
+Updates the \hyperlink{classAssistant}{Assistant}'s x position, y position, and angle to reflect its current pose. 
+
+\begin{DoxyNote}{Note}
+Rounding is used to calculate the current angle. This approximation is accounted for by using threshholds when processing angles. 
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & Odometry message from odom topic \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classAgent}{Agent}.
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classAssistant_a1f237fcda74950177c10cc26ea778863}{\index{Assistant@{Assistant}!boredom@{boredom}}
+\index{boredom@{boredom}!Assistant@{Assistant}}
+\subsubsection[{boredom}]{\setlength{\rightskip}{0pt plus 5cm}int Assistant\-::boredom\hspace{0.3cm}{\ttfamily [protected]}}}\label{classAssistant_a1f237fcda74950177c10cc26ea778863}
+\hyperlink{classResident}{Resident} boredom \hypertarget{classAssistant_ac3c8eb895beffec2e70b25184c7fcae9}{\index{Assistant@{Assistant}!checkpoints@{checkpoints}}
+\index{checkpoints@{checkpoints}!Assistant@{Assistant}}
+\subsubsection[{checkpoints}]{\setlength{\rightskip}{0pt plus 5cm}int Assistant\-::checkpoints\mbox{[}10\mbox{]}\mbox{[}2\mbox{]}\hspace{0.3cm}{\ttfamily [protected]}}}\label{classAssistant_ac3c8eb895beffec2e70b25184c7fcae9}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+= \{  
+        \{30, 25\}, 
+        \{30, 7\}, 
+        \{40, 7\},
+        \{40, 8\},
+        \{38,8\},
+        \{38,7\},
+        \{40,7\},
+        \{30,7\},
+        \{30, 25\},
+        \{34,20\}
+        \}
+\end{DoxyCode}
+
+
+Set of checkpoints that the nodes can move to in the map. Gives x position and y position for each co-\/ordinate. 
+
+\hypertarget{classAssistant_af9a992d4b1c5036ed73c57c7e1c5c258}{\index{Assistant@{Assistant}!cooking@{cooking}}
+\index{cooking@{cooking}!Assistant@{Assistant}}
+\subsubsection[{cooking}]{\setlength{\rightskip}{0pt plus 5cm}bool Assistant\-::cooking\hspace{0.3cm}{\ttfamily [protected]}}}\label{classAssistant_af9a992d4b1c5036ed73c57c7e1c5c258}
+True if the robot is cooking \hypertarget{classAssistant_a451a20f551c43d0b6810c8208fe84773}{\index{Assistant@{Assistant}!cur\-\_\-angle@{cur\-\_\-angle}}
+\index{cur\-\_\-angle@{cur\-\_\-angle}!Assistant@{Assistant}}
+\subsubsection[{cur\-\_\-angle}]{\setlength{\rightskip}{0pt plus 5cm}double Assistant\-::cur\-\_\-angle\hspace{0.3cm}{\ttfamily [protected]}}}\label{classAssistant_a451a20f551c43d0b6810c8208fe84773}
+The robot's current facing in reference to the co-\/ordinate system \hypertarget{classAssistant_ae4468e02db193f0ffa0ca17a249f802d}{\index{Assistant@{Assistant}!goal\-\_\-angle@{goal\-\_\-angle}}
+\index{goal\-\_\-angle@{goal\-\_\-angle}!Assistant@{Assistant}}
+\subsubsection[{goal\-\_\-angle}]{\setlength{\rightskip}{0pt plus 5cm}double Assistant\-::goal\-\_\-angle\hspace{0.3cm}{\ttfamily [protected]}}}\label{classAssistant_ae4468e02db193f0ffa0ca17a249f802d}
+The angle that the robot must face to approach the goal, defined in reference to the co-\/ordinate system \hypertarget{classAssistant_a1a1f1fe48d0eb6a6a39b7fbdb2ef6641}{\index{Assistant@{Assistant}!goal\-\_\-x@{goal\-\_\-x}}
+\index{goal\-\_\-x@{goal\-\_\-x}!Assistant@{Assistant}}
+\subsubsection[{goal\-\_\-x}]{\setlength{\rightskip}{0pt plus 5cm}double Assistant\-::goal\-\_\-x\hspace{0.3cm}{\ttfamily [protected]}}}\label{classAssistant_a1a1f1fe48d0eb6a6a39b7fbdb2ef6641}
+test\-The x position of the robot's goal \hypertarget{classAssistant_a1b6ce5d7c3124140be8d351c847fe91c}{\index{Assistant@{Assistant}!goal\-\_\-y@{goal\-\_\-y}}
+\index{goal\-\_\-y@{goal\-\_\-y}!Assistant@{Assistant}}
+\subsubsection[{goal\-\_\-y}]{\setlength{\rightskip}{0pt plus 5cm}double Assistant\-::goal\-\_\-y\hspace{0.3cm}{\ttfamily [protected]}}}\label{classAssistant_a1b6ce5d7c3124140be8d351c847fe91c}
+The y position of the robot's goal \hypertarget{classAssistant_a13877ed73a684f59171c686186110870}{\index{Assistant@{Assistant}!health@{health}}
+\index{health@{health}!Assistant@{Assistant}}
+\subsubsection[{health}]{\setlength{\rightskip}{0pt plus 5cm}int Assistant\-::health\hspace{0.3cm}{\ttfamily [protected]}}}\label{classAssistant_a13877ed73a684f59171c686186110870}
+\hyperlink{classResident}{Resident} health \hypertarget{classAssistant_ad109fd18cc762f9b9f7e64b626ec5d48}{\index{Assistant@{Assistant}!hunger@{hunger}}
+\index{hunger@{hunger}!Assistant@{Assistant}}
+\subsubsection[{hunger}]{\setlength{\rightskip}{0pt plus 5cm}int Assistant\-::hunger\hspace{0.3cm}{\ttfamily [protected]}}}\label{classAssistant_ad109fd18cc762f9b9f7e64b626ec5d48}
+\hyperlink{classResident}{Resident} hunger \hypertarget{classAssistant_a939484adfb9673d2608282124ef348b9}{\index{Assistant@{Assistant}!is\-Set@{is\-Set}}
+\index{is\-Set@{is\-Set}!Assistant@{Assistant}}
+\subsubsection[{is\-Set}]{\setlength{\rightskip}{0pt plus 5cm}bool Assistant\-::is\-Set\hspace{0.3cm}{\ttfamily [protected]}}}\label{classAssistant_a939484adfb9673d2608282124ef348b9}
+Indicates whether the robot is currently on its way to a goal. \hypertarget{classAssistant_a694fdaa5fb378340c42b7f75716cd1ce}{\index{Assistant@{Assistant}!px@{px}}
+\index{px@{px}!Assistant@{Assistant}}
+\subsubsection[{px}]{\setlength{\rightskip}{0pt plus 5cm}double Assistant\-::px\hspace{0.3cm}{\ttfamily [protected]}}}\label{classAssistant_a694fdaa5fb378340c42b7f75716cd1ce}
+The robot's initial x position \hypertarget{classAssistant_ae092b444c226b5ffbdf454ad24f630d6}{\index{Assistant@{Assistant}!py@{py}}
+\index{py@{py}!Assistant@{Assistant}}
+\subsubsection[{py}]{\setlength{\rightskip}{0pt plus 5cm}double Assistant\-::py\hspace{0.3cm}{\ttfamily [protected]}}}\label{classAssistant_ae092b444c226b5ffbdf454ad24f630d6}
+The robot's initial y position \hypertarget{classAssistant_a741527493a17d0f6dc512c03a2055fc1}{\index{Assistant@{Assistant}!ret@{ret}}
+\index{ret@{ret}!Assistant@{Assistant}}
+\subsubsection[{ret}]{\setlength{\rightskip}{0pt plus 5cm}std\-::pair$<$double, double$>$ Assistant\-::ret\hspace{0.3cm}{\ttfamily [protected]}}}\label{classAssistant_a741527493a17d0f6dc512c03a2055fc1}
+linear\-\_\-x and angular\-\_\-z for the robot 
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+se306\-\_\-project1/src/Assistant.\-h\item 
+se306\-\_\-project1/src/Assistant.\-cpp\end{DoxyCompactItemize}

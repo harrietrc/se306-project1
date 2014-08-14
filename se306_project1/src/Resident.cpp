@@ -341,6 +341,9 @@ int Resident::run(int argc, char *argv[])
 			velocityValues = std::make_pair(0, 0);
 		if (hunger < 90) {
 			//ROS_INFO("hunger");
+			velocityValues = movePath(checkpoints, 	3);
+			linear_x = velocityValues.first;
+			angular_z = velocityValues.second;		
 		}
 		linear_x = 0;
 		angular_z=0;

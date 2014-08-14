@@ -27,6 +27,8 @@ double py;
 double cur_angle;
 int cc = 1; //current_checkpoint = 0;
 
+std::pair<double, double> ret;	
+
 std::pair<double, double> move(double goal_x, double goal_y, double cur_angle, double goal_angle, double px, double py);
 double calc_goal_angle(double goal_x, double goal_y, double cur_angle, double px, double py); 
 void StageOdom_callback(nav_msgs::Odometry msg); 
@@ -204,7 +206,7 @@ void Doctor::residentStatusCallback(se306_project1::ResidentMsg msg)
 		healing = false;
 		
 	}
-	
+
 	if (healing || moveToPoint) {
 		velocityValues = movePath(checkpoints, 	3);
 		linear_x = velocityValues.first;
