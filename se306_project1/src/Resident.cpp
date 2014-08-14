@@ -158,11 +158,12 @@ void Resident::doctor_callback(se306_project1::DoctorMsg msg)
 
 void Resident::assistant_callback(se306_project1::AssistantMsg msg)
 {
-	//if (msg.cooking == true)
-	//{
-		//hunger = 100;
-		//ROS_INFO("Resident eating food, hunger = 100");
-	//}
+	/*if (msg.cooking == true)
+	{
+		hunger = 100;
+		ROS_INFO("Resident eating food, hunger = 100");
+	}
+	*/
 }
 
 //Keeps robot moving by changing linear_x and angular_z

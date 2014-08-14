@@ -43,6 +43,7 @@ class Resident : public Agent
 		std::pair<double, double> move(double goal_x, double goal_y, double cur_angle, double goal_angle, double px, double py);
 		void randomCheckpointCallback(const ros::TimerEvent&);
 		void assistant_callback(se306_project1::AssistantMsg msg);
+		std::pair<double, double>  movePath(int path[][2], int pathLength);
 
 		// Return type of robot
 		// MIGHT HAVE TO RETURN A STRING BECAUSE ROS DOESN'T SUPPORT ENUM IN MESSAGES

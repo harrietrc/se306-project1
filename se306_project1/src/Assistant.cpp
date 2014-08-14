@@ -52,10 +52,6 @@ void Assistant::StageOdom_callback(nav_msgs::Odometry msg)
 std::pair<double, double> Assistant::movePath(int path[][2], int pathLength) {
 		
 		
-	ROS_INFO("###");
-	ROS_INFO("goal_angle: %f",goal_angle);
-	ROS_INFO("cur_angle: %f",cur_angle);
-		ROS_INFO("###");
 	
 	std::pair<double, double> ret;	
 	ret = std::make_pair(0, 0); //initialize pair. Used to get return.
