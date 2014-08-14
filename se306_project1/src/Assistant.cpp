@@ -316,10 +316,6 @@ int Assistant::run(int argc, char **argv)
 			if (i == 30)
 			{
 				assistant_pub.publish(msg);
-<<<<<<< HEAD
-=======
-				//ROS_INFO("Food is ready");
->>>>>>> 6f4325dfcc39ce8764a381daccd2cd95122ba38d
 				i = 0;
 			}
 		}
@@ -343,7 +339,7 @@ int Assistant::run(int argc, char **argv)
 /* 
 	Redirects to main function (run()) of the node.
 */
-int main(int argc, char **argv) {
+int main(int argc, char *argv[]) {
 	Assistant *a = new Assistant();
 	a->Assistant::run(argc, argv);
 }

@@ -38,7 +38,8 @@ class Doctor : public Visitor
 	public:
 		void StageOdom_callback(nav_msgs::Odometry msg);
 		void StageLaser_callback(sensor_msgs::LaserScan msg);
-		int run(int argc, char **argv);
+		int run(int argc, char *argv[]);
+
 
 		double calc_goal_angle(double goal_x, double goal_y, double cur_angle, double px, double py);
 		std::pair<double, double> move(double goal_x, double goal_y, double cur_angle, double goal_angle, double px, double py);

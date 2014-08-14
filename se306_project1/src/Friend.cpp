@@ -24,7 +24,7 @@ void Friend::StageLaser_callback(sensor_msgs::LaserScan msg)
 	
 }
 
-int Friend::run(int argc, char **argv)
+int Friend::run(int argc, char *argv[])
 {
 
 	//initialize robot parameters
@@ -82,7 +82,7 @@ int Friend::run(int argc, char **argv)
 /* 
 	Redirects to main function (run()) of the node.
 */
-int main(int argc, char **argv) {
+int main(int argc, char *argv[]) {
 	Friend *a = new Friend();
 	a->Friend::run(argc, argv);
 }

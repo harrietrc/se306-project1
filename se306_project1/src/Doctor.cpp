@@ -31,8 +31,6 @@ std::pair<double, double> move(double goal_x, double goal_y, double cur_angle, d
 double calc_goal_angle(double goal_x, double goal_y, double cur_angle, double px, double py); 
 void StageOdom_callback(nav_msgs::Odometry msg); 
 
-<<<<<<< HEAD
-=======
 int readyToHeal = 0;
 int residentHealed = 0;
 int moveToPoint = 0;
@@ -42,7 +40,6 @@ int checkpoints[3][2] = {
 		{10, 0},
 		{10, -7}
 	};
->>>>>>> 6f4325dfcc39ce8764a381daccd2cd95122ba38d
 	
 void Doctor::StageOdom_callback(nav_msgs::Odometry msg)
 {
@@ -197,7 +194,6 @@ void Doctor::residentStatusCallback(se306_project1::ResidentMsg msg)
 	} 
 	
 	if(msg.health < 90 && healing ==false)
->>>>>>> 6f4325dfcc39ce8764a381daccd2cd95122ba38d
 	{
 		healing = true;
 		velocityValues = movePath(checkpoints, 	3);
@@ -209,26 +205,15 @@ void Doctor::residentStatusCallback(se306_project1::ResidentMsg msg)
 		
 	}
 	
-<<<<<<< HEAD
-	if (healResident) {
-		velocityValues = movePath(checkpoints, 	4);
-		linear_x = velocityValues.first;
-		angular_z = velocityValues.second;
-		ROS_INFO("Doctor is healing");
-	}
-
-=======
 	if (healing || moveToPoint) {
 		velocityValues = movePath(checkpoints, 	3);
 		linear_x = velocityValues.first;
 		angular_z = velocityValues.second;
 	}
 	
-	
->>>>>>> 6f4325dfcc39ce8764a381daccd2cd95122ba38d
 }
 
-int Doctor::run(int argc, char **argv)
+int Doctor::run(int argc, char *argv[])
 {
 	//Initial pose. This is the same as the pose used in the world file.
 	px = checkpoints[cc-1][0];
@@ -298,23 +283,19 @@ int Doctor::run(int argc, char **argv)
 			doctor_pub.publish(aMsg);
 			residentHealed = 1;
 		}
-		
-		
-		
+
 		ros::spinOnce();
 
 		loop_rate.sleep();
 		++count;
 	}
-
 	return 0;
-
 }
 
 /* 
 	Redirects to main function (run()) of the node.
 */
-int main(int argc, char **argv) {
+int main(int argc, char *argv[]) {
 	Doctor *a = new Doctor;
 	a->Doctor::run(argc, argv);
 }
