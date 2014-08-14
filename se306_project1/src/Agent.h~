@@ -8,6 +8,7 @@ class Agent
 		//pose of the robot
 		double px;
 		double py;
+		double theta;
 
 		// Enumeration of type of robot
 		enum Type{FRIEND, RELATIVE, DOCTOR, NURSE, CAREGIVER, ASSISTANT, RESIDENT};

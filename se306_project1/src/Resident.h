@@ -10,6 +10,8 @@ class Resident : public Agent
 		//goal pose and orientation
 		double goal_x;
 		double goal_y;
+		double px;
+		double py;
 		double goal_angle;
 
 		//bool running;
