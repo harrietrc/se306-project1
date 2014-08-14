@@ -151,7 +151,10 @@ void Resident::StageLaser_callback(sensor_msgs::LaserScan msg)
 void Resident::doctor_callback(se306_project1::DoctorMsg msg)
 {
 	if (msg.healResident == true)
+	{
 	 	health = 100;
+		ROS_INFO("Resident healed by Doctor, health = 100");
+	}
 }
 
 void Resident::assistant_callback(se306_project1::AssistantMsg msg)

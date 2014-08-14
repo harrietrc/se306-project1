@@ -37,6 +37,15 @@ void Doctor::residentStatusCallback(se306_project1::ResidentMsg msg)
 	//			leave() // go outside of house?
 	// else
 	// 	healResident = false;
+	if (msg.health < 20 && healResident == false) // emergency
+	{
+		healResident = true;
+		ROS_INFO("Resident is in critical condition (EMERGENCY)");
+		ROS_INFO("Resident health is: %d", msg.health);
+	} else if (msg.health >= 20)
+	{
+		healResident = false;
+	}
 	
 }
 
@@ -44,7 +53,7 @@ int Doctor::run(int argc, char **argv)
 {
 	//initialize robot parameters
 	//Initial pose. This is same as the pose that you used in the world file to set	the robot pose.
-	theta = M_PI/2.0;
+	//theta = M_PI/2.0;
 	px = 10;
 	py = 20;
 	
@@ -82,6 +91,7 @@ int Doctor::run(int argc, char **argv)
 
 	//a count of howmany messages we have sent
 	int count = 0;
+	int i =0;
 
 	////messages
 	//velocity of this RobotNode
@@ -101,6 +111,16 @@ int Doctor::run(int argc, char **argv)
 		msg.healResident = healResident;
 		doctor_pub.publish(msg);
 		
+		if (healResident == true && count % 10 == 0){
+					i += 1;
+					if (i == 10)
+					{
+						doctor_pub.publish(msg);
+						ROS_INFO("Doctor used heal on Resident");
+						i = 0;
+					}
+		}
+
 		ros::spinOnce();
 
 		loop_rate.sleep();
