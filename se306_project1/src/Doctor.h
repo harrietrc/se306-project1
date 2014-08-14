@@ -21,7 +21,7 @@ class Doctor : public Visitor
 		//current pose and orientation of the robot
 		double cur_angle;
 
-		int cc; //current_checkpoint = 0;
+		int cc = 1; //current_checkpoint = 0;
 
 		int checkpoints[4][2] = {
 			{10, -7},

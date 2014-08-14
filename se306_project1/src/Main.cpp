@@ -12,15 +12,15 @@ int main(int argc, char** argv) {
 	AgentConst::AgentType agentType = AgentConst::RESIDENT;
 	AgentFactory agentFactory;
 	nodeList[agentType] = nodeList[agentType] + agentFactory.createAgent(agentType);
-	std::cout << "now we have " << nodeList[agentType] << "resident(s)\n";
+	std::cout << "now we have " << nodeList[agentType] << " resident(s)\n";
 
 	agentType = AgentConst::ASSISTANT;
 	nodeList[agentType] = nodeList[agentType] + agentFactory.createAgent(agentType);
-	std::cout << "now we have " << nodeList[agentType] << "assistant(s)\n";
+	std::cout << "now we have " << nodeList[agentType] << " assistant(s)\n";
 
 	agentType = AgentConst::DOCTOR;
 	nodeList[agentType] = nodeList[agentType] + agentFactory.createAgent(agentType);
-	std::cout << "now we have " << nodeList[agentType] << "doctor(s)\n";
+	std::cout << "now we have " << nodeList[agentType] << " doctor(s)\n";
 
 	return 0;
 }
