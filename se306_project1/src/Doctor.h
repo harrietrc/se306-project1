@@ -36,13 +36,6 @@ class Doctor : public Visitor
 		std::pair<double,bool> goal_pair;
 		std::pair<double, double> ret;	
 
-			int checkpoints[4][2] = {
-				{10, -7},
-				{10, 2},
-				{30, 20},
-				{30, 25}
-				};
-
 	public:
 		void StageOdom_callback(nav_msgs::Odometry msg);
 		void StageLaser_callback(sensor_msgs::LaserScan msg);

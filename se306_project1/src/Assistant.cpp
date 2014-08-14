@@ -98,6 +98,7 @@ std::pair<double, double> Assistant::move(double goal_x, double goal_y, double c
 	//threshold = ((int)(threshold * 1000 + .5) / 1000.0);
 //threshold = ((int)(threshold * 1000 + .5) / 1000.0);
 
+	/*#DEBUG
 	ROS_INFO("##################");
 	ROS_INFO("goal_y: %f",goal_y);
 	ROS_INFO("py: %f",py);
@@ -108,6 +109,7 @@ std::pair<double, double> Assistant::move(double goal_x, double goal_y, double c
 	ROS_INFO("goal_angle: %f",goal_angle);
 	ROS_INFO("cur_angle: %f",cur_angle);
 	ROS_INFO("##################");
+	*/
 	
 	if ((goal_angle  == threshold) || isSet) {
 		_ret.first = 5; //linear_x
@@ -197,7 +199,7 @@ void Assistant::residentStatusCallback(se306_project1::ResidentMsg msg)
 		linear_x = velocityValues.first;
 		angular_z = velocityValues.second;
 	
-		ROS_INFO("Resident is hungry, hunger = %d", msg.hunger);
+		//#DEBUG ROS_INFO("Resident is hungry, hunger = %d", msg.hunger);
 	} else if (msg.hunger >= 60)
 	{
 		cooking = false;
@@ -231,7 +233,7 @@ void Assistant::medicationCallback(const ros::TimerEvent&) {
 
 	// Behaviour should only occur if the simulation time is between the specified start and end times.
 	if (((tnow % dlen) > startTime) && ((tnow % dlen) < endTime)) { // Note that this will run at the end of the duration specified for the timer.
-		ROS_INFO("providing medication"); 
+		//#DEBUG ROS_INFO("providing medication");
 		std::ostringstream s;
 		s << tnow; 
 		//ROS_INFO(s.str().c_str()); // Just shows elapsed seconds
@@ -316,7 +318,7 @@ int Assistant::run(int argc, char **argv)
 			if (i == 30)
 			{
 				assistant_pub.publish(msg);
-				ROS_INFO("Food is ready");
+				//#DEBUG ROS_INFO("Food is ready");
 				i = 0;
 			}
 		}

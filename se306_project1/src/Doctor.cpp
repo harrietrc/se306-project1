@@ -153,6 +153,10 @@ void Doctor::StageLaser_callback(sensor_msgs::LaserScan msg)
 //custom resident callback function, you get the message object that was sent from Resident
 void Doctor::residentStatusCallback(se306_project1::ResidentMsg msg)
 {
+
+	std::pair<double, double> velocityValues;
+	velocityValues = std::make_pair(0, 0);
+
 	// if (msg.health < 20) { // emergency
 	// 	Doctor visits()/moves() to the Resident
 	// 	if Doctor is next to Resident
@@ -171,6 +175,13 @@ void Doctor::residentStatusCallback(se306_project1::ResidentMsg msg)
 		healResident = false;
 	}
 	
+	if (healResident) {
+		velocityValues = movePath(checkpoints, 	4);
+		linear_x = velocityValues.first;
+		angular_z = velocityValues.second;
+		ROS_INFO("Doctor is healing");
+	}
+
 }
 
 int Doctor::run(int argc, char **argv)
