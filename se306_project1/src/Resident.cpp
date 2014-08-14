@@ -13,6 +13,7 @@
 #include <stdlib.h>
 #include "time_conversion.hpp"
 #include "Resident.h"	
+#include "boost/graph/adjacency_list.hpp"
 
 //velocity of the robot
 double linear_x;
@@ -77,14 +78,28 @@ void checkpointMap() {
 	}
 }
 
+struct VertexProperties {
+    std::string cName;
+};
 
 /*
-	Creates graph of checkpoints.
+	Creates graph of checkpoints. Having to add the boost namespace drags the code out *a lot*, but it's nice to know where
+	everything comes form. Use 'using namespace boost' if it bothers you. The idea is to have the names as a graph, then
+	look them up in the hashmap to get the corresponding co-ordinates.
 */
 void makeGraph() {
 
-	
+	typedef boost::adjacency_list <boost::listS, boost::listS, boost::undirectedS, VertexProperties> Graph;
+	int cNum = checkpointNames.size(); // field for the number of checkpoints might be wise in the future. Lots of duplication.
+	Graph cGraph(cNum); 
 
+	boost::property_map<Graph, std::string VertexProperties::*>::type 
+    cName = get(&VertexProperties::cName, cGraph);
+
+    // // Some way to automate this would be good with higher numbers of checkpoints.
+    // boost::add_edge(boost::vertex("cp0", cGraph), boost::vertex("cp1",cGraph), cGraph);
+    // boost::add_edge(boost::vertex("cp1", cGraph), boost::vertex("cp2",cGraph), cGraph);
+    // // etc. (adding more edges)
 }
 	
 void Resident::StageOdom_callback(nav_msgs::Odometry msg)
