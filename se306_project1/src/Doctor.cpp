@@ -27,56 +27,55 @@ double cur_angle;
 
 int cc = 1; //current_checkpoint = 0;
 
+std::pair<double, double> ret;	
+
 std::pair<double, double> move(double goal_x, double goal_y, double cur_angle, double goal_angle, double px, double py);
 double calc_goal_angle(double goal_x, double goal_y, double cur_angle, double px, double py); 
 void StageOdom_callback(nav_msgs::Odometry msg); 
 
-
+			int checkpoints[4][2] = {
+				{10, -7},
+				{10, 1},
+				{30, 20},
+				{30, 25}
+				};
 	
 void Doctor::StageOdom_callback(nav_msgs::Odometry msg)
 {
-	//Converting from quaternion to radians
-	cur_angle = acos(msg.pose.pose.orientation.w) * 2;
-	if (msg.pose.pose.orientation.z > 0) {
-		cur_angle = (2*M_PI)-acos(msg.pose.pose.orientation.w) * 2;
-	}
+	//ret = std::make_pair(0, 0); //initialize pair. Used to get return.
 
-	//Rounding to 3 decimal places
-	cur_angle = ((int)(cur_angle * 1000 + .5) / 1000.0);
-	
-	
-	//Update the current position
-	px = msg.pose.pose.position.x + checkpoints[0][0];
-	py = msg.pose.pose.position.y + checkpoints[0][1];
-}
+	////Converting from quaternion to radians
+	//cur_angle = acos(msg.pose.pose.orientation.w) * 2;
+	//if (msg.pose.pose.orientation.z > 0) {
+		//cur_angle = (2*M_PI)-acos(msg.pose.pose.orientation.w) * 2;
+	//}
 
-std::pair<double, double> Doctor::movePath(int path[][2], int pathLength) {
-		
-		
+	////Rounding to 3 decimal places
+	//cur_angle = ((int)(cur_angle * 1000 + .5) / 1000.0);
 	
-	std::pair<double, double> ret;	
-	ret = std::make_pair(0, 0); //initialize pair. Used to get return.
+	////Update the current position
+	//px = msg.pose.pose.position.x + checkpoints[0][0];
+	//py = msg.pose.pose.position.y + checkpoints[0][1];
 	
-	//When goal reached
-	if ((px <= goal_x + 0.5) && (px >= goal_x - 0.5) && (py <= goal_y + 0.5) && (py >= goal_y - 0.5)) {
-	isSet = false;
-		if (cc == pathLength) { //If at last checkpoint
-			linear_x = 0;
-		} else {
-			cc++; //Increment checkpoint index
-		}
-		goal_x = path[cc][0];
-		goal_y = path[cc][1];
+	////When goal reached
+	//if ((px <= goal_x + 0.5) && (px >= goal_x - 0.5) && (py <= goal_y + 0.5) && (py >= goal_y - 0.5)) {
+	//isSet = false;
+		//if (cc == 8) { //If at last checkpoint
+			//linear_x = 0;
+		//} else {
+			//cc++; //Increment checkpoint index
+		//}
+		//goal_x = checkpoints[cc][0];
+		//goal_y = checkpoints[cc][1];
 	
-		//Account for delay by subtracting delay values from current pose and orientation
-		goal_angle = calc_goal_angle(goal_x, goal_y, cur_angle - M_PI/20, px - 0.1, py - 0.1); 
-		//goal_angle = calc_goal_angle(goal_x, goal_y, cur_angle, px, py);
+		////Account for delay by subtracting delay values from current pose and orientation
+		//goal_angle = calc_goal_angle(goal_x, goal_y, cur_angle - M_PI/20, px - 0.1, py - 0.1);
 
-	} else { //Do this until goal is reached
-		ret = move(goal_x, goal_y, cur_angle, goal_angle, px, py);	
-	}
-	
-	return ret;
+	//} else { //Do this until goal is reached
+		//ret = move(goal_x, goal_y, cur_angle, goal_angle, px, py);	
+		//linear_x = ret.first;
+		//angular_z = ret.second;
+	//}
 }
 
 
@@ -89,16 +88,16 @@ std::pair<double, double> Doctor::move(double goal_x, double goal_y, double cur_
 	moveSpeed = ((int)(moveSpeed * 1000 + .5) / 1000.0);
 
 	//When the robot is facing the correct direction, start moving
-	double threshold = cur_angle;//cur_angle-moveSpeed/10;
-	//threshold = ((int)(threshold * 1000 + .5) / 1000.0);
+	double threshold = cur_angle-moveSpeed/10;
+	threshold = ((int)(threshold * 1000 + .5) / 1000.0);
 
 	if ((goal_angle  == threshold) || isSet) {
 		_ret.first = 5; //linear_x
 		_ret.second = 0; //angular_z
 		isSet = true;
-	} else if ((goal_angle <= cur_angle + 0.6) && (goal_angle >= cur_angle - 0.6) )  {
+	} else if ((goal_angle <= cur_angle + 0.3) && (goal_angle >= cur_angle - 0.3) )  {
 		_ret.first = 0; //linear_x
-		_ret.second = fabs(cur_angle - goal_angle);//0.001; //angular_z
+		_ret.second = fabs(goal_angle - cur_angle); //angular_z
 		if (goal_angle == cur_angle) {
 			isSet = true;		
 		}
@@ -121,31 +120,31 @@ std::pair<double, double> Doctor::move(double goal_x, double goal_y, double cur_
 double Doctor::calc_goal_angle(double goal_x, double goal_y, double cur_angle, double px, double py) 
 {
 
-	//Initial and goal vectors used to calculate goal theta
-	double init_vector_x;
-	double init_vector_y;
-	double goal_vector_x;
-	double goal_vector_y;
-	double goal_angle;
+	////Initial and goal vectors used to calculate goal theta
+	//double init_vector_x;
+	//double init_vector_y;
+	//double goal_vector_x;
+	//double goal_vector_y;
+	//double goal_angle;
 	
-	//Finding the vector that the robot is facing and the goal vector
-	init_vector_x = cos(cur_angle);
-	init_vector_y = sin(cur_angle);
-	goal_vector_x = goal_x - px;
-	goal_vector_y = goal_y - py;
+	////Finding the vector that the robot is facing and the goal vector
+	//init_vector_x = cos(cur_angle);
+	//init_vector_y = sin(cur_angle);
+	//goal_vector_x = goal_x - px;
+	//goal_vector_y = goal_y - py;
 	
-	goal_angle = atan2(goal_vector_y, goal_vector_x); //pi <= goal_angle < -pi
-	if (goal_angle < 0) {
-		goal_angle = 2 * M_PI + goal_angle; //Remove sign, then add to pi
-	} else if (goal_angle == 2 * M_PI) { //New goal angle =>   >0 to 6.283
-		goal_angle = 0;
-	}
-	goal_angle = (2* M_PI) - goal_angle;
+	//goal_angle = atan2(goal_vector_y, goal_vector_x); //pi <= goal_angle < -pi
+	//if (goal_angle < 0) {
+		//goal_angle = 2 * M_PI + goal_angle; //Remove sign, then add to pi
+	//} else if (goal_angle == 2 * M_PI) { //New goal angle =>   >0 to 6.283
+		//goal_angle = 0;
+	//}
+	//goal_angle = (2* M_PI) - goal_angle;
 
-	//rounding goal_angle to three decimal places
-	goal_angle = ((int)(goal_angle * 1000 + .5) / 1000.0);
+	////rounding goal_angle to three decimal places
+	//goal_angle = ((int)(goal_angle * 1000 + .5) / 1000.0);
 	
-	return goal_angle;
+	//return goal_angle;
 }
 
 void Doctor::StageLaser_callback(sensor_msgs::LaserScan msg)
@@ -180,16 +179,16 @@ void Doctor::residentStatusCallback(se306_project1::ResidentMsg msg)
 
 int Doctor::run(int argc, char **argv)
 {
-	//Initial pose. This is the same as the pose used in the world file.
-	px = checkpoints[cc-1][0];
-	py = checkpoints[cc-1][1];
-	cur_angle = 0;
+	////Initial pose. This is the same as the pose used in the world file.
+	//px = checkpoints[cc-1][0];
+	//py = checkpoints[cc-1][1];
+	//cur_angle = 0;
 
-	//Set goal pose 
-	goal_x = checkpoints[cc][0];
-	goal_y = checkpoints[cc][1];
+	////Set goal pose 
+	//goal_x = checkpoints[cc][0];
+	//goal_y = checkpoints[cc][1];
 
-	goal_angle = calc_goal_angle(goal_x, goal_y, cur_angle, px, py);
+	//goal_angle = calc_goal_angle(goal_x, goal_y, cur_angle, px, py);
 
 	//Initial velocities
 	linear_x = 0;
