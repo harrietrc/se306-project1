@@ -20,10 +20,6 @@ int main(int argc, char** argv) {
 
 	agentType = AgentConst::DOCTOR;
 	nodeList[agentType] = nodeList[agentType] + agentFactory.createAgent(agentType);
-	std::cout << "now we have " << nodeList[agentType] << " doctor(s)\n";
-
-	agentType = AgentConst::DOCTOR;
-	nodeList[agentType] = nodeList[agentType] + agentFactory.createAgent(agentType);
 
 	std::cout << "now we have " << nodeList[agentType] << "doctor(s)\n";	
 	
