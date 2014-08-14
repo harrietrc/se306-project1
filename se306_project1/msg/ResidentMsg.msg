@@ -1,2 +1,2 @@
-float64 health
-float64 hunger
+int64 health
+int64 hunger

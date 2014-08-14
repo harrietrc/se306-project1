@@ -1,7 +1,11 @@
 #include "Agent.h"
+#include "std_msgs/String.h"
 
 class Assistant : public Agent
 {
+	private:
+		bool cooking;
+
 	public:
 		void StageOdom_callback(nav_msgs::Odometry msg);
 		void StageLaser_callback(sensor_msgs::LaserScan msg);
