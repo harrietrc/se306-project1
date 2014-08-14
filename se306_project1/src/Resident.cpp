@@ -30,17 +30,15 @@ double px;
 double py;
 double cur_angle;
 
-int cc = 1; //current_checkpoint = 0;
-
-std::pair<double, double> ret;	
-
 		int checkpoints[3][2] = {  
 				{47, 43},
-				{47, 18},
-				{22, 18}
+				{47, 20},
+				{34, 20}
 				};
 
 
+int cc = 1; //current_checkpoint = 0;
+				
 std::pair<double, double> move(double goal_x, double goal_y, double cur_angle, double goal_angle, double px, double py);
 double calc_goal_angle(double goal_x, double goal_y, double cur_angle, double px, double py); 
 void StageOdom_callback(nav_msgs::Odometry msg); 
@@ -56,6 +54,32 @@ typedef std::string CheckpointName; // Key
 typedef std::pair<int, int> Checkpoint; // Value
 typedef std::map<CheckpointName, Checkpoint> CheckpointMap;
 CheckpointMap c;
+
+std::pair<double, double> Resident::movePath(int path[][2], int pathLength) {
+	std::pair<double, double> ret;	
+	ret = std::make_pair(0, 0); //initialize pair. Used to get return.
+	//When goal reached
+	
+	if ((px <= goal_x + 0.5) && (px >= goal_x - 0.5) && (py <= goal_y + 0.5) && (py >= goal_y - 0.5)) {
+		isSet = false;
+		if (cc == pathLength) { //If at last checkpoint
+			linear_x = 0;
+		} else {
+			cc++; //Increment checkpoint index
+		}
+			goal_x = path[cc][0];
+			goal_y = path[cc][1];
+	
+		//Account for delay by subtracting delay values from current pose and orientation
+		goal_angle = calc_goal_angle(goal_x, goal_y, cur_angle - M_PI/20, px - 0.1, py - 0.1); 
+		//goal_angle = calc_goal_angle(goal_x, goal_y, cur_angle, px, py);
+
+	} else { //Do this until goal is reached
+		ret = move(goal_x, goal_y, cur_angle, goal_angle, px, py);	
+	}
+		return ret;
+}
+
 
 /*
 	Associates checkpoint names with checkpoint co-ordinates
@@ -103,8 +127,8 @@ void makeGraph() {
 	
 void Resident::StageOdom_callback(nav_msgs::Odometry msg)
 {
-	ret = std::make_pair(0, 0); //initialize pair. Used to get return.
-
+	/*ret = std::make_pair(0, 0); //initialize pair. Used to get return.
+	*/
 	//Converting from quaternion to radians
 	cur_angle = acos(msg.pose.pose.orientation.w) * 2;
 	if (msg.pose.pose.orientation.z > 0) {
@@ -117,26 +141,7 @@ void Resident::StageOdom_callback(nav_msgs::Odometry msg)
 	//Update the current position
 	px = msg.pose.pose.position.x + checkpoints[0][0];
 	py = msg.pose.pose.position.y + checkpoints[0][1];
-	
-	//When goal reached
-	if ((px <= goal_x + 0.5) && (px >= goal_x - 0.5) && (py <= goal_y + 0.5) && (py >= goal_y - 0.5)) {
-	isSet = false;
-		if (cc == 2) { //If at last checkpoint
-			linear_x = 0;
-		} else {
-			cc++; //Increment checkpoint index
-		}
-		goal_x = checkpoints[cc][0];
-		goal_y = checkpoints[cc][1];
-	
-		//Account for delay by subtracting delay values from current pose and orientation
-		goal_angle = calc_goal_angle(goal_x, goal_y, cur_angle - M_PI/20, px - 0.1, py - 0.1);
 
-	} else { //Do this until goal is reached
-		ret = move(goal_x, goal_y, cur_angle, goal_angle, px, py);	
-		linear_x = ret.first;
-		angular_z = ret.second;
-	}
 }
 
 void Resident::StageLaser_callback(sensor_msgs::LaserScan msg)
@@ -174,24 +179,24 @@ std::pair<double, double> Resident::move(double goal_x, double goal_y, double cu
 	moveSpeed = ((int)(moveSpeed * 1000 + .5) / 1000.0);
 
 	//When the robot is facing the correct direction, start moving
-	double threshold = cur_angle-moveSpeed/10;
-	threshold = ((int)(threshold * 1000 + .5) / 1000.0);
-	/*ROS_INFO("##################");
+	double threshold = cur_angle;//-moveSpeed/10;
+	//threshold = ((int)(threshold * 1000 + .5) / 1000.0);
+	ROS_INFO("##################");
 	ROS_INFO("goal_y: %f",goal_y);
 	ROS_INFO("py: %f",py);
 	ROS_INFO("goal_x: %f",goal_x);
 	ROS_INFO("px: %f",px);
-	ROS_INFO("angle Vel1: %f", _ret.second);
-	ROS_INFO("threshold: %f",threshold);
-	ROS_INFO("goal_angle: %f",goal_angle);
-	ROS_INFO("cur_angle: %f",cur_angle);
+//	ROS_INFO("angle Vel1: %f", _ret.second);
+//	ROS_INFO("threshold: %f",threshold);
+//	ROS_INFO("goal_angle: %f",goal_angle);
+//	ROS_INFO("cur_angle: %f",cur_angle);
 	ROS_INFO("##################");
-*/
+
 	if ((goal_angle  == threshold) || isSet) {
 		_ret.first = 5; //linear_x
 		_ret.second = 0; //angular_z
 		isSet = true;
-	} else if ((goal_angle <= cur_angle + 0.3) && (goal_angle >= cur_angle - 0.3) )  {
+	} else if ((goal_angle <= cur_angle + 0.6) && (goal_angle >= cur_angle - 0.6) )  {
 		_ret.first = 0; //linear_x
 		_ret.second = fabs(goal_angle - cur_angle); //angular_z
 		if (goal_angle == cur_angle) {
@@ -255,9 +260,6 @@ void Resident::randomCheckpointCallback(const ros::TimerEvent&) {
 int Resident::run(int argc, char **argv)
 {
 
-	 //initialize robot parameters
-	isSet = false;
-	cc = 1; //current_checkpoint = 0;
 
 	//Initial pose. This is the same as the pose used in the world file.
 	px = checkpoints[cc-1][0];
@@ -333,6 +335,13 @@ int Resident::run(int argc, char **argv)
 				hunger -= hungerReductionRate;
 				health -= healthReductionRate;
 		}
+			std::pair<double, double> velocityValues;	
+			velocityValues = std::make_pair(0, 0);
+		if (hunger < 90) {
+			velocityValues = movePath(checkpoints, 	3);
+			linear_x = velocityValues.first;
+			angular_z = velocityValues.second;
+		}
 		
 		//std_msgs::String msg;
 		//std::stringstream ss;
@@ -344,6 +353,8 @@ int Resident::run(int argc, char **argv)
 		se306_project1::ResidentMsg msg; 
 		msg.health = health;
 		msg.hunger = hunger;
+		msg.x = px; 
+		msg.y = py;
 
 		resident_pub.publish(msg);
 		

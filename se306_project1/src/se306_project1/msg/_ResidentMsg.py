@@ -6,15 +6,17 @@ import struct
 
 
 class ResidentMsg(genpy.Message):
-  _md5sum = "057261b685fadae268df84f841e72762"
+  _md5sum = "3263770d9697e608dc5912cf7c7dbf41"
   _type = "se306_project1/ResidentMsg"
   _has_header = False #flag to mark the presence of a Header object
-  _full_text = """int64 health
+  _full_text = """float64 x
+float64 y
+int64 health
 int64 hunger
 
 """
-  __slots__ = ['health','hunger']
-  _slot_types = ['int64','int64']
+  __slots__ = ['x','y','health','hunger']
+  _slot_types = ['float64','float64','int64','int64']
 
   def __init__(self, *args, **kwds):
     """
@@ -24,7 +26,7 @@ int64 hunger
     changes.  You cannot mix in-order arguments and keyword arguments.
 
     The available fields are:
-       health,hunger
+       x,y,health,hunger
 
     :param args: complete set of field values, in .msg order
     :param kwds: use keyword arguments corresponding to message field names
@@ -33,11 +35,17 @@ int64 hunger
     if args or kwds:
       super(ResidentMsg, self).__init__(*args, **kwds)
       #message fields cannot be None, assign default values for those that are
+      if self.x is None:
+        self.x = 0.
+      if self.y is None:
+        self.y = 0.
       if self.health is None:
         self.health = 0
       if self.hunger is None:
         self.hunger = 0
     else:
+      self.x = 0.
+      self.y = 0.
       self.health = 0
       self.hunger = 0
 
@@ -54,7 +62,7 @@ int64 hunger
     """
     try:
       _x = self
-      buff.write(_struct_2q.pack(_x.health, _x.hunger))
+      buff.write(_struct_2d2q.pack(_x.x, _x.y, _x.health, _x.hunger))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(_x))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(_x))))
 
@@ -67,8 +75,8 @@ int64 hunger
       end = 0
       _x = self
       start = end
-      end += 16
-      (_x.health, _x.hunger,) = _struct_2q.unpack(str[start:end])
+      end += 32
+      (_x.x, _x.y, _x.health, _x.hunger,) = _struct_2d2q.unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -82,7 +90,7 @@ int64 hunger
     """
     try:
       _x = self
-      buff.write(_struct_2q.pack(_x.health, _x.hunger))
+      buff.write(_struct_2d2q.pack(_x.x, _x.y, _x.health, _x.hunger))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(_x))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(_x))))
 
@@ -96,11 +104,11 @@ int64 hunger
       end = 0
       _x = self
       start = end
-      end += 16
-      (_x.health, _x.hunger,) = _struct_2q.unpack(str[start:end])
+      end += 32
+      (_x.x, _x.y, _x.health, _x.hunger,) = _struct_2d2q.unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
 
 _struct_I = genpy.struct_I
-_struct_2q = struct.Struct("<2q")
+_struct_2d2q = struct.Struct("<2d2q")
