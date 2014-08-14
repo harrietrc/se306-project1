@@ -24,17 +24,16 @@ double goal_x;
 double goal_y;
 double goal_angle;
 bool isSet = false;
-
 //current pose and orientation of the robot
 double px;
 double py;
 double cur_angle;
-
 		int checkpoints[3][2] = {  
-				{47, 43},
-				{47, 20},
-				{34, 20}
-				};
+			{47, 43},
+			{47, 20},
+			{34, 20}
+		};
+
 
 
 int cc = 1; //current_checkpoint = 0;
@@ -67,9 +66,14 @@ std::pair<double, double> Resident::movePath(int path[][2], int pathLength) {
 		} else {
 			cc++; //Increment checkpoint index
 		}
+		if (cc == pathLength) {
+			linear_x = 0;
+			goal_x = path[cc-1][0];
+			goal_y = path[cc-1][1];
+		} else {
 			goal_x = path[cc][0];
 			goal_y = path[cc][1];
-	
+		}
 		//Account for delay by subtracting delay values from current pose and orientation
 		goal_angle = calc_goal_angle(goal_x, goal_y, cur_angle - M_PI/20, px - 0.1, py - 0.1); 
 		//goal_angle = calc_goal_angle(goal_x, goal_y, cur_angle, px, py);
@@ -181,7 +185,7 @@ std::pair<double, double> Resident::move(double goal_x, double goal_y, double cu
 	//When the robot is facing the correct direction, start moving
 	double threshold = cur_angle;//-moveSpeed/10;
 	//threshold = ((int)(threshold * 1000 + .5) / 1000.0);
-	ROS_INFO("##################");
+/*	ROS_INFO("##################");
 	ROS_INFO("goal_y: %f",goal_y);
 	ROS_INFO("py: %f",py);
 	ROS_INFO("goal_x: %f",goal_x);
@@ -191,7 +195,7 @@ std::pair<double, double> Resident::move(double goal_x, double goal_y, double cu
 //	ROS_INFO("goal_angle: %f",goal_angle);
 //	ROS_INFO("cur_angle: %f",cur_angle);
 	ROS_INFO("##################");
-
+*/
 	if ((goal_angle  == threshold) || isSet) {
 		_ret.first = 5; //linear_x
 		_ret.second = 0; //angular_z

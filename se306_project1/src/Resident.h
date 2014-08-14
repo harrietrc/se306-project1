@@ -26,12 +26,7 @@ class Resident : public Agent
 
 		std::pair<double,bool> goal_pair;
 		std::pair<double, double> ret;	
-
-		int checkpoints[3][2] = {  
-				{47, 43},
-				{47, 20},
-				{34, 20}
-				};
+			
 
 
 	public:
