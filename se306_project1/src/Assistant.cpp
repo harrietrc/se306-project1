@@ -49,6 +49,8 @@ void Assistant::StageOdom_callback(nav_msgs::Odometry msg)
 	//Update the current position
 	px = msg.pose.pose.position.x + checkpoints[0][0];
 	py = msg.pose.pose.position.y + checkpoints[0][1];
+
+	
 }
 
 std::pair<double, double> Assistant::movePath(int path[][2], int pathLength) {
@@ -99,6 +101,7 @@ std::pair<double, double> Assistant::move(double goal_x, double goal_y, double c
 	double threshold = cur_angle;//cur_angle-moveSpeed/10;
 	//threshold = ((int)(threshold * 1000 + .5) / 1000.0);
 //threshold = ((int)(threshold * 1000 + .5) / 1000.0);
+
 	if ((goal_angle  == threshold) || isSet) {
 		_ret.first = 5; //linear_x
 		_ret.second = 0; //angular_z
@@ -197,6 +200,7 @@ void Assistant::residentStatusCallback(se306_project1::ResidentMsg msg)
 	} else if (msg.hunger >= 60)
 	{
 		cooking = false;
+		
 	}
 	
 	if (cooking || moveToPoint) {
@@ -312,6 +316,10 @@ int Assistant::run(int argc, char **argv)
 			if (i == 30)
 			{
 				assistant_pub.publish(msg);
+<<<<<<< HEAD
+=======
+				//ROS_INFO("Food is ready");
+>>>>>>> 6f4325dfcc39ce8764a381daccd2cd95122ba38d
 				i = 0;
 			}
 		}

@@ -17,7 +17,6 @@ class Doctor : public Visitor
 		double goal_angle;
 
 		bool running;
-		bool isSet;
 
 		//current pose and orientation of the robot
 		double cur_angle;
