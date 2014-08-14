@@ -54,6 +54,8 @@ void Assistant::StageOdom_callback(nav_msgs::Odometry msg)
 	//Update the current position
 	px = msg.pose.pose.position.x + checkpoints[0][0];
 	py = msg.pose.pose.position.y + checkpoints[0][1];
+
+	
 }
 
 /**
@@ -120,17 +122,6 @@ std::pair<double, double> Assistant::move(double goal_x, double goal_y, double c
 	//threshold = ((int)(threshold * 1000 + .5) / 1000.0);
 //threshold = ((int)(threshold * 1000 + .5) / 1000.0);
 
-/*	ROS_INFO("##################");
-	ROS_INFO("goal_y: %f",goal_y);
-	ROS_INFO("py: %f",py);
-	ROS_INFO("goal_x: %f",goal_x);
-	ROS_INFO("px: %f",px);
-//	ROS_INFO("angle Vel1: %f", _ret.second);
-//	ROS_INFO("threshold: %f",threshold);
-	ROS_INFO("goal_angle: %f",goal_angle);
-	ROS_INFO("cur_angle: %f",cur_angle);
-	ROS_INFO("##################");
-	*/
 	if ((goal_angle  == threshold) || isSet) {
 		_ret.first = 5; //linear_x
 		_ret.second = 0; //angular_z
@@ -249,6 +240,7 @@ void Assistant::residentStatusCallback(se306_project1::ResidentMsg msg)
 	} else if (msg.hunger >= 60)
 	{
 		cooking = false;
+		
 	}
 	
 	if (cooking || moveToPoint) {
@@ -276,7 +268,7 @@ void Assistant::medicationCallback(const ros::TimerEvent&) {
 
 	// Behaviour should only occur if the simulation time is between the specified start and end times.
 	if (((tnow % dlen) > startTime) && ((tnow % dlen) < endTime)) { // Note that this will run at the end of the duration specified for the timer.
-		ROS_INFO("providing medication"); 
+		//#DEBUG ROS_INFO("providing medication");
 		std::ostringstream s;
 		s << tnow; 
 		//ROS_INFO(s.str().c_str()); // Just shows elapsed seconds
@@ -367,7 +359,10 @@ int Assistant::run(int argc, char **argv)
 			if (i == 30)
 			{
 				assistant_pub.publish(msg);
+<<<<<<< HEAD
+=======
 				//ROS_INFO("Food is ready");
+>>>>>>> 6f4325dfcc39ce8764a381daccd2cd95122ba38d
 				i = 0;
 			}
 		}
