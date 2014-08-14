@@ -133,7 +133,7 @@ std::pair<double, double> Resident::move(double goal_x, double goal_y, double cu
 	return _ret; 
 }
 
-double calc_goal_angle(double goal_x, double goal_y, double cur_angle, double px, double py) 
+double Resident::calc_goal_angle(double goal_x, double goal_y, double cur_angle, double px, double py) 
 {
 
 	//Initial and goal vectors used to calculate goal theta

@@ -10,6 +10,8 @@ class Resident : public Agent
 		//goal pose and orientation
 		double goal_x;
 		double goal_y;
+		double px;
+		double py;
 		double goal_angle;
 
 		bool running;
@@ -38,7 +40,7 @@ class Resident : public Agent
 		void StageLaser_callback(sensor_msgs::LaserScan msg);
 		int run(int argc, char **argv);
 		void doctor_callback(se306_project1::DoctorMsg msg);
-		std::pair <double,bool> calc_goal(double goal_x, double goal_y, double cur_angle, double px, double py);
+		double calc_goal_angle(double goal_x, double goal_y, double cur_angle, double px, double py);
 		std::pair<double, double> move(double goal_x, double goal_y, double cur_angle, double goal_angle, double px, double py);
 		void randomCheckpointCallback(const ros::TimerEvent&);
 
