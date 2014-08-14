@@ -158,11 +158,11 @@ void Resident::doctor_callback(se306_project1::DoctorMsg msg)
 
 void Resident::assistant_callback(se306_project1::AssistantMsg msg)
 {
-	if (msg.cooking == true)
-	{
-		hunger = 100;
-		ROS_INFO("Resident eating food, hunger = 100");
-	}
+	//if (msg.cooking == true)
+	//{
+		//hunger = 100;
+		//ROS_INFO("Resident eating food, hunger = 100");
+	//}
 }
 
 //Keeps robot moving by changing linear_x and angular_z
@@ -175,7 +175,7 @@ std::pair<double, double> Resident::move(double goal_x, double goal_y, double cu
 	//When the robot is facing the correct direction, start moving
 	double threshold = cur_angle-moveSpeed/10;
 	threshold = ((int)(threshold * 1000 + .5) / 1000.0);
-	ROS_INFO("##################");
+	/*ROS_INFO("##################");
 	ROS_INFO("goal_y: %f",goal_y);
 	ROS_INFO("py: %f",py);
 	ROS_INFO("goal_x: %f",goal_x);
@@ -185,7 +185,7 @@ std::pair<double, double> Resident::move(double goal_x, double goal_y, double cu
 	ROS_INFO("goal_angle: %f",goal_angle);
 	ROS_INFO("cur_angle: %f",cur_angle);
 	ROS_INFO("##################");
-
+*/
 	if ((goal_angle  == threshold) || isSet) {
 		_ret.first = 5; //linear_x
 		_ret.second = 0; //angular_z
