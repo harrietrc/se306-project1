@@ -28,7 +28,7 @@ double cur_angle;
 
 int cc = 1; //current_checkpoint = 0;
 
-std::pair<double, double> ret;	
+
 
 
 std::pair<double, double> move(double goal_x, double goal_y, double cur_angle, double goal_angle, double px, double py);
@@ -37,8 +37,10 @@ void StageOdom_callback(nav_msgs::Odometry msg);
 
 void Assistant::StageOdom_callback(nav_msgs::Odometry msg)
 {
+	/*
 	ret = std::make_pair(0, 0); //initialize pair. Used to get return.
-
+	*/
+	
 	//Converting from quaternion to radians
 	cur_angle = acos(msg.pose.pose.orientation.w) * 2;
 	if (msg.pose.pose.orientation.z > 0) {
@@ -48,10 +50,12 @@ void Assistant::StageOdom_callback(nav_msgs::Odometry msg)
 	//Rounding to 3 decimal places
 	cur_angle = ((int)(cur_angle * 1000 + .5) / 1000.0);
 	
+	
 	//Update the current position
 	px = msg.pose.pose.position.x + checkpoints[0][0];
 	py = msg.pose.pose.position.y + checkpoints[0][1];
 	
+	/*
 	//When goal reached
 	if ((px <= goal_x + 0.5) && (px >= goal_x - 0.5) && (py <= goal_y + 0.5) && (py >= goal_y - 0.5)) {
 	isSet = false;
@@ -71,8 +75,8 @@ void Assistant::StageOdom_callback(nav_msgs::Odometry msg)
 		linear_x = ret.first;
 		angular_z = ret.second;
 	}
+	*/
 }
-
 
 //Keeps robot moving by changing linear_x and angular_z
 std::pair<double, double> Assistant::move(double goal_x, double goal_y, double cur_angle, double goal_angle, double px, double py) 
@@ -110,6 +114,35 @@ std::pair<double, double> Assistant::move(double goal_x, double goal_y, double c
 	}
 
 	return _ret; 
+}
+
+
+std::pair<double, double> Assistant::movePath(int path[][2], int pathLength) {
+		
+	std::pair<double, double> ret;	
+	ret = std::make_pair(0, 0); //initialize pair. Used to get return.
+	
+	//When goal reached
+	if ((px <= goal_x + 0.5) && (px >= goal_x - 0.5) && (py <= goal_y + 0.5) && (py >= goal_y - 0.5)) {
+	isSet = false;
+		if (cc == pathLength) { //If at last checkpoint
+			linear_x = 0;
+		} else {
+			cc++; //Increment checkpoint index
+		}
+		goal_x = path[cc][0];
+		goal_y = path[cc][1];
+	
+		//Account for delay by subtracting delay values from current pose and orientation
+		goal_angle = calc_goal_angle(goal_x, goal_y, cur_angle - M_PI/20, px - 0.1, py - 0.1);
+
+	} else { //Do this until goal is reached
+		ret = move(goal_x, goal_y, cur_angle, goal_angle, px, py);	
+		//linear_x = ret.first;
+		//angular_z = ret.second;
+	}
+	
+	return ret;
 }
 
 double Assistant::calc_goal_angle(double goal_x, double goal_y, double cur_angle, double px, double py) 
@@ -164,6 +197,7 @@ void Assistant::residentStatusCallback(se306_project1::ResidentMsg msg)
 	//ROS_INFO("Resident hunger is: %d", msg.hunger);
 	if(msg.hunger < 60 && cooking ==false)
 	{
+		
 		cooking = true;
 		ROS_INFO("Resident is hungry, hunger = %d", msg.hunger);
 		ROS_INFO("Assistant is cooking");
