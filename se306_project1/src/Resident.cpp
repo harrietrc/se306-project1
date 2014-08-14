@@ -12,8 +12,81 @@
 #include <cmath>
 #include <stdlib.h>
 #include "time_conversion.hpp"
-#include "Resident.h"
+#include "Resident.h"	
 
+//velocity of the robot
+double linear_x;
+double angular_z;
+
+//goal pose and orientation
+double goal_x;
+double goal_y;
+double goal_angle;
+bool isSet = false;
+
+//current pose and orientation of the robot
+double px;
+double py;
+double cur_angle;
+
+int cc = 1; //current_checkpoint = 0;
+
+std::pair<double, double> ret;	
+
+int checkpoints[5][2] = {  
+{30, 25}, 
+{35, 35}, 
+{12, 42},
+{30, 42},
+{30, 25}  
+};
+
+std::pair<double, double> move(double goal_x, double goal_y, double cur_angle, double goal_angle, double px, double py);
+double calc_goal_angle(double goal_x, double goal_y, double cur_angle, double px, double py); 
+void StageOdom_callback(nav_msgs::Odometry msg); 
+
+// Change these names (cp0, cp1, etc.) to be more descriptive - e.g. kitchen, bedroom, etc.
+std::string nameArr[6] = {
+"cp0","cp1", "cp2", "cp3","cp4","cp5"
+};
+std::vector<std::string> checkpointNames(&nameArr[0], &nameArr[0]+2);
+
+// Build a hashmap that corresponds names with checkpoint co-ordinates.
+typedef std::string CheckpointName; // Key
+typedef std::pair<int, int> Checkpoint; // Value
+typedef std::map<CheckpointName, Checkpoint> CheckpointMap;
+CheckpointMap c;
+
+/*
+	Associates checkpoint names with checkpoint co-ordinates
+*/
+void checkpointMap() {
+	// Number of checkpoints
+	int checkpointNum = checkpointNames.size();
+
+	// Convert array to pairs
+	std::vector<std::pair<int,int> > vec;
+	for (int i=0; i<checkpointNum; i++) {
+		std::pair<int, int> p = std::make_pair(checkpoints[i][0],checkpoints[i][1]);
+		vec.push_back(p);
+	}
+
+	// Add checkpoint name and checkpoint co-ordinates to the map
+	for (int i=0; i<checkpointNum; i++) {
+		c.insert(std::make_pair(CheckpointName(checkpointNames[i]), Checkpoint(vec[i])));
+	}
+}
+
+
+/*
+	Creates graph of checkpoints.
+*/
+void makeGraph() {
+
+	
+
+}
+	
 void Resident::StageOdom_callback(nav_msgs::Odometry msg)
 {
 	ret = std::make_pair(0, 0); //initialize pair. Used to get return.
