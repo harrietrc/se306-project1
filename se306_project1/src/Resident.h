@@ -27,13 +27,12 @@ class Resident : public Agent
 		std::pair<double,bool> goal_pair;
 		std::pair<double, double> ret;	
 
-		int checkpoints[5][2] = {  
-				{30, 25},
-				{35, 35},
-				{12, 42},
-				{30, 42},
-				{30, 25}
+		int checkpoints[3][2] = {  
+				{47, 43},
+				{47, 18},
+				{22, 18}
 				};
+
 
 	public:
 		void StageOdom_callback(nav_msgs::Odometry msg);

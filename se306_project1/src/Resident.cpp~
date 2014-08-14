@@ -5,6 +5,7 @@
 #include <sensor_msgs/LaserScan.h>
 #include "se306_project1/ResidentMsg.h"
 #include "se306_project1/DoctorMsg.h"
+#include "se306_project1/AssistantMsg.h"
 
 #include <sstream>
 #include "math.h"
@@ -12,15 +13,97 @@
 #include <stdlib.h>
 #include "time_conversion.hpp"
 #include "Resident.h"	
+#include "boost/graph/adjacency_list.hpp"
+
+//velocity of the robot
+double linear_x;
+double angular_z;
+
+//goal pose and orientation
+double goal_x;
+double goal_y;
+double goal_angle;
+bool isSet = false;
+
+//current pose and orientation of the robot
+double px;
+double py;
+double cur_angle;
+
+int cc = 1; //current_checkpoint = 0;
+
+std::pair<double, double> ret;	
+
+		int checkpoints[3][2] = {  
+				{47, 43},
+				{47, 18},
+				{22, 18}
+				};
+
+
+std::pair<double, double> move(double goal_x, double goal_y, double cur_angle, double goal_angle, double px, double py);
+double calc_goal_angle(double goal_x, double goal_y, double cur_angle, double px, double py); 
+void StageOdom_callback(nav_msgs::Odometry msg); 
+
+// Change these names (cp0, cp1, etc.) to be more descriptive - e.g. kitchen, bedroom, etc.
+std::string nameArr[6] = {
+"cp0","cp1", "cp2", "cp3","cp4","cp5"
+};
+std::vector<std::string> checkpointNames(&nameArr[0], &nameArr[0]+2);
+
+// Build a hashmap that corresponds names with checkpoint co-ordinates.
+typedef std::string CheckpointName; // Key
+typedef std::pair<int, int> Checkpoint; // Value
+typedef std::map<CheckpointName, Checkpoint> CheckpointMap;
+CheckpointMap c;
+
+/*
+	Associates checkpoint names with checkpoint co-ordinates
+*/
+void checkpointMap() {
+	// Number of checkpoints
+	int checkpointNum = checkpointNames.size();
+
+	// Convert array to pairs
+	std::vector<std::pair<int,int> > vec;
+	for (int i=0; i<checkpointNum; i++) {
+		std::pair<int, int> p = std::make_pair(checkpoints[i][0],checkpoints[i][1]);
+		vec.push_back(p);
+	}
+
+	// Add checkpoint name and checkpoint co-ordinates to the map
+	for (int i=0; i<checkpointNum; i++) {
+		c.insert(std::make_pair(CheckpointName(checkpointNames[i]), Checkpoint(vec[i])));
+	}
+}
+
+struct VertexProperties {
+    std::string cName;
+};
+
+/*
+	Creates graph of checkpoints. Having to add the boost namespace drags the code out *a lot*, but it's nice to know where
+	everything comes form. Use 'using namespace boost' if it bothers you. The idea is to have the names as a graph, then
+	look them up in the hashmap to get the corresponding co-ordinates.
+*/
+void makeGraph() {
+
+	typedef boost::adjacency_list <boost::listS, boost::listS, boost::undirectedS, VertexProperties> Graph;
+	int cNum = checkpointNames.size(); // field for the number of checkpoints might be wise in the future. Lots of duplication.
+	Graph cGraph(cNum); 
+
+	boost::property_map<Graph, std::string VertexProperties::*>::type 
+    cName = get(&VertexProperties::cName, cGraph);
+
+    // // Some way to automate this would be good with higher numbers of checkpoints.
+    // boost::add_edge(boost::vertex("cp0", cGraph), boost::vertex("cp1",cGraph), cGraph);
+    // boost::add_edge(boost::vertex("cp1", cGraph), boost::vertex("cp2",cGraph), cGraph);
+    // // etc. (adding more edges)
+}
 	
 void Resident::StageOdom_callback(nav_msgs::Odometry msg)
 {
-	if (running ) {
-	return;
-	}
-	running = true;
 	ret = std::make_pair(0, 0); //initialize pair. Used to get return.
-	//double val = 0;
 
 	//Converting from quaternion to radians
 	cur_angle = acos(msg.pose.pose.orientation.w) * 2;
@@ -35,45 +118,25 @@ void Resident::StageOdom_callback(nav_msgs::Odometry msg)
 	px = msg.pose.pose.position.x + checkpoints[0][0];
 	py = msg.pose.pose.position.y + checkpoints[0][1];
 	
-
 	//When goal reached
 	if ((px <= goal_x + 0.5) && (px >= goal_x - 0.5) && (py <= goal_y + 0.5) && (py >= goal_y - 0.5)) {
 	isSet = false;
-	if (cc == 4) { //If at last checkpoint
-		linear_x = 0;
-		
-	} else {
-		cc++; //Increment checkpoint index
-	}
-	goal_x = checkpoints[cc][0];
-	ROS_INFO("GOAL_X %f",goal_x);
-	goal_y = checkpoints[cc][1];
+		if (cc == 2) { //If at last checkpoint
+			linear_x = 0;
+		} else {
+			cc++; //Increment checkpoint index
+		}
+		goal_x = checkpoints[cc][0];
+		goal_y = checkpoints[cc][1];
+	
+		//Account for delay by subtracting delay values from current pose and orientation
+		goal_angle = calc_goal_angle(goal_x, goal_y, cur_angle - M_PI/20, px - 0.1, py - 0.1);
 
-	if (is_called) {
-		//Adjusts for delay between publish and subscribe	
-		//val = goal_angle;
-		goal_pair = calc_goal(goal_x, goal_y, cur_angle - M_PI/20, px - 0.1, py - 0.1);
-		goal_angle = goal_pair.first;
-
-		is_called = false;
-	}
-
-	if (goal_angle >= 6.283) {
-		goal_angle = goal_angle - 6.283;
-	}
-	//ret = move(goal_x, goal_y, cur_angle, goal_angle, px, py);
-	//linear_x = ret.first;
-	//	angular_z = ret.second;	
 	} else { //Do this until goal is reached
-		
-		is_called = true;
-		//val = 0;
 		ret = move(goal_x, goal_y, cur_angle, goal_angle, px, py);	
 		linear_x = ret.first;
 		angular_z = ret.second;
 	}
-
-	running = false;
 }
 
 void Resident::StageLaser_callback(sensor_msgs::LaserScan msg)
@@ -87,19 +150,29 @@ void Resident::StageLaser_callback(sensor_msgs::LaserScan msg)
 void Resident::doctor_callback(se306_project1::DoctorMsg msg)
 {
 	if (msg.healResident == true)
+	{
 	 	health = 100;
+		ROS_INFO("Resident healed by Doctor, health = 100");
+	}
+}
+
+void Resident::assistant_callback(se306_project1::AssistantMsg msg)
+{
+	if (msg.cooking == true)
+	{
+		hunger = 100;
+		ROS_INFO("Resident eating food, hunger = 100");
+	}
 }
 
 //Keeps robot moving by changing linear_x and angular_z
 std::pair<double, double> Resident::move(double goal_x, double goal_y, double cur_angle, double goal_angle, double px, double py) 
 {	
- //contains linear_x and angular_x. Defines how robot movees between goals.	
-	
 	std::pair<double,double>_ret = std::make_pair(0, 0); //initialize pair. Used to get return.
 	double moveSpeed = M_PI/2;
 	moveSpeed = ((int)(moveSpeed * 1000 + .5) / 1000.0);
-	//When the robot is facing the correct direction, start moving
 
+	//When the robot is facing the correct direction, start moving
 	double threshold = cur_angle-moveSpeed/10;
 	threshold = ((int)(threshold * 1000 + .5) / 1000.0);
 
@@ -122,45 +195,29 @@ std::pair<double, double> Resident::move(double goal_x, double goal_y, double cu
 
 
 	if ((px-0.1 <= goal_x + 0.5) && (px-0.1 >= goal_x - 0.5) && (py-0.1 <= goal_y + 0.5) && (py-0.1 >= goal_y - 0.5)) {	
-			_ret.first = 0; //linear_x
+			_ret.first = 0; 
 			isSet = false;
-			// ROS_INFO("are you in yet? the sequel");
-		
 	}
 
 	return _ret; 
 }
 
-std::pair <double,bool> Resident::calc_goal(double goal_x, double goal_y, double cur_angle, double px, double py) 
-{
 
-	std::pair <double,bool> _ret (0, false);
+double Resident::calc_goal_angle(double goal_x, double goal_y, double cur_angle, double px, double py) 
+{
 
 	//Initial and goal vectors used to calculate goal theta
 	double init_vector_x;
 	double init_vector_y;
 	double goal_vector_x;
 	double goal_vector_y;
-	//double dot;
 	double goal_angle;
-	double cross = 0;
-	bool is_clockwise = false;
 	
-
 	//Finding the vector that the robot is facing and the goal vector
 	init_vector_x = cos(cur_angle);
 	init_vector_y = sin(cur_angle);
 	goal_vector_x = goal_x - px;
 	goal_vector_y = goal_y - py;
-
-	cross = (init_vector_x * goal_vector_y) - (goal_vector_x * init_vector_y);
-	
-	if (cross < 0) {
-		is_clockwise = true;
-	}
-	else{
-		is_clockwise = false;
-	}
 	
 	goal_angle = atan2(goal_vector_y, goal_vector_x); //pi <= goal_angle < -pi
 	if (goal_angle < 0) {
@@ -172,11 +229,8 @@ std::pair <double,bool> Resident::calc_goal(double goal_x, double goal_y, double
 
 	//rounding goal_angle to three decimal places
 	goal_angle = ((int)(goal_angle * 1000 + .5) / 1000.0);
-
-	_ret.first = goal_angle;
-	_ret.second = is_clockwise;
-
-	return _ret;
+	
+	return goal_angle;
 }
 
 /*
@@ -184,37 +238,30 @@ std::pair <double,bool> Resident::calc_goal(double goal_x, double goal_y, double
 	more complex and realistic model later.
 */
 void Resident::randomCheckpointCallback(const ros::TimerEvent&) {
-	ROS_INFO("hello");
+	//ROS_INFO("hello");
 }
 
 int Resident::run(int argc, char **argv)
 {
-	//initialize robot parameters
-	running = false;
-	isSet = false;
 
+	 //initialize robot parameters
+	isSet = false;
 	cc = 1; //current_checkpoint = 0;
 
-	is_called = true; 
-
-	
-	goal_pair = std::make_pair(0, false);
-	
-	//Initial pose. This is same as the pose that you used in the world file to set	the robot pose.
+	//Initial pose. This is the same as the pose used in the world file.
 	px = checkpoints[cc-1][0];
 	py = checkpoints[cc-1][1];
 	cur_angle = 0;
-	
-	//Goal 
+
+	//Set goal pose 
 	goal_x = checkpoints[cc][0];
 	goal_y = checkpoints[cc][1];
 
-	goal_pair = calc_goal(goal_x, goal_y, cur_angle, px, py);
-	goal_angle = goal_pair.first;
-	
-	//Initial velocity
+	goal_angle = calc_goal_angle(goal_x, goal_y, cur_angle, px, py);
+
+	//Initial velocities
 	linear_x = 0;
-	angular_z = 0.001;
+	angular_z = 0;
 	
 	//Align local system to global coordinates
 
@@ -229,18 +276,20 @@ int Resident::run(int argc, char **argv)
 
 	//advertise() function will tell ROS that you want to publish on a given topic_
 	//to stage
-	ros::Publisher RobotNode_stage_pub = n.advertise<geometry_msgs::Twist>("robot_0/cmd_vel",1000); 
+	ros::Publisher RobotNode_stage_pub = n.advertise<geometry_msgs::Twist>("robot_1/cmd_vel",1000); 
 
 	//custom message/topic publisher "resident/state" for now
 	//ros::Publisher Resident_pub = n.advertise<std_msgs::String>("residentStatus",1000); 
 	ros::Publisher resident_pub = n.advertise<se306_project1::ResidentMsg>("residentStatus",1000); 
 
 	//subscribe to listen to messages coming from stage
-	ros::Subscriber StageOdo_sub = n.subscribe<nav_msgs::Odometry>("robot_0/odom",1000, &Resident::StageOdom_callback, this);
-	ros::Subscriber StageLaser_sub = n.subscribe<sensor_msgs::LaserScan>("robot_0/base_scan",1000,&Resident::StageLaser_callback, this);
+	ros::Subscriber StageOdo_sub = n.subscribe<nav_msgs::Odometry>("robot_1/odom",1000, &Resident::StageOdom_callback, this);
+	ros::Subscriber StageLaser_sub = n.subscribe<sensor_msgs::LaserScan>("robot_1/base_scan",1000,&Resident::StageLaser_callback, this);
 
 	//subscribe to doctor messages
 	ros::Subscriber doctor_sub = n.subscribe<se306_project1::DoctorMsg>("healResident",1000, &Resident::doctor_callback, this);
+
+	ros::Subscriber assistant_sub = n.subscribe<se306_project1::AssistantMsg>("assistantStatus",1000, &Resident::assistant_callback, this);
 
 	//ros::Rate loop_rate(10);
 	ros::Rate loop_rate(1000);
