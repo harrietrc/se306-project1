@@ -6,12 +6,13 @@ import struct
 
 
 class AssistantMsg(genpy.Message):
-  _md5sum = "a8aa42e8285665e9386239c148c6bced"
+  _md5sum = "a03c5f8f468a7475ee423369456ec01c"
   _type = "se306_project1/AssistantMsg"
   _has_header = False #flag to mark the presence of a Header object
-  _full_text = """int64 cooking
+  _full_text = """int64 FoodDelivered
+
 """
-  __slots__ = ['cooking']
+  __slots__ = ['FoodDelivered']
   _slot_types = ['int64']
 
   def __init__(self, *args, **kwds):
@@ -22,7 +23,7 @@ class AssistantMsg(genpy.Message):
     changes.  You cannot mix in-order arguments and keyword arguments.
 
     The available fields are:
-       cooking
+       FoodDelivered
 
     :param args: complete set of field values, in .msg order
     :param kwds: use keyword arguments corresponding to message field names
@@ -31,10 +32,10 @@ class AssistantMsg(genpy.Message):
     if args or kwds:
       super(AssistantMsg, self).__init__(*args, **kwds)
       #message fields cannot be None, assign default values for those that are
-      if self.cooking is None:
-        self.cooking = 0
+      if self.FoodDelivered is None:
+        self.FoodDelivered = 0
     else:
-      self.cooking = 0
+      self.FoodDelivered = 0
 
   def _get_types(self):
     """
@@ -48,7 +49,7 @@ class AssistantMsg(genpy.Message):
     :param buff: buffer, ``StringIO``
     """
     try:
-      buff.write(_struct_q.pack(self.cooking))
+      buff.write(_struct_q.pack(self.FoodDelivered))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(_x))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(_x))))
 
@@ -61,7 +62,7 @@ class AssistantMsg(genpy.Message):
       end = 0
       start = end
       end += 8
-      (self.cooking,) = _struct_q.unpack(str[start:end])
+      (self.FoodDelivered,) = _struct_q.unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -74,7 +75,7 @@ class AssistantMsg(genpy.Message):
     :param numpy: numpy python module
     """
     try:
-      buff.write(_struct_q.pack(self.cooking))
+      buff.write(_struct_q.pack(self.FoodDelivered))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(_x))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(_x))))
 
@@ -88,7 +89,7 @@ class AssistantMsg(genpy.Message):
       end = 0
       start = end
       end += 8
-      (self.cooking,) = _struct_q.unpack(str[start:end])
+      (self.FoodDelivered,) = _struct_q.unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill

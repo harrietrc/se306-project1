@@ -36,8 +36,8 @@ class Assistant : public Agent
 		*	@brief Set of checkpoints that the nodes can move to in the map.
 		* 	Gives x position and y position for each co-ordinate
 		*/
-		int checkpoints[10][2] = {  
-		{30, 25}, 
+		int checkpoints[11][2] = {  
+		{30, 25},
 		{30, 7}, 
 		{40, 7},
 		{40, 8},
@@ -46,7 +46,8 @@ class Assistant : public Agent
 		{40,7},
 		{30,7},
 		{30, 25},
-		{34,20}
+		{34,20},
+		{30, 25}
 		};
 
 		bool cooking; /**< True if the robot is cooking */
