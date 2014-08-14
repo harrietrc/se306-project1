@@ -73,8 +73,15 @@ std::pair<double, double> Doctor::movePath(int path[][2], int pathLength) {
 		} else {
 			cc++; //Increment checkpoint index
 		}
-		goal_x = path[cc][0];
-		goal_y = path[cc][1];
+		if (cc == pathLength) {
+			linear_x = 0;
+			goal_x = path[cc-1][0];
+			goal_y = path[cc-1][1];
+		} else {
+			goal_x = path[cc][0];
+			goal_y = path[cc][1];
+		}
+
 	
 		//Account for delay by subtracting delay values from current pose and orientation
 		goal_angle = calc_goal_angle(goal_x, goal_y, cur_angle - M_PI/20, px - 0.1, py - 0.1); 
@@ -178,8 +185,8 @@ void Doctor::residentStatusCallback(se306_project1::ResidentMsg msg)
 	std::pair<double, double> velocityValues;	
 	velocityValues = std::make_pair(0, 0);
 	
-	
-	if ((sqrt(pow((msg.x - px),2) + pow((msg.y - py),2)) < 2.5) && residentHealed== 0){
+
+	if ((sqrt(pow((msg.x - px),2) + pow((msg.y - py),2)) < 2.5) && residentHealed == 0){
 		linear_x = 0;
 		angular_z = 0;
 		moveToPoint = true;

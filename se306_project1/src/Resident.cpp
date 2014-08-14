@@ -143,8 +143,8 @@ void Resident::StageOdom_callback(nav_msgs::Odometry msg)
 	cur_angle = ((int)(cur_angle * 1000 + .5) / 1000.0);
 	
 	//Update the current position
-	px = msg.pose.pose.position.x + checkpoints[0][0];
-	py = msg.pose.pose.position.y + checkpoints[0][1];
+	px = msg.pose.pose.position.x + 10;//checkpoints[0][0];
+	py = msg.pose.pose.position.y + 0;//checkpoints[0][1];
 	
 
 }
