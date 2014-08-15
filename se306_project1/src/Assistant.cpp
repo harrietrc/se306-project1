@@ -73,7 +73,7 @@ std::pair<double, double> Assistant::movePath(int path[][2], int pathLength) {
 	
 	//When goal reached
 	if ((px <= goal_x + 0.5) && (px >= goal_x - 0.5) && (py <= goal_y + 0.5) && (py >= goal_y - 0.5)) {
-	isSet = false;
+		isSet = false;
 		if (cc == pathLength) { //If at last checkpoint
 			linear_x = 0;
 		} else {
@@ -231,13 +231,14 @@ void Assistant::residentStatusCallback(se306_project1::ResidentMsg msg)
 		foodIsReady = 1;
 	} 
 	
-	if(msg.hunger < 90 && cooking ==false)
+	if(msg.hunger < 90 && cooking == false)
 	{
+		ROS_INFO("Assistant is on the way to the kitchen");
 		cooking = true;
 		velocityValues = movePath(checkpoints, 	11);
 		linear_x = velocityValues.first;
 		angular_z = velocityValues.second;
-	} else if (msg.hunger >= 60)
+	} else if (msg.hunger >= 90)
 	{
 		cooking = false;
 		
@@ -359,10 +360,6 @@ int Assistant::run(int argc, char **argv)
 			if (i == 30)
 			{
 				assistant_pub.publish(msg);
-<<<<<<< HEAD
-=======
-				//ROS_INFO("Food is ready");
->>>>>>> 6f4325dfcc39ce8764a381daccd2cd95122ba38d
 				i = 0;
 			}
 		}
@@ -386,7 +383,7 @@ int Assistant::run(int argc, char **argv)
 /**
 *	@brief Redirects to main function (run()) of the node.
 */
-int main(int argc, char **argv) {
+int main(int argc, char *argv[]) {
 	Assistant *a = new Assistant();
 	a->Assistant::run(argc, argv);
 }

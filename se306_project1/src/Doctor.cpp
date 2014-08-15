@@ -37,9 +37,16 @@ int readyToHeal = 0;
 int residentHealed = 0;
 int moveToPoint = 0;
 
-int checkpoints[3][2] = {  
-		{10, -7},
-		{10, 0},
+int checkpoints[10][2] = {  
+		{10,-7},
+		{10, 5},
+		{25,12},
+		{25,25},
+		{34,20},
+		{25,25},
+		{25,25},
+		{25,12},
+		{10,5},
 		{10, -7}
 	};
 	
@@ -86,8 +93,15 @@ std::pair<double, double> Doctor::movePath(int path[][2], int pathLength) {
 		} else {
 			cc++; //Increment checkpoint index
 		}
-		goal_x = path[cc][0];
-		goal_y = path[cc][1];
+		if (cc == pathLength) {
+			linear_x = 0;
+			goal_x = path[cc-1][0];
+			goal_y = path[cc-1][1];
+		} else {
+			goal_x = path[cc][0];
+			goal_y = path[cc][1];
+		}
+
 	
 		//Account for delay by subtracting delay values from current pose and orientation
 		goal_angle = calc_goal_angle(goal_x, goal_y, cur_angle - M_PI/20, px - 0.1, py - 0.1); 
@@ -122,37 +136,28 @@ std::pair<double, double> Doctor::move(double goal_x, double goal_y, double cur_
 	//When the robot is facing the correct direction, start moving
 	double threshold = cur_angle;//cur_angle-moveSpeed/10;
 	//threshold = ((int)(threshold * 1000 + .5) / 1000.0);
-	ROS_INFO("##################");
-	ROS_INFO("threshold: %f",threshold);
-	ROS_INFO("goal_angle: %f",goal_angle);
-	ROS_INFO("cur_angle: %f",cur_angle);
-	ROS_INFO("##################");
+
 	if ((goal_angle  == threshold) || isSet) {
-		ROS_INFO("First If Statement");
 		_ret.first = 5; //linear_x
 		_ret.second = 0; //angular_z
 		isSet = true;
 	} else if ((goal_angle <= cur_angle + 0.6) && (goal_angle >= cur_angle - 0.6) )  {
 		_ret.first = 0; //linear_x
-				ROS_INFO("Second If Statement");
 
 		_ret.second = fabs(cur_angle - goal_angle);//0.001; //angular_z
 		if (goal_angle == cur_angle) {
 			isSet = true;	
-			ROS_INFO("Third If Statement");
 	
 		}
 
 	} else {
 		_ret.first = 0; //linear_x
 		_ret.second = moveSpeed; //angular_z
-		ROS_INFO("fourth If Statement");
 
 		isSet = false;
 	}
 
 	if ((px-0.1 <= goal_x + 0.5) && (px-0.1 >= goal_x - 0.5) && (py-0.1 <= goal_y + 0.5) && (py-0.1 >= goal_y - 0.5)) {	
-			ROS_INFO("fifth If Statement");
 
 			_ret.first = 0; 
 			isSet = false;
@@ -228,9 +233,8 @@ void Doctor::residentStatusCallback(se306_project1::ResidentMsg msg)
 	
 	std::pair<double, double> velocityValues;	
 	velocityValues = std::make_pair(0, 0);
-	
-	
-	if ((sqrt(pow((msg.x - px),2) + pow((msg.y - py),2)) < 2.5) && residentHealed== 0){
+		
+	if ((sqrt(pow((msg.x - px),2) + pow((msg.y - py),2)) < 2.5) && residentHealed == 0){
 		linear_x = 0;
 		angular_z = 0;
 		moveToPoint = true;
@@ -239,33 +243,31 @@ void Doctor::residentStatusCallback(se306_project1::ResidentMsg msg)
 		readyToHeal= 1;
 	} 
 	
-	if(msg.health < 90 && healing ==false)
+	if(msg.health < 55 && healing ==false)
 	{
+		ROS_INFO("Doctor is on the way");
 		healing = true;
-		velocityValues = movePath(checkpoints, 	3);
+		velocityValues = movePath(checkpoints, 	10);
 		linear_x = velocityValues.first;
 		angular_z = velocityValues.second;
 	} else if (msg.health >= 90)
 	{
 		healing = false;
-		
 	}
-	
 
 	if (healing || moveToPoint) {
-		velocityValues = movePath(checkpoints, 	3);
+		velocityValues = movePath(checkpoints, 	10);
 		linear_x = velocityValues.first;
 		angular_z = velocityValues.second;
 	}
 	
-
 }
 
 /**
 *	@brief Main function for the Doctor process.
 *	Controls node setup and periodic events.
 */
-int Doctor::run(int argc, char **argv)
+int Doctor::run(int argc, char *argv[])
 {
 	//Initial pose. This is the same as the pose used in the world file.
 	px = checkpoints[cc-1][0];
@@ -335,23 +337,19 @@ int Doctor::run(int argc, char **argv)
 			doctor_pub.publish(aMsg);
 			residentHealed = 1;
 		}
-		
-		
-		
+
 		ros::spinOnce();
 
 		loop_rate.sleep();
 		++count;
 	}
-
 	return 0;
-
 }
 
 /**
 *	@brief Redirects to main function (run()) of the node.
 */
-int main(int argc, char **argv) {
+int main(int argc, char *argv[]) {
 	Doctor *a = new Doctor;
 	a->Doctor::run(argc, argv);
 }

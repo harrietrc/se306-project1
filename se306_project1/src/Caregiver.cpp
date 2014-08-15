@@ -39,7 +39,7 @@ void Caregiver::StageLaser_callback(sensor_msgs::LaserScan msg)
 *	@brief Main function for the Caregiver process.
 *	Controls node setup and periodic events.
 */
-int Caregiver::run(int argc, char **argv)
+int Caregiver::run(int argc, char *argv[])
 {
 	//initialize robot parameters
 	//Initial pose. This is same as the pose that you used in the world file to set	the robot pose.
@@ -96,7 +96,7 @@ int Caregiver::run(int argc, char **argv)
 /**
 *	@brief Redirects to main function (run()) of the node.
 */
-int main(int argc, char **argv) {
+int main(int argc, char *argv[]) {
 	Caregiver *a = new Caregiver();
 	a->Caregiver::run(argc, argv);
 }

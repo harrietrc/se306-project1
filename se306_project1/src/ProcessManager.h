@@ -13,5 +13,5 @@
 */
 class ProcessManager {
 public:
-	int nodeProcess(std::string executableName);
+	int nodeProcess(std::string executableName, int nodeNumber);
 };

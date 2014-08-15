@@ -39,7 +39,7 @@ void Friend::StageLaser_callback(sensor_msgs::LaserScan msg)
 *	@brief Main function for the Friend process.
 *	Controls node setup and periodic events.
 */
-int Friend::run(int argc, char **argv)
+int Friend::run(int argc, char *argv[])
 {
 
 	//initialize robot parameters
@@ -97,7 +97,7 @@ int Friend::run(int argc, char **argv)
 /**
 *	@brief Redirects to main function (run()) of the node.
 */
-int main(int argc, char **argv) {
+int main(int argc, char *argv[]) {
 	Friend *a = new Friend();
 	a->Friend::run(argc, argv);
 }

@@ -39,7 +39,7 @@ void Nurse::StageLaser_callback(sensor_msgs::LaserScan msg)
 *	@brief Main function for the Nurse process.
 *	Controls node setup and periodic events.
 */
-int Nurse::run(int argc, char **argv)
+int Nurse::run(int argc, char *argv[])
 {
 
 	//initialize robot parameters
@@ -97,7 +97,7 @@ int Nurse::run(int argc, char **argv)
 /**
 *	@brief Redirects to main function (run()) of the node.
 */
-int main(int argc, char **argv) {
+int main(int argc, char *argv[]) {
 	Nurse *a = new Nurse();
 	a->Nurse::run(argc, argv);
 }

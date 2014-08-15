@@ -8,7 +8,7 @@ class Caregiver : public Visitor
 	public:
 		void StageOdom_callback(nav_msgs::Odometry msg);
 		void StageLaser_callback(sensor_msgs::LaserScan msg);
-		int run(int argc, char **argv);
+		int run(int argc, char *argv[]);
 		
 		// Get id of robot
 		//int get_id()
