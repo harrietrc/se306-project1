@@ -158,6 +158,13 @@ void Resident::StageLaser_callback(sensor_msgs::LaserScan msg)
 //doctor will heal resident when they are next to each other
 void Resident::doctor_callback(se306_project1::DoctorMsg msg)
 {
+
+	 if (msg.healResident == 1)
+	{
+	 	health = 100;
+		ROS_INFO("Resident healed by Doctor, health = 100");
+	}
+
 }
 
 void Resident::assistant_callback(se306_project1::AssistantMsg msg)
@@ -166,7 +173,6 @@ void Resident::assistant_callback(se306_project1::AssistantMsg msg)
 	{
 		hunger = 100;
 		ROS_INFO("Resident has received food");
-		ROS_INFO("Resident hunger: %d",hunger);
 	}
 	
 }
@@ -181,17 +187,6 @@ std::pair<double, double> Resident::move(double goal_x, double goal_y, double cu
 	//When the robot is facing the correct direction, start moving
 	double threshold = cur_angle;//-moveSpeed/10;
 	//threshold = ((int)(threshold * 1000 + .5) / 1000.0);
-/*	ROS_INFO("##################");
-	ROS_INFO("goal_y: %f",goal_y);
-	ROS_INFO("py: %f",py);
-	ROS_INFO("goal_x: %f",goal_x);
-	ROS_INFO("px: %f",px);
-//	ROS_INFO("angle Vel1: %f", _ret.second);
-//	ROS_INFO("threshold: %f",threshold);
-//	ROS_INFO("goal_angle: %f",goal_angle);
-//	ROS_INFO("cur_angle: %f",cur_angle);
-	ROS_INFO("##################");
-*/
 
 	if ((goal_angle  == threshold) || isSet) {
 		_ret.first = 5; //linear_x
@@ -320,15 +315,15 @@ int Resident::run(int argc, char *argv[])
 	int dur2 = time_conversion::simHoursToRealSecs(2); // Perform callback every 2 simulation hours
 	ros::Timer medicationTimer = n.createTimer(ros::Duration(dur2), &Resident::randomCheckpointCallback, this); 
 
-	int hungerReductionRate = 1; //1 hunger point reduction per second
-	int healthReductionRate = 1; // 0.1 health point reduction per second
+	int hungerReductionRate = 2; //1 hunger point reduction per second
+	int healthReductionRate = 2; // 0.1 health point reduction per second
 
 	while (ros::ok())
 	{
 		//messages to stage
 		RobotNode_cmdvel.linear.x = linear_x;
 		RobotNode_cmdvel.angular.z = angular_z;
-
+		//ROS_INFO("Hunger %d",hunger);
 		//publish the message
 		RobotNode_stage_pub.publish(RobotNode_cmdvel);
 		
@@ -340,19 +335,10 @@ int Resident::run(int argc, char *argv[])
 			std::pair<double, double> velocityValues;	
 			velocityValues = std::make_pair(0, 0);
 		if (hunger < 90) {
-			//ROS_INFO("hunger");
 			velocityValues = movePath(checkpoints, 	3);
 			linear_x = velocityValues.first;
-			angular_z = velocityValues.second;		
+			angular_z = velocityValues.second;			
 		}
-		linear_x = 0;
-		angular_z=0;
-		//std_msgs::String msg;
-		//std::stringstream ss;
-		//ss << "Hello world" << hunger;
-		//msg.data = ss.str();
-		
-		//custom resident message publisher
 		
 		se306_project1::ResidentMsg msg; 
 		msg.health = health;
