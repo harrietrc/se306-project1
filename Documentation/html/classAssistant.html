@@ -114,10 +114,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aaf1fe61dc3d3aac3f0ec603531ad9ad7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAssistant.html#aaf1fe61dc3d3aac3f0ec603531ad9ad7">StageLaser_callback</a> (sensor_msgs::LaserScan msg)</td></tr>
 <tr class="memdesc:aaf1fe61dc3d3aac3f0ec603531ad9ad7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback function to process laser scan messsages. You can access the range data from msg.ranges[i]. i = sample number.  <a href="#aaf1fe61dc3d3aac3f0ec603531ad9ad7">More...</a><br/></td></tr>
 <tr class="separator:aaf1fe61dc3d3aac3f0ec603531ad9ad7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a50eec4c3693b7b2c7d363ef4848a5815"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a50eec4c3693b7b2c7d363ef4848a5815"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAssistant.html#a50eec4c3693b7b2c7d363ef4848a5815">run</a> (int argc, char **argv)</td></tr>
-<tr class="memdesc:a50eec4c3693b7b2c7d363ef4848a5815"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main function for the <a class="el" href="classAssistant.html" title="Class for robot assistants. ">Assistant</a> process. Controls node setup and periodic events. <br/></td></tr>
-<tr class="separator:a50eec4c3693b7b2c7d363ef4848a5815"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adaee2d23c3ba9e0c7ed99642424580de"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adaee2d23c3ba9e0c7ed99642424580de"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAssistant.html#adaee2d23c3ba9e0c7ed99642424580de">run</a> (int argc, char *argv[])</td></tr>
+<tr class="memdesc:adaee2d23c3ba9e0c7ed99642424580de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main function for the <a class="el" href="classAssistant.html" title="Class for robot assistants. ">Assistant</a> process. Controls node setup and periodic events. <br/></td></tr>
+<tr class="separator:adaee2d23c3ba9e0c7ed99642424580de"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8fce345025f32bcd0e45d83960d4b3f7"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAssistant.html#a8fce345025f32bcd0e45d83960d4b3f7">calc_goal_angle</a> (double <a class="el" href="classAssistant.html#a1a1f1fe48d0eb6a6a39b7fbdb2ef6641">goal_x</a>, double <a class="el" href="classAssistant.html#a1b6ce5d7c3124140be8d351c847fe91c">goal_y</a>, double <a class="el" href="classAssistant.html#a451a20f551c43d0b6810c8208fe84773">cur_angle</a>, double <a class="el" href="classAssistant.html#a694fdaa5fb378340c42b7f75716cd1ce">px</a>, double <a class="el" href="classAssistant.html#ae092b444c226b5ffbdf454ad24f630d6">py</a>)</td></tr>
 <tr class="memdesc:a8fce345025f32bcd0e45d83960d4b3f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Given the agent's current angle, this function calculates the angle to the goal. cur_angle, goal_x, goal_y, px, and py are class fields but are also passed as parameters.  <a href="#a8fce345025f32bcd0e45d83960d4b3f7">More...</a><br/></td></tr>
 <tr class="separator:a8fce345025f32bcd0e45d83960d4b3f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -134,7 +134,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>randomCheckpointCallb
 <tr class="memdesc:ae4f0887ad0748940571fdf9ed1013766"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback function that unpacks and processes resident status messages. <a class="el" href="classAssistant.html" title="Class for robot assistants. ">Assistant</a> should subscribe to the ResidentMsg topic in order for this callback to be called. ResidentMsg is published by the <a class="el" href="classResident.html" title="Class representing the Resident. ">Resident</a>.  <a href="#ae4f0887ad0748940571fdf9ed1013766">More...</a><br/></td></tr>
 <tr class="separator:ae4f0887ad0748940571fdf9ed1013766"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae9b3476194ec440164926085a87a81f0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAssistant.html#ae9b3476194ec440164926085a87a81f0">medicationCallback</a> (const ros::TimerEvent &amp;)</td></tr>
-<tr class="memdesc:ae9b3476194ec440164926085a87a81f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Periodic callback for the provision of medication that should act as a model for all periodic events. Called by the ros::Timer in the <a class="el" href="classAssistant.html#a50eec4c3693b7b2c7d363ef4848a5815" title="Main function for the Assistant process. Controls node setup and periodic events. ...">run()</a> function. Can specify start time, end time, and period.  <a href="#ae9b3476194ec440164926085a87a81f0">More...</a><br/></td></tr>
+<tr class="memdesc:ae9b3476194ec440164926085a87a81f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Periodic callback for the provision of medication that should act as a model for all periodic events. Called by the ros::Timer in the <a class="el" href="classAssistant.html#adaee2d23c3ba9e0c7ed99642424580de" title="Main function for the Assistant process. Controls node setup and periodic events. ...">run()</a> function. Can specify start time, end time, and period.  <a href="#ae9b3476194ec440164926085a87a81f0">More...</a><br/></td></tr>
 <tr class="separator:ae9b3476194ec440164926085a87a81f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
@@ -285,7 +285,7 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Periodic callback for the provision of medication that should act as a model for all periodic events. Called by the ros::Timer in the <a class="el" href="classAssistant.html#a50eec4c3693b7b2c7d363ef4848a5815" title="Main function for the Assistant process. Controls node setup and periodic events. ...">run()</a> function. Can specify start time, end time, and period. </p>
+<p>Periodic callback for the provision of medication that should act as a model for all periodic events. Called by the ros::Timer in the <a class="el" href="classAssistant.html#adaee2d23c3ba9e0c7ed99642424580de" title="Main function for the Assistant process. Controls node setup and periodic events. ...">run()</a> function. Can specify start time, end time, and period. </p>
 <dl class="section note"><dt>Note</dt><dd>The callback is called at the end of the duration specified for the timer. </dd></dl>
 <dl class="section remark"><dt>Remarks</dt><dd>This could be adjustd in the future to allow for events that occur only on certain days - currently it accommodates only for events that occur every x days (or multiple times per day). </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
@@ -787,7 +787,7 @@ Additional Inherited Members</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Aug 15 2014 12:07:51 for SE306 Project 1 by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Aug 15 2014 12:49:26 for SE306 Project 1 by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>
