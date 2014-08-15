@@ -11,6 +11,9 @@ namespace AgentConst {
 	enum AgentType { RESIDENT, ASSISTANT, DOCTOR };
 }
 
+/**
+*	@brief Class for instantiating agents dynamically.
+*/
 class AgentFactory {
 public:
 //	AgentFactory();

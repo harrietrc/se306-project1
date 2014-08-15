@@ -11,7 +11,9 @@
 
 using namespace std;
 
-
+/**	
+*	@brief Creates a mock agent - for testing
+*/
 void AgentFactory::createMockAgent() {
 	cout << "I will create a mock agent";
 }

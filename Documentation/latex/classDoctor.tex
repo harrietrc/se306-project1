@@ -26,9 +26,9 @@ void \hyperlink{classDoctor_ab0b46ba92bd2069733f304858b7e4495}{Stage\-Laser\-\_\
 \hypertarget{classDoctor_a1fe9c9a74bd4d2044b7217ec82ae9e60}{int \hyperlink{classDoctor_a1fe9c9a74bd4d2044b7217ec82ae9e60}{run} (int argc, char $\ast$$\ast$argv)}\label{classDoctor_a1fe9c9a74bd4d2044b7217ec82ae9e60}
 
 \begin{DoxyCompactList}\small\item\em Main function for the \hyperlink{classDoctor}{Doctor} process. Controls node setup and periodic events. \end{DoxyCompactList}\item 
-double \hyperlink{classDoctor_a55fe6c06a3ce07fd9014a03000df43db}{calc\-\_\-goal\-\_\-angle} (double goal\-\_\-x, double goal\-\_\-y, double cur\-\_\-angle, double px, double py)
+double \hyperlink{classDoctor_a55fe6c06a3ce07fd9014a03000df43db}{calc\-\_\-goal\-\_\-angle} (double \hyperlink{classDoctor_ae058c3d6dce31d71ac4e63e3fd653275}{goal\-\_\-x}, double \hyperlink{classDoctor_aba0c1163551f144834fc0d68c556fac2}{goal\-\_\-y}, double \hyperlink{classDoctor_ab67e7a3eab1a57a0cfa52d84fe52414d}{cur\-\_\-angle}, double \hyperlink{classDoctor_a6ea729b1a8fc6d33176d768ef62b0a43}{px}, double \hyperlink{classDoctor_a04b4b5bddd2b99b6eb4b7b8813eeeebf}{py})
 \begin{DoxyCompactList}\small\item\em Given the agent's current angle, this function calculates the angle to the goal. cur\-\_\-angle, goal\-\_\-x, goal\-\_\-y, px, and py are class fields but are also passed as parameters. \end{DoxyCompactList}\item 
-std\-::pair$<$ double, double $>$ \hyperlink{classDoctor_ada60bb6625be46966ff86f7af9d05366}{move} (double goal\-\_\-x, double goal\-\_\-y, double cur\-\_\-angle, double goal\-\_\-angle, double px, double py)
+std\-::pair$<$ double, double $>$ \hyperlink{classDoctor_ada60bb6625be46966ff86f7af9d05366}{move} (double \hyperlink{classDoctor_ae058c3d6dce31d71ac4e63e3fd653275}{goal\-\_\-x}, double \hyperlink{classDoctor_aba0c1163551f144834fc0d68c556fac2}{goal\-\_\-y}, double \hyperlink{classDoctor_ab67e7a3eab1a57a0cfa52d84fe52414d}{cur\-\_\-angle}, double \hyperlink{classDoctor_a27377808d49670322af2ce4ec34730f1}{goal\-\_\-angle}, double \hyperlink{classDoctor_a6ea729b1a8fc6d33176d768ef62b0a43}{px}, double \hyperlink{classDoctor_a04b4b5bddd2b99b6eb4b7b8813eeeebf}{py})
 \begin{DoxyCompactList}\small\item\em Keeps the agent moving by changing linear\-\_\-x ad angular\-\_\-z. \end{DoxyCompactList}\item 
 \hypertarget{classDoctor_a21ac6188dd7f5890ff1a633cf700144d}{void {\bfseries random\-Checkpoint\-Callback} (const ros\-::\-Timer\-Event \&)}\label{classDoctor_a21ac6188dd7f5890ff1a633cf700144d}
 
@@ -43,52 +43,40 @@ void \hyperlink{classDoctor_af4d24247a3f59b1b3b5258938e019086}{resident\-Status\
 \subsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{classDoctor_adab6ec6a93ee2f58b436a8294120f295}{bool {\bfseries heal\-Resident}}\label{classDoctor_adab6ec6a93ee2f58b436a8294120f295}
-
+bool \hyperlink{classDoctor_adab6ec6a93ee2f58b436a8294120f295}{heal\-Resident}
 \item 
-\hypertarget{classDoctor_ab1814310e306e7a742ffa9c5c6b913ef}{int {\bfseries health}}\label{classDoctor_ab1814310e306e7a742ffa9c5c6b913ef}
-
+int \hyperlink{classDoctor_ab1814310e306e7a742ffa9c5c6b913ef}{health}
 \item 
-\hypertarget{classDoctor_a76dcb7e1308ef8001b7960cb542e3824}{int {\bfseries boredom}}\label{classDoctor_a76dcb7e1308ef8001b7960cb542e3824}
-
+int \hyperlink{classDoctor_a76dcb7e1308ef8001b7960cb542e3824}{boredom}
 \item 
-\hypertarget{classDoctor_a7b59e97eb09eed2ffed797d1174ac47f}{int {\bfseries hunger}}\label{classDoctor_a7b59e97eb09eed2ffed797d1174ac47f}
-
+int \hyperlink{classDoctor_a7b59e97eb09eed2ffed797d1174ac47f}{hunger}
 \item 
-\hypertarget{classDoctor_ae058c3d6dce31d71ac4e63e3fd653275}{double {\bfseries goal\-\_\-x}}\label{classDoctor_ae058c3d6dce31d71ac4e63e3fd653275}
-
+double \hyperlink{classDoctor_ae058c3d6dce31d71ac4e63e3fd653275}{goal\-\_\-x}
 \item 
-\hypertarget{classDoctor_aba0c1163551f144834fc0d68c556fac2}{double {\bfseries goal\-\_\-y}}\label{classDoctor_aba0c1163551f144834fc0d68c556fac2}
-
+double \hyperlink{classDoctor_aba0c1163551f144834fc0d68c556fac2}{goal\-\_\-y}
 \item 
-\hypertarget{classDoctor_a6ea729b1a8fc6d33176d768ef62b0a43}{double {\bfseries px}}\label{classDoctor_a6ea729b1a8fc6d33176d768ef62b0a43}
-
+double \hyperlink{classDoctor_a6ea729b1a8fc6d33176d768ef62b0a43}{px}
 \item 
-\hypertarget{classDoctor_a04b4b5bddd2b99b6eb4b7b8813eeeebf}{double {\bfseries py}}\label{classDoctor_a04b4b5bddd2b99b6eb4b7b8813eeeebf}
-
+double \hyperlink{classDoctor_a04b4b5bddd2b99b6eb4b7b8813eeeebf}{py}
 \item 
-\hypertarget{classDoctor_a27377808d49670322af2ce4ec34730f1}{double {\bfseries goal\-\_\-angle}}\label{classDoctor_a27377808d49670322af2ce4ec34730f1}
-
+double \hyperlink{classDoctor_a27377808d49670322af2ce4ec34730f1}{goal\-\_\-angle}
 \item 
 \hypertarget{classDoctor_a2f7dffac0f8141914640e8f9bee5e7ff}{bool {\bfseries running}}\label{classDoctor_a2f7dffac0f8141914640e8f9bee5e7ff}
 
 \item 
-\hypertarget{classDoctor_ab67e7a3eab1a57a0cfa52d84fe52414d}{double {\bfseries cur\-\_\-angle}}\label{classDoctor_ab67e7a3eab1a57a0cfa52d84fe52414d}
-
+double \hyperlink{classDoctor_ab67e7a3eab1a57a0cfa52d84fe52414d}{cur\-\_\-angle}
 \item 
-\hypertarget{classDoctor_a254303eb3ae4982340eb079ea76e942a}{int {\bfseries cc} = 1}\label{classDoctor_a254303eb3ae4982340eb079ea76e942a}
-
+int \hyperlink{classDoctor_a254303eb3ae4982340eb079ea76e942a}{cc} = 1
 \item 
-int {\bfseries checkpoints} \mbox{[}4\mbox{]}\mbox{[}2\mbox{]}
-\item 
+int \hyperlink{classDoctor_a9bb025d7f8f843371b1c63414272afe1}{checkpoints} \mbox{[}4\mbox{]}\mbox{[}2\mbox{]}
+\begin{DoxyCompactList}\small\item\em Set of checkpoints that the nodes can move to in the map. Gives x position and y position for each co-\/ordinate. \end{DoxyCompactList}\item 
 \hypertarget{classDoctor_a0566f795b41ece871b82ed7b63c5a780}{bool {\bfseries is\-\_\-called}}\label{classDoctor_a0566f795b41ece871b82ed7b63c5a780}
 
 \item 
 \hypertarget{classDoctor_a31d510c612a7f9d59efbcc8327f7adf3}{std\-::pair$<$ double, bool $>$ {\bfseries goal\-\_\-pair}}\label{classDoctor_a31d510c612a7f9d59efbcc8327f7adf3}
 
 \item 
-\hypertarget{classDoctor_ac371e75b4dcac584c9f2fa89585fefd7}{std\-::pair$<$ double, double $>$ {\bfseries ret}}\label{classDoctor_ac371e75b4dcac584c9f2fa89585fefd7}
-
+std\-::pair$<$ double, double $>$ \hyperlink{classDoctor_ac371e75b4dcac584c9f2fa89585fefd7}{ret}
 \end{DoxyCompactItemize}
 \subsection*{Additional Inherited Members}
 
@@ -251,7 +239,13 @@ Implements \hyperlink{classAgent}{Agent}.
 
 
 \subsection{Member Data Documentation}
-\hypertarget{classDoctor_a9bb025d7f8f843371b1c63414272afe1}{\index{Doctor@{Doctor}!checkpoints@{checkpoints}}
+\hypertarget{classDoctor_a76dcb7e1308ef8001b7960cb542e3824}{\index{Doctor@{Doctor}!boredom@{boredom}}
+\index{boredom@{boredom}!Doctor@{Doctor}}
+\subsubsection[{boredom}]{\setlength{\rightskip}{0pt plus 5cm}int Doctor\-::boredom\hspace{0.3cm}{\ttfamily [protected]}}}\label{classDoctor_a76dcb7e1308ef8001b7960cb542e3824}
+\hyperlink{classResident}{Resident} boredom \hypertarget{classDoctor_a254303eb3ae4982340eb079ea76e942a}{\index{Doctor@{Doctor}!cc@{cc}}
+\index{cc@{cc}!Doctor@{Doctor}}
+\subsubsection[{cc}]{\setlength{\rightskip}{0pt plus 5cm}int Doctor\-::cc = 1\hspace{0.3cm}{\ttfamily [protected]}}}\label{classDoctor_a254303eb3ae4982340eb079ea76e942a}
+The index of the checkpoint that the agent is currently aiming for \hypertarget{classDoctor_a9bb025d7f8f843371b1c63414272afe1}{\index{Doctor@{Doctor}!checkpoints@{checkpoints}}
 \index{checkpoints@{checkpoints}!Doctor@{Doctor}}
 \subsubsection[{checkpoints}]{\setlength{\rightskip}{0pt plus 5cm}int Doctor\-::checkpoints\mbox{[}4\mbox{]}\mbox{[}2\mbox{]}\hspace{0.3cm}{\ttfamily [protected]}}}\label{classDoctor_a9bb025d7f8f843371b1c63414272afe1}
 {\bfseries Initial value\-:}
@@ -264,6 +258,40 @@ Implements \hyperlink{classAgent}{Agent}.
             \}
 \end{DoxyCode}
 
+
+Set of checkpoints that the nodes can move to in the map. Gives x position and y position for each co-\/ordinate. 
+
+\hypertarget{classDoctor_ab67e7a3eab1a57a0cfa52d84fe52414d}{\index{Doctor@{Doctor}!cur\-\_\-angle@{cur\-\_\-angle}}
+\index{cur\-\_\-angle@{cur\-\_\-angle}!Doctor@{Doctor}}
+\subsubsection[{cur\-\_\-angle}]{\setlength{\rightskip}{0pt plus 5cm}double Doctor\-::cur\-\_\-angle\hspace{0.3cm}{\ttfamily [protected]}}}\label{classDoctor_ab67e7a3eab1a57a0cfa52d84fe52414d}
+The agent's current facing in reference to the co-\/ordinate system \hypertarget{classDoctor_a27377808d49670322af2ce4ec34730f1}{\index{Doctor@{Doctor}!goal\-\_\-angle@{goal\-\_\-angle}}
+\index{goal\-\_\-angle@{goal\-\_\-angle}!Doctor@{Doctor}}
+\subsubsection[{goal\-\_\-angle}]{\setlength{\rightskip}{0pt plus 5cm}double Doctor\-::goal\-\_\-angle\hspace{0.3cm}{\ttfamily [protected]}}}\label{classDoctor_a27377808d49670322af2ce4ec34730f1}
+The angle that the agent must face to approach the goal, defined in reference to the co-\/ordinate system \hypertarget{classDoctor_ae058c3d6dce31d71ac4e63e3fd653275}{\index{Doctor@{Doctor}!goal\-\_\-x@{goal\-\_\-x}}
+\index{goal\-\_\-x@{goal\-\_\-x}!Doctor@{Doctor}}
+\subsubsection[{goal\-\_\-x}]{\setlength{\rightskip}{0pt plus 5cm}double Doctor\-::goal\-\_\-x\hspace{0.3cm}{\ttfamily [protected]}}}\label{classDoctor_ae058c3d6dce31d71ac4e63e3fd653275}
+The x position of the agent's goal \hypertarget{classDoctor_aba0c1163551f144834fc0d68c556fac2}{\index{Doctor@{Doctor}!goal\-\_\-y@{goal\-\_\-y}}
+\index{goal\-\_\-y@{goal\-\_\-y}!Doctor@{Doctor}}
+\subsubsection[{goal\-\_\-y}]{\setlength{\rightskip}{0pt plus 5cm}double Doctor\-::goal\-\_\-y\hspace{0.3cm}{\ttfamily [protected]}}}\label{classDoctor_aba0c1163551f144834fc0d68c556fac2}
+The y position of the agent's goal \hypertarget{classDoctor_adab6ec6a93ee2f58b436a8294120f295}{\index{Doctor@{Doctor}!heal\-Resident@{heal\-Resident}}
+\index{heal\-Resident@{heal\-Resident}!Doctor@{Doctor}}
+\subsubsection[{heal\-Resident}]{\setlength{\rightskip}{0pt plus 5cm}bool Doctor\-::heal\-Resident\hspace{0.3cm}{\ttfamily [protected]}}}\label{classDoctor_adab6ec6a93ee2f58b436a8294120f295}
+Indicates whether the \hyperlink{classDoctor}{Doctor} should heal the resident. \hypertarget{classDoctor_ab1814310e306e7a742ffa9c5c6b913ef}{\index{Doctor@{Doctor}!health@{health}}
+\index{health@{health}!Doctor@{Doctor}}
+\subsubsection[{health}]{\setlength{\rightskip}{0pt plus 5cm}int Doctor\-::health\hspace{0.3cm}{\ttfamily [protected]}}}\label{classDoctor_ab1814310e306e7a742ffa9c5c6b913ef}
+\hyperlink{classResident}{Resident} health \hypertarget{classDoctor_a7b59e97eb09eed2ffed797d1174ac47f}{\index{Doctor@{Doctor}!hunger@{hunger}}
+\index{hunger@{hunger}!Doctor@{Doctor}}
+\subsubsection[{hunger}]{\setlength{\rightskip}{0pt plus 5cm}int Doctor\-::hunger\hspace{0.3cm}{\ttfamily [protected]}}}\label{classDoctor_a7b59e97eb09eed2ffed797d1174ac47f}
+\hyperlink{classResident}{Resident} hunger \hypertarget{classDoctor_a6ea729b1a8fc6d33176d768ef62b0a43}{\index{Doctor@{Doctor}!px@{px}}
+\index{px@{px}!Doctor@{Doctor}}
+\subsubsection[{px}]{\setlength{\rightskip}{0pt plus 5cm}double Doctor\-::px\hspace{0.3cm}{\ttfamily [protected]}}}\label{classDoctor_a6ea729b1a8fc6d33176d768ef62b0a43}
+The agent's initial x position \hypertarget{classDoctor_a04b4b5bddd2b99b6eb4b7b8813eeeebf}{\index{Doctor@{Doctor}!py@{py}}
+\index{py@{py}!Doctor@{Doctor}}
+\subsubsection[{py}]{\setlength{\rightskip}{0pt plus 5cm}double Doctor\-::py\hspace{0.3cm}{\ttfamily [protected]}}}\label{classDoctor_a04b4b5bddd2b99b6eb4b7b8813eeeebf}
+The agent's initial y position \hypertarget{classDoctor_ac371e75b4dcac584c9f2fa89585fefd7}{\index{Doctor@{Doctor}!ret@{ret}}
+\index{ret@{ret}!Doctor@{Doctor}}
+\subsubsection[{ret}]{\setlength{\rightskip}{0pt plus 5cm}std\-::pair$<$double, double$>$ Doctor\-::ret\hspace{0.3cm}{\ttfamily [protected]}}}\label{classDoctor_ac371e75b4dcac584c9f2fa89585fefd7}
+linear\-\_\-x and angular\-\_\-z for the robot 
 
 The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
 \item 

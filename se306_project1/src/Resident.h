@@ -6,29 +6,29 @@
 class Resident : public Agent
 {
 	protected:
-		int health;
-		int boredom;
-		int hunger;
+		int health; /*!< Resident health */
+		int boredom; /*!< Resident boredom */
+		int hunger; /*!< Resident hunger */
 		
 		//goal pose and orientation
-		double goal_x;
-		double goal_y;
-		double px;
-		double py;
-		double goal_angle;
+		double goal_x; /*!< The x position of the agent's goal */
+		double goal_y; /*!< The y position of the agent's goal */
+		double px; /*!< The agent's initial x position */
+		double py; /*!< The agent's initial y position */
+		double goal_angle;  /*!< The angle that the agent must face to approach the goal, defined in reference to the co-ordinate system */
 
 		//bool running;
-		bool isSet;
+		bool isSet; /*!< The angle that the agent must face to approach the goal, defined in reference to the co-ordinate system */
 
 		//current pose and orientation of the robot
-		double cur_angle;
+		double cur_angle; /*!< The agent's current facing in reference to the co-ordinate system */
 
 		int cc; //current_checkpoint = 0;
 
 		bool is_called; 
 
 		std::pair<double,bool> goal_pair;
-		std::pair<double, double> ret;	
+		std::pair<double, double> ret;	/*!< linear_x and angular_z for the robot */
 			
 
 

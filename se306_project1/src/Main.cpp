@@ -6,6 +6,10 @@ std::map<AgentConst::AgentType, int> nodeList;
 
 void initializeNodeList();
 
+/**
+*	@brief Responsible for ensuring that nodes are initialised
+*	Communicates with AgentFactory
+*/
 int main(int argc, char** argv) {
 	initializeNodeList();
 
@@ -26,6 +30,9 @@ int main(int argc, char** argv) {
 	return 0;
 }
 
+/**
+*	@brief Initialises the list of nodes.
+*/
 void initializeNodeList() {
 	nodeList[AgentConst::RESIDENT] = 0;
 	nodeList[AgentConst::ASSISTANT] = 0;

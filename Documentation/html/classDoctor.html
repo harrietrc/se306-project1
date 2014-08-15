@@ -119,10 +119,10 @@ Public Member Functions</h2></td></tr>
 int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDoctor.html#a1fe9c9a74bd4d2044b7217ec82ae9e60">run</a> (int argc, char **argv)</td></tr>
 <tr class="memdesc:a1fe9c9a74bd4d2044b7217ec82ae9e60"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main function for the <a class="el" href="classDoctor.html" title="Class for the Doctor nodes. ">Doctor</a> process. Controls node setup and periodic events. <br/></td></tr>
 <tr class="separator:a1fe9c9a74bd4d2044b7217ec82ae9e60"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a55fe6c06a3ce07fd9014a03000df43db"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDoctor.html#a55fe6c06a3ce07fd9014a03000df43db">calc_goal_angle</a> (double goal_x, double goal_y, double cur_angle, double px, double py)</td></tr>
+<tr class="memitem:a55fe6c06a3ce07fd9014a03000df43db"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDoctor.html#a55fe6c06a3ce07fd9014a03000df43db">calc_goal_angle</a> (double <a class="el" href="classDoctor.html#ae058c3d6dce31d71ac4e63e3fd653275">goal_x</a>, double <a class="el" href="classDoctor.html#aba0c1163551f144834fc0d68c556fac2">goal_y</a>, double <a class="el" href="classDoctor.html#ab67e7a3eab1a57a0cfa52d84fe52414d">cur_angle</a>, double <a class="el" href="classDoctor.html#a6ea729b1a8fc6d33176d768ef62b0a43">px</a>, double <a class="el" href="classDoctor.html#a04b4b5bddd2b99b6eb4b7b8813eeeebf">py</a>)</td></tr>
 <tr class="memdesc:a55fe6c06a3ce07fd9014a03000df43db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Given the agent's current angle, this function calculates the angle to the goal. cur_angle, goal_x, goal_y, px, and py are class fields but are also passed as parameters.  <a href="#a55fe6c06a3ce07fd9014a03000df43db">More...</a><br/></td></tr>
 <tr class="separator:a55fe6c06a3ce07fd9014a03000df43db"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ada60bb6625be46966ff86f7af9d05366"><td class="memItemLeft" align="right" valign="top">std::pair&lt; double, double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDoctor.html#ada60bb6625be46966ff86f7af9d05366">move</a> (double goal_x, double goal_y, double cur_angle, double goal_angle, double px, double py)</td></tr>
+<tr class="memitem:ada60bb6625be46966ff86f7af9d05366"><td class="memItemLeft" align="right" valign="top">std::pair&lt; double, double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDoctor.html#ada60bb6625be46966ff86f7af9d05366">move</a> (double <a class="el" href="classDoctor.html#ae058c3d6dce31d71ac4e63e3fd653275">goal_x</a>, double <a class="el" href="classDoctor.html#aba0c1163551f144834fc0d68c556fac2">goal_y</a>, double <a class="el" href="classDoctor.html#ab67e7a3eab1a57a0cfa52d84fe52414d">cur_angle</a>, double <a class="el" href="classDoctor.html#a27377808d49670322af2ce4ec34730f1">goal_angle</a>, double <a class="el" href="classDoctor.html#a6ea729b1a8fc6d33176d768ef62b0a43">px</a>, double <a class="el" href="classDoctor.html#a04b4b5bddd2b99b6eb4b7b8813eeeebf">py</a>)</td></tr>
 <tr class="memdesc:ada60bb6625be46966ff86f7af9d05366"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keeps the agent moving by changing linear_x ad angular_z.  <a href="#ada60bb6625be46966ff86f7af9d05366">More...</a><br/></td></tr>
 <tr class="separator:ada60bb6625be46966ff86f7af9d05366"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a21ac6188dd7f5890ff1a633cf700144d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a21ac6188dd7f5890ff1a633cf700144d"></a>
@@ -140,43 +140,33 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>medicationCallback</b
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:adab6ec6a93ee2f58b436a8294120f295"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adab6ec6a93ee2f58b436a8294120f295"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>healResident</b></td></tr>
+<tr class="memitem:adab6ec6a93ee2f58b436a8294120f295"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDoctor.html#adab6ec6a93ee2f58b436a8294120f295">healResident</a></td></tr>
 <tr class="separator:adab6ec6a93ee2f58b436a8294120f295"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab1814310e306e7a742ffa9c5c6b913ef"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab1814310e306e7a742ffa9c5c6b913ef"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>health</b></td></tr>
+<tr class="memitem:ab1814310e306e7a742ffa9c5c6b913ef"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDoctor.html#ab1814310e306e7a742ffa9c5c6b913ef">health</a></td></tr>
 <tr class="separator:ab1814310e306e7a742ffa9c5c6b913ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a76dcb7e1308ef8001b7960cb542e3824"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a76dcb7e1308ef8001b7960cb542e3824"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>boredom</b></td></tr>
+<tr class="memitem:a76dcb7e1308ef8001b7960cb542e3824"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDoctor.html#a76dcb7e1308ef8001b7960cb542e3824">boredom</a></td></tr>
 <tr class="separator:a76dcb7e1308ef8001b7960cb542e3824"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7b59e97eb09eed2ffed797d1174ac47f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7b59e97eb09eed2ffed797d1174ac47f"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>hunger</b></td></tr>
+<tr class="memitem:a7b59e97eb09eed2ffed797d1174ac47f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDoctor.html#a7b59e97eb09eed2ffed797d1174ac47f">hunger</a></td></tr>
 <tr class="separator:a7b59e97eb09eed2ffed797d1174ac47f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae058c3d6dce31d71ac4e63e3fd653275"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae058c3d6dce31d71ac4e63e3fd653275"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>goal_x</b></td></tr>
+<tr class="memitem:ae058c3d6dce31d71ac4e63e3fd653275"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDoctor.html#ae058c3d6dce31d71ac4e63e3fd653275">goal_x</a></td></tr>
 <tr class="separator:ae058c3d6dce31d71ac4e63e3fd653275"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aba0c1163551f144834fc0d68c556fac2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aba0c1163551f144834fc0d68c556fac2"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>goal_y</b></td></tr>
+<tr class="memitem:aba0c1163551f144834fc0d68c556fac2"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDoctor.html#aba0c1163551f144834fc0d68c556fac2">goal_y</a></td></tr>
 <tr class="separator:aba0c1163551f144834fc0d68c556fac2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6ea729b1a8fc6d33176d768ef62b0a43"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6ea729b1a8fc6d33176d768ef62b0a43"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>px</b></td></tr>
+<tr class="memitem:a6ea729b1a8fc6d33176d768ef62b0a43"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDoctor.html#a6ea729b1a8fc6d33176d768ef62b0a43">px</a></td></tr>
 <tr class="separator:a6ea729b1a8fc6d33176d768ef62b0a43"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a04b4b5bddd2b99b6eb4b7b8813eeeebf"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a04b4b5bddd2b99b6eb4b7b8813eeeebf"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>py</b></td></tr>
+<tr class="memitem:a04b4b5bddd2b99b6eb4b7b8813eeeebf"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDoctor.html#a04b4b5bddd2b99b6eb4b7b8813eeeebf">py</a></td></tr>
 <tr class="separator:a04b4b5bddd2b99b6eb4b7b8813eeeebf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a27377808d49670322af2ce4ec34730f1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a27377808d49670322af2ce4ec34730f1"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>goal_angle</b></td></tr>
+<tr class="memitem:a27377808d49670322af2ce4ec34730f1"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDoctor.html#a27377808d49670322af2ce4ec34730f1">goal_angle</a></td></tr>
 <tr class="separator:a27377808d49670322af2ce4ec34730f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2f7dffac0f8141914640e8f9bee5e7ff"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2f7dffac0f8141914640e8f9bee5e7ff"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>running</b></td></tr>
 <tr class="separator:a2f7dffac0f8141914640e8f9bee5e7ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab67e7a3eab1a57a0cfa52d84fe52414d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab67e7a3eab1a57a0cfa52d84fe52414d"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>cur_angle</b></td></tr>
+<tr class="memitem:ab67e7a3eab1a57a0cfa52d84fe52414d"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDoctor.html#ab67e7a3eab1a57a0cfa52d84fe52414d">cur_angle</a></td></tr>
 <tr class="separator:ab67e7a3eab1a57a0cfa52d84fe52414d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a254303eb3ae4982340eb079ea76e942a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a254303eb3ae4982340eb079ea76e942a"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>cc</b> = 1</td></tr>
+<tr class="memitem:a254303eb3ae4982340eb079ea76e942a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDoctor.html#a254303eb3ae4982340eb079ea76e942a">cc</a> = 1</td></tr>
 <tr class="separator:a254303eb3ae4982340eb079ea76e942a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9bb025d7f8f843371b1c63414272afe1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><b>checkpoints</b> [4][2]</td></tr>
+<tr class="memitem:a9bb025d7f8f843371b1c63414272afe1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDoctor.html#a9bb025d7f8f843371b1c63414272afe1">checkpoints</a> [4][2]</td></tr>
+<tr class="memdesc:a9bb025d7f8f843371b1c63414272afe1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set of checkpoints that the nodes can move to in the map. Gives x position and y position for each co-ordinate.  <a href="#a9bb025d7f8f843371b1c63414272afe1">More...</a><br/></td></tr>
 <tr class="separator:a9bb025d7f8f843371b1c63414272afe1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0566f795b41ece871b82ed7b63c5a780"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0566f795b41ece871b82ed7b63c5a780"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_called</b></td></tr>
@@ -184,8 +174,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_called</b></td></t
 <tr class="memitem:a31d510c612a7f9d59efbcc8327f7adf3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a31d510c612a7f9d59efbcc8327f7adf3"></a>
 std::pair&lt; double, bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>goal_pair</b></td></tr>
 <tr class="separator:a31d510c612a7f9d59efbcc8327f7adf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac371e75b4dcac584c9f2fa89585fefd7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac371e75b4dcac584c9f2fa89585fefd7"></a>
-std::pair&lt; double, double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>ret</b></td></tr>
+<tr class="memitem:ac371e75b4dcac584c9f2fa89585fefd7"><td class="memItemLeft" align="right" valign="top">std::pair&lt; double, double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDoctor.html#ac371e75b4dcac584c9f2fa89585fefd7">ret</a></td></tr>
 <tr class="separator:ac371e75b4dcac584c9f2fa89585fefd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classAgent"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classAgent')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classAgent.html">Agent</a></td></tr>
 <tr class="memitem:a77dfc60513d8c90b2848297e09fffba7 inherit pro_attribs_classAgent"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a77dfc60513d8c90b2848297e09fffba7"></a>
@@ -476,6 +465,48 @@ Additional Inherited Members</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a class="anchor" id="a76dcb7e1308ef8001b7960cb542e3824"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Doctor::boredom</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p><a class="el" href="classResident.html" title="Class representing the Resident. ">Resident</a> boredom </p>
+
+</div>
+</div>
+<a class="anchor" id="a254303eb3ae4982340eb079ea76e942a"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Doctor::cc = 1</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>The index of the checkpoint that the agent is currently aiming for </p>
+
+</div>
+</div>
 <a class="anchor" id="a9bb025d7f8f843371b1c63414272afe1"></a>
 <div class="memitem">
 <div class="memproto">
@@ -500,6 +531,218 @@ Additional Inherited Members</h2></td></tr>
 <div class="line">            {30, 25}</div>
 <div class="line">            }</div>
 </div><!-- fragment -->
+<p>Set of checkpoints that the nodes can move to in the map. Gives x position and y position for each co-ordinate. </p>
+
+</div>
+</div>
+<a class="anchor" id="ab67e7a3eab1a57a0cfa52d84fe52414d"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Doctor::cur_angle</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>The agent's current facing in reference to the co-ordinate system </p>
+
+</div>
+</div>
+<a class="anchor" id="a27377808d49670322af2ce4ec34730f1"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Doctor::goal_angle</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>The angle that the agent must face to approach the goal, defined in reference to the co-ordinate system </p>
+
+</div>
+</div>
+<a class="anchor" id="ae058c3d6dce31d71ac4e63e3fd653275"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Doctor::goal_x</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>The x position of the agent's goal </p>
+
+</div>
+</div>
+<a class="anchor" id="aba0c1163551f144834fc0d68c556fac2"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Doctor::goal_y</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>The y position of the agent's goal </p>
+
+</div>
+</div>
+<a class="anchor" id="adab6ec6a93ee2f58b436a8294120f295"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Doctor::healResident</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Indicates whether the <a class="el" href="classDoctor.html" title="Class for the Doctor nodes. ">Doctor</a> should heal the resident. </p>
+
+</div>
+</div>
+<a class="anchor" id="ab1814310e306e7a742ffa9c5c6b913ef"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Doctor::health</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p><a class="el" href="classResident.html" title="Class representing the Resident. ">Resident</a> health </p>
+
+</div>
+</div>
+<a class="anchor" id="a7b59e97eb09eed2ffed797d1174ac47f"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Doctor::hunger</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p><a class="el" href="classResident.html" title="Class representing the Resident. ">Resident</a> hunger </p>
+
+</div>
+</div>
+<a class="anchor" id="a6ea729b1a8fc6d33176d768ef62b0a43"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Doctor::px</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>The agent's initial x position </p>
+
+</div>
+</div>
+<a class="anchor" id="a04b4b5bddd2b99b6eb4b7b8813eeeebf"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Doctor::py</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>The agent's initial y position </p>
+
+</div>
+</div>
+<a class="anchor" id="ac371e75b4dcac584c9f2fa89585fefd7"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::pair&lt;double, double&gt; Doctor::ret</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>linear_x and angular_z for the robot </p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
@@ -509,7 +752,7 @@ Additional Inherited Members</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Aug 15 2014 11:57:52 for SE306 Project 1 by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Aug 15 2014 12:07:51 for SE306 Project 1 by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>
