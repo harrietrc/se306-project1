@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['goal_5fangle',['goal_angle',['../classAssistant.html#ae4468e02db193f0ffa0ca17a249f802d',1,'Assistant::goal_angle()'],['../classDoctor.html#a27377808d49670322af2ce4ec34730f1',1,'Doctor::goal_angle()'],['../classResident.html#a194117576f1937cac43ac1b05b884085',1,'Resident::goal_angle()']]],
-  ['goal_5fx',['goal_x',['../classAssistant.html#a1a1f1fe48d0eb6a6a39b7fbdb2ef6641',1,'Assistant::goal_x()'],['../classDoctor.html#ae058c3d6dce31d71ac4e63e3fd653275',1,'Doctor::goal_x()'],['../classResident.html#adee57a6649dfa4a41d027fbb8d961226',1,'Resident::goal_x()']]],
-  ['goal_5fy',['goal_y',['../classAssistant.html#a1b6ce5d7c3124140be8d351c847fe91c',1,'Assistant::goal_y()'],['../classDoctor.html#aba0c1163551f144834fc0d68c556fac2',1,'Doctor::goal_y()'],['../classResident.html#a30e28a999b67c4db3500c9c3c9989a10',1,'Resident::goal_y()']]]
+  ['cc',['cc',['../classDoctor.html#a254303eb3ae4982340eb079ea76e942a',1,'Doctor']]],
+  ['checkpoints',['checkpoints',['../classAssistant.html#a31e94c37f8c6509b81c5c92ad5213e3f',1,'Assistant::checkpoints()'],['../classDoctor.html#a9bb025d7f8f843371b1c63414272afe1',1,'Doctor::checkpoints()']]],
+  ['cooking',['cooking',['../classAssistant.html#af9a992d4b1c5036ed73c57c7e1c5c258',1,'Assistant']]],
+  ['cur_5fangle',['cur_angle',['../classAssistant.html#a451a20f551c43d0b6810c8208fe84773',1,'Assistant::cur_angle()'],['../classDoctor.html#ab67e7a3eab1a57a0cfa52d84fe52414d',1,'Doctor::cur_angle()'],['../classResident.html#a4781565db7a2e58566d2120623fbc13e',1,'Resident::cur_angle()']]]
 ];

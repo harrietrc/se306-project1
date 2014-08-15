@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['vertexproperties',['VertexProperties',['../structVertexProperties.html',1,'']]],
-  ['visitor',['Visitor',['../classVisitor.html',1,'']]]
+  ['todo_20list',['Todo List',['../todo.html',1,'']]]
 ];

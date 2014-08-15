@@ -19,15 +19,13 @@ Inheritance diagram for Agent\-:\begin{figure}[H]
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{classAgent_a4b1182b9ee5dccaa871d71beef94a7d2}{virtual void {\bfseries Stage\-Odom\-\_\-callback} (nav\-\_\-msgs\-::\-Odometry msg)=0}\label{classAgent_a4b1182b9ee5dccaa871d71beef94a7d2}
+virtual void \hyperlink{classAgent_a4b1182b9ee5dccaa871d71beef94a7d2}{Stage\-Odom\-\_\-callback} (nav\-\_\-msgs\-::\-Odometry msg)=0
+\begin{DoxyCompactList}\small\item\em Updates the \hyperlink{classResident}{Resident}'s x position, y position, and angle to reflect its current pose. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classAgent_adfe1de8bbeaa7e4a5f7f2ff3e45593e8}{Stage\-Laser\-\_\-callback} (sensor\-\_\-msgs\-::\-Laser\-Scan msg)=0
+\begin{DoxyCompactList}\small\item\em Virtual callback function to process laser scan messsages. \end{DoxyCompactList}\item 
+\hypertarget{classAgent_a3de32bf3de5baf5a996b874f2ba7cf75}{virtual int \hyperlink{classAgent_a3de32bf3de5baf5a996b874f2ba7cf75}{run} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})=0}\label{classAgent_a3de32bf3de5baf5a996b874f2ba7cf75}
 
-\item 
-\hypertarget{classAgent_adfe1de8bbeaa7e4a5f7f2ff3e45593e8}{virtual void {\bfseries Stage\-Laser\-\_\-callback} (sensor\-\_\-msgs\-::\-Laser\-Scan msg)=0}\label{classAgent_adfe1de8bbeaa7e4a5f7f2ff3e45593e8}
-
-\item 
-\hypertarget{classAgent_a3de32bf3de5baf5a996b874f2ba7cf75}{virtual int {\bfseries run} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})=0}\label{classAgent_a3de32bf3de5baf5a996b874f2ba7cf75}
-
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Main function that controls agent events. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Protected Types}
 \begin{DoxyCompactItemize}
 \item 
@@ -45,20 +43,15 @@ enum {\bfseries Type} \{ \\*
 \subsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{classAgent_a77dfc60513d8c90b2848297e09fffba7}{double {\bfseries linear\-\_\-x}}\label{classAgent_a77dfc60513d8c90b2848297e09fffba7}
-
+double \hyperlink{classAgent_a77dfc60513d8c90b2848297e09fffba7}{linear\-\_\-x}
 \item 
-\hypertarget{classAgent_affc842049c5010a5f8bd99a62d650a25}{double {\bfseries angular\-\_\-z}}\label{classAgent_affc842049c5010a5f8bd99a62d650a25}
-
+double \hyperlink{classAgent_affc842049c5010a5f8bd99a62d650a25}{angular\-\_\-z}
 \item 
-\hypertarget{classAgent_af51536ae3b511b53726b84b9226cc772}{double {\bfseries px}}\label{classAgent_af51536ae3b511b53726b84b9226cc772}
-
+double \hyperlink{classAgent_af51536ae3b511b53726b84b9226cc772}{px}
 \item 
-\hypertarget{classAgent_a048e8b32d02a2fd58f046a444a287015}{double {\bfseries py}}\label{classAgent_a048e8b32d02a2fd58f046a444a287015}
-
+double \hyperlink{classAgent_a048e8b32d02a2fd58f046a444a287015}{py}
 \item 
-\hypertarget{classAgent_aefcf2085a669d7e91d932e7cc3ee88ce}{int {\bfseries robot\-\_\-id}}\label{classAgent_aefcf2085a669d7e91d932e7cc3ee88ce}
-
+int \hyperlink{classAgent_aefcf2085a669d7e91d932e7cc3ee88ce}{robot\-\_\-id}
 \end{DoxyCompactItemize}
 
 
@@ -68,6 +61,67 @@ Superclass for all 'agents' -\/ i.\-e. Assistants, Visitors, and the \hyperlink{
 \begin{DoxyRefDesc}{Todo}
 \item[\hyperlink{todo__todo000001}{Todo}]Shift all common functionality (such as navigation) and properties to this class from subclasses.\end{DoxyRefDesc}
 
+
+\subsection{Member Function Documentation}
+\hypertarget{classAgent_adfe1de8bbeaa7e4a5f7f2ff3e45593e8}{\index{Agent@{Agent}!Stage\-Laser\-\_\-callback@{Stage\-Laser\-\_\-callback}}
+\index{Stage\-Laser\-\_\-callback@{Stage\-Laser\-\_\-callback}!Agent@{Agent}}
+\subsubsection[{Stage\-Laser\-\_\-callback}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Agent\-::\-Stage\-Laser\-\_\-callback (
+\begin{DoxyParamCaption}
+\item[{sensor\-\_\-msgs\-::\-Laser\-Scan}]{msg}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classAgent_adfe1de8bbeaa7e4a5f7f2ff3e45593e8}
+
+
+Virtual callback function to process laser scan messsages. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & Single scan from a planar laser range finder \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \hyperlink{classAssistant_aaf1fe61dc3d3aac3f0ec603531ad9ad7}{Assistant}, \hyperlink{classDoctor_ab0b46ba92bd2069733f304858b7e4495}{Doctor}, \hyperlink{classResident_a6745ec218b7e451eb7ba2ca88fa2aca9}{Resident}, \hyperlink{classCaregiver_a3dc0edd8065745e6f355f80f2b293ba1}{Caregiver}, \hyperlink{classFriend_a1334996a432a7d435d40169bad684dc4}{Friend}, \hyperlink{classNurse_aa709fbc5dc09b8db82db59c1a2829d4a}{Nurse}, and \hyperlink{classRelative_a556d177e5d1562ab9af5018ef382c836}{Relative}.
+
+\hypertarget{classAgent_a4b1182b9ee5dccaa871d71beef94a7d2}{\index{Agent@{Agent}!Stage\-Odom\-\_\-callback@{Stage\-Odom\-\_\-callback}}
+\index{Stage\-Odom\-\_\-callback@{Stage\-Odom\-\_\-callback}!Agent@{Agent}}
+\subsubsection[{Stage\-Odom\-\_\-callback}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Agent\-::\-Stage\-Odom\-\_\-callback (
+\begin{DoxyParamCaption}
+\item[{nav\-\_\-msgs\-::\-Odometry}]{msg}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classAgent_a4b1182b9ee5dccaa871d71beef94a7d2}
+
+
+Updates the \hyperlink{classResident}{Resident}'s x position, y position, and angle to reflect its current pose. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & Odometry message from odom topic \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \hyperlink{classAssistant_ad016061136f3fa5c3ed733e23a54aa00}{Assistant}, \hyperlink{classDoctor_a92b20f52198c6137d8858152cba77640}{Doctor}, \hyperlink{classResident_ae1406a27c978147c7816e57f9ed13aed}{Resident}, \hyperlink{classCaregiver_aa326466c62614b84d6a750dc0e59fa48}{Caregiver}, \hyperlink{classFriend_ab336b2a40bc6b9787bd0e9283f29f468}{Friend}, \hyperlink{classNurse_a3ff47edb35f171a538fe62b3abdca948}{Nurse}, and \hyperlink{classRelative_a13fc6c65f7338cfa29c9f31958134c56}{Relative}.
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classAgent_affc842049c5010a5f8bd99a62d650a25}{\index{Agent@{Agent}!angular\-\_\-z@{angular\-\_\-z}}
+\index{angular\-\_\-z@{angular\-\_\-z}!Agent@{Agent}}
+\subsubsection[{angular\-\_\-z}]{\setlength{\rightskip}{0pt plus 5cm}double Agent\-::angular\-\_\-z\hspace{0.3cm}{\ttfamily [protected]}}}\label{classAgent_affc842049c5010a5f8bd99a62d650a25}
+Angular velocity of the robot \hypertarget{classAgent_a77dfc60513d8c90b2848297e09fffba7}{\index{Agent@{Agent}!linear\-\_\-x@{linear\-\_\-x}}
+\index{linear\-\_\-x@{linear\-\_\-x}!Agent@{Agent}}
+\subsubsection[{linear\-\_\-x}]{\setlength{\rightskip}{0pt plus 5cm}double Agent\-::linear\-\_\-x\hspace{0.3cm}{\ttfamily [protected]}}}\label{classAgent_a77dfc60513d8c90b2848297e09fffba7}
+Linear velocity of the robot \hypertarget{classAgent_af51536ae3b511b53726b84b9226cc772}{\index{Agent@{Agent}!px@{px}}
+\index{px@{px}!Agent@{Agent}}
+\subsubsection[{px}]{\setlength{\rightskip}{0pt plus 5cm}double Agent\-::px\hspace{0.3cm}{\ttfamily [protected]}}}\label{classAgent_af51536ae3b511b53726b84b9226cc772}
+x position of the robot \hypertarget{classAgent_a048e8b32d02a2fd58f046a444a287015}{\index{Agent@{Agent}!py@{py}}
+\index{py@{py}!Agent@{Agent}}
+\subsubsection[{py}]{\setlength{\rightskip}{0pt plus 5cm}double Agent\-::py\hspace{0.3cm}{\ttfamily [protected]}}}\label{classAgent_a048e8b32d02a2fd58f046a444a287015}
+y position of the robot \hypertarget{classAgent_aefcf2085a669d7e91d932e7cc3ee88ce}{\index{Agent@{Agent}!robot\-\_\-id@{robot\-\_\-id}}
+\index{robot\-\_\-id@{robot\-\_\-id}!Agent@{Agent}}
+\subsubsection[{robot\-\_\-id}]{\setlength{\rightskip}{0pt plus 5cm}int Agent\-::robot\-\_\-id\hspace{0.3cm}{\ttfamily [protected]}}}\label{classAgent_aefcf2085a669d7e91d932e7cc3ee88ce}
+Robot's I\-D 
 
 The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
