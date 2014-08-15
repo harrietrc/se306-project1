@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['calc_5fgoal_5fangle',['calc_goal_angle',['../classAssistant.html#a8fce345025f32bcd0e45d83960d4b3f7',1,'Assistant']]]
+  ['assistant_5fcallback',['assistant_callback',['../classResident.html#aa715d491e917de6f621593f0d1f01bd6',1,'Resident']]]
 ];

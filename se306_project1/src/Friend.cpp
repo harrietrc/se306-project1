@@ -8,6 +8,11 @@
 #include "math.h"
 #include "Friend.h"
 
+/**
+*	@brief Updates the Friend's x position, y position, and angle to reflect its current pose.
+*	@note Rounding is used to calculate the current angle. This approximation is accounted for by using threshholds when processing angles.
+*	@param msg Odometry message from odom topic
+*/
 void Friend::StageOdom_callback(nav_msgs::Odometry msg)
 {
 	//This is the call back function to process odometry messages coming from Stage. 	
@@ -17,6 +22,12 @@ void Friend::StageOdom_callback(nav_msgs::Odometry msg)
 	ROS_INFO("Current y position is: %f", py);
 }
 
+/**
+*	@brief Callback function to process laser scan messsages.
+*	You can access the range data from msg.ranges[i]. i = sample number
+*	@note Currently blank as it is not in use. Navigation operates through a checkpoint system.
+*	@param msg Single scan from a planar laser range finder
+*/
 void Friend::StageLaser_callback(sensor_msgs::LaserScan msg)
 {
 	//This is the callback function to process laser scan messages
@@ -24,6 +35,10 @@ void Friend::StageLaser_callback(sensor_msgs::LaserScan msg)
 	
 }
 
+/**
+*	@brief Main function for the Friend process.
+*	Controls node setup and periodic events.
+*/
 int Friend::run(int argc, char **argv)
 {
 
@@ -79,8 +94,8 @@ int Friend::run(int argc, char **argv)
 
 }
 	
-/* 
-	Redirects to main function (run()) of the node.
+/**
+*	@brief Redirects to main function (run()) of the node.
 */
 int main(int argc, char **argv) {
 	Friend *a = new Friend();

@@ -1,6 +1,15 @@
 \hypertarget{classRelative}{\section{Relative Class Reference}
 \label{classRelative}\index{Relative@{Relative}}
 }
+
+
+Class for \hyperlink{classRelative}{Relative} nodes.  
+
+
+
+
+{\ttfamily \#include $<$Relative.\-h$>$}
+
 Inheritance diagram for Relative\-:\begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -10,16 +19,66 @@ Inheritance diagram for Relative\-:\begin{figure}[H]
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{classRelative_a13fc6c65f7338cfa29c9f31958134c56}{void {\bfseries Stage\-Odom\-\_\-callback} (nav\-\_\-msgs\-::\-Odometry msg)}\label{classRelative_a13fc6c65f7338cfa29c9f31958134c56}
+void \hyperlink{classRelative_a13fc6c65f7338cfa29c9f31958134c56}{Stage\-Odom\-\_\-callback} (nav\-\_\-msgs\-::\-Odometry msg)
+\begin{DoxyCompactList}\small\item\em Updates the \hyperlink{classRelative}{Relative}'s x position, y position, and angle to reflect its current pose. \end{DoxyCompactList}\item 
+void \hyperlink{classRelative_a556d177e5d1562ab9af5018ef382c836}{Stage\-Laser\-\_\-callback} (sensor\-\_\-msgs\-::\-Laser\-Scan msg)
+\begin{DoxyCompactList}\small\item\em Callback function to process laser scan messsages. You can access the range data from msg.\-ranges\mbox{[}i\mbox{]}. i = sample number. \end{DoxyCompactList}\item 
+\hypertarget{classRelative_a966fc1a728e7b4ab9bde0cb636b5d7a9}{int \hyperlink{classRelative_a966fc1a728e7b4ab9bde0cb636b5d7a9}{run} (int argc, char $\ast$$\ast$argv)}\label{classRelative_a966fc1a728e7b4ab9bde0cb636b5d7a9}
 
-\item 
-\hypertarget{classRelative_a556d177e5d1562ab9af5018ef382c836}{void {\bfseries Stage\-Laser\-\_\-callback} (sensor\-\_\-msgs\-::\-Laser\-Scan msg)}\label{classRelative_a556d177e5d1562ab9af5018ef382c836}
-
-\item 
-\hypertarget{classRelative_a966fc1a728e7b4ab9bde0cb636b5d7a9}{int {\bfseries run} (int argc, char $\ast$$\ast$argv)}\label{classRelative_a966fc1a728e7b4ab9bde0cb636b5d7a9}
-
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Main function for the \hyperlink{classRelative}{Relative} process. Controls node setup and periodic events. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Class for \hyperlink{classRelative}{Relative} nodes. 
+
+\subsection{Member Function Documentation}
+\hypertarget{classRelative_a556d177e5d1562ab9af5018ef382c836}{\index{Relative@{Relative}!Stage\-Laser\-\_\-callback@{Stage\-Laser\-\_\-callback}}
+\index{Stage\-Laser\-\_\-callback@{Stage\-Laser\-\_\-callback}!Relative@{Relative}}
+\subsubsection[{Stage\-Laser\-\_\-callback}]{\setlength{\rightskip}{0pt plus 5cm}void Relative\-::\-Stage\-Laser\-\_\-callback (
+\begin{DoxyParamCaption}
+\item[{sensor\-\_\-msgs\-::\-Laser\-Scan}]{msg}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classRelative_a556d177e5d1562ab9af5018ef382c836}
+
+
+Callback function to process laser scan messsages. You can access the range data from msg.\-ranges\mbox{[}i\mbox{]}. i = sample number. 
+
+\begin{DoxyNote}{Note}
+Currently blank as it is not in use. Navigation operates through a checkpoint system. 
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & Single scan from a planar laser range finder \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classAgent}{Agent}.
+
+\hypertarget{classRelative_a13fc6c65f7338cfa29c9f31958134c56}{\index{Relative@{Relative}!Stage\-Odom\-\_\-callback@{Stage\-Odom\-\_\-callback}}
+\index{Stage\-Odom\-\_\-callback@{Stage\-Odom\-\_\-callback}!Relative@{Relative}}
+\subsubsection[{Stage\-Odom\-\_\-callback}]{\setlength{\rightskip}{0pt plus 5cm}void Relative\-::\-Stage\-Odom\-\_\-callback (
+\begin{DoxyParamCaption}
+\item[{nav\-\_\-msgs\-::\-Odometry}]{msg}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classRelative_a13fc6c65f7338cfa29c9f31958134c56}
+
+
+Updates the \hyperlink{classRelative}{Relative}'s x position, y position, and angle to reflect its current pose. 
+
+\begin{DoxyNote}{Note}
+Rounding is used to calculate the current angle. This approximation is accounted for by using threshholds when processing angles. 
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & Odometry message from odom topic \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classAgent}{Agent}.
+
 
 
 The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}

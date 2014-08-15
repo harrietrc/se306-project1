@@ -1,6 +1,15 @@
 \hypertarget{classDoctor}{\section{Doctor Class Reference}
 \label{classDoctor}\index{Doctor@{Doctor}}
 }
+
+
+Class for the \hyperlink{classDoctor}{Doctor} nodes.  
+
+
+
+
+{\ttfamily \#include $<$Doctor.\-h$>$}
+
 Inheritance diagram for Doctor\-:\begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -10,30 +19,24 @@ Inheritance diagram for Doctor\-:\begin{figure}[H]
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{classDoctor_a92b20f52198c6137d8858152cba77640}{void {\bfseries Stage\-Odom\-\_\-callback} (nav\-\_\-msgs\-::\-Odometry msg)}\label{classDoctor_a92b20f52198c6137d8858152cba77640}
+void \hyperlink{classDoctor_a92b20f52198c6137d8858152cba77640}{Stage\-Odom\-\_\-callback} (nav\-\_\-msgs\-::\-Odometry msg)
+\begin{DoxyCompactList}\small\item\em Updates the \hyperlink{classDoctor}{Doctor}'s x position, y position, and angle to reflect its current pose. \end{DoxyCompactList}\item 
+void \hyperlink{classDoctor_ab0b46ba92bd2069733f304858b7e4495}{Stage\-Laser\-\_\-callback} (sensor\-\_\-msgs\-::\-Laser\-Scan msg)
+\begin{DoxyCompactList}\small\item\em Callback function to process laser scan messsages. You can access the range data from msg.\-ranges\mbox{[}i\mbox{]}. i = sample number. \end{DoxyCompactList}\item 
+\hypertarget{classDoctor_a1fe9c9a74bd4d2044b7217ec82ae9e60}{int \hyperlink{classDoctor_a1fe9c9a74bd4d2044b7217ec82ae9e60}{run} (int argc, char $\ast$$\ast$argv)}\label{classDoctor_a1fe9c9a74bd4d2044b7217ec82ae9e60}
 
-\item 
-\hypertarget{classDoctor_ab0b46ba92bd2069733f304858b7e4495}{void {\bfseries Stage\-Laser\-\_\-callback} (sensor\-\_\-msgs\-::\-Laser\-Scan msg)}\label{classDoctor_ab0b46ba92bd2069733f304858b7e4495}
-
-\item 
-\hypertarget{classDoctor_a1fe9c9a74bd4d2044b7217ec82ae9e60}{int {\bfseries run} (int argc, char $\ast$$\ast$argv)}\label{classDoctor_a1fe9c9a74bd4d2044b7217ec82ae9e60}
-
-\item 
-\hypertarget{classDoctor_a55fe6c06a3ce07fd9014a03000df43db}{double {\bfseries calc\-\_\-goal\-\_\-angle} (double goal\-\_\-x, double goal\-\_\-y, double cur\-\_\-angle, double px, double py)}\label{classDoctor_a55fe6c06a3ce07fd9014a03000df43db}
-
-\item 
-\hypertarget{classDoctor_ada60bb6625be46966ff86f7af9d05366}{std\-::pair$<$ double, double $>$ {\bfseries move} (double goal\-\_\-x, double goal\-\_\-y, double cur\-\_\-angle, double goal\-\_\-angle, double px, double py)}\label{classDoctor_ada60bb6625be46966ff86f7af9d05366}
-
-\item 
+\begin{DoxyCompactList}\small\item\em Main function for the \hyperlink{classDoctor}{Doctor} process. Controls node setup and periodic events. \end{DoxyCompactList}\item 
+double \hyperlink{classDoctor_a55fe6c06a3ce07fd9014a03000df43db}{calc\-\_\-goal\-\_\-angle} (double goal\-\_\-x, double goal\-\_\-y, double cur\-\_\-angle, double px, double py)
+\begin{DoxyCompactList}\small\item\em Given the agent's current angle, this function calculates the angle to the goal. cur\-\_\-angle, goal\-\_\-x, goal\-\_\-y, px, and py are class fields but are also passed as parameters. \end{DoxyCompactList}\item 
+std\-::pair$<$ double, double $>$ \hyperlink{classDoctor_ada60bb6625be46966ff86f7af9d05366}{move} (double goal\-\_\-x, double goal\-\_\-y, double cur\-\_\-angle, double goal\-\_\-angle, double px, double py)
+\begin{DoxyCompactList}\small\item\em Keeps the agent moving by changing linear\-\_\-x ad angular\-\_\-z. \end{DoxyCompactList}\item 
 \hypertarget{classDoctor_a21ac6188dd7f5890ff1a633cf700144d}{void {\bfseries random\-Checkpoint\-Callback} (const ros\-::\-Timer\-Event \&)}\label{classDoctor_a21ac6188dd7f5890ff1a633cf700144d}
 
 \item 
-\hypertarget{classDoctor_aed76815aa67aec25e8ff86a55e4ac4f1}{std\-::pair$<$ double, double $>$ {\bfseries move\-Path} (int path\mbox{[}$\,$\mbox{]}\mbox{[}2\mbox{]}, int path\-Length)}\label{classDoctor_aed76815aa67aec25e8ff86a55e4ac4f1}
-
-\item 
-\hypertarget{classDoctor_af4d24247a3f59b1b3b5258938e019086}{void {\bfseries resident\-Status\-Callback} (\hyperlink{structse306__project1_1_1ResidentMsg__}{se306\-\_\-project1\-::\-Resident\-Msg} msg)}\label{classDoctor_af4d24247a3f59b1b3b5258938e019086}
-
-\item 
+std\-::pair$<$ double, double $>$ \hyperlink{classDoctor_a958cbab204ba7da1aeb34c33e028dc14}{move\-Path} (int path\mbox{[}$\,$\mbox{]}\mbox{[}2\mbox{]}, int path\-Length)
+\begin{DoxyCompactList}\small\item\em Causes the agent to move until the goal is reached. When the goal is reached, the next checkpoint becomes the goal or if the list of checkpoints is exhausted, the agent returns to its initial position (the first checkpoint) \end{DoxyCompactList}\item 
+void \hyperlink{classDoctor_af4d24247a3f59b1b3b5258938e019086}{resident\-Status\-Callback} (\hyperlink{structse306__project1_1_1ResidentMsg__}{se306\-\_\-project1\-::\-Resident\-Msg} msg)
+\begin{DoxyCompactList}\small\item\em Callback function that unpacks and processes resident status messages. \hyperlink{classAssistant}{Assistant} should subscribe to the Resident\-Msg topic in order for this callback to be called. Resident\-Msg is published by the \hyperlink{classResident}{Resident}. \end{DoxyCompactList}\item 
 \hypertarget{classDoctor_a26ae14986239ea67147a52235685e31e}{void {\bfseries medication\-Callback} (const ros\-::\-Timer\-Event \&)}\label{classDoctor_a26ae14986239ea67147a52235685e31e}
 
 \end{DoxyCompactItemize}
@@ -70,14 +73,13 @@ Inheritance diagram for Doctor\-:\begin{figure}[H]
 \hypertarget{classDoctor_a2f7dffac0f8141914640e8f9bee5e7ff}{bool {\bfseries running}}\label{classDoctor_a2f7dffac0f8141914640e8f9bee5e7ff}
 
 \item 
-\hypertarget{classDoctor_ae31c0df1faec161bc8fec8dfae55b139}{bool {\bfseries is\-Set}}\label{classDoctor_ae31c0df1faec161bc8fec8dfae55b139}
-
-\item 
 \hypertarget{classDoctor_ab67e7a3eab1a57a0cfa52d84fe52414d}{double {\bfseries cur\-\_\-angle}}\label{classDoctor_ab67e7a3eab1a57a0cfa52d84fe52414d}
 
 \item 
 \hypertarget{classDoctor_a254303eb3ae4982340eb079ea76e942a}{int {\bfseries cc} = 1}\label{classDoctor_a254303eb3ae4982340eb079ea76e942a}
 
+\item 
+int {\bfseries checkpoints} \mbox{[}4\mbox{]}\mbox{[}2\mbox{]}
 \item 
 \hypertarget{classDoctor_a0566f795b41ece871b82ed7b63c5a780}{bool {\bfseries is\-\_\-called}}\label{classDoctor_a0566f795b41ece871b82ed7b63c5a780}
 
@@ -87,10 +89,165 @@ Inheritance diagram for Doctor\-:\begin{figure}[H]
 \item 
 \hypertarget{classDoctor_ac371e75b4dcac584c9f2fa89585fefd7}{std\-::pair$<$ double, double $>$ {\bfseries ret}}\label{classDoctor_ac371e75b4dcac584c9f2fa89585fefd7}
 
-\item 
-int {\bfseries checkpoints} \mbox{[}4\mbox{]}\mbox{[}2\mbox{]}
 \end{DoxyCompactItemize}
 \subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Class for the \hyperlink{classDoctor}{Doctor} nodes. 
+
+\subsection{Member Function Documentation}
+\hypertarget{classDoctor_a55fe6c06a3ce07fd9014a03000df43db}{\index{Doctor@{Doctor}!calc\-\_\-goal\-\_\-angle@{calc\-\_\-goal\-\_\-angle}}
+\index{calc\-\_\-goal\-\_\-angle@{calc\-\_\-goal\-\_\-angle}!Doctor@{Doctor}}
+\subsubsection[{calc\-\_\-goal\-\_\-angle}]{\setlength{\rightskip}{0pt plus 5cm}double Doctor\-::calc\-\_\-goal\-\_\-angle (
+\begin{DoxyParamCaption}
+\item[{double}]{goal\-\_\-x, }
+\item[{double}]{goal\-\_\-y, }
+\item[{double}]{cur\-\_\-angle, }
+\item[{double}]{px, }
+\item[{double}]{py}
+\end{DoxyParamCaption}
+)}}\label{classDoctor_a55fe6c06a3ce07fd9014a03000df43db}
+
+
+Given the agent's current angle, this function calculates the angle to the goal. cur\-\_\-angle, goal\-\_\-x, goal\-\_\-y, px, and py are class fields but are also passed as parameters. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em goal\-\_\-x} & The x co-\/ordinate of the goal \\
+\hline
+{\em goal\-\_\-y} & The y co-\/ordinate of the goal \\
+\hline
+{\em cur\-\_\-angle} & The agent's current angle, in reference to the co-\/ordinate system \\
+\hline
+{\em px} & The agent's initial x position \\
+\hline
+{\em py} & The agent's initial y position \\
+\hline
+{\em goal\-\_\-angle} & The angle that the robot must rotate to face the goal, in reference to the co-\/ordinate system. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classDoctor_ada60bb6625be46966ff86f7af9d05366}{\index{Doctor@{Doctor}!move@{move}}
+\index{move@{move}!Doctor@{Doctor}}
+\subsubsection[{move}]{\setlength{\rightskip}{0pt plus 5cm}std\-::pair$<$ double, double $>$ Doctor\-::move (
+\begin{DoxyParamCaption}
+\item[{double}]{goal\-\_\-x, }
+\item[{double}]{goal\-\_\-y, }
+\item[{double}]{cur\-\_\-angle, }
+\item[{double}]{goal\-\_\-angle, }
+\item[{double}]{px, }
+\item[{double}]{py}
+\end{DoxyParamCaption}
+)}}\label{classDoctor_ada60bb6625be46966ff86f7af9d05366}
+
+
+Keeps the agent moving by changing linear\-\_\-x ad angular\-\_\-z. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em goal\-\_\-x} & The x position of the robot's goal \\
+\hline
+{\em goal\-\_\-y} & The y position of the robot's goal \\
+\hline
+{\em cur\-\_\-angle} & The agent's current facing, in reference to the co-\/ordinate system. \\
+\hline
+{\em goal\-\_\-angle} & The angle that the agent must face in order to reach the goal. \\
+\hline
+{\em px} & Initial x position \\
+\hline
+{\em py} & Initial y position \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\-\_\-ret linear\-\_\-x and angular\-\_\-z 
+\end{DoxyReturn}
+\hypertarget{classDoctor_a958cbab204ba7da1aeb34c33e028dc14}{\index{Doctor@{Doctor}!move\-Path@{move\-Path}}
+\index{move\-Path@{move\-Path}!Doctor@{Doctor}}
+\subsubsection[{move\-Path}]{\setlength{\rightskip}{0pt plus 5cm}std\-::pair$<$ double, double $>$ Doctor\-::move\-Path (
+\begin{DoxyParamCaption}
+\item[{int}]{path\mbox{[}$\,$\mbox{]}\mbox{[}2\mbox{]}, }
+\item[{int}]{path\-Length}
+\end{DoxyParamCaption}
+)}}\label{classDoctor_a958cbab204ba7da1aeb34c33e028dc14}
+
+
+Causes the agent to move until the goal is reached. When the goal is reached, the next checkpoint becomes the goal or if the list of checkpoints is exhausted, the agent returns to its initial position (the first checkpoint) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path\mbox{[}$\,$\mbox{]}\mbox{[}2\mbox{]}} & An array of checkpoints that forms a path. \\
+\hline
+{\em path\-Length} & The number of checkpoints in the path (-\/1, as counting starts at 0) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+linear\-\_\-x and angular\-\_\-z 
+\end{DoxyReturn}
+\hypertarget{classDoctor_af4d24247a3f59b1b3b5258938e019086}{\index{Doctor@{Doctor}!resident\-Status\-Callback@{resident\-Status\-Callback}}
+\index{resident\-Status\-Callback@{resident\-Status\-Callback}!Doctor@{Doctor}}
+\subsubsection[{resident\-Status\-Callback}]{\setlength{\rightskip}{0pt plus 5cm}void Doctor\-::resident\-Status\-Callback (
+\begin{DoxyParamCaption}
+\item[{{\bf se306\-\_\-project1\-::\-Resident\-Msg}}]{msg}
+\end{DoxyParamCaption}
+)}}\label{classDoctor_af4d24247a3f59b1b3b5258938e019086}
+
+
+Callback function that unpacks and processes resident status messages. \hyperlink{classAssistant}{Assistant} should subscribe to the Resident\-Msg topic in order for this callback to be called. Resident\-Msg is published by the \hyperlink{classResident}{Resident}. 
+
+\begin{DoxyNote}{Note}
+Currently this callback processes only resident hunger, controlling the cooking behaviour. More behaviours can be implemented later. 
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & A custom Resident\-Msg message that contains information about the resident's current status. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classDoctor_ab0b46ba92bd2069733f304858b7e4495}{\index{Doctor@{Doctor}!Stage\-Laser\-\_\-callback@{Stage\-Laser\-\_\-callback}}
+\index{Stage\-Laser\-\_\-callback@{Stage\-Laser\-\_\-callback}!Doctor@{Doctor}}
+\subsubsection[{Stage\-Laser\-\_\-callback}]{\setlength{\rightskip}{0pt plus 5cm}void Doctor\-::\-Stage\-Laser\-\_\-callback (
+\begin{DoxyParamCaption}
+\item[{sensor\-\_\-msgs\-::\-Laser\-Scan}]{msg}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classDoctor_ab0b46ba92bd2069733f304858b7e4495}
+
+
+Callback function to process laser scan messsages. You can access the range data from msg.\-ranges\mbox{[}i\mbox{]}. i = sample number. 
+
+\begin{DoxyNote}{Note}
+Currently blank as it is not in use. Navigation operates through a checkpoint system. 
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & Single scan from a planar laser range finder \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classAgent}{Agent}.
+
+\hypertarget{classDoctor_a92b20f52198c6137d8858152cba77640}{\index{Doctor@{Doctor}!Stage\-Odom\-\_\-callback@{Stage\-Odom\-\_\-callback}}
+\index{Stage\-Odom\-\_\-callback@{Stage\-Odom\-\_\-callback}!Doctor@{Doctor}}
+\subsubsection[{Stage\-Odom\-\_\-callback}]{\setlength{\rightskip}{0pt plus 5cm}void Doctor\-::\-Stage\-Odom\-\_\-callback (
+\begin{DoxyParamCaption}
+\item[{nav\-\_\-msgs\-::\-Odometry}]{msg}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classDoctor_a92b20f52198c6137d8858152cba77640}
+
+
+Updates the \hyperlink{classDoctor}{Doctor}'s x position, y position, and angle to reflect its current pose. 
+
+\begin{DoxyNote}{Note}
+Rounding is used to calculate the current angle. This approximation is accounted for by using threshholds when processing angles. 
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & Odometry message from odom topic \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classAgent}{Agent}.
+
 
 
 \subsection{Member Data Documentation}
@@ -100,11 +257,11 @@ int {\bfseries checkpoints} \mbox{[}4\mbox{]}\mbox{[}2\mbox{]}
 {\bfseries Initial value\-:}
 \begin{DoxyCode}
 = \{
-                \{10, -7\},
-                \{10, 2\},
-                \{30, 20\},
-                \{30, 25\}
-                \}
+            \{10, -7\},
+            \{10, 1\},
+            \{30, 20\},
+            \{30, 25\}
+            \}
 \end{DoxyCode}
 
 

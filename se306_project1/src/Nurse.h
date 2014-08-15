@@ -1,5 +1,8 @@
 #include "Visitor.h"
 
+/**
+*	@brief Class for Nurse nodes.
+*/
 class Nurse : public Visitor
 {
 	public:

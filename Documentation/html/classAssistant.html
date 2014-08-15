@@ -102,7 +102,7 @@ Inheritance diagram for Assistant:</div>
  <div class="center">
   <img src="classAssistant.png" usemap="#Assistant_map" alt=""/>
   <map id="Assistant_map" name="Assistant_map">
-<area href="classAgent.html" alt="Agent" shape="rect" coords="0,0,62,24"/>
+<area href="classAgent.html" title="Superclass for all &#39;agents&#39; - i.e. Assistants, Visitors, and the Resident. " alt="Agent" shape="rect" coords="0,0,62,24"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -119,19 +119,19 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class
 <tr class="memdesc:a50eec4c3693b7b2c7d363ef4848a5815"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main function for the <a class="el" href="classAssistant.html" title="Class for robot assistants. ">Assistant</a> process. Controls node setup and periodic events. <br/></td></tr>
 <tr class="separator:a50eec4c3693b7b2c7d363ef4848a5815"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8fce345025f32bcd0e45d83960d4b3f7"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAssistant.html#a8fce345025f32bcd0e45d83960d4b3f7">calc_goal_angle</a> (double <a class="el" href="classAssistant.html#a1a1f1fe48d0eb6a6a39b7fbdb2ef6641">goal_x</a>, double <a class="el" href="classAssistant.html#a1b6ce5d7c3124140be8d351c847fe91c">goal_y</a>, double <a class="el" href="classAssistant.html#a451a20f551c43d0b6810c8208fe84773">cur_angle</a>, double <a class="el" href="classAssistant.html#a694fdaa5fb378340c42b7f75716cd1ce">px</a>, double <a class="el" href="classAssistant.html#ae092b444c226b5ffbdf454ad24f630d6">py</a>)</td></tr>
-<tr class="memdesc:a8fce345025f32bcd0e45d83960d4b3f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Given the robot's current angle, this function calculates the angle to the goal. cur_angle, goal_x, goal_y, px, and py are class fields but are also passed as parameters.  <a href="#a8fce345025f32bcd0e45d83960d4b3f7">More...</a><br/></td></tr>
+<tr class="memdesc:a8fce345025f32bcd0e45d83960d4b3f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Given the agent's current angle, this function calculates the angle to the goal. cur_angle, goal_x, goal_y, px, and py are class fields but are also passed as parameters.  <a href="#a8fce345025f32bcd0e45d83960d4b3f7">More...</a><br/></td></tr>
 <tr class="separator:a8fce345025f32bcd0e45d83960d4b3f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac420c9d5551f0ef6925d9a58a5b4854a"><td class="memItemLeft" align="right" valign="top">std::pair&lt; double, double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAssistant.html#ac420c9d5551f0ef6925d9a58a5b4854a">move</a> (double <a class="el" href="classAssistant.html#a1a1f1fe48d0eb6a6a39b7fbdb2ef6641">goal_x</a>, double <a class="el" href="classAssistant.html#a1b6ce5d7c3124140be8d351c847fe91c">goal_y</a>, double <a class="el" href="classAssistant.html#a451a20f551c43d0b6810c8208fe84773">cur_angle</a>, double <a class="el" href="classAssistant.html#ae4468e02db193f0ffa0ca17a249f802d">goal_angle</a>, double <a class="el" href="classAssistant.html#a694fdaa5fb378340c42b7f75716cd1ce">px</a>, double <a class="el" href="classAssistant.html#ae092b444c226b5ffbdf454ad24f630d6">py</a>)</td></tr>
-<tr class="memdesc:ac420c9d5551f0ef6925d9a58a5b4854a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keeps the robot moving by changing linear_x ad angular_z.  <a href="#ac420c9d5551f0ef6925d9a58a5b4854a">More...</a><br/></td></tr>
+<tr class="memdesc:ac420c9d5551f0ef6925d9a58a5b4854a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keeps the agent moving by changing linear_x ad angular_z.  <a href="#ac420c9d5551f0ef6925d9a58a5b4854a">More...</a><br/></td></tr>
 <tr class="separator:ac420c9d5551f0ef6925d9a58a5b4854a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a320ca71cccf4964b341820db82b4b604"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a320ca71cccf4964b341820db82b4b604"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>randomCheckpointCallback</b> (const ros::TimerEvent &amp;)</td></tr>
 <tr class="separator:a320ca71cccf4964b341820db82b4b604"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a921c4b094867a4ebc62e404e772d002c"><td class="memItemLeft" align="right" valign="top">std::pair&lt; double, double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAssistant.html#a921c4b094867a4ebc62e404e772d002c">movePath</a> (int path[][2], int pathLength)</td></tr>
-<tr class="memdesc:a921c4b094867a4ebc62e404e772d002c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Causes the robot to move until the goal is reached. When the goal is reached, the next checkpoint becomes the goal or if the list of checkpoints is exhausted, the robot returns to its initial position (the first checkpoint)  <a href="#a921c4b094867a4ebc62e404e772d002c">More...</a><br/></td></tr>
+<tr class="memdesc:a921c4b094867a4ebc62e404e772d002c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Causes the agent to move until the goal is reached. When the goal is reached, the next checkpoint becomes the goal or if the list of checkpoints is exhausted, the agent returns to its initial position (the first checkpoint)  <a href="#a921c4b094867a4ebc62e404e772d002c">More...</a><br/></td></tr>
 <tr class="separator:a921c4b094867a4ebc62e404e772d002c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae4f0887ad0748940571fdf9ed1013766"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAssistant.html#ae4f0887ad0748940571fdf9ed1013766">residentStatusCallback</a> (<a class="el" href="structse306__project1_1_1ResidentMsg__.html">se306_project1::ResidentMsg</a> msg)</td></tr>
-<tr class="memdesc:ae4f0887ad0748940571fdf9ed1013766"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback function that unpacks and processes resident status messages. <a class="el" href="classAssistant.html" title="Class for robot assistants. ">Assistant</a> should subscribe to the ResidentMsg topic in order for this callback to be called. ResidentMsg is published by the <a class="el" href="classResident.html">Resident</a>.  <a href="#ae4f0887ad0748940571fdf9ed1013766">More...</a><br/></td></tr>
+<tr class="memdesc:ae4f0887ad0748940571fdf9ed1013766"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback function that unpacks and processes resident status messages. <a class="el" href="classAssistant.html" title="Class for robot assistants. ">Assistant</a> should subscribe to the ResidentMsg topic in order for this callback to be called. ResidentMsg is published by the <a class="el" href="classResident.html" title="Class representing the Resident. ">Resident</a>.  <a href="#ae4f0887ad0748940571fdf9ed1013766">More...</a><br/></td></tr>
 <tr class="separator:ae4f0887ad0748940571fdf9ed1013766"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae9b3476194ec440164926085a87a81f0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAssistant.html#ae9b3476194ec440164926085a87a81f0">medicationCallback</a> (const ros::TimerEvent &amp;)</td></tr>
 <tr class="memdesc:ae9b3476194ec440164926085a87a81f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Periodic callback for the provision of medication that should act as a model for all periodic events. Called by the ros::Timer in the <a class="el" href="classAssistant.html#a50eec4c3693b7b2c7d363ef4848a5815" title="Main function for the Assistant process. Controls node setup and periodic events. ...">run()</a> function. Can specify start time, end time, and period.  <a href="#ae9b3476194ec440164926085a87a81f0">More...</a><br/></td></tr>
@@ -173,9 +173,9 @@ std::pair&lt; double, bool &gt;&#160;</td><td class="memItemRight" valign="botto
 <tr class="separator:ab02623d3ac8868e28de116fe0b00f509"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a741527493a17d0f6dc512c03a2055fc1"><td class="memItemLeft" align="right" valign="top">std::pair&lt; double, double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAssistant.html#a741527493a17d0f6dc512c03a2055fc1">ret</a></td></tr>
 <tr class="separator:a741527493a17d0f6dc512c03a2055fc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac3c8eb895beffec2e70b25184c7fcae9"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAssistant.html#ac3c8eb895beffec2e70b25184c7fcae9">checkpoints</a> [10][2]</td></tr>
-<tr class="memdesc:ac3c8eb895beffec2e70b25184c7fcae9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set of checkpoints that the nodes can move to in the map. Gives x position and y position for each co-ordinate.  <a href="#ac3c8eb895beffec2e70b25184c7fcae9">More...</a><br/></td></tr>
-<tr class="separator:ac3c8eb895beffec2e70b25184c7fcae9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31e94c37f8c6509b81c5c92ad5213e3f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAssistant.html#a31e94c37f8c6509b81c5c92ad5213e3f">checkpoints</a> [11][2]</td></tr>
+<tr class="memdesc:a31e94c37f8c6509b81c5c92ad5213e3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set of checkpoints that the nodes can move to in the map. Gives x position and y position for each co-ordinate.  <a href="#a31e94c37f8c6509b81c5c92ad5213e3f">More...</a><br/></td></tr>
+<tr class="separator:a31e94c37f8c6509b81c5c92ad5213e3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af9a992d4b1c5036ed73c57c7e1c5c258"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAssistant.html#af9a992d4b1c5036ed73c57c7e1c5c258">cooking</a></td></tr>
 <tr class="separator:af9a992d4b1c5036ed73c57c7e1c5c258"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classAgent"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classAgent')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classAgent.html">Agent</a></td></tr>
@@ -256,14 +256,14 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Given the robot's current angle, this function calculates the angle to the goal. cur_angle, goal_x, goal_y, px, and py are class fields but are also passed as parameters. </p>
+<p>Given the agent's current angle, this function calculates the angle to the goal. cur_angle, goal_x, goal_y, px, and py are class fields but are also passed as parameters. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">goal_x</td><td>The x co-ordinate of the goal </td></tr>
     <tr><td class="paramname">goal_y</td><td>The y co-ordinate of the goal </td></tr>
-    <tr><td class="paramname">cur_angle</td><td>The robot's current angle, in reference to the co-ordinate system </td></tr>
-    <tr><td class="paramname">px</td><td>The robot's initial x position </td></tr>
-    <tr><td class="paramname">py</td><td>The robot's initial y position </td></tr>
+    <tr><td class="paramname">cur_angle</td><td>The agent's current angle, in reference to the co-ordinate system </td></tr>
+    <tr><td class="paramname">px</td><td>The agent's initial x position </td></tr>
+    <tr><td class="paramname">py</td><td>The agent's initial y position </td></tr>
     <tr><td class="paramname">goal_angle</td><td>The angle that the robot must rotate to face the goal, in reference to the co-ordinate system. </td></tr>
   </table>
   </dd>
@@ -345,13 +345,13 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Keeps the robot moving by changing linear_x ad angular_z. </p>
+<p>Keeps the agent moving by changing linear_x ad angular_z. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">goal_x</td><td>The x position of the robot's goal </td></tr>
     <tr><td class="paramname">goal_y</td><td>The y position of the robot's goal </td></tr>
-    <tr><td class="paramname">cur_angle</td><td>The robot's current facing, in reference to the co-ordinate system. </td></tr>
-    <tr><td class="paramname">goal_angle</td><td>The angle that the robot must face in order to reach the goal. </td></tr>
+    <tr><td class="paramname">cur_angle</td><td>The agent's current facing, in reference to the co-ordinate system. </td></tr>
+    <tr><td class="paramname">goal_angle</td><td>The angle that the agent must face in order to reach the goal. </td></tr>
     <tr><td class="paramname">px</td><td>Initial x position </td></tr>
     <tr><td class="paramname">py</td><td>Initial y position </td></tr>
   </table>
@@ -385,7 +385,7 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Causes the robot to move until the goal is reached. When the goal is reached, the next checkpoint becomes the goal or if the list of checkpoints is exhausted, the robot returns to its initial position (the first checkpoint) </p>
+<p>Causes the agent to move until the goal is reached. When the goal is reached, the next checkpoint becomes the goal or if the list of checkpoints is exhausted, the agent returns to its initial position (the first checkpoint) </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">path[][2]</td><td>An array of checkpoints that forms a path. </td></tr>
@@ -411,7 +411,7 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Callback function that unpacks and processes resident status messages. <a class="el" href="classAssistant.html" title="Class for robot assistants. ">Assistant</a> should subscribe to the ResidentMsg topic in order for this callback to be called. ResidentMsg is published by the <a class="el" href="classResident.html">Resident</a>. </p>
+<p>Callback function that unpacks and processes resident status messages. <a class="el" href="classAssistant.html" title="Class for robot assistants. ">Assistant</a> should subscribe to the ResidentMsg topic in order for this callback to be called. ResidentMsg is published by the <a class="el" href="classResident.html" title="Class representing the Resident. ">Resident</a>. </p>
 <dl class="section note"><dt>Note</dt><dd>Currently this callback processes only resident hunger, controlling the cooking behaviour. More behaviours can be implemented later. </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -510,11 +510,11 @@ Additional Inherited Members</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p><a class="el" href="classResident.html">Resident</a> boredom </p>
+<p><a class="el" href="classResident.html" title="Class representing the Resident. ">Resident</a> boredom </p>
 
 </div>
 </div>
-<a class="anchor" id="ac3c8eb895beffec2e70b25184c7fcae9"></a>
+<a class="anchor" id="a31e94c37f8c6509b81c5c92ad5213e3f"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -522,7 +522,7 @@ Additional Inherited Members</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int Assistant::checkpoints[10][2]</td>
+          <td class="memname">int Assistant::checkpoints[11][2]</td>
         </tr>
       </table>
   </td>
@@ -532,7 +532,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">= {  </div>
-<div class="line">        {30, 25}, </div>
+<div class="line">        {30, 25},</div>
 <div class="line">        {30, 7}, </div>
 <div class="line">        {40, 7},</div>
 <div class="line">        {40, 8},</div>
@@ -541,7 +541,8 @@ Additional Inherited Members</h2></td></tr>
 <div class="line">        {40,7},</div>
 <div class="line">        {30,7},</div>
 <div class="line">        {30, 25},</div>
-<div class="line">        {34,20}</div>
+<div class="line">        {34,20},</div>
+<div class="line">        {30, 25}</div>
 <div class="line">        }</div>
 </div><!-- fragment -->
 <p>Set of checkpoints that the nodes can move to in the map. Gives x position and y position for each co-ordinate. </p>
@@ -628,7 +629,7 @@ Additional Inherited Members</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>testThe x position of the robot's goal </p>
+<p>The x position of the robot's goal </p>
 
 </div>
 </div>
@@ -670,7 +671,7 @@ Additional Inherited Members</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p><a class="el" href="classResident.html">Resident</a> health </p>
+<p><a class="el" href="classResident.html" title="Class representing the Resident. ">Resident</a> health </p>
 
 </div>
 </div>
@@ -691,7 +692,7 @@ Additional Inherited Members</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p><a class="el" href="classResident.html">Resident</a> hunger </p>
+<p><a class="el" href="classResident.html" title="Class representing the Resident. ">Resident</a> hunger </p>
 
 </div>
 </div>
@@ -786,7 +787,7 @@ Additional Inherited Members</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Aug 15 2014 09:56:16 for SE306 Project 1 by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Aug 15 2014 11:57:52 for SE306 Project 1 by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

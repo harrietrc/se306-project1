@@ -1,5 +1,8 @@
 #include "Visitor.h"
 
+/**
+*	@brief Class for Friend nodes.
+*/
 class Friend : public Visitor
 {
 	public:

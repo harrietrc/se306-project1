@@ -1,3 +1,8 @@
+/**
+*	@brief Superclass for all 'agents' - i.e. Assistants, Visitors, and the Resident.
+* 	@todo Shift all common functionality (such as navigation) and properties to this class from subclasses.
+*	@extends Agent
+*/
 class Agent
 {
 	protected:

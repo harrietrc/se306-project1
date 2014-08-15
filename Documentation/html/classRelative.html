@@ -90,27 +90,33 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">Relative Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Class for <a class="el" href="classRelative.html" title="Class for Relative nodes. ">Relative</a> nodes.  
+ <a href="classRelative.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="Relative_8h_source.html">Relative.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for Relative:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="classRelative.png" usemap="#Relative_map" alt=""/>
   <map id="Relative_map" name="Relative_map">
-<area href="classVisitor.html" alt="Visitor" shape="rect" coords="0,56,57,80"/>
-<area href="classAgent.html" alt="Agent" shape="rect" coords="0,0,57,24"/>
+<area href="classVisitor.html" title="Class for the implementation of visitors - i.e. Caregivers, Nurses, Doctors, Friends, and Relatives. " alt="Visitor" shape="rect" coords="0,56,57,80"/>
+<area href="classAgent.html" title="Superclass for all &#39;agents&#39; - i.e. Assistants, Visitors, and the Resident. " alt="Agent" shape="rect" coords="0,0,57,24"/>
 </map>
  </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a13fc6c65f7338cfa29c9f31958134c56"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a13fc6c65f7338cfa29c9f31958134c56"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>StageOdom_callback</b> (nav_msgs::Odometry msg)</td></tr>
+<tr class="memitem:a13fc6c65f7338cfa29c9f31958134c56"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRelative.html#a13fc6c65f7338cfa29c9f31958134c56">StageOdom_callback</a> (nav_msgs::Odometry msg)</td></tr>
+<tr class="memdesc:a13fc6c65f7338cfa29c9f31958134c56"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the <a class="el" href="classRelative.html" title="Class for Relative nodes. ">Relative</a>'s x position, y position, and angle to reflect its current pose.  <a href="#a13fc6c65f7338cfa29c9f31958134c56">More...</a><br/></td></tr>
 <tr class="separator:a13fc6c65f7338cfa29c9f31958134c56"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a556d177e5d1562ab9af5018ef382c836"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a556d177e5d1562ab9af5018ef382c836"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>StageLaser_callback</b> (sensor_msgs::LaserScan msg)</td></tr>
+<tr class="memitem:a556d177e5d1562ab9af5018ef382c836"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRelative.html#a556d177e5d1562ab9af5018ef382c836">StageLaser_callback</a> (sensor_msgs::LaserScan msg)</td></tr>
+<tr class="memdesc:a556d177e5d1562ab9af5018ef382c836"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback function to process laser scan messsages. You can access the range data from msg.ranges[i]. i = sample number.  <a href="#a556d177e5d1562ab9af5018ef382c836">More...</a><br/></td></tr>
 <tr class="separator:a556d177e5d1562ab9af5018ef382c836"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a966fc1a728e7b4ab9bde0cb636b5d7a9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a966fc1a728e7b4ab9bde0cb636b5d7a9"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>run</b> (int argc, char **argv)</td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRelative.html#a966fc1a728e7b4ab9bde0cb636b5d7a9">run</a> (int argc, char **argv)</td></tr>
+<tr class="memdesc:a966fc1a728e7b4ab9bde0cb636b5d7a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main function for the <a class="el" href="classRelative.html" title="Class for Relative nodes. ">Relative</a> process. Controls node setup and periodic events. <br/></td></tr>
 <tr class="separator:a966fc1a728e7b4ab9bde0cb636b5d7a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
@@ -145,6 +151,79 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>py</b></td></tr>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>robot_id</b></td></tr>
 <tr class="separator:aefcf2085a669d7e91d932e7cc3ee88ce inherit pro_attribs_classAgent"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Class for <a class="el" href="classRelative.html" title="Class for Relative nodes. ">Relative</a> nodes. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a556d177e5d1562ab9af5018ef382c836"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Relative::StageLaser_callback </td>
+          <td>(</td>
+          <td class="paramtype">sensor_msgs::LaserScan&#160;</td>
+          <td class="paramname"><em>msg</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Callback function to process laser scan messsages. You can access the range data from msg.ranges[i]. i = sample number. </p>
+<dl class="section note"><dt>Note</dt><dd>Currently blank as it is not in use. Navigation operates through a checkpoint system. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">msg</td><td>Single scan from a planar laser range finder </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="classAgent.html">Agent</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a13fc6c65f7338cfa29c9f31958134c56"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Relative::StageOdom_callback </td>
+          <td>(</td>
+          <td class="paramtype">nav_msgs::Odometry&#160;</td>
+          <td class="paramname"><em>msg</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Updates the <a class="el" href="classRelative.html" title="Class for Relative nodes. ">Relative</a>'s x position, y position, and angle to reflect its current pose. </p>
+<dl class="section note"><dt>Note</dt><dd>Rounding is used to calculate the current angle. This approximation is accounted for by using threshholds when processing angles. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">msg</td><td>Odometry message from odom topic </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="classAgent.html">Agent</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>se306_project1/src/<a class="el" href="Relative_8h_source.html">Relative.h</a></li>
 <li>se306_project1/src/Relative.cpp</li>
@@ -152,7 +231,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>robot_id</b></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Aug 15 2014 09:56:16 for SE306 Project 1 by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Aug 15 2014 11:57:52 for SE306 Project 1 by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

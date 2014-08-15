@@ -27,14 +27,14 @@ void \hyperlink{classAssistant_aaf1fe61dc3d3aac3f0ec603531ad9ad7}{Stage\-Laser\-
 
 \begin{DoxyCompactList}\small\item\em Main function for the \hyperlink{classAssistant}{Assistant} process. Controls node setup and periodic events. \end{DoxyCompactList}\item 
 double \hyperlink{classAssistant_a8fce345025f32bcd0e45d83960d4b3f7}{calc\-\_\-goal\-\_\-angle} (double \hyperlink{classAssistant_a1a1f1fe48d0eb6a6a39b7fbdb2ef6641}{goal\-\_\-x}, double \hyperlink{classAssistant_a1b6ce5d7c3124140be8d351c847fe91c}{goal\-\_\-y}, double \hyperlink{classAssistant_a451a20f551c43d0b6810c8208fe84773}{cur\-\_\-angle}, double \hyperlink{classAssistant_a694fdaa5fb378340c42b7f75716cd1ce}{px}, double \hyperlink{classAssistant_ae092b444c226b5ffbdf454ad24f630d6}{py})
-\begin{DoxyCompactList}\small\item\em Given the robot's current angle, this function calculates the angle to the goal. cur\-\_\-angle, goal\-\_\-x, goal\-\_\-y, px, and py are class fields but are also passed as parameters. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Given the agent's current angle, this function calculates the angle to the goal. cur\-\_\-angle, goal\-\_\-x, goal\-\_\-y, px, and py are class fields but are also passed as parameters. \end{DoxyCompactList}\item 
 std\-::pair$<$ double, double $>$ \hyperlink{classAssistant_ac420c9d5551f0ef6925d9a58a5b4854a}{move} (double \hyperlink{classAssistant_a1a1f1fe48d0eb6a6a39b7fbdb2ef6641}{goal\-\_\-x}, double \hyperlink{classAssistant_a1b6ce5d7c3124140be8d351c847fe91c}{goal\-\_\-y}, double \hyperlink{classAssistant_a451a20f551c43d0b6810c8208fe84773}{cur\-\_\-angle}, double \hyperlink{classAssistant_ae4468e02db193f0ffa0ca17a249f802d}{goal\-\_\-angle}, double \hyperlink{classAssistant_a694fdaa5fb378340c42b7f75716cd1ce}{px}, double \hyperlink{classAssistant_ae092b444c226b5ffbdf454ad24f630d6}{py})
-\begin{DoxyCompactList}\small\item\em Keeps the robot moving by changing linear\-\_\-x ad angular\-\_\-z. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Keeps the agent moving by changing linear\-\_\-x ad angular\-\_\-z. \end{DoxyCompactList}\item 
 \hypertarget{classAssistant_a320ca71cccf4964b341820db82b4b604}{void {\bfseries random\-Checkpoint\-Callback} (const ros\-::\-Timer\-Event \&)}\label{classAssistant_a320ca71cccf4964b341820db82b4b604}
 
 \item 
 std\-::pair$<$ double, double $>$ \hyperlink{classAssistant_a921c4b094867a4ebc62e404e772d002c}{move\-Path} (int path\mbox{[}$\,$\mbox{]}\mbox{[}2\mbox{]}, int path\-Length)
-\begin{DoxyCompactList}\small\item\em Causes the robot to move until the goal is reached. When the goal is reached, the next checkpoint becomes the goal or if the list of checkpoints is exhausted, the robot returns to its initial position (the first checkpoint) \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Causes the agent to move until the goal is reached. When the goal is reached, the next checkpoint becomes the goal or if the list of checkpoints is exhausted, the agent returns to its initial position (the first checkpoint) \end{DoxyCompactList}\item 
 void \hyperlink{classAssistant_ae4f0887ad0748940571fdf9ed1013766}{resident\-Status\-Callback} (\hyperlink{structse306__project1_1_1ResidentMsg__}{se306\-\_\-project1\-::\-Resident\-Msg} msg)
 \begin{DoxyCompactList}\small\item\em Callback function that unpacks and processes resident status messages. \hyperlink{classAssistant}{Assistant} should subscribe to the Resident\-Msg topic in order for this callback to be called. Resident\-Msg is published by the \hyperlink{classResident}{Resident}. \end{DoxyCompactList}\item 
 void \hyperlink{classAssistant_ae9b3476194ec440164926085a87a81f0}{medication\-Callback} (const ros\-::\-Timer\-Event \&)
@@ -76,7 +76,7 @@ double \hyperlink{classAssistant_a451a20f551c43d0b6810c8208fe84773}{cur\-\_\-ang
 \item 
 std\-::pair$<$ double, double $>$ \hyperlink{classAssistant_a741527493a17d0f6dc512c03a2055fc1}{ret}
 \item 
-int \hyperlink{classAssistant_ac3c8eb895beffec2e70b25184c7fcae9}{checkpoints} \mbox{[}10\mbox{]}\mbox{[}2\mbox{]}
+int \hyperlink{classAssistant_a31e94c37f8c6509b81c5c92ad5213e3f}{checkpoints} \mbox{[}11\mbox{]}\mbox{[}2\mbox{]}
 \begin{DoxyCompactList}\small\item\em Set of checkpoints that the nodes can move to in the map. Gives x position and y position for each co-\/ordinate. \end{DoxyCompactList}\item 
 bool \hyperlink{classAssistant_af9a992d4b1c5036ed73c57c7e1c5c258}{cooking}
 \end{DoxyCompactItemize}
@@ -100,7 +100,7 @@ Class for robot assistants.
 )}}\label{classAssistant_a8fce345025f32bcd0e45d83960d4b3f7}
 
 
-Given the robot's current angle, this function calculates the angle to the goal. cur\-\_\-angle, goal\-\_\-x, goal\-\_\-y, px, and py are class fields but are also passed as parameters. 
+Given the agent's current angle, this function calculates the angle to the goal. cur\-\_\-angle, goal\-\_\-x, goal\-\_\-y, px, and py are class fields but are also passed as parameters. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -108,11 +108,11 @@ Given the robot's current angle, this function calculates the angle to the goal.
 \hline
 {\em goal\-\_\-y} & The y co-\/ordinate of the goal \\
 \hline
-{\em cur\-\_\-angle} & The robot's current angle, in reference to the co-\/ordinate system \\
+{\em cur\-\_\-angle} & The agent's current angle, in reference to the co-\/ordinate system \\
 \hline
-{\em px} & The robot's initial x position \\
+{\em px} & The agent's initial x position \\
 \hline
-{\em py} & The robot's initial y position \\
+{\em py} & The agent's initial y position \\
 \hline
 {\em goal\-\_\-angle} & The angle that the robot must rotate to face the goal, in reference to the co-\/ordinate system. \\
 \hline
@@ -153,7 +153,7 @@ This could be adjustd in the future to allow for events that occur only on certa
 )}}\label{classAssistant_ac420c9d5551f0ef6925d9a58a5b4854a}
 
 
-Keeps the robot moving by changing linear\-\_\-x ad angular\-\_\-z. 
+Keeps the agent moving by changing linear\-\_\-x ad angular\-\_\-z. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -161,9 +161,9 @@ Keeps the robot moving by changing linear\-\_\-x ad angular\-\_\-z.
 \hline
 {\em goal\-\_\-y} & The y position of the robot's goal \\
 \hline
-{\em cur\-\_\-angle} & The robot's current facing, in reference to the co-\/ordinate system. \\
+{\em cur\-\_\-angle} & The agent's current facing, in reference to the co-\/ordinate system. \\
 \hline
-{\em goal\-\_\-angle} & The angle that the robot must face in order to reach the goal. \\
+{\em goal\-\_\-angle} & The angle that the agent must face in order to reach the goal. \\
 \hline
 {\em px} & Initial x position \\
 \hline
@@ -183,7 +183,7 @@ Keeps the robot moving by changing linear\-\_\-x ad angular\-\_\-z.
 )}}\label{classAssistant_a921c4b094867a4ebc62e404e772d002c}
 
 
-Causes the robot to move until the goal is reached. When the goal is reached, the next checkpoint becomes the goal or if the list of checkpoints is exhausted, the robot returns to its initial position (the first checkpoint) 
+Causes the agent to move until the goal is reached. When the goal is reached, the next checkpoint becomes the goal or if the list of checkpoints is exhausted, the agent returns to its initial position (the first checkpoint) 
 
 
 \begin{DoxyParams}{Parameters}
@@ -266,13 +266,13 @@ Implements \hyperlink{classAgent}{Agent}.
 \hypertarget{classAssistant_a1f237fcda74950177c10cc26ea778863}{\index{Assistant@{Assistant}!boredom@{boredom}}
 \index{boredom@{boredom}!Assistant@{Assistant}}
 \subsubsection[{boredom}]{\setlength{\rightskip}{0pt plus 5cm}int Assistant\-::boredom\hspace{0.3cm}{\ttfamily [protected]}}}\label{classAssistant_a1f237fcda74950177c10cc26ea778863}
-\hyperlink{classResident}{Resident} boredom \hypertarget{classAssistant_ac3c8eb895beffec2e70b25184c7fcae9}{\index{Assistant@{Assistant}!checkpoints@{checkpoints}}
+\hyperlink{classResident}{Resident} boredom \hypertarget{classAssistant_a31e94c37f8c6509b81c5c92ad5213e3f}{\index{Assistant@{Assistant}!checkpoints@{checkpoints}}
 \index{checkpoints@{checkpoints}!Assistant@{Assistant}}
-\subsubsection[{checkpoints}]{\setlength{\rightskip}{0pt plus 5cm}int Assistant\-::checkpoints\mbox{[}10\mbox{]}\mbox{[}2\mbox{]}\hspace{0.3cm}{\ttfamily [protected]}}}\label{classAssistant_ac3c8eb895beffec2e70b25184c7fcae9}
+\subsubsection[{checkpoints}]{\setlength{\rightskip}{0pt plus 5cm}int Assistant\-::checkpoints\mbox{[}11\mbox{]}\mbox{[}2\mbox{]}\hspace{0.3cm}{\ttfamily [protected]}}}\label{classAssistant_a31e94c37f8c6509b81c5c92ad5213e3f}
 {\bfseries Initial value\-:}
 \begin{DoxyCode}
 = \{  
-        \{30, 25\}, 
+        \{30, 25\},
         \{30, 7\}, 
         \{40, 7\},
         \{40, 8\},
@@ -281,7 +281,8 @@ Implements \hyperlink{classAgent}{Agent}.
         \{40,7\},
         \{30,7\},
         \{30, 25\},
-        \{34,20\}
+        \{34,20\},
+        \{30, 25\}
         \}
 \end{DoxyCode}
 
@@ -300,7 +301,7 @@ The robot's current facing in reference to the co-\/ordinate system \hypertarget
 The angle that the robot must face to approach the goal, defined in reference to the co-\/ordinate system \hypertarget{classAssistant_a1a1f1fe48d0eb6a6a39b7fbdb2ef6641}{\index{Assistant@{Assistant}!goal\-\_\-x@{goal\-\_\-x}}
 \index{goal\-\_\-x@{goal\-\_\-x}!Assistant@{Assistant}}
 \subsubsection[{goal\-\_\-x}]{\setlength{\rightskip}{0pt plus 5cm}double Assistant\-::goal\-\_\-x\hspace{0.3cm}{\ttfamily [protected]}}}\label{classAssistant_a1a1f1fe48d0eb6a6a39b7fbdb2ef6641}
-test\-The x position of the robot's goal \hypertarget{classAssistant_a1b6ce5d7c3124140be8d351c847fe91c}{\index{Assistant@{Assistant}!goal\-\_\-y@{goal\-\_\-y}}
+The x position of the robot's goal \hypertarget{classAssistant_a1b6ce5d7c3124140be8d351c847fe91c}{\index{Assistant@{Assistant}!goal\-\_\-y@{goal\-\_\-y}}
 \index{goal\-\_\-y@{goal\-\_\-y}!Assistant@{Assistant}}
 \subsubsection[{goal\-\_\-y}]{\setlength{\rightskip}{0pt plus 5cm}double Assistant\-::goal\-\_\-y\hspace{0.3cm}{\ttfamily [protected]}}}\label{classAssistant_a1b6ce5d7c3124140be8d351c847fe91c}
 The y position of the robot's goal \hypertarget{classAssistant_a13877ed73a684f59171c686186110870}{\index{Assistant@{Assistant}!health@{health}}

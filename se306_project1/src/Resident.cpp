@@ -54,6 +54,14 @@ typedef std::pair<int, int> Checkpoint; // Value
 typedef std::map<CheckpointName, Checkpoint> CheckpointMap;
 CheckpointMap c;
 
+/**
+*	@brief Causes the agent to move until the goal is reached.
+*	When the goal is reached, the next checkpoint becomes the goal or if the list of checkpoints is exhausted, the agent returns
+*	to its initial position (the first checkpoint)
+*	@param path[][2] An array of checkpoints that forms a path.
+*	@param pathLength The number of checkpoints in the path (-1, as counting starts at 0)
+*	@return linear_x and angular_z
+*/
 std::pair<double, double> Resident::movePath(int path[][2], int pathLength) {
 	std::pair<double, double> ret;	
 	ret = std::make_pair(0, 0); //initialize pair. Used to get return.
@@ -85,8 +93,10 @@ std::pair<double, double> Resident::movePath(int path[][2], int pathLength) {
 }
 
 
-/*
-	Associates checkpoint names with checkpoint co-ordinates
+/**
+*	@build Associates checkpoint names with checkpoint co-ordinates
+*	To be used in conjunction with a graph of checkpoint names, representing paths between checkpoints.
+* 	@attention Builds, but untested - proof of concept. Development on hold.
 */
 void checkpointMap() {
 	// Number of checkpoints
@@ -109,10 +119,11 @@ struct VertexProperties {
     std::string cName;
 };
 
-/*
-	Creates graph of checkpoints. Having to add the boost namespace drags the code out *a lot*, but it's nice to know where
-	everything comes form. Use 'using namespace boost' if it bothers you. The idea is to have the names as a graph, then
-	look them up in the hashmap to get the corresponding co-ordinates.
+
+/**
+*	@brief Creates a graph from the checkpoints, representing paths around the house.
+*	Edges must be added manually.
+*	@note Consider using 'using namespace boost'
 */
 void makeGraph() {
 
@@ -128,7 +139,12 @@ void makeGraph() {
     // boost::add_edge(boost::vertex("cp1", cGraph), boost::vertex("cp2",cGraph), cGraph);
     // // etc. (adding more edges)
 }
-	
+
+/**
+*	@brief Updates the Resident's x position, y position, and angle to reflect its current pose.
+*	@note Rounding is used to calculate the current angle. This approximation is accounted for by using threshholds when processing angles.
+*	@param msg Odometry message from odom topic
+*/
 void Resident::StageOdom_callback(nav_msgs::Odometry msg)
 {
 	/*ret = std::make_pair(0, 0); //initialize pair. Used to get return.
@@ -148,6 +164,12 @@ void Resident::StageOdom_callback(nav_msgs::Odometry msg)
 
 }
 
+/**
+*	@brief Callback function to process laser scan messsages.
+*	You can access the range data from msg.ranges[i]. i = sample number
+*	@note Currently blank as it is not in use. Navigation operates through a checkpoint system.
+*	@param msg Single scan from a planar laser range finder
+*/
 void Resident::StageLaser_callback(sensor_msgs::LaserScan msg)
 {
 	//This is the callback function to process laser scan messages
@@ -155,11 +177,19 @@ void Resident::StageLaser_callback(sensor_msgs::LaserScan msg)
 	
 }
 
-//doctor will heal resident when they are next to each other
+/**
+*	@brief Increases the resident's health when the doctor heals them.
+*	@param msg A custom message from an Assistant robot.
+*	@remarks Perhaps add a delay between medication/diagnosis and healing?
+*/
 void Resident::doctor_callback(se306_project1::DoctorMsg msg)
 {
 }
 
+/**
+*	@brief Increases the Resident's hunger (towards full) if food has been delivered.
+*	@param msg A custom message from an Assistant robot. 
+*/
 void Resident::assistant_callback(se306_project1::AssistantMsg msg)
 {
 	if (msg.FoodDelivered == 1)
@@ -171,7 +201,16 @@ void Resident::assistant_callback(se306_project1::AssistantMsg msg)
 	
 }
 
-//Keeps robot moving by changing linear_x and angular_z
+/**
+*	@brief Keeps the agent moving by changing linear_x ad angular_z.
+*	@param goal_x The x position of the robot's goal
+*	@param goal_y The y position of the robot's goal
+* 	@param cur_angle The agent's current facing, in reference to the co-ordinate system.
+*	@param goal_angle The angle that the agent must face in order to reach the goal.
+*	@param px Initial x position
+*	@param py Initial y position
+*	@return _ret linear_x and angular_z
+*/
 std::pair<double, double> Resident::move(double goal_x, double goal_y, double cur_angle, double goal_angle, double px, double py) 
 {	
 	std::pair<double,double>_ret = std::make_pair(0, 0); //initialize pair. Used to get return.
@@ -219,7 +258,16 @@ std::pair<double, double> Resident::move(double goal_x, double goal_y, double cu
 	return _ret; 
 }
 
-
+/**
+*	@brief Given the agent's current angle, this function calculates the angle to the goal.
+*	cur_angle, goal_x, goal_y, px, and py are class fields but are also passed as parameters.
+*	@param goal_x The x co-ordinate of the goal
+*	@param goal_y The y co-ordinate of the goal
+*	@param cur_angle The agent's current angle, in reference to the co-ordinate system
+*	@param px The agent's initial x position
+*	@param py The agent's initial y position
+*	@param goal_angle The angle that the robot must rotate to face the goal, in reference to the co-ordinate system.
+*/
 double Resident::calc_goal_angle(double goal_x, double goal_y, double cur_angle, double px, double py) 
 {
 
@@ -258,9 +306,12 @@ void Resident::randomCheckpointCallback(const ros::TimerEvent&) {
 	//ROS_INFO("hello");
 }
 
+/**
+*	@brief Main function for the Resident process.
+*	Controls node setup and periodic events.
+*/
 int Resident::run(int argc, char **argv)
 {
-
 
 	//Initial pose. This is the same as the pose used in the world file.
 	px = checkpoints[cc-1][0];
@@ -372,8 +423,8 @@ int Resident::run(int argc, char **argv)
 
 }
 
-/* 
-	Redirects to main function (run()) of the node.
+/**
+*	@brief Redirects to main function (run()) of the node.
 */
 int main(int argc, char **argv) {
 	Resident *a = new Resident();

@@ -1,5 +1,8 @@
 #include "Agent.h"
 
+/**
+*	@brief Class representing the Resident.
+*/
 class Resident : public Agent
 {
 	protected:

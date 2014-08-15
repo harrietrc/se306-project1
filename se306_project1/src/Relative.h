@@ -1,5 +1,8 @@
 #include "Visitor.h"
 
+/**
+*	@brief Class for Relative nodes.
+*/
 class Relative : public Visitor
 {
 	public:

@@ -1,5 +1,8 @@
 #include "Agent.h"
 
+/**
+*	@brief Class for the implementation of visitors - i.e. Caregivers, Nurses, Doctors, Friends, and Relatives.
+*/
 class Visitor : public Agent
 {
 	/*

@@ -43,6 +43,11 @@ int checkpoints[3][2] = {
 		{10, -7}
 	};
 	
+/**
+*	@brief Updates the Doctor's x position, y position, and angle to reflect its current pose.
+*	@note Rounding is used to calculate the current angle. This approximation is accounted for by using threshholds when processing angles.
+*	@param msg Odometry message from odom topic
+*/
 void Doctor::StageOdom_callback(nav_msgs::Odometry msg)
 {
 	//Converting from quaternion to radians
@@ -60,6 +65,14 @@ void Doctor::StageOdom_callback(nav_msgs::Odometry msg)
 	
 }
 
+/**
+*	@brief Causes the agent to move until the goal is reached.
+*	When the goal is reached, the next checkpoint becomes the goal or if the list of checkpoints is exhausted, the agent returns
+*	to its initial position (the first checkpoint)
+*	@param path[][2] An array of checkpoints that forms a path.
+*	@param pathLength The number of checkpoints in the path (-1, as counting starts at 0)
+*	@return linear_x and angular_z
+*/
 std::pair<double, double> Doctor::movePath(int path[][2], int pathLength) {
 		
 	std::pair<double, double> ret;	
@@ -88,7 +101,16 @@ std::pair<double, double> Doctor::movePath(int path[][2], int pathLength) {
 }
 
 
-//Keeps robot moving by changing linear_x and angular_z
+/**
+*	@brief Keeps the agent moving by changing linear_x ad angular_z.
+*	@param goal_x The x position of the robot's goal
+*	@param goal_y The y position of the robot's goal
+* 	@param cur_angle The agent's current facing, in reference to the co-ordinate system.
+*	@param goal_angle The angle that the agent must face in order to reach the goal.
+*	@param px Initial x position
+*	@param py Initial y position
+*	@return _ret linear_x and angular_z
+*/
 std::pair<double, double> Doctor::move(double goal_x, double goal_y, double cur_angle, double goal_angle, double px, double py) 
 {		
 
@@ -141,6 +163,16 @@ std::pair<double, double> Doctor::move(double goal_x, double goal_y, double cur_
 	return _ret; 
 }
 
+/**
+*	@brief Given the agent's current angle, this function calculates the angle to the goal.
+*	cur_angle, goal_x, goal_y, px, and py are class fields but are also passed as parameters.
+*	@param goal_x The x co-ordinate of the goal
+*	@param goal_y The y co-ordinate of the goal
+*	@param cur_angle The agent's current angle, in reference to the co-ordinate system
+*	@param px The agent's initial x position
+*	@param py The agent's initial y position
+*	@param goal_angle The angle that the robot must rotate to face the goal, in reference to the co-ordinate system.
+*/
 double Doctor::calc_goal_angle(double goal_x, double goal_y, double cur_angle, double px, double py) 
 {
 
@@ -171,6 +203,12 @@ double Doctor::calc_goal_angle(double goal_x, double goal_y, double cur_angle, d
 	return goal_angle;
 }
 
+/**
+*	@brief Callback function to process laser scan messsages.
+*	You can access the range data from msg.ranges[i]. i = sample number
+*	@note Currently blank as it is not in use. Navigation operates through a checkpoint system.
+*	@param msg Single scan from a planar laser range finder
+*/
 void Doctor::StageLaser_callback(sensor_msgs::LaserScan msg)
 {
 	//This is the callback function to process laser scan messages
@@ -178,7 +216,13 @@ void Doctor::StageLaser_callback(sensor_msgs::LaserScan msg)
 	
 }
 
-//custom resident callback function, you get the message object that was sent from Resident
+/**
+*	@brief Callback function that unpacks and processes resident status messages.
+*	Assistant should subscribe to the ResidentMsg topic in order for this callback to be called. ResidentMsg is published by the Resident.
+*	@note Currently this callback processes only resident hunger, controlling the cooking behaviour. More behaviours 
+*	can be implemented later.
+*	@param msg A custom ResidentMsg message that contains information about the resident's current status.
+*/
 void Doctor::residentStatusCallback(se306_project1::ResidentMsg msg)
 {
 	
@@ -217,6 +261,10 @@ void Doctor::residentStatusCallback(se306_project1::ResidentMsg msg)
 
 }
 
+/**
+*	@brief Main function for the Doctor process.
+*	Controls node setup and periodic events.
+*/
 int Doctor::run(int argc, char **argv)
 {
 	//Initial pose. This is the same as the pose used in the world file.
@@ -300,8 +348,8 @@ int Doctor::run(int argc, char **argv)
 
 }
 
-/* 
-	Redirects to main function (run()) of the node.
+/**
+*	@brief Redirects to main function (run()) of the node.
 */
 int main(int argc, char **argv) {
 	Doctor *a = new Doctor;

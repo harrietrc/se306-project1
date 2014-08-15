@@ -59,8 +59,8 @@ void Assistant::StageOdom_callback(nav_msgs::Odometry msg)
 }
 
 /**
-*	@brief Causes the robot to move until the goal is reached.
-*	When the goal is reached, the next checkpoint becomes the goal or if the list of checkpoints is exhausted, the robot returns
+*	@brief Causes the agent to move until the goal is reached.
+*	When the goal is reached, the next checkpoint becomes the goal or if the list of checkpoints is exhausted, the agent returns
 *	to its initial position (the first checkpoint)
 *	@param path[][2] An array of checkpoints that forms a path.
 *	@param pathLength The number of checkpoints in the path (-1, as counting starts at 0)
@@ -101,11 +101,11 @@ std::pair<double, double> Assistant::movePath(int path[][2], int pathLength) {
 
 
 /**
-*	@brief Keeps the robot moving by changing linear_x ad angular_z.
+*	@brief Keeps the agent moving by changing linear_x ad angular_z.
 *	@param goal_x The x position of the robot's goal
 *	@param goal_y The y position of the robot's goal
-* 	@param cur_angle The robot's current facing, in reference to the co-ordinate system.
-*	@param goal_angle The angle that the robot must face in order to reach the goal.
+* 	@param cur_angle The agent's current facing, in reference to the co-ordinate system.
+*	@param goal_angle The angle that the agent must face in order to reach the goal.
 *	@param px Initial x position
 *	@param py Initial y position
 *	@return _ret linear_x and angular_z
@@ -120,7 +120,7 @@ std::pair<double, double> Assistant::move(double goal_x, double goal_y, double c
 	//When the robot is facing the correct direction, start moving
 	double threshold = cur_angle;//cur_angle-moveSpeed/10;
 	//threshold = ((int)(threshold * 1000 + .5) / 1000.0);
-//threshold = ((int)(threshold * 1000 + .5) / 1000.0);
+	//threshold = ((int)(threshold * 1000 + .5) / 1000.0);
 
 	if ((goal_angle  == threshold) || isSet) {
 		_ret.first = 5; //linear_x
@@ -149,13 +149,13 @@ std::pair<double, double> Assistant::move(double goal_x, double goal_y, double c
 }
 
 /**
-*	@brief Given the robot's current angle, this function calculates the angle to the goal.
+*	@brief Given the agent's current angle, this function calculates the angle to the goal.
 *	cur_angle, goal_x, goal_y, px, and py are class fields but are also passed as parameters.
 *	@param goal_x The x co-ordinate of the goal
 *	@param goal_y The y co-ordinate of the goal
-*	@param cur_angle The robot's current angle, in reference to the co-ordinate system
-*	@param px The robot's initial x position
-*	@param py The robot's initial y position
+*	@param cur_angle The agent's current angle, in reference to the co-ordinate system
+*	@param px The agent's initial x position
+*	@param py The agent's initial y position
 *	@param goal_angle The angle that the robot must rotate to face the goal, in reference to the co-ordinate system.
 */
 double Assistant::calc_goal_angle(double goal_x, double goal_y, double cur_angle, double px, double py) 

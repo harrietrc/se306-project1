@@ -90,27 +90,33 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">Caregiver Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Superclass for visitors - i.e. Caregivers, Nurses, Doctors, Friends, Relatives.  
+ <a href="classCaregiver.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="Caregiver_8h_source.html">Caregiver.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for Caregiver:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="classCaregiver.png" usemap="#Caregiver_map" alt=""/>
   <map id="Caregiver_map" name="Caregiver_map">
-<area href="classVisitor.html" alt="Visitor" shape="rect" coords="0,56,69,80"/>
-<area href="classAgent.html" alt="Agent" shape="rect" coords="0,0,69,24"/>
+<area href="classVisitor.html" title="Class for the implementation of visitors - i.e. Caregivers, Nurses, Doctors, Friends, and Relatives. " alt="Visitor" shape="rect" coords="0,56,69,80"/>
+<area href="classAgent.html" title="Superclass for all &#39;agents&#39; - i.e. Assistants, Visitors, and the Resident. " alt="Agent" shape="rect" coords="0,0,69,24"/>
 </map>
  </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aa326466c62614b84d6a750dc0e59fa48"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa326466c62614b84d6a750dc0e59fa48"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>StageOdom_callback</b> (nav_msgs::Odometry msg)</td></tr>
+<tr class="memitem:aa326466c62614b84d6a750dc0e59fa48"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCaregiver.html#aa326466c62614b84d6a750dc0e59fa48">StageOdom_callback</a> (nav_msgs::Odometry msg)</td></tr>
+<tr class="memdesc:aa326466c62614b84d6a750dc0e59fa48"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the <a class="el" href="classCaregiver.html" title="Superclass for visitors - i.e. Caregivers, Nurses, Doctors, Friends, Relatives. ">Caregiver</a>'s x position, y position, and angle to reflect its current pose.  <a href="#aa326466c62614b84d6a750dc0e59fa48">More...</a><br/></td></tr>
 <tr class="separator:aa326466c62614b84d6a750dc0e59fa48"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3dc0edd8065745e6f355f80f2b293ba1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3dc0edd8065745e6f355f80f2b293ba1"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>StageLaser_callback</b> (sensor_msgs::LaserScan msg)</td></tr>
+<tr class="memitem:a3dc0edd8065745e6f355f80f2b293ba1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCaregiver.html#a3dc0edd8065745e6f355f80f2b293ba1">StageLaser_callback</a> (sensor_msgs::LaserScan msg)</td></tr>
+<tr class="memdesc:a3dc0edd8065745e6f355f80f2b293ba1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback function to process laser scan messsages. You can access the range data from msg.ranges[i]. i = sample number.  <a href="#a3dc0edd8065745e6f355f80f2b293ba1">More...</a><br/></td></tr>
 <tr class="separator:a3dc0edd8065745e6f355f80f2b293ba1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a940203c96d2be4d4de57baee6bbf1a62"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a940203c96d2be4d4de57baee6bbf1a62"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>run</b> (int argc, char **argv)</td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCaregiver.html#a940203c96d2be4d4de57baee6bbf1a62">run</a> (int argc, char **argv)</td></tr>
+<tr class="memdesc:a940203c96d2be4d4de57baee6bbf1a62"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main function for the <a class="el" href="classCaregiver.html" title="Superclass for visitors - i.e. Caregivers, Nurses, Doctors, Friends, Relatives. ">Caregiver</a> process. Controls node setup and periodic events. <br/></td></tr>
 <tr class="separator:a940203c96d2be4d4de57baee6bbf1a62"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
@@ -145,6 +151,79 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>py</b></td></tr>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>robot_id</b></td></tr>
 <tr class="separator:aefcf2085a669d7e91d932e7cc3ee88ce inherit pro_attribs_classAgent"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Superclass for visitors - i.e. Caregivers, Nurses, Doctors, Friends, Relatives. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a3dc0edd8065745e6f355f80f2b293ba1"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Caregiver::StageLaser_callback </td>
+          <td>(</td>
+          <td class="paramtype">sensor_msgs::LaserScan&#160;</td>
+          <td class="paramname"><em>msg</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Callback function to process laser scan messsages. You can access the range data from msg.ranges[i]. i = sample number. </p>
+<dl class="section note"><dt>Note</dt><dd>Currently blank as it is not in use. Navigation operates through a checkpoint system. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">msg</td><td>Single scan from a planar laser range finder </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="classAgent.html">Agent</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aa326466c62614b84d6a750dc0e59fa48"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Caregiver::StageOdom_callback </td>
+          <td>(</td>
+          <td class="paramtype">nav_msgs::Odometry&#160;</td>
+          <td class="paramname"><em>msg</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Updates the <a class="el" href="classCaregiver.html" title="Superclass for visitors - i.e. Caregivers, Nurses, Doctors, Friends, Relatives. ">Caregiver</a>'s x position, y position, and angle to reflect its current pose. </p>
+<dl class="section note"><dt>Note</dt><dd>Rounding is used to calculate the current angle. This approximation is accounted for by using threshholds when processing angles. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">msg</td><td>Odometry message from odom topic </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="classAgent.html">Agent</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>se306_project1/src/<a class="el" href="Caregiver_8h_source.html">Caregiver.h</a></li>
 <li>se306_project1/src/Caregiver.cpp</li>
@@ -152,7 +231,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>robot_id</b></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Aug 15 2014 09:56:16 for SE306 Project 1 by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Aug 15 2014 11:57:52 for SE306 Project 1 by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

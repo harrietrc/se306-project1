@@ -1,6 +1,15 @@
 \hypertarget{classNurse}{\section{Nurse Class Reference}
 \label{classNurse}\index{Nurse@{Nurse}}
 }
+
+
+Class for \hyperlink{classNurse}{Nurse} nodes.  
+
+
+
+
+{\ttfamily \#include $<$Nurse.\-h$>$}
+
 Inheritance diagram for Nurse\-:\begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -10,16 +19,66 @@ Inheritance diagram for Nurse\-:\begin{figure}[H]
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{classNurse_a3ff47edb35f171a538fe62b3abdca948}{void {\bfseries Stage\-Odom\-\_\-callback} (nav\-\_\-msgs\-::\-Odometry msg)}\label{classNurse_a3ff47edb35f171a538fe62b3abdca948}
+void \hyperlink{classNurse_a3ff47edb35f171a538fe62b3abdca948}{Stage\-Odom\-\_\-callback} (nav\-\_\-msgs\-::\-Odometry msg)
+\begin{DoxyCompactList}\small\item\em Updates the \hyperlink{classNurse}{Nurse}'s x position, y position, and angle to reflect its current pose. \end{DoxyCompactList}\item 
+void \hyperlink{classNurse_aa709fbc5dc09b8db82db59c1a2829d4a}{Stage\-Laser\-\_\-callback} (sensor\-\_\-msgs\-::\-Laser\-Scan msg)
+\begin{DoxyCompactList}\small\item\em Callback function to process laser scan messsages. You can access the range data from msg.\-ranges\mbox{[}i\mbox{]}. i = sample number. \end{DoxyCompactList}\item 
+\hypertarget{classNurse_a73f9edde8df4beb33b9810034faead0c}{int \hyperlink{classNurse_a73f9edde8df4beb33b9810034faead0c}{run} (int argc, char $\ast$$\ast$argv)}\label{classNurse_a73f9edde8df4beb33b9810034faead0c}
 
-\item 
-\hypertarget{classNurse_aa709fbc5dc09b8db82db59c1a2829d4a}{void {\bfseries Stage\-Laser\-\_\-callback} (sensor\-\_\-msgs\-::\-Laser\-Scan msg)}\label{classNurse_aa709fbc5dc09b8db82db59c1a2829d4a}
-
-\item 
-\hypertarget{classNurse_a73f9edde8df4beb33b9810034faead0c}{int {\bfseries run} (int argc, char $\ast$$\ast$argv)}\label{classNurse_a73f9edde8df4beb33b9810034faead0c}
-
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Main function for the \hyperlink{classNurse}{Nurse} process. Controls node setup and periodic events. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Class for \hyperlink{classNurse}{Nurse} nodes. 
+
+\subsection{Member Function Documentation}
+\hypertarget{classNurse_aa709fbc5dc09b8db82db59c1a2829d4a}{\index{Nurse@{Nurse}!Stage\-Laser\-\_\-callback@{Stage\-Laser\-\_\-callback}}
+\index{Stage\-Laser\-\_\-callback@{Stage\-Laser\-\_\-callback}!Nurse@{Nurse}}
+\subsubsection[{Stage\-Laser\-\_\-callback}]{\setlength{\rightskip}{0pt plus 5cm}void Nurse\-::\-Stage\-Laser\-\_\-callback (
+\begin{DoxyParamCaption}
+\item[{sensor\-\_\-msgs\-::\-Laser\-Scan}]{msg}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classNurse_aa709fbc5dc09b8db82db59c1a2829d4a}
+
+
+Callback function to process laser scan messsages. You can access the range data from msg.\-ranges\mbox{[}i\mbox{]}. i = sample number. 
+
+\begin{DoxyNote}{Note}
+Currently blank as it is not in use. Navigation operates through a checkpoint system. 
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & Single scan from a planar laser range finder \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classAgent}{Agent}.
+
+\hypertarget{classNurse_a3ff47edb35f171a538fe62b3abdca948}{\index{Nurse@{Nurse}!Stage\-Odom\-\_\-callback@{Stage\-Odom\-\_\-callback}}
+\index{Stage\-Odom\-\_\-callback@{Stage\-Odom\-\_\-callback}!Nurse@{Nurse}}
+\subsubsection[{Stage\-Odom\-\_\-callback}]{\setlength{\rightskip}{0pt plus 5cm}void Nurse\-::\-Stage\-Odom\-\_\-callback (
+\begin{DoxyParamCaption}
+\item[{nav\-\_\-msgs\-::\-Odometry}]{msg}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classNurse_a3ff47edb35f171a538fe62b3abdca948}
+
+
+Updates the \hyperlink{classNurse}{Nurse}'s x position, y position, and angle to reflect its current pose. 
+
+\begin{DoxyNote}{Note}
+Rounding is used to calculate the current angle. This approximation is accounted for by using threshholds when processing angles. 
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & Odometry message from odom topic \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classAgent}{Agent}.
+
 
 
 The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}

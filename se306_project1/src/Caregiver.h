@@ -1,5 +1,8 @@
 #include "Visitor.h"
 
+/**
+*	@brief Superclass for visitors - i.e. Caregivers, Nurses, Doctors, Friends, Relatives
+*/
 class Caregiver : public Visitor
 {
 	public:

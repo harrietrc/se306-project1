@@ -91,44 +91,50 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">Resident Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Class representing the <a class="el" href="classResident.html" title="Class representing the Resident. ">Resident</a>.  
+ <a href="classResident.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="Resident_8h_source.html">Resident.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for Resident:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="classResident.png" usemap="#Resident_map" alt=""/>
   <map id="Resident_map" name="Resident_map">
-<area href="classAgent.html" alt="Agent" shape="rect" coords="0,0,60,24"/>
+<area href="classAgent.html" title="Superclass for all &#39;agents&#39; - i.e. Assistants, Visitors, and the Resident. " alt="Agent" shape="rect" coords="0,0,60,24"/>
 </map>
  </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ae1406a27c978147c7816e57f9ed13aed"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae1406a27c978147c7816e57f9ed13aed"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>StageOdom_callback</b> (nav_msgs::Odometry msg)</td></tr>
+<tr class="memitem:ae1406a27c978147c7816e57f9ed13aed"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classResident.html#ae1406a27c978147c7816e57f9ed13aed">StageOdom_callback</a> (nav_msgs::Odometry msg)</td></tr>
+<tr class="memdesc:ae1406a27c978147c7816e57f9ed13aed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the <a class="el" href="classResident.html" title="Class representing the Resident. ">Resident</a>'s x position, y position, and angle to reflect its current pose.  <a href="#ae1406a27c978147c7816e57f9ed13aed">More...</a><br/></td></tr>
 <tr class="separator:ae1406a27c978147c7816e57f9ed13aed"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6745ec218b7e451eb7ba2ca88fa2aca9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6745ec218b7e451eb7ba2ca88fa2aca9"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>StageLaser_callback</b> (sensor_msgs::LaserScan msg)</td></tr>
+<tr class="memitem:a6745ec218b7e451eb7ba2ca88fa2aca9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classResident.html#a6745ec218b7e451eb7ba2ca88fa2aca9">StageLaser_callback</a> (sensor_msgs::LaserScan msg)</td></tr>
+<tr class="memdesc:a6745ec218b7e451eb7ba2ca88fa2aca9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback function to process laser scan messsages. You can access the range data from msg.ranges[i]. i = sample number.  <a href="#a6745ec218b7e451eb7ba2ca88fa2aca9">More...</a><br/></td></tr>
 <tr class="separator:a6745ec218b7e451eb7ba2ca88fa2aca9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa4cbafa8f6cf586b53a774a8f1d81aa6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa4cbafa8f6cf586b53a774a8f1d81aa6"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>run</b> (int argc, char **argv)</td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classResident.html#aa4cbafa8f6cf586b53a774a8f1d81aa6">run</a> (int argc, char **argv)</td></tr>
+<tr class="memdesc:aa4cbafa8f6cf586b53a774a8f1d81aa6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main function for the <a class="el" href="classResident.html" title="Class representing the Resident. ">Resident</a> process. Controls node setup and periodic events. <br/></td></tr>
 <tr class="separator:aa4cbafa8f6cf586b53a774a8f1d81aa6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6d8fbbc8a60508ec913fb41d7e743094"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6d8fbbc8a60508ec913fb41d7e743094"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>doctor_callback</b> (<a class="el" href="structse306__project1_1_1DoctorMsg__.html">se306_project1::DoctorMsg</a> msg)</td></tr>
+<tr class="memitem:a6d8fbbc8a60508ec913fb41d7e743094"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classResident.html#a6d8fbbc8a60508ec913fb41d7e743094">doctor_callback</a> (<a class="el" href="structse306__project1_1_1DoctorMsg__.html">se306_project1::DoctorMsg</a> msg)</td></tr>
+<tr class="memdesc:a6d8fbbc8a60508ec913fb41d7e743094"><td class="mdescLeft">&#160;</td><td class="mdescRight">Increases the resident's health when the doctor heals them.  <a href="#a6d8fbbc8a60508ec913fb41d7e743094">More...</a><br/></td></tr>
 <tr class="separator:a6d8fbbc8a60508ec913fb41d7e743094"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae8e00862499c8a502b5c99f8267d3345"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae8e00862499c8a502b5c99f8267d3345"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>calc_goal_angle</b> (double goal_x, double goal_y, double cur_angle, double px, double py)</td></tr>
+<tr class="memitem:ae8e00862499c8a502b5c99f8267d3345"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classResident.html#ae8e00862499c8a502b5c99f8267d3345">calc_goal_angle</a> (double goal_x, double goal_y, double cur_angle, double px, double py)</td></tr>
+<tr class="memdesc:ae8e00862499c8a502b5c99f8267d3345"><td class="mdescLeft">&#160;</td><td class="mdescRight">Given the agent's current angle, this function calculates the angle to the goal. cur_angle, goal_x, goal_y, px, and py are class fields but are also passed as parameters.  <a href="#ae8e00862499c8a502b5c99f8267d3345">More...</a><br/></td></tr>
 <tr class="separator:ae8e00862499c8a502b5c99f8267d3345"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6f48fd57a638a2b4599777a1be766296"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6f48fd57a638a2b4599777a1be766296"></a>
-std::pair&lt; double, double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>move</b> (double goal_x, double goal_y, double cur_angle, double goal_angle, double px, double py)</td></tr>
+<tr class="memitem:a6f48fd57a638a2b4599777a1be766296"><td class="memItemLeft" align="right" valign="top">std::pair&lt; double, double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classResident.html#a6f48fd57a638a2b4599777a1be766296">move</a> (double goal_x, double goal_y, double cur_angle, double goal_angle, double px, double py)</td></tr>
+<tr class="memdesc:a6f48fd57a638a2b4599777a1be766296"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keeps the agent moving by changing linear_x ad angular_z.  <a href="#a6f48fd57a638a2b4599777a1be766296">More...</a><br/></td></tr>
 <tr class="separator:a6f48fd57a638a2b4599777a1be766296"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a538db1d9cce0d967a78e7d10876d76ca"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a538db1d9cce0d967a78e7d10876d76ca"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>randomCheckpointCallback</b> (const ros::TimerEvent &amp;)</td></tr>
 <tr class="separator:a538db1d9cce0d967a78e7d10876d76ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa715d491e917de6f621593f0d1f01bd6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa715d491e917de6f621593f0d1f01bd6"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>assistant_callback</b> (<a class="el" href="structse306__project1_1_1AssistantMsg__.html">se306_project1::AssistantMsg</a> msg)</td></tr>
+<tr class="memitem:aa715d491e917de6f621593f0d1f01bd6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classResident.html#aa715d491e917de6f621593f0d1f01bd6">assistant_callback</a> (<a class="el" href="structse306__project1_1_1AssistantMsg__.html">se306_project1::AssistantMsg</a> msg)</td></tr>
+<tr class="memdesc:aa715d491e917de6f621593f0d1f01bd6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Increases the <a class="el" href="classResident.html" title="Class representing the Resident. ">Resident</a>'s hunger (towards full) if food has been delivered.  <a href="#aa715d491e917de6f621593f0d1f01bd6">More...</a><br/></td></tr>
 <tr class="separator:aa715d491e917de6f621593f0d1f01bd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0cfe1d9b185beed7d3438157cc69db05"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0cfe1d9b185beed7d3438157cc69db05"></a>
-std::pair&lt; double, double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>movePath</b> (int path[][2], int pathLength)</td></tr>
+<tr class="memitem:a0cfe1d9b185beed7d3438157cc69db05"><td class="memItemLeft" align="right" valign="top">std::pair&lt; double, double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classResident.html#a0cfe1d9b185beed7d3438157cc69db05">movePath</a> (int path[][2], int pathLength)</td></tr>
+<tr class="memdesc:a0cfe1d9b185beed7d3438157cc69db05"><td class="mdescLeft">&#160;</td><td class="mdescRight">Causes the agent to move until the goal is reached. When the goal is reached, the next checkpoint becomes the goal or if the list of checkpoints is exhausted, the agent returns to its initial position (the first checkpoint)  <a href="#a0cfe1d9b185beed7d3438157cc69db05">More...</a><br/></td></tr>
 <tr class="separator:a0cfe1d9b185beed7d3438157cc69db05"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
@@ -208,6 +214,285 @@ Additional Inherited Members</h2></td></tr>
  }</td></tr>
 <tr class="separator:a74c335b513eeb92231976477006c63bf inherit pro_types_classAgent"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Class representing the <a class="el" href="classResident.html" title="Class representing the Resident. ">Resident</a>. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="aa715d491e917de6f621593f0d1f01bd6"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Resident::assistant_callback </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structse306__project1_1_1AssistantMsg__.html">se306_project1::AssistantMsg</a>&#160;</td>
+          <td class="paramname"><em>msg</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Increases the <a class="el" href="classResident.html" title="Class representing the Resident. ">Resident</a>'s hunger (towards full) if food has been delivered. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">msg</td><td>A custom message from an <a class="el" href="classAssistant.html" title="Class for robot assistants. ">Assistant</a> robot. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ae8e00862499c8a502b5c99f8267d3345"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Resident::calc_goal_angle </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>goal_x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>goal_y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>cur_angle</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>px</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>py</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Given the agent's current angle, this function calculates the angle to the goal. cur_angle, goal_x, goal_y, px, and py are class fields but are also passed as parameters. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">goal_x</td><td>The x co-ordinate of the goal </td></tr>
+    <tr><td class="paramname">goal_y</td><td>The y co-ordinate of the goal </td></tr>
+    <tr><td class="paramname">cur_angle</td><td>The agent's current angle, in reference to the co-ordinate system </td></tr>
+    <tr><td class="paramname">px</td><td>The agent's initial x position </td></tr>
+    <tr><td class="paramname">py</td><td>The agent's initial y position </td></tr>
+    <tr><td class="paramname">goal_angle</td><td>The angle that the robot must rotate to face the goal, in reference to the co-ordinate system. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a6d8fbbc8a60508ec913fb41d7e743094"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Resident::doctor_callback </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structse306__project1_1_1DoctorMsg__.html">se306_project1::DoctorMsg</a>&#160;</td>
+          <td class="paramname"><em>msg</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Increases the resident's health when the doctor heals them. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">msg</td><td>A custom message from an <a class="el" href="classAssistant.html" title="Class for robot assistants. ">Assistant</a> robot. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section remark"><dt>Remarks</dt><dd>Perhaps add a delay between medication/diagnosis and healing? </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a6f48fd57a638a2b4599777a1be766296"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::pair&lt; double, double &gt; Resident::move </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>goal_x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>goal_y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>cur_angle</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>goal_angle</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>px</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>py</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Keeps the agent moving by changing linear_x ad angular_z. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">goal_x</td><td>The x position of the robot's goal </td></tr>
+    <tr><td class="paramname">goal_y</td><td>The y position of the robot's goal </td></tr>
+    <tr><td class="paramname">cur_angle</td><td>The agent's current facing, in reference to the co-ordinate system. </td></tr>
+    <tr><td class="paramname">goal_angle</td><td>The angle that the agent must face in order to reach the goal. </td></tr>
+    <tr><td class="paramname">px</td><td>Initial x position </td></tr>
+    <tr><td class="paramname">py</td><td>Initial y position </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>_ret linear_x and angular_z </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a0cfe1d9b185beed7d3438157cc69db05"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::pair&lt; double, double &gt; Resident::movePath </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>path</em>[][2], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>pathLength</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Causes the agent to move until the goal is reached. When the goal is reached, the next checkpoint becomes the goal or if the list of checkpoints is exhausted, the agent returns to its initial position (the first checkpoint) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">path[][2]</td><td>An array of checkpoints that forms a path. </td></tr>
+    <tr><td class="paramname">pathLength</td><td>The number of checkpoints in the path (-1, as counting starts at 0) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>linear_x and angular_z </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a6745ec218b7e451eb7ba2ca88fa2aca9"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Resident::StageLaser_callback </td>
+          <td>(</td>
+          <td class="paramtype">sensor_msgs::LaserScan&#160;</td>
+          <td class="paramname"><em>msg</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Callback function to process laser scan messsages. You can access the range data from msg.ranges[i]. i = sample number. </p>
+<dl class="section note"><dt>Note</dt><dd>Currently blank as it is not in use. Navigation operates through a checkpoint system. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">msg</td><td>Single scan from a planar laser range finder </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="classAgent.html">Agent</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ae1406a27c978147c7816e57f9ed13aed"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Resident::StageOdom_callback </td>
+          <td>(</td>
+          <td class="paramtype">nav_msgs::Odometry&#160;</td>
+          <td class="paramname"><em>msg</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Updates the <a class="el" href="classResident.html" title="Class representing the Resident. ">Resident</a>'s x position, y position, and angle to reflect its current pose. </p>
+<dl class="section note"><dt>Note</dt><dd>Rounding is used to calculate the current angle. This approximation is accounted for by using threshholds when processing angles. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">msg</td><td>Odometry message from odom topic </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="classAgent.html">Agent</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>se306_project1/src/<a class="el" href="Resident_8h_source.html">Resident.h</a></li>
 <li>se306_project1/src/Resident.cpp</li>
@@ -215,7 +500,7 @@ Additional Inherited Members</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Aug 15 2014 09:56:16 for SE306 Project 1 by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Aug 15 2014 11:57:52 for SE306 Project 1 by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

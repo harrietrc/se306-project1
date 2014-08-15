@@ -1,6 +1,9 @@
 #include "Visitor.h"
 #include "std_msgs/String.h"
 
+/**
+*	@brief Class for the Doctor nodes.
+*/
 class Doctor : public Visitor
 {
 	protected:
