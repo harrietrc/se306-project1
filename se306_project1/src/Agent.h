@@ -17,5 +17,5 @@ class Agent
 	public:
 		virtual void StageOdom_callback(nav_msgs::Odometry msg) = 0;
 		virtual void StageLaser_callback(sensor_msgs::LaserScan msg) = 0;
-		virtual int run(int argc, char **argv) = 0;
+		virtual int run(int argc, char *argv[]) = 0;
 };

@@ -1,0 +1,114 @@
+\hypertarget{classDoctor}{\section{Doctor Class Reference}
+\label{classDoctor}\index{Doctor@{Doctor}}
+}
+Inheritance diagram for Doctor\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classDoctor}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classDoctor_a92b20f52198c6137d8858152cba77640}{void {\bfseries Stage\-Odom\-\_\-callback} (nav\-\_\-msgs\-::\-Odometry msg)}\label{classDoctor_a92b20f52198c6137d8858152cba77640}
+
+\item 
+\hypertarget{classDoctor_ab0b46ba92bd2069733f304858b7e4495}{void {\bfseries Stage\-Laser\-\_\-callback} (sensor\-\_\-msgs\-::\-Laser\-Scan msg)}\label{classDoctor_ab0b46ba92bd2069733f304858b7e4495}
+
+\item 
+\hypertarget{classDoctor_a1fe9c9a74bd4d2044b7217ec82ae9e60}{int {\bfseries run} (int argc, char $\ast$$\ast$argv)}\label{classDoctor_a1fe9c9a74bd4d2044b7217ec82ae9e60}
+
+\item 
+\hypertarget{classDoctor_a55fe6c06a3ce07fd9014a03000df43db}{double {\bfseries calc\-\_\-goal\-\_\-angle} (double goal\-\_\-x, double goal\-\_\-y, double cur\-\_\-angle, double px, double py)}\label{classDoctor_a55fe6c06a3ce07fd9014a03000df43db}
+
+\item 
+\hypertarget{classDoctor_ada60bb6625be46966ff86f7af9d05366}{std\-::pair$<$ double, double $>$ {\bfseries move} (double goal\-\_\-x, double goal\-\_\-y, double cur\-\_\-angle, double goal\-\_\-angle, double px, double py)}\label{classDoctor_ada60bb6625be46966ff86f7af9d05366}
+
+\item 
+\hypertarget{classDoctor_a21ac6188dd7f5890ff1a633cf700144d}{void {\bfseries random\-Checkpoint\-Callback} (const ros\-::\-Timer\-Event \&)}\label{classDoctor_a21ac6188dd7f5890ff1a633cf700144d}
+
+\item 
+\hypertarget{classDoctor_aed76815aa67aec25e8ff86a55e4ac4f1}{std\-::pair$<$ double, double $>$ {\bfseries move\-Path} (int path\mbox{[}$\,$\mbox{]}\mbox{[}2\mbox{]}, int path\-Length)}\label{classDoctor_aed76815aa67aec25e8ff86a55e4ac4f1}
+
+\item 
+\hypertarget{classDoctor_af4d24247a3f59b1b3b5258938e019086}{void {\bfseries resident\-Status\-Callback} (\hyperlink{structse306__project1_1_1ResidentMsg__}{se306\-\_\-project1\-::\-Resident\-Msg} msg)}\label{classDoctor_af4d24247a3f59b1b3b5258938e019086}
+
+\item 
+\hypertarget{classDoctor_a26ae14986239ea67147a52235685e31e}{void {\bfseries medication\-Callback} (const ros\-::\-Timer\-Event \&)}\label{classDoctor_a26ae14986239ea67147a52235685e31e}
+
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classDoctor_adab6ec6a93ee2f58b436a8294120f295}{bool {\bfseries heal\-Resident}}\label{classDoctor_adab6ec6a93ee2f58b436a8294120f295}
+
+\item 
+\hypertarget{classDoctor_ab1814310e306e7a742ffa9c5c6b913ef}{int {\bfseries health}}\label{classDoctor_ab1814310e306e7a742ffa9c5c6b913ef}
+
+\item 
+\hypertarget{classDoctor_a76dcb7e1308ef8001b7960cb542e3824}{int {\bfseries boredom}}\label{classDoctor_a76dcb7e1308ef8001b7960cb542e3824}
+
+\item 
+\hypertarget{classDoctor_a7b59e97eb09eed2ffed797d1174ac47f}{int {\bfseries hunger}}\label{classDoctor_a7b59e97eb09eed2ffed797d1174ac47f}
+
+\item 
+\hypertarget{classDoctor_ae058c3d6dce31d71ac4e63e3fd653275}{double {\bfseries goal\-\_\-x}}\label{classDoctor_ae058c3d6dce31d71ac4e63e3fd653275}
+
+\item 
+\hypertarget{classDoctor_aba0c1163551f144834fc0d68c556fac2}{double {\bfseries goal\-\_\-y}}\label{classDoctor_aba0c1163551f144834fc0d68c556fac2}
+
+\item 
+\hypertarget{classDoctor_a6ea729b1a8fc6d33176d768ef62b0a43}{double {\bfseries px}}\label{classDoctor_a6ea729b1a8fc6d33176d768ef62b0a43}
+
+\item 
+\hypertarget{classDoctor_a04b4b5bddd2b99b6eb4b7b8813eeeebf}{double {\bfseries py}}\label{classDoctor_a04b4b5bddd2b99b6eb4b7b8813eeeebf}
+
+\item 
+\hypertarget{classDoctor_a27377808d49670322af2ce4ec34730f1}{double {\bfseries goal\-\_\-angle}}\label{classDoctor_a27377808d49670322af2ce4ec34730f1}
+
+\item 
+\hypertarget{classDoctor_a2f7dffac0f8141914640e8f9bee5e7ff}{bool {\bfseries running}}\label{classDoctor_a2f7dffac0f8141914640e8f9bee5e7ff}
+
+\item 
+\hypertarget{classDoctor_ae31c0df1faec161bc8fec8dfae55b139}{bool {\bfseries is\-Set}}\label{classDoctor_ae31c0df1faec161bc8fec8dfae55b139}
+
+\item 
+\hypertarget{classDoctor_ab67e7a3eab1a57a0cfa52d84fe52414d}{double {\bfseries cur\-\_\-angle}}\label{classDoctor_ab67e7a3eab1a57a0cfa52d84fe52414d}
+
+\item 
+\hypertarget{classDoctor_a254303eb3ae4982340eb079ea76e942a}{int {\bfseries cc} = 1}\label{classDoctor_a254303eb3ae4982340eb079ea76e942a}
+
+\item 
+\hypertarget{classDoctor_a0566f795b41ece871b82ed7b63c5a780}{bool {\bfseries is\-\_\-called}}\label{classDoctor_a0566f795b41ece871b82ed7b63c5a780}
+
+\item 
+\hypertarget{classDoctor_a31d510c612a7f9d59efbcc8327f7adf3}{std\-::pair$<$ double, bool $>$ {\bfseries goal\-\_\-pair}}\label{classDoctor_a31d510c612a7f9d59efbcc8327f7adf3}
+
+\item 
+\hypertarget{classDoctor_ac371e75b4dcac584c9f2fa89585fefd7}{std\-::pair$<$ double, double $>$ {\bfseries ret}}\label{classDoctor_ac371e75b4dcac584c9f2fa89585fefd7}
+
+\item 
+int {\bfseries checkpoints} \mbox{[}4\mbox{]}\mbox{[}2\mbox{]}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classDoctor_a9bb025d7f8f843371b1c63414272afe1}{\index{Doctor@{Doctor}!checkpoints@{checkpoints}}
+\index{checkpoints@{checkpoints}!Doctor@{Doctor}}
+\subsubsection[{checkpoints}]{\setlength{\rightskip}{0pt plus 5cm}int Doctor\-::checkpoints\mbox{[}4\mbox{]}\mbox{[}2\mbox{]}\hspace{0.3cm}{\ttfamily [protected]}}}\label{classDoctor_a9bb025d7f8f843371b1c63414272afe1}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+= \{
+                \{10, -7\},
+                \{10, 2\},
+                \{30, 20\},
+                \{30, 25\}
+                \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+se306\-\_\-project1/src/Doctor.\-h\item 
+se306\-\_\-project1/src/Doctor.\-cpp\end{DoxyCompactItemize}

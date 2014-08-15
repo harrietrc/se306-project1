@@ -16,5 +16,5 @@ public:
 //	AgentFactory();
 //	virtual ~AgentFactory();
 	void createMockAgent();
-	int createAgent(AgentConst::AgentType agentType);
+	int createAgent(AgentConst::AgentType agentType, int nodeNumber);
 };

@@ -27,6 +27,8 @@ double py;
 double cur_angle;
 int cc = 1; //current_checkpoint = 0;
 
+std::pair<double, double> ret;	
+
 std::pair<double, double> move(double goal_x, double goal_y, double cur_angle, double goal_angle, double px, double py);
 double calc_goal_angle(double goal_x, double goal_y, double cur_angle, double px, double py); 
 void StageOdom_callback(nav_msgs::Odometry msg); 
@@ -67,8 +69,6 @@ void Doctor::StageOdom_callback(nav_msgs::Odometry msg)
 
 std::pair<double, double> Doctor::movePath(int path[][2], int pathLength) {
 		
-		
-	
 	std::pair<double, double> ret;	
 	ret = std::make_pair(0, 0); //initialize pair. Used to get return.
 	
@@ -135,7 +135,6 @@ std::pair<double, double> Doctor::move(double goal_x, double goal_y, double cur_
 		isSet = false;
 	}
 
-
 	if ((px-0.1 <= goal_x + 0.5) && (px-0.1 >= goal_x - 0.5) && (py-0.1 <= goal_y + 0.5) && (py-0.1 >= goal_y - 0.5)) {	
 
 			_ret.first = 0; 
@@ -187,7 +186,6 @@ void Doctor::StageLaser_callback(sensor_msgs::LaserScan msg)
 //custom resident callback function, you get the message object that was sent from Resident
 void Doctor::residentStatusCallback(se306_project1::ResidentMsg msg)
 {
-
 	
 	std::pair<double, double> velocityValues;	
 	velocityValues = std::make_pair(0, 0);
@@ -212,17 +210,16 @@ void Doctor::residentStatusCallback(se306_project1::ResidentMsg msg)
 	{
 		healing = false;
 	}
-	
+
 	if (healing || moveToPoint) {
 		velocityValues = movePath(checkpoints, 	10);
 		linear_x = velocityValues.first;
 		angular_z = velocityValues.second;
 	}
 	
-	
 }
 
-int Doctor::run(int argc, char **argv)
+int Doctor::run(int argc, char *argv[])
 {
 	//Initial pose. This is the same as the pose used in the world file.
 	px = checkpoints[cc-1][0];
@@ -292,23 +289,19 @@ int Doctor::run(int argc, char **argv)
 			doctor_pub.publish(aMsg);
 			residentHealed = 1;
 		}
-		
-		
-		
+
 		ros::spinOnce();
 
 		loop_rate.sleep();
 		++count;
 	}
-
 	return 0;
-
 }
 
 /* 
 	Redirects to main function (run()) of the node.
 */
-int main(int argc, char **argv) {
+int main(int argc, char *argv[]) {
 	Doctor *a = new Doctor;
 	a->Doctor::run(argc, argv);
 }

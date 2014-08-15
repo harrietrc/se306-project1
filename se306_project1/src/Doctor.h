@@ -23,16 +23,23 @@ class Doctor : public Visitor
 
 		int cc = 1; //current_checkpoint = 0;
 
+		int checkpoints[4][2] = {
+			{10, -7},
+			{10, 1},
+			{30, 20},
+			{30, 25}
+			};
+
 		bool is_called; 
 
 		std::pair<double,bool> goal_pair;
 		std::pair<double, double> ret;	
 
-
 	public:
 		void StageOdom_callback(nav_msgs::Odometry msg);
 		void StageLaser_callback(sensor_msgs::LaserScan msg);
-		int run(int argc, char **argv);
+		int run(int argc, char *argv[]);
+
 
 		double calc_goal_angle(double goal_x, double goal_y, double cur_angle, double px, double py);
 		std::pair<double, double> move(double goal_x, double goal_y, double cur_angle, double goal_angle, double px, double py);

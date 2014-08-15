@@ -145,7 +145,6 @@ void Resident::StageOdom_callback(nav_msgs::Odometry msg)
 	//Update the current position
 	px = msg.pose.pose.position.x + checkpoints[0][0];
 	py = msg.pose.pose.position.y + checkpoints[0][1];
-	
 
 }
 
@@ -159,13 +158,13 @@ void Resident::StageLaser_callback(sensor_msgs::LaserScan msg)
 //doctor will heal resident when they are next to each other
 void Resident::doctor_callback(se306_project1::DoctorMsg msg)
 {
+
 	 if (msg.healResident == 1)
 	{
 	 	health = 100;
 		ROS_INFO("Resident healed by Doctor, health = 100");
 	}
-	
-	
+
 }
 
 void Resident::assistant_callback(se306_project1::AssistantMsg msg)
@@ -254,8 +253,9 @@ void Resident::randomCheckpointCallback(const ros::TimerEvent&) {
 	//ROS_INFO("hello");
 }
 
-int Resident::run(int argc, char **argv)
+int Resident::run(int argc, char *argv[])
 {
+
 
 
 	//Initial pose. This is the same as the pose used in the world file.
@@ -323,7 +323,7 @@ int Resident::run(int argc, char **argv)
 		//messages to stage
 		RobotNode_cmdvel.linear.x = linear_x;
 		RobotNode_cmdvel.angular.z = angular_z;
-
+		//ROS_INFO("Hunger %d",hunger);
 		//publish the message
 		RobotNode_stage_pub.publish(RobotNode_cmdvel);
 		
