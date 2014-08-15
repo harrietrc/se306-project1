@@ -201,8 +201,9 @@ void Doctor::residentStatusCallback(se306_project1::ResidentMsg msg)
 		readyToHeal= 1;
 	} 
 	
-	if(msg.health < 55 && healing ==false)
+	if(msg.health < 65 && healing ==false)
 	{
+		ROS_INFO("Resident is feeling unwell");
 		ROS_INFO("Doctor is on the way");
 		healing = true;
 		velocityValues = movePath(checkpoints, 	10);

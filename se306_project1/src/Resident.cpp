@@ -28,6 +28,7 @@ bool isSet = false;
 double px;
 double py;
 double cur_angle;
+
 		int checkpoints[3][2] = {  
 			{47, 43},
 			{47, 20},
@@ -315,8 +316,8 @@ int Resident::run(int argc, char **argv)
 	int dur2 = time_conversion::simHoursToRealSecs(2); // Perform callback every 2 simulation hours
 	ros::Timer medicationTimer = n.createTimer(ros::Duration(dur2), &Resident::randomCheckpointCallback, this); 
 
-	int hungerReductionRate = 2; //1 hunger point reduction per second
-	int healthReductionRate = 2; // 0.1 health point reduction per second
+	int hungerReductionRate = 1; //1 hunger point reduction per second
+	int healthReductionRate = 1; // 0.1 health point reduction per second
 
 	while (ros::ok())
 	{
@@ -331,6 +332,21 @@ int Resident::run(int argc, char **argv)
 		if (count % 100 == 0){
 				hunger -= hungerReductionRate;
 				health -= healthReductionRate;
+				
+				if (hunger < 0){
+						hunger = 0;
+				}
+				if (health < 0){
+						health = 0;
+				}
+				
+				
+				ROS_INFO("########################");
+				ROS_INFO("Hunger : %d", hunger);
+				ROS_INFO("Health : %d", health);
+				ROS_INFO("########################");
+
+				
 		}
 			std::pair<double, double> velocityValues;	
 			velocityValues = std::make_pair(0, 0);
