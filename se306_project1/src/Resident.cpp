@@ -14,6 +14,45 @@
 #include "time_conversion.hpp"
 #include "Resident.h"	
 #include "boost/graph/adjacency_list.hpp"
+#include <boost/graph/graphviz.hpp> // Good for debugging, but take out for final build.
+
+// Boost recommends using BFS instead of dijkstra_shortest_paths (and variants) when all edge weights are equal to 1.
+#include "boost/graph/breadth_first_search.hpp"
+
+using namespace boost; // Useful for graphs
+
+/* GRAPH STUFF */
+
+// -- CHECKPOINTS --
+// So apparently it's necessary to create an array in order to initialise a vector. Don't use this array for other 
+// purposes - it's only for initialisation. Change these names (cp0, cp1, etc.) to be more descriptive - e.g. 
+// kitchen, bedroom, etc. 
+const char* nameArr[] = { 
+	"cp0","cp1", "cp2"
+};
+// Vector initialised with values from the array above.
+std::vector<std::string> checkpointNames(begin(nameArr), end(nameArr)); // Remember to change this - maybe equivalate to namArr length?
+
+// -- GRAPH --
+typedef property<vertex_name_t, std::string> VertexProperty; // Will allow us to retrieve vertex names from vertex references
+typedef adjacency_list <vecS, vecS, undirectedS, VertexProperty> vector_graph_t; // Graph type
+const int checkpointNum = checkpointNames.size(); // Number of checkpoints. 
+vector_graph_t g(checkpointNum); // Our graph
+std::map<std::string, vector_graph_t::vertex_descriptor> indices; // map that corresponds checkpoint names to the vertices in the graph. 
+
+// -- EDGES --
+// 'Edges' between checkpoints
+typedef std::pair <std::string, std::string> E;
+E paths[] = { E ("cp0", "cp1"), E ("cp1", "cp2")}; // Define edges here
+
+// -- MAP OF NAMES TO CO-ORDINATES --
+// Build a hashmap that corresponds names with checkpoint co-ordinates.
+typedef std::string CheckpointName; // Key
+typedef std::pair<int, int> Checkpoint; // Value
+typedef std::map<CheckpointName, Checkpoint> CheckpointMap;
+CheckpointMap c;
+/* (end of graph stuff) */
+
 
 //velocity of the robot
 double linear_x;
@@ -28,6 +67,7 @@ bool isSet = false;
 double px;
 double py;
 double cur_angle;
+
 		int checkpoints[3][2] = {  
 			{47, 43},
 			{47, 20},
@@ -41,18 +81,6 @@ int cc = 1; //current_checkpoint = 0;
 std::pair<double, double> move(double goal_x, double goal_y, double cur_angle, double goal_angle, double px, double py);
 double calc_goal_angle(double goal_x, double goal_y, double cur_angle, double px, double py); 
 void StageOdom_callback(nav_msgs::Odometry msg); 
-
-// Change these names (cp0, cp1, etc.) to be more descriptive - e.g. kitchen, bedroom, etc.
-std::string nameArr[6] = {
-"cp0","cp1", "cp2", "cp3","cp4","cp5"
-};
-std::vector<std::string> checkpointNames(&nameArr[0], &nameArr[0]+2);
-
-// Build a hashmap that corresponds names with checkpoint co-ordinates.
-typedef std::string CheckpointName; // Key
-typedef std::pair<int, int> Checkpoint; // Value
-typedef std::map<CheckpointName, Checkpoint> CheckpointMap;
-CheckpointMap c;
 
 /**
 *	@brief Causes the agent to move until the goal is reached.
@@ -99,8 +127,6 @@ std::pair<double, double> Resident::movePath(int path[][2], int pathLength) {
 * 	@attention Builds, but untested - proof of concept. Development on hold.
 */
 void checkpointMap() {
-	// Number of checkpoints
-	int checkpointNum = checkpointNames.size();
 
 	// Convert array to pairs
 	std::vector<std::pair<int,int> > vec;
@@ -115,29 +141,68 @@ void checkpointMap() {
 	}
 }
 
-struct VertexProperties {
-    std::string cName;
-};
-
-
-/**
-*	@brief Creates a graph from the checkpoints, representing paths around the house.
-*	Edges must be added manually.
-*	@note Consider using 'using namespace boost'
-*/
 void makeGraph() {
 
-	typedef boost::adjacency_list <boost::listS, boost::listS, boost::undirectedS, VertexProperties> Graph;
-	int cNum = checkpointNames.size(); // field for the number of checkpoints might be wise in the future. Lots of duplication.
-	Graph cGraph(cNum); 
+	// Fills the property 'vertex_name_t' of the vertices, allowing us to get the checkpoint name back when we have 
+	// only a reference to the vertex (as will be the case when examining the shortest path). Also associates each
+	// checkpoint name with a vertex descriptor.
+	for(int i = 0; i < checkpointNum; i++)
+	{
+	  boost::put(vertex_name_t(), g, i, checkpointNames[i]); 
+	  indices[checkpointNames[i]] = boost::vertex(i, g); 
+	}
 
-	boost::property_map<Graph, std::string VertexProperties::*>::type 
-    cName = get(&VertexProperties::cName, cGraph);
+	// Add the edges. 
+	for(int i = 0; i < sizeof(paths)/sizeof(paths[0]); i++)
+	{
+	  boost::add_edge(indices[paths[i].first], indices[paths[i].second], g);
+	}
 
-    // // Some way to automate this would be good with higher numbers of checkpoints.
-    // boost::add_edge(boost::vertex("cp0", cGraph), boost::vertex("cp1",cGraph), cGraph);
-    // boost::add_edge(boost::vertex("cp1", cGraph), boost::vertex("cp2",cGraph), cGraph);
-    // // etc. (adding more edges)
+	// //Prints a pretty graph
+	// std::ofstream ofs("test.dot");
+    // write_graphviz(ofs, g); // dot -Tps test.dot -o outfile.ps	
+
+}
+
+std::vector<std::string> shortestPath(std::string startName, std::string endName) {
+
+	//Create vector to store the predecessors (can also make one to store distances)
+  	std::vector<vector_graph_t::vertex_descriptor> p(boost::num_vertices(g));
+
+  	// Get the descriptor for the source node
+  	vector_graph_t::vertex_descriptor s = indices[startName]; // Shouldn't be hardcoded - pass start checkpoint
+
+ 	// Computes the shortest path 
+ 	breadth_first_search(g, s, visitor(make_bfs_visitor(record_predecessors(&p[0], on_tree_edge()))));
+
+ 	// Get the path back from the predecessor map
+ 	vector_graph_t::vertex_descriptor goal = indices[endName]; // As above, end checkpoint
+ 	std::vector<vector_graph_t::vertex_descriptor> path;
+	vector_graph_t::vertex_descriptor current;
+
+	current = goal;
+
+	// This loop could be eliminated by pushing checkpoint names to a vector rather than vertex_descriptors. However,
+	// I left it in because it seemed like good practice to create/retain the actual path of vertices, e.g. in case
+	// there we should implement and want to access properties other than just vertex names.
+	while(current!=s) {
+   		path.push_back(current);
+    	current = p[current]; // Predecessor of the current checkpoint in the path
+	}
+
+	// path.push_back(s); // BFS doesn't include the start node. 
+
+	std::vector<std::string> a;
+
+	for (int i=0; i<path.size(); i++) {
+		// Get the vertex name from the graph's property map
+		std::string cpn = boost::get(vertex_name_t(), g, path[i]); // adjacency_list vertex_descriptors are ints
+		a.push_back(cpn);
+	}
+	
+	std::reverse(a.begin(), a.end()); // as search starts from goal; we can access only predecessors, not successors
+
+    return a;
 }
 
 /**
