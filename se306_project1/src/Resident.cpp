@@ -124,7 +124,6 @@ std::pair<double, double> Resident::movePath(int path[][2], int pathLength) {
 /**
 *	@build Associates checkpoint names with checkpoint co-ordinates
 *	To be used in conjunction with a graph of checkpoint names, representing paths between checkpoints.
-* 	@attention Builds, but untested - proof of concept. Development on hold.
 */
 void checkpointMap() {
 
@@ -139,6 +138,7 @@ void checkpointMap() {
 	for (int i=0; i<checkpointNum; i++) {
 		c.insert(std::make_pair(CheckpointName(checkpointNames[i]), Checkpoint(vec[i])));
 	}
+
 }
 
 void makeGraph() {
@@ -164,7 +164,7 @@ void makeGraph() {
 
 }
 
-std::vector<std::string> shortestPath(std::string startName, std::string endName) {
+std::vector<std::pair<double, double> > shortestPath(std::string startName, std::string endName) {
 
 	//Create vector to store the predecessors (can also make one to store distances)
   	std::vector<vector_graph_t::vertex_descriptor> p(boost::num_vertices(g));
@@ -192,12 +192,13 @@ std::vector<std::string> shortestPath(std::string startName, std::string endName
 
 	// path.push_back(s); // BFS doesn't include the start node. 
 
-	std::vector<std::string> a;
+	std::vector<std::pair<double, double> > a;
 
 	for (int i=0; i<path.size(); i++) {
 		// Get the vertex name from the graph's property map
 		std::string cpn = boost::get(vertex_name_t(), g, path[i]); // adjacency_list vertex_descriptors are ints
-		a.push_back(cpn);
+		std::pair<double, double> coords = c[cpn]; // Get co-ordinates associated with checkpoint name
+		a.push_back(coords);
 	}
 	
 	std::reverse(a.begin(), a.end()); // as search starts from goal; we can access only predecessors, not successors
@@ -370,7 +371,15 @@ void Resident::randomCheckpointCallback(const ros::TimerEvent&) {
 *	@brief Main function for the Resident process.
 *	Controls node setup and periodic events.
 */
-int Resident::run(int argc, char *argv[])
+int Resident::run(int argc, char *argv[]) {
+
+	// Graph demo (pass start and goal checkpoint names, get a path of checkpoints as co-ordinates back.)
+	checkpointMap();
+	makeGraph();
+	std::vector<std::pair<double, double> > sp = shortestPath("cp0", "cp2"); // Gets shortest path from cp0 to cp1
+	for (int i=0; i<sp.size(); i++) {
+		printf("%f, %f\n", sp[i].first, sp[i].second); 
+	} // Note that it won't return the start node - if you want it to, there's a line you can uncomment in shortestPath().
 
 	//Initial pose. This is the same as the pose used in the world file.
 	px = checkpoints[cc-1][0];
