@@ -23,7 +23,7 @@ void \hyperlink{classResident_ae1406a27c978147c7816e57f9ed13aed}{Stage\-Odom\-\_
 \begin{DoxyCompactList}\small\item\em Updates the \hyperlink{classResident}{Resident}'s x position, y position, and angle to reflect its current pose. \end{DoxyCompactList}\item 
 void \hyperlink{classResident_a6745ec218b7e451eb7ba2ca88fa2aca9}{Stage\-Laser\-\_\-callback} (sensor\-\_\-msgs\-::\-Laser\-Scan msg)
 \begin{DoxyCompactList}\small\item\em Callback function to process laser scan messsages. You can access the range data from msg.\-ranges\mbox{[}i\mbox{]}. i = sample number. \end{DoxyCompactList}\item 
-\hypertarget{classResident_aa4cbafa8f6cf586b53a774a8f1d81aa6}{int \hyperlink{classResident_aa4cbafa8f6cf586b53a774a8f1d81aa6}{run} (int argc, char $\ast$$\ast$argv) = checkpoints\mbox{[}cc-\/1\mbox{]}\mbox{[}0\mbox{]}}\label{classResident_aa4cbafa8f6cf586b53a774a8f1d81aa6}
+\hypertarget{classResident_aa4cbafa8f6cf586b53a774a8f1d81aa6}{int \hyperlink{classResident_aa4cbafa8f6cf586b53a774a8f1d81aa6}{run} (int argc, char $\ast$$\ast$argv)}\label{classResident_aa4cbafa8f6cf586b53a774a8f1d81aa6}
 
 \begin{DoxyCompactList}\small\item\em Main function for the \hyperlink{classResident}{Resident} process. Controls node setup and periodic events. \end{DoxyCompactList}\item 
 void \hyperlink{classResident_a6d8fbbc8a60508ec913fb41d7e743094}{doctor\-\_\-callback} (\hyperlink{structse306__project1_1_1DoctorMsg__}{se306\-\_\-project1\-::\-Doctor\-Msg} msg)
@@ -38,7 +38,17 @@ std\-::pair$<$ double, double $>$ \hyperlink{classResident_a6f48fd57a638a2b45997
 void \hyperlink{classResident_aa715d491e917de6f621593f0d1f01bd6}{assistant\-\_\-callback} (\hyperlink{structse306__project1_1_1AssistantMsg__}{se306\-\_\-project1\-::\-Assistant\-Msg} msg)
 \begin{DoxyCompactList}\small\item\em Increases the \hyperlink{classResident}{Resident}'s hunger (towards full) if food has been delivered. \end{DoxyCompactList}\item 
 std\-::pair$<$ double, double $>$ \hyperlink{classResident_a0cfe1d9b185beed7d3438157cc69db05}{move\-Path} (int path\mbox{[}$\,$\mbox{]}\mbox{[}2\mbox{]}, int path\-Length)
-\begin{DoxyCompactList}\small\item\em Causes the agent to move until the goal is reached. When the goal is reached, the next checkpoint becomes the goal or if the list of checkpoints is exhausted, the agent returns to its initial position (the first checkpoint) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Causes the agent to move until the goal is reached. When the goal is reached, the next checkpoint becomes the goal or if the list of checkpoints is exhausted, the agent returns to its initial position (the first checkpoint) \end{DoxyCompactList}\item 
+\hypertarget{classResident_a15bb8540e201651ba2182880c5e8e00d}{void {\bfseries checkpoint\-Map} ()}\label{classResident_a15bb8540e201651ba2182880c5e8e00d}
+
+\item 
+\hypertarget{classResident_a356d42dfaccea84de8c020b447b307c0}{void {\bfseries make\-Graph} ()}\label{classResident_a356d42dfaccea84de8c020b447b307c0}
+
+\item 
+\hypertarget{classResident_af0d9900521219f2b28425f492a51d093}{std\-::vector$<$ std\-::pair$<$ double, \\*
+double $>$ $>$ {\bfseries shortest\-Path} (std\-::string start\-Name, std\-::string end\-Name)}\label{classResident_af0d9900521219f2b28425f492a51d093}
+
+\end{DoxyCompactItemize}
 \subsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 

@@ -15,8 +15,6 @@
 #include "Resident.h"	
 #include "boost/graph/adjacency_list.hpp"
 #include <boost/graph/graphviz.hpp> // Good for debugging, but take out for final build.
-
-// Boost recommends using BFS instead of dijkstra_shortest_paths (and variants) when all edge weights are equal to 1.
 #include "boost/graph/breadth_first_search.hpp"
 
 using namespace boost; // Useful for graphs
@@ -76,6 +74,8 @@ double cur_angle;
 
 
 
+
+	// Fills the property 'vertex_name_t' of the vertices, allowing us to get the checkpoint name back when
 int cc = 1; //current_checkpoint = 0;
 				
 std::pair<double, double> move(double goal_x, double goal_y, double cur_angle, double goal_angle, double px, double py);
@@ -122,10 +122,11 @@ std::pair<double, double> Resident::movePath(int path[][2], int pathLength) {
 
 
 /**
-*	@build Associates checkpoint names with checkpoint co-ordinates
-*	To be used in conjunction with a graph of checkpoint names, representing paths between checkpoints.
+*	@brief Associates checkpoint names with checkpoint co-ordinates
+*	To be used in conjunction with a graph of checkpoint names, representing paths between checkpoints. Could be replaced
+*	by adding the co-ordinates to bundled properties in the property map of the graph.
 */
-void checkpointMap() {
+void Resident::checkpointMap() {
 
 	// Convert array to pairs
 	std::vector<std::pair<int,int> > vec;
@@ -141,7 +142,12 @@ void checkpointMap() {
 
 }
 
-void makeGraph() {
+/**
+*	@brief Creates a graph of checkpoint names, provided the vector of names and the array of edges.
+*	Uses boost's adjacency list.
+*	@todo Error checking for non-existent edge arrays and vertex vectors. 
+*/
+void Resident::makeGraph() {
 
 	// Fills the property 'vertex_name_t' of the vertices, allowing us to get the checkpoint name back when we have 
 	// only a reference to the vertex (as will be the case when examining the shortest path). Also associates each
@@ -164,7 +170,15 @@ void makeGraph() {
 
 }
 
-std::vector<std::pair<double, double> > shortestPath(std::string startName, std::string endName) {
+/**
+*	@brief Finds the shortest path between 2 checkpoints, and returns the path as co-ordinates.
+*	Uses breadth first search - Boost recommends this over Dijkstra's algorithm for graphs with uniformly weighted edges.
+*	@param startName The name of the start checkpoint as a string (e.g. 'kitchen')
+*	@param endName The name of the goal checkpoint as a string (e.g. 'bathroom')
+*	@return a A vector of checkpoint co-ordinates forming a path between start and end, formatted as pairs of x and y co-ordinates.
+*	@todo Error checking for non-existent/initialised graph.
+*/
+std::vector<std::pair<double, double> > Resident::shortestPath(std::string startName, std::string endName) {
 
 	//Create vector to store the predecessors (can also make one to store distances)
   	std::vector<vector_graph_t::vertex_descriptor> p(boost::num_vertices(g));
