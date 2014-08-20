@@ -9,30 +9,35 @@
 #include "Caregiver.h"
 
 /**
-*	@brief Updates the Caregiver's x position, y position, and angle to reflect its current pose.
-*	@note Rounding is used to calculate the current angle. This approximation is accounted for by using threshholds when processing angles.
-*	@param msg Odometry message from odom topic
+*	@brief Caregiver helps the resident to eat.
+*	@return Returns true if behaviour was successful, and false otherwise.
 */
-void Caregiver::StageOdom_callback(nav_msgs::Odometry msg)
-{
-	//This is the call back function to process odometry messages coming from Stage. 	
-	px = 5 + msg.pose.pose.position.x;
-	py =10 + msg.pose.pose.position.y;
-	ROS_INFO("Current x position is: %f", px);
-	ROS_INFO("Current y position is: %f", py);
+bool Caregiver::doEatSupport() {
+
 }
 
 /**
-*	@brief Callback function to process laser scan messsages.
-*	You can access the range data from msg.ranges[i]. i = sample number
-*	@note Currently blank as it is not in use. Navigation operates through a checkpoint system.
-*	@param msg Single scan from a planar laser range finder
+*	@brief Caregiver helps the resident to do exercise.
+*	@return Returns true if behaviour was successful, and false otherwise.
 */
-void Caregiver::StageLaser_callback(sensor_msgs::LaserScan msg)
-{
-	//This is the callback function to process laser scan messages
-	//you can access the range data from msg.ranges[i]. i = sample number
-	
+bool Caregiver::doExerciseSupport() {
+
+}
+
+/**
+*	@brief Caregiver helps the resident to shower.
+*	@return Returns true if behaviour was successful, and false otherwise.
+*/
+bool Caregiver::doShowerSupport() {
+
+}
+
+/**
+*	@brief Caregiver gives the resident moral support/
+*	@return Returns true if behaviour was successful, and false otherwise.
+*/
+bool Caregiver::doMoralSupport() {
+
 }
 
 /**
@@ -41,21 +46,18 @@ void Caregiver::StageLaser_callback(sensor_msgs::LaserScan msg)
 */
 int Caregiver::run(int argc, char *argv[])
 {
-	//initialize robot parameters
-	//Initial pose. This is same as the pose that you used in the world file to set	the robot pose.
-	theta = M_PI/2.0;
-	px = 10;
-	py = 20;
-	
-	//Initial velocity
-	linear_x = 0.2;
-	angular_z = 0.2;
+	/* -- Initialisation -- */
 	
 	//You must call ros::init() first of all. ros::init() function needs to see argc and argv. The third argument is the name of the node
-	ros::init(argc, argv, "Caregiver");
+	ros::init(argc, argv, "Relative");
 
 	//NodeHandle is the main access point to communicate with ros.
 	ros::NodeHandle n;
+
+	ros::Rate loop_rate(10);
+
+
+	/* -- Publish / Subscribe -- */
 
 	//advertise() function will tell ROS that you want to publish on a given topic_
 	//to stage
@@ -63,16 +65,11 @@ int Caregiver::run(int argc, char *argv[])
 
 	//subscribe to listen to messages coming from stage
 	ros::Subscriber StageOdo_sub = n.subscribe<nav_msgs::Odometry>("robot_0/odom",1000, &Caregiver::StageOdom_callback,this);
-	ros::Subscriber StageLaser_sub = n.subscribe<sensor_msgs::LaserScan>("robot_0/base_scan",1000,&Caregiver::StageLaser_callback,this);
-
-	ros::Rate loop_rate(10);
-
-	//a count of howmany messages we have sent
-	int count = 0;
 
 	////messages
 	//velocity of this RobotNode
 	geometry_msgs::Twist RobotNode_cmdvel;
+	
 
 	while (ros::ok())
 	{
@@ -84,13 +81,10 @@ int Caregiver::run(int argc, char *argv[])
 		RobotNode_stage_pub.publish(RobotNode_cmdvel);
 		
 		ros::spinOnce();
-
 		loop_rate.sleep();
-		++count;
 	}
 
 	return 0;
-
 }
 
 /**

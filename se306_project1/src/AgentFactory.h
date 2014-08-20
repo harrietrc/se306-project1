@@ -16,8 +16,8 @@ namespace AgentConst {
 */
 class AgentFactory {
 public:
-//	AgentFactory();
-//	virtual ~AgentFactory();
+
 	void createMockAgent();
 	int createAgent(AgentConst::AgentType agentType, int nodeNumber);
+	
 };
