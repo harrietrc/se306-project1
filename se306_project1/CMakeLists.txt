@@ -37,6 +37,8 @@ rosbuild_add_executable(Doctor src/Doctor.cpp)
 #rosbuild_add_executable(Nurse src/Nurse.cpp)
 #rosbuild_add_executable(Relative src/Relative.cpp)
 
+#gtest
+rosbuild_add_gtest(test/utest bin/test/utest.cpp)
 
 #rosbuild_add_executable(R0 src/R0.cpp src/time_conversion.cpp)
 #rosbuild_add_executable(R0 src/R0.cpp)

@@ -1,0 +1,1 @@
+g++ -I ${GTEST_DIR}/include test1.c libgtest.a -lpthread -o test1
