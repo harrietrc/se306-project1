@@ -24,6 +24,6 @@ void Visitor::visitResident() {
 *	@returns true if the behaviour completes successfully.
 */
 bool Visitor::doConverse() {
-
+	return true;
 }
 

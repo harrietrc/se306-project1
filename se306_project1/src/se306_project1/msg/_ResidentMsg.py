@@ -13,7 +13,6 @@ class ResidentMsg(genpy.Message):
 float64 y
 int64 health
 int64 hunger
-
 """
   __slots__ = ['x','y','health','hunger']
   _slot_types = ['float64','float64','int64','int64']

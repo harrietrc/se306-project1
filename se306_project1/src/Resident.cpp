@@ -20,7 +20,7 @@
 *	@brief Makes the resident go to bed and sleep, as scheduled by a timer.
 */
 bool Resident::doSleep(const ros::TimerEvent&) {
-
+	return true;
 }
 
 /**

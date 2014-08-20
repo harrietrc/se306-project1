@@ -10,7 +10,6 @@ class AssistantMsg(genpy.Message):
   _type = "se306_project1/AssistantMsg"
   _has_header = False #flag to mark the presence of a Header object
   _full_text = """int64 FoodDelivered
-
 """
   __slots__ = ['FoodDelivered']
   _slot_types = ['int64']

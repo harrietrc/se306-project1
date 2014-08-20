@@ -23,7 +23,7 @@ void Doctor::delegate(se306_project1::ResidentMsg msg) {
 *	@returns true if behaviour is successful.
 */
 bool Doctor::doHeal() {
-
+	return true;
 }
 
 /**
@@ -32,7 +32,7 @@ bool Doctor::doHeal() {
 *	@returns true if behaviour is successful.
 */
 bool Doctor::doHospitalise() {
-
+	return true;
 }
 
 /**

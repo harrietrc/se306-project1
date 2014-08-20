@@ -11,6 +11,8 @@
 #include "boost/graph/adjacency_list.hpp"
 #include <boost/graph/graphviz.hpp> // Good for debugging, but take out for final build.
 #include "boost/graph/breadth_first_search.hpp"
+#include "se306_project1/ResidentMsg.h"
+#include "se306_project1/AssistantMsg.h"
 
 using namespace boost; // Useful for graphs
 
@@ -44,16 +46,16 @@ CheckpointMap c;
 /* -- Pathing -- */
 
 int cc; /*!< The index of the agent's current checkpoint in the path. */
-std::std::vector<double, double> path; /*!< The agent's path to a specified goal. */
+std::vector<std::pair<double, double> > path; /*!< The agent's path to a specified goal. */
 
 /**
-*	@brief Finds the shortest path between 2 checkpoints, and returns the path as co-ordinates.
+*	@brief Finds the shortest path between 2 checkpoints, and returns the path as co-ordinates. 
 *	Uses breadth first search - Boost recommends this over Dijkstra's algorithm for graphs with uniformly weighted edges.
+* 	Sets path member variable.
 *	@param startName The name of the start checkpoint as a string (e.g. 'kitchen')
 *	@param endName The name of the goal checkpoint as a string (e.g. 'bathroom')
-*	@return a A vector of checkpoint co-ordinates forming a path between start and end, formatted as pairs of x and y co-ordinates.
 */
-std::vector<std::pair<double, double> > Agent::shortestPath(std::string startName, std::string endName) {
+void Agent::shortestPath(std::string startName, std::string endName) {
 
 }
 
@@ -92,7 +94,7 @@ void Agent::StageOdom_callback(nav_msgs::Odometry msg) {
 *	@returns The angular and linear velocity that the agent should adopt in order to reach the next checkpoint.
 */
 std::pair<double, double> Agent::movePath() {
-
+	return std::make_pair(0, 0); //stub
 }
 
 /**
@@ -100,12 +102,12 @@ std::pair<double, double> Agent::movePath() {
 *	@return _ret linear and angular velocity for the agent. 
 */
 std::pair<double, double> Agent::move() {
-
+	return std::make_pair(0, 0); //stub
 }
 
 /**
 *	@brief Given the agent's current angle, this function calculates the angle to the goal.
 */
 double Agent::calc_goal_angle() {
-
+	return 0;
 }

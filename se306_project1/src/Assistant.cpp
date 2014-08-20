@@ -61,7 +61,7 @@ bool Assistant::doEntertainment() {
 *	@note Not totally sure if this is the implementation we're going for or not.
 */
 bool Assistant::coordinate() {
-
+	return true;
 } 
 
 /**

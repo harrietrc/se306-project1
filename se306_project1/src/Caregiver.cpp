@@ -3,7 +3,6 @@
 #include <geometry_msgs/Twist.h>
 #include <nav_msgs/Odometry.h>
 #include <sensor_msgs/LaserScan.h>
-
 #include <sstream>
 #include "math.h"
 #include "Caregiver.h"
@@ -13,7 +12,7 @@
 *	@return Returns true if behaviour was successful, and false otherwise.
 */
 bool Caregiver::doEatSupport() {
-
+	return true;
 }
 
 /**
@@ -21,7 +20,7 @@ bool Caregiver::doEatSupport() {
 *	@return Returns true if behaviour was successful, and false otherwise.
 */
 bool Caregiver::doExerciseSupport() {
-
+	return true;
 }
 
 /**
@@ -29,7 +28,7 @@ bool Caregiver::doExerciseSupport() {
 *	@return Returns true if behaviour was successful, and false otherwise.
 */
 bool Caregiver::doShowerSupport() {
-
+	return true;
 }
 
 /**
@@ -37,7 +36,7 @@ bool Caregiver::doShowerSupport() {
 *	@return Returns true if behaviour was successful, and false otherwise.
 */
 bool Caregiver::doMoralSupport() {
-
+	return true;
 }
 
 /**

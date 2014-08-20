@@ -1,3 +1,8 @@
+#include <sensor_msgs/LaserScan.h>
+#include <nav_msgs/Odometry.h>
+#include "se306_project1/ResidentMsg.h"
+#include "se306_project1/AssistantMsg.h"
+
 /**
 *	@brief Superclass for all 'agents' - i.e. Assistants, Visitors, and the Resident.
 *	Contains common navigation functionality and properties.
@@ -46,7 +51,7 @@ class Agent
 		std::pair<double, double> movePath(); /*!< @note No parameters as long as the agent's path is a field. */
 		std::pair<double, double> move(); /*!< @note Same return type as movePath() because move() generates the return value for movePath(). */
 		double calc_goal_angle();
-		std::vector<std::pair<double, double> > shortestPath(std::string startName, std::string endName);
+		void shortestPath(std::string startName, std::string endName);
 
 		void makeGraph();
 		void checkpointMap();

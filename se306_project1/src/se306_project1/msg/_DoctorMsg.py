@@ -10,7 +10,6 @@ class DoctorMsg(genpy.Message):
   _type = "se306_project1/DoctorMsg"
   _has_header = False #flag to mark the presence of a Header object
   _full_text = """int64 healResident
-
 """
   __slots__ = ['healResident']
   _slot_types = ['int64']
