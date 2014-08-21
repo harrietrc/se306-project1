@@ -228,12 +228,36 @@ void Doctor::StageLaser_callback(sensor_msgs::LaserScan msg)
 *	can be implemented later.
 *	@param msg A custom ResidentMsg message that contains information about the resident's current status.
 */
-void Doctor::residentStatusCallback(se306_project1::ResidentMsg msg)
+void Doctor::delegate(se306_project1::ResidentMsg msg)
 {
-	
+	if (msg.health < 55) { // Resident is very ill
+		doHeal(msg);
+	}
+	else if (msg.health >= 90) { // Resident has recently been healed
+		healing = false;
+		hospitalise = false;
+	}
+	else if (msg.health <= 10) { // Resident is dying
+		doHospitalise();
+	}
+}
+
+/**
+* @brief Medicates/heals/diagnoses resident, improving their health.
+* @returns true if behaviour is successful.
+*/
+bool Doctor::doHeal(se306_project1::ResidentMsg msg) {
 	std::pair<double, double> velocityValues;	
 	velocityValues = std::make_pair(0, 0);
-		
+
+	if (healing == false) {
+		ROS_INFO("Doctor is on the way");
+		healing = true;
+		velocityValues = movePath(checkpoints, 	10);
+		linear_x = velocityValues.first;
+		angular_z = velocityValues.second;
+	}
+
 	if ((sqrt(pow((msg.x - px),2) + pow((msg.y - py),2)) < 2.5) && residentHealed == 0){
 		linear_x = 0;
 		angular_z = 0;
@@ -241,18 +265,6 @@ void Doctor::residentStatusCallback(se306_project1::ResidentMsg msg)
 		goal_x = px;
 		goal_y = py;
 		readyToHeal= 1;
-	} 
-	
-	if(msg.health < 55 && healing ==false)
-	{
-		ROS_INFO("Doctor is on the way");
-		healing = true;
-		velocityValues = movePath(checkpoints, 	10);
-		linear_x = velocityValues.first;
-		angular_z = velocityValues.second;
-	} else if (msg.health >= 90)
-	{
-		healing = false;
 	}
 
 	if (healing || moveToPoint) {
@@ -260,7 +272,30 @@ void Doctor::residentStatusCallback(se306_project1::ResidentMsg msg)
 		linear_x = velocityValues.first;
 		angular_z = velocityValues.second;
 	}
-	
+
+	return readyToHeal;
+}
+/**
+* @brief Takes the resident to hospital
+* (non-doctor-induced emergency, despite the function name...)
+* @returns true if behaviour is successful.
+*/
+bool Doctor::doHospitalise() {
+	if (hospitalise == false) {
+		ROS_INFO("Doctor is on the way to take Resident to the hospital");
+		hospitalise = true;
+		// move doctor to resident and then move both doctor and resident outside of house
+		// do something with nurses as well?
+		/*
+		std::pair<double, double> velocityValues;	
+		velocityValues = std::make_pair(0, 0);
+
+		velocityValues = movePath(checkpoints, 	10);
+		linear_x = velocityValues.first;
+		angular_z = velocityValues.second;
+		*/
+	}
+	return true;
 }
 
 /**
@@ -286,6 +321,9 @@ int Doctor::run(int argc, char *argv[])
 
 	//boolean to indicate whether doctor should heal the resident
 	healResident = false;
+
+	//boolean to indicate whether doctor should take the resident to the hospital
+	hospitalise = false;
 		
 	//You must call ros::init() first of all. ros::init() function needs to see argc and argv. The third argument is the name of the node
 	ros::init(argc, argv, "Doctor");
@@ -305,10 +343,7 @@ int Doctor::run(int argc, char *argv[])
 	ros::Subscriber StageLaser_sub = n.subscribe<sensor_msgs::LaserScan>("robot_2/base_scan",1000,&Doctor::StageLaser_callback, this);
 
 	//custom Resident subscriber to "resident/state"
-	//ros::Subscriber Resident_sub = n.subscribe<std_msgs::String>("residentStatus",1000,residentStatusCallback);
-
-	//custom Resident subscriber to "resident/state"
-	ros::Subscriber resident_sub = n.subscribe<se306_project1::ResidentMsg>("residentStatus",1000,&Doctor::residentStatusCallback, this);
+	ros::Subscriber resident_sub = n.subscribe<se306_project1::ResidentMsg>("residentStatus",1000,&Doctor::delegate, this);
 
 	ros::Rate loop_rate(1000);
 

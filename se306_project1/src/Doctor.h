@@ -8,6 +8,7 @@ class Doctor : public Visitor
 {
 	protected:
 		bool healResident; /*!< Indicates whether the Doctor should heal the resident. */
+		bool hospitalise; /*!< Indicates whether the Doctor should take the resident to the  hospital. */
 		int health; /*!< Resident health */
 		int boredom; /*!< Resident boredom */
 		int hunger; /*!< Resident hunger */
@@ -53,10 +54,10 @@ class Doctor : public Visitor
 		std::pair<double, double> move(double goal_x, double goal_y, double cur_angle, double goal_angle, double px, double py);
 		void randomCheckpointCallback(const ros::TimerEvent&);
 		std::pair<double, double>  movePath(int path[][2], int pathLength);
-		void residentStatusCallback(se306_project1::ResidentMsg msg);
+		void delegate(se306_project1::ResidentMsg msg);
 		void medicationCallback(const ros::TimerEvent&);
 
-		// Restores health of the resident
-		//void restore_Health()
+		bool doHeal(se306_project1::ResidentMsg msg);
+		bool doHospitalise();
 		
 };
