@@ -10,11 +10,6 @@ class Resident : public Agent
 		int health; /*!< Resident health */
 		int boredom; /*!< Resident boredom */
 		int hunger; /*!< Resident hunger */
-		
-		//goal pose and orientation
-		double goal_x; /*!< The x position of the agent's goal */
-		double goal_y; /*!< The y position of the agent's goal */
-		double goal_angle;  /*!< The angle that the agent must face to approach the goal, defined in reference to the co-ordinate system */
 
 		//bool running;
 		bool isSet; /*!< The angle that the agent must face to approach the goal, defined in reference to the co-ordinate system */
@@ -32,8 +27,7 @@ class Resident : public Agent
 
 		void turn(std::pair<double, double> currentCheckpoint, std::pair<double,double> nextCheckpoint);
 		void moveForward(std::pair<double, double> currentCheckpoint, std::pair<double,double> nextCheckpoint);
-
-		double calc_goal_angle(double goal_x, double goal_y, double cur_angle, double px, double py);
+		double calculateGoalAngle(std::pair<double, double> goalCheckpoint);
 		void move();
 		std::pair<double, double>  movePath(int path[][2], int pathLength);
 

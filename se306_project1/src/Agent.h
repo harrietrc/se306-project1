@@ -7,8 +7,8 @@ class Agent
 {
 	protected:
 		//velocity of the robot
-		double linear_x = 0; /*!< Linear velocity of the robot */
-		double angular_z = 0; /*!< Angular velocity of the robot */
+		double linear_x; /*!< Linear velocity of the robot */
+		double angular_z; /*!< Angular velocity of the robot */
 	
 		//pose of the robot
 		double px; /*!< x position of the robot */

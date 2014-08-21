@@ -12,17 +12,6 @@
 #include "Resident.h"	
 
 using namespace std;
-
-//velocity of the robot
-double linear_x;
-double angular_z;
-
-//goal pose and orientation
-double goal_x;
-double goal_y;
-double goal_angle;
-bool isSet = false;
-
 /**
  *	@brief Updates the Resident's x position, y position, and angle to reflect its current pose.
  *	@note Rounding is used to calculate the current angle. This approximation is accounted for by using threshholds when processing angles.
@@ -88,7 +77,7 @@ void Resident::move(){
 
 }
 
-void Resident::turn(pair<double,double> currentcheckpoint, pair<double,double> nextCheckpoint){
+void Resident::turn(pair<double,double> currentCheckpoint, pair<double,double> nextCheckpoint){
 
 }
 
@@ -96,6 +85,30 @@ void Resident::moveForward(pair<double,double> currentcheckpoint, pair<double,do
 
 }
 
+/**
+ *	This function calculates the angle to the goal.
+ */
+double Resident::calculateGoalAngle(pair<double, double> goalCheckpoint){
+
+	//Finding the vector that the robot is facing and the goal vector
+	double goalVectorX = goalCheckpoint.first - px;
+	double goalVectorY = goalCheckpoint.second - py;
+
+	double goalAngle = atan2(goalVectorY, goalVectorX); //pi <= goalAngle < -pi
+
+	if (goalAngle < 0) {
+		goalAngle = goalAngle * -1;
+	} else if (goalAngle == 2 * M_PI) { //New goal angle =>   >0 to 6.283
+		goalAngle = 0;
+	} else {
+		goalAngle = 2 * M_PI - goalAngle;
+	}
+
+	//rounding goalAngle to three decimal places
+	goalAngle = ((int)(goalAngle * 1000 + .5) / 1000.0);
+
+	return goalAngle;
+}
 
 /**
  *	@brief Causes the agent to move until the goal is reached.
@@ -126,11 +139,11 @@ void Resident::moveForward(pair<double,double> currentcheckpoint, pair<double,do
 //			goal_y = path[cc][1];
 //		}
 //		//Account for delay by subtracting delay values from current pose and orientation
-//		goal_angle = calc_goal_angle(goal_x, goal_y, currentAngle - M_PI/20, px - 0.1, py - 0.1);
-//		//goal_angle = calc_goal_angle(goal_x, goal_y, currentAngle, px, py);
+//		goalAngle = calc_goalAngle(goal_x, goal_y, currentAngle - M_PI/20, px - 0.1, py - 0.1);
+//		//goalAngle = calc_goalAngle(goal_x, goal_y, currentAngle, px, py);
 //
 //	} else { //Do this until goal is reached
-//		ret = move(goal_x, goal_y, currentAngle, goal_angle, px, py);
+//		ret = move(goal_x, goal_y, currentAngle, goalAngle, px, py);
 //	}
 //	return ret;
 //}
@@ -157,12 +170,12 @@ void Resident::StageLaser_callback(sensor_msgs::LaserScan msg)
  *	@param goal_x The x position of the robot's goal
  *	@param goal_y The y position of the robot's goal
  * 	@param currentAngle The agent's current facing, in reference to the co-ordinate system.
- *	@param goal_angle The angle that the agent must face in order to reach the goal.
+ *	@param goalAngle The angle that the agent must face in order to reach the goal.
  *	@param px Initial x position
  *	@param py Initial y position
  *	@return _ret linear_x and angular_z
  */
-//std::pair<double, double> Resident::move(double goal_x, double goal_y, double currentAngle, double goal_angle, double px, double py)
+//std::pair<double, double> Resident::move(double goal_x, double goal_y, double currentAngle, double goalAngle, double px, double py)
 //{
 //	std::pair<double,double>_ret = std::make_pair(0, 0); //initialize pair. Used to get return.
 //	double moveSpeed = M_PI/2;
@@ -172,14 +185,14 @@ void Resident::StageLaser_callback(sensor_msgs::LaserScan msg)
 //	double threshold = currentAngle;//-moveSpeed/10;
 //	//threshold = ((int)(threshold * 1000 + .5) / 1000.0);
 //
-//	if ((goal_angle  == threshold) || isSet) {
+//	if ((goalAngle  == threshold) || isSet) {
 //		_ret.first = 5; //linear_x
 //		_ret.second = 0; //angular_z
 //		isSet = true;
-//	} else if ((goal_angle <= currentAngle + 0.6) && (goal_angle >= currentAngle - 0.6) )  {
+//	} else if ((goalAngle <= currentAngle + 0.6) && (goalAngle >= currentAngle - 0.6) )  {
 //		_ret.first = 0; //linear_x
-//		_ret.second = fabs(goal_angle - currentAngle); //angular_z
-//		if (goal_angle == currentAngle) {
+//		_ret.second = fabs(goalAngle - currentAngle); //angular_z
+//		if (goalAngle == currentAngle) {
 //			isSet = true;
 //		}
 //
@@ -198,45 +211,6 @@ void Resident::StageLaser_callback(sensor_msgs::LaserScan msg)
 //	return _ret;
 //}
 
-/**
- *	@brief Given the agent's current angle, this function calculates the angle to the goal.
- *	currentAngle, goal_x, goal_y, px, and py are class fields but are also passed as parameters.
- *	@param goal_x The x co-ordinate of the goal
- *	@param goal_y The y co-ordinate of the goal
- *	@param currentAngle The agent's current angle, in reference to the co-ordinate system
- *	@param px The agent's initial x position
- *	@param py The agent's initial y position
- *	@param goal_angle The angle that the robot must rotate to face the goal, in reference to the co-ordinate system.
- */
-double Resident::calc_goal_angle(double goal_x, double goal_y, double currentAngle, double px, double py)
-{
-
-	//Initial and goal vectors used to calculate goal theta
-	double init_vector_x;
-	double init_vector_y;
-	double goal_vector_x;
-	double goal_vector_y;
-	double goal_angle;
-
-	//Finding the vector that the robot is facing and the goal vector
-	init_vector_x = cos(currentAngle);
-	init_vector_y = sin(currentAngle);
-	goal_vector_x = goal_x - px;
-	goal_vector_y = goal_y - py;
-
-	goal_angle = atan2(goal_vector_y, goal_vector_x); //pi <= goal_angle < -pi
-	if (goal_angle < 0) {
-		goal_angle = 2 * M_PI + goal_angle; //Remove sign, then add to pi
-	} else if (goal_angle == 2 * M_PI) { //New goal angle =>   >0 to 6.283
-		goal_angle = 0;
-	}
-	goal_angle = (2* M_PI) - goal_angle;
-
-	//rounding goal_angle to three decimal places
-	goal_angle = ((int)(goal_angle * 1000 + .5) / 1000.0);
-
-	return goal_angle;
-}
 
 /**
  *	@brief Main function for the Resident process.
