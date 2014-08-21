@@ -1,3 +1,7 @@
+include "assistant.inc"
+include "sofa.inc"
+include "bed.inc"
+
 define mylaser ranger
 (
   sensor(
@@ -28,27 +32,6 @@ define myRobot position
 	mylaser(pose [ 0.050 0.000 0.000 0.000 ])
 )
 
-define sofa position
-(
-	block
-	(
-		points 8
-		point[1] [0 0]
-		point[2] [-4 0]  #
-		point[3] [-4 -1.5]
-		point[4] [1.5 -1.5]
-		point[5] [1.5 10.5]
-		point[6] [-4 10.5]
-		point[7] [-4 9]
-		point[0] [0 9]	#			
-		z [0 1]
-	)
-
-	#fit shape to this size in meters
-	size [7 16 4]
-	drive "diff"
-	mylaser(pose [ 0.050 0.000 0.000 0.000 ])
-)
 
 define square position
 (
@@ -116,9 +99,16 @@ floorplan
   pose [ 0.000 0.000 0.000 0.000 ]
 )
 
+# furniture
+
+sofa( pose [ -15.000 -22.000 0.000 0.000 ] name "f1" color "light blue")
+sofa( pose [ -27.000 -22.000 0.000 90.000 ] name "f2" color "light blue" size [7 14 7])
+bed( pose [ 27.000 22.000 0.000 90.000 ] name "f3" color "light blue")
+
+
 # throw in a robot
 
+assistant( pose [ 17.000 17.000 0.000 0.000 ] name "r1")
 myRobot( pose [ 30.000 25.000 0.000 0.000 ] name "r0" color "blue")
-sofa( pose [ 15.000 14.000 0.000 0.000 ] name "r1" color "green")
-myRobot( pose [ 32.000 15.000 0.000 0.000 ] name "r1" color "green")
-doctor( pose [ 10.000 -7.000 0.000 0.000 ] name "r2" color "red")
+#myRobot( pose [ 32.000 15.000 0.000 0.000 ] name "r1" color "green")
+doctor( pose [ 10.000 -7.000 0.000 0.000 ] name "r1" color "red")
