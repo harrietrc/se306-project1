@@ -13,28 +13,17 @@ class Agent
 		//pose of the robot
 		double px; /*!< x position of the robot */
 		double py; /*!< y position of the robot */
+		double currentAngle; /*!< angle of the robot*/
 
-		// Enumeration of type of robot
-		enum Type{FRIEND, RELATIVE, DOCTOR, NURSE, CAREGIVER, ASSISTANT, RESIDENT}; /*!< Enumeration of the types of robots */
-	
+		//current checkpoint
+		std::pair<int, int> currentCheckpoint = std::make_pair(30,25);
+
+		//shortestPath
+		std::vector<std::pair<double,double>> shortestPath = {{30,25},{35,30},{35,25}};
+		int shortestPathIndex = 1;
+
+		//moving status of the robot
+		bool isMoving = false;
+
 		int robot_id; /*!< Robot's ID */
-
-	public:
-		
-		/**
-		*	@brief Updates the Resident's x position, y position, and angle to reflect its current pose.
-		*	@param msg Odometry message from odom topic
-		*/
-		virtual void StageOdom_callback(nav_msgs::Odometry msg) = 0;
-
-		/**
-		*	@brief Virtual callback function to process laser scan messsages.
-		*	@param msg Single scan from a planar laser range finder
-		*/
-		virtual void StageLaser_callback(sensor_msgs::LaserScan msg) = 0;
-
-		/**
-		*	@brief Main function that controls agent events.
-		*/
-		virtual int run(int argc, char *argv[]) = 0;
 };
