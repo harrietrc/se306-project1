@@ -1,34 +1,15 @@
-/*#include <string>
-#include <queue>
 #include <iostream>
-#include <stddef.h>
-#include "PriorityQueue.h"
+#include "PriorityQueue.hpp"
+#include <string>
+#include <iomanip>
+#include <queue>
 
 
-// Global static pointer to ensure that there is only ever one
-// instance of this Queue
-PriorityQueue* PriorityQueue::myQueue = NULL; 
 
 
-PriorityQueue* PriorityQueue::Instace()
-{
-	if(!myQueue) {
-		myQueue = new PriorityQueue;
-	}
+//priority_queue<state,vector<state>,CompareStates> q2; 
 
-	return myQueue;
-}
+//PriorityQueue::void printData() {
+//	ROS_INFO("my nigga my nigga");
+//}
 
-
-string getValue() {
-	if (!value) {
-		value = "Value is no longer empty";
-	}
-	return value;
-}
-
-
-void changeValue(string newVal) {
-	value = newVal;
-}
-*/

@@ -24,7 +24,7 @@ int ProcessManager::nodeProcess(std::string executableName, int nodeNumber) {
 		const char* argNum = val.str().c_str();
 
 		std::cout<< "starting process with name " << executableName << " and nodeNumber " << argNum << "\n";
-		std::string path = "./bin/" + executableName;
+		std::string path = "/afs/ec.auckland.ac.nz/users/m/s/mshe140/unixhome/se306-project1/se306_project1/bin/" + executableName;
 
 		execl(path.c_str(), executableName.c_str(), argNum, (char*)0);
 		//wait(NULL);

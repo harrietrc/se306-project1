@@ -6,6 +6,8 @@
 #include "se306_project1/ResidentMsg.h"
 #include "se306_project1/DoctorMsg.h"
 #include "se306_project1/AssistantMsg.h"
+#include "PriorityQueue.hpp"
+//#include "PriorityQueue.cpp"
 
 #include <sstream>
 #include "math.h"
@@ -454,7 +456,7 @@ int Resident::run(int argc, char *argv[]) {
 
 	int hungerReductionRate = 2; //1 hunger point reduction per second
 	int healthReductionRate = 2; // 0.1 health point reduction per second
-
+	
 	while (ros::ok())
 	{
 		//messages to stage
