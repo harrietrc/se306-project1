@@ -3,10 +3,50 @@
 #include <geometry_msgs/Twist.h>
 #include <nav_msgs/Odometry.h>
 #include <sensor_msgs/LaserScan.h>
+#include "se306_project1/ResidentMsg.h"
 
 #include <sstream>
 #include "math.h"
 #include "Nurse.h"
+
+/**
+*	@brief Callback function that unpacks and processes resident status messages.
+*	Nurse should subscribe to the ResidentMsg topic in order for this callback to be called. ResidentMsg is published by the Resident.
+*	@note Currently this callback processes only resident hunger, controlling the cooking behaviour. More behaviours 
+*	can be implemented later.
+*	@param msg A custom ResidentMsg message that contains information about the resident's current status.
+*/
+void Nurse::delegate(se306_project1::ResidentMsg msg)
+{
+	if (msg.health >= 90) { // Resident has recently been healed
+		hospitalise = false;
+	}
+	else if (msg.health <= 10) { // Resident is dying
+		doHospitalise();
+	}
+}
+
+/**
+* @brief Takes the resident to hospital
+* (non-doctor-induced emergency, despite the function name...)
+* @returns true if behaviour is successful.
+*/
+bool Nurse::doHospitalise() {
+	if (hospitalise == false) {
+		ROS_INFO("Nurse is on the way to take Resident to the hospital");
+		hospitalise = true;
+		// move nurse to resident and then move both nurse and resident outside of house
+		/*
+		std::pair<double, double> velocityValues;	
+		velocityValues = std::make_pair(0, 0);
+
+		velocityValues = movePath(checkpoints, 	10);
+		linear_x = velocityValues.first;
+		angular_z = velocityValues.second;
+		*/
+	}
+	return true;
+}
 
 /**
 *	@brief Updates the Nurse's x position, y position, and angle to reflect its current pose.
@@ -18,8 +58,8 @@ void Nurse::StageOdom_callback(nav_msgs::Odometry msg)
 	//This is the call back function to process odometry messages coming from Stage. 	
 	px = 5 + msg.pose.pose.position.x;
 	py =10 + msg.pose.pose.position.y;
-	ROS_INFO("Current x position is: %f", px);
-	ROS_INFO("Current y position is: %f", py);
+	//ROS_INFO("Current x position is: %f", px);
+	//ROS_INFO("Current y position is: %f", py);
 }
 
 /**
@@ -44,7 +84,7 @@ int Nurse::run(int argc, char *argv[])
 
 	//initialize robot parameters
 	//Initial pose. This is same as the pose that you used in the world file to set	the robot pose.
-	theta = M_PI/2.0;
+	//theta = M_PI/2.0;
 	px = 10;
 	py = 20;
 	
@@ -66,7 +106,10 @@ int Nurse::run(int argc, char *argv[])
 	ros::Subscriber StageOdo_sub = n.subscribe<nav_msgs::Odometry>("robot_0/odom",1000, &Nurse::StageOdom_callback,this);
 	ros::Subscriber StageLaser_sub = n.subscribe<sensor_msgs::LaserScan>("robot_0/base_scan",1000,&Nurse::StageLaser_callback,this);
 
-	ros::Rate loop_rate(10);
+	//custom Resident subscriber to "residentStatus"
+	ros::Subscriber resident_sub = n.subscribe<se306_project1::ResidentMsg>("residentStatus",1000,&Nurse::delegate, this);
+
+	ros::Rate loop_rate(1000);
 
 	//a count of howmany messages we have sent
 	int count = 0;
