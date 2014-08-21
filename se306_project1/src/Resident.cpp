@@ -89,6 +89,20 @@ void Resident::turn(pair<double,double> currentCheckpoint, pair<double,double> n
 //		ROS_INFO("Angle Difference, %f", (currentAngle - checkpointAngle) * 180 / M_PI);
 //	}
 
+	angular_z = 1.5;
+
+	if (isClockwise){
+		angular_z = angular_z * -1;
+	}
+
+
+	double angleDifference = checkpointAngle - currentAngle;
+
+	if (fabs(angleDifference) <= 0.008){
+		angular_z = 0;
+		isFacingCorrectly = true;
+		//linear_x = 0.3;
+	}
 }
 
 void Resident::moveForward(pair<double,double> currentcheckpoint, pair<double,double> nextCheckpoint){
