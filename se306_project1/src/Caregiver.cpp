@@ -15,22 +15,35 @@
 *	can be implemented later.
 *	@param msg A custom ResidentMsg message that contains information about the resident's current status.
 */
-void Caregiver::delegate(se306_project1::ResidentMsg r_msg, se306_project1::AssistantMsg a_msg)
+//void Caregiver::delegate(se306_project1::ResidentMsg r_msg, se306_project1::AssistantMsg a_msg) no?
+void Caregiver::delegate(const ros::TimerEvent&)
 {
-	if (r_msg.hygiene < 50) { // Resident is in dire need of a shower
+	int startTime = time_conversion::simHoursToRealSecs(6); // Start callback at 6am
+	int endTime = time_conversion::simHoursToRealSecs(12); // Stop callback at 12pm
+
+	int tnow = ros::Time::now().toSec(); // The simulation time now
+	int dlen = time_conversion::getDayLength(); // The length of a simulation day, in seconds
+
+	// Behaviour should only occur if the simulation time is between the specified start and end times.
+	if (((tnow % dlen) > startTime) && ((tnow % dlen) < endTime)) { // Note that this will run at the end of the duration specified for the timer.
+		doEatSupport(r_msg);
+		doExerciseSupport(r_msg);
 		doShowerSupport(r_msg);
-	}
-	else if (r_msg.mood <50} { // Resident is demoralized, give him his depression medication
 		doMoralSupport(r_msg);
 	}
-	else if (r_msg.fitness) { // Resident needs excercise
-		doExerciseSupport(r_msg);
-	}
-	else if (a_msg.FoodDelivered) {
-		doEatSupport(r_msg)
-	}
+	// if (r_msg.hygiene < 50) { // Resident is in dire need of a shower
+	// 	doShowerSupport(r_msg);
+	// }
+	// else if (r_msg.mood <50} { // Resident is demoralized, give him his depression medication
+	// 	doMoralSupport(r_msg);
+	// }
+	// else if (r_msg.fitness) { // Resident needs excercise
+	// 	doExerciseSupport(r_msg);
+	// }
+	// else if (a_msg.FoodDelivered) {
+	// 	doEatSupport(r_msg)
+	// }
 }
-
 
 /**
 *	@brief Caregiver helps the resident to eat. Will feed him after his meal has been prepared by an assistant.
@@ -55,7 +68,8 @@ bool Caregiver::doEatSupport(se306_project1::ResidentMsg msg) {
 *	@return Returns true if behaviour was successful, and false otherwise.
 */
 bool Caregiver::doExerciseSupport(se306_project1::ResidentMsg msg) {
-		if(needs_excercise){
+	
+	if(needs_excercise){
 		needs_excercise = false;
 		//Caregiver should move to residents position, then help him excercise. Go to gym area etc
 	}
@@ -72,6 +86,7 @@ bool Caregiver::doExerciseSupport(se306_project1::ResidentMsg msg) {
 *	@return Returns true if behaviour was successful, and false otherwise.
 */
 bool Caregiver::doShowerSupport(se306_project1::ResidentMsg msg) {
+	
 	if(needs_shower){
 		needs_shower = false;
 		//Caregiver should move to residents position, take him to the shower(spin around) and clean him
@@ -130,6 +145,11 @@ int Caregiver::run(int argc, char *argv[])
 
 
 	ros::Subscriber assitant_sub = n.subscribe<se306_project1::AssistantMsg>("assistantStatus",1000,&Caregiver::delegate, this);
+
+	// Periodic callback
+	int dur2 = time_conversion::simHoursToRealSecs(2); // Perform callback every 2 simulation hours
+	ros::Timer caregiverSchedule = n.createTimer(ros::Duration(dur2), &Caregiver::delegate, this); 
+
 
 	////messages
 	//velocity of this RobotNode
