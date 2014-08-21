@@ -349,7 +349,6 @@ int Doctor::run(int argc, char *argv[])
 
 	//a count of howmany messages we have sent
 	int count = 0;
-	int i =0;
 
 	////messages
 	//velocity of this RobotNode
