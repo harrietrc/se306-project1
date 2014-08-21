@@ -7,8 +7,8 @@ class Agent
 {
 	protected:
 		//velocity of the robot
-		double linear_x; /*!< Linear velocity of the robot */
-		double angular_z; /*!< Angular velocity of the robot */
+		double linear_x = 0; /*!< Linear velocity of the robot */
+		double angular_z = 0; /*!< Angular velocity of the robot */
 	
 		//pose of the robot
 		double px; /*!< x position of the robot */
@@ -16,14 +16,15 @@ class Agent
 		double currentAngle; /*!< angle of the robot*/
 
 		//current checkpoint
-		std::pair<int, int> currentCheckpoint = std::make_pair(30,25);
+		std::pair<double, double> currentCheckpoint = std::make_pair(30,25);
 
 		//shortestPath
-		std::vector<std::pair<double,double>> shortestPath = {{30,25},{35,30},{35,25}};
+		std::vector<std::pair<double,double> > shortestPath;
 		int shortestPathIndex = 1;
+		bool isFacingCorrectly = false;
 
 		//moving status of the robot
-		bool isMoving = false;
+		bool isMoving = true;
 
 		int robot_id; /*!< Robot's ID */
 };

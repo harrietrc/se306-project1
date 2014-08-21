@@ -13,8 +13,6 @@
 
 using namespace std;
 
-int count = 0;
-
 //velocity of the robot
 double linear_x;
 double angular_z;
@@ -52,10 +50,16 @@ void Resident::StageOdom_callback(nav_msgs::Odometry msg)
 	px = msg.pose.pose.position.x;
 	py = msg.pose.pose.position.y;
 
+	if (isMoving == true){
+		move();
+	}
+
 
 }
 
 void Resident::move(){
+
+
 	if (isMoving == false){
 		isMoving = true;
 		currentCheckpoint.first = 30;
@@ -63,8 +67,16 @@ void Resident::move(){
 		//Get the path stuff
 	}
 
-	if (currentCheckpoint.first == shortestPath.at(shortestPathIndex).first &&
-		currentCheckpoint.second == shortestPath.at(shortestPathIndex).second){
+	pair<double, double> nextCheckpoint = shortestPath.at(shortestPathIndex);
+
+	if (!isFacingCorrectly){
+		turn(currentCheckpoint, nextCheckpoint);
+	}else{
+		moveForward(currentCheckpoint, nextCheckpoint);
+	}
+
+	if (currentCheckpoint.first == nextCheckpoint.first &&
+		currentCheckpoint.second == nextCheckpoint.second){
 
 		shortestPathIndex++;
 		if (shortestPathIndex > shortestPath.size()){
@@ -73,6 +85,14 @@ void Resident::move(){
 		}
 
 	}
+
+}
+
+void Resident::turn(pair<double,double> currentcheckpoint, pair<double,double> nextCheckpoint){
+
+}
+
+void Resident::moveForward(pair<double,double> currentcheckpoint, pair<double,double> nextCheckpoint){
 
 }
 
@@ -224,15 +244,12 @@ double Resident::calc_goal_angle(double goal_x, double goal_y, double currentAng
  */
 int Resident::run(int argc, char *argv[]) {
 
-	//Initial velocities
-	linear_x = 0.0;
-	angular_z = -0.3;
+	pair<double, double> c1 = make_pair(35,30);
+	pair<double, double> c2 = make_pair(35,25);
 
-	//Align local system to global coordinates
-
-	health = 100;
-	boredom = 100;
-	hunger = 100;
+	shortestPath.push_back(currentCheckpoint);
+	shortestPath.push_back(c1);
+	shortestPath.push_back(c2);
 
 	//You must call ros::init() first of all. ros::init() function needs to see argc and argv. The third argument is the name of the node
 	ros::init(argc, argv, "Resident");
@@ -252,7 +269,7 @@ int Resident::run(int argc, char *argv[]) {
 	ros::Rate loop_rate(10);
 
 	//a count of howmany messages we have sent
-	count = 0;
+	int count = 0;
 
 	////messages
 	//velocity of this RobotNode

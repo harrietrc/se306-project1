@@ -5,6 +5,7 @@
 */
 class Resident : public Agent
 {
+
 	private:
 		int health; /*!< Resident health */
 		int boredom; /*!< Resident boredom */
@@ -28,6 +29,9 @@ class Resident : public Agent
 
 
 	public:
+
+		void turn(std::pair<double, double> currentCheckpoint, std::pair<double,double> nextCheckpoint);
+		void moveForward(std::pair<double, double> currentCheckpoint, std::pair<double,double> nextCheckpoint);
 
 		double calc_goal_angle(double goal_x, double goal_y, double cur_angle, double px, double py);
 		void move();
