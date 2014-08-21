@@ -16,15 +16,18 @@ class Agent
 		double currentAngle; /*!< angle of the robot*/
 
 		//current checkpoint
-		std::pair<double, double> currentCheckpoint = std::make_pair(30,25);
+		std::pair<double, double> currentCheckpoint;
 
 		//shortestPath
 		std::vector<std::pair<double,double> > shortestPath;
-		int shortestPathIndex = 1;
-		bool isFacingCorrectly = false;
+		int shortestPathIndex;
+		bool isFacingCorrectly;
 
 		//moving status of the robot
-		bool isMoving = true;
+		bool isMoving;
 
 		int robot_id; /*!< Robot's ID */
+
+		double checkpointAngle;
+		bool isClockwise;
 };

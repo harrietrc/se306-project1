@@ -11,6 +11,8 @@
 #include <stdlib.h>
 #include "Resident.h"	
 
+//int a = 0;
+
 using namespace std;
 /**
  *	@brief Updates the Resident's x position, y position, and angle to reflect its current pose.
@@ -19,6 +21,7 @@ using namespace std;
  */
 void Resident::StageOdom_callback(nav_msgs::Odometry msg)
 {
+	//a++;
 	//Converting from quaternion to radians
 	currentAngle = acos(msg.pose.pose.orientation.w) * 2;
 	if (msg.pose.pose.orientation.z > 0) {
@@ -69,22 +72,45 @@ void Resident::move(){
 
 		shortestPathIndex++;
 		if (shortestPathIndex > shortestPath.size()){
-			shortestPathIndex = 1;
+			shortestPathIndex = 0;
 			isMoving = false;
 		}
 
+		checkpointAngle = calculateGoalAngle(shortestPath.at(shortestPathIndex));
+		isClockwise = isTurnClockwise();
 	}
 
 }
 
 void Resident::turn(pair<double,double> currentCheckpoint, pair<double,double> nextCheckpoint){
+//	if (a % 10 == 0){
+//		ROS_INFO("Goal Angle: %f", checkpointAngle * 180 / M_PI);
+//		ROS_INFO("Current Angle: %f", currentAngle * 180 / M_PI);
+//		ROS_INFO("Angle Difference, %f", (currentAngle - checkpointAngle) * 180 / M_PI);
+//	}
 
 }
 
 void Resident::moveForward(pair<double,double> currentcheckpoint, pair<double,double> nextCheckpoint){
+	isFacingCorrectly = false;
 
 }
 
+bool Resident::isTurnClockwise(){
+
+	double angleDifference = checkpointAngle - currentAngle;
+	if (angleDifference > 0){
+		if (fabs(angleDifference) < M_PI){
+			return true;
+		}
+	}else{
+		if (fabs(angleDifference) > M_PI){
+			return true;
+		}
+	}
+
+	return false;
+}
 /**
  *	This function calculates the angle to the goal.
  */
@@ -111,48 +137,6 @@ double Resident::calculateGoalAngle(pair<double, double> goalCheckpoint){
 }
 
 /**
- *	@brief Causes the agent to move until the goal is reached.
- *	When the goal is reached, the next checkpoint becomes the goal or if the list of checkpoints is exhausted, the agent returns
- *	to its initial position (the first checkpoint)
- *	@param path[][2] An array of checkpoints that forms a path.
- *	@param pathLength The number of checkpoints in the path (-1, as counting starts at 0)
- *	@return linear_x and angular_z
- */
-//std::pair<double, double> Resident::movePath(int path[][2], int pathLength) {
-//	std::pair<double, double> ret;
-//	ret = std::make_pair(0, 0); //initialize pair. Used to get return.
-//	//When goal reached
-//
-//	if ((px <= goal_x + 0.5) && (px >= goal_x - 0.5) && (py <= goal_y + 0.5) && (py >= goal_y - 0.5)) {
-//		isSet = false;
-//		if (cc == pathLength) { //If at last checkpoint
-//			linear_x = 0;
-//		} else {
-//			cc++; //Increment checkpoint index
-//		}
-//		if (cc == pathLength) {
-//			linear_x = 0;
-//			goal_x = path[cc-1][0];
-//			goal_y = path[cc-1][1];
-//		} else {
-//			goal_x = path[cc][0];
-//			goal_y = path[cc][1];
-//		}
-//		//Account for delay by subtracting delay values from current pose and orientation
-//		goalAngle = calc_goalAngle(goal_x, goal_y, currentAngle - M_PI/20, px - 0.1, py - 0.1);
-//		//goalAngle = calc_goalAngle(goal_x, goal_y, currentAngle, px, py);
-//
-//	} else { //Do this until goal is reached
-//		ret = move(goal_x, goal_y, currentAngle, goalAngle, px, py);
-//	}
-//	return ret;
-//}
-
-
-
-
-
-/**
  *	@brief Callback function to process laser scan messsages.
  *	You can access the range data from msg.ranges[i]. i = sample number
  *	@note Currently blank as it is not in use. Navigation operates through a checkpoint system.
@@ -166,64 +150,27 @@ void Resident::StageLaser_callback(sensor_msgs::LaserScan msg)
 }
 
 /**
- *	@brief Keeps the agent moving by changing linear_x ad angular_z.
- *	@param goal_x The x position of the robot's goal
- *	@param goal_y The y position of the robot's goal
- * 	@param currentAngle The agent's current facing, in reference to the co-ordinate system.
- *	@param goalAngle The angle that the agent must face in order to reach the goal.
- *	@param px Initial x position
- *	@param py Initial y position
- *	@return _ret linear_x and angular_z
- */
-//std::pair<double, double> Resident::move(double goal_x, double goal_y, double currentAngle, double goalAngle, double px, double py)
-//{
-//	std::pair<double,double>_ret = std::make_pair(0, 0); //initialize pair. Used to get return.
-//	double moveSpeed = M_PI/2;
-//	moveSpeed = ((int)(moveSpeed * 1000 + .5) / 1000.0);
-//
-//	//When the robot is facing the correct direction, start moving
-//	double threshold = currentAngle;//-moveSpeed/10;
-//	//threshold = ((int)(threshold * 1000 + .5) / 1000.0);
-//
-//	if ((goalAngle  == threshold) || isSet) {
-//		_ret.first = 5; //linear_x
-//		_ret.second = 0; //angular_z
-//		isSet = true;
-//	} else if ((goalAngle <= currentAngle + 0.6) && (goalAngle >= currentAngle - 0.6) )  {
-//		_ret.first = 0; //linear_x
-//		_ret.second = fabs(goalAngle - currentAngle); //angular_z
-//		if (goalAngle == currentAngle) {
-//			isSet = true;
-//		}
-//
-//	} else {
-//		_ret.first = 0; //linear_x
-//		_ret.second = moveSpeed; //angular_z
-//		isSet = false;
-//	}
-//
-//
-//	if ((px-0.1 <= goal_x + 0.5) && (px-0.1 >= goal_x - 0.5) && (py-0.1 <= goal_y + 0.5) && (py-0.1 >= goal_y - 0.5)) {
-//		_ret.first = 0;
-//		isSet = false;
-//	}
-//
-//	return _ret;
-//}
-
-
-/**
  *	@brief Main function for the Resident process.
  *	Controls node setup and periodic events.
  */
 int Resident::run(int argc, char *argv[]) {
 
+	currentCheckpoint = make_pair(30,25);
 	pair<double, double> c1 = make_pair(35,30);
 	pair<double, double> c2 = make_pair(35,25);
 
 	shortestPath.push_back(currentCheckpoint);
 	shortestPath.push_back(c1);
 	shortestPath.push_back(c2);
+
+	isMoving = true;
+	isFacingCorrectly = false;
+	shortestPathIndex = 0;
+	checkpointAngle = 0;
+	isClockwise = true;
+
+	linear_x = 0;
+	angular_z = 0;
 
 	//You must call ros::init() first of all. ros::init() function needs to see argc and argv. The third argument is the name of the node
 	ros::init(argc, argv, "Resident");

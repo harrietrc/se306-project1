@@ -5,30 +5,19 @@
 */
 class Resident : public Agent
 {
-
 	private:
 		int health; /*!< Resident health */
 		int boredom; /*!< Resident boredom */
 		int hunger; /*!< Resident hunger */
 
-		//bool running;
-		bool isSet; /*!< The angle that the agent must face to approach the goal, defined in reference to the co-ordinate system */
-
-		int cc; //current_checkpoint = 0;
-
-		bool is_called; 
-
-		std::pair<double,bool> goal_pair;
-		std::pair<double, double> ret;	/*!< linear_x and angular_z for the robot */
-			
-
-
 	public:
+
 
 		void turn(std::pair<double, double> currentCheckpoint, std::pair<double,double> nextCheckpoint);
 		void moveForward(std::pair<double, double> currentCheckpoint, std::pair<double,double> nextCheckpoint);
 		double calculateGoalAngle(std::pair<double, double> goalCheckpoint);
 		void move();
+		bool isTurnClockwise();
 		std::pair<double, double>  movePath(int path[][2], int pathLength);
 
 		/**
