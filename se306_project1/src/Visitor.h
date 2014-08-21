@@ -5,6 +5,17 @@
 */
 class Visitor : public Agent
 {
+
+	public:
+		//void StageOdom_callback(nav_msgs::Odometry msg);
+
+		//int run(int argc, char *argv[]); //Doesnt work for some reason
+
+		void delegate(const ros::TimerEvent&);
+
+		bool meetResident(se306_project1::ResidentMsg msg);
+
+
 	/*
 	public:
 			// Return type of robot
