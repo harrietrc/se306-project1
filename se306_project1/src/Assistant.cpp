@@ -17,7 +17,8 @@
 *	@param msg A custom ResidentMsg message that contains information about the resident's current status.
 */
 void Assistant::delegate(se306_project1::ResidentMsg msg) {
-
+	// Resident status will be a string - one among SILL, ILL, HUNGRY, TIRED BORED, and HEALTHCARE - see Mustafa's pq.
+	// alternatively we could send the status in another format.
 }
 
 /**

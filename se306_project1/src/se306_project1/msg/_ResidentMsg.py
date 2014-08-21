@@ -6,16 +6,13 @@ import struct
 
 
 class ResidentMsg(genpy.Message):
-  _md5sum = "3263770d9697e608dc5912cf7c7dbf41"
+  _md5sum = "4fe5af303955c287688e7347e9b00278"
   _type = "se306_project1/ResidentMsg"
   _has_header = False #flag to mark the presence of a Header object
-  _full_text = """float64 x
-float64 y
-int64 health
-int64 hunger
+  _full_text = """string status
 """
-  __slots__ = ['x','y','health','hunger']
-  _slot_types = ['float64','float64','int64','int64']
+  __slots__ = ['status']
+  _slot_types = ['string']
 
   def __init__(self, *args, **kwds):
     """
@@ -25,7 +22,7 @@ int64 hunger
     changes.  You cannot mix in-order arguments and keyword arguments.
 
     The available fields are:
-       x,y,health,hunger
+       status
 
     :param args: complete set of field values, in .msg order
     :param kwds: use keyword arguments corresponding to message field names
@@ -34,19 +31,10 @@ int64 hunger
     if args or kwds:
       super(ResidentMsg, self).__init__(*args, **kwds)
       #message fields cannot be None, assign default values for those that are
-      if self.x is None:
-        self.x = 0.
-      if self.y is None:
-        self.y = 0.
-      if self.health is None:
-        self.health = 0
-      if self.hunger is None:
-        self.hunger = 0
+      if self.status is None:
+        self.status = ''
     else:
-      self.x = 0.
-      self.y = 0.
-      self.health = 0
-      self.hunger = 0
+      self.status = ''
 
   def _get_types(self):
     """
@@ -60,8 +48,15 @@ int64 hunger
     :param buff: buffer, ``StringIO``
     """
     try:
-      _x = self
-      buff.write(_struct_2d2q.pack(_x.x, _x.y, _x.health, _x.hunger))
+      _x = self.status
+      length = len(_x)
+      if python3 or type(_x) == unicode:
+        _x = _x.encode('utf-8')
+        length = len(_x)
+      if python3:
+        buff.write(struct.pack('<I%sB'%length, length, *_x))
+      else:
+        buff.write(struct.pack('<I%ss'%length, length, _x))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(_x))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(_x))))
 
@@ -72,10 +67,15 @@ int64 hunger
     """
     try:
       end = 0
-      _x = self
       start = end
-      end += 32
-      (_x.x, _x.y, _x.health, _x.hunger,) = _struct_2d2q.unpack(str[start:end])
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      start = end
+      end += length
+      if python3:
+        self.status = str[start:end].decode('utf-8')
+      else:
+        self.status = str[start:end]
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -88,8 +88,15 @@ int64 hunger
     :param numpy: numpy python module
     """
     try:
-      _x = self
-      buff.write(_struct_2d2q.pack(_x.x, _x.y, _x.health, _x.hunger))
+      _x = self.status
+      length = len(_x)
+      if python3 or type(_x) == unicode:
+        _x = _x.encode('utf-8')
+        length = len(_x)
+      if python3:
+        buff.write(struct.pack('<I%sB'%length, length, *_x))
+      else:
+        buff.write(struct.pack('<I%ss'%length, length, _x))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(_x))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(_x))))
 
@@ -101,13 +108,17 @@ int64 hunger
     """
     try:
       end = 0
-      _x = self
       start = end
-      end += 32
-      (_x.x, _x.y, _x.health, _x.hunger,) = _struct_2d2q.unpack(str[start:end])
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      start = end
+      end += length
+      if python3:
+        self.status = str[start:end].decode('utf-8')
+      else:
+        self.status = str[start:end]
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
 
 _struct_I = genpy.struct_I
-_struct_2d2q = struct.Struct("<2d2q")

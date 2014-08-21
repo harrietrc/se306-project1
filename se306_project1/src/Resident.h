@@ -6,10 +6,8 @@
 class Resident : public Agent
 {
 	protected:
-		int health; /*!< Resident health */
-		int boredom; /*!< Resident boredom */
-		int hunger; /*!< Resident hunger */	
 		bool doSleep(const ros::TimerEvent&);	
+		void publishStatus();
 
 	public:
 		int run(int argc, char **argv);

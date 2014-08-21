@@ -3,7 +3,6 @@
 #include <geometry_msgs/Twist.h>
 #include <nav_msgs/Odometry.h>
 #include <sensor_msgs/LaserScan.h>
-#include "se306_project1/ResidentMsg.h"
 #include "se306_project1/DoctorMsg.h"
 #include "se306_project1/AssistantMsg.h"
 #include <sstream>
@@ -15,6 +14,16 @@
 #include "boost/graph/adjacency_list.hpp"
 #include <boost/graph/graphviz.hpp> // Good for debugging, but take out for final build.
 #include "boost/graph/breadth_first_search.hpp"
+
+PriorityQueue *status_queue = PriorityQueue::getInstance();
+
+/**
+*	@brief Gets current resident status and publishes it to a topic for assistants and doctors/nurses.
+*	May convert to string and publish in the standard way - do we need custom messages any more?
+*/
+void Resident::publishStatus() {
+
+}
 
 /**
 *	@brief Makes the resident go to bed and sleep, as scheduled by a timer.
