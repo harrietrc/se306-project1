@@ -6,7 +6,7 @@
 class Caregiver : public Visitor {
 
 	protected:
-		void delegate(se306_project1::ResidentMsg msg);
+		virtual void delegate(se306_project1::ResidentMsg msg) {};
 		bool doMoralSupport();
 		bool doShowerSupport();
 		bool doExerciseSupport();

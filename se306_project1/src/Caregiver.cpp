@@ -1,14 +1,10 @@
 #include "ros/ros.h"
 #include "std_msgs/String.h"
 #include <geometry_msgs/Twist.h>
-#include <nav_msgs/Odometry.h>
-#include <sensor_msgs/LaserScan.h>
 #include <sstream>
 #include "math.h"
 #include "Caregiver.h"
 #include "se306_project1/ResidentMsg.h"
-#include <se306_project1/src/Agent.h>
-#include "Visitor.h"
 
 /**
 *	@brief Caregiver helps the resident to eat.
@@ -66,7 +62,7 @@ int Caregiver::run(int argc, char *argv[])
 	ros::Publisher RobotNode_stage_pub = n.advertise<geometry_msgs::Twist>("robot_0/cmd_vel",1000); 
 
 	//subscribe to listen to messages coming from stage
-	ros::Subscriber StageOdo_sub = n.subscribe<nav_msgs::Odometry>("robot_0/odom",1000, &Agent::StageOdom_callback,this);
+	ros::Subscriber StageOdo_sub = n.subscribe("robot_0/odom",1000, &Agent::StageOdom_callback, dynamic_cast<Agent*>(this));
 
 	////messages
 	//velocity of this RobotNode

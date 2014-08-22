@@ -1,7 +1,18 @@
-#include <sensor_msgs/LaserScan.h>
 #include <nav_msgs/Odometry.h>
 #include "se306_project1/ResidentMsg.h"
 #include "se306_project1/AssistantMsg.h"
+#include "ros/ros.h"
+#include "std_msgs/String.h"
+#include <geometry_msgs/Twist.h>
+#include <nav_msgs/Odometry.h>
+#include <sensor_msgs/LaserScan.h>
+#include <sstream>
+#include "math.h"
+#include <cmath>
+#include <stdlib.h>
+#include "boost/graph/adjacency_list.hpp"
+#include <boost/graph/graphviz.hpp> // Good for debugging, but take out for final build.
+#include "boost/graph/breadth_first_search.hpp"
 
 /**
 *	@brief Superclass for all 'agents' - i.e. Assistants, Visitors, and the Resident.
@@ -58,10 +69,9 @@ class Agent
 
 		/* -- Communication and co-ordination -- */
 
-		virtual void delegate(se306_project1::ResidentMsg msg); /*!< Callback that calls callbacks */
+		virtual void delegate(se306_project1::ResidentMsg msg) {} /*!< Callback that calls callbacks */
 
-
-		virtual int run(int argc, char *argv[]) = 0; /*!< Pure virtual function, made accessible through the non-member main() function */
+		virtual int run(int argc, char *argv[]) = 0; /*!< Pure virtual function, made accessible through the non-member main() function */	
 
 	public:
 		
