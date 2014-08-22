@@ -40,7 +40,7 @@ define bed position
 		point[5] [-2.0 1.6]
 		point[6] [-2.0 0.2]
 		point[7] [-1.8 0]
-		z [0.7 1]
+		z [0.7 0.9]
 		color "light green"
 	)
 	
@@ -56,7 +56,7 @@ define bed position
 		point[5] [-2.2 1.8]
 		point[6] [-2.0 1.6]
 		point[7] [-2.0 0.2]
-		z [0.7 1]
+		z [0.7 0.9]
 	)
 	
 	#fit shape to this size in meters

@@ -4,7 +4,7 @@ define assistant position
   color "gray50"
 	drive "diff"
 	mylaser(pose [ 0.050 0.000 0.000 0.000 ])
-  size [3.5 5 5]
+  size [2.5 2.5 5]
 
 
   # body bottom
@@ -32,27 +32,27 @@ define assistant position
   )
 
   # right wheel 
-  block 
-  (
-    points 4
-    point[0] [ 1 0 ] 
-    point[1] [ 1 0.25 ] 
-    point[2] [ 0.0 0.25 ] 
-    point[3] [ 0 0.0 ] 
-    z [ 0.0 0.4 ]
-		color "grey"
-  )
+  #block 
+  #(
+  #  points 4
+  #  point[0] [ 1 0 ] 
+  #  point[1] [ 1 0.25 ] 
+  #  point[2] [ 0.0 0.25 ] 
+  #  point[3] [ 0 0.0 ] 
+  #  z [ 0.0 0.4 ]
+	#	color "grey"
+  #)
 
   # right wheel 
-  block 
-  (
-    points 4
-    point[0] [ 1 0.75 ] 
-    point[1] [ 1 1 ] 
-    point[2] [ 0 1 ] 
-    point[3] [ 0 0.75 ] 
-    z [ 0.0 0.4 ]
-  )
+  #block 
+  #(
+   # points 4
+    #point[0] [ 1 0.75 ] 
+    #point[1] [ 1 1 ] 
+    #point[2] [ 0 1 ] 
+    #point[3] [ 0 0.75 ] 
+    #z [ 0.0 0.4 ]
+  #)
 
   # right eye front
   block
