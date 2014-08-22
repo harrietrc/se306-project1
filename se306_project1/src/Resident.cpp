@@ -14,8 +14,10 @@
 #include "boost/graph/adjacency_list.hpp"
 #include <boost/graph/graphviz.hpp> // Good for debugging, but take out for final build.
 #include "boost/graph/breadth_first_search.hpp"
+#include "PriorityQueue.hpp"
+#include <se306_project1/src/Agent.h>
 
-PriorityQueue *status_queue = PriorityQueue::getInstance();
+//PriorityQueue *status_queue = PriorityQueue::getInstance();
 
 /**
 *	@brief Gets current resident status and publishes it to a topic for assistants and doctors/nurses.
@@ -40,12 +42,6 @@ bool Resident::doSleep(const ros::TimerEvent&) {
 void Resident::doctor_callback(se306_project1::DoctorMsg msg)
 {
 
-	 if (msg.healResident == 1)
-	{
-	 	health = 100;
-		ROS_INFO("Resident healed by Doctor, health = 100");
-	}
-
 }
 
 /**
@@ -54,11 +50,6 @@ void Resident::doctor_callback(se306_project1::DoctorMsg msg)
 */
 void Resident::assistant_callback(se306_project1::AssistantMsg msg)
 {
-	if (msg.FoodDelivered == 1)
-	{
-		hunger = 100;
-		ROS_INFO("Resident has received food");
-	}
 	
 }
 
@@ -86,7 +77,7 @@ int Resident::run(int argc, char *argv[]) {
 	ros::Publisher RobotNode_stage_pub = n.advertise<geometry_msgs::Twist>("robot_0/cmd_vel",1000); 
 
 	//subscribe to listen to messages coming from stage
-	ros::Subscriber StageOdo_sub = n.subscribe<nav_msgs::Odometry>("robot_0/odom",1000, &Resident::StageOdom_callback,this);
+	//ros::Subscriber StageOdo_sub = n.subscribe<nav_msgs::Odometry>("robot_0/odom",1000, &Agent::StageOdom_callback,this);
 
 	////messages
 	//velocity of this RobotNode
@@ -96,8 +87,8 @@ int Resident::run(int argc, char *argv[]) {
 	while (ros::ok())
 	{
 		//messages to stage
-		RobotNode_cmdvel.linear.x = linear_x;
-		RobotNode_cmdvel.angular.z = angular_z;
+		//RobotNode_cmdvel.linear.x = linear_x;
+		//RobotNode_cmdvel.angular.z = angular_z;
 			
 		//publish the message
 		RobotNode_stage_pub.publish(RobotNode_cmdvel);

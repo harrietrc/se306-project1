@@ -1,4 +1,4 @@
-#include "Agent.h"
+#include <se306_project1/src/Agent.h>
 
 /**
 *	@brief Class representing the Resident.

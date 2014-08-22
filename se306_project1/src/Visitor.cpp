@@ -1,4 +1,5 @@
-#include "Agent.h"
+#include "Visitor.h"
+#include "ros/ros.h"
 
 /**
 *	@brief Causes the visitor to visit the resident, as based on a timer.
@@ -7,7 +8,7 @@
 *	@param endTime The hour to end the periodic visits.
 *	@remarks If start time and end time are unnecessary, they can be removed
 */
-void Visitor::doTimedVisit(const ros::TimerEvent&, int startTime, int endTime) {
+void Visitor::doTimedVisit(const ros::TimerEvent&) {
 
 }
 

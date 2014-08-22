@@ -8,6 +8,8 @@
 #include <sstream>
 #include "math.h"
 #include "Doctor.h"
+#include <se306_project1/src/Agent.h>
+#include "Visitor.h"
 
 /**
 *	@brief Callback function that unpacks and processes resident status messages.
@@ -59,7 +61,7 @@ int Doctor::run(int argc, char *argv[])
 	ros::Publisher RobotNode_stage_pub = n.advertise<geometry_msgs::Twist>("robot_0/cmd_vel",1000); 
 
 	//subscribe to listen to messages coming from stage
-	ros::Subscriber StageOdo_sub = n.subscribe<nav_msgs::Odometry>("robot_0/odom",1000, &Doctor::StageOdom_callback,this);
+	ros::Subscriber StageOdo_sub = n.subscribe<nav_msgs::Odometry>("robot_0/odom",1000, &Agent::StageOdom_callback,this);
 
 	////messages
 	//velocity of this RobotNode
@@ -69,8 +71,8 @@ int Doctor::run(int argc, char *argv[])
 	while (ros::ok())
 	{
 		//messages to stage
-		RobotNode_cmdvel.linear.x = linear_x;
-		RobotNode_cmdvel.angular.z = angular_z;
+		//RobotNode_cmdvel.linear.x = linear_x;
+		//RobotNode_cmdvel.angular.z = angular_z;
 			
 		//publish the message
 		RobotNode_stage_pub.publish(RobotNode_cmdvel);

@@ -66,5 +66,4 @@ class Agent
 	public:
 		
 		void StageOdom_callback(nav_msgs::Odometry msg);
-		void StageLaser_callback(sensor_msgs::LaserScan msg);
 };
