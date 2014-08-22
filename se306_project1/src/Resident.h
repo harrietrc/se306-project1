@@ -13,8 +13,8 @@ class Resident : public Agent
 	public:
 
 
-		void turn(std::pair<double, double> currentCheckpoint, std::pair<double,double> nextCheckpoint);
-		void moveForward(std::pair<double, double> currentCheckpoint, std::pair<double,double> nextCheckpoint);
+		void turn();
+		void moveForward(std::pair<double,double> nextCheckpoint);
 		double calculateGoalAngle(std::pair<double, double> goalCheckpoint);
 		void move();
 		bool isTurnClockwise();

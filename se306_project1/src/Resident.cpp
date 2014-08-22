@@ -61,16 +61,11 @@ void Resident::move(){
 
 	pair<double, double> nextCheckpoint = shortestPath.at(shortestPathIndex);
 
-	if (!isFacingCorrectly){
-		turn(currentCheckpoint, nextCheckpoint);
-	}else{
-		moveForward(currentCheckpoint, nextCheckpoint);
-	}
-
 	if (currentCheckpoint.first == nextCheckpoint.first &&
 		currentCheckpoint.second == nextCheckpoint.second){
 
 		shortestPathIndex++;
+		ROS_INFO("SPI %d", shortestPathIndex);
 		if (shortestPathIndex > shortestPath.size()){
 			shortestPathIndex = 0;
 			isMoving = false;
@@ -78,18 +73,28 @@ void Resident::move(){
 
 		checkpointAngle = calculateGoalAngle(shortestPath.at(shortestPathIndex));
 		isClockwise = isTurnClockwise();
+
+
+	}
+
+	nextCheckpoint = shortestPath.at(shortestPathIndex);
+
+	if (!isFacingCorrectly){
+		turn();
+	}else{
+		moveForward(nextCheckpoint);
 	}
 
 }
 
-void Resident::turn(pair<double,double> currentCheckpoint, pair<double,double> nextCheckpoint){
+void Resident::turn(){
 //	if (a % 10 == 0){
 //		ROS_INFO("Goal Angle: %f", checkpointAngle * 180 / M_PI);
 //		ROS_INFO("Current Angle: %f", currentAngle * 180 / M_PI);
 //		ROS_INFO("Angle Difference, %f", (currentAngle - checkpointAngle) * 180 / M_PI);
 //	}
 
-	angular_z = 1.5;
+	angular_z = 0.7;
 
 	if (isClockwise){
 		angular_z = angular_z * -1;
@@ -98,15 +103,23 @@ void Resident::turn(pair<double,double> currentCheckpoint, pair<double,double> n
 
 	double angleDifference = checkpointAngle - currentAngle;
 
-	if (fabs(angleDifference) <= 0.008){
+	if (fabs(angleDifference) <= 0.018){
 		angular_z = 0;
 		isFacingCorrectly = true;
-		//linear_x = 0.3;
 	}
 }
 
-void Resident::moveForward(pair<double,double> currentcheckpoint, pair<double,double> nextCheckpoint){
-	isFacingCorrectly = false;
+void Resident::moveForward(pair<double,double> nextCheckpoint){
+
+	linear_x = 0.5;
+
+	double distanceFromCheckpoint = sqrt(pow((nextCheckpoint.first - px),2) + pow((nextCheckpoint.second - py),2));
+
+	if (distanceFromCheckpoint <= 0.5){
+		currentCheckpoint = nextCheckpoint;
+		isFacingCorrectly = false;
+		linear_x = 0;
+	}
 
 }
 
