@@ -130,7 +130,13 @@ void Resident::moveForward(pair<double,double> nextCheckpoint){
 
 	double distanceFromCheckpoint = sqrt(pow((nextCheckpoint.first - px),2) + pow((nextCheckpoint.second - py),2));
 
-	linear_x = minLinearX + linear_x * sin ((distanceFromCheckpoint / 40) * M_PI /2);
+	// Check to ensure that linear velocity doesn't decrease if the distance between the checkpoints is higher than 40.
+	double distanceRatio = (distanceFromCheckpoint / 40);
+	if (distanceRatio > 1){
+		distanceRatio = 1;
+	}
+
+	linear_x = minLinearX + linear_x * sin (distanceRatio * M_PI /2);
 
 	ROS_INFO("Linear_x %f", linear_x);
 
