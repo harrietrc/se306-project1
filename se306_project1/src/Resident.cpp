@@ -138,8 +138,6 @@ void Resident::moveForward(pair<double,double> nextCheckpoint){
 
 	linear_x = minLinearX + linear_x * sin (distanceRatio * M_PI /2);
 
-	ROS_INFO("Linear_x %f", linear_x);
-
 	if (distanceFromCheckpoint <= 0.5){
 		currentCheckpoint = nextCheckpoint;
 		isFacingCorrectly = false;
@@ -207,22 +205,11 @@ void Resident::StageLaser_callback(sensor_msgs::LaserScan msg)
  */
 int Resident::run(int argc, char *argv[]) {
 
-	currentCheckpoint = make_pair(30,25);
 	pair<double, double> c1 = make_pair(40,30);
 	pair<double, double> c2 = make_pair(30,40);
 
-	shortestPath.push_back(currentCheckpoint);
 	shortestPath.push_back(c1);
 	shortestPath.push_back(c2);
-
-	isMoving = true;
-	isFacingCorrectly = false;
-	shortestPathIndex = 0;
-	checkpointAngle = 0;
-	isClockwise = true;
-
-	linear_x = 0;
-	angular_z = 0;
 
 	//You must call ros::init() first of all. ros::init() function needs to see argc and argv. The third argument is the name of the node
 	ros::init(argc, argv, "Resident");

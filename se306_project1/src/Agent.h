@@ -5,6 +5,23 @@
 */
 class Agent
 {
+	public:
+		Agent(){
+			linear_x = 0;
+			angular_z = 0;
+			px = 0;
+			py = 0;
+			currentAngle = 0;
+			currentCheckpoint = std::make_pair(30,25);
+			shortestPath.push_back(currentCheckpoint);
+			isMoving = true;
+			isFacingCorrectly = false;
+			shortestPathIndex = 0;
+			checkpointAngle = 0;
+			isClockwise = true;
+			robot_id = 0;
+
+		}
 	protected:
 		//velocity of the robot
 		double linear_x; /*!< Linear velocity of the robot */

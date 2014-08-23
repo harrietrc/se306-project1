@@ -12,6 +12,11 @@ class Resident : public Agent
 
 	public:
 
+		Resident() : Agent(){
+			health = 100;
+			hunger = 0;
+			boredom = 0;
+		}
 
 		void turn();
 		void moveForward(std::pair<double,double> nextCheckpoint);
