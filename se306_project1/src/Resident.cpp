@@ -65,7 +65,6 @@ void Resident::move(){
 			currentCheckpoint.second == nextCheckpoint.second){
 
 		shortestPathIndex++;
-		ROS_INFO("SPI %d", shortestPathIndex);
 		if (shortestPathIndex >= shortestPath.size()){
 			shortestPathIndex = 0;
 			isMoving = false;
@@ -113,7 +112,6 @@ void Resident::turn(){
 	angular_z = minAngularZ + angular_z * cos(M_PI/2 - angleDifference);
 
 	if (fabs(angleDifference) <= 0.02){
-		ROS_INFO("Yes!");
 		angular_z = 0.0049;
 		if (isTurnClockwise()){
 			angular_z = angular_z * -1;
@@ -127,9 +125,14 @@ void Resident::turn(){
 
 void Resident::moveForward(pair<double,double> nextCheckpoint){
 
-	linear_x = 1.5;
+	linear_x = 5;
+	double minLinearX = 1.5;
 
 	double distanceFromCheckpoint = sqrt(pow((nextCheckpoint.first - px),2) + pow((nextCheckpoint.second - py),2));
+
+	linear_x = minLinearX + linear_x * sin ((distanceFromCheckpoint / 40) * M_PI /2);
+
+	ROS_INFO("Linear_x %f", linear_x);
 
 	if (distanceFromCheckpoint <= 0.5){
 		currentCheckpoint = nextCheckpoint;
@@ -200,7 +203,7 @@ int Resident::run(int argc, char *argv[]) {
 
 	currentCheckpoint = make_pair(30,25);
 	pair<double, double> c1 = make_pair(40,30);
-	pair<double, double> c2 = make_pair(30,30);
+	pair<double, double> c2 = make_pair(30,40);
 
 	shortestPath.push_back(currentCheckpoint);
 	shortestPath.push_back(c1);
