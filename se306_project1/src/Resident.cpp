@@ -112,9 +112,9 @@ void Resident::turn(){
 
 	angular_z = minAngularZ + angular_z * cos(M_PI/2 - angleDifference);
 
-	if (fabs(angleDifference) <= 0.015){
+	if (fabs(angleDifference) <= 0.02){
 		angular_z = 0.005;
-		if (fabs(angleDifference) <= 0.003){
+		if (fabs(angleDifference) <= 0.002){
 			angular_z = 0;
 			isFacingCorrectly = true;
 		}
