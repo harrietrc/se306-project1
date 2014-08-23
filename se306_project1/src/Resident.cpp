@@ -49,7 +49,7 @@ void Resident::StageOdom_callback(nav_msgs::Odometry msg)
 
 
 
-/**
+/*
  *	@brief Callback function to process laser scan messsages.
  *	You can access the range data from msg.ranges[i]. i = sample number
  *	@note Currently blank as it is not in use. Navigation operates through a checkpoint system.

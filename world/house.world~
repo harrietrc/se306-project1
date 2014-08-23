@@ -28,7 +28,7 @@ define myRobot position
 	mylaser(pose [ 0.050 0.000 0.000 0.000 ])
 
 	localization_origin [0 0 0 0]
-	velocity_bounds [-2 2 -2 2 -2 2 -180 180]
+	velocity_bounds [-10 10 -10 10 -10 10 -180 180]
 )
 
 define assistant position
@@ -69,7 +69,7 @@ define my_block model
 
 resolution 0.02 #resolution of the underline bitmap model in meters. 
 
-interval_sim 100  # simulation timestep in milliseconds. length of each simulation update cycle. does nothing.
+interval_sim 50  # simulation timestep in milliseconds. length of each simulation update cycle. does nothing.
 
 
 window
