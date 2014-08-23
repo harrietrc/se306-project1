@@ -3,6 +3,11 @@
 * 	@todo Shift all common functionality (such as navigation) and properties to this class from subclasses.
 *	@extends Agent
 */
+#include <stdlib.h>
+#include <sstream>
+#include <vector>
+
+
 class Agent
 {
 	public:
@@ -12,8 +17,8 @@ class Agent
 			px = 0;
 			py = 0;
 			currentAngle = 0;
-			currentCheckpoint = std::make_pair(30,25);
-			shortestPath.push_back(currentCheckpoint);
+			currentCheckpoint = std::make_pair(0,0); // Needs to be initialised in subclasses!!
+			shortestPath.push_back(currentCheckpoint); // Needs to be removed later!!
 			isMoving = true;
 			isFacingCorrectly = false;
 			shortestPathIndex = 0;
@@ -22,6 +27,7 @@ class Agent
 			robot_id = 0;
 
 		}
+
 	protected:
 		//velocity of the robot
 		double linear_x; /*!< Linear velocity of the robot */
@@ -36,7 +42,7 @@ class Agent
 		std::pair<double, double> currentCheckpoint;
 
 		//shortestPath
-		std::vector<std::pair<double,double> > shortestPath;
+		std::vector <std::pair<double,double> > shortestPath;
 		int shortestPathIndex;
 		bool isFacingCorrectly;
 
@@ -47,4 +53,12 @@ class Agent
 
 		double checkpointAngle;
 		bool isClockwise;
+
+		void turn();
+		void moveForward(std::pair<double,double> nextCheckpoint);
+		double calculateGoalAngle(std::pair<double,double> goalCheckpoint);
+		void move();
+		bool isTurnClockwise();
+		std::pair<double, double>  movePath(int path[][2], int pathLength);
+
 };

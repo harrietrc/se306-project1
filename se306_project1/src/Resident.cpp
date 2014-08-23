@@ -9,9 +9,7 @@
 #include "math.h"
 #include <cmath>
 #include <stdlib.h>
-#include "Resident.h"	
-
-//int a = 0;
+#include "Resident.h"
 
 using namespace std;
 /**
@@ -49,142 +47,7 @@ void Resident::StageOdom_callback(nav_msgs::Odometry msg)
 
 }
 
-void Resident::move(){
 
-
-	if (isMoving == false){
-		isMoving = true;
-		currentCheckpoint.first = 30;
-		currentCheckpoint.second = 25;
-		//Get the path stuff
-	}
-
-	pair<double, double> nextCheckpoint = shortestPath.at(shortestPathIndex);
-
-	if (currentCheckpoint.first == nextCheckpoint.first &&
-			currentCheckpoint.second == nextCheckpoint.second){
-
-		shortestPathIndex++;
-		if (shortestPathIndex >= shortestPath.size()){
-			shortestPathIndex = 0;
-			isMoving = false;
-			return;
-		}else{
-			checkpointAngle = calculateGoalAngle(shortestPath.at(shortestPathIndex));
-			//ROS_INFO("Goal Angle: %f", checkpointAngle);
-
-			isClockwise = isTurnClockwise();
-			nextCheckpoint = shortestPath.at(shortestPathIndex);
-		}
-
-	}
-
-	if (!isFacingCorrectly){
-		turn();
-	}else{
-		moveForward(nextCheckpoint);
-	}
-
-}
-
-void Resident::turn(){
-	//	if (a % 10 == 0){
-	//		ROS_INFO("Goal Angle: %f", checkpointAngle * 180 / M_PI);
-	//		ROS_INFO("Current Angle: %f", currentAngle * 180 / M_PI);
-	//		ROS_INFO("Angle Difference, %f", (currentAngle - checkpointAngle) * 180 / M_PI);
-	//	}
-
-	angular_z = 1.5;
-	double minAngularZ = 0.05;
-
-	if (isClockwise){
-		angular_z = angular_z * -1;
-		minAngularZ = minAngularZ * -1;
-	}
-
-
-	double angleDifference = fabs(checkpointAngle - currentAngle);
-
-	if (angleDifference > M_PI) {
-		angleDifference = 2 * M_PI - angleDifference;
-	}
-
-	angular_z = minAngularZ + angular_z * cos(M_PI/2 - angleDifference);
-
-	if (fabs(angleDifference) <= 0.02){
-		angular_z = 0.0049;
-		if (isTurnClockwise()){
-			angular_z = angular_z * -1;
-		}
-		if (fabs(angleDifference) <= 0.005){
-			angular_z = 0;
-			isFacingCorrectly = true;
-		}
-	}
-}
-
-void Resident::moveForward(pair<double,double> nextCheckpoint){
-
-	linear_x = 5;
-	double minLinearX = 1.5;
-
-	double distanceFromCheckpoint = sqrt(pow((nextCheckpoint.first - px),2) + pow((nextCheckpoint.second - py),2));
-
-	// Check to ensure that linear velocity doesn't decrease if the distance between the checkpoints is higher than 40.
-	double distanceRatio = (distanceFromCheckpoint / 40);
-	if (distanceRatio > 1){
-		distanceRatio = 1;
-	}
-
-	linear_x = minLinearX + linear_x * sin (distanceRatio * M_PI /2);
-
-	if (distanceFromCheckpoint <= 0.5){
-		currentCheckpoint = nextCheckpoint;
-		isFacingCorrectly = false;
-		linear_x = 0;
-	}
-
-}
-
-bool Resident::isTurnClockwise(){
-
-	double angleDifference = checkpointAngle - currentAngle;
-	if (angleDifference > 0){
-		if (fabs(angleDifference) < M_PI){
-			return true;
-		}
-	}else{
-		if (fabs(angleDifference) > M_PI){
-			return true;
-		}
-	}
-
-	return false;
-}
-/**
- *	This function calculates the angle to the goal.
- */
-double Resident::calculateGoalAngle(pair<double, double> goalCheckpoint){
-
-	//Finding the vector that the robot is facing and the goal vector
-	double goalVectorX = goalCheckpoint.first - px;
-	double goalVectorY = goalCheckpoint.second - py;
-
-	double goalAngle = atan2(goalVectorY, goalVectorX); //pi <= goalAngle < -pi
-
-	if (goalAngle < 0) {
-		goalAngle = goalAngle * -1;
-	} else if (goalAngle == 2 * M_PI) { //New goal angle =>   >0 to 6.283
-		goalAngle = 0;
-	} else {
-		goalAngle = 2 * M_PI - goalAngle;
-	}
-
-	//rounding goalAngle to three decimal places
-	goalAngle = ((int)(goalAngle * 1000 + .5) / 1000.0);
-
-	return goalAngle;
-}
 
 /**
  *	@brief Callback function to process laser scan messsages.

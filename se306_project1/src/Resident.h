@@ -18,13 +18,6 @@ class Resident : public Agent
 			boredom = 0;
 		}
 
-		void turn();
-		void moveForward(std::pair<double,double> nextCheckpoint);
-		double calculateGoalAngle(std::pair<double, double> goalCheckpoint);
-		void move();
-		bool isTurnClockwise();
-		std::pair<double, double>  movePath(int path[][2], int pathLength);
-
 		/**
 		*	@brief Updates the Resident's x position, y position, and angle to reflect its current pose.
 		*	@param msg Odometry message from odom topic
