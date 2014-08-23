@@ -113,8 +113,12 @@ void Resident::turn(){
 	angular_z = minAngularZ + angular_z * cos(M_PI/2 - angleDifference);
 
 	if (fabs(angleDifference) <= 0.02){
-		angular_z = 0.005;
-		if (fabs(angleDifference) <= 0.002){
+		ROS_INFO("Yes!");
+		angular_z = 0.0049;
+		if (isTurnClockwise()){
+			angular_z = angular_z * -1;
+		}
+		if (fabs(angleDifference) <= 0.005){
 			angular_z = 0;
 			isFacingCorrectly = true;
 		}
@@ -123,7 +127,7 @@ void Resident::turn(){
 
 void Resident::moveForward(pair<double,double> nextCheckpoint){
 
-	linear_x = 0.5;
+	linear_x = 1.5;
 
 	double distanceFromCheckpoint = sqrt(pow((nextCheckpoint.first - px),2) + pow((nextCheckpoint.second - py),2));
 
@@ -195,8 +199,8 @@ void Resident::StageLaser_callback(sensor_msgs::LaserScan msg)
 int Resident::run(int argc, char *argv[]) {
 
 	currentCheckpoint = make_pair(30,25);
-	pair<double, double> c1 = make_pair(35,30);
-	pair<double, double> c2 = make_pair(35,25);
+	pair<double, double> c1 = make_pair(40,30);
+	pair<double, double> c2 = make_pair(30,30);
 
 	shortestPath.push_back(currentCheckpoint);
 	shortestPath.push_back(c1);
