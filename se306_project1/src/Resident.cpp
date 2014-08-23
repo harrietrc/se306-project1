@@ -31,13 +31,13 @@ void Resident::StageOdom_callback(nav_msgs::Odometry msg)
 	//Rounding to 3 decimal places
 	currentAngle = ((int)(currentAngle * 1000 + .5) / 1000.0);
 
-//	currentAngle = currentAngle * (180 / M_PI);
+	//	currentAngle = currentAngle * (180 / M_PI);
 
-//	if (count % 10 == 0){
-//		ROS_INFO ("px %f", msg.pose.pose.position.x);
-//		ROS_INFO ("py %f", msg.pose.pose.position.y);
-//		ROS_INFO ("angle %f", currentAngle);
-//	}
+	//	if (count % 10 == 0){
+	//		ROS_INFO ("px %f", msg.pose.pose.position.x);
+	//		ROS_INFO ("py %f", msg.pose.pose.position.y);
+	//		ROS_INFO ("angle %f", currentAngle);
+	//	}
 
 	px = msg.pose.pose.position.x;
 	py = msg.pose.pose.position.y;
@@ -62,7 +62,7 @@ void Resident::move(){
 	pair<double, double> nextCheckpoint = shortestPath.at(shortestPathIndex);
 
 	if (currentCheckpoint.first == nextCheckpoint.first &&
-		currentCheckpoint.second == nextCheckpoint.second){
+			currentCheckpoint.second == nextCheckpoint.second){
 
 		shortestPathIndex++;
 		ROS_INFO("SPI %d", shortestPathIndex);
@@ -73,11 +73,6 @@ void Resident::move(){
 		}else{
 			checkpointAngle = calculateGoalAngle(shortestPath.at(shortestPathIndex));
 			//ROS_INFO("Goal Angle: %f", checkpointAngle);
-
-			angleDiffCheckpointCurrent = fabs(checkpointAngle - currentAngle);
-			if (angleDiffCheckpointCurrent > M_PI) {
-				angleDiffCheckpointCurrent = 2 * M_PI - angleDiffCheckpointCurrent;
-			}
 
 			isClockwise = isTurnClockwise();
 			nextCheckpoint = shortestPath.at(shortestPathIndex);
@@ -94,13 +89,13 @@ void Resident::move(){
 }
 
 void Resident::turn(){
-//	if (a % 10 == 0){
-//		ROS_INFO("Goal Angle: %f", checkpointAngle * 180 / M_PI);
-//		ROS_INFO("Current Angle: %f", currentAngle * 180 / M_PI);
-//		ROS_INFO("Angle Difference, %f", (currentAngle - checkpointAngle) * 180 / M_PI);
-//	}
+	//	if (a % 10 == 0){
+	//		ROS_INFO("Goal Angle: %f", checkpointAngle * 180 / M_PI);
+	//		ROS_INFO("Current Angle: %f", currentAngle * 180 / M_PI);
+	//		ROS_INFO("Angle Difference, %f", (currentAngle - checkpointAngle) * 180 / M_PI);
+	//	}
 
-	angular_z = 0.3;
+	angular_z = 1.5;
 	double minAngularZ = 0.05;
 
 	if (isClockwise){
@@ -115,16 +110,14 @@ void Resident::turn(){
 		angleDifference = 2 * M_PI - angleDifference;
 	}
 
-	ROS_INFO("angleDiff: %f", angleDifference);
-	ROS_INFO("angleDiffCheckpointCurrent: %f", angleDiffCheckpointCurrent);
+	angular_z = minAngularZ + angular_z * cos(M_PI/2 - angleDifference);
 
-	angular_z = minAngularZ + angular_z * sin((angleDifference/angleDiffCheckpointCurrent) * M_PI);
-
-	ROS_INFO("angular z: %f", angular_z);
-
-	if (fabs(angleDifference) <= 0.009){
-		angular_z = 0;
-		isFacingCorrectly = true;
+	if (fabs(angleDifference) <= 0.015){
+		angular_z = 0.005;
+		if (fabs(angleDifference) <= 0.003){
+			angular_z = 0;
+			isFacingCorrectly = true;
+		}
 	}
 }
 

@@ -29,6 +29,5 @@ class Agent
 		int robot_id; /*!< Robot's ID */
 
 		double checkpointAngle;
-		double angleDiffCheckpointCurrent;
 		bool isClockwise;
 };
