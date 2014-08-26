@@ -5,24 +5,17 @@
 #include "std_msgs/String.h"
 #include <geometry_msgs/Twist.h>
 #include <nav_msgs/Odometry.h>
-#include <sensor_msgs/LaserScan.h>
 #include <sstream>
 #include "math.h"
 #include <cmath>
 #include <stdlib.h>
-#include "boost/graph/adjacency_list.hpp"
-#include <boost/graph/graphviz.hpp> // Good for debugging, but take out for final build.
-#include "boost/graph/breadth_first_search.hpp"
+#include <sstream>
+#include <vector>
 
 /**
 *	@brief Superclass for all 'agents' - i.e. Assistants, Visitors, and the Resident.
 *	Contains common navigation functionality and properties.
 */
-#include <stdlib.h>
-#include <sstream>
-#include <vector>
-
-
 class Agent
 {
 	public:
@@ -65,31 +58,12 @@ class Agent
 
 		//moving status of the robot
 		bool isMoving;
-		/**
-		*	@brief Set of checkpoints that the nodes can move to in the map.
-		* 	Gives x position and y position for each co-ordinate
-		*/
-		int checkpoints[11][2] = {  
-		{30, 25},
-		{30, 7}, 
-		{40, 7},
-		{40, 8},
-		{38,8},
-		{38,7},
-		{40,7},
-		{30,7},
-		{30, 25},
-		{34,20},
-		{30, 25}
-		};
 
 		int robot_id; /*!< Robot's ID */
 
 		double checkpointAngle;
 		bool isClockwise;
 
-		void makeGraph();
-		void checkpointMap();
 		void turn();
 		void moveForward(std::pair<double,double> nextCheckpoint);
 		double calculateGoalAngle(std::pair<double,double> goalCheckpoint);
@@ -99,7 +73,5 @@ class Agent
 		/* -- Communication and co-ordination -- */
 
 		void delegate(se306_project1::ResidentMsg msg) {} /*!< Callback that calls callbacks */
-
-		void getShortestPath(std::string startName, std::string endName);
 	
 };
