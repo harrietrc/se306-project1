@@ -19,38 +19,14 @@ class Resident : public Agent
 		}
 
 		/**
-		*	@brief Updates the Resident's x position, y position, and angle to reflect its current pose.
-		*	@param msg Odometry message from odom topic
-		*/
-		void StageOdom_callback(nav_msgs::Odometry msg);
-
-		/**
-		*	@brief Virtual callback function to process laser scan messsages.
-		*	@param msg Single scan from a planar laser range finder
-		*/
-		void StageLaser_callback(sensor_msgs::LaserScan msg);
-
-		/**
 		*	@brief Main function that controls agent events.
 		*/
 		int run(int argc, char *argv[]);
-		// Return type of robot
-		// MIGHT HAVE TO RETURN A STRING BECAUSE ROS DOESN'T SUPPORT ENUM IN MESSAGES
-		//Type get_Type()
-	
-		// Get id of robot
-		//int get_id(){
-	
-		// Wakes up
-		//void wake_up()
-	
-		// Eat
-		//void eat()
-	
-		// Takes medicine
-		//void take_medicine()
-	
-		// Accepts entertainment
-		//void accept_entertainment()
-		
+
+		void doctor_callback(se306_project1::DoctorMsg msg);
+		void assistant_callback(se306_project1::AssistantMsg msg);
+		bool doSleep(const ros::TimerEvent&);	
+		void publishStatus();
+
+
 };

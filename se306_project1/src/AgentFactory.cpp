@@ -30,13 +30,3 @@ int AgentFactory::createAgent(AgentConst::AgentType agentType, int nodeNumber) {
 	return processManager.nodeProcess(stringType, nodeNumber);
 }
 
-//int main() {return 0;}
-//AgentFactory::AgentFactory() {
-//	// TODO Auto-generated constructor stub
-//
-//}
-//
-//AgentFactory::~AgentFactory() {
-//	// TODO Auto-generated destructor stub
-//}
-

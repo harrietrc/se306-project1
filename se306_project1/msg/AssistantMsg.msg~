@@ -1,1 +1,1 @@
-bool FoodDelivered
+int64 FoodDelivered
