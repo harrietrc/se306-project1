@@ -1,5 +1,4 @@
 #include "ros/ros.h"
-#include "std_msgs/String.h"
 #include <geometry_msgs/Twist.h>
 #include <nav_msgs/Odometry.h>
 #include <sensor_msgs/LaserScan.h>
@@ -38,9 +37,6 @@ bool Resident::doSleep(const ros::TimerEvent&) {
 */
 void Resident::doctor_callback(se306_project1::DoctorMsg msg)
 {
-	//This is the callback function to process laser scan messages
-	//you can access the range data from msg.ranges[i]. i = sample number
-
 
 }
 
@@ -85,7 +81,6 @@ int Resident::run(int argc, char *argv[]) {
 	//subscribe to listen to messages coming from stage
 	ros::Subscriber StageOdo_sub = n.subscribe("robot_0/odom",1000, &Agent::StageOdom_callback, dynamic_cast<Agent*>(this));
 
-	////messages
 	//velocity of this RobotNode
 	geometry_msgs::Twist RobotNode_cmdvel;
 

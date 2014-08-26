@@ -20,7 +20,7 @@ using namespace std;
 
 /** Array of the names of checkpoints. Necessary for the initialisation of the checkpoints vector. */
 const char* nameArr[] = { 
-	"cp0","cp1", "cp2"
+		"cp0","cp1", "cp2"
 };
 
 std::vector<std::string> checkpointNames(begin(nameArr), end(nameArr)); /*!< Vector of checkpoint names. See nameArr[]. */
@@ -51,28 +51,28 @@ int cc; /*!< The index of the agent's current checkpoint in the path. */
 std::vector<std::pair<double, double> > path; /*!< The agent's path to a specified goal. */
 
 /**
-*	@brief Finds the shortest path between 2 checkpoints, and returns the path as co-ordinates. 
-*	Uses breadth first search - Boost recommends this over Dijkstra's algorithm for graphs with uniformly weighted edges.
-* 	Sets path member variable.
-*	@param startName The name of the start checkpoint as a string (e.g. 'kitchen')
-*	@param endName The name of the goal checkpoint as a string (e.g. 'bathroom')
-*/
+ *	@brief Finds the shortest path between 2 checkpoints, and returns the path as co-ordinates.
+ *	Uses breadth first search - Boost recommends this over Dijkstra's algorithm for graphs with uniformly weighted edges.
+ * 	Sets path member variable.
+ *	@param startName The name of the start checkpoint as a string (e.g. 'kitchen')
+ *	@param endName The name of the goal checkpoint as a string (e.g. 'bathroom')
+ */
 void Agent::getShortestPath(std::string startName, std::string endName) {
 
 }
 
 /**
-*	@brief Creates a graph of checkpoint names, provided the vector of names and the array of edges.
-*/
+ *	@brief Creates a graph of checkpoint names, provided the vector of names and the array of edges.
+ */
 void Agent::makeGraph() {
 
 }
 
 /**
-*	@brief Associates checkpoint names with checkpoint co-ordinates
-*	To be used in conjunction with a graph of checkpoint names, representing paths between checkpoints. Could be replaced
-*	by adding the co-ordinates to bundled properties in the property map of the graph.
-*/
+ *	@brief Associates checkpoint names with checkpoint co-ordinates
+ *	To be used in conjunction with a graph of checkpoint names, representing paths between checkpoints. Could be replaced
+ *	by adding the co-ordinates to bundled properties in the property map of the graph.
+ */
 void Agent::checkpointMap() {
 
 }
@@ -80,16 +80,37 @@ void Agent::checkpointMap() {
 /* -- Stage callbacks -- */
 
 /**
-*	@brief Updates the agent's x position, y position, and angle to reflect its current pose.
-*	@param msg Odometry message from odom topic
-*/
+ *	@brief Updates the agent's x position, y position, and angle to reflect its current pose.
+ *	@param msg Odometry message from odom topic
+ */
+
+
 void Agent::StageOdom_callback(nav_msgs::Odometry msg) {
 
+
+	//Converting from quaternion to radians
+	currentAngle = acos(msg.pose.pose.orientation.w) * 2;
+	if (msg.pose.pose.orientation.z > 0) {
+		currentAngle = (2*M_PI)-acos(msg.pose.pose.orientation.w) * 2;
+	}
+	//Rounding to 3 decimal places
+	currentAngle = ((int)(currentAngle * 1000 + .5) / 1000.0);
+
+
+	//Update the current position
+	px = msg.pose.pose.position.x;
+	py = msg.pose.pose.position.y;
+
+	if (isMoving == true){
+		move();
+	}
 }
 
 /*
  * MOVE METHODS {START}
  */
+
+
 
 void Agent::move(){
 
@@ -130,6 +151,8 @@ void Agent::move(){
 
 }
 
+
+
 void Agent::turn(){
 	//	if (a % 10 == 0){
 	//		ROS_INFO("Goal Angle: %f", checkpointAngle * 180 / M_PI);
@@ -166,6 +189,8 @@ void Agent::turn(){
 	}
 }
 
+
+
 void Agent::moveForward(pair<double,double> nextCheckpoint){
 
 	linear_x = 5;
@@ -189,6 +214,7 @@ void Agent::moveForward(pair<double,double> nextCheckpoint){
 
 }
 
+
 bool Agent::isTurnClockwise(){
 
 	double angleDifference = checkpointAngle - currentAngle;
@@ -204,6 +230,7 @@ bool Agent::isTurnClockwise(){
 
 	return false;
 }
+
 /**
  *	This function calculates the angle to the goal.
  */
