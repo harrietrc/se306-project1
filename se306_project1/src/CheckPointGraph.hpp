@@ -9,6 +9,6 @@ class CheckPointGraph {
 	public:
 		void makeGraph();
 		void checkpointMap();
-		void getShortestPath(std::string startName, std::string endName);
+		std::vector<std::pair<double, double> > shortestPath(std::string startName, std::string endName);
 		
 };
