@@ -1,23 +1,24 @@
 #include "Visitor.h"
 #include "ros/ros.h"
-
-/**
-*	@brief Causes the visitor to visit the resident, as based on a timer.
-*	@param The timer that calls this callback automatically generates a TimerEvent.
-*	@param startTimme The hour to start the periodic visits
-*	@param endTime The hour to end the periodic visits.
-*	@remarks If start time and end time are unnecessary, they can be removed
-*/
-void Visitor::doTimedVisit(const ros::TimerEvent&) {
-
-}
+#include "math.h"
 
 /**
 *	@brief Visit the resident.
 *	May be simple - e.g. toggling visitor visibility, or moving to the door.
+*	@returns true if this has moved next to the Resident
 */
-void Visitor::visitResident() {
+bool Visitor::visitResident() {
+	double lastCheckpointX = shortestPath.at(shortestPath.size()-1).first;
+	double lastCheckpointY = shortestPath.at(shortestPath.size()-1).second;
 
+	double distanceFromCheckpoint = sqrt(pow((lastCheckpointX - px),2) + pow((lastCheckpointY - py),2));
+	
+	// move(<toResident>); // maybe move to living room area instead?
+	if (distanceFromCheckpoint < 0.5) { // next to resident
+		return true;
+	}
+	
+	return false;
 }
 
 /**
@@ -25,6 +26,18 @@ void Visitor::visitResident() {
 *	@returns true if the behaviour completes successfully.
 */
 bool Visitor::doConverse() {
-	return true;
-}
+	// converse for an hour?
+	int tnow = ros::Time::now().toSec(); // The simulation time now
+	int finishConvo = tnow + 1; // one hour later
+	
+	ROS_INFO("Starting conversation...");
+	while (tnow < finishConvo) {
+		tnow = ros::Time::now().toSec(); // The simulation time now
+	}
 
+	// convo should be done and visitor should leave
+	// move(outsideHouse);
+	finishedConvo = true;
+	
+	return finishedConvo;
+}

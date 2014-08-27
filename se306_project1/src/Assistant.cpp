@@ -4,8 +4,6 @@
 #include <nav_msgs/Odometry.h>
 #include <sensor_msgs/LaserScan.h>
 #include <stdlib.h>
-#include "se306_project1/ResidentMsg.h"
-#include "se306_project1/AssistantMsg.h"
 #include <sstream>
 #include "math.h"
 #include "time_conversion.hpp"
@@ -22,8 +20,8 @@ using namespace std;
 */
 void Assistant::medicate() {
 
-	double lastCheckpointX = g.getCoords(shortestPath.at(shortestPath.size()-1)).first;
-	double lastCheckpointY = g.getCoords(shortestPath.at(shortestPath.size()-1)).second;
+	double lastCheckpointX = shortestPath.at(shortestPath.size()-1).first;
+	double lastCheckpointY = shortestPath.at(shortestPath.size()-1).second;
 
 	double distanceFromCheckpoint = sqrt(pow((lastCheckpointX - px),2) + pow((lastCheckpointY - py),2));
 
@@ -33,7 +31,7 @@ void Assistant::medicate() {
 			isMedicated == true;
 		}
 	}else if (isMedicated) {
-		//move("HouseCentre");
+		move("HouseCentre");
 	}
 
 }
@@ -43,43 +41,44 @@ void Assistant::medicate() {
 */
 void Assistant::cook() {
 
-	ROS_INFO("here");
-	double lastCheckpointX = g.getCoords("KitchenNorthEast").first;
-	double lastCheckpointY = g.getCoords("KitchenNorthEast").second;
-	ROS_INFO("X, %f", lastCheckpointX);
-	ROS_INFO("Y, %f", lastCheckpointY);
+	double lastCheckpointX = shortestPath.at(shortestPath.size()-1).first;
+	double lastCheckpointY = shortestPath.at(shortestPath.size()-1).second;
+
 	double distanceFromCheckpoint = sqrt(pow((lastCheckpointX - px),2) + pow((lastCheckpointY - py),2));
 
 	if (!atKitchen && !finishedCooking) {
-		ROS_INFO("Yyyyyyy, ");
 
 		move("KitchenNorthWest");
-		//ROS_INFO("Yyyyyyy, %f", lastCheckpointY);
-
 		if (distanceFromCheckpoint < 0.5) {
-		 	atKitchen = true;
+			atKitchen = true;
+			pair<double, double> p1 = make_pair(4,-24);
+			pair<double, double> p2 = make_pair(24,-24);
+			pair<double, double> p3 = make_pair(24,-32);
+			pair<double, double> p4 = make_pair(20,-32);
+			pair<double, double> p5 = make_pair(20,-28);
+			pair<double, double> p6 = make_pair(4,-24);
 
-		 	shortestPath.clear();
-		 	shortestPath.push_back("KitchenNorthEast");
-		 	shortestPath.push_back("KitchenSouthEast");
-		 	shortestPath.push_back("KitchenNorthEast");
-		 	shortestPath.push_back("KitchenSouthEast");
-		 	shortestPath.push_back("KitchenNorthWest");
-
-		 	isMoving = true;
+			shortestPath.clear();
+			shortestPath.push_back(p1);
+			shortestPath.push_back(p2);
+			shortestPath.push_back(p3);
+			shortestPath.push_back(p4);
+			shortestPath.push_back(p5);
+			shortestPath.push_back(p6);
+			isMoving = true;
 		}
 
 
 	} else if (atKitchen && !finishedCooking) {
 
 		// The path to simulate the cooking behaviour in the kitchen
-		if (distanceFromCheckpoint < 0.5) {
+		if (px == 4 && py == -24) { // Final kitchen points (refer to p6)
 			finishedCooking = true;
 		}
 
 	} else if (atKitchen && finishedCooking) {
 
-		move("HouseCentre");
+		//move("HouseCentre");
 		if (distanceFromCheckpoint < 0.5) {
 			atKitchen = false;
 			finishedCooking = false;
@@ -101,8 +100,8 @@ void Assistant::clean() {
 */
 void Assistant::entertain() {
 
-	double lastCheckpointX = g.getCoords(shortestPath.at(shortestPath.size()-1)).first;
-	double lastCheckpointY = g.getCoords(shortestPath.at(shortestPath.size()-1)).second;
+	double lastCheckpointX = shortestPath.at(shortestPath.size()-1).first;
+	double lastCheckpointY = shortestPath.at(shortestPath.size()-1).second;
 
 	double distanceFromCheckpoint = sqrt(pow((lastCheckpointX - px),2) + pow((lastCheckpointY - py),2));
 
@@ -130,18 +129,17 @@ void Assistant::delegate(se306_project1::ResidentMsg msg) {
 	// alternatively we could send the status in another format.
 
 	// check msg if cook do cooking e.t.c
-	//if (msg.state == "hungry") {
+	if (msg.state == "hungry") {
 		cook();
-//	}
+	}
 
-/*	if (msg.state == "bored") {
+	if (msg.state == "bored") {
 		entertain();
 	}
 
 	if (msg.state == "medication") {
 		medicate();
 	}
-	*/
 
 }
 
@@ -151,13 +149,6 @@ void Assistant::delegate(se306_project1::ResidentMsg msg) {
 */
 int Assistant::run(int argc, char **argv)
 {
-
-	// pair<double, double> c1 = make_pair(30,10);
-	// pair<double, double> c2 = make_pair(40,10);
-
-	// shortestPath.push_back(c1);
-	// shortestPath.push_back(c2);
-
 	//You must call ros::init() first of all. ros::init() function needs to see argc and argv. The third argument is the name of the node
 	ros::init(argc, argv, "Assistant");
 
@@ -182,11 +173,10 @@ int Assistant::run(int argc, char **argv)
 
 	while (ros::ok())
 	{
-	//	ROS_INFO("But");
 		//messages to stage
 		RobotNode_cmdvel.linear.x = linear_x;
 		RobotNode_cmdvel.angular.z = angular_z;
-		cook();
+			
 		//publish the message
 		RobotNode_stage_pub.publish(RobotNode_cmdvel);
 		

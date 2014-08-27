@@ -2,7 +2,9 @@
 #include <boost/graph/graphviz.hpp> // Good for debugging, but take out for final build.
 #include "boost/graph/breadth_first_search.hpp"
 #include "CheckPointGraph.hpp"
-
+#include <boost/bimap/bimap.hpp>
+#include <boost/bimap/set_of.hpp>
+#include <vector>
 using namespace boost; // Useful for graphs
 
 /** Array of the names of checkpoints. Necessary for the initialisation of the checkpoints vector. */
@@ -20,7 +22,7 @@ const char* nameArr[] = {
 */
 int checkpoints[][2] = {
 	{-27,-40},{-20,-40},{-24,-12},{-18,-18},{0,-18},{0,-12},{6,-24},{6,-28},{24,-28},{24,-24},{0,6},{24,-10},{20,-6},{0,22},
-	{0,22},{6,22},{-6,18},{-24,18},{-26,22},{-18,22},{-32,45},{-24,36},{6,30},{26,30},{30,45},
+	{6,22},{-6,18},{-24,18},{-26,22},{-18,22},{-32,45},{-24,36},{6,30},{26,30},{30,45},
 	{26,48}, {32,20}, {32,18}, {-33,-46}, {-36,-48}, {-30,-48}, {-8,-46}, {-20,-46}, {-23,-46}, {-20,-48}
 };
 
@@ -31,7 +33,7 @@ std::vector<std::string> checkpointNames(begin(nameArr), end(nameArr)); /*!< Vec
 typedef property<vertex_name_t, std::string> VertexProperty; /*!<  Will allow us to retrieve vertex names from vertex references */
 typedef adjacency_list <vecS, vecS, undirectedS, VertexProperty> vector_graph_t; /*!< Graph of checkpoint names */
 const int checkpointNum = checkpointNames.size(); /*!< Number of checkpoints. */
-vector_graph_t g(checkpointNum); // Our graph
+vector_graph_t g(checkpointNum); // Our map
 std::map<std::string, vector_graph_t::vertex_descriptor> indices; /*!< Map that corresponds checkpoint names to the vertices in the graph. */
 
 /* -- Edges -- */
@@ -51,15 +53,36 @@ E paths[] = {
 	 E("DoctorOrigin","FrontDoorWest"), E("Nurse1Origin","FrontDoorWest"), E("Nurse2Origin","FrontDoorWest"),
 	 E("Friend1Origin","FrontDoorEast"), E("Friend2Origin","FrontDoorEast"), E("Friend3Origin","FrontDoorEast"),
 	 E("CaregiverOrigin","FrontDoorEast"),
-	 E("Assistant1Origin","CouchesNorthEast"), E("Assistant2Origin","CouchesNorthEast"), E("ResidentOrigin","BedNorthEast")
+	 E("Assistant1Origin","CouchesNorthEast"), E("Assistant2Origin","CouchesNorthEast"), E("ResidentOrigin","BedNorthEast"),
+	 E("HouseCentre","CentrePassageSouth")
 }; /*!< Defines edges between checkpoints */
 
 /* -- Map of names to co-ordinates -- */
+
+// // typedef std::string CheckpointName; // Key
+// // typedef std::pair<int, int> Checkpoint; // Value
+// typedef boost::bimaps::bimap< boost::bimaps::set_of<std::string>, boost::bimaps::set_of<std::pair<int, int> > > CheckpointMap;
+// CheckpointMap c;
+
+// typedef CheckpointMap::left_map CheckpointNames;
+// CheckpointNames& names = c.left;
+// typedef CheckpointNames::value_type CheckpointName;
+// typedef CheckpointNames::const_iterator CheckpointNamesIterator;
+
+// typedef CheckpointMap::right_map CheckpointCoords;
+// CheckpointCoords& coords = c.right;
+// typedef CheckpointCoords::value_type CheckpointCoord;
+// typedef CheckpointCoords::const_iterator CheckpointCoordsIterator;
+
+/* -- Temporary solution - two maps of co-ordinates to names and names to co-ordinates --*/
 
 typedef std::string CheckpointName; // Key
 typedef std::pair<int, int> Checkpoint; // Value
 typedef std::map<CheckpointName, Checkpoint> CheckpointMap; /*!< Map with checkpoint names as keys and checkpoint co-ordinates as values */
 CheckpointMap c;
+
+typedef std::map<Checkpoint, CheckpointName> CheckpointMapReverse; /*!< Map with checkpoint names as keys and checkpoint co-ordinates as values */
+CheckpointMapReverse crev;
 
 /* -- Pathing -- */
 
@@ -73,13 +96,13 @@ std::vector<std::pair<double, double> > path; /*!< The agent's path to a specifi
  *	@param startName The name of the start checkpoint as a string (e.g. 'kitchen')
  *	@param endName The name of the goal checkpoint as a string (e.g. 'bathroom')
  */
-std::vector<std::string> CheckPointGraph::shortestPath(std::string startName, std::string endName) {
+std::vector<std::pair<double, double> > CheckPointGraph::shortestPath(std::string startName, std::string endName) {
 
 	//Create vector to store the predecessors (can also make one to store distances)
   	std::vector<vector_graph_t::vertex_descriptor> p(boost::num_vertices(g));
 
   	// Get the descriptor for the source node
-  	vector_graph_t::vertex_descriptor s = indices[startName]; // Shouldn't be hardcoded - pass start checkpoint
+  	vector_graph_t::vertex_descriptor s = indices[startName]; 
 
  	// Computes the shortest path 
  	breadth_first_search(g, s, visitor(make_bfs_visitor(record_predecessors(&p[0], on_tree_edge()))));
@@ -101,19 +124,13 @@ std::vector<std::string> CheckPointGraph::shortestPath(std::string startName, st
 
 	path.push_back(s); // BFS doesn't include the start node. 
 
-	//std::vector<std::pair<double, double> > a;
-
-	// Commented out - old implementation returned the path as a vector of pairs of doubles
-	// for (int i=0; i<path.size(); i++) {
-	// 	// Get the vertex name from the graph's property map
-	// 	std::string cpn = boost::get(vertex_name_t(), g, path[i]); // adjacency_list vertex_descriptors are ints
-	// 	std::pair<double, double> coords = c[cpn]; // Get co-ordinates associated with checkpoint name
-	// 	a.push_back(coords);
-	// }
-	std::vector<std::string> a;
+	std::vector<std::pair<double, double> > a;
 
 	for (int i=0; i<path.size(); i++) {
-		a.push_back(boost::get(vertex_name_t(), g, path[i])); // Add checkpoint name
+		// Get the vertex name from the graph's property map
+		std::string cpn = boost::get(vertex_name_t(), g, path[i]); // adjacency_list vertex_descriptors are ints
+		std::pair<double, double> coords = c.at(cpn); // Get co-ordinates associated with checkpoint name
+		a.push_back(coords);
 	}
 	
 	std::reverse(a.begin(), a.end()); // as search starts from goal; we can access only predecessors, not successors
@@ -121,10 +138,15 @@ std::vector<std::string> CheckPointGraph::shortestPath(std::string startName, st
     return a;
 }
 
+// checked
+std::string CheckPointGraph::getCheckpointName(std::pair<double, double> cpcoords) {
+	return crev.at(cpcoords);
+}
+
 /**
 *	@brief Creates a graph of checkpoint names, provided the vector of names and the array of edges.
 *	Uses boost's adjacency list.
-*/
+*/ // checked
 void CheckPointGraph::makeGraph() {
 
 	// Fills the property 'vertex_name_t' of the vertices, allowing us to get the checkpoint name back when we have 
@@ -152,7 +174,7 @@ void CheckPointGraph::makeGraph() {
  *	@brief Associates checkpoint names with checkpoint co-ordinates
  *	To be used in conjunction with a graph of checkpoint names, representing paths between checkpoints. Could be replaced
  *	by adding the co-ordinates to bundled properties in the property map of the graph.
- */
+ */ //checked
 void CheckPointGraph::checkpointMap() {
 
 	// Convert array to pairs
@@ -165,15 +187,8 @@ void CheckPointGraph::checkpointMap() {
 	// Add checkpoint name and checkpoint co-ordinates to the map
 	for (int i=0; i<checkpointNum; i++) {
 		c.insert(std::make_pair(CheckpointName(checkpointNames[i]), Checkpoint(vec[i])));
+		crev.insert(std::make_pair(Checkpoint(vec[i]), CheckpointName(checkpointNames[i])));
 	}
 
 }
 
-/**
-*	@brief Gets the co-ordinates of a checkpoint given its name.
-*	@param checkPointName The name of the checkpoint
-*	@return The (x,y) co-ordinates of a checkpoint as a pair
-*/
-std::pair<double, double> CheckPointGraph::getCoords(std::string checkPointName) {
-	return c[checkPointName];
-}
