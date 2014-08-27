@@ -33,7 +33,6 @@ class Agent
 			checkpointAngle = 0;
 			isClockwise = true;
 			robot_id = 0;
-
 		}
 
 		void StageOdom_callback(nav_msgs::Odometry msg);
@@ -63,6 +62,8 @@ class Agent
 
 		double checkpointAngle;
 		bool isClockwise;
+
+		int nodeNumber;
 
 		void turn();
 		void moveForward(std::pair<double,double> nextCheckpoint);

@@ -11,6 +11,7 @@
 #include <cmath>
 #include <stdlib.h>
 #include "Resident.h"
+#include <iostream>
 
 using namespace std;
 //PriorityQueue *status_queue = PriorityQueue::getInstance();
