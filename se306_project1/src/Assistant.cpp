@@ -33,7 +33,7 @@ void Assistant::medicate() {
 			isMedicated == true;
 		}
 	}else if (isMedicated) {
-		move(homeCentre);
+		//move(homeCentre);
 	}
 
 }
