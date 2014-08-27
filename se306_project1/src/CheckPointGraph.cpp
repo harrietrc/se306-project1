@@ -17,7 +17,7 @@ const char* nameArr[] = {
 *	@brief Set of checkpoints that the nodes can move to in the map.
 * 	Gives x position and y position for each co-ordinate
 */
-int checkpoints[11][2] = {  
+int checkpoints[][2] = {
 	{-27,-40},{-20,-40},{-24,-12},{-18,-18},{0,-18},{0,-12},{6,-24},{6,-28},{24,-28},{24,-24},{0,6},{24,-10},{20,-6},{0,22},
 	{0,22},{6,22},{-6,18},{-24,18},{-26,22},{-18,22},{-32,45},{-24,36},{6,30},{26,30},{30.45}
 };
