@@ -97,8 +97,6 @@ std::vector<std::pair<double, double> > path; /*!< The agent's path to a specifi
  *	@param endName The name of the goal checkpoint as a string (e.g. 'bathroom')
  */
 std::vector<std::pair<double, double> > CheckPointGraph::shortestPath(std::string startName, std::string endName) {
-	CheckPointGraph::checkpointMap();
-	CheckPointGraph::makeGraph();
 
 	//Create vector to store the predecessors (can also make one to store distances)
   	std::vector<vector_graph_t::vertex_descriptor> p(boost::num_vertices(g));

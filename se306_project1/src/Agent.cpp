@@ -61,7 +61,6 @@ void Agent::StageOdom_callback(nav_msgs::Odometry msg) {
 void Agent::setPath(std::string start, std::string end) {
 	shortestPath = g.shortestPath(start, end);
 	shortestPathIndex = 0;
-	std::vector<std::pair<double, double> > another = g.shortestPath("Shower", "FrontDoorWest");
 }
 
 
