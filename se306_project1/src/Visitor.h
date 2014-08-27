@@ -6,16 +6,14 @@
 */
 class Visitor : public Agent {
 
-	private:
+	protected:
 		bool emergency = false; // required if timing/scheduling is done within this class
 		bool finishedConvo = false;
 
-	protected:
-		void visitResident();
-		void doTimedVisit(const ros::TimerEvent&);
-		void delegate(se306_project1::ResidentMsg msg);
+		bool visitResident();
 		bool doConverse();
+		virtual void delegate(se306_project1::ResidentMsg msg) = 0;
 
 	public:
-		int run(int argc, char *argv[]); 
+		virtual int run(int argc, char *argv[]) = 0; 
 };
