@@ -73,7 +73,7 @@ std::vector<std::pair<double, double> > path; /*!< The agent's path to a specifi
  *	@param startName The name of the start checkpoint as a string (e.g. 'kitchen')
  *	@param endName The name of the goal checkpoint as a string (e.g. 'bathroom')
  */
-std::vector<std::pair<double, double> > CheckPointGraph::shortestPath(std::string startName, std::string endName) {
+std::vector<std::string> CheckPointGraph::shortestPath(std::string startName, std::string endName) {
 
 	//Create vector to store the predecessors (can also make one to store distances)
   	std::vector<vector_graph_t::vertex_descriptor> p(boost::num_vertices(g));
@@ -99,15 +99,21 @@ std::vector<std::pair<double, double> > CheckPointGraph::shortestPath(std::strin
     	current = p[current]; // Predecessor of the current checkpoint in the path
 	}
 
-	// path.push_back(s); // BFS doesn't include the start node. 
+	path.push_back(s); // BFS doesn't include the start node. 
 
-	std::vector<std::pair<double, double> > a;
+	//std::vector<std::pair<double, double> > a;
+
+	// Commented out - old implementation returned the path as a vector of pairs of doubles
+	// for (int i=0; i<path.size(); i++) {
+	// 	// Get the vertex name from the graph's property map
+	// 	std::string cpn = boost::get(vertex_name_t(), g, path[i]); // adjacency_list vertex_descriptors are ints
+	// 	std::pair<double, double> coords = c[cpn]; // Get co-ordinates associated with checkpoint name
+	// 	a.push_back(coords);
+	// }
+	std::vector<std::string> a;
 
 	for (int i=0; i<path.size(); i++) {
-		// Get the vertex name from the graph's property map
-		std::string cpn = boost::get(vertex_name_t(), g, path[i]); // adjacency_list vertex_descriptors are ints
-		std::pair<double, double> coords = c[cpn]; // Get co-ordinates associated with checkpoint name
-		a.push_back(coords);
+		a.push_back(boost::get(vertex_name_t(), g, path[i])); // Add checkpoint name
 	}
 	
 	std::reverse(a.begin(), a.end()); // as search starts from goal; we can access only predecessors, not successors
@@ -164,16 +170,10 @@ void CheckPointGraph::checkpointMap() {
 }
 
 /**
-*	@brief Wrapper for shortest path function that returns the path as doubles.
-*	@param start The name of the start checkpoint
-*	@param end The name of the end checkpoint
-*	@returns The shortest path between the two points as pairs of doubles.
+*	@brief Gets the co-ordinates of a checkpoint given its name.
+*	@param checkPointName The name of the checkpoint
+*	@return The (x,y) co-ordinates of a checkpoint as a pair
 */
-std::vector<std::pair<double, double> > CheckPointGraph::shortestPathAsDoubles(std::string start, std::string end) {
-	std::vector<std::pair<double, double> > doublePath;
-	std::vector<std::pair<double, double> > path = CheckPointGraph::shortestPath(start, end);
-	for (int i=0; i<checkpointNum; i++) {
-		doublePath.push_back(path[i]); // Push each co-ordinate corresponding to the name in the path to the new path of doubles
-	}
-	return doublePath;
+std::pair<double, double> CheckPointGraph::getCoords(std::string checkPointName) {
+	return c[checkPointName];
 }

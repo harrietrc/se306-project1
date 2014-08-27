@@ -13,6 +13,6 @@ class CheckPointGraph {
 		}
 		void makeGraph();
 		void checkpointMap();
-		std::vector<std::pair<double, double> > shortestPath(std::string startName, std::string endName);
-		std::vector<std::pair<double, double> > shortestPathAsDoubles(std::string start, std::string end);
+		std::vector<std::string> shortestPath(std::string startName, std::string endName);
+		std::pair<double, double> getCoords(std::string checkPointName);
 };
