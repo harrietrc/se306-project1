@@ -58,7 +58,14 @@ void Assistant::delegate(se306_project1::ResidentMsg msg) {
 	// check msg if cook do cooking e.t.c
 	if (msg.state == "hungry") {
 		cook();
+	}
 
+	if (msg.state == "bored") {
+		entertain();
+	}
+
+	if (msg.state == "") {
+		cook();
 	}
 
 }

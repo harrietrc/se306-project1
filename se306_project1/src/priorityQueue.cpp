@@ -31,7 +31,7 @@ bool priorityQueue::isStateInPQ(residentStates currentState) {
 		if (PQ.at(i).state == currentState) {
 			return true;
 		}
-		if (i > 7 ) {
+		if (i > 8 ) {
 			break;
 		}
 	}
@@ -44,10 +44,30 @@ residentStates priorityQueue::checkCurrentState() {
 	return PQ.back().state;
 }
 
+void priorityQueue::removeState(residentStates unwantedState) {
+
+	if (!isStateInPQ(unwantedState)) {
+		return;
+	}
+	for (unsigned i=0; i<PQ.size();i++) {
+		if (PQ.at(i).state == unwantedState) {
+			PQ.erase(PQ.begin() + i);
+			return;
+		}
+	}
+
+}
+
 void priorityQueue::addToPQ(residentStates currentState) {
 	if (isStateInPQ(currentState)) { // if state is in PQ, don't add again
 		return;
 	}
+
+	if (currentState == emergency) {
+		removeState(healthLow);
+	}
+
+
 
 	statusObj currResidentStatus;
 	currResidentStatus.state = currentState;
@@ -63,17 +83,20 @@ void priorityQueue::addToPQ(residentStates currentState) {
 	case (caregiver):
 			currResidentStatus.priority = 3;
 			break;
-	case (friends):
+	case(medication):
 			currResidentStatus.priority = 4;
 			break;
-	case (hunger):
+	case (friends):
 			currResidentStatus.priority = 5;
 			break;
-	case (tired):
+	case (hunger):
 			currResidentStatus.priority = 6;
 			break;
-	case (bored):
+	case (tired):
 			currResidentStatus.priority = 7;
+			break;
+	case (bored):
+			currResidentStatus.priority = 8;
 			break;
 	case (idle):
 			break;
@@ -99,7 +122,7 @@ void priorityQueue::addToPQ(residentStates currentState) {
 
 				}
 
-				if (i > 7 ) {
+				if (i > 8 ) {
 					break;
 				}
 

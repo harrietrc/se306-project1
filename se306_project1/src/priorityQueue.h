@@ -9,7 +9,7 @@
 #define PRIORITYQUEUE_H_
 
 
-enum residentStates {hunger,healthLow,bored,emergency,tired,caregiver,friends,idle};
+enum residentStates {hunger,healthLow,bored,emergency,tired,caregiver,friends,medication,idle};
 
 
 class priorityQueue {
@@ -21,6 +21,7 @@ public:
 	residentStates checkCurrentState();
 private:
 	bool isStateInPQ(residentStates currentState);
+	void removeState(residentStates unwantedState);
 
 };
 
