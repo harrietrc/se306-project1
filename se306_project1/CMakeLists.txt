@@ -29,8 +29,8 @@ rosbuild_genmsg()
 #rosbuild_add_executable(example examples/example.cpp)
 #target_link_libraries(example ${PROJECT_NAME})
 
-rosbuild_add_executable(Resident src/Resident.cpp src/time_conversion.cpp)
-rosbuild_add_executable(Assistant src/Assistant.cpp src/time_conversion.cpp)
+#rosbuild_add_executable(Resident src/Resident.cpp src/time_conversion.cpp)
+#rosbuild_add_executable(Assistant src/Assistant.cpp src/time_conversion.cpp)
 rosbuild_add_executable(Doctor src/Doctor.cpp)
 #rosbuild_add_executable(Caregiver src/Caregiver.cpp)
 #rosbuild_add_executable(Friend src/Friend.cpp)
@@ -38,7 +38,7 @@ rosbuild_add_executable(Doctor src/Doctor.cpp)
 #rosbuild_add_executable(Relative src/Relative.cpp)
 
 #gtest
-rosbuild_add_gtest(test/utest bin/test/utest.cpp)
+rosbuild_add_gtest(utest test/utest.cpp)
 
 #rosbuild_add_executable(R0 src/R0.cpp src/time_conversion.cpp)
 #rosbuild_add_executable(R0 src/R0.cpp)
