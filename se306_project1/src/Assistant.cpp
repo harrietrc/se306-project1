@@ -33,7 +33,7 @@ void Assistant::medicate() {
 			isMedicated == true;
 		}
 	}else if (isMedicated) {
-		move(homeCentre);
+		move("HouseCentre");
 	}
 
 }
@@ -50,7 +50,7 @@ void Assistant::cook() {
 
 	if (!atKitchen && !finishedCooking) {
 
-		//move("KitchenNorthWest");
+		move("KitchenNorthWest");
 		if (distanceFromCheckpoint < 0.5) {
 			atKitchen = true;
 			pair<double, double> p1 = make_pair(4,-24);
@@ -172,6 +172,8 @@ int Assistant::run(int argc, char **argv)
 	////messages
 	//velocity of this RobotNode
 	geometry_msgs::Twist RobotNode_cmdvel;
+
+	move("HouseCentre");
 
 	while (ros::ok())
 	{

@@ -2,6 +2,8 @@
 #include <boost/graph/graphviz.hpp> // Good for debugging, but take out for final build.
 #include "boost/graph/breadth_first_search.hpp"
 #include "CheckPointGraph.hpp"
+#include <boost/bimap/bimap.hpp>
+#include <boost/bimap/set_of.hpp>
 
 using namespace boost; // Useful for graphs
 
@@ -31,7 +33,7 @@ std::vector<std::string> checkpointNames(begin(nameArr), end(nameArr)); /*!< Vec
 typedef property<vertex_name_t, std::string> VertexProperty; /*!<  Will allow us to retrieve vertex names from vertex references */
 typedef adjacency_list <vecS, vecS, undirectedS, VertexProperty> vector_graph_t; /*!< Graph of checkpoint names */
 const int checkpointNum = checkpointNames.size(); /*!< Number of checkpoints. */
-vector_graph_t g(checkpointNum); // Our graph
+vector_graph_t g(checkpointNum); // Our map
 std::map<std::string, vector_graph_t::vertex_descriptor> indices; /*!< Map that corresponds checkpoint names to the vertices in the graph. */
 
 /* -- Edges -- */
@@ -56,10 +58,30 @@ E paths[] = {
 
 /* -- Map of names to co-ordinates -- */
 
+// // typedef std::string CheckpointName; // Key
+// // typedef std::pair<int, int> Checkpoint; // Value
+// typedef boost::bimaps::bimap< boost::bimaps::set_of<std::string>, boost::bimaps::set_of<std::pair<int, int> > > CheckpointMap;
+// CheckpointMap c;
+
+// typedef CheckpointMap::left_map CheckpointNames;
+// CheckpointNames& names = c.left;
+// typedef CheckpointNames::value_type CheckpointName;
+// typedef CheckpointNames::const_iterator CheckpointNamesIterator;
+
+// typedef CheckpointMap::right_map CheckpointCoords;
+// CheckpointCoords& coords = c.right;
+// typedef CheckpointCoords::value_type CheckpointCoord;
+// typedef CheckpointCoords::const_iterator CheckpointCoordsIterator;
+
+/* -- Temporary solution - two maps of co-ordinates to names and names to co-ordinates --*/
+
 typedef std::string CheckpointName; // Key
 typedef std::pair<int, int> Checkpoint; // Value
 typedef std::map<CheckpointName, Checkpoint> CheckpointMap; /*!< Map with checkpoint names as keys and checkpoint co-ordinates as values */
 CheckpointMap c;
+
+typedef std::map<Checkpoint, CheckpointName> CheckpointMapReverse; /*!< Map with checkpoint names as keys and checkpoint co-ordinates as values */
+CheckpointMapReverse crev;
 
 /* -- Pathing -- */
 
@@ -106,13 +128,17 @@ std::vector<std::pair<double, double> > CheckPointGraph::shortestPath(std::strin
 	for (int i=0; i<path.size(); i++) {
 		// Get the vertex name from the graph's property map
 		std::string cpn = boost::get(vertex_name_t(), g, path[i]); // adjacency_list vertex_descriptors are ints
-		std::pair<double, double> coords = c[cpn]; // Get co-ordinates associated with checkpoint name
+		std::pair<double, double> coords = c.at(cpn); // Get co-ordinates associated with checkpoint name
 		a.push_back(coords);
 	}
 	
 	std::reverse(a.begin(), a.end()); // as search starts from goal; we can access only predecessors, not successors
 
     return a;
+}
+
+std::string CheckPointGraph::getCheckpointName(std::pair<double, double> cpcoords) {
+	return crev.at(cpcoords);
 }
 
 /**
@@ -158,22 +184,10 @@ void CheckPointGraph::checkpointMap() {
 
 	// Add checkpoint name and checkpoint co-ordinates to the map
 	for (int i=0; i<checkpointNum; i++) {
+		//names.insert(CheckpointNames(checkpointNames[i], vec[i]));
 		c.insert(std::make_pair(CheckpointName(checkpointNames[i]), Checkpoint(vec[i])));
+		crev.insert(std::make_pair(Checkpoint(vec[i]), CheckpointName(checkpointNames[i])));
 	}
 
 }
 
-/**
-*	@brief Wrapper for shortest path function that returns the path as doubles.
-*	@param start The name of the start checkpoint
-*	@param end The name of the end checkpoint
-*	@returns The shortest path between the two points as pairs of doubles.
-*/
-std::vector<std::pair<double, double> > CheckPointGraph::shortestPathAsDoubles(std::string start, std::string end) {
-	std::vector<std::pair<double, double> > doublePath;
-	std::vector<std::pair<double, double> > path = CheckPointGraph::shortestPath(start, end);
-	for (int i=0; i<checkpointNum; i++) {
-		doublePath.push_back(path[i]); // Push each co-ordinate corresponding to the name in the path to the new path of doubles
-	}
-	return doublePath;
-}

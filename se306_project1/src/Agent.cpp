@@ -59,20 +59,22 @@ void Agent::StageOdom_callback(nav_msgs::Odometry msg) {
 *	@param end The name of the end checkpoint
 */
 void Agent::setPath(std::string start, std::string end) {
-	shortestPath = g.shortestPathAsDoubles(start, end);
+	shortestPath = g.shortestPath(start, end);
 	shortestPathIndex = 0;
 }
 
 
 void Agent::move(std::string goalName){
 
-
 	if (isMoving == false){
 		isMoving = true;
 		currentCheckpoint.first = 32; // can get rid of this
 		currentCheckpoint.second = 20; // ditto
 		//Get the path stuff
-		Agent::setPath(originName, goalName);
+		std::string cname = g.getCheckpointName(currentCheckpoint);
+		ROS_INFO(cname.c_str());
+		ROS_INFO("hi!");
+		Agent::setPath(cname, goalName);
 	}
 
 	pair<double, double> nextCheckpoint = shortestPath.at(shortestPathIndex);
