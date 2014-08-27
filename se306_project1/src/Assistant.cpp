@@ -172,6 +172,7 @@ int Assistant::run(int argc, char **argv)
 	////messages
 	//velocity of this RobotNode
 	geometry_msgs::Twist RobotNode_cmdvel;
+	move("HouseCentre");
 
 	while (ros::ok())
 	{
@@ -196,5 +197,6 @@ int Assistant::run(int argc, char **argv)
 */
 int main(int argc, char *argv[]) {
 	Assistant *a = new Assistant();
+	//setOriginName(argc, argv[0]); // Set the name of the starting checkpoint
 	a->Assistant::run(argc, argv);
 }

@@ -40,7 +40,7 @@ class Agent
 
 	protected:
 		// Sets origin name
-		void setOriginName();
+		void setOriginName(int agentNum, char* agentName);
 
 		void setPath(std::string start, std::string end);
 
