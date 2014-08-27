@@ -11,6 +11,7 @@
 #include <stdlib.h>
 #include <sstream>
 #include <vector>
+#include "CheckPointGraph.hpp"
 
 /**
 *	@brief Superclass for all 'agents' - i.e. Assistants, Visitors, and the Resident.
@@ -33,12 +34,22 @@ class Agent
 			checkpointAngle = 0;
 			isClockwise = true;
 			robot_id = 0;
-
 		}
 
 		void StageOdom_callback(nav_msgs::Odometry msg);
 
 	protected:
+		// Sets origin name
+		void setOriginName();
+
+		void setPath(std::string start, std::string end);
+
+		// Checkpoint graph object
+		CheckPointGraph g;
+
+		// The name of this agent's origin checkpoint
+		std::string originName = "Assistant1Origin"; //Temporary!
+
 		//velocity of the robot
 		double linear_x; /*!< Linear velocity of the robot */
 		double angular_z; /*!< Angular velocity of the robot */
@@ -67,7 +78,7 @@ class Agent
 		void turn();
 		void moveForward(std::pair<double,double> nextCheckpoint);
 		double calculateGoalAngle(std::pair<double,double> goalCheckpoint);
-		void move();
+		void move(std::string goal);
 		bool isTurnClockwise();
 
 		/* -- Communication and co-ordination -- */

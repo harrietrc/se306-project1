@@ -14,14 +14,20 @@
 
 using namespace std;
 
+/**
+*	@note we need a way to get the start co-ordinates of the agent, whether from stage or from the world file (if possible)
+*	and so set the origin name to the correct one for that node.
+*/
+void Agent::setOriginName() {
+	
+}
+
 /* -- Stage callbacks -- */
 
 /**
  *	@brief Updates the agent's x position, y position, and angle to reflect its current pose.
  *	@param msg Odometry message from odom topic
  */
-
-
 void Agent::StageOdom_callback(nav_msgs::Odometry msg) {
 
 
@@ -39,7 +45,7 @@ void Agent::StageOdom_callback(nav_msgs::Odometry msg) {
 	py = msg.pose.pose.position.y;
 
 	if (isMoving == true){
-		move();
+		move(originName);
 	}
 }
 
@@ -47,16 +53,26 @@ void Agent::StageOdom_callback(nav_msgs::Odometry msg) {
  * MOVE METHODS {START}
  */
 
+/**
+*	@brief Sets the path for the agent.
+*	@param start The name of the start checkpoint
+*	@param end The name of the end checkpoint
+*/
+void Agent::setPath(std::string start, std::string end) {
+	shortestPath = g.shortestPathAsDoubles(start, end);
+	shortestPathIndex = 0;
+}
 
 
-void Agent::move(){
+void Agent::move(std::string goalName){
 
 
 	if (isMoving == false){
 		isMoving = true;
-		currentCheckpoint.first = 30;
-		currentCheckpoint.second = 25;
+		currentCheckpoint.first = 32; // can get rid of this
+		currentCheckpoint.second = 20; // ditto
 		//Get the path stuff
+		Agent::setPath(originName, goalName);
 	}
 
 	pair<double, double> nextCheckpoint = shortestPath.at(shortestPathIndex);
