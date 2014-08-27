@@ -40,6 +40,10 @@ bool priorityQueue::isStateInPQ(residentStates currentState) {
 }
 
 
+residentStates priorityQueue::checkCurrentState() {
+	return PQ.back().state;
+}
+
 void priorityQueue::addToPQ(residentStates currentState) {
 	if (isStateInPQ(currentState)) { // if state is in PQ, don't add again
 		return;

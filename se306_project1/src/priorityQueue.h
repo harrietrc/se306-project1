@@ -18,6 +18,7 @@ public:
 	virtual ~priorityQueue();
 	void addToPQ(residentStates currentState);
 	residentStates popFromPQ();
+	residentStates checkCurrentState();
 private:
 	bool isStateInPQ(residentStates currentState);
 

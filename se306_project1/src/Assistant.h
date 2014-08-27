@@ -18,10 +18,9 @@ class Assistant : public Agent
 		
 
 	protected:
-		bool doMedication(const ros::TimerEvent&);
-		bool doCooking();
-		bool doCleaning();
-		bool doEntertainment();
-		bool coordinate();
+		void doMedication(const ros::TimerEvent&);
+		void doCooking();
+		void doCleaning();
+		void doEntertainment();
 
 };
