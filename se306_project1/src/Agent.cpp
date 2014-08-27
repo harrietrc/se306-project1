@@ -59,26 +59,27 @@ void Agent::StageOdom_callback(nav_msgs::Odometry msg) {
 *	@param end The name of the end checkpoint
 */
 void Agent::setPath(std::string start, std::string end) {
-	shortestPath = g.shortestPathAsDoubles(start, end);
+	shortestPath = g.shortestPath(start, end);
 	shortestPathIndex = 0;
 }
 
 
 void Agent::move(std::string goalName){
 
+	std::string nextCheckpoint = shortestPath.at(shortestPathIndex);
+	std::pair<double, double> currentCheckpointCoords = g.getCoords(currentCheckpoint);
+	std::pair<double, double> nextCheckpointCoords = g.getCoords(nextCheckpoint);
 
 	if (isMoving == false){
 		isMoving = true;
-		currentCheckpoint.first = 32; // can get rid of this
-		currentCheckpoint.second = 20; // ditto
+		currentCheckpointCoords.first = 32; // can get rid of this
+		currentCheckpointCoords.second = 20; // ditto
 		//Get the path stuff
-		Agent::setPath(originName, goalName);
+		Agent::setPath(currentCheckpoint, goalName);
 	}
 
-	pair<double, double> nextCheckpoint = shortestPath.at(shortestPathIndex);
-
-	if (currentCheckpoint.first == nextCheckpoint.first &&
-			currentCheckpoint.second == nextCheckpoint.second){
+	if (currentCheckpointCoords.first == nextCheckpointCoords.first &&
+			currentCheckpointCoords.second == nextCheckpointCoords.second){
 
 		shortestPathIndex++;
 		if (shortestPathIndex >= shortestPath.size()){
@@ -88,7 +89,7 @@ void Agent::move(std::string goalName){
 		}else{
 			nextCheckpoint = shortestPath.at(shortestPathIndex);
 
-			checkpointAngle = calculateGoalAngle(nextCheckpoint);
+			checkpointAngle = calculateGoalAngle(nextCheckpointCoords);
 			//ROS_INFO("Goal Angle: %f", checkpointAngle);
 
 			isClockwise = isTurnClockwise();
@@ -144,12 +145,13 @@ void Agent::turn(){
 
 
 
-void Agent::moveForward(pair<double,double> nextCheckpoint){
+void Agent::moveForward(std::string nextCheckpoint){
 
 	linear_x = 5;
 	double minLinearX = 1.5;
+	std::pair<double, double> nextCheckpointCoords = g.getCoords(nextCheckpoint);
 
-	double distanceFromCheckpoint = sqrt(pow((nextCheckpoint.first - px),2) + pow((nextCheckpoint.second - py),2));
+	double distanceFromCheckpoint = sqrt(pow((nextCheckpointCoords.first - px),2) + pow((nextCheckpointCoords.second - py),2));
 
 	// Check to ensure that linear velocity doesn't decrease if the distance between the checkpoints is higher than 40.
 	double distanceRatio = (distanceFromCheckpoint / 40);

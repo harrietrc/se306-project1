@@ -26,8 +26,8 @@ class Agent
 			px = 0;
 			py = 0;
 			currentAngle = 0;
-			currentCheckpoint = std::make_pair(0,0); // Needs to be initialised in subclasses!!
-			shortestPath.push_back(currentCheckpoint); // Needs to be removed later!!
+			// currentCheckpoint = std::make_pair(0,0); // Needs to be initialised in subclasses!!
+			// shortestPath.push_back(currentCheckpoint); // Needs to be removed later!!
 			isMoving = false;
 			isFacingCorrectly = false;
 			shortestPathIndex = 0;
@@ -40,7 +40,7 @@ class Agent
 
 	protected:
 		// Sets origin name
-		void setOriginName();
+		virtual void setOriginName();
 
 		void setPath(std::string start, std::string end);
 
@@ -60,10 +60,10 @@ class Agent
 		double currentAngle; /*!< angle of the robot*/
 
 		//current checkpoint
-		std::pair<double, double> currentCheckpoint;
+		std::string currentCheckpoint;
 
 		//shortestPath
-		std::vector <std::pair<double,double> > shortestPath;
+		std::vector <std::string> shortestPath;
 		int shortestPathIndex;
 		bool isFacingCorrectly;
 
@@ -76,7 +76,7 @@ class Agent
 		bool isClockwise;
 
 		void turn();
-		void moveForward(std::pair<double,double> nextCheckpoint);
+		void moveForward(std::string nextCheckpoint);
 		double calculateGoalAngle(std::pair<double,double> goalCheckpoint);
 		void move(std::string goal);
 		bool isTurnClockwise();
