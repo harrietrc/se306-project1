@@ -27,7 +27,7 @@ class Agent
 			currentAngle = 0;
 			currentCheckpoint = std::make_pair(0,0); // Needs to be initialised in subclasses!!
 			shortestPath.push_back(currentCheckpoint); // Needs to be removed later!!
-			isMoving = true;
+			isMoving = false;
 			isFacingCorrectly = false;
 			shortestPathIndex = 0;
 			checkpointAngle = 0;
