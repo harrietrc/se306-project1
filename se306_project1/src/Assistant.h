@@ -29,5 +29,7 @@ class Assistant : public Agent
 		bool atKitchen = false;
 		bool finishedCooking = false;
 
+		bool atBedroom = false;
+		bool residentEntertained = false;
 
 };

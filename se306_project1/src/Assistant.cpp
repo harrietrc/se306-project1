@@ -29,11 +29,12 @@ void Assistant::medicate(const ros::TimerEvent&) {
 *	@returns true if behaviour was successful, false otherwise
 */
 void Assistant::cook() {
-/*
+
 	if (!atKitchen && !finishedCooking) {
 
-		/*move(kitchenCheckpoint);
-		if (px == kitchenCheckpoint.first && py == kitchenCheckpoint.second) {
+		//move("KitchenNorthWest");
+		if (px == shortestPath.at(shortestPath.size()-1).first &&
+			py == shortestPath.at(shortestPath.size()-1).second) {
 			atKitchen = true;
 			pair<double, double> p1 = make_pair(4,-24);
 			pair<double, double> p2 = make_pair(24,-24);
@@ -56,18 +57,19 @@ void Assistant::cook() {
 	} else if (atKitchen && !finishedCooking) {
 
 		// The path to simulate the cooking behaviour in the kitchen
-		if (px == 4 && py == -24) { // final kitchen points (refer to point 6)
+		if (px == 4 && py == -24) { // Final kitchen points (refer to p6)
 			finishedCooking = true;
 		}
 
 	} else if (atKitchen && finishedCooking) {
-		//move(home);
-		/*if (px == home.first && px == home.second) {
+
+		//move("HouseCentre");
+		if (px == shortestPath.at(shortestPath.size()-1).first &&
+			py == shortestPath.at(shortestPath.size()-1).second) {
 			atKitchen = false;
 			finishedCooking = false;
 		}
 	}
-	*/
 }
 
 
@@ -76,6 +78,7 @@ void Assistant::cook() {
 *	@returns true if behaviour was successful, false otherwise
 */
 void Assistant::clean() {
+
 }	
 
 /**
@@ -83,6 +86,17 @@ void Assistant::clean() {
 *	@returns true if behaviour was successful, false otherwise
 */
 void Assistant::entertain() {
+	if (!atBedroom && !residentEntertained) {
+		//move("BedSouthWest");
+		if (px == shortestPath.at(shortestPath.size()-1).first && py == shortestPath.at(shortestPath.size()-1).first) {
+			atBedroom = true;
+		}
+	} else if (atBedroom && !residentEntertained) {
+		//spin around
+		//if done spinning around, isEntertained = true;
+	} else if (atBedroom && residentEntertained) {
+		//move("HouseCentre");
+	}
 }
 
 
