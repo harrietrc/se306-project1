@@ -11,6 +11,7 @@
 #include <cmath>
 #include <stdlib.h>
 #include "Resident.h"
+#include "priorityQueue.h"
 
 using namespace std;
 //PriorityQueue *status_queue = PriorityQueue::getInstance();
@@ -60,6 +61,9 @@ int Resident::run(int argc, char *argv[]) {
 
 	pair<double, double> c1 = make_pair(40,30);
 	pair<double, double> c2 = make_pair(30,40);
+
+	//priorityQueue myQueue;
+	//	myQueue.addToPQ(bored);
 
 	shortestPath.push_back(c1);
 	shortestPath.push_back(c2);
