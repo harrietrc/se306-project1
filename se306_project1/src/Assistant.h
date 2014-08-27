@@ -19,17 +19,18 @@ class Assistant : public Agent
 
 	private:
 		// functions
-		void medicate(const ros::TimerEvent&);
+		void medicate();
 		void cook();
 		void clean();
 		void entertain();
 		void delegate(se306_project1::ResidentMsg msg);
 
-		// variables
+		// Boolean variables
 		bool atKitchen = false;
 		bool finishedCooking = false;
 
 		bool atBedroom = false;
 		bool residentEntertained = false;
 
+		bool isMedicated = false;
 };
