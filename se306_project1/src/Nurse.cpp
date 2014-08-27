@@ -3,9 +3,47 @@
 #include <geometry_msgs/Twist.h>
 #include <nav_msgs/Odometry.h>
 #include <sensor_msgs/LaserScan.h>
+#include "se306_project1/ResidentMsg.h"
 #include <sstream>
 #include "math.h"
 #include "Nurse.h"
+
+/**
+*	@brief Callback function that unpacks and processes resident status messages.
+*	Nurse should subscribe to the ResidentMsg topic in order for this callback to be called. ResidentMsg is published by the Resident.
+*	@param msg A custom ResidentMsg message that contains information about the resident's current status.
+*/
+void Nurse::delegate(se306_project1::ResidentMsg msg) {
+	if (msg.state == "sill") { // seriously ill - emergency
+		doHospitalise();
+	} else {
+		readyToHospitalise = false;
+	}
+}
+
+/**
+*	@brief Takes the resident to hospital 
+*	(non-doctor-induced emergency, despite the function name...)
+*/
+void Nurse::doHospitalise() {
+
+	double lastCheckpointX = g.getCoords(shortestPath.at(shortestPath.size()-1)).first;
+	double lastCheckpointY = g.getCoords(shortestPath.at(shortestPath.size()-1)).second;
+
+	double distanceFromCheckpoint = sqrt(pow((lastCheckpointX - px),2) + pow((lastCheckpointY - py),2));
+	
+	if (readyToHospitalise == false) {
+		// move(<toResident>);
+		if (distanceFromCheckpoint < 0.5) { // next to resident
+			readyToHospitalise = true;
+		}
+	}
+	
+	if (readyToHospitalise == true) { // go back outside once Nurse is next to resident
+		// move(<outsideHouse>);
+	}
+
+}
 
 /**
 *	@brief Main function for the Nurse process.
@@ -30,6 +68,9 @@ int Nurse::run(int argc, char *argv[])
 	//advertise() function will tell ROS that you want to publish on a given topic_
 	//to stage
 	ros::Publisher RobotNode_stage_pub = n.advertise<geometry_msgs::Twist>("robot_0/cmd_vel",1000); 
+
+	// Nurse subscribes to the Resident status topic
+	ros::Subscriber resident_sub = n.subscribe<se306_project1::ResidentMsg>("residentStatus",1000, &Nurse::delegate, this);
 
 	//subscribe to listen to messages coming from stage
 	ros::Subscriber StageOdo_sub = n.subscribe("robot_0/odom",1000, &Agent::StageOdom_callback, dynamic_cast<Agent*>(this));
