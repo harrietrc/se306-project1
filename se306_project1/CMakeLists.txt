@@ -15,7 +15,6 @@ rosbuild_init()
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 #set the default path for built libraries to the "lib" directory
 set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
-
 #uncomment if you have defined messages
 rosbuild_genmsg()
 #uncomment if you have defined services
@@ -29,6 +28,7 @@ rosbuild_genmsg()
 #rosbuild_add_executable(example examples/example.cpp)
 #target_link_libraries(example ${PROJECT_NAME})
 
+<<<<<<< Updated upstream
 #rosbuild_add_executable(Resident src/Resident.cpp src/time_conversion.cpp)
 #rosbuild_add_executable(Assistant src/Assistant.cpp src/time_conversion.cpp)
 rosbuild_add_executable(Doctor src/Doctor.cpp)
@@ -39,6 +39,18 @@ rosbuild_add_executable(Doctor src/Doctor.cpp)
 
 #gtest
 rosbuild_add_gtest(utest test/utest.cpp)
+=======
+#rosbuild_add_executable(rosGUI src/rosGUI.py)
+#set_target_properties(rosGUI PROPERTIES LINKER_LANGUAGE python)
+rosbuild_add_executable(Resident src/Resident.cpp src/time_conversion.cpp src/Agent.cpp src/CheckPointGraph.cpp src/priorityQueue.cpp)
+rosbuild_add_executable(Assistant src/Assistant.cpp src/time_conversion.cpp src/Agent.cpp src/CheckPointGraph.cpp)
+#rosbuild_add_executable(Doctor src/Doctor.cpp src/Agent.cpp src/CheckPointGraph.cpp)
+#rosbuild_add_executable(Caregiver src/Caregiver.cpp src/Agent.cpp src/CheckPointGraph.cpp)
+#rosbuild_add_executable(Friend src/Friend.cpp src/Agent.cpp src/CheckPointGraph.cpp)
+#rosbuild_add_executable(Nurse src/Nurse.cpp src/Agent.cpp src/CheckPointGraph.cpp)
+#rosbuild_add_executable(Relative src/Relative.cpp src/Agent.cpp src/CheckPointGraph.cpp)
+
+>>>>>>> Stashed changes
 
 #rosbuild_add_executable(R0 src/R0.cpp src/time_conversion.cpp)
 #rosbuild_add_executable(R0 src/R0.cpp)
