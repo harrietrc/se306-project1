@@ -7,7 +7,10 @@ using namespace boost; // Useful for graphs
 
 /** Array of the names of checkpoints. Necessary for the initialisation of the checkpoints vector. */
 const char* nameArr[] = { 
-		"cp0","cp1", "cp2"
+		"FrontDoorLeft","FrontDoorRight","LivingRoomNorthWest","LivingRoomNorthEast","CentrePassageSouth","CentrePassageNorth",
+		"KitchenNorthWest","KitchenSouthWest","KitchenSouthEast","KitchenNorthEast","HouseCentre","CentreStool","NextToCentreStool",
+		"BedroomEntranceWest","BedroomEntranceEast","CouchesNorthEast","CouchesNorthCentre","BathroomEntranceWest","BathroomEntranceEast",
+		"Shower","BathroomCentre","BedSouthWest","BedSouthEast","BedNorthEast"
 };
 
 /**
@@ -15,17 +18,8 @@ const char* nameArr[] = {
 * 	Gives x position and y position for each co-ordinate
 */
 int checkpoints[11][2] = {  
-	{30, 25},
-	{30, 7}, 
-	{40, 7},
-	{40, 8},
-	{38,8},
-	{38,7},
-	{40,7},
-	{30,7},
-	{30, 25},
-	{34,20},
-	{30, 25}
+	{-27,-40},{-20,-40},{-24,-12},{-18,-18},{0,-18},{0,-12},{6,-24},{6,-28},{24,-28},{24,-24},{0,6},{24,-10},{20,-6},{0,22},
+	{0,22},{6,22},{-6,18},{-24,18},{-26,22},{-18,22},{-32,45},{-24,36},{6,30},{26,30},{30.45}
 };
 
 std::vector<std::string> checkpointNames(begin(nameArr), end(nameArr)); /*!< Vector of checkpoint names. See nameArr[]. */
@@ -41,7 +35,18 @@ std::map<std::string, vector_graph_t::vertex_descriptor> indices; /*!< Map that 
 /* -- Edges -- */
 
 typedef std::pair <std::string, std::string> E;
-E paths[] = { E ("cp0", "cp1"), E ("cp1", "cp2")}; /*!< Defines edges between checkpoints */
+E paths[] = {
+	 E("FrontDoorLeft","LivingRoomNorthWest"), E("FrontDoorRight", "LivingRoomNorthEast"), E("LivingRoomNorthWest","CentrePassageNorth"),
+	 E("LivingRoomNorthEast","CentrePassageSouth"), E("CentrePassageNorth","KitchenNorthWest"), E("CentrePassageSouth","KitchenNorthWest"),
+	 E("KitchenNorthWest","KitchenNorthEast"), E("KitchenNorthEast","KitchenSouthEast"), E("KitchenSouthEast","KitchenSouthWest"),
+	 E("KitchenSouthWest","KitchenNorthWest"), E("CentrePassageSouth","NextToCentreStool"), E("CentrePassageNorth","NextToCentreStool"),
+	 E("NextToCentreStool","CentreStool"), E("NextToCentreStool","HouseCentre"), E("CentrePassageNorth","HouseCentre"),
+	 E("CentrePassageNorth","HouseCentre"), E("HouseCentre", "CouchesNorthEast"), E("CouchesNorthEast","CouchesNorthCentre"),
+	 E("CouchesNorthEast","BedroomEntranceEast"), E("CouchesNorthEast","BedroomEntranceWest"), E("CouchesNorthCentre","BathroomEntranceEast"),
+	 E("CouchesNorthCentre","BedroomEntranceWest"), E("BathroomEntranceEast","BathroomCentre"), E("BathroomEntranceWest","BathroomCentre"),
+	 E("BathroomCentre","Shower"), E("BedroomEntranceWest","BedSouthWest"), E("BedroomEntranceEast","BedSouthEast"), 
+	 E("BedSouthEast","BedNorthEast")
+}; /*!< Defines edges between checkpoints */
 
 /* -- Map of names to co-ordinates -- */
 
