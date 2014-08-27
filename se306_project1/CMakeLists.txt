@@ -37,6 +37,7 @@ rosbuild_add_executable(Doctor src/Doctor.cpp src/Agent.cpp src/CheckPointGraph.
 #rosbuild_add_executable(Friend src/Friend.cpp src/Agent.cpp src/CheckPointGraph.cpp)
 rosbuild_add_executable(Nurse src/Nurse.cpp src/Agent.cpp src/CheckPointGraph.cpp)
 #rosbuild_add_executable(Relative src/Relative.cpp src/Agent.cpp src/CheckPointGraph.cpp)
+rosbuild_add_executable(Visitor src/Visitor.cpp src/Agent.cpp src/time_conversion.cpp src/CheckPointGraph.cpp)
 
 
 #rosbuild_add_executable(R0 src/R0.cpp src/time_conversion.cpp)
