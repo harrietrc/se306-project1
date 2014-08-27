@@ -7,11 +7,13 @@
 class Visitor : public Agent {
 
 	protected:
-		void visitResident();
-		void doTimedVisit(const ros::TimerEvent&);
+		bool emergency = false; // required if timing/scheduling is done within this class
+		bool finishedConvo = false;
+
+		bool visitResident();
 		bool doConverse();
-		virtual int run(int argc, char *argv[]) = 0; 
+		virtual void delegate(se306_project1::ResidentMsg msg) = 0;
 
 	public:
-
+		virtual int run(int argc, char *argv[]) = 0; 
 };
