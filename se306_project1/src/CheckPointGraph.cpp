@@ -7,10 +7,11 @@ using namespace boost; // Useful for graphs
 
 /** Array of the names of checkpoints. Necessary for the initialisation of the checkpoints vector. */
 const char* nameArr[] = { 
-		"FrontDoorLeft","FrontDoorRight","LivingRoomNorthWest","LivingRoomNorthEast","CentrePassageSouth","CentrePassageNorth",
+		"FrontDoorWest","FrontDoorEast","LivingRoomNorthWest","LivingRoomNorthEast","CentrePassageSouth","CentrePassageNorth",
 		"KitchenNorthWest","KitchenSouthWest","KitchenSouthEast","KitchenNorthEast","HouseCentre","CentreStool","NextToCentreStool",
 		"BedroomEntranceWest","BedroomEntranceEast","CouchesNorthEast","CouchesNorthCentre","BathroomEntranceWest","BathroomEntranceEast",
-		"Shower","BathroomCentre","BedSouthWest","BedSouthEast","BedNorthEast"
+		"Shower","BathroomCentre","BedSouthWest","BedSouthEast","BedNorthEast","ResidentOrigin", "Assistant1Origin", "Assistant2Origin",
+		"DoctorOrigin","Nurse1Origin","Nurse2Origin","CaregiverOrigin","Friend1Origin","Friend2Origin","Friend3Origin"
 };
 
 /**
@@ -19,7 +20,8 @@ const char* nameArr[] = {
 */
 int checkpoints[][2] = {
 	{-27,-40},{-20,-40},{-24,-12},{-18,-18},{0,-18},{0,-12},{6,-24},{6,-28},{24,-28},{24,-24},{0,6},{24,-10},{20,-6},{0,22},
-	{0,22},{6,22},{-6,18},{-24,18},{-26,22},{-18,22},{-32,45},{-24,36},{6,30},{26,30},{30.45}
+	{0,22},{6,22},{-6,18},{-24,18},{-26,22},{-18,22},{-32,45},{-24,36},{6,30},{26,30},{30,45},
+	{26,48}, {32,20}, {32,18}, {-33,-46}, {-36,-48}, {-30,-48}, {-8,-46}, {-20,-46}, {-23,-46}, {-20,-48}
 };
 
 std::vector<std::string> checkpointNames(begin(nameArr), end(nameArr)); /*!< Vector of checkpoint names. See nameArr[]. */
@@ -36,7 +38,7 @@ std::map<std::string, vector_graph_t::vertex_descriptor> indices; /*!< Map that 
 
 typedef std::pair <std::string, std::string> E;
 E paths[] = {
-	 E("FrontDoorLeft","LivingRoomNorthWest"), E("FrontDoorRight", "LivingRoomNorthEast"), E("LivingRoomNorthWest","CentrePassageNorth"),
+	 E("FrontDoorWest","LivingRoomNorthWest"), E("FrontDoorEast", "LivingRoomNorthEast"), E("LivingRoomNorthWest","CentrePassageNorth"),
 	 E("LivingRoomNorthEast","CentrePassageSouth"), E("CentrePassageNorth","KitchenNorthWest"), E("CentrePassageSouth","KitchenNorthWest"),
 	 E("KitchenNorthWest","KitchenNorthEast"), E("KitchenNorthEast","KitchenSouthEast"), E("KitchenSouthEast","KitchenSouthWest"),
 	 E("KitchenSouthWest","KitchenNorthWest"), E("CentrePassageSouth","NextToCentreStool"), E("CentrePassageNorth","NextToCentreStool"),
@@ -45,7 +47,11 @@ E paths[] = {
 	 E("CouchesNorthEast","BedroomEntranceEast"), E("CouchesNorthEast","BedroomEntranceWest"), E("CouchesNorthCentre","BathroomEntranceEast"),
 	 E("CouchesNorthCentre","BedroomEntranceWest"), E("BathroomEntranceEast","BathroomCentre"), E("BathroomEntranceWest","BathroomCentre"),
 	 E("BathroomCentre","Shower"), E("BedroomEntranceWest","BedSouthWest"), E("BedroomEntranceEast","BedSouthEast"), 
-	 E("BedSouthEast","BedNorthEast")
+	 E("BedSouthEast","BedNorthEast"), E("Origin","BedSouthEast"),
+	 E("DoctorOrigin","FrontDoorWest"), E("Nurse1Origin","FrontDoorWest"), E("Nurse2Origin","FrontDoorWest"),
+	 E("Friend1Origin","FrontDoorEast"), E("Friend2Origin","FrontDoorEast"), E("Friend3Origin","FrontDoorEast"),
+	 E("CaregiverOrigin","FrontDoorEast"),
+	 E("Assistant1Origin","CouchesNorthEast"), E("Assistant2Origin","CouchesNorthEast"), E("ResidentOrigin","BedNorthEast")
 }; /*!< Defines edges between checkpoints */
 
 /* -- Map of names to co-ordinates -- */
@@ -155,4 +161,19 @@ void CheckPointGraph::checkpointMap() {
 		c.insert(std::make_pair(CheckpointName(checkpointNames[i]), Checkpoint(vec[i])));
 	}
 
+}
+
+/**
+*	@brief Wrapper for shortest path function that returns the path as doubles.
+*	@param start The name of the start checkpoint
+*	@param end The name of the end checkpoint
+*	@returns The shortest path between the two points as pairs of doubles.
+*/
+std::vector<std::pair<double, double> > CheckPointGraph::shortestPathAsDoubles(std::string start, std::string end) {
+	std::vector<std::pair<double, double> > doublePath;
+	std::vector<std::pair<double, double> > path = CheckPointGraph::shortestPath(start, end);
+	for (int i=0; i<checkpointNum; i++) {
+		doublePath.push_back(path[i]); // Push each co-ordinate corresponding to the name in the path to the new path of doubles
+	}
+	return doublePath;
 }
