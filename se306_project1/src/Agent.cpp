@@ -59,8 +59,17 @@ void Agent::StageOdom_callback(nav_msgs::Odometry msg) {
 *	@param end The name of the end checkpoint
 */
 void Agent::setPath(std::string start, std::string end) {
+	ROS_INFO("here");
 	shortestPath = g.shortestPath(start, end);
 	shortestPathIndex = 0;
+	std::vector<std::pair<double, double> > another = g.shortestPath("Shower", "FrontDoorWest");
+	printf("%d\n",shortestPath.size() );
+		std::string res1;
+			std::string res2;
+			for (int i=0; i<shortestPath.size();i++) {
+				printf("First: %d\n", shortestPath.at(i).first);
+				printf("Second: %d\n", shortestPath.at(i).second);
+			}
 }
 
 
@@ -72,23 +81,38 @@ void Agent::move(std::string goalName){
 		currentCheckpoint.second = 20; // ditto
 		//Get the path stuff
 		std::string cname = g.getCheckpointName(currentCheckpoint);
-		ROS_INFO(cname.c_str());
-		ROS_INFO("hi!");
+		//ROS_INFO(cname.c_str());
 		Agent::setPath(cname, goalName);
 	}
 
 	pair<double, double> nextCheckpoint = shortestPath.at(shortestPathIndex);
+	//ROS_INFO(g.getCheckpointName(nextCheckpoint).c_str());
 
 	if (currentCheckpoint.first == nextCheckpoint.first &&
 			currentCheckpoint.second == nextCheckpoint.second){
+		ROS_INFO("help");
 
 		shortestPathIndex++;
 		if (shortestPathIndex >= shortestPath.size()){
+			ROS_INFO("woe");
 			shortestPathIndex = 0;
 			isMoving = false;
 			return;
 		}else{
 			nextCheckpoint = shortestPath.at(shortestPathIndex);
+
+			std::string res1;
+			std::string res2;
+			for (int i=0; i<shortestPath.size();i++) {
+				ostringstream convert1; 
+				ostringstream convert2; 
+				convert1 << shortestPath.at(i).first;
+				convert2 << shortestPath.at(i).second;
+				res1 = convert1.str();
+				res2 = convert2.str();
+				printf(res1.c_str());
+				printf(res2.c_str());
+			}
 
 			checkpointAngle = calculateGoalAngle(nextCheckpoint);
 			//ROS_INFO("Goal Angle: %f", checkpointAngle);
@@ -99,8 +123,10 @@ void Agent::move(std::string goalName){
 	}
 
 	if (!isFacingCorrectly){
+		ROS_INFO("face");
 		turn();
 	}else{
+		//ROS_INFO("forward");
 		moveForward(nextCheckpoint);
 	}
 
@@ -114,6 +140,18 @@ void Agent::turn(){
 	//		ROS_INFO("Current Angle: %f", currentAngle * 180 / M_PI);
 	//		ROS_INFO("Angle Difference, %f", (currentAngle - checkpointAngle) * 180 / M_PI);
 	//	}
+	std::string res1;
+		std::string res2;
+		for (int i=0; i<shortestPath.size();i++) {
+			ostringstream convert1; 
+			ostringstream convert2; 
+			convert1 << shortestPath.at(i).first;
+			convert2 << shortestPath.at(i).second;
+			res1 = convert1.str();
+			res2 = convert2.str();
+			printf(res1.c_str());
+			printf(res2.c_str());
+		}
 
 	angular_z = 1.5;
 	double minAngularZ = 0.05;
@@ -134,6 +172,7 @@ void Agent::turn(){
 
 	if (fabs(angleDifference) <= 0.02){
 		angular_z = 0.0049;
+		ROS_INFO("to turn cw");
 		if (isTurnClockwise()){
 			angular_z = angular_z * -1;
 		}

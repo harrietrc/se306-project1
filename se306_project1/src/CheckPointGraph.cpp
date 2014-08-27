@@ -22,7 +22,7 @@ const char* nameArr[] = {
 */
 int checkpoints[][2] = {
 	{-27,-40},{-20,-40},{-24,-12},{-18,-18},{0,-18},{0,-12},{6,-24},{6,-28},{24,-28},{24,-24},{0,6},{24,-10},{20,-6},{0,22},
-	{0,22},{6,22},{-6,18},{-24,18},{-26,22},{-18,22},{-32,45},{-24,36},{6,30},{26,30},{30,45},
+	{6,22},{-6,18},{-24,18},{-26,22},{-18,22},{-32,45},{-24,36},{6,30},{26,30},{30,45},
 	{26,48}, {32,20}, {32,18}, {-33,-46}, {-36,-48}, {-30,-48}, {-8,-46}, {-20,-46}, {-23,-46}, {-20,-48}
 };
 
@@ -96,12 +96,14 @@ std::vector<std::pair<double, double> > path; /*!< The agent's path to a specifi
  *	@param endName The name of the goal checkpoint as a string (e.g. 'bathroom')
  */
 std::vector<std::pair<double, double> > CheckPointGraph::shortestPath(std::string startName, std::string endName) {
+	CheckPointGraph::checkpointMap();
+	CheckPointGraph::makeGraph();
 
 	//Create vector to store the predecessors (can also make one to store distances)
   	std::vector<vector_graph_t::vertex_descriptor> p(boost::num_vertices(g));
 
   	// Get the descriptor for the source node
-  	vector_graph_t::vertex_descriptor s = indices[startName]; // Shouldn't be hardcoded - pass start checkpoint
+  	vector_graph_t::vertex_descriptor s = indices[startName]; 
 
  	// Computes the shortest path 
  	breadth_first_search(g, s, visitor(make_bfs_visitor(record_predecessors(&p[0], on_tree_edge()))));
@@ -121,15 +123,21 @@ std::vector<std::pair<double, double> > CheckPointGraph::shortestPath(std::strin
     	current = p[current]; // Predecessor of the current checkpoint in the path
 	}
 
-	// path.push_back(s); // BFS doesn't include the start node. 
+	path.push_back(s); // BFS doesn't include the start node. 
 
 	std::vector<std::pair<double, double> > a;
 
 	for (int i=0; i<path.size(); i++) {
 		// Get the vertex name from the graph's property map
 		std::string cpn = boost::get(vertex_name_t(), g, path[i]); // adjacency_list vertex_descriptors are ints
+		//printf("CPN: %s\n", cpn.c_str());//fine
 		std::pair<double, double> coords = c.at(cpn); // Get co-ordinates associated with checkpoint name
+		//printf("C TEST %d\n", c.at(cpn).first);//fine
+		// printf("C1: %d\n", coords.first);
+		// printf("C2: %d\n", coords.second);
 		a.push_back(coords);
+		// printf("A1: %d\n", a[i].first);
+		// printf("A2: %d\n", a[i].second);
 	}
 	
 	std::reverse(a.begin(), a.end()); // as search starts from goal; we can access only predecessors, not successors
@@ -137,6 +145,7 @@ std::vector<std::pair<double, double> > CheckPointGraph::shortestPath(std::strin
     return a;
 }
 
+// checked
 std::string CheckPointGraph::getCheckpointName(std::pair<double, double> cpcoords) {
 	return crev.at(cpcoords);
 }
@@ -144,7 +153,7 @@ std::string CheckPointGraph::getCheckpointName(std::pair<double, double> cpcoord
 /**
 *	@brief Creates a graph of checkpoint names, provided the vector of names and the array of edges.
 *	Uses boost's adjacency list.
-*/
+*/ // checked
 void CheckPointGraph::makeGraph() {
 
 	// Fills the property 'vertex_name_t' of the vertices, allowing us to get the checkpoint name back when we have 
@@ -172,7 +181,7 @@ void CheckPointGraph::makeGraph() {
  *	@brief Associates checkpoint names with checkpoint co-ordinates
  *	To be used in conjunction with a graph of checkpoint names, representing paths between checkpoints. Could be replaced
  *	by adding the co-ordinates to bundled properties in the property map of the graph.
- */
+ */ //checked
 void CheckPointGraph::checkpointMap() {
 
 	// Convert array to pairs
@@ -185,7 +194,12 @@ void CheckPointGraph::checkpointMap() {
 	// Add checkpoint name and checkpoint co-ordinates to the map
 	for (int i=0; i<checkpointNum; i++) {
 		//names.insert(CheckpointNames(checkpointNames[i], vec[i]));
+		// printf("Name: %s\n", checkpointNames[i].c_str());
+		// printf("X: %d\n", vec[i].first);
+		// printf("Y: %d\n", vec[i].second);
+
 		c.insert(std::make_pair(CheckpointName(checkpointNames[i]), Checkpoint(vec[i])));
+		//printf("C TEST ONE %d\n", c.at(checkpointNames[i]).first);
 		crev.insert(std::make_pair(Checkpoint(vec[i]), CheckpointName(checkpointNames[i])));
 	}
 
