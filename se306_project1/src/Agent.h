@@ -71,7 +71,5 @@ class Agent
 		bool isTurnClockwise();
 
 		/* -- Communication and co-ordination -- */
-
-		void delegate(se306_project1::ResidentMsg msg) {} /*!< Callback that calls callbacks */
 	
 };

@@ -18,9 +18,11 @@ class Assistant : public Agent
 		
 
 	protected:
-		void doMedication(const ros::TimerEvent&);
-		void doCooking();
-		void doCleaning();
-		void doEntertainment();
+		void medicate(const ros::TimerEvent&);
+		void cook();
+		void clean();
+		void entertain();
+		void delegate(se306_project1::ResidentMsg msg);
+
 
 };
