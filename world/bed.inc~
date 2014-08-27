@@ -11,7 +11,7 @@ define bed position
 		point[4] [-4.0 -4.9]
 		point[5] [-4.0 0]
 		z [0 0.7]
-		color "light yellow"
+		color "steel blue"
 	)
 
 	# matrice
@@ -41,7 +41,7 @@ define bed position
 		point[6] [-2.0 0.2]
 		point[7] [-1.8 0]
 		z [0.7 0.9]
-		color "light green"
+		color "snow"
 	)
 	
 	# pillow right

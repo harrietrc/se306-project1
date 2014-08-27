@@ -11,7 +11,7 @@ define bed position
 		point[4] [-4.0 -4.9]
 		point[5] [-4.0 0]
 		z [0 0.7]
-		color "light yellow"
+		color "steel blue"
 	)
 
 	# matrice
