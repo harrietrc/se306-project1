@@ -53,7 +53,8 @@ E paths[] = {
 	 E("DoctorOrigin","FrontDoorWest"), E("Nurse1Origin","FrontDoorWest"), E("Nurse2Origin","FrontDoorWest"),
 	 E("Friend1Origin","FrontDoorEast"), E("Friend2Origin","FrontDoorEast"), E("Friend3Origin","FrontDoorEast"),
 	 E("CaregiverOrigin","FrontDoorEast"),
-	 E("Assistant1Origin","CouchesNorthEast"), E("Assistant2Origin","CouchesNorthEast"), E("ResidentOrigin","BedNorthEast")
+	 E("Assistant1Origin","CouchesNorthEast"), E("Assistant2Origin","CouchesNorthEast"), E("ResidentOrigin","BedNorthEast"),
+	 E("HouseCentre","CentrePassageSouth")
 }; /*!< Defines edges between checkpoints */
 
 /* -- Map of names to co-ordinates -- */
@@ -130,14 +131,8 @@ std::vector<std::pair<double, double> > CheckPointGraph::shortestPath(std::strin
 	for (int i=0; i<path.size(); i++) {
 		// Get the vertex name from the graph's property map
 		std::string cpn = boost::get(vertex_name_t(), g, path[i]); // adjacency_list vertex_descriptors are ints
-		//printf("CPN: %s\n", cpn.c_str());//fine
 		std::pair<double, double> coords = c.at(cpn); // Get co-ordinates associated with checkpoint name
-		//printf("C TEST %d\n", c.at(cpn).first);//fine
-		// printf("C1: %d\n", coords.first);
-		// printf("C2: %d\n", coords.second);
 		a.push_back(coords);
-		// printf("A1: %d\n", a[i].first);
-		// printf("A2: %d\n", a[i].second);
 	}
 	
 	std::reverse(a.begin(), a.end()); // as search starts from goal; we can access only predecessors, not successors
@@ -193,13 +188,7 @@ void CheckPointGraph::checkpointMap() {
 
 	// Add checkpoint name and checkpoint co-ordinates to the map
 	for (int i=0; i<checkpointNum; i++) {
-		//names.insert(CheckpointNames(checkpointNames[i], vec[i]));
-		// printf("Name: %s\n", checkpointNames[i].c_str());
-		// printf("X: %d\n", vec[i].first);
-		// printf("Y: %d\n", vec[i].second);
-
 		c.insert(std::make_pair(CheckpointName(checkpointNames[i]), Checkpoint(vec[i])));
-		//printf("C TEST ONE %d\n", c.at(checkpointNames[i]).first);
 		crev.insert(std::make_pair(Checkpoint(vec[i]), CheckpointName(checkpointNames[i])));
 	}
 

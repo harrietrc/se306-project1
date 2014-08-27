@@ -173,11 +173,6 @@ int Assistant::run(int argc, char **argv)
 	//velocity of this RobotNode
 	geometry_msgs::Twist RobotNode_cmdvel;
 
-	//move("HouseCentre");
-	// std::string st = g.getCheckpointName(std::make_pair(-24,-12));
-	// printf("%s\n", st.c_str());
-	setPath("FrontDoorEast","HouseCentre");
-
 	while (ros::ok())
 	{
 		//messages to stage
