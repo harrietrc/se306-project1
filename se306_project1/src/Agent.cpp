@@ -18,8 +18,10 @@ using namespace std;
 *	@note we need a way to get the start co-ordinates of the agent, whether from stage or from the world file (if possible)
 *	and so set the origin name to the correct one for that node.
 */
-void Agent::setOriginName() {
-	
+void setOriginName(int agentNum, char* agentName) {
+	if (strcmp(agentName, "Assistant")) {
+
+	}
 }
 
 /* -- Stage callbacks -- */
@@ -29,7 +31,6 @@ void Agent::setOriginName() {
  *	@param msg Odometry message from odom topic
  */
 void Agent::StageOdom_callback(nav_msgs::Odometry msg) {
-
 
 	//Converting from quaternion to radians
 	currentAngle = acos(msg.pose.pose.orientation.w) * 2;
@@ -73,9 +74,13 @@ void Agent::move(std::string goalName){
 		//Get the path stuff
 		std::string cname = g.getCheckpointName(currentCheckpoint);
 		Agent::setPath(cname, goalName);
+		for (int i=0; i<shortestPath.size();i++) {
+			printf("%f %f\n", shortestPath[i].first, shortestPath[i].second);
+		}
 	}
 
 	pair<double, double> nextCheckpoint = shortestPath.at(shortestPathIndex);
+	printf("Next: %f %f - %s\n", nextCheckpoint.first, nextCheckpoint.second, g.getCheckpointName(nextCheckpoint).c_str());
 
 	if (currentCheckpoint.first == nextCheckpoint.first &&
 			currentCheckpoint.second == nextCheckpoint.second){
