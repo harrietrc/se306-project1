@@ -65,8 +65,10 @@ void Agent::setPath(std::string start, std::string end) {
 
 
 void Agent::move(std::string goalName){
+	ROS_INFO("Yyyyyyy, ");
 
 	std::string nextCheckpoint = shortestPath.at(shortestPathIndex);
+	ROS_INFO("hhhh, ");
 	std::pair<double, double> currentCheckpointCoords = g.getCoords(currentCheckpoint);
 	std::pair<double, double> nextCheckpointCoords = g.getCoords(nextCheckpoint);
 

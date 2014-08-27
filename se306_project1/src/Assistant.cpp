@@ -43,14 +43,19 @@ void Assistant::medicate() {
 */
 void Assistant::cook() {
 
-	double lastCheckpointX = g.getCoords(shortestPath.at(shortestPath.size()-1)).first;
-	double lastCheckpointY = g.getCoords(shortestPath.at(shortestPath.size()-1)).second;
-
+	ROS_INFO("here");
+	double lastCheckpointX = g.getCoords("KitchenNorthEast").first;
+	double lastCheckpointY = g.getCoords("KitchenNorthEast").second;
+	ROS_INFO("X, %f", lastCheckpointX);
+	ROS_INFO("Y, %f", lastCheckpointY);
 	double distanceFromCheckpoint = sqrt(pow((lastCheckpointX - px),2) + pow((lastCheckpointY - py),2));
 
 	if (!atKitchen && !finishedCooking) {
+		ROS_INFO("Yyyyyyy, ");
 
 		move("KitchenNorthWest");
+		//ROS_INFO("Yyyyyyy, %f", lastCheckpointY);
+
 		if (distanceFromCheckpoint < 0.5) {
 		 	atKitchen = true;
 
@@ -177,10 +182,11 @@ int Assistant::run(int argc, char **argv)
 
 	while (ros::ok())
 	{
+	//	ROS_INFO("But");
 		//messages to stage
 		RobotNode_cmdvel.linear.x = linear_x;
 		RobotNode_cmdvel.angular.z = angular_z;
-			
+		cook();
 		//publish the message
 		RobotNode_stage_pub.publish(RobotNode_cmdvel);
 		
