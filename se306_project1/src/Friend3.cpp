@@ -9,8 +9,6 @@
 #include "se306_project1/ResidentMsg.h"
 #include "time_conversion.hpp"
 
-std::string originName = "Friend3Origin";
-
 /**
 *	@brief Causes the friend to visit the resident, as based on a timer.
 *	@param The timer that calls this callback automatically generates a TimerEvent.

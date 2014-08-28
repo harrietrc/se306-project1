@@ -11,7 +11,6 @@ class Resident : public Agent
 		int boredom; /*!< Resident boredom */
 		int hunger; /*!< Resident hunger */
 		int day;
-		bool wasItAdded;
 		priorityQueue stateQueue;
 
 		std::string residentState;
@@ -25,6 +24,8 @@ class Resident : public Agent
 			boredom = 0;
 			stateQueue = priorityQueue();
 			residentState = stateQueue.checkCurrentState();
+			originName = "ResidentOrigin";
+			currentCheckpoint = std::make_pair(26,48);
 		}
 
 		/**
@@ -45,6 +46,7 @@ class Resident : public Agent
 		void hungerCallback(const ros::TimerEvent&);
 		void friendsCallback(const ros::TimerEvent&);
 		void friendsDoneCallback(const ros::TimerEvent&);
+		void checkStatus();
 
 
 };

@@ -14,4 +14,10 @@ class Friend1 : public Visitor
 	public:
 		int run(int argc, char *argv[]);
 
+		void friendsDoneCallback(const ros::TimerEvent&);
+
+		Friend1() {
+			originName = "Friend1Origin";
+		}
+
 };

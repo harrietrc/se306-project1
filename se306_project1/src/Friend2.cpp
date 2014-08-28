@@ -9,28 +9,9 @@
 #include "se306_project1/ResidentMsg.h"
 #include "time_conversion.hpp"
 
-std::string originName = "Friend2Origin";
 
-/**
-*	@brief Causes the friend to visit the resident, as based on a timer.
-*	@param The timer that calls this callback automatically generates a TimerEvent.
-*	@param startTimme The hour to start the periodic visits
-*	@param endTime The hour to end the periodic visits.
-*	@remarks If start time and end time are unnecessary, they can be removed
-*/
-void Friend2::doTimedVisit(const ros::TimerEvent&) { // don't know whether if timing is still required in this class? if not then use delegate
-	int startTime = time_conversion::simHoursToRealSecs(6); // Start callback at 6am
-	int endTime = time_conversion::simHoursToRealSecs(12); // Stop callback at 12pm
-	int tnow = ros::Time::now().toSec(); // The simulation time now
-	int dlen = time_conversion::getDayLength(); // The length of a simulation day, in seconds
-	
-	// Behaviour should only occur if the simulation time is between the specified start and end times.
-	if (((tnow % dlen) > startTime) && ((tnow % dlen) < endTime)) { // Note that this will run at the end of the duration specified for the timer.
-		if (emergency == false && finishedConvo == false) {
-			while (Visitor::visitResident() == false) // true when this is next to resident then do convo
-			finishedConvo = Visitor::doConverse();
-		}
-	}
+void Friend2::friendsDoneCallback(const ros::TimerEvent&){
+
 }
 
 /**
@@ -83,8 +64,9 @@ int Friend2::run(int argc, char *argv[])
 	ros::Subscriber resident_sub = n.subscribe<se306_project1::ResidentMsg>("residentStatus",1000, &Friend2::delegate, this);
 
 	// Periodic callback
-	int dur2 = time_conversion::simHoursToRealSecs(2); // Perform callback every 2 simulation hours
-	ros::Timer VisitorSchedule = n.createTimer(ros::Duration(dur2), &Friend2::doTimedVisit, this);
+	int friendsDone = time_conversion::simHoursToRealSecs(11.5);
+	ros::Timer friendsDoneTimer = n.createTimer(ros::Duration(friendsDone), &Friend2::friendsDoneCallback, this);
+
 
 	////messages
 	//velocity of this RobotNode
@@ -122,6 +104,7 @@ int Friend2::run(int argc, char *argv[])
 *	@brief Redirects to main function (run()) of the node.
 */
 int main(int argc, char *argv[]) {
+
 	Friend2 *a = new Friend2();
 	a->Friend2::run(argc, argv);
 }

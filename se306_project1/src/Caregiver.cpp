@@ -18,7 +18,7 @@
 //void Caregiver::delegate(se306_project1::ResidentMsg r_msg, se306_project1::AssistantMsg a_msg) no?
 void Caregiver::delegate(se306_project1::ResidentMsg msg)
 {
-	/*if (msg.state == 'care') {
+	if (msg.state == 'caregiver') {
 		if (!atResident) {
 			move(msg.currentCheckpoint); //to resident
 
@@ -37,11 +37,11 @@ void Caregiver::delegate(se306_project1::ResidentMsg msg)
 		}
 
 		if (hasExercised) {
-			move('FrontDoorEast'); //leave or something
+			move("FrontDoorEast"); //leave or something
 		}
 	}
-	*/
 }
+
 
 /**
 *	@brief Caregiver helps the resident to shower, by taking them to the shower and helping them clean themseld.

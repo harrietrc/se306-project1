@@ -10,8 +10,6 @@
 #include "math.h"
 #include "Doctor.h"
 
-std::string originName = "DoctorOrigin";
-
 /**
 *	@brief Callback function that unpacks and processes resident status messages.
 *	Doctor should subscribe to the ResidentMsg topic in order for this callback to be called. ResidentMsg is published by the Resident.

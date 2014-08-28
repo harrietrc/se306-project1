@@ -26,21 +26,20 @@ class Agent
 			px = 0;
 			py = 0;
 			currentAngle = 0;
-			currentCheckpoint = std::make_pair(0,0); // Needs to be initialised in subclasses!!
-			shortestPath.push_back(currentCheckpoint); // Needs to be removed later!!
+			//currentCheckpoint = std::make_pair(0,0); // Needs to be initialised in subclasses!!
+			//shortestPath.push_back(currentCheckpoint); // Needs to be removed later!!
 			isMoving = false;
 			isFacingCorrectly = false;
 			shortestPathIndex = 0;
 			checkpointAngle = 0;
 			isClockwise = true;
 			robot_id = 0;
-			// originName = "HouseCentre"; //TEMPORARY!
 		}
 
 		void StageOdom_callback(nav_msgs::Odometry msg);
 
 	protected:
-		// std::string originName;
+		std::string originName;
 
 		void setPath(std::string start, std::string end);
 

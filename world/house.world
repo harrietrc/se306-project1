@@ -67,7 +67,7 @@ define my_block model
 
 resolution 0.02 #resolution of the underline bitmap model in meters. 
 
-interval_sim 100  # simulation timestep in milliseconds. length of each simulation update cycle. does nothing.
+interval_sim 50  # simulation timestep in milliseconds. length of each simulation update cycle. does nothing.
 
 
 window
@@ -111,8 +111,8 @@ sofa( pose [ -19.500 12.500 0.000 90.000 ] name "f2" color "steel blue" size [7 
 table( pose [ -21 0 0 0 ] name "f3" color "tan")		   #coffee table
 
 bed( pose [ 17.500 43.000 0.000 0.000 ] name "f4")	#bed
-table( pose [ 3 47 0 90 ] name "f5" color "tan")		   #bed table
-box( pose [ 33 36 0 0 ] name "f6" color "tan")			   #cabinet
+#table( pose [ 3 47 0 90 ] name "f5" color "tan")		   #bed table
+#box( pose [ 33 36 0 0 ] name "f6" color "tan")			   #cabinet
 
 box( pose [ -32 43 9 0 ] name "f7" color "white" size [9 1 1]) #shower part
 box( pose [ -28 47 0 0 ] name "f7" color "white" size [1 9 10]) #shower part
@@ -122,7 +122,7 @@ box( pose [ -22 49 4 0 ] name "f9" color "white" size [5.5 3 3]) #toilet part
 box( pose [ -22 45.5 0 0 ] name "f9" color "white" size [2 2 2]) #toilet part
 box( pose [ -12.5 44 0 0 ] name "f10" color "snow" size [7 15 4]) 	   #bath tub
 box( pose [ -12.5 44 0 0 ] name "f10" color "light blue" size [4 12 4.2])	#water
-box( pose [ -32 26 0 0 ] name "f11" color "white" size [8 5 4.2])	#bathroom sink
+#box( pose [ -32 26 0 0 ] name "f11" color "white" size [8 5 4.2])	#bathroom sink
 
 box( pose [ -33 0 4 0 ] name "f12" color "dark grey" size [3 12 7]) #tv
 box( pose [ -33 0 0 0 ] name "f12" color "dark grey" size [1.5 1.5 4]) #tv stand
@@ -132,12 +132,12 @@ circle( pose [ 15 6.5 4 0 ] name "f13" color "tan" )		   #oval table top
 box( pose [ 15 6.5 0 0 ] name "f13" color "tan" size [2 2 4]) 	   #table stand
 chair( pose [ 15 1 0 90 ] name "f14" color "tan") 	   #table chair
 chair( pose [ 15 11.5 0 270 ] name "f14" color "tan") 	   #table chair
-chair( pose [ 22 6 0 180 ] name "f14" color "tan") 	   #table chair
+#chair( pose [ 22 6 0 180 ] name "f14" color "tan") 	   #table chair
 
 
-circle( pose [ 16 -12 0 0 ] name "f15" color "thistle" size [4 4 4.2])		   #oval stool
-circle( pose [ 24 -12 0 0 ] name "f15" color "thistle" size [4 4 4.2])		   #oval stool
-circle( pose [ 32 -12 0 0 ] name "f15" color "thistle" size [4 4 4.2])		   #oval stool
+#circle( pose [ 16 -12 0 0 ] name "f15" color "thistle" size [4 4 4.2])		   #oval stool
+#circle( pose [ 24 -12 0 0 ] name "f15" color "thistle" size [4 4 4.2])		   #oval stool
+#circle( pose [ 32 -12 0 0 ] name "f15" color "thistle" size [4 4 4.2])		   #oval stool
 box( pose [ 13 -35 0 0 ] name "f16" color "grey" size [9 6 10]) #fridge
 counter( pose [ 24 -27 0 0 ] name "f17" color "steel blue")		   #kitchen counter
 box( pose [ 32 -27 0 0 ] name "f18" color "grey" size [5 7 6]) 	   #stove

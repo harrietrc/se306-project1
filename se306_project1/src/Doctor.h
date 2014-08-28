@@ -19,5 +19,8 @@ class Doctor : public Visitor
 
 	public:
 		int run(int argc, char *argv[]);
+		Doctor() {
+			originName = "DoctorOrigin";
+		}
 		
 };
