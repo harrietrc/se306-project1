@@ -30,9 +30,7 @@ void Assistant::medicate(se306_project1::ResidentMsg msg) {
 	//if (!isMedicated) {
 		move(msg.currentCheckpoint);
 		if (distanceFromCheckpoint < 5) {
-			/*isMoving = false;
-			linear_x = 0;
-			ROS_INFO("close to end");
+			stopMoving();
 			isMedicated == true;
 			isFacingCorrectly = false;
 
@@ -40,10 +38,9 @@ void Assistant::medicate(se306_project1::ResidentMsg msg) {
 			amsg.ResidentMedicated = true;
 			Assistant_state_pub.publish(amsg);
 
-			currentCheckpoint.first = lastCheckpointX;
-			currentCheckpoint.second = lastCheckpointY;
+			currentCheckpoint.first = msg.currentCheckpointX;
+			currentCheckpoint.second = msg.currentCheckpointY;
 			move("Assistant1Origin");
-			*/
 		}
 //	}else if (isMedicated) {
 	//	move("HouseCentre");

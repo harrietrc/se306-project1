@@ -29,7 +29,8 @@ void Resident::publishStatus(ros::Publisher Resident_state_pub) {
 	// Creating a message for residentStatus
 	residentState = stateQueue.checkCurrentState();
 	se306_project1::ResidentMsg msg;
-	residentState = "hungry";    //hardcoded state
+	//residentState = "medication";    //hardcoded state
+	msg.state = residentState;
 	msg.currentCheckpoint = g.getCheckpointName(currentCheckpoint);
 	msg.currentCheckpointX = currentCheckpoint.first;
 	msg.currentCheckpointY = currentCheckpoint.second;
@@ -209,7 +210,7 @@ int Resident::run(int argc, char *argv[]) {
 
 	//velocity of this RobotNode
 	geometry_msgs::Twist RobotNode_cmdvel;
-	//stateQueue.addToPQ(medication);
+	stateQueue.addToPQ(medication);
 	while (ros::ok())
 	{
 		//messages to stage
