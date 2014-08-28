@@ -18,12 +18,9 @@
 //void Caregiver::delegate(se306_project1::ResidentMsg r_msg, se306_project1::AssistantMsg a_msg) no?
 void Caregiver::delegate(se306_project1::ResidentMsg msg)
 {
-	std::string position;
-
-	if (msg.state == care) {
+	/*if (msg.state == 'care') {
 		if (!atResident) {
-			position = msg.position; //???
-			move(position); //to resident but where??????
+			move(msg.currentCheckpoint); //to resident
 
 			if (Visitor::visitResident() == true) { // next to resident
 				atResident = true;
@@ -40,9 +37,10 @@ void Caregiver::delegate(se306_project1::ResidentMsg msg)
 		}
 
 		if (hasExercised) {
-			move(FrontDoorEast); //leave or something
+			move('FrontDoorEast'); //leave or something
 		}
 	}
+	*/
 }
 
 /**
@@ -56,7 +54,7 @@ bool Caregiver::shower(se306_project1::ResidentMsg msg) {
 	position = "Shower";
 	move(position);
 
-	if (msg.position = position){
+	if (msg.currentCheckpoint == position){
 		//showering
 		spin();
 		return true;
@@ -74,7 +72,7 @@ bool Caregiver::exercise(se306_project1::ResidentMsg msg) {
 	position = "BedSouthEast";
 	move(position);
 
-	if (msg.position == position){
+	if (msg.currentCheckpoint == position){
 		//exercising
 		spin();
 		return true;
@@ -108,32 +106,23 @@ int Caregiver::run(int argc, char *argv[])
 
 	ros::Rate loop_rate(10);
 
-	//Booleans which determine if the caregiver should care for the resident
-	needs_food = false;
-	needs_excercise = false;
-	needs_shower = false;
-	needs_moral_support = false;
+	//Booleans
+	atResident = false;
+	hasShowered = false;
+	hasExercised = false;
 
 
 	/* -- Publish / Subscribe -- */
 
 	//advertise() function will tell ROS that you want to publish on a given topic_
 	//to stage
-	ros::Publisher RobotNode_stage_pub = n.advertise<geometry_msgs::Twist>("robot_0/cmd_vel",1000); 
+	ros::Publisher RobotNode_stage_pub = n.advertise<geometry_msgs::Twist>("robot_0/cmd_vel",1000);
 
 	//subscribe to listen to messages coming from stage
-	ros::Subscriber StageOdo_sub = n.subscribe<nav_msgs::Odometry>("robot_0/odom",1000, &Caregiver::StageOdom_callback,this);
+	ros::Subscriber StageOdo_sub = n.subscribe<nav_msgs::Odometry>("robot_0/odom",1000, &Caregiver::StageOdom_callback,dynamic_cast<Agent*>(this));
 
 	//custom Resident subscriber to "resident/state"
 	ros::Subscriber resident_sub = n.subscribe<se306_project1::ResidentMsg>("residentStatus",1000,&Caregiver::delegate, this);
-
-
-	ros::Subscriber assitant_sub = n.subscribe<se306_project1::AssistantMsg>("assistantStatus",1000,&Caregiver::delegate, this);
-
-	// Periodic callback
-	int dur2 = time_conversion::simHoursToRealSecs(2); // Perform callback every 2 simulation hours
-	ros::Timer caregiverSchedule = n.createTimer(ros::Duration(dur2), &Caregiver::delegate, this); 
-
 
 	////messages
 	//velocity of this RobotNode

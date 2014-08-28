@@ -70,9 +70,11 @@ void Agent::move(std::string goalName){
 		isMoving = true;
 		currentCheckpoint.first = 17; // can get rid of this
 		currentCheckpoint.second = 17; // ditto
+
 		//Get the path stuff
 		std::string cname = g.getCheckpointName(currentCheckpoint);
 		Agent::setPath(cname, goalName);
+
 		// for (int i=0; i<shortestPath.size();i++) {
 		// 	printf("%f %f\n", shortestPath[i].first, shortestPath[i].second);
 		// }

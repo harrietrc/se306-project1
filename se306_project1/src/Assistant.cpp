@@ -9,6 +9,8 @@
 #include "time_conversion.hpp"
 #include "Assistant.h"
 #include <cmath>
+#include "se306_project1/AssistantMsg.h"
+#include "se306_project1/ResidentMsg.h"
 
 using namespace std;
 
@@ -29,9 +31,17 @@ void Assistant::medicate() {
 		//move(ResidentCheckpoint);
 		if (distanceFromCheckpoint < 0.5) {
 			isMedicated == true;
+
+			se306_project1::AssistantMsg msg;
+			ros::Publisher Resident_state_pub;
+			msg.ResidentMedicated = true;
+			Resident_state_pub.publish(msg);
 		}
 	}else if (isMedicated) {
 		move("HouseCentre");
+		if (distanceFromCheckpoint < 0.5) {
+			isMedicated == false;
+		}
 	}
 
 }
@@ -66,8 +76,6 @@ void Assistant::cook() {
 			shortestPath.push_back(p5);
 			shortestPath.push_back(p6);
 			isMoving = true;
-			//checkpointAngle = calculateGoalAngle(p1);
-			//isClockwise = isTurnClockwise();
 		}
 
 
@@ -76,12 +84,16 @@ void Assistant::cook() {
 		// The path to simulate the cooking behaviour in the kitchen
 		if ((distanceFromCheckpoint < 0.5) ) { // Final kitchen points (refer to p6)
 			finishedCooking = true;
+
 		}
 
 	} else if (atKitchen && finishedCooking) {
-
 		move("HouseCentre");
 		if (distanceFromCheckpoint < 0.5) {
+			se306_project1::AssistantMsg msg;
+			ros::Publisher Resident_state_pub;
+			msg.FoodDelivered = true;
+			Resident_state_pub.publish(msg);
 			atKitchen = false;
 			finishedCooking = false;
 		}
@@ -107,20 +119,30 @@ void Assistant::entertain() {
 
 	double distanceFromCheckpoint = sqrt(pow((lastCheckpointX - px),2) + pow((lastCheckpointY - py),2));
 	if (!atBedroom && !residentEntertained) {
-		entertainmenCounter = 0;
+		entertainmentCounter = 0;
 		move("BedSouthWest");
 		if (distanceFromCheckpoint < 0.5) {
 			atBedroom = true;
 		}
 	} else if (atBedroom && !residentEntertained) {
 		angular_z = 2;
-		entertainmenCounter++;
-		if (entertainmenCounter > 150) {
+		entertainmentCounter++;
+		if (entertainmentCounter > 150) {
 			angular_z = 0;
 			residentEntertained = true;
+
+			se306_project1::AssistantMsg msg;
+			ros::Publisher Resident_state_pub;
+			msg.ResidentEntertained = residentEntertained;
+			Resident_state_pub.publish(residentEntertained);
+
 		}
 	} else if (atBedroom && residentEntertained) {
 		move("HouseCentre");
+		if (distanceFromCheckpoint < 0.5) {
+			atBedroom = false;
+			residentEntertained = false;
+		}
 	}
 }
 
@@ -133,19 +155,19 @@ void Assistant::entertain() {
 void Assistant::delegate(se306_project1::ResidentMsg msg) {
 	// Resident status will be a string - one among SILL, ILL, HUNGRY, TIRED BORED, and HEALTHCARE - see Mustafa's pq.
 	// alternatively we could send the status in another format.
+	if (msg.state != "sill") {
+		// check msg if cook do cooking e.t.c
+		if (msg.state == "hungry") {
+			cook();
+		}
 
-	// check msg if cook do cooking e.t.c
-	if (msg.state == "hungry") {
-		cook();
-	}
+		if (msg.state == "bored") {
+			entertain();
+		}
 
-	if (msg.state == "bored") {
-		entertain();
-
-	}
-
-	if (msg.state == "medication") {
-		medicate();
+		if (msg.state == "medication") {
+			medicate();
+		}
 	}
 
 }
@@ -173,23 +195,27 @@ int Assistant::run(int argc, char **argv)
 	//advertise() function will tell ROS that you want to publish on a given topic_
 	//to stage
 	ros::Publisher RobotNode_stage_pub = n.advertise<geometry_msgs::Twist>("robot_1/cmd_vel",1000);
+	ros::Publisher Resident_state_pub = n.advertise<se306_project1::ResidentMsg>("assistantStatus", 1000);
 
 	//subscribe to listen to messages coming from stage
 	ros::Subscriber StageOdo_sub = n.subscribe("robot_1/odom",1000, &Assistant::StageOdom_callback, dynamic_cast<Agent*>(this));
+	ros::Subscriber residentSub = n.subscribe("residentStatus",1000, &Assistant::delegate, this);
 
 	////messages
 	//velocity of this RobotNode
 
 	geometry_msgs::Twist RobotNode_cmdvel;
+
 	while (ros::ok())
 	{
 		entertain();
 		//messages to stage
 		RobotNode_cmdvel.linear.x = linear_x;
 		RobotNode_cmdvel.angular.z = angular_z;
-			
+
 		//publish the message
 		RobotNode_stage_pub.publish(RobotNode_cmdvel);
+
 		
 		ros::spinOnce();
 

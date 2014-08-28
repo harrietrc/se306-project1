@@ -8,10 +8,10 @@ class Caregiver : public Visitor {
 	private:
 		// bool variables
 		bool hasShowered;
-		bool hasExericesed;
+		bool hasExercised;
 		bool atResident;
-		bool exercise();
-		bool shower();
+		bool exercise(se306_project1::ResidentMsg msg);
+		bool shower(se306_project1::ResidentMsg msg);
 
 		// methods
 		void spin();
