@@ -41,7 +41,11 @@ bool priorityQueue::isStateInPQ(residentStates currentState) {
 
 
 residentStates priorityQueue::checkCurrentState() {
-	return PQ.back().state;
+	if (PQ.empty()) {
+		return idle;
+	} else {
+		return PQ.back().state;
+	}
 }
 
 void priorityQueue::removeState(residentStates unwantedState) {
