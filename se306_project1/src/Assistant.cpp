@@ -53,8 +53,10 @@ void Assistant::cook(se306_project1::ResidentMsg msg) {
 	double lastCheckpointX = shortestPath.at(shortestPath.size()-1).first;
 	double lastCheckpointY = shortestPath.at(shortestPath.size()-1).second;
 
+
 	double distanceFromCheckpoint = sqrt(pow((lastCheckpointX - px),2) + pow((lastCheckpointY - py),2));
 
+	ROS_INFO("#######################");
 	if (!atKitchen && !finishedCooking) {
 		move("KitchenNorthWest");
 		if (distanceFromCheckpoint < 0.5) {
@@ -64,7 +66,7 @@ void Assistant::cook(se306_project1::ResidentMsg msg) {
 			pair<double, double> p3 = make_pair(24,-30);
 			pair<double, double> p4 = make_pair(20,-30);
 			pair<double, double> p5 = make_pair(20,-28);
-			pair<double, double> p6 = make_pair(6,-24);
+			pair<double, double> p6 = make_pair(6,-28);
 
 			shortestPath.clear();
 			shortestPath.push_back(p1);
@@ -78,27 +80,33 @@ void Assistant::cook(se306_project1::ResidentMsg msg) {
 
 
 	} else if (atKitchen && !finishedCooking) {
+
 		// The path to simulate the cooking behaviour in the kitchen
 		if ((distanceFromCheckpoint < 0.5) ) { // Final kitchen points (refer to p6)
 			finishedCooking = true;
-
+			move(msg.currentCheckpoint);
 		}
 
 	} else if (atKitchen && finishedCooking) {
+
 		move(msg.currentCheckpoint);
-		ROS_INFO("is it working?");
-		ROS_INFO("%f",distanceFromCheckpoint);
-		if (distanceFromCheckpoint < 1.5) {
+		if (distanceFromCheckpoint < 3.5) {
+
 			se306_project1::AssistantMsg amsg;
 			foodDelivered = true;
 			amsg.FoodDelivered = true;
 			Assistant_state_pub.publish(amsg);
-			atKitchen = false;
-			finishedCooking = false;
+
 			move("HouseCentre");
 		}
 	} else if (foodDelivered) {
 		move("HouseCentre");
+
+		if (distanceFromCheckpoint < 0.5) {
+			atKitchen = false;
+			finishedCooking = false;
+			foodDelivered = false;
+		}
 	}
 }
 

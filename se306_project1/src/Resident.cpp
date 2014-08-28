@@ -34,7 +34,7 @@ void Resident::publishStatus(ros::Publisher Resident_state_pub) {
 	msg.currentCheckpoint = "ResidentOrigin";
 	//msg.currentCheckpointX = currentCheckpoint.first;
 //	msg.currentCheckpointY = currentCheckpoint.second;
-
+//msg.currentCheckpointX =
 	Resident_state_pub.publish(msg);
 }
 
@@ -76,7 +76,10 @@ void Resident::friend_callback(const std_msgs::String::ConstPtr& msg)
 */
 void Resident::assistant_callback(se306_project1::AssistantMsg msg)
 {
-	
+	if (msg.FoodDelivered == true) {
+		hunger = 100;
+		//stateQueue.removeState(hunger);
+	}
 	//This is the callback function to process laser scan messages
 	//you can access the range data from msg.ranges[i]. i = sample number
 
