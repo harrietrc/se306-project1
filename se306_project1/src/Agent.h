@@ -34,13 +34,12 @@ class Agent
 			checkpointAngle = 0;
 			isClockwise = true;
 			robot_id = 0;
-			// originName = "HouseCentre"; //TEMPORARY!
 		}
 
 		void StageOdom_callback(nav_msgs::Odometry msg);
 
 	protected:
-		// std::string originName;
+		std::string originName;
 
 		void setPath(std::string start, std::string end);
 

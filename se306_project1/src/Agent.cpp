@@ -42,7 +42,7 @@ void Agent::StageOdom_callback(nav_msgs::Odometry msg) {
 	py = msg.pose.pose.position.y;
 	if (isMoving == true){
 		// move(originName); // Only correct if this doesn't get called
-		move("HouseCentre");//TEMPORARY!
+		move(originName);//TEMPORARY!
 	}
 }
 
