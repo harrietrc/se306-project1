@@ -116,7 +116,7 @@ void Agent::turn(){
 	//		ROS_INFO("Angle Difference, %f", (currentAngle - checkpointAngle) * 180 / M_PI);
 	//	}
 
-	angular_z = 0.5;
+	angular_z = 1.5;
 	double minAngularZ = 0.05;
 
 	if (isClockwise){

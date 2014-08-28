@@ -40,11 +40,11 @@ bool priorityQueue::isStateInPQ(residentStates currentState) {
 }
 
 
-residentStates priorityQueue::checkCurrentState() {
+std::string priorityQueue::checkCurrentState() {
 	if (PQ.empty()) {
-		return idle;
+		return stateConvertString(idle);
 	} else {
-		return PQ.back().state;
+		return stateConvertString(PQ.back().state);
 	}
 }
 
@@ -149,5 +149,39 @@ residentStates priorityQueue::popFromPQ() {
 		PQ.pop_back();
 		return state;
 	}
+}
+
+std::string priorityQueue::stateConvertString(residentStates currentState){
+	switch(currentState) // assigning the priority
+		{
+		case (emergency):
+				return "emergency";
+				break;
+		case (healthLow):
+				return "healthLow";
+				break;
+		case (caregiver):
+				return "caregiver";
+				break;
+		case(medication):
+				return "medication";
+				break;
+		case (friends):
+				return "friends";
+				break;
+		case (hunger):
+				return "hunger";
+				break;
+		case (tired):
+				return "tired";
+				break;
+		case (bored):
+				return "bored";
+				break;
+		case (idle):
+				return "idle";
+				break;
+		}
+	return "Can't convert!!"; //
 }
 

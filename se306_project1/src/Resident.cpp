@@ -23,8 +23,19 @@ using namespace std;
 *	@brief Gets current resident status and publishes it to a topic for assistants and doctors/nurses.
 *	May convert to string and publish in the standard way - do we need custom messages any more?
 */
-void Resident::publishStatus() {
+void Resident::publishStatus(ros::Publisher Resident_state_pub) {
+
+
+	// Creating a message for residentStatus
 	residentState = stateQueue.checkCurrentState();
+	se306_project1::ResidentMsg msg;
+	msg.state = residentState;
+	msg.currentCheckpoint = g.getCheckpointName(currentCheckpoint);
+	msg.currentCheckpointX = currentCheckpoint.first;
+	msg.currentCheckpointY = currentCheckpoint.second;
+
+	Resident_state_pub.publish(msg);
+
 
 }
 
@@ -55,8 +66,8 @@ void Resident::doctor_callback(se306_project1::DoctorMsg msg)
 
 void Resident::friend_callback(const std_msgs::String::ConstPtr& msg)
 {
-	//if (msg.data == "Done") { // friend has finished talking with Resident
-	//	boredom = 0;
+//	if (msg.data == "Done") { // friend has finished talking with Resident
+//		boredom = 0;
 //	}
 }
 
@@ -96,6 +107,8 @@ int Resident::run(int argc, char *argv[]) {
 
 	ros::Rate loop_rate(10);
 
+	ros::Time time = ros::Time::now();
+
 	/* -- Publish / Subscribe -- */
 
 	//advertise() function will tell ROS that you want to publish on a given topic_
@@ -125,6 +138,7 @@ int Resident::run(int argc, char *argv[]) {
 		//publish the message
 		RobotNode_stage_pub.publish(RobotNode_cmdvel);
 
+		publishStatus(Resident_state_pub);
 
 		ros::spinOnce();
 		loop_rate.sleep();
