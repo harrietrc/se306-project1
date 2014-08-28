@@ -9,6 +9,7 @@
 #define PRIORITYQUEUE_H_
 
 
+
 enum residentStates {hunger,healthLow,bored,emergency,tired,caregiver,friends,medication,idle};
 
 
@@ -19,6 +20,7 @@ public:
 	void addToPQ(residentStates currentState);
 	residentStates popFromPQ();
 	residentStates checkCurrentState();
+	stri
 private:
 	bool isStateInPQ(residentStates currentState);
 	void removeState(residentStates unwantedState);

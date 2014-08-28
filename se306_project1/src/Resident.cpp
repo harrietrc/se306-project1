@@ -24,7 +24,14 @@ using namespace std;
 *	May convert to string and publish in the standard way - do we need custom messages any more?
 */
 void Resident::publishStatus() {
+
+
+	// Creating a message for residentStatus
 	residentState = stateQueue.checkCurrentState();
+	se306_project1::ResidentMsg msg;
+	msg.state = stateToString(residentState);
+
+
 
 }
 
@@ -55,9 +62,9 @@ void Resident::doctor_callback(se306_project1::DoctorMsg msg)
 
 void Resident::friend_callback(const std_msgs::String::ConstPtr& msg)
 {
-	if (msg.data == "Done") { // friend has finished talking with Resident
-		boredom = 0;
-	}
+//	if (msg.data == "Done") { // friend has finished talking with Resident
+//		boredom = 0;
+//	}
 }
 
 /**
@@ -95,6 +102,8 @@ int Resident::run(int argc, char *argv[]) {
 	ros::NodeHandle n;
 
 	ros::Rate loop_rate(10);
+
+	ros::Time time = ros::Time::now();
 
 	/* -- Publish / Subscribe -- */
 
