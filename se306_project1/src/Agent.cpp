@@ -24,6 +24,12 @@ void setOriginName(int agentNum, char* agentName) {
 	}
 }
 
+void Agent::stopMoving(){
+	isMoving = false;
+	linear_x = 0;
+	angular_z = 0;
+}
+
 /* -- Stage callbacks -- */
 
 /**
