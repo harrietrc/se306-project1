@@ -1,4 +1,5 @@
 #include "Agent.h"
+#include "priorityQueue.h"
 
 /**
 *	@brief Class representing the Resident.
@@ -10,12 +11,18 @@ class Resident : public Agent
 		int boredom; /*!< Resident boredom */
 		int hunger; /*!< Resident hunger */
 
+		priorityQueue stateQueue;
+
+		residentStates residentState;
+
 	public:
 
 		Resident() : Agent(){
 			health = 100;
 			hunger = 0;
 			boredom = 0;
+			stateQueue = priorityQueue();
+			residentState = stateQueue.checkCurrentState();
 		}
 
 		/**

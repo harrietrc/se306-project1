@@ -14,6 +14,8 @@
 #include "priorityQueue.h"
 
 using namespace std;
+
+
 //PriorityQueue *status_queue = PriorityQueue::getInstance();
 
 /**
@@ -21,6 +23,7 @@ using namespace std;
 *	May convert to string and publish in the standard way - do we need custom messages any more?
 */
 void Resident::publishStatus() {
+	residentState = stateQueue.checkCurrentState();
 
 }
 
@@ -68,6 +71,7 @@ int Resident::run(int argc, char *argv[]) {
 	shortestPath.push_back(c1);
 	shortestPath.push_back(c2);
 
+
 	//You must call ros::init() first of all. ros::init() function needs to see argc and argv. The third argument is the name of the node
 	ros::init(argc, argv, "Resident");
 
@@ -80,6 +84,8 @@ int Resident::run(int argc, char *argv[]) {
 
 	//advertise() function will tell ROS that you want to publish on a given topic_
 	//to stage
+	ros::Publisher Resident_state_pub = n.advertise<se306_project1::ResidentMsg>("residentStatus", 1000);
+
 	ros::Publisher RobotNode_stage_pub = n.advertise<geometry_msgs::Twist>("robot_0/cmd_vel",1000); 
 
 	//subscribe to listen to messages coming from stage
@@ -96,6 +102,7 @@ int Resident::run(int argc, char *argv[]) {
 
 		//publish the message
 		RobotNode_stage_pub.publish(RobotNode_cmdvel);
+
 
 		ros::spinOnce();
 		loop_rate.sleep();
