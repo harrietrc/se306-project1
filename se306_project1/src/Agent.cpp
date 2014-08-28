@@ -117,7 +117,7 @@ void Agent::turn(){
 	//		ROS_INFO("Angle Difference, %f", (currentAngle - checkpointAngle) * 180 / M_PI);
 	//	}
 
-	angular_z = 1.5;
+	angular_z = 0.5;
 	double minAngularZ = 0.05;
 
 	if (isClockwise){
@@ -152,9 +152,16 @@ void Agent::turn(){
 void Agent::moveForward(pair<double,double> nextCheckpoint){
 
 	linear_x = 5;
-	double minLinearX = 1.5;
+	double minLinearX = 0.5;
 
 	double distanceFromCheckpoint = sqrt(pow((nextCheckpoint.first - px),2) + pow((nextCheckpoint.second - py),2));
+
+
+	ROS_INFO("Distance: %f", distanceFromCheckpoint);
+	ROS_INFO("px: %f", px);
+	ROS_INFO("py: %f", py);
+	ROS_INFO("check x: %f", nextCheckpoint.first );
+	ROS_INFO("check y: %f", nextCheckpoint.second);
 
 	// Check to ensure that linear velocity doesn't decrease if the distance between the checkpoints is higher than 40.
 	double distanceRatio = (distanceFromCheckpoint / 40);
@@ -197,8 +204,6 @@ double Agent::calculateGoalAngle(pair<double, double> goalCheckpoint){
 	//Finding the vector that the robot is facing and the goal vector
 	double goalVectorX = goalCheckpoint.first - px;
 	double goalVectorY = goalCheckpoint.second - py;
-	printf("goalCheckpoin.tfirst: %f px: %f\n", goalCheckpoint.first, px);
-	printf("goalCheckpoin.tsec: %f py: %f\n", goalCheckpoint.second, py);
 
 	double goalAngle = atan2(goalVectorY, goalVectorX); //pi <= goalAngle < -pi
 
