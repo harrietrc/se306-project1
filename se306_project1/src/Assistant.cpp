@@ -167,6 +167,7 @@ int Assistant::run(int argc, char **argv)
 	//advertise() function will tell ROS that you want to publish on a given topic_
 	//to stage
 	ros::Publisher RobotNode_stage_pub = n.advertise<geometry_msgs::Twist>("robot_1/cmd_vel",1000);
+	ros::Publisher GUI_publisher = n.advertise<std_msgs::String>("python/gui",1000);
 
 	//subscribe to listen to messages coming from stage
 	ros::Subscriber StageOdo_sub = n.subscribe("robot_1/odom",1000, &Assistant::StageOdom_callback, dynamic_cast<Agent*>(this));
@@ -174,6 +175,8 @@ int Assistant::run(int argc, char **argv)
 	////messages
 	//velocity of this RobotNode
 	geometry_msgs::Twist RobotNode_cmdvel;
+	std_msgs::String GUImsg;
+
 	move("HouseCentre");
 
 	while (ros::ok())
@@ -185,6 +188,15 @@ int Assistant::run(int argc, char **argv)
 		//publish the message
 		RobotNode_stage_pub.publish(RobotNode_cmdvel);
 		
+		//message to pythonGUI
+		std::stringstream guiMsgString;
+		guiMsgString << "boji_sean";
+		GUImsg.data = guiMsgString.str();
+
+		//publish for gui
+		GUI_publisher.publish(GUImsg);
+
+
 		ros::spinOnce();
 
 		loop_rate.sleep();

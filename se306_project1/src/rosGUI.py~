@@ -54,8 +54,6 @@ def residentStatusCallback(GUImsg):
 	print('in boji callback')
 	rospy.loginfo(rospy.get_caller_id()+"I heard %s", GUImsg.data)
 
-
-
 if __name__ == "__main__":
     # Instantiate class
 	app = simpleapp_tk(None)
