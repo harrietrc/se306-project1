@@ -6,17 +6,17 @@ import struct
 
 
 class ResidentMsg(genpy.Message):
-  _md5sum = "3263770d9697e608dc5912cf7c7dbf41"
+  _md5sum = "a2286c83f7f83efe61c3a41a67ca0ca2"
   _type = "se306_project1/ResidentMsg"
   _has_header = False #flag to mark the presence of a Header object
   _full_text = """float64 x
 float64 y
 int64 health
 int64 hunger
-
+string state
 """
-  __slots__ = ['x','y','health','hunger']
-  _slot_types = ['float64','float64','int64','int64']
+  __slots__ = ['x','y','health','hunger','state']
+  _slot_types = ['float64','float64','int64','int64','string']
 
   def __init__(self, *args, **kwds):
     """
@@ -26,7 +26,7 @@ int64 hunger
     changes.  You cannot mix in-order arguments and keyword arguments.
 
     The available fields are:
-       x,y,health,hunger
+       x,y,health,hunger,state
 
     :param args: complete set of field values, in .msg order
     :param kwds: use keyword arguments corresponding to message field names
@@ -43,11 +43,14 @@ int64 hunger
         self.health = 0
       if self.hunger is None:
         self.hunger = 0
+      if self.state is None:
+        self.state = ''
     else:
       self.x = 0.
       self.y = 0.
       self.health = 0
       self.hunger = 0
+      self.state = ''
 
   def _get_types(self):
     """
@@ -63,6 +66,15 @@ int64 hunger
     try:
       _x = self
       buff.write(_struct_2d2q.pack(_x.x, _x.y, _x.health, _x.hunger))
+      _x = self.state
+      length = len(_x)
+      if python3 or type(_x) == unicode:
+        _x = _x.encode('utf-8')
+        length = len(_x)
+      if python3:
+        buff.write(struct.pack('<I%sB'%length, length, *_x))
+      else:
+        buff.write(struct.pack('<I%ss'%length, length, _x))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(_x))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(_x))))
 
@@ -77,6 +89,15 @@ int64 hunger
       start = end
       end += 32
       (_x.x, _x.y, _x.health, _x.hunger,) = _struct_2d2q.unpack(str[start:end])
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      start = end
+      end += length
+      if python3:
+        self.state = str[start:end].decode('utf-8')
+      else:
+        self.state = str[start:end]
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -91,6 +112,15 @@ int64 hunger
     try:
       _x = self
       buff.write(_struct_2d2q.pack(_x.x, _x.y, _x.health, _x.hunger))
+      _x = self.state
+      length = len(_x)
+      if python3 or type(_x) == unicode:
+        _x = _x.encode('utf-8')
+        length = len(_x)
+      if python3:
+        buff.write(struct.pack('<I%sB'%length, length, *_x))
+      else:
+        buff.write(struct.pack('<I%ss'%length, length, _x))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(_x))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(_x))))
 
@@ -106,6 +136,15 @@ int64 hunger
       start = end
       end += 32
       (_x.x, _x.y, _x.health, _x.hunger,) = _struct_2d2q.unpack(str[start:end])
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      start = end
+      end += length
+      if python3:
+        self.state = str[start:end].decode('utf-8')
+      else:
+        self.state = str[start:end]
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill

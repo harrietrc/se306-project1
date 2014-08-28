@@ -19,7 +19,7 @@ void AgentFactory::createMockAgent() {
 }
 
 int AgentFactory::createAgent(AgentConst::AgentType agentType, int nodeNumber) {
-	//cout << "creating agent using process manager, agent type: " << agentType << endl;
+	cout << "creating agent using process manager, agent type: " << agentType << endl;
 	ProcessManager processManager;
 	std::string stringType = "";
 
