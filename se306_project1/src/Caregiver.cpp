@@ -18,7 +18,7 @@
 //void Caregiver::delegate(se306_project1::ResidentMsg r_msg, se306_project1::AssistantMsg a_msg) no?
 void Caregiver::delegate(se306_project1::ResidentMsg msg)
 {
-	if (msg.state == care) {
+	/*if (msg.state == 'care') {
 		if (!atResident) {
 			move(msg.currentCheckpoint); //to resident
 
@@ -37,9 +37,10 @@ void Caregiver::delegate(se306_project1::ResidentMsg msg)
 		}
 
 		if (hasExercised) {
-			move(FrontDoorEast); //leave or something
+			move('FrontDoorEast'); //leave or something
 		}
 	}
+	*/
 }
 
 /**
@@ -53,7 +54,7 @@ bool Caregiver::shower(se306_project1::ResidentMsg msg) {
 	position = "Shower";
 	move(position);
 
-	if (msg.position = position){
+	if (msg.currentCheckpoint == position){
 		//showering
 		spin();
 		return true;
@@ -71,7 +72,7 @@ bool Caregiver::exercise(se306_project1::ResidentMsg msg) {
 	position = "BedSouthEast";
 	move(position);
 
-	if (msg.position == position){
+	if (msg.currentCheckpoint == position){
 		//exercising
 		spin();
 		return true;
@@ -115,10 +116,10 @@ int Caregiver::run(int argc, char *argv[])
 
 	//advertise() function will tell ROS that you want to publish on a given topic_
 	//to stage
-	ros::Publisher RobotNode_stage_pub = n.advertise<geometry_msgs::Twist>("robot_0/cmd_vel",1000); 
+	ros::Publisher RobotNode_stage_pub = n.advertise<geometry_msgs::Twist>("robot_0/cmd_vel",1000);
 
 	//subscribe to listen to messages coming from stage
-	ros::Subscriber StageOdo_sub = n.subscribe<nav_msgs::Odometry>("robot_0/odom",1000, &Caregiver::StageOdom_callback,this);
+	ros::Subscriber StageOdo_sub = n.subscribe<nav_msgs::Odometry>("robot_0/odom",1000, &Caregiver::StageOdom_callback,dynamic_cast<Agent*>(this));
 
 	//custom Resident subscriber to "resident/state"
 	ros::Subscriber resident_sub = n.subscribe<se306_project1::ResidentMsg>("residentStatus",1000,&Caregiver::delegate, this);
