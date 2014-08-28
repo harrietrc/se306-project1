@@ -64,7 +64,6 @@ void Assistant::cook(se306_project1::ResidentMsg msg) {
 	//double distanceFromCheckpoint = sqrt(pow((lastCheckpointX - px),2) + pow((lastCheckpointY - py),2));
 
 	if (!atKitchen && !finishedCooking) {
-		ROS_INFO("!!!!!!!!!!");
 		move("KitchenNorthWest");
 		if (g.getCheckpointName(currentCheckpoint) == "KitchenNorthWest") {
 			atKitchen = true;
@@ -180,12 +179,10 @@ void Assistant::delegate(se306_project1::ResidentMsg msg) {
 	// alternatively we could send the status in another format.
 	// enum residentStates {hunger,healthLow,bored,emergency,tired,caregiver,friends,medication,idle};
 
-	ROS_INFO ("Test1");
 
 	if (msg.state != "emergency") {
 		// check msg if cook do cooking e.t.c
 		if (msg.state == "hungry") {
-			ROS_INFO ("Test2");
 			cook(msg);
 		}
 
