@@ -16,7 +16,7 @@ residentStates state;
 std::vector<statusObj> PQ;
 
 priorityQueue::priorityQueue() {
-	// TODO Auto-generated constructor stub
+	addToPQ(tired);
 
 }
 
@@ -98,7 +98,7 @@ void priorityQueue::addToPQ(residentStates currentState) {
 	case (friends):
 			currResidentStatus.priority = 5;
 			break;
-	case (hunger):
+	case (hungry):
 			currResidentStatus.priority = 6;
 			break;
 	case (tired):
@@ -174,8 +174,8 @@ std::string priorityQueue::stateConvertString(residentStates currentState){
 		case (friends):
 				return "friends";
 				break;
-		case (hunger):
-				return "hunger";
+		case (hungry):
+				return "hungry";
 				break;
 		case (tired):
 				return "tired";

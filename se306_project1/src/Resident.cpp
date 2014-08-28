@@ -60,7 +60,19 @@ void Resident::triggerRandomEvents(){
 }
 
 void Resident::medicationCallback(const ros::TimerEvent&){
-	ROS_INFO ("Medicate");
+	stateQueue.addToPQ(medication);
+}
+void Resident::hungerCallback(const ros::TimerEvent&){
+	stateQueue.addToPQ(hungry);
+}
+void Resident::caregiverServicesCallback(const ros::TimerEvent&){
+	stateQueue.addToPQ(caregiver);
+}
+void Resident::wakeCallback(const ros::TimerEvent&){
+	stateQueue.removeState(tired);
+}
+void Resident::sleepCallback(const ros::TimerEvent&){
+	stateQueue.addToPQ(tired);
 }
 
 /**
@@ -150,12 +162,25 @@ int Resident::run(int argc, char *argv[]) {
 	ros::Subscriber friend_sub = n.subscribe("visitorConvo", 1000, &Resident::friend_callback, this);
 
 	// Periodic callback
-	int morningMedication = time_conversion::simHoursToRealSecs(4);
-	int afternoonMedication = time_conversion::simHoursToRealSecs(8);
-	int nightMedication = time_conversion::simHoursToRealSecs(13);
+	int wakeup = time_conversion::simHoursToRealSecs(0);
+	int caregiverServices = time_conversion::simHoursToRealSecs(0.5);
+	int morningMedication = time_conversion::simHoursToRealSecs(5);
+	int afternoonMedication = time_conversion::simHoursToRealSecs(9);
+	int nightMedication = time_conversion::simHoursToRealSecs(14);
+	int morningHungry = time_conversion::simHoursToRealSecs(3);
+	int afternoonHungry = time_conversion::simHoursToRealSecs(7);
+	int nightHungry= time_conversion::simHoursToRealSecs(12);
+	int sleep = time_conversion::simHoursToRealSecs(15);
+	ros::Timer wakeUpTimer = n.createTimer(ros::Duration(wakeup), &Resident::wakeCallback, this);
+	ros::Timer caregiverTimer = n.createTimer(ros::Duration(caregiverServices), &Resident::caregiverServicesCallback, this);
 	ros::Timer medicationTimer = n.createTimer(ros::Duration(morningMedication), &Resident::medicationCallback, this);
 	ros::Timer medicationTimer2 = n.createTimer(ros::Duration(afternoonMedication), &Resident::medicationCallback, this);
 	ros::Timer medicationTimer3 = n.createTimer(ros::Duration(nightMedication), &Resident::medicationCallback, this);
+	ros::Timer hungryTimer = n.createTimer(ros::Duration(morningHungry), &Resident::hungerCallback, this);
+	ros::Timer hungryTimer2 = n.createTimer(ros::Duration(afternoonHungry), &Resident::hungerCallback, this);
+	ros::Timer hungryTimer3 = n.createTimer(ros::Duration(nightHungry), &Resident::hungerCallback, this);
+	ros::Timer sleepTimer = n.createTimer(ros::Duration(sleep), &Resident::sleepCallback, this);
+
 
 
 	//velocity of this RobotNode

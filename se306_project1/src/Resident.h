@@ -10,6 +10,7 @@ class Resident : public Agent
 		int health; /*!< Resident health */
 		int boredom; /*!< Resident boredom */
 		int hunger; /*!< Resident hunger */
+		int day;
 
 		priorityQueue stateQueue;
 
@@ -18,6 +19,7 @@ class Resident : public Agent
 	public:
 
 		Resident() : Agent(){
+			day = 1;
 			health = 100;
 			hunger = 0;
 			boredom = 0;
@@ -37,6 +39,10 @@ class Resident : public Agent
 		void publishStatus(ros::Publisher Resident_state_pub);
 		void triggerRandomEvents();
 		void medicationCallback(const ros::TimerEvent&);
+		void wakeCallback(const ros::TimerEvent&);
+		void sleepCallback(const ros::TimerEvent&);
+		void caregiverServicesCallback(const ros::TimerEvent&);
+		void hungerCallback(const ros::TimerEvent&);
 
 
 };

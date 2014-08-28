@@ -12,7 +12,7 @@
 
 
 
-enum residentStates {hunger,healthLow,bored,emergency,tired,caregiver,friends,medication,idle};
+enum residentStates {hungry,healthLow,bored,emergency,tired,caregiver,friends,medication,idle};
 
 class priorityQueue {
 public:
@@ -21,10 +21,10 @@ public:
 	void addToPQ(residentStates currentState);
 	residentStates popFromPQ();
 	std::string checkCurrentState();
+	void removeState(residentStates unwantedState);
 
 private:
 	bool isStateInPQ(residentStates currentState);
-	void removeState(residentStates unwantedState);
 	std::string stateConvertString(residentStates currentState);
 
 };
