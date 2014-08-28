@@ -22,15 +22,15 @@ using namespace std;
 */
 void Assistant::medicate(se306_project1::ResidentMsg msg) {
 
-	double lastCheckpointX = shortestPath.at(shortestPath.size()-1).first;
-	double lastCheckpointY = shortestPath.at(shortestPath.size()-1).second;
+//	double lastCheckpointX = shortestPath.at(shortestPath.size()-1).first;
+//	double lastCheckpointY = shortestPath.at(shortestPath.size()-1).second;
 
-	double distanceFromCheckpoint = sqrt(pow((lastCheckpointX - px),2) + pow((lastCheckpointY - py),2));
+	double distanceFromCheckpoint = sqrt(pow((msg.currentCheckpointX - px),2) + pow((msg.currentCheckpointY - py),2));
 
 	//if (!isMedicated) {
 		move(msg.currentCheckpoint);
 		if (distanceFromCheckpoint < 5) {
-			isMoving = false;
+			/*isMoving = false;
 			linear_x = 0;
 			ROS_INFO("close to end");
 			isMedicated == true;
@@ -43,6 +43,7 @@ void Assistant::medicate(se306_project1::ResidentMsg msg) {
 			currentCheckpoint.first = lastCheckpointX;
 			currentCheckpoint.second = lastCheckpointY;
 			move("Assistant1Origin");
+			*/
 		}
 //	}else if (isMedicated) {
 	//	move("HouseCentre");
@@ -58,10 +59,10 @@ void Assistant::medicate(se306_project1::ResidentMsg msg) {
 */
 void Assistant::cook(se306_project1::ResidentMsg msg) {
 
-	//double lastCheckpointX = shortestPath.at(shortestPath.size()-1).first; //fucking throws errors if shortestPath size is 0
-	//double lastCheckpointY = shortestPath.at(shortestPath.size()-1).second;
+//	double lastCheckpointX = shortestPath.at(shortestPath.size()-1).first; //fucking throws errors if shortestPath size is 0
+//	double lastCheckpointY = shortestPath.at(shortestPath.size()-1).second;
 
-	//double distanceFromCheckpoint = sqrt(pow((lastCheckpointX - px),2) + pow((lastCheckpointY - py),2));
+	double distanceFromCheckpoint = sqrt(pow((msg.currentCheckpointX - px),2) + pow((msg.currentCheckpointY - py),2));
 
 	if (!atKitchen && !finishedCooking) {
 		move("KitchenNorthWest");
