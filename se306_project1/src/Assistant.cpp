@@ -27,21 +27,29 @@ void Assistant::medicate(se306_project1::ResidentMsg msg) {
 
 	double distanceFromCheckpoint = sqrt(pow((lastCheckpointX - px),2) + pow((lastCheckpointY - py),2));
 
-	if (!isMedicated) {
-		//move(ResidentCheckpoint);
-		if (distanceFromCheckpoint < 0.5) {
+	//if (!isMedicated) {
+		move(msg.currentCheckpoint);
+		if (distanceFromCheckpoint < 5) {
+			isMoving = false;
+			linear_x = 0;
+			ROS_INFO("close to end");
 			isMedicated == true;
+			isFacingCorrectly = false;
 
 			se306_project1::AssistantMsg amsg;
 			amsg.ResidentMedicated = true;
 			Assistant_state_pub.publish(amsg);
+
+			currentCheckpoint.first = lastCheckpointX;
+			currentCheckpoint.second = lastCheckpointY;
+			move("HouseCentre");
 		}
-	}else if (isMedicated) {
-		move(msg.currentCheckpoint);
-		if (distanceFromCheckpoint < 0.5) {
-			isMedicated == false;
-		}
-	}
+//	}else if (isMedicated) {
+	//	move("HouseCentre");
+	//	if (distanceFromCheckpoint < 0.5) {
+	//		isMedicated == false;
+	//	}
+//	}
 
 }
 
@@ -56,45 +64,64 @@ void Assistant::cook(se306_project1::ResidentMsg msg) {
 	double distanceFromCheckpoint = sqrt(pow((lastCheckpointX - px),2) + pow((lastCheckpointY - py),2));
 
 	if (!atKitchen && !finishedCooking) {
-
 		move("KitchenNorthWest");
 		if (distanceFromCheckpoint < 0.5) {
 			atKitchen = true;
 			pair<double, double> p1 = make_pair(6,-24);
 			pair<double, double> p2 = make_pair(24,-24);
-			pair<double, double> p3 = make_pair(24,-30);
+		//	pair<double, double> p3 = make_pair(24,-30);
 			pair<double, double> p4 = make_pair(20,-30);
-			pair<double, double> p5 = make_pair(20,-28);
-			pair<double, double> p6 = make_pair(6,-24);
+		//	pair<double, double> p5 = make_pair(20,-28);
+			pair<double, double> p6 = make_pair(6,-28);
 
 			shortestPath.clear();
 			shortestPath.push_back(p1);
 			shortestPath.push_back(p2);
-			shortestPath.push_back(p3);
+		//	shortestPath.push_back(p3);
 			shortestPath.push_back(p4);
-			shortestPath.push_back(p5);
+		//	shortestPath.push_back(p5);
 			shortestPath.push_back(p6);
 			isMoving = true;
 		}
 
 
 	} else if (atKitchen && !finishedCooking) {
-		ROS_INFO("goal Angle: %f", checkpointAngle);
+
 		// The path to simulate the cooking behaviour in the kitchen
 		if ((distanceFromCheckpoint < 0.5) ) { // Final kitchen points (refer to p6)
 			finishedCooking = true;
 
 		}
 
-	} else if (atKitchen && finishedCooking) {
+	} else if (atKitchen && finishedCooking && !foodDelivered) {
+
 		move(msg.currentCheckpoint);
-		if (distanceFromCheckpoint < 0.5) {
+		lastCheckpointX = shortestPath.at(shortestPath.size()-1).first;
+		lastCheckpointY = shortestPath.at(shortestPath.size()-1).second;
+		distanceFromCheckpoint = sqrt(pow((lastCheckpointX - px),2) + pow((lastCheckpointY - py),2));
+		if (distanceFromCheckpoint < 5) {
+			isMoving = false;
+			linear_x = 0;
+
 			se306_project1::AssistantMsg amsg;
 			amsg.FoodDelivered = true;
 			Assistant_state_pub.publish(amsg);
+
+			isFacingCorrectly = false;
+			foodDelivered = true;
+			currentCheckpoint.first = lastCheckpointX;
+			currentCheckpoint.second = lastCheckpointY;
+			move("HouseCentre");
+
+		}
+	} else if (atKitchen && finishedCooking && foodDelivered) {
+		move("HouseCentre");
+		if (distanceFromCheckpoint < 0.5) {
 			atKitchen = false;
 			finishedCooking = false;
+			foodDelivered = false;
 		}
+
 	}
 }
 
@@ -166,6 +193,8 @@ void Assistant::delegate(se306_project1::ResidentMsg msg) {
 
 		if (msg.state == "medication") {
 			medicate(msg);
+		} else {
+			move("HouseCentre");
 		}
 	}
 
@@ -193,7 +222,7 @@ int Assistant::run(int argc, char **argv)
 	//advertise() function will tell ROS that you want to publish on a given topic_
 	//to stage
 	ros::Publisher RobotNode_stage_pub = n.advertise<geometry_msgs::Twist>("robot_1/cmd_vel",1000);
-	Assistant_state_pub = n.advertise<se306_project1::ResidentMsg>("assistantStatus", 1000);
+	Assistant_state_pub = n.advertise<se306_project1::AssistantMsg>("assistantStatus", 1000);
 
 	//subscribe to listen to messages coming from stage
 	ros::Subscriber StageOdo_sub = n.subscribe("robot_1/odom",1000, &Assistant::StageOdom_callback, dynamic_cast<Agent*>(this));

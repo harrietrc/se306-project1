@@ -17,7 +17,6 @@
 
 using namespace std;
 
-
 //PriorityQueue *status_queue = PriorityQueue::getInstance();
 
 /**
@@ -30,11 +29,12 @@ void Resident::publishStatus(ros::Publisher Resident_state_pub) {
 	// Creating a message for residentStatus
 	residentState = stateQueue.checkCurrentState();
 	se306_project1::ResidentMsg msg;
+
+	//residentState = "medication";    //hardcoded state
 	msg.state = residentState;
-	msg.currentCheckpoint = currentCheckpoint;
+	msg.currentCheckpoint = g.getCheckpointName(currentCheckpoint);
 	msg.currentCheckpointX = currentCheckpoint.first;
 	msg.currentCheckpointY = currentCheckpoint.second;
-
 	Resident_state_pub.publish(msg);
 }
 
@@ -65,6 +65,12 @@ void Resident::checkStatus(){
 	}
 	if (residentState == "caregiver"){
 		move("BedSouthWest");
+	}
+	if (hunger > 70){
+		stateQueue.addToPQ(hungry);
+	}
+	if (boredom > 70){
+		stateQueue.addToPQ(bored);
 	}
 }
 
@@ -122,7 +128,16 @@ void Resident::friend_callback(const std_msgs::String::ConstPtr& msg)
 */
 void Resident::assistant_callback(se306_project1::AssistantMsg msg)
 {
-	
+
+	ROS_INFO("in call back");
+	if (msg.FoodDelivered == true) {
+		hunger = 100;
+		stateQueue.removeState(hungry);
+	}
+	if (msg.ResidentMedicated == true) {
+		stateQueue.removeState(medication);
+		ROS_INFO("Medicated");
+	}
 	//This is the callback function to process laser scan messages
 	//you can access the range data from msg.ranges[i]. i = sample number
 
@@ -134,15 +149,6 @@ void Resident::assistant_callback(se306_project1::AssistantMsg msg)
  */
 int Resident::run(int argc, char *argv[]) {
 
-	pair<double, double> c1 = make_pair(40,30);
-	pair<double, double> c2 = make_pair(30,40);
-
-	//priorityQueue myQueue;
-	//	myQueue.addToPQ(bored);
-
-	shortestPath.push_back(c1);
-	shortestPath.push_back(c2);
-
 
 	//You must call ros::init() first of all. ros::init() function needs to see argc and argv. The third argument is the name of the node
 	ros::init(argc, argv, "Resident");
@@ -150,6 +156,7 @@ int Resident::run(int argc, char *argv[]) {
 	//NodeHandle is the main access point to communicate with ros.
 	ros::NodeHandle n;
 
+	int count = 0;
 	ros::Rate loop_rate(10);
 
 
@@ -160,6 +167,10 @@ int Resident::run(int argc, char *argv[]) {
 	ros::Publisher Resident_state_pub = n.advertise<se306_project1::ResidentMsg>("residentStatus", 1000);
 
 	ros::Publisher RobotNode_stage_pub = n.advertise<geometry_msgs::Twist>("robot_0/cmd_vel",1000); 
+
+	ros::Subscriber assistantSub = n.subscribe("assistantStatus",1000, &Resident::assistant_callback, this);
+
+
 
 	//subscribe to listen to messages coming from stage
 	ros::Subscriber StageOdo_sub = n.subscribe("robot_0/odom",1000, &Agent::StageOdom_callback, dynamic_cast<Agent*>(this));
@@ -181,6 +192,7 @@ int Resident::run(int argc, char *argv[]) {
 	int sleep = time_conversion::simHoursToRealSecs(15);
 	int friends = time_conversion::simHoursToRealSecs(9);
 	int friendsDone = time_conversion::simHoursToRealSecs(11.5);
+
 	ros::Timer wakeUpTimer = n.createTimer(ros::Duration(wakeup), &Resident::wakeCallback, this);
 	ros::Timer caregiverTimer = n.createTimer(ros::Duration(caregiverServices), &Resident::caregiverServicesCallback, this);
 	ros::Timer medicationTimer = n.createTimer(ros::Duration(morningMedication), &Resident::medicationCallback, this);
@@ -194,7 +206,7 @@ int Resident::run(int argc, char *argv[]) {
 
 	//velocity of this RobotNode
 	geometry_msgs::Twist RobotNode_cmdvel;
-
+	//stateQueue.addToPQ(medication);
 	while (ros::ok())
 	{
 		//messages to stage
@@ -204,11 +216,20 @@ int Resident::run(int argc, char *argv[]) {
 		//publish the message
 		RobotNode_stage_pub.publish(RobotNode_cmdvel);
 
-		checkStatus();
-		publishStatus(Resident_state_pub);
+		if (count % 10 == 0){
+			if (count % 50 == 0){
+				boredom += 2;
+				hunger += 1;
+			}
+			triggerRandomEvents();
+			checkStatus();
+			publishStatus(Resident_state_pub);
+		//ROS_INFO("State is: %s",residentState.c_str());
+		}
 
 		ros::spinOnce();
 		loop_rate.sleep();
+		count++;
 	}
 
 	return 0;

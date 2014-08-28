@@ -10,12 +10,14 @@ class Assistant : public Agent
 
 		Assistant() : Agent(){
 
+			currentCheckpoint.first = 17;
+			currentCheckpoint.second = 17;
 			atKitchen = false;
 			finishedCooking = false;
 
 			atBedroom = false;
 			residentEntertained = false;
-
+			foodDelivered = false;
 			isMedicated = false;
 		}
 
@@ -38,7 +40,7 @@ class Assistant : public Agent
 		// Boolean variables
 		bool atKitchen;
 		bool finishedCooking;
-
+		bool foodDelivered;
 		bool atBedroom;
 		bool residentEntertained;
 

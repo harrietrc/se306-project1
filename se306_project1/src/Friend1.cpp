@@ -35,13 +35,13 @@ void Friend1::delegate(se306_project1::ResidentMsg msg) {
 *	@brief Main function for the Friend process.
 *	Controls node setup and periodic events.
 */
-int Friend::run(int argc, char *argv[])
+int Friend1::run(int argc, char *argv[])
 {
 
 	/* -- Initialisation -- */
 	
 	//You must call ros::init() first of all. ros::init() function needs to see argc and argv. The third argument is the name of the node
-	ros::init(argc, argv, "Friend");
+	ros::init(argc, argv, "Friend1");
 
 	//NodeHandle is the main access point to communicate with ros.
 	ros::NodeHandle n;
@@ -62,11 +62,12 @@ int Friend::run(int argc, char *argv[])
 	ros::Subscriber StageOdo_sub = n.subscribe("robot_0/odom",1000, &Agent::StageOdom_callback, dynamic_cast<Agent*>(this));
 
 	//custom Resident subscriber to "resident/state"
-	ros::Subscriber resident_sub = n.subscribe<se306_project1::ResidentMsg>("residentStatus",1000, &Friend::delegate, this);
+	ros::Subscriber resident_sub = n.subscribe<se306_project1::ResidentMsg>("residentStatus",1000, &Friend1::delegate, this);
 
 	// Periodic callback
 	int friendsDone = time_conversion::simHoursToRealSecs(11.5);
-	ros::Timer friendsDoneTimer = n.createTimer(ros::Duration(friendsDone), &Resident::friendsDoneCallback, this);
+	ros::Timer friendsDoneTimer = n.createTimer(ros::Duration(friendsDone), &Friend1::friendsDoneCallback, this);
+
 
 	////messages
 	//velocity of this RobotNode
@@ -104,6 +105,7 @@ int Friend::run(int argc, char *argv[])
 *	@brief Redirects to main function (run()) of the node.
 */
 int main(int argc, char *argv[]) {
-	Friend *a = new Friend();
-	a->Friend::run(argc, argv);
+
+	Friend1 *a = new Friend1();
+	a->Friend1::run(argc, argv);
 }

@@ -86,7 +86,7 @@ int Friend::run(int argc, char *argv[])
 
 	// Periodic callback
 	int friendsDone = time_conversion::simHoursToRealSecs(11.5);
-	ros::Timer friendsDoneTimer = n.createTimer(ros::Duration(friendsDone), &Resident::friendsDoneCallback, this);
+	ros::Timer friendsDoneTimer = n.createTimer(ros::Duration(friendsDone), &Friend::friendsDoneCallback, this);
 
 	////messages
 	//velocity of this RobotNode
@@ -100,8 +100,8 @@ int Friend::run(int argc, char *argv[])
 	while (ros::ok())
 	{
 		//messages to stage
-		//RobotNode_cmdvel.linear.x = linear_x;
-		//RobotNode_cmdvel.angular.z = angular_z;
+		RobotNode_cmdvel.linear.x = linear_x;
+		RobotNode_cmdvel.angular.z = angular_z;
 			
 		//publish the message
 		RobotNode_stage_pub.publish(RobotNode_cmdvel);

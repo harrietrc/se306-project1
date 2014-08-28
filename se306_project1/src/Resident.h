@@ -25,6 +25,8 @@ class Resident : public Agent
 			boredom = 0;
 			stateQueue = priorityQueue();
 			residentState = stateQueue.checkCurrentState();
+			originName = "ResidentOrigin";
+			currentCheckpoint = std::make_pair(26,48);
 		}
 
 		/**

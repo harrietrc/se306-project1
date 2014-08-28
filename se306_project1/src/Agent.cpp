@@ -14,16 +14,6 @@
 
 using namespace std;
 
-/**
-*	@note we need a way to get the start co-ordinates of the agent, whether from stage or from the world file (if possible)
-*	and so set the origin name to the correct one for that node.
-*/
-void setOriginName(int agentNum, char* agentName) {
-	if (strcmp(agentName, "Assistant")) {
-
-	}
-}
-
 void Agent::stopMoving(){
 	isMoving = false;
 	linear_x = 0;
@@ -51,7 +41,8 @@ void Agent::StageOdom_callback(nav_msgs::Odometry msg) {
 	px = msg.pose.pose.position.x;
 	py = msg.pose.pose.position.y;
 	if (isMoving == true){
-		move(originName);
+		// move(originName); // Only correct if this doesn't get called
+		move(originName);//TEMPORARY!
 	}
 }
 
@@ -74,23 +65,24 @@ void Agent::move(std::string goalName){
 
 	if (isMoving == false){
 		isMoving = true;
-		currentCheckpoint.first = 17; // can get rid of this
-		currentCheckpoint.second = 17; // ditto
+	//	currentCheckpoint.first = 17; // can get rid of this
+	//	currentCheckpoint.second = 17; // ditto
 
 		//Get the path stuff
 		std::string cname = g.getCheckpointName(currentCheckpoint);
 		Agent::setPath(cname, goalName);
 
-		// for (int i=0; i<shortestPath.size();i++) {
-		// 	printf("%f %f\n", shortestPath[i].first, shortestPath[i].second);
-		// }
+	/*	 for (int i=0; i<shortestPath.size();i++) {
+			 ROS_INFO("checkpoint x: %f",shortestPath[i].first);
+			 ROS_INFO("checkpoint y: %f",shortestPath[i].second);
+
+		 }
+		 */
 	}
 
 	pair<double, double> nextCheckpoint = shortestPath.at(shortestPathIndex);
-
 	if (currentCheckpoint.first == nextCheckpoint.first &&
 			currentCheckpoint.second == nextCheckpoint.second){
-
 		shortestPathIndex++;
 		if (shortestPathIndex >= shortestPath.size()){
 			shortestPathIndex = 0;
@@ -99,7 +91,7 @@ void Agent::move(std::string goalName){
 		}else{
 			nextCheckpoint = shortestPath.at(shortestPathIndex);
 			checkpointAngle = calculateGoalAngle(nextCheckpoint);
-			//ROS_INFO("goal Angle: %f",checkpointAngle);
+
 			isClockwise = isTurnClockwise();
 		}
 
@@ -110,7 +102,6 @@ void Agent::move(std::string goalName){
 	}else{
 		moveForward(nextCheckpoint);
 	}
-
 }
 
 
@@ -156,16 +147,11 @@ void Agent::turn(){
 void Agent::moveForward(pair<double,double> nextCheckpoint){
 
 	linear_x = 5;
-	double minLinearX = 0.5;
+	double minLinearX = 1;
 
 	double distanceFromCheckpoint = sqrt(pow((nextCheckpoint.first - px),2) + pow((nextCheckpoint.second - py),2));
 
 
-//	ROS_INFO("Distance: %f", distanceFromCheckpoint);
-//	ROS_INFO("px: %f", px);
-//	ROS_INFO("py: %f", py);
-//	ROS_INFO("check x: %f", nextCheckpoint.first );
-//	ROS_INFO("check y: %f", nextCheckpoint.second);
 
 	// Check to ensure that linear velocity doesn't decrease if the distance between the checkpoints is higher than 40.
 	double distanceRatio = (distanceFromCheckpoint / 40);
