@@ -80,7 +80,7 @@ class Agent
 		double calculateGoalAngle(std::pair<double,double> goalCheckpoint);
 		void move(std::string goal);
 		bool isTurnClockwise();
-
+		void stopMoving();
 		/* -- Communication and co-ordination -- */
 	
 };
