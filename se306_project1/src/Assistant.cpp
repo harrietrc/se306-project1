@@ -158,6 +158,7 @@ int Assistant::run(int argc, char **argv)
 	ros::Rate loop_rate(10);
 
 
+
 	/* -- Publish / Subscribe -- */
 
 	//advertise() function will tell ROS that you want to publish on a given topic_
@@ -169,11 +170,11 @@ int Assistant::run(int argc, char **argv)
 
 	////messages
 	//velocity of this RobotNode
+	move("HouseCentre");
+
 	geometry_msgs::Twist RobotNode_cmdvel;
 	while (ros::ok())
 	{
-			ROS_INFO("px %f",px);
-			ROS_INFO("py %f",py);
 		//messages to stage
 		RobotNode_cmdvel.linear.x = linear_x;
 		RobotNode_cmdvel.angular.z = angular_z;
