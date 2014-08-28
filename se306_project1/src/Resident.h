@@ -25,6 +25,7 @@ class Resident : public Agent
 
 		void doctor_callback(se306_project1::DoctorMsg msg);
 		void assistant_callback(se306_project1::AssistantMsg msg);
+		void friend_callback(const std_msgs::String::ConstPtr& msg);
 		bool doSleep(const ros::TimerEvent&);	
 		void publishStatus();
 
