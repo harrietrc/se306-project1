@@ -30,7 +30,7 @@ void Resident::publishStatus(ros::Publisher Resident_state_pub) {
 	// Creating a message for residentStatus
 	residentState = stateQueue.checkCurrentState();
 	se306_project1::ResidentMsg msg;
-	residentState = "hunger";
+	//residentState = "hunger";    //hardcoded state
 	msg.state = residentState;
 	msg.currentCheckpoint = "ResidentOrigin";
 	msg.currentCheckpointX = currentCheckpoint.first;
@@ -159,6 +159,10 @@ int Resident::run(int argc, char *argv[]) {
 
 	ros::Publisher RobotNode_stage_pub = n.advertise<geometry_msgs::Twist>("robot_0/cmd_vel",1000); 
 
+	ros::Subscriber assistantSub = n.subscribe("assistantStatus",1000, &Resident::assistant_callback, this);
+
+
+
 	//subscribe to listen to messages coming from stage
 	ros::Subscriber StageOdo_sub = n.subscribe("robot_0/odom",1000, &Agent::StageOdom_callback, dynamic_cast<Agent*>(this));
 	
@@ -179,6 +183,7 @@ int Resident::run(int argc, char *argv[]) {
 	int sleep = time_conversion::simHoursToRealSecs(15);
 	int friends = time_conversion::simHoursToRealSecs(9);
 	int friendsDone = time_conversion::simHoursToRealSecs(11.5);
+
 	ros::Timer wakeUpTimer = n.createTimer(ros::Duration(wakeup), &Resident::wakeCallback, this);
 	ros::Timer caregiverTimer = n.createTimer(ros::Duration(caregiverServices), &Resident::caregiverServicesCallback, this);
 	ros::Timer medicationTimer = n.createTimer(ros::Duration(morningMedication), &Resident::medicationCallback, this);

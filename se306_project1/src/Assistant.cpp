@@ -94,12 +94,15 @@ void Assistant::cook(se306_project1::ResidentMsg msg) {
 		if (distanceFromCheckpoint < 5) {
 			isMoving = false;
 			linear_x = 0;
+
+			se306_project1::AssistantMsg amsg;
+			amsg.FoodDelivered = true;
+			Assistant_state_pub.publish(amsg);
+
 			isFacingCorrectly = false;
 			foodDelivered = true;
-
 			currentCheckpoint.first = lastCheckpointX;
 			currentCheckpoint.second = lastCheckpointY;
-
 			move("HouseCentre");
 
 		}
@@ -170,6 +173,7 @@ void Assistant::delegate(se306_project1::ResidentMsg msg) {
 	// alternatively we could send the status in another format.
 	// enum residentStates {hunger,healthLow,bored,emergency,tired,caregiver,friends,medication,idle};
 
+
 	if (msg.state != "emergency") {
 		// check msg if cook do cooking e.t.c
 		if (msg.state == "hunger") {
@@ -209,7 +213,7 @@ int Assistant::run(int argc, char **argv)
 	//advertise() function will tell ROS that you want to publish on a given topic_
 	//to stage
 	ros::Publisher RobotNode_stage_pub = n.advertise<geometry_msgs::Twist>("robot_1/cmd_vel",1000);
-	Assistant_state_pub = n.advertise<se306_project1::ResidentMsg>("assistantStatus", 1000);
+	Assistant_state_pub = n.advertise<se306_project1::AssistantMsg>("assistantStatus", 1000);
 
 	//subscribe to listen to messages coming from stage
 	ros::Subscriber StageOdo_sub = n.subscribe("robot_1/odom",1000, &Assistant::StageOdom_callback, dynamic_cast<Agent*>(this));
