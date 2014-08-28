@@ -69,18 +69,19 @@ void Agent::move(std::string goalName){
 
 	if (isMoving == false){
 		isMoving = true;
-		currentCheckpoint.first = 32; // can get rid of this
-		currentCheckpoint.second = 20; // ditto
+		currentCheckpoint.first = 17; // can get rid of this
+		currentCheckpoint.second = 17; // ditto
 		//Get the path stuff
 		std::string cname = g.getCheckpointName(currentCheckpoint);
 		Agent::setPath(cname, goalName);
-		for (int i=0; i<shortestPath.size();i++) {
-			printf("%f %f\n", shortestPath[i].first, shortestPath[i].second);
-		}
+		// for (int i=0; i<shortestPath.size();i++) {
+		// 	printf("%f %f\n", shortestPath[i].first, shortestPath[i].second);
+		// }
 	}
 
 	pair<double, double> nextCheckpoint = shortestPath.at(shortestPathIndex);
-	printf("Next: %f %f - %s\n", nextCheckpoint.first, nextCheckpoint.second, g.getCheckpointName(nextCheckpoint).c_str());
+	// printf("Next: %f %f - %s\n", nextCheckpoint.first, nextCheckpoint.second, g.getCheckpointName(nextCheckpoint).c_str());
+	// printf("current: %f %f - %s\n", currentCheckpoint.first, currentCheckpoint.second, g.getCheckpointName(currentCheckpoint).c_str());
 
 	if (currentCheckpoint.first == nextCheckpoint.first &&
 			currentCheckpoint.second == nextCheckpoint.second){
@@ -126,6 +127,7 @@ void Agent::turn(){
 
 
 	double angleDifference = fabs(checkpointAngle - currentAngle);
+	printf("%f %f %f\n", angleDifference, checkpointAngle, currentAngle);
 
 	if (angleDifference > M_PI) {
 		angleDifference = 2 * M_PI - angleDifference;
@@ -195,6 +197,8 @@ double Agent::calculateGoalAngle(pair<double, double> goalCheckpoint){
 	//Finding the vector that the robot is facing and the goal vector
 	double goalVectorX = goalCheckpoint.first - px;
 	double goalVectorY = goalCheckpoint.second - py;
+	printf("goalCheckpoin.tfirst: %f px: %f\n", goalCheckpoint.first, px);
+	printf("goalCheckpoin.tsec: %f py: %f\n", goalCheckpoint.second, py);
 
 	double goalAngle = atan2(goalVectorY, goalVectorX); //pi <= goalAngle < -pi
 
@@ -215,4 +219,5 @@ double Agent::calculateGoalAngle(pair<double, double> goalCheckpoint){
 /*
  * MOVE METHODS {END}
  */
+
 
