@@ -21,19 +21,13 @@ int ProcessManager::nodeProcess(std::string executableName, int nodeNumber) {
 	if (child == 0) {
 		std::stringstream val;
 		val << nodeNumber;
-		const char* argNumConst = val.str().c_str();
+		const char* argNum = val.str().c_str();
 
-		char* argNum = const_cast<char*>(argNumConst);
+		std::cout<< "starting process with name " << executableName << " and nodeNumber " << argNum << "\n";
+		std::string path = "./bin/" + executableName;
 
-		char* execName = const_cast<char*>(executableName.c_str());
-
-		std::stringstream pathm9;
-		pathm9 << "./bin/" << executableName;
-
-		char* commands[] = { execName, (char *)0 };
-
-		execvp(pathm9.str().c_str(), commands);
-
+		execl(path.c_str(), executableName.c_str(), argNum, (char*)0);
+		//wait(NULL);
 		return 1;
 	} else {
 		return 1;
