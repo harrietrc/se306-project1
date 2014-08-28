@@ -58,16 +58,16 @@ void Assistant::medicate(se306_project1::ResidentMsg msg) {
 */
 void Assistant::cook(se306_project1::ResidentMsg msg) {
 
-	double lastCheckpointX = shortestPath.at(shortestPath.size()-1).first;
-	double lastCheckpointY = shortestPath.at(shortestPath.size()-1).second;
+	//double lastCheckpointX = shortestPath.at(shortestPath.size()-1).first; //fucking throws errors if shortestPath size is 0
+	//double lastCheckpointY = shortestPath.at(shortestPath.size()-1).second;
 
-	double distanceFromCheckpoint = sqrt(pow((lastCheckpointX - px),2) + pow((lastCheckpointY - py),2));
+	//double distanceFromCheckpoint = sqrt(pow((lastCheckpointX - px),2) + pow((lastCheckpointY - py),2));
 
 	atKitchen = true;
 	finishedCooking = true;
 	if (!atKitchen && !finishedCooking) {
 		move("KitchenNorthWest");
-		if (distanceFromCheckpoint < 0.5) {
+		if (g.getCheckpointName(currentCheckpoint) == "KitchenNorthWest") {
 			atKitchen = true;
 			pair<double, double> p1 = make_pair(6,-24);
 			pair<double, double> p2 = make_pair(24,-24);
@@ -90,7 +90,7 @@ void Assistant::cook(se306_project1::ResidentMsg msg) {
 	} else if (atKitchen && !finishedCooking) {
 
 		// The path to simulate the cooking behaviour in the kitchen
-		if ((distanceFromCheckpoint < 0.5) ) { // Final kitchen points (refer to p6)
+		if (currentCheckpoint.first == 6 && currentCheckpoint.second == -28) { // Final kitchen points (refer to p6)
 			finishedCooking = true;
 
 		}
@@ -98,27 +98,25 @@ void Assistant::cook(se306_project1::ResidentMsg msg) {
 	} else if (atKitchen && finishedCooking && !foodDelivered) {
 
 		move(msg.currentCheckpoint);
-		lastCheckpointX = shortestPath.at(shortestPath.size()-1).first;
-		lastCheckpointY = shortestPath.at(shortestPath.size()-1).second;
-		distanceFromCheckpoint = sqrt(pow((lastCheckpointX - px),2) + pow((lastCheckpointY - py),2));
+		//lastCheckpointX = shortestPath.at(shortestPath.size()-1).first;
+		//lastCheckpointY = shortestPath.at(shortestPath.size()-1).second;
+		double distanceFromCheckpoint = sqrt(pow((msg.currentCheckpointX - px),2) + pow((msg.currentCheckpointY - py),2));
 		if (distanceFromCheckpoint < 5) {
-			isMoving = false;
-			linear_x = 0;
+			stopMoving();
 
 			se306_project1::AssistantMsg amsg;
 			amsg.FoodDelivered = true;
 			Assistant_state_pub.publish(amsg);
 
-			isFacingCorrectly = false;
 			foodDelivered = true;
-			currentCheckpoint.first = lastCheckpointX;
-			currentCheckpoint.second = lastCheckpointY;
-			move("Assistant1Origin");
+			currentCheckpoint.first = msg.currentCheckpointX;
+			currentCheckpoint.second = msg.currentCheckpointY;
+			move("HouseCentre");
 
 		}
 	} else if (atKitchen && finishedCooking && foodDelivered) {
-		move("Assistant1Origin");
-		if (distanceFromCheckpoint < 0.5) {
+		move("HouseCentre");
+		if (g.getCheckpointName(currentCheckpoint) == "HouseCentre") {
 			atKitchen = false;
 			finishedCooking = false;
 			foodDelivered = false;
@@ -182,6 +180,7 @@ void Assistant::delegate(se306_project1::ResidentMsg msg) {
 	// Resident status will be a string - one among SILL, ILL, HUNGRY, TIRED BORED, and HEALTHCARE - see Mustafa's pq.
 	// alternatively we could send the status in another format.
 	// enum residentStates {hunger,healthLow,bored,emergency,tired,caregiver,friends,medication,idle};
+
 
 	if (msg.state != "emergency") {
 		// check msg if cook do cooking e.t.c
