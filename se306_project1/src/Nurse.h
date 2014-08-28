@@ -9,7 +9,7 @@ class Nurse : public Visitor {
 		bool readyToHospitalise = false;
 	
 	protected:
-		void doHospitalise(std::string residentCheckpoint);
+		void doHospitalise();
 		void delegate(se306_project1::ResidentMsg msg);
 
 	public:

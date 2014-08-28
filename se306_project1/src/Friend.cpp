@@ -25,11 +25,8 @@ void Friend::doTimedVisit(const ros::TimerEvent&) { // don't know whether if tim
 	// Behaviour should only occur if the simulation time is between the specified start and end times.
 	if (((tnow % dlen) > startTime) && ((tnow % dlen) < endTime)) { // Note that this will run at the end of the duration specified for the timer.
 		if (emergency == false && finishedConvo == false) {
-			while (Visitor::visitResident("Friend1Sofa") == false) // true when this is next to checkpoint
+			while (Visitor::visitResident() == false) // true when this is next to resident then do convo
 			finishedConvo = Visitor::doConverse();
-			if (finishedConvo == true) { // finished convo so friend should go home
-				move("Friend1Origin");
-			}
 		}
 	}
 }
@@ -44,11 +41,8 @@ void Friend::delegate(se306_project1::ResidentMsg msg) {
 		emergency = true; // required variable if timing/scheduling is done within this class
 	} else if (msg.state == "friends") { // resident state when it needs friends to converse with
 		emergency = false; // required variable if timing/scheduling is done within this class
-		if (Visitor::visitResident("Friend1Sofa") == true) { // next to resident, use msg.currentCheckpoint instead
+		if (Visitor::visitResident() == true) { // next to resident
 			finishedConvo = Visitor::doConverse();
-			if (finishedConvo == true) { // finished convo so friend should go home
-				move("Friend1Origin");
-			}
 		}
 	}
 }

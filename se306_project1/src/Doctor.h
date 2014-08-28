@@ -13,8 +13,8 @@ class Doctor : public Visitor
 		bool readyToHospitalise = false;
 		
 	protected:
-		bool doHeal(std::string residentCheckpoint);
-		bool doHospitalise(std::string residentCheckpoint);
+		bool doHeal();
+		bool doHospitalise();
 		void delegate(se306_project1::ResidentMsg msg);
 
 	public:
