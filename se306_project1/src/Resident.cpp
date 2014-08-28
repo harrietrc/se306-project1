@@ -29,6 +29,7 @@ void Resident::publishStatus(ros::Publisher Resident_state_pub) {
 	// Creating a message for residentStatus
 	residentState = stateQueue.checkCurrentState();
 	se306_project1::ResidentMsg msg;
+	//residentState = "medication";    //hardcoded state
 	msg.state = residentState;
 	msg.currentCheckpoint = g.getCheckpointName(currentCheckpoint);
 	msg.currentCheckpointX = currentCheckpoint.first;
@@ -136,7 +137,6 @@ void Resident::assistant_callback(se306_project1::AssistantMsg msg)
 		hunger = 100;
 		stateQueue.removeState(hungry);
 		ROS_INFO("FED");
-		stateSetOnce = true;
 	}
 	if (msg.ResidentMedicated == true) {
 		stateQueue.removeState(medication);
@@ -211,6 +211,7 @@ int Resident::run(int argc, char *argv[]) {
 
 	//velocity of this RobotNode
 	geometry_msgs::Twist RobotNode_cmdvel;
+
 	while (ros::ok())
 	{
 		//messages to stage
