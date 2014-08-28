@@ -44,3 +44,5 @@ rosbuild_add_executable(Nurse src/Nurse.cpp src/Agent.cpp src/CheckPointGraph.cp
 #rosbuild_add_executable(R0 src/R0.cpp)
 rosbuild_add_executable(Main src/Main.cpp src/AgentFactory.cpp src/ProcessManager.cpp)
 #rosbuild_add_executable(R1 src/R1.cpp)
+#rosbuild_add_gtest(utest test/utest.cpp)
+
