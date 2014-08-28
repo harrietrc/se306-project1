@@ -63,8 +63,6 @@ void Assistant::cook(se306_project1::ResidentMsg msg) {
 
 	//double distanceFromCheckpoint = sqrt(pow((lastCheckpointX - px),2) + pow((lastCheckpointY - py),2));
 
-	atKitchen = true;
-	finishedCooking = true;
 	if (!atKitchen && !finishedCooking) {
 		move("KitchenNorthWest");
 		if (g.getCheckpointName(currentCheckpoint) == "KitchenNorthWest") {
@@ -197,6 +195,9 @@ void Assistant::delegate(se306_project1::ResidentMsg msg) {
 		} else {
 			move("Assistant1Origin");
 		}
+	} else {
+		move("Assistant1Origin");
+
 	}
 
 }
