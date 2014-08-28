@@ -17,7 +17,6 @@
 
 using namespace std;
 
-
 //PriorityQueue *status_queue = PriorityQueue::getInstance();
 
 /**
