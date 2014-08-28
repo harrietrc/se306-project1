@@ -30,7 +30,7 @@ void Assistant::medicate(se306_project1::ResidentMsg msg) {
 	//if (!isMedicated) {
 		move(msg.currentCheckpoint);
 		if (distanceFromCheckpoint < 5) {
-			/*isMoving = false;
+			isMoving = false;
 			linear_x = 0;
 			ROS_INFO("close to end");
 			isMedicated == true;
@@ -40,10 +40,10 @@ void Assistant::medicate(se306_project1::ResidentMsg msg) {
 			amsg.ResidentMedicated = true;
 			Assistant_state_pub.publish(amsg);
 
-			currentCheckpoint.first = lastCheckpointX;
-			currentCheckpoint.second = lastCheckpointY;
+			currentCheckpoint.first = msg.currentCheckpointX;
+			currentCheckpoint.second = msg.currentCheckpointY;
 			move("Assistant1Origin");
-			*/
+
 		}
 //	}else if (isMedicated) {
 	//	move("HouseCentre");
@@ -180,10 +180,10 @@ void Assistant::delegate(se306_project1::ResidentMsg msg) {
 	// alternatively we could send the status in another format.
 	// enum residentStates {hunger,healthLow,bored,emergency,tired,caregiver,friends,medication,idle};
 
-
 	if (msg.state != "emergency") {
 		// check msg if cook do cooking e.t.c
 		if (msg.state == "hungry") {
+			ROS_INFO("inside");
 			cook(msg);
 		}
 
