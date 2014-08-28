@@ -7,13 +7,13 @@
 *	May be simple - e.g. toggling visitor visibility, or moving to the door.
 *	@returns true if this has moved next to the Resident
 */
-bool Visitor::visitResident() {
+bool Visitor::visitResident(std::string residentCheckpoint) {
 	double lastCheckpointX = shortestPath.at(shortestPath.size()-1).first;
 	double lastCheckpointY = shortestPath.at(shortestPath.size()-1).second;
 
 	double distanceFromCheckpoint = sqrt(pow((lastCheckpointX - px),2) + pow((lastCheckpointY - py),2));
 	
-	// move(<toResident>); // maybe move to living room area instead?
+	move(residentCheckpoint);
 	if (distanceFromCheckpoint < 0.5) { // next to resident
 		return true;
 	}
@@ -36,7 +36,6 @@ bool Visitor::doConverse() {
 	}
 
 	// convo should be done and visitor should leave
-	// move(outsideHouse);
 	finishedConvo = true;
 	
 	return finishedConvo;

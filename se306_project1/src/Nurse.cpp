@@ -15,7 +15,7 @@
 */
 void Nurse::delegate(se306_project1::ResidentMsg msg) {
 	if (msg.state == "sill") { // seriously ill - emergency
-		doHospitalise();
+		doHospitalise(msg.currentCheckpoint);
 	} else {
 		readyToHospitalise = false;
 	}
@@ -25,7 +25,7 @@ void Nurse::delegate(se306_project1::ResidentMsg msg) {
 *	@brief Takes the resident to hospital 
 *	(non-doctor-induced emergency, despite the function name...)
 */
-void Nurse::doHospitalise() {
+void Nurse::doHospitalise(std::string residentCheckpoint) {
 
 	double lastCheckpointX = shortestPath.at(shortestPath.size()-1).first;
 	double lastCheckpointY = shortestPath.at(shortestPath.size()-1).second;
@@ -33,8 +33,7 @@ void Nurse::doHospitalise() {
 	double distanceFromCheckpoint = sqrt(pow((lastCheckpointX - px),2) + pow((lastCheckpointY - py),2));
 	
 	if (readyToHospitalise == false) {
-		// move(<toResident>);
-		if (distanceFromCheckpoint < 0.5) { // next to resident
+		if (Visitor::visitResident(residentCheckpoint) == true) { // next to resident
 			readyToHospitalise = true;
 		}
 	}

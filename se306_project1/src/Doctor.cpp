@@ -16,11 +16,11 @@
 */
 void Doctor::delegate(se306_project1::ResidentMsg msg) {
 	if (msg.state == "ill") { // ill
-		doHeal();
+		doHeal(msg.currentCheckpoint);
 	}
 
 	if (msg.state == "sill") { // seriously ill - emergency
-		doHospitalise();
+		doHospitalise(msg.currentCheckpoint);
 	}
 }
 
@@ -28,21 +28,21 @@ void Doctor::delegate(se306_project1::ResidentMsg msg) {
 *	@brief Medicates/heals/diagnoses resident, improving their health.
 *	@returns true if behaviour is successful.
 */
-bool Doctor::doHeal() {
+bool Doctor::doHeal(std::string residentCheckpoint) {
 	
 	if (healing == false && readyToHeal == false) {
 		ROS_INFO("Doctor is on the way"); // print once that the doctor is coming
 		healing = true;
 	}
 	if (healing == true && readyToHeal == false) {
-		if (Visitor::visitResident() == true) { // next to resident
+		if (Visitor::visitResident(residentCheckpoint) == true) { // next to resident
 			readyToHeal = true;
 		}
 	}
 
 	if (readyToHeal == true && healing == true) { // Resident should be healed by now so go back outside
 		healing = false;
-		// move(<outsideHouse>);
+		move("DoctorOrigin"); // go back outside
 	}
 	
 	return readyToHeal; // This method doesn't have to return a bool but idk
@@ -53,7 +53,7 @@ bool Doctor::doHeal() {
 *	(non-doctor-induced emergency, despite the function name...)
 *	@returns true if behaviour is successful.
 */
-bool Doctor::doHospitalise() {
+bool Doctor::doHospitalise(std::string residentCheckpoint) {
 
 	if (hospitalise == false && hospitalise == false) {
 		// behaviour is that when the resident is seriously ill, the doctor including two nurses will come to the resident
@@ -62,14 +62,14 @@ bool Doctor::doHospitalise() {
 		hospitalise = true;
 	}
 	if (hospitalise == true && readyToHospitalise == false) {
-		if (Visitor::visitResident() == true) { // next to resident
+		if (Visitor::visitResident(residentCheckpoint) == true) { // next to resident
 			readyToHospitalise = true;
 		}
 	}
 	
 	if (readyToHospitalise == true && hospitalise == true) { // go back outside once Doctor is next to resident
 		hospitalise = false;
-		// move(<outsideHouse>);
+		move("DoctorOrigin"); // go back outside
 	}
 	
 	return readyToHospitalise; // This method doesn't have to return a bool but idk

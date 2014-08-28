@@ -10,7 +10,7 @@ class Visitor : public Agent {
 		bool emergency = false; // required if timing/scheduling is done within this class
 		bool finishedConvo = false;
 
-		bool visitResident();
+		bool visitResident(std::string residentCheckpoint);
 		bool doConverse();
 		virtual void delegate(se306_project1::ResidentMsg msg) = 0;
 
