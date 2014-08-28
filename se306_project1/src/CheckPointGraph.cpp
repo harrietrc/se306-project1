@@ -12,7 +12,8 @@ const char* nameArr[] = {
 		"KitchenNorthWest","KitchenSouthWest","KitchenSouthEast","KitchenNorthEast","HouseCentre","CentreStool","NextToCentreStool",
 		"BedroomEntranceWest","BedroomEntranceEast","CouchesNorthEast","CouchesNorthCentre","BathroomEntranceWest","BathroomEntranceEast",
 		"Shower","BathroomCentre","BedSouthWest","BedSouthEast","BedNorthEast","ResidentOrigin", "Assistant1Origin", "Assistant2Origin",
-		"DoctorOrigin","Nurse1Origin","Nurse2Origin","CaregiverOrigin","Friend1Origin","Friend2Origin","Friend3Origin"
+		"DoctorOrigin","Nurse1Origin","Nurse2Origin","CaregiverOrigin","Friend1Origin","Friend2Origin","Friend3Origin","AboveSofa",
+		"Friend1Sofa", "Friend2Sofa", "Friend3Sofa","ResidentSofa"
 };
 
 /**
@@ -20,9 +21,9 @@ const char* nameArr[] = {
 * 	Gives x position and y position for each co-ordinate
 */
 int checkpoints[][2] = {
-	{-27,-40},{-20,-40},{-24,-12},{-18,-18},{0,-18},{0,-12},{6,-24},{6,-28},{24,-28},{24,-24},{0,6},{24,-10},{20,-6},{0,20},
+	{-27,-40},{-20,-40},{-28,-12},{-18,-18},{0,-18},{0,-12},{6,-24},{6,-28},{24,-28},{24,-24},{0,6},{24,-10},{20,-6},{0,20},
 	{4,22},{0,18},{-24,18},{-26,22},{-18,22},{-32,45},{-24,36},{6,30},{26,30},{30,45},
-	{26,48}, {17,17}, {32,18}, {-33,-46}, {-36,-48}, {-30,-48}, {-8,-46}, {-20,-46}, {-23,-46}, {-20,-48}
+	{26,48}, {17,17}, {32,18}, {-33,-46}, {-36,-48}, {-30,-48}, {-8,-46}, {-20,-46}, {-23,-46}, {-20,-48}, {-14,6}, {-24,6},{-16,0},{-16,-8},{-17, 6}
 };
 
 std::vector<std::string> checkpointNames(begin(nameArr), end(nameArr)); /*!< Vector of checkpoint names. See nameArr[]. */
@@ -54,7 +55,8 @@ E paths[] = {
 	 E("CaregiverOrigin","FrontDoorEast"), E("BedSouthEast","BedSouthWest"),
 	 E("Assistant1Origin","CouchesNorthEast"), E("Assistant2Origin","CouchesNorthEast"), E("ResidentOrigin","BedNorthEast"),
 	 E("HouseCentre","CentrePassageSouth"), E("Assistant1Origin","BedroomEntranceWest"),
-	 E("Assistant1Origin","BedroomEntranceWest"), E("Assistant2Origin","Assistant1Origin"), E("BedSouthWest","BedroomEntranceWest")
+	 E("Assistant1Origin","BedroomEntranceWest"), E("Assistant2Origin","Assistant1Origin"), E("BedSouthWest","BedroomEntranceWest"),
+	 E("AboveSofa", "HouseCentre")
 }; /*!< Defines edges between checkpoints */
 
 /* -- Map of names to co-ordinates -- */

@@ -125,7 +125,7 @@ door( pose [ -8.5 -37.5 0 0 ] name "r8" color "light steel blue" size [12 1.5 12
 
 ########## Furniture ##########
 
-sofa( pose [ -9.000 0.000 0.000 0.000 ] name "f1" color "steel blue")			#sofa 1
+sofa( pose [ -9.000 -5.000 0.000 0.000 ] name "f1" color "steel blue")			#sofa 1
 sofa( pose [ -19.500 12.500 0.000 90.000 ] name "f2" color "steel blue" size [7 14 7]) #sofa 2
 table( pose [ -21 0 0 0 ] name "f3" color "tan")		   #coffee table
 
