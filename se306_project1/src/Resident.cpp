@@ -13,6 +13,7 @@
 #include <stdlib.h>
 #include "Resident.h"
 #include "priorityQueue.h"
+#include "time_conversion.hpp"
 
 using namespace std;
 
@@ -37,6 +38,30 @@ void Resident::publishStatus(ros::Publisher Resident_state_pub) {
 	Resident_state_pub.publish(msg);
 
 
+}
+
+void Resident::triggerRandomEvents(){
+
+	int randomGeneratedForEmergency = rand() % 100;
+	int randomGeneratedForIll = rand() % 100;
+
+
+	if (randomGeneratedForEmergency <= 3){
+		stateQueue.addToPQ(emergency);
+		health = 10;
+	}
+
+	if (randomGeneratedForIll <= 20){
+		health = health - 5;
+		if (health < 50){
+			stateQueue.addToPQ(healthLow);
+		}
+	}
+
+}
+
+void Resident::medicationCallback(const ros::TimerEvent&){
+	ROS_INFO ("Medicate");
 }
 
 /**
@@ -107,7 +132,6 @@ int Resident::run(int argc, char *argv[]) {
 
 	ros::Rate loop_rate(10);
 
-	ros::Time time = ros::Time::now();
 
 	/* -- Publish / Subscribe -- */
 
@@ -125,6 +149,15 @@ int Resident::run(int argc, char *argv[]) {
 	
 	// Resident subscribes to this topic by Friend
 	ros::Subscriber friend_sub = n.subscribe("visitorConvo", 1000, &Resident::friend_callback, this);
+
+	// Periodic callback
+	int morningMedication = time_conversion::simHoursToRealSecs(4);
+	int afternoonMedication = time_conversion::simHoursToRealSecs(8);
+	int nightMedication = time_conversion::simHoursToRealSecs(13);
+	ros::Timer medicationTimer = n.createTimer(ros::Duration(morningMedication), &Resident::medicationCallback, this);
+	ros::Timer medicationTimer2 = n.createTimer(ros::Duration(afternoonMedication), &Resident::medicationCallback, this);
+	ros::Timer medicationTimer3 = n.createTimer(ros::Duration(nightMedication), &Resident::medicationCallback, this);
+
 
 	//velocity of this RobotNode
 	geometry_msgs::Twist RobotNode_cmdvel;

@@ -70,6 +70,11 @@ void priorityQueue::addToPQ(residentStates currentState) {
 	if (currentState == emergency) {
 		removeState(healthLow);
 	}
+	if (currentState == healthLow) {
+		if(isStateInPQ(emergency)) {
+			return;
+		}
+	}
 
 
 

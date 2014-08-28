@@ -3,7 +3,7 @@
 
 namespace time_conversion {
 	/* Length of a simulated day in seconds. See time_conversion.hpp */
-	const int DAY_LENGTH = 120;
+	const int DAY_LENGTH = 720;
 	
 	/* Converts a number of hours in the simulator to seconds in real time. */
 	int simHoursToRealSecs(double hours) {
