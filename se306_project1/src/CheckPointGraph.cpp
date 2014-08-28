@@ -21,7 +21,7 @@ const char* nameArr[] = {
 */
 int checkpoints[][2] = {
 	{-27,-40},{-20,-40},{-24,-12},{-18,-18},{0,-18},{0,-12},{6,-24},{6,-28},{24,-28},{24,-24},{0,6},{24,-10},{20,-6},{0,20},
-	{6,22},{-6,18},{-24,18},{-26,22},{-18,22},{-32,45},{-24,36},{6,30},{26,30},{30,45},
+	{6,22},{0,18},{-24,18},{-26,22},{-18,22},{-32,45},{-24,36},{6,30},{26,30},{30,45},
 	{26,48}, {17,17}, {32,18}, {-33,-46}, {-36,-48}, {-30,-48}, {-8,-46}, {-20,-46}, {-23,-46}, {-20,-48}
 };
 
@@ -42,18 +42,19 @@ E paths[] = {
 	 E("FrontDoorWest","LivingRoomNorthWest"), E("FrontDoorEast", "LivingRoomNorthEast"), E("LivingRoomNorthWest","CentrePassageNorth"),
 	 E("LivingRoomNorthEast","CentrePassageSouth"), E("CentrePassageNorth","KitchenNorthWest"), E("CentrePassageSouth","KitchenNorthWest"),
 	 E("KitchenNorthWest","KitchenNorthEast"), E("KitchenNorthEast","KitchenSouthEast"), E("KitchenSouthEast","KitchenSouthWest"),
-	 E("KitchenSouthWest","KitchenNorthWest"), E("CentrePassageSouth","NextToCentreStool"), E("CentrePassageNorth","NextToCentreStool"),
-	 E("NextToCentreStool","CentreStool"), E("NextToCentreStool","HouseCentre"), E("CentrePassageNorth","HouseCentre"),
+	 E("KitchenSouthWest","KitchenNorthWest"), E("CentrePassageSouth","CentrePassageNorth"), E("CentrePassageNorth","NextToCentreStool"),
+	 E("NextToCentreStool","CentreStool"), E("NextToCentreStool","HouseCentre"), 
 	 E("CentrePassageNorth","HouseCentre"), E("HouseCentre", "CouchesNorthEast"), E("CouchesNorthEast","CouchesNorthCentre"),
 	 E("CouchesNorthEast","BedroomEntranceEast"), E("CouchesNorthEast","BedroomEntranceWest"), E("CouchesNorthCentre","BathroomEntranceEast"),
-	 E("CouchesNorthCentre","BedroomEntranceWest"), E("BathroomEntranceEast","BathroomCentre"), E("BathroomEntranceWest","BathroomCentre"),
+	 E("BathroomEntranceEast","BathroomCentre"), E("BathroomEntranceWest","BathroomCentre"),
 	 E("BathroomCentre","Shower"), E("BedroomEntranceWest","BedSouthWest"), E("BedroomEntranceEast","BedSouthEast"), 
-	 E("BedSouthEast","BedNorthEast"), E("Origin","BedSouthEast"),
+	 E("BedSouthEast","BedNorthEast"), E("ResidentOrigin","BedSouthEast"),
 	 E("DoctorOrigin","FrontDoorWest"), E("Nurse1Origin","FrontDoorWest"), E("Nurse2Origin","FrontDoorWest"),
 	 E("Friend1Origin","FrontDoorEast"), E("Friend2Origin","FrontDoorEast"), E("Friend3Origin","FrontDoorEast"),
-	 E("CaregiverOrigin","FrontDoorEast"),
+	 E("CaregiverOrigin","FrontDoorEast"), E("BedSouthEast","BedSouthWest"),
 	 E("Assistant1Origin","CouchesNorthEast"), E("Assistant2Origin","CouchesNorthEast"), E("ResidentOrigin","BedNorthEast"),
-	 E("HouseCentre","CentrePassageSouth")
+	 E("HouseCentre","CentrePassageSouth"), E("Assistant1Origin","BedroomEntranceWest"),
+	 E("Assistant1Origin","BedroomEntranceWest"), E("Assistant2Origin","Assistant1Origin"), E("BedSouthWest","BedroomEntranceWest")
 }; /*!< Defines edges between checkpoints */
 
 /* -- Map of names to co-ordinates -- */
@@ -163,9 +164,9 @@ void CheckPointGraph::makeGraph() {
 	  boost::add_edge(indices[paths[i].first], indices[paths[i].second], g);
 	}
 
-	// //Prints a pretty graph
-	// std::ofstream ofs("test.dot");
-    // write_graphviz(ofs, g); // dot -Tps test.dot -o outfile.ps	
+	//Prints a pretty graph
+	std::ofstream ofs("test.dot");
+    write_graphviz(ofs, g); // dot -Tps test.dot -o outfile.ps	
 
 }
 
