@@ -61,7 +61,10 @@ void Resident::triggerRandomEvents(){
 void Resident::checkStatus(){
 	residentState = stateQueue.checkCurrentState();
 	if (residentState == "friends"){
-		move("");
+		move("ResidentSofa");
+	}
+	if (residentState == "caregiver"){
+		move("BedSouthWest");
 	}
 }
 
