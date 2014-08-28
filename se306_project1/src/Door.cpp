@@ -4,6 +4,7 @@
 #include <sensor_msgs/LaserScan.h>
 #include "se306_project1/ResidentMsg.h"
 #include "math.h"
+#include "std_msgs/String.h"
 #include "Door.h"
 
 /**
@@ -35,8 +36,9 @@ void Door::StageOdom_callback(nav_msgs::Odometry msg)
 *	@param msg A custom ResidentMsg message that contains information about the resident's current status.
 */
 void Door::delegate(se306_project1::ResidentMsg msg) {
-	if (msg.state == "ill" || msg.state == "emergency" || msg.state == "caregiver" || msg.state == "friends") { // resident is hungry
-		if (opened == false) {
+	if (msg.state == "ill" || msg.state == "emergency" || msg.state == "caregiver" || msg.state == "friends") {
+		if (opened == false && resStateWhenOpened != msg.state) {
+			resStateWhenOpened = msg.state;
 			open();
 			ROS_INFO("Opening door");
 		}
@@ -53,6 +55,7 @@ void Door::delegate(se306_project1::ResidentMsg msg) {
 *	@brief opens the Door
 */
 void Door::open() {
+	//opened = true;
 	linear_x = 100;
 	double distanceFromCheckpoint = sqrt(pow((-8.5 - px),2) + pow((-37.5 - py),2)); // opened is -8.5 and -37.5
 	if (distanceFromCheckpoint < 0.5) {
@@ -65,6 +68,16 @@ void Door::open() {
 *	@brief closes the Door
 */
 void Door::close() {
+	//opened = false;
+	
+	// time for door to automatically close
+	int tnow = ros::Time::now().toSec(); // The simulation time now
+	int wait = tnow + 1; // one hour later
+	// make door wait for an hour? before closing
+	while (tnow < wait) {
+		tnow = ros::Time::now().toSec(); // The simulation time now
+	}
+	
 	linear_x = -100;
 	double distanceFromCheckpoint = sqrt(pow((-20.5 - px),2) + pow((-37.5 - py),2)); // closed is -20.5 and -37.5
 	if (distanceFromCheckpoint < 0.5) {
