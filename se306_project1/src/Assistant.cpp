@@ -159,6 +159,8 @@ int Assistant::run(int argc, char **argv)
 
 	ros::Rate loop_rate(10);
 
+	px = 17;
+	py = 17;
 
 	/* -- Publish / Subscribe -- */
 
