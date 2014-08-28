@@ -18,12 +18,9 @@
 //void Caregiver::delegate(se306_project1::ResidentMsg r_msg, se306_project1::AssistantMsg a_msg) no?
 void Caregiver::delegate(se306_project1::ResidentMsg msg)
 {
-	std::string position;
-
 	if (msg.state == care) {
 		if (!atResident) {
-			position = msg.position; //???
-			move(position); //to resident but where??????
+			move(msg.currentCheckpoint); //to resident
 
 			if (Visitor::visitResident() == true) { // next to resident
 				atResident = true;
@@ -108,11 +105,10 @@ int Caregiver::run(int argc, char *argv[])
 
 	ros::Rate loop_rate(10);
 
-	//Booleans which determine if the caregiver should care for the resident
-	needs_food = false;
-	needs_excercise = false;
-	needs_shower = false;
-	needs_moral_support = false;
+	//Booleans
+	atResident = false;
+	hasShowered = false;
+	hasExercised = false;
 
 
 	/* -- Publish / Subscribe -- */
@@ -126,14 +122,6 @@ int Caregiver::run(int argc, char *argv[])
 
 	//custom Resident subscriber to "resident/state"
 	ros::Subscriber resident_sub = n.subscribe<se306_project1::ResidentMsg>("residentStatus",1000,&Caregiver::delegate, this);
-
-
-	ros::Subscriber assitant_sub = n.subscribe<se306_project1::AssistantMsg>("assistantStatus",1000,&Caregiver::delegate, this);
-
-	// Periodic callback
-	int dur2 = time_conversion::simHoursToRealSecs(2); // Perform callback every 2 simulation hours
-	ros::Timer caregiverSchedule = n.createTimer(ros::Duration(dur2), &Caregiver::delegate, this); 
-
 
 	////messages
 	//velocity of this RobotNode
