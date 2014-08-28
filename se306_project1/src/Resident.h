@@ -11,7 +11,7 @@ class Resident : public Agent
 		int boredom; /*!< Resident boredom */
 		int hunger; /*!< Resident hunger */
 		int day;
-
+		bool wasItAdded;
 		priorityQueue stateQueue;
 
 		std::string residentState;

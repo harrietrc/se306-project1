@@ -42,7 +42,7 @@ void Assistant::medicate(se306_project1::ResidentMsg msg) {
 
 			currentCheckpoint.first = lastCheckpointX;
 			currentCheckpoint.second = lastCheckpointY;
-			move("HouseCentre");
+			move("Assistant1Origin");
 		}
 //	}else if (isMedicated) {
 	//	move("HouseCentre");
@@ -63,6 +63,8 @@ void Assistant::cook(se306_project1::ResidentMsg msg) {
 
 	double distanceFromCheckpoint = sqrt(pow((lastCheckpointX - px),2) + pow((lastCheckpointY - py),2));
 
+	atKitchen = true;
+	finishedCooking = true;
 	if (!atKitchen && !finishedCooking) {
 		move("KitchenNorthWest");
 		if (distanceFromCheckpoint < 0.5) {
@@ -111,11 +113,11 @@ void Assistant::cook(se306_project1::ResidentMsg msg) {
 			foodDelivered = true;
 			currentCheckpoint.first = lastCheckpointX;
 			currentCheckpoint.second = lastCheckpointY;
-			move("HouseCentre");
+			move("Assistant1Origin");
 
 		}
 	} else if (atKitchen && finishedCooking && foodDelivered) {
-		move("HouseCentre");
+		move("Assistant1Origin");
 		if (distanceFromCheckpoint < 0.5) {
 			atKitchen = false;
 			finishedCooking = false;
@@ -183,7 +185,7 @@ void Assistant::delegate(se306_project1::ResidentMsg msg) {
 
 	if (msg.state != "emergency") {
 		// check msg if cook do cooking e.t.c
-		if (msg.state == "hunger") {
+		if (msg.state == "hungry") {
 			cook(msg);
 		}
 
@@ -194,7 +196,7 @@ void Assistant::delegate(se306_project1::ResidentMsg msg) {
 		if (msg.state == "medication") {
 			medicate(msg);
 		} else {
-			move("HouseCentre");
+			move("Assistant1Origin");
 		}
 	}
 

@@ -54,6 +54,7 @@ void priorityQueue::removeState(residentStates unwantedState) {
 	}
 	for (unsigned i=0; i<PQ.size();i++) {
 		if (PQ.at(i).state == unwantedState) {
+			ROS_INFO("removed");
 			PQ.erase(PQ.begin() + i);
 			return;
 		}
@@ -144,8 +145,6 @@ void priorityQueue::addToPQ(residentStates currentState) {
 }
 
 residentStates priorityQueue::popFromPQ() {
-	ROS_INFO("PQ has removed state");
-
 	if (PQ.empty()) {
 		return idle;
 
