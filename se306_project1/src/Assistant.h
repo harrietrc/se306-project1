@@ -33,12 +33,15 @@ class Assistant : public Agent
 		void entertain();
 		void delegate(se306_project1::ResidentMsg msg);
 
+
 		// Boolean variables
 		bool atKitchen;
 		bool finishedCooking;
 
 		bool atBedroom;
 		bool residentEntertained;
+
+		int entertainmenCounter = 0;
 
 		bool isMedicated;
 };

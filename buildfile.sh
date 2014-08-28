@@ -23,6 +23,7 @@ trap ctrl_c INT
 function ctrl_c() {
 	killall -9 roscore
         echo "quit"
+	return $?
 }
 source setup.bash
 roscore &

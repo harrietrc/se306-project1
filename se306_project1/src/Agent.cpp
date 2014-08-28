@@ -91,7 +91,7 @@ void Agent::move(std::string goalName){
 		}else{
 			nextCheckpoint = shortestPath.at(shortestPathIndex);
 			checkpointAngle = calculateGoalAngle(nextCheckpoint);
-
+			ROS_INFO("goal Angle: %f",checkpointAngle);
 			isClockwise = isTurnClockwise();
 		}
 

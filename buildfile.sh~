@@ -21,7 +21,8 @@
 trap ctrl_c INT
 
 function ctrl_c() {
-        echo "** Trapped CTRL-C"
+	killall -9 roscore
+        echo "quit"
 }
 source setup.bash
 roscore &
