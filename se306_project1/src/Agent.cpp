@@ -68,16 +68,19 @@ void Agent::move(std::string goalName){
 
 	if (isMoving == false){
 		isMoving = true;
-		currentCheckpoint.first = 17; // can get rid of this
-		currentCheckpoint.second = 17; // ditto
+	//	currentCheckpoint.first = 17; // can get rid of this
+	//	currentCheckpoint.second = 17; // ditto
 
 		//Get the path stuff
 		std::string cname = g.getCheckpointName(currentCheckpoint);
 		Agent::setPath(cname, goalName);
 
-		// for (int i=0; i<shortestPath.size();i++) {
-		// 	printf("%f %f\n", shortestPath[i].first, shortestPath[i].second);
-		// }
+		 for (int i=0; i<shortestPath.size();i++) {
+			 ROS_INFO("checkpoint x: %f",shortestPath[i].first);
+			 ROS_INFO("checkpoint y: %f",shortestPath[i].second);
+
+		 }
+		 ROS_INFO("#########");
 	}
 
 	pair<double, double> nextCheckpoint = shortestPath.at(shortestPathIndex);
@@ -93,7 +96,7 @@ void Agent::move(std::string goalName){
 		}else{
 			nextCheckpoint = shortestPath.at(shortestPathIndex);
 			checkpointAngle = calculateGoalAngle(nextCheckpoint);
-			ROS_INFO("goal Angle: %f",checkpointAngle);
+			//ROS_INFO("goal Angle: %f",checkpointAngle);
 			isClockwise = isTurnClockwise();
 		}
 
@@ -149,7 +152,7 @@ void Agent::turn(){
 void Agent::moveForward(pair<double,double> nextCheckpoint){
 
 	linear_x = 5;
-	double minLinearX = 0.5;
+	double minLinearX = 1;
 
 	double distanceFromCheckpoint = sqrt(pow((nextCheckpoint.first - px),2) + pow((nextCheckpoint.second - py),2));
 

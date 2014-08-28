@@ -56,7 +56,6 @@ void Assistant::cook(se306_project1::ResidentMsg msg) {
 
 	double distanceFromCheckpoint = sqrt(pow((lastCheckpointX - px),2) + pow((lastCheckpointY - py),2));
 
-	ROS_INFO("#######################");
 	if (!atKitchen && !finishedCooking) {
 		move("KitchenNorthWest");
 		if (distanceFromCheckpoint < 0.5) {
@@ -84,25 +83,34 @@ void Assistant::cook(se306_project1::ResidentMsg msg) {
 		// The path to simulate the cooking behaviour in the kitchen
 		if ((distanceFromCheckpoint < 0.5) ) { // Final kitchen points (refer to p6)
 			finishedCooking = true;
-			move(msg.currentCheckpoint);
+
 		}
 
-	} else if (atKitchen && finishedCooking) {
+	} else if (atKitchen && finishedCooking && !foodDelivered) {
 
+		ROS_INFO("delivering food");
 		move(msg.currentCheckpoint);
-		if (distanceFromCheckpoint < 3.5) {
-
+		lastCheckpointX = shortestPath.at(shortestPath.size()-1).first;
+		lastCheckpointY = shortestPath.at(shortestPath.size()-1).second;
+		distanceFromCheckpoint = sqrt(pow((lastCheckpointX - px),2) + pow((lastCheckpointY - py),2));
+		ROS_INFO("distance: %f",distanceFromCheckpoint);
+		ROS_INFO("chec x %f :",lastCheckpointX);
+		ROS_INFO("chec y %f ",lastCheckpointY);
+		if (distanceFromCheckpoint < 5) {
+			isMoving = false;
+			ROS_INFO("#########################################################################################################################################################################################################################################################################################################################");
 			se306_project1::AssistantMsg amsg;
 			foodDelivered = true;
 			amsg.FoodDelivered = true;
 			Assistant_state_pub.publish(amsg);
-
 			move("HouseCentre");
-		}
-	} else if (foodDelivered) {
-		move("HouseCentre");
 
+		}
+	} else if (atKitchen && finishedCooking && foodDelivered) {
+		ROS_INFO("in");
+		move("HouseCentre");
 		if (distanceFromCheckpoint < 0.5) {
+			ROS_INFO("HOME!");
 			atKitchen = false;
 			finishedCooking = false;
 			foodDelivered = false;

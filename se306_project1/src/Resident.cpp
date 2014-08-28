@@ -13,6 +13,7 @@
 #include <stdlib.h>
 #include "Resident.h"
 #include "priorityQueue.h"
+#include "time_conversion.hpp"
 
 using namespace std;
 
@@ -36,6 +37,42 @@ void Resident::publishStatus(ros::Publisher Resident_state_pub) {
 //	msg.currentCheckpointY = currentCheckpoint.second;
 //msg.currentCheckpointX =
 	Resident_state_pub.publish(msg);
+}
+
+void Resident::triggerRandomEvents(){
+
+	int randomGeneratedForEmergency = rand() % 100;
+	int randomGeneratedForIll = rand() % 100;
+
+
+	if (randomGeneratedForEmergency <= 3){
+		stateQueue.addToPQ(emergency);
+		health = 10;
+	}
+
+	if (randomGeneratedForIll <= 20){
+		health = health - 5;
+		if (health < 50){
+			stateQueue.addToPQ(healthLow);
+		}
+	}
+
+}
+
+void Resident::medicationCallback(const ros::TimerEvent&){
+	stateQueue.addToPQ(medication);
+}
+void Resident::hungerCallback(const ros::TimerEvent&){
+	stateQueue.addToPQ(hungry);
+}
+void Resident::caregiverServicesCallback(const ros::TimerEvent&){
+	stateQueue.addToPQ(caregiver);
+}
+void Resident::wakeCallback(const ros::TimerEvent&){
+	stateQueue.removeState(tired);
+}
+void Resident::sleepCallback(const ros::TimerEvent&){
+	stateQueue.addToPQ(tired);
 }
 
 /**
@@ -78,7 +115,7 @@ void Resident::assistant_callback(se306_project1::AssistantMsg msg)
 {
 	if (msg.FoodDelivered == true) {
 		hunger = 100;
-		//stateQueue.removeState(hunger);
+		stateQueue.removeState(hungry);
 	}
 	//This is the callback function to process laser scan messages
 	//you can access the range data from msg.ranges[i]. i = sample number
@@ -109,7 +146,6 @@ int Resident::run(int argc, char *argv[]) {
 
 	ros::Rate loop_rate(10);
 
-	ros::Time time = ros::Time::now();
 
 	/* -- Publish / Subscribe -- */
 
@@ -127,6 +163,28 @@ int Resident::run(int argc, char *argv[]) {
 	
 	// Resident subscribes to this topic by Friend
 	ros::Subscriber friend_sub = n.subscribe("visitorConvo", 1000, &Resident::friend_callback, this);
+
+	// Periodic callback
+	int wakeup = time_conversion::simHoursToRealSecs(0);
+	int caregiverServices = time_conversion::simHoursToRealSecs(0.5);
+	int morningMedication = time_conversion::simHoursToRealSecs(5);
+	int afternoonMedication = time_conversion::simHoursToRealSecs(9);
+	int nightMedication = time_conversion::simHoursToRealSecs(14);
+	int morningHungry = time_conversion::simHoursToRealSecs(3);
+	int afternoonHungry = time_conversion::simHoursToRealSecs(7);
+	int nightHungry= time_conversion::simHoursToRealSecs(12);
+	int sleep = time_conversion::simHoursToRealSecs(15);
+	ros::Timer wakeUpTimer = n.createTimer(ros::Duration(wakeup), &Resident::wakeCallback, this);
+	ros::Timer caregiverTimer = n.createTimer(ros::Duration(caregiverServices), &Resident::caregiverServicesCallback, this);
+	ros::Timer medicationTimer = n.createTimer(ros::Duration(morningMedication), &Resident::medicationCallback, this);
+	ros::Timer medicationTimer2 = n.createTimer(ros::Duration(afternoonMedication), &Resident::medicationCallback, this);
+	ros::Timer medicationTimer3 = n.createTimer(ros::Duration(nightMedication), &Resident::medicationCallback, this);
+	ros::Timer hungryTimer = n.createTimer(ros::Duration(morningHungry), &Resident::hungerCallback, this);
+	ros::Timer hungryTimer2 = n.createTimer(ros::Duration(afternoonHungry), &Resident::hungerCallback, this);
+	ros::Timer hungryTimer3 = n.createTimer(ros::Duration(nightHungry), &Resident::hungerCallback, this);
+	ros::Timer sleepTimer = n.createTimer(ros::Duration(sleep), &Resident::sleepCallback, this);
+
+
 
 	//velocity of this RobotNode
 	geometry_msgs::Twist RobotNode_cmdvel;

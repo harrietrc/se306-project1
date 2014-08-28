@@ -10,6 +10,8 @@ class Assistant : public Agent
 
 		Assistant() : Agent(){
 
+			currentCheckpoint.first = 17;
+			currentCheckpoint.second = 17;
 			atKitchen = false;
 			finishedCooking = false;
 
