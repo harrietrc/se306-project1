@@ -6,6 +6,12 @@
 */
 class Doctor : public Visitor
 {
+	private:
+		bool healing = false;
+		bool readyToHeal = false;
+		bool hospitalise = false;
+		bool readyToHospitalise = false;
+		
 	protected:
 		bool doHeal();
 		bool doHospitalise();

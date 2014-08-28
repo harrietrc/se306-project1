@@ -17,11 +17,20 @@ class Assistant : public Agent
 		int run(int argc, char *argv[]);
 		
 
-	protected:
-		bool doMedication(const ros::TimerEvent&);
-		bool doCooking();
-		bool doCleaning();
-		bool doEntertainment();
-		bool coordinate();
+	private:
+		// functions
+		void medicate();
+		void cook();
+		void clean();
+		void entertain();
+		void delegate(se306_project1::ResidentMsg msg);
 
+		// Boolean variables
+		bool atKitchen = false;
+		bool finishedCooking = false;
+
+		bool atBedroom = false;
+		bool residentEntertained = false;
+
+		bool isMedicated = false;
 };

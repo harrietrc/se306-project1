@@ -7,25 +7,21 @@ using namespace boost; // Useful for graphs
 
 /** Array of the names of checkpoints. Necessary for the initialisation of the checkpoints vector. */
 const char* nameArr[] = { 
-		"cp0","cp1", "cp2"
+		"FrontDoorWest","FrontDoorEast","LivingRoomNorthWest","LivingRoomNorthEast","CentrePassageSouth","CentrePassageNorth",
+		"KitchenNorthWest","KitchenSouthWest","KitchenSouthEast","KitchenNorthEast","HouseCentre","CentreStool","NextToCentreStool",
+		"BedroomEntranceWest","BedroomEntranceEast","CouchesNorthEast","CouchesNorthCentre","BathroomEntranceWest","BathroomEntranceEast",
+		"Shower","BathroomCentre","BedSouthWest","BedSouthEast","BedNorthEast","ResidentOrigin", "Assistant1Origin", "Assistant2Origin",
+		"DoctorOrigin","Nurse1Origin","Nurse2Origin","CaregiverOrigin","Friend1Origin","Friend2Origin","Friend3Origin"
 };
 
 /**
 *	@brief Set of checkpoints that the nodes can move to in the map.
 * 	Gives x position and y position for each co-ordinate
 */
-int checkpoints[11][2] = {  
-	{30, 25},
-	{30, 7}, 
-	{40, 7},
-	{40, 8},
-	{38,8},
-	{38,7},
-	{40,7},
-	{30,7},
-	{30, 25},
-	{34,20},
-	{30, 25}
+int checkpoints[][2] = {
+	{-27,-40},{-20,-40},{-24,-12},{-18,-18},{0,-18},{0,-12},{6,-24},{6,-28},{24,-28},{24,-24},{0,6},{24,-10},{20,-6},{0,22},
+	{0,22},{6,22},{-6,18},{-24,18},{-26,22},{-18,22},{-32,45},{-24,36},{6,30},{26,30},{30,45},
+	{26,48}, {32,20}, {32,18}, {-33,-46}, {-36,-48}, {-30,-48}, {-8,-46}, {-20,-46}, {-23,-46}, {-20,-48}
 };
 
 std::vector<std::string> checkpointNames(begin(nameArr), end(nameArr)); /*!< Vector of checkpoint names. See nameArr[]. */
@@ -41,7 +37,22 @@ std::map<std::string, vector_graph_t::vertex_descriptor> indices; /*!< Map that 
 /* -- Edges -- */
 
 typedef std::pair <std::string, std::string> E;
-E paths[] = { E ("cp0", "cp1"), E ("cp1", "cp2")}; /*!< Defines edges between checkpoints */
+E paths[] = {
+	 E("FrontDoorWest","LivingRoomNorthWest"), E("FrontDoorEast", "LivingRoomNorthEast"), E("LivingRoomNorthWest","CentrePassageNorth"),
+	 E("LivingRoomNorthEast","CentrePassageSouth"), E("CentrePassageNorth","KitchenNorthWest"), E("CentrePassageSouth","KitchenNorthWest"),
+	 E("KitchenNorthWest","KitchenNorthEast"), E("KitchenNorthEast","KitchenSouthEast"), E("KitchenSouthEast","KitchenSouthWest"),
+	 E("KitchenSouthWest","KitchenNorthWest"), E("CentrePassageSouth","NextToCentreStool"), E("CentrePassageNorth","NextToCentreStool"),
+	 E("NextToCentreStool","CentreStool"), E("NextToCentreStool","HouseCentre"), E("CentrePassageNorth","HouseCentre"),
+	 E("CentrePassageNorth","HouseCentre"), E("HouseCentre", "CouchesNorthEast"), E("CouchesNorthEast","CouchesNorthCentre"),
+	 E("CouchesNorthEast","BedroomEntranceEast"), E("CouchesNorthEast","BedroomEntranceWest"), E("CouchesNorthCentre","BathroomEntranceEast"),
+	 E("CouchesNorthCentre","BedroomEntranceWest"), E("BathroomEntranceEast","BathroomCentre"), E("BathroomEntranceWest","BathroomCentre"),
+	 E("BathroomCentre","Shower"), E("BedroomEntranceWest","BedSouthWest"), E("BedroomEntranceEast","BedSouthEast"), 
+	 E("BedSouthEast","BedNorthEast"), E("Origin","BedSouthEast"),
+	 E("DoctorOrigin","FrontDoorWest"), E("Nurse1Origin","FrontDoorWest"), E("Nurse2Origin","FrontDoorWest"),
+	 E("Friend1Origin","FrontDoorEast"), E("Friend2Origin","FrontDoorEast"), E("Friend3Origin","FrontDoorEast"),
+	 E("CaregiverOrigin","FrontDoorEast"),
+	 E("Assistant1Origin","CouchesNorthEast"), E("Assistant2Origin","CouchesNorthEast"), E("ResidentOrigin","BedNorthEast")
+}; /*!< Defines edges between checkpoints */
 
 /* -- Map of names to co-ordinates -- */
 
@@ -62,7 +73,7 @@ std::vector<std::pair<double, double> > path; /*!< The agent's path to a specifi
  *	@param startName The name of the start checkpoint as a string (e.g. 'kitchen')
  *	@param endName The name of the goal checkpoint as a string (e.g. 'bathroom')
  */
-std::vector<std::pair<double, double> > CheckPointGraph::shortestPath(std::string startName, std::string endName) {
+std::vector<std::string> CheckPointGraph::shortestPath(std::string startName, std::string endName) {
 
 	//Create vector to store the predecessors (can also make one to store distances)
   	std::vector<vector_graph_t::vertex_descriptor> p(boost::num_vertices(g));
@@ -88,15 +99,21 @@ std::vector<std::pair<double, double> > CheckPointGraph::shortestPath(std::strin
     	current = p[current]; // Predecessor of the current checkpoint in the path
 	}
 
-	// path.push_back(s); // BFS doesn't include the start node. 
+	path.push_back(s); // BFS doesn't include the start node. 
 
-	std::vector<std::pair<double, double> > a;
+	//std::vector<std::pair<double, double> > a;
+
+	// Commented out - old implementation returned the path as a vector of pairs of doubles
+	// for (int i=0; i<path.size(); i++) {
+	// 	// Get the vertex name from the graph's property map
+	// 	std::string cpn = boost::get(vertex_name_t(), g, path[i]); // adjacency_list vertex_descriptors are ints
+	// 	std::pair<double, double> coords = c[cpn]; // Get co-ordinates associated with checkpoint name
+	// 	a.push_back(coords);
+	// }
+	std::vector<std::string> a;
 
 	for (int i=0; i<path.size(); i++) {
-		// Get the vertex name from the graph's property map
-		std::string cpn = boost::get(vertex_name_t(), g, path[i]); // adjacency_list vertex_descriptors are ints
-		std::pair<double, double> coords = c[cpn]; // Get co-ordinates associated with checkpoint name
-		a.push_back(coords);
+		a.push_back(boost::get(vertex_name_t(), g, path[i])); // Add checkpoint name
 	}
 	
 	std::reverse(a.begin(), a.end()); // as search starts from goal; we can access only predecessors, not successors
@@ -150,4 +167,13 @@ void CheckPointGraph::checkpointMap() {
 		c.insert(std::make_pair(CheckpointName(checkpointNames[i]), Checkpoint(vec[i])));
 	}
 
+}
+
+/**
+*	@brief Gets the co-ordinates of a checkpoint given its name.
+*	@param checkPointName The name of the checkpoint
+*	@return The (x,y) co-ordinates of a checkpoint as a pair
+*/
+std::pair<double, double> CheckPointGraph::getCoords(std::string checkPointName) {
+	return c[checkPointName];
 }

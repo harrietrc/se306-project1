@@ -11,6 +11,7 @@
 #include <stdlib.h>
 #include <sstream>
 #include <vector>
+#include "CheckPointGraph.hpp"
 
 /**
 *	@brief Superclass for all 'agents' - i.e. Assistants, Visitors, and the Resident.
@@ -25,9 +26,9 @@ class Agent
 			px = 0;
 			py = 0;
 			currentAngle = 0;
-			currentCheckpoint = std::make_pair(0,0); // Needs to be initialised in subclasses!!
-			shortestPath.push_back(currentCheckpoint); // Needs to be removed later!!
-			isMoving = true;
+			// currentCheckpoint = std::make_pair(0,0); // Needs to be initialised in subclasses!!
+			// shortestPath.push_back(currentCheckpoint); // Needs to be removed later!!
+			isMoving = false;
 			isFacingCorrectly = false;
 			shortestPathIndex = 0;
 			checkpointAngle = 0;
@@ -38,6 +39,17 @@ class Agent
 		void StageOdom_callback(nav_msgs::Odometry msg);
 
 	protected:
+		// Sets origin name
+		virtual void setOriginName();
+
+		void setPath(std::string start, std::string end);
+
+		// Checkpoint graph object
+		CheckPointGraph g;
+
+		// The name of this agent's origin checkpoint
+		std::string originName = "Assistant1Origin"; //Temporary!
+
 		//velocity of the robot
 		double linear_x; /*!< Linear velocity of the robot */
 		double angular_z; /*!< Angular velocity of the robot */
@@ -48,10 +60,10 @@ class Agent
 		double currentAngle; /*!< angle of the robot*/
 
 		//current checkpoint
-		std::pair<double, double> currentCheckpoint;
+		std::string currentCheckpoint;
 
 		//shortestPath
-		std::vector <std::pair<double,double> > shortestPath;
+		std::vector <std::string> shortestPath;
 		int shortestPathIndex;
 		bool isFacingCorrectly;
 
@@ -63,16 +75,12 @@ class Agent
 		double checkpointAngle;
 		bool isClockwise;
 
-		int nodeNumber;
-
 		void turn();
-		void moveForward(std::pair<double,double> nextCheckpoint);
+		void moveForward(std::string nextCheckpoint);
 		double calculateGoalAngle(std::pair<double,double> goalCheckpoint);
-		void move();
+		void move(std::string goal);
 		bool isTurnClockwise();
 
 		/* -- Communication and co-ordination -- */
-
-		void delegate(se306_project1::ResidentMsg msg) {} /*!< Callback that calls callbacks */
 	
 };

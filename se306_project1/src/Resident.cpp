@@ -11,7 +11,7 @@
 #include <cmath>
 #include <stdlib.h>
 #include "Resident.h"
-#include <iostream>
+#include "priorityQueue.h"
 
 using namespace std;
 //PriorityQueue *status_queue = PriorityQueue::getInstance();
@@ -59,11 +59,14 @@ void Resident::assistant_callback(se306_project1::AssistantMsg msg)
  */
 int Resident::run(int argc, char *argv[]) {
 
-	pair<double, double> c1 = make_pair(40,30);
-	pair<double, double> c2 = make_pair(30,40);
+	// pair<double, double> c1 = make_pair(40,30);
+	// pair<double, double> c2 = make_pair(30,40);
 
-	shortestPath.push_back(c1);
-	shortestPath.push_back(c2);
+	//priorityQueue myQueue;
+	//	myQueue.addToPQ(bored);
+
+	// shortestPath.push_back(c1);
+	// shortestPath.push_back(c2);
 
 	//You must call ros::init() first of all. ros::init() function needs to see argc and argv. The third argument is the name of the node
 	ros::init(argc, argv, "Resident");

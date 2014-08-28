@@ -30,12 +30,12 @@ rosbuild_genmsg()
 #target_link_libraries(example ${PROJECT_NAME})
 
 
-rosbuild_add_executable(Resident src/Resident.cpp src/time_conversion.cpp src/Agent.cpp src/CheckPointGraph.cpp)
+rosbuild_add_executable(Resident src/Resident.cpp src/time_conversion.cpp src/Agent.cpp src/CheckPointGraph.cpp src/priorityQueue.cpp)
 rosbuild_add_executable(Assistant src/Assistant.cpp src/time_conversion.cpp src/Agent.cpp src/CheckPointGraph.cpp)
-#rosbuild_add_executable(Doctor src/Doctor.cpp src/Agent.cpp src/CheckPointGraph.cpp)
+rosbuild_add_executable(Doctor src/Doctor.cpp src/Agent.cpp src/CheckPointGraph.cpp)
 #rosbuild_add_executable(Caregiver src/Caregiver.cpp src/Agent.cpp src/CheckPointGraph.cpp)
 #rosbuild_add_executable(Friend src/Friend.cpp src/Agent.cpp src/CheckPointGraph.cpp)
-#rosbuild_add_executable(Nurse src/Nurse.cpp src/Agent.cpp src/CheckPointGraph.cpp)
+rosbuild_add_executable(Nurse src/Nurse.cpp src/Agent.cpp src/CheckPointGraph.cpp)
 #rosbuild_add_executable(Relative src/Relative.cpp src/Agent.cpp src/CheckPointGraph.cpp)
 
 

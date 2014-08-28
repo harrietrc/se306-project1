@@ -7,8 +7,12 @@
 class CheckPointGraph {
 
 	public:
+		CheckPointGraph() {
+			checkpointMap(); // Apparently calling functions in the constructor is less bad in C++ than in Java...
+			makeGraph(); // ditto, but should consider moving. These are here for convenience.
+		}
 		void makeGraph();
 		void checkpointMap();
-		std::vector<std::pair<double, double> > shortestPath(std::string startName, std::string endName);
-		
+		std::vector<std::string> shortestPath(std::string startName, std::string endName);
+		std::pair<double, double> getCoords(std::string checkPointName);
 };
