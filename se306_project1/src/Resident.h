@@ -45,6 +45,7 @@ class Resident : public Agent
 		void hungerCallback(const ros::TimerEvent&);
 		void friendsCallback(const ros::TimerEvent&);
 		void friendsDoneCallback(const ros::TimerEvent&);
+		void checkStatus();
 
 
 };

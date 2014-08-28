@@ -13,5 +13,6 @@ class Friend : public Visitor
 
 	public:
 		int run(int argc, char *argv[]);
+		void friendsDoneCallback(const ros::TimerEvent&);
 
 };

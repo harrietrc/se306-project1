@@ -3,7 +3,7 @@
 /**
 *	@brief Class for Friend nodes.
 */
-class Friend : public Visitor
+class Friend1 : public Visitor
 {
 	private:
 		
@@ -13,5 +13,6 @@ class Friend : public Visitor
 
 	public:
 		int run(int argc, char *argv[]);
+		void friendsDoneCallback(const ros::TimerEvent&);
 
 };

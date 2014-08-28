@@ -30,9 +30,8 @@ void Resident::publishStatus(ros::Publisher Resident_state_pub) {
 	// Creating a message for residentStatus
 	residentState = stateQueue.checkCurrentState();
 	se306_project1::ResidentMsg msg;
-	residentState = "hunger";
 	msg.state = residentState;
-	msg.currentCheckpoint = "ResidentOrigin";
+	msg.currentCheckpoint = currentCheckpoint;
 	msg.currentCheckpointX = currentCheckpoint.first;
 	msg.currentCheckpointY = currentCheckpoint.second;
 
@@ -59,6 +58,13 @@ void Resident::triggerRandomEvents(){
 
 }
 
+void Resident::checkStatus(){
+	residentState = stateQueue.checkCurrentState();
+	if (residentState == "friends"){
+		move("");
+	}
+}
+
 void Resident::medicationCallback(const ros::TimerEvent&){
 	stateQueue.addToPQ(medication);
 }
@@ -80,12 +86,7 @@ void Resident::friendsCallback(const ros::TimerEvent&){
 void Resident::friendsDoneCallback(const ros::TimerEvent&){
 	stateQueue.removeState(friends);
 }
-/**
-*	@brief Makes the resident go to bed and sleep, as scheduled by a timer.
-*/
-bool Resident::doSleep(const ros::TimerEvent&) {
-	return true;
-}
+
 
 /**
 *	@brief Increases the resident's health when the doctor heals them.
@@ -200,6 +201,7 @@ int Resident::run(int argc, char *argv[]) {
 		//publish the message
 		RobotNode_stage_pub.publish(RobotNode_cmdvel);
 
+		checkStatus();
 		publishStatus(Resident_state_pub);
 
 		ros::spinOnce();
