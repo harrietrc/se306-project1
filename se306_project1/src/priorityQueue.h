@@ -5,6 +5,8 @@
  *      Author: mustafa
  */
 
+#include <string>
+
 #ifndef PRIORITYQUEUE_H_
 #define PRIORITYQUEUE_H_
 
@@ -12,18 +14,18 @@
 
 enum residentStates {hunger,healthLow,bored,emergency,tired,caregiver,friends,medication,idle};
 
-
 class priorityQueue {
 public:
 	priorityQueue();
 	virtual ~priorityQueue();
 	void addToPQ(residentStates currentState);
 	residentStates popFromPQ();
-	residentStates checkCurrentState();
-	stri
+	std::string checkCurrentState();
+
 private:
 	bool isStateInPQ(residentStates currentState);
 	void removeState(residentStates unwantedState);
+	std::string stateConvertString(residentStates currentState);
 
 };
 

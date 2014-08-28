@@ -44,7 +44,6 @@ void Agent::StageOdom_callback(nav_msgs::Odometry msg) {
 	//Update the current position
 	px = msg.pose.pose.position.x;
 	py = msg.pose.pose.position.y;
-
 	if (isMoving == true){
 		move(originName);
 	}
@@ -80,8 +79,6 @@ void Agent::move(std::string goalName){
 	}
 
 	pair<double, double> nextCheckpoint = shortestPath.at(shortestPathIndex);
-	// printf("Next: %f %f - %s\n", nextCheckpoint.first, nextCheckpoint.second, g.getCheckpointName(nextCheckpoint).c_str());
-	// printf("current: %f %f - %s\n", currentCheckpoint.first, currentCheckpoint.second, g.getCheckpointName(currentCheckpoint).c_str());
 
 	if (currentCheckpoint.first == nextCheckpoint.first &&
 			currentCheckpoint.second == nextCheckpoint.second){
@@ -94,7 +91,7 @@ void Agent::move(std::string goalName){
 		}else{
 			nextCheckpoint = shortestPath.at(shortestPathIndex);
 			checkpointAngle = calculateGoalAngle(nextCheckpoint);
-
+			ROS_INFO("goal Angle: %f",checkpointAngle);
 			isClockwise = isTurnClockwise();
 		}
 
@@ -223,5 +220,3 @@ double Agent::calculateGoalAngle(pair<double, double> goalCheckpoint){
 /*
  * MOVE METHODS {END}
  */
-
-

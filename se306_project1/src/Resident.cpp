@@ -23,14 +23,18 @@ using namespace std;
 *	@brief Gets current resident status and publishes it to a topic for assistants and doctors/nurses.
 *	May convert to string and publish in the standard way - do we need custom messages any more?
 */
-void Resident::publishStatus() {
+void Resident::publishStatus(ros::Publisher Resident_state_pub) {
 
 
 	// Creating a message for residentStatus
 	residentState = stateQueue.checkCurrentState();
 	se306_project1::ResidentMsg msg;
-	msg.state = stateToString(residentState);
+	msg.state = residentState;
+	msg.currentCheckpoint = g.getCheckpointName(currentCheckpoint);
+	msg.currentCheckpointX = currentCheckpoint.first;
+	msg.currentCheckpointY = currentCheckpoint.second;
 
+	Resident_state_pub.publish(msg);
 
 
 }
@@ -134,6 +138,7 @@ int Resident::run(int argc, char *argv[]) {
 		//publish the message
 		RobotNode_stage_pub.publish(RobotNode_cmdvel);
 
+		publishStatus(Resident_state_pub);
 
 		ros::spinOnce();
 		loop_rate.sleep();

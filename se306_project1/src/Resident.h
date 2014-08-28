@@ -13,7 +13,7 @@ class Resident : public Agent
 
 		priorityQueue stateQueue;
 
-		residentStates residentState;
+		std::string residentState;
 
 	public:
 
@@ -34,7 +34,7 @@ class Resident : public Agent
 		void assistant_callback(se306_project1::AssistantMsg msg);
 		void friend_callback(const std_msgs::String::ConstPtr& msg);
 		bool doSleep(const ros::TimerEvent&);	
-		void publishStatus();
+		void publishStatus(ros::Publisher Resident_state_pub);
 
 
 };
