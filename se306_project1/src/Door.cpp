@@ -13,8 +13,20 @@
 void Door::StageOdom_callback(nav_msgs::Odometry msg)
 {
 	//This is the call back function to process odometry messages coming from Stage. 	
-	px = msg.pose.pose.position.x;
-	py = msg.pose.pose.position.y;
+	px = -20.5 + msg.pose.pose.position.x;
+	py = -37.5 + msg.pose.pose.position.y;
+	//ROS_INFO("Current x position is: %f", px);
+	//ROS_INFO("Current y position is: %f", py);
+
+	// testing opening and closing
+	if (opened == false){
+		open();
+		ROS_INFO("Opening door");
+	} else {
+		if (opened == true)
+			close();
+			ROS_INFO("Closing door");
+	}
 }
 
 /**
@@ -23,12 +35,16 @@ void Door::StageOdom_callback(nav_msgs::Odometry msg)
 *	@param msg A custom ResidentMsg message that contains information about the resident's current status.
 */
 void Door::delegate(se306_project1::ResidentMsg msg) {
-	if (msg.state == "hungry" || ) { // resident is hungry
-		if (opened == false)
+	if (msg.state == "ill" || msg.state == "emergency" || msg.state == "caregiver" || msg.state == "friends") { // resident is hungry
+		if (opened == false) {
 			open();
+			ROS_INFO("Opening door");
+		}
 	} else {
-		if (opened == true)
+		if (opened == true) {
 			close();
+			ROS_INFO("Closing door");
+		}
 	}
 
 }
@@ -37,9 +53,9 @@ void Door::delegate(se306_project1::ResidentMsg msg) {
 *	@brief opens the Door
 */
 void Door::open() {
-	linear_x = 5;
+	linear_x = 100;
 	double distanceFromCheckpoint = sqrt(pow((-8.5 - px),2) + pow((-37.5 - py),2)); // opened is -8.5 and -37.5
-	if (distanceFromCheckpoint < 0.5) { // next to resident
+	if (distanceFromCheckpoint < 0.5) {
 		linear_x = 0;
 		opened = true;
 	}
@@ -49,9 +65,9 @@ void Door::open() {
 *	@brief closes the Door
 */
 void Door::close() {
-	linear_x = -5;
+	linear_x = -100;
 	double distanceFromCheckpoint = sqrt(pow((-20.5 - px),2) + pow((-37.5 - py),2)); // closed is -20.5 and -37.5
-	if (distanceFromCheckpoint < 0.5) { // next to resident
+	if (distanceFromCheckpoint < 0.5) {
 		linear_x = 0;
 		opened = false;
 	}
@@ -66,6 +82,9 @@ int Door::run(int argc, char *argv[])
 	/* -- Initialisation -- */
 	linear_x = 0;
 	angular_z = 0;
+
+	px = -20.5;
+	py = -37.5;
 	
 	//You must call ros::init() first of all. ros::init() function needs to see argc and argv. The third argument is the name of the node
 	ros::init(argc, argv, "Door");
