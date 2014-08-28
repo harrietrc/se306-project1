@@ -55,9 +55,9 @@ void Resident::doctor_callback(se306_project1::DoctorMsg msg)
 
 void Resident::friend_callback(const std_msgs::String::ConstPtr& msg)
 {
-	if (msg.data == "Done") { // friend has finished talking with Resident
-		boredom = 0;
-	}
+	//if (msg.data == "Done") { // friend has finished talking with Resident
+	//	boredom = 0;
+//	}
 }
 
 /**
