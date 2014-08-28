@@ -18,11 +18,11 @@
 //void Caregiver::delegate(se306_project1::ResidentMsg r_msg, se306_project1::AssistantMsg a_msg) no?
 void Caregiver::delegate(se306_project1::ResidentMsg msg)
 {
-	if (msg.state == 'caregiver') {
+	if (msg.state == "caregiver") {
 		if (!atResident) {
 			move(msg.currentCheckpoint); //to resident
 
-			if (Visitor::visitResident() == true) { // next to resident
+			if (true) { // next to resident
 				atResident = true;
 			}
 			
@@ -116,10 +116,10 @@ int Caregiver::run(int argc, char *argv[])
 
 	//advertise() function will tell ROS that you want to publish on a given topic_
 	//to stage
-	ros::Publisher RobotNode_stage_pub = n.advertise<geometry_msgs::Twist>("robot_0/cmd_vel",1000);
+	ros::Publisher RobotNode_stage_pub = n.advertise<geometry_msgs::Twist>("robot_3/cmd_vel",1000);
 
 	//subscribe to listen to messages coming from stage
-	ros::Subscriber StageOdo_sub = n.subscribe<nav_msgs::Odometry>("robot_0/odom",1000, &Caregiver::StageOdom_callback,dynamic_cast<Agent*>(this));
+	ros::Subscriber StageOdo_sub = n.subscribe<nav_msgs::Odometry>("robot_3/odom",1000, &Caregiver::StageOdom_callback,dynamic_cast<Agent*>(this));
 
 	//custom Resident subscriber to "resident/state"
 	ros::Subscriber resident_sub = n.subscribe<se306_project1::ResidentMsg>("residentStatus",1000,&Caregiver::delegate, this);

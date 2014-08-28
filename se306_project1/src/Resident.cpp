@@ -30,7 +30,7 @@ void Resident::publishStatus(ros::Publisher Resident_state_pub) {
 	residentState = stateQueue.checkCurrentState();
 	se306_project1::ResidentMsg msg;
 
-	//residentState = "medication";    //hardcoded state
+	residentState = "hungry";    //hardcoded state
 	msg.state = residentState;
 	msg.currentCheckpoint = g.getCheckpointName(currentCheckpoint);
 	msg.currentCheckpointX = currentCheckpoint.first;
@@ -50,7 +50,7 @@ void Resident::triggerRandomEvents(){
 	}
 
 	if (randomGeneratedForIll <= 20){
-		health = health - 5;
+		health = health - 2;
 		if (health < 50){
 			stateQueue.addToPQ(healthLow);
 		}
@@ -81,10 +81,14 @@ void Resident::hungerCallback(const ros::TimerEvent&){
 	stateQueue.addToPQ(hungry);
 }
 void Resident::caregiverServicesCallback(const ros::TimerEvent&){
-	stateQueue.addToPQ(caregiver);
+	//stateQueue.addToPQ(caregiver);
+}
+void Resident::caregiverServicesDoneCallback(const ros::TimerEvent&){
+	stateQueue.removeState(caregiver);
 }
 void Resident::wakeCallback(const ros::TimerEvent&){
 	stateQueue.removeState(tired);
+	ROS_INFO ("Wake up!");
 }
 void Resident::sleepCallback(const ros::TimerEvent&){
 	stateQueue.addToPQ(tired);
@@ -192,17 +196,18 @@ int Resident::run(int argc, char *argv[]) {
 	int sleep = time_conversion::simHoursToRealSecs(15);
 	int friends = time_conversion::simHoursToRealSecs(9);
 	int friendsDone = time_conversion::simHoursToRealSecs(11.5);
-
-	ros::Timer wakeUpTimer = n.createTimer(ros::Duration(wakeup), &Resident::wakeCallback, this);
-	ros::Timer caregiverTimer = n.createTimer(ros::Duration(caregiverServices), &Resident::caregiverServicesCallback, this);
-	ros::Timer medicationTimer = n.createTimer(ros::Duration(morningMedication), &Resident::medicationCallback, this);
-	ros::Timer medicationTimer2= n.createTimer(ros::Duration(nightMedication), &Resident::medicationCallback, this);
-	ros::Timer hungryTimer = n.createTimer(ros::Duration(morningHungry), &Resident::hungerCallback, this);
-	ros::Timer hungryTimer2 = n.createTimer(ros::Duration(afternoonHungry), &Resident::hungerCallback, this);
-	ros::Timer hungryTimer3 = n.createTimer(ros::Duration(nightHungry), &Resident::hungerCallback, this);
-	ros::Timer sleepTimer = n.createTimer(ros::Duration(sleep), &Resident::sleepCallback, this);
-	ros::Timer friendsTimer = n.createTimer(ros::Duration(friends), &Resident::friendsCallback, this);
-	ros::Timer friendsDoneTimer = n.createTimer(ros::Duration(friendsDone), &Resident::friendsDoneCallback, this);
+	int caregiverServicesDone = time_conversion::simHoursToRealSecs(3);
+	ros::Timer wakeUpTimer = n.createTimer(ros::Duration(wakeup), &Resident::wakeCallback,this, true);
+	ros::Timer caregiverTimer = n.createTimer(ros::Duration(caregiverServices), &Resident::caregiverServicesCallback, this, true);
+	ros::Timer caregiverDoneTimer = n.createTimer(ros::Duration(caregiverServicesDone), &Resident::caregiverServicesDoneCallback, this, true);
+	ros::Timer medicationTimer = n.createTimer(ros::Duration(morningMedication), &Resident::medicationCallback, this, true);
+	ros::Timer medicationTimer2= n.createTimer(ros::Duration(nightMedication), &Resident::medicationCallback, this, true);
+	ros::Timer hungryTimer = n.createTimer(ros::Duration(morningHungry), &Resident::hungerCallback, this, true);
+	ros::Timer hungryTimer2 = n.createTimer(ros::Duration(afternoonHungry), &Resident::hungerCallback, this, true);
+	ros::Timer hungryTimer3 = n.createTimer(ros::Duration(nightHungry), &Resident::hungerCallback, this, true);
+	ros::Timer sleepTimer = n.createTimer(ros::Duration(sleep), &Resident::sleepCallback, this, true);
+	ros::Timer friendsTimer = n.createTimer(ros::Duration(friends), &Resident::friendsCallback, this, true);
+	ros::Timer friendsDoneTimer = n.createTimer(ros::Duration(friendsDone), &Resident::friendsDoneCallback, this, true);
 
 	//velocity of this RobotNode
 	geometry_msgs::Twist RobotNode_cmdvel;
@@ -221,10 +226,11 @@ int Resident::run(int argc, char *argv[]) {
 				boredom += 2;
 				hunger += 1;
 			}
-			triggerRandomEvents();
+			//triggerRandomEvents();
 			checkStatus();
 			publishStatus(Resident_state_pub);
-		//ROS_INFO("State is: %s",residentState.c_str());
+			residentState = stateQueue.checkCurrentState();
+			ROS_INFO("State is: %s",residentState.c_str());
 		}
 
 		ros::spinOnce();

@@ -18,6 +18,7 @@ void Agent::stopMoving(){
 	isMoving = false;
 	linear_x = 0;
 	angular_z = 0;
+	isFacingCorrectly = false;
 }
 
 /* -- Stage callbacks -- */
