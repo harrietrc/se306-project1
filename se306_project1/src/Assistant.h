@@ -15,7 +15,7 @@ class Assistant : public Agent
 
 			atBedroom = false;
 			residentEntertained = false;
-
+			foodDelivered = false;
 			isMedicated = false;
 		}
 
@@ -38,7 +38,7 @@ class Assistant : public Agent
 		// Boolean variables
 		bool atKitchen;
 		bool finishedCooking;
-
+		bool foodDelivered;
 		bool atBedroom;
 		bool residentEntertained;
 

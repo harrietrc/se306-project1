@@ -104,7 +104,6 @@ void Agent::move(std::string goalName){
 	}else{
 		moveForward(nextCheckpoint);
 	}
-
 }
 
 
