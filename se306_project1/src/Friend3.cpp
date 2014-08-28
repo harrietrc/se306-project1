@@ -5,11 +5,11 @@
 #include <sensor_msgs/LaserScan.h>
 #include <sstream>
 #include "math.h"
-#include "Friend1.h"
+#include "Friend3.h"
 #include "se306_project1/ResidentMsg.h"
 #include "time_conversion.hpp"
 
-std::string originName = "Friend1Origin";
+std::string originName = "Friend3Origin";
 
 /**
 *	@brief Causes the friend to visit the resident, as based on a timer.
@@ -18,7 +18,7 @@ std::string originName = "Friend1Origin";
 *	@param endTime The hour to end the periodic visits.
 *	@remarks If start time and end time are unnecessary, they can be removed
 */
-void Friend1::doTimedVisit(const ros::TimerEvent&) { // don't know whether if timing is still required in this class? if not then use delegate
+void Friend3::doTimedVisit(const ros::TimerEvent&) { // don't know whether if timing is still required in this class? if not then use delegate
 	int startTime = time_conversion::simHoursToRealSecs(6); // Start callback at 6am
 	int endTime = time_conversion::simHoursToRealSecs(12); // Stop callback at 12pm
 	int tnow = ros::Time::now().toSec(); // The simulation time now
@@ -38,7 +38,7 @@ void Friend1::doTimedVisit(const ros::TimerEvent&) { // don't know whether if ti
 *	Friend should subscribe to the ResidentMsg topic in order for this callback to be called. ResidentMsg is published by the Resident.
 *	@param msg A custom ResidentMsg message that contains information about the resident's current status.
 */
-void Friend1::delegate(se306_project1::ResidentMsg msg) {
+void Friend3::delegate(se306_project1::ResidentMsg msg) {
 	if (msg.state == "emergency") {
 		emergency = true; // required variable if timing/scheduling is done within this class
 	} else if (msg.state == "friends") { // resident state when it needs friends to converse with
@@ -53,13 +53,13 @@ void Friend1::delegate(se306_project1::ResidentMsg msg) {
 *	@brief Main function for the Friend process.
 *	Controls node setup and periodic events.
 */
-int Friend1::run(int argc, char *argv[])
+int Friend3::run(int argc, char *argv[])
 {
 
 	/* -- Initialisation -- */
 	
 	//You must call ros::init() first of all. ros::init() function needs to see argc and argv. The third argument is the name of the node
-	ros::init(argc, argv, "Friend1");
+	ros::init(argc, argv, "Friend3");
 
 	//NodeHandle is the main access point to communicate with ros.
 	ros::NodeHandle n;
@@ -80,11 +80,11 @@ int Friend1::run(int argc, char *argv[])
 	ros::Subscriber StageOdo_sub = n.subscribe("robot_0/odom",1000, &Agent::StageOdom_callback, dynamic_cast<Agent*>(this));
 
 	//custom Resident subscriber to "resident/state"
-	ros::Subscriber resident_sub = n.subscribe<se306_project1::ResidentMsg>("residentStatus",1000, &Friend1::delegate, this);
+	ros::Subscriber resident_sub = n.subscribe<se306_project1::ResidentMsg>("residentStatus",1000, &Friend3::delegate, this);
 
 	// Periodic callback
 	int dur2 = time_conversion::simHoursToRealSecs(2); // Perform callback every 2 simulation hours
-	ros::Timer VisitorSchedule = n.createTimer(ros::Duration(dur2), &Friend1::doTimedVisit, this);
+	ros::Timer VisitorSchedule = n.createTimer(ros::Duration(dur2), &Friend3::doTimedVisit, this);
 
 	////messages
 	//velocity of this RobotNode
@@ -122,6 +122,6 @@ int Friend1::run(int argc, char *argv[])
 *	@brief Redirects to main function (run()) of the node.
 */
 int main(int argc, char *argv[]) {
-	Friend1 *a = new Friend1();
-	a->Friend1::run(argc, argv);
+	Friend3 *a = new Friend3();
+	a->Friend3::run(argc, argv);
 }

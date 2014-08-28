@@ -34,21 +34,18 @@ class Agent
 			checkpointAngle = 0;
 			isClockwise = true;
 			robot_id = 0;
+			// originName = "HouseCentre"; //TEMPORARY!
 		}
 
 		void StageOdom_callback(nav_msgs::Odometry msg);
 
 	protected:
-		// Sets origin name
-		void setOriginName(int agentNum, char* agentName);
+		// std::string originName;
 
 		void setPath(std::string start, std::string end);
 
 		// Checkpoint graph object
 		CheckPointGraph g;
-
-		// The name of this agent's origin checkpoint
-		std::string originName = "Assistant1Origin"; //Temporary!
 
 		//velocity of the robot
 		double linear_x; /*!< Linear velocity of the robot */
