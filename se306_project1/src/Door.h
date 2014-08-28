@@ -14,6 +14,8 @@ class Door
 		
 		bool opened = false;
 		
+		std::string resStateWhenOpened = "";
+		
 	protected:
 		void StageOdom_callback(nav_msgs::Odometry msg);
 		void delegate(se306_project1::ResidentMsg msg);
