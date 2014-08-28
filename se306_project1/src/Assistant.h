@@ -15,6 +15,7 @@ class Assistant : public Agent
 
 			atBedroom = false;
 			residentEntertained = false;
+			foodDelivered = false;
 
 			isMedicated = false;
 		}
@@ -32,11 +33,12 @@ class Assistant : public Agent
 		void clean();
 		void entertain();
 		void delegate(se306_project1::ResidentMsg msg);
-
+	//	void publishStatus()
 
 		// Boolean variables
 		bool atKitchen;
 		bool finishedCooking;
+		bool foodDelivered;
 
 		bool atBedroom;
 		bool residentEntertained;

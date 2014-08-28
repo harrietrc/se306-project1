@@ -1,1 +1,3 @@
-int64 FoodDelivered
+bool FoodDelivered
+bool ResidentEntertained
+bool ResidentMedicated

@@ -9,6 +9,8 @@
 #include "time_conversion.hpp"
 #include "Assistant.h"
 #include <cmath>
+#include "se306_project1/AssistantMsg.h"
+#include "se306_project1/ResidentMsg.h"
 
 using namespace std;
 
@@ -32,6 +34,9 @@ void Assistant::medicate() {
 		}
 	}else if (isMedicated) {
 		move("HouseCentre");
+//		if (distanceFromCheckpoint < 0.5) {
+//			isMedicated == false;
+//		}
 	}
 
 }
@@ -81,10 +86,11 @@ void Assistant::cook() {
 	} else if (atKitchen && finishedCooking) {
 
 		move("HouseCentre");
-		if (distanceFromCheckpoint < 0.5) {
-			atKitchen = false;
-			finishedCooking = false;
-		}
+//		if (distanceFromCheckpoint < 0.5) {
+//			foodDelivered = true;
+//			atKitchen = false;
+//			finishedCooking = false;
+//		}
 	}
 }
 
@@ -121,6 +127,10 @@ void Assistant::entertain() {
 		}
 	} else if (atBedroom && residentEntertained) {
 		move("HouseCentre");
+//		if (distanceFromCheckpoint < 0.5) {
+//			atBedroom = false;
+//			residentEntertained = false;
+//		}
 	}
 }
 
@@ -141,7 +151,6 @@ void Assistant::delegate(se306_project1::ResidentMsg msg) {
 
 	if (msg.state == "bored") {
 		entertain();
-
 	}
 
 	if (msg.state == "medication") {
@@ -173,6 +182,7 @@ int Assistant::run(int argc, char **argv)
 	//advertise() function will tell ROS that you want to publish on a given topic_
 	//to stage
 	ros::Publisher RobotNode_stage_pub = n.advertise<geometry_msgs::Twist>("robot_1/cmd_vel",1000);
+	ros::Publisher Resident_state_pub = n.advertise<se306_project1::ResidentMsg>("assistantStatus", 1000);
 
 	//subscribe to listen to messages coming from stage
 	ros::Subscriber StageOdo_sub = n.subscribe("robot_1/odom",1000, &Assistant::StageOdom_callback, dynamic_cast<Agent*>(this));
@@ -181,6 +191,8 @@ int Assistant::run(int argc, char **argv)
 	//velocity of this RobotNode
 
 	geometry_msgs::Twist RobotNode_cmdvel;
+	se306_project1::AssistantMsg msg;
+
 	while (ros::ok())
 	{
 		entertain();
@@ -188,8 +200,40 @@ int Assistant::run(int argc, char **argv)
 		RobotNode_cmdvel.linear.x = linear_x;
 		RobotNode_cmdvel.angular.z = angular_z;
 			
+//		if (foodDelivered == true) {
+//			msg.FoodDelivered = 1;
+//		}else{
+//			msg.FoodDelivered = 0;
+//		}
+//
+//		if (residentEntertained == true) {
+//			msg.ResidentEntertained = 1;
+//		}else{
+//			msg.ResidentEntertained = 0;
+//		}
+
+		msg.FoodDelivered = foodDelivered;
+		msg.ResidentEntertained = residentEntertained;
+		msg.ResidentMedicated = isMedicated;
+
+		if (foodDelivered) {
+			foodDelivered = false;
+			atKitchen = false;
+			finishedCooking = false;
+		}
+
+		if (residentEntertained) {
+			atBedroom = false;
+			residentEntertained = false;
+		}
+
+		if (isMedicated) {
+			isMedicated = false;
+		}
+
 		//publish the message
 		RobotNode_stage_pub.publish(RobotNode_cmdvel);
+		Resident_state_pub.publish(msg);
 		
 		ros::spinOnce();
 
