@@ -29,19 +29,13 @@ void Doctor::delegate(se306_project1::ResidentMsg msg) {
 *	@returns true if behaviour is successful.
 */
 bool Doctor::doHeal() {
-
-	double lastCheckpointX = g.getCoords(shortestPath.at(shortestPath.size()-1)).first;
-	double lastCheckpointY = g.getCoords(shortestPath.at(shortestPath.size()-1)).second;
-
-	double distanceFromCheckpoint = sqrt(pow((lastCheckpointX - px),2) + pow((lastCheckpointY - py),2));
 	
-	if (healing == false) {
+	if (healing == false && readyToHeal == false) {
 		ROS_INFO("Doctor is on the way"); // print once that the doctor is coming
 		healing = true;
 	}
-	if (healing == true) {
-		// move(<toResident>);
-		if (distanceFromCheckpoint < 0.5) { // next to resident
+	if (healing == true && readyToHeal == false) {
+		if (Visitor::visitResident() == true) { // next to resident
 			readyToHeal = true;
 		}
 	}
@@ -61,20 +55,14 @@ bool Doctor::doHeal() {
 */
 bool Doctor::doHospitalise() {
 
-	double lastCheckpointX = g.getCoords(shortestPath.at(shortestPath.size()-1)).first;
-	double lastCheckpointY = g.getCoords(shortestPath.at(shortestPath.size()-1)).second;
-
-	double distanceFromCheckpoint = sqrt(pow((lastCheckpointX - px),2) + pow((lastCheckpointY - py),2));
-	
-	if (hospitalise == false) {
+	if (hospitalise == false && hospitalise == false) {
 		// behaviour is that when the resident is seriously ill, the doctor including two nurses will come to the resident
 		// once the doctor is next to the resident, they will all move together back outside of the house
 		ROS_INFO("Doctor and nurses are on the way to take Resident to the hospital"); // print once that the doctor is coming
 		hospitalise = true;
 	}
-	if (hospitalise == true) {
-		// move(<toResident>);
-		if (distanceFromCheckpoint < 0.5) { // next to resident
+	if (hospitalise == true && readyToHospitalise == false) {
+		if (Visitor::visitResident() == true) { // next to resident
 			readyToHospitalise = true;
 		}
 	}

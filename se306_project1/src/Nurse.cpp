@@ -27,8 +27,8 @@ void Nurse::delegate(se306_project1::ResidentMsg msg) {
 */
 void Nurse::doHospitalise() {
 
-	double lastCheckpointX = g.getCoords(shortestPath.at(shortestPath.size()-1)).first;
-	double lastCheckpointY = g.getCoords(shortestPath.at(shortestPath.size()-1)).second;
+	double lastCheckpointX = shortestPath.at(shortestPath.size()-1).first;
+	double lastCheckpointY = shortestPath.at(shortestPath.size()-1).second;
 
 	double distanceFromCheckpoint = sqrt(pow((lastCheckpointX - px),2) + pow((lastCheckpointY - py),2));
 	

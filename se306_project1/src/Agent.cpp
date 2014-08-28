@@ -18,8 +18,10 @@ using namespace std;
 *	@note we need a way to get the start co-ordinates of the agent, whether from stage or from the world file (if possible)
 *	and so set the origin name to the correct one for that node.
 */
-void Agent::setOriginName() {
-	
+void setOriginName(int agentNum, char* agentName) {
+	if (strcmp(agentName, "Assistant")) {
+
+	}
 }
 
 /* -- Stage callbacks -- */
@@ -29,7 +31,6 @@ void Agent::setOriginName() {
  *	@param msg Odometry message from odom topic
  */
 void Agent::StageOdom_callback(nav_msgs::Odometry msg) {
-
 
 	//Converting from quaternion to radians
 	currentAngle = acos(msg.pose.pose.orientation.w) * 2;
@@ -66,20 +67,23 @@ void Agent::setPath(std::string start, std::string end) {
 
 void Agent::move(std::string goalName){
 
-	std::string nextCheckpoint = shortestPath.at(shortestPathIndex);
-	std::pair<double, double> currentCheckpointCoords = g.getCoords(currentCheckpoint);
-	std::pair<double, double> nextCheckpointCoords = g.getCoords(nextCheckpoint);
-
 	if (isMoving == false){
 		isMoving = true;
-		currentCheckpointCoords.first = 32; // can get rid of this
-		currentCheckpointCoords.second = 20; // ditto
+		currentCheckpoint.first = 32; // can get rid of this
+		currentCheckpoint.second = 20; // ditto
 		//Get the path stuff
-		Agent::setPath(currentCheckpoint, goalName);
+		std::string cname = g.getCheckpointName(currentCheckpoint);
+		Agent::setPath(cname, goalName);
+		for (int i=0; i<shortestPath.size();i++) {
+			printf("%f %f\n", shortestPath[i].first, shortestPath[i].second);
+		}
 	}
 
-	if (currentCheckpointCoords.first == nextCheckpointCoords.first &&
-			currentCheckpointCoords.second == nextCheckpointCoords.second){
+	pair<double, double> nextCheckpoint = shortestPath.at(shortestPathIndex);
+	printf("Next: %f %f - %s\n", nextCheckpoint.first, nextCheckpoint.second, g.getCheckpointName(nextCheckpoint).c_str());
+
+	if (currentCheckpoint.first == nextCheckpoint.first &&
+			currentCheckpoint.second == nextCheckpoint.second){
 
 		shortestPathIndex++;
 		if (shortestPathIndex >= shortestPath.size()){
@@ -88,9 +92,7 @@ void Agent::move(std::string goalName){
 			return;
 		}else{
 			nextCheckpoint = shortestPath.at(shortestPathIndex);
-
-			checkpointAngle = calculateGoalAngle(nextCheckpointCoords);
-			//ROS_INFO("Goal Angle: %f", checkpointAngle);
+			checkpointAngle = calculateGoalAngle(nextCheckpoint);
 
 			isClockwise = isTurnClockwise();
 		}
@@ -145,13 +147,12 @@ void Agent::turn(){
 
 
 
-void Agent::moveForward(std::string nextCheckpoint){
+void Agent::moveForward(pair<double,double> nextCheckpoint){
 
 	linear_x = 5;
 	double minLinearX = 1.5;
-	std::pair<double, double> nextCheckpointCoords = g.getCoords(nextCheckpoint);
 
-	double distanceFromCheckpoint = sqrt(pow((nextCheckpointCoords.first - px),2) + pow((nextCheckpointCoords.second - py),2));
+	double distanceFromCheckpoint = sqrt(pow((nextCheckpoint.first - px),2) + pow((nextCheckpoint.second - py),2));
 
 	// Check to ensure that linear velocity doesn't decrease if the distance between the checkpoints is higher than 40.
 	double distanceRatio = (distanceFromCheckpoint / 40);

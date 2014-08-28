@@ -46,6 +46,8 @@ define doctor position
 	size [2.5 2.5 0.5]
 	drive "diff"
 	mylaser(pose [ 0.050 0.000 0.000 0.000 ])
+    localization_origin [0 0 0 0]
+  velocity_bounds [-10 10 -10 10 -10 10 -180 180]
 )
 
 define floorplan model
@@ -89,6 +91,12 @@ floorplan
   pose [ 0.000 0.000 0.000 0.000 ]
 ) 
 
+########### Robots ###########
+
+myRobot( pose [ 30.000 25.000 0.000 0.000 ] name "r0" color "blue")
+assistant( pose [ 17.000 17.000 1.000 0.000 ] name "r1")
+doctor( pose [ 10.000 -7.000 0.000 0.000 ] name "r2" color "red")
+
 ########## Furniture ##########
 
 sofa( pose [ -9.000 0.000 0.000 0.000 ] name "f1" color "steel blue")			#sofa 1
@@ -129,8 +137,4 @@ counter( pose [ 24 -27 0 0 ] name "f17" color "steel blue")		   #kitchen counter
 box( pose [ 32 -27 0 0 ] name "f18" color "grey" size [5 7 6]) 	   #stove
 
 
-########### Robots ###########
 
-myRobot( pose [ 30.000 25.000 0.000 0.000 ] name "r0" color "blue")
-assistant( pose [ 17.000 17.000 1.000 0.000 ] name "r1")
-doctor( pose [ 10.000 -7.000 0.000 0.000 ] name "r2" color "red")
