@@ -1,15 +1,16 @@
 #include "Visitor.h"
 
 /**
-*	@brief Class for Friend nodes.
+*	@brief Class for Nurse nodes.
 */
-class Friend2 : public Visitor
-{
+class Nurse2 : public Visitor {
+
 	private:
-		
+		bool readyToHospitalise = false;
+	
 	protected:
+		void doHospitalise();
 		void delegate(se306_project1::ResidentMsg msg);
-		void doTimedVisit(const ros::TimerEvent&);
 
 	public:
 		int run(int argc, char *argv[]);

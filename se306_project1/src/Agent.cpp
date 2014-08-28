@@ -14,16 +14,6 @@
 
 using namespace std;
 
-/**
-*	@note we need a way to get the start co-ordinates of the agent, whether from stage or from the world file (if possible)
-*	and so set the origin name to the correct one for that node.
-*/
-void setOriginName(int agentNum, char* agentName) {
-	if (strcmp(agentName, "Assistant")) {
-
-	}
-}
-
 void Agent::stopMoving(){
 	isMoving = false;
 	linear_x = 0;
@@ -51,7 +41,8 @@ void Agent::StageOdom_callback(nav_msgs::Odometry msg) {
 	px = msg.pose.pose.position.x;
 	py = msg.pose.pose.position.y;
 	if (isMoving == true){
-		move(originName);
+		// move(originName); // Only correct if this doesn't get called
+		move("HouseCentre");//TEMPORARY!
 	}
 }
 

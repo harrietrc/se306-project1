@@ -17,6 +17,7 @@
 
 using namespace std;
 
+std::string originName = "ResidentOrigin";
 
 //PriorityQueue *status_queue = PriorityQueue::getInstance();
 

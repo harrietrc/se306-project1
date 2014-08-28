@@ -3,7 +3,7 @@
 /**
 *	@brief Class for Friend nodes.
 */
-class Friend2 : public Visitor
+class Friend3 : public Visitor
 {
 	private:
 		

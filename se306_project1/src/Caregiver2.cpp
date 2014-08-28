@@ -5,8 +5,9 @@
 #include <sensor_msgs/LaserScan.h>
 #include <sstream>
 #include "math.h"
-#include "Caregiver.h"
+#include "Caregiver2.h"
 
+std::string originName = "Caregiver2Origin";
 
 /**
 *	@brief Callback function that unpacks and processes resident status messages.
@@ -16,7 +17,7 @@
 *	@param msg A custom ResidentMsg message that contains information about the resident's current status.
 */
 //void Caregiver::delegate(se306_project1::ResidentMsg r_msg, se306_project1::AssistantMsg a_msg) no?
-void Caregiver::delegate(se306_project1::ResidentMsg msg)
+void Caregiver2::delegate(se306_project1::ResidentMsg msg)
 {
 	/*if (msg.state == 'care') {
 		if (!atResident) {
@@ -47,7 +48,7 @@ void Caregiver::delegate(se306_project1::ResidentMsg msg)
 *	@brief Caregiver helps the resident to shower, by taking them to the shower and helping them clean themseld.
 *	@return Returns true if behaviour was successful, and false otherwise.
 */
-bool Caregiver::shower(se306_project1::ResidentMsg msg) {
+bool Caregiver2::shower(se306_project1::ResidentMsg msg) {
 
 
 	std::string position;
@@ -66,7 +67,7 @@ bool Caregiver::shower(se306_project1::ResidentMsg msg) {
 *	@brief Caregiver helps the resident to do exercise. Will arrive when excercise scheduled.
 *	@return Returns true if behaviour was successful, and false otherwise.
 */
-bool Caregiver::exercise(se306_project1::ResidentMsg msg) {
+bool Caregiver2::exercise(se306_project1::ResidentMsg msg) {
 	
 	std::string position;
 	position = "BedSouthEast";
@@ -80,7 +81,7 @@ bool Caregiver::exercise(se306_project1::ResidentMsg msg) {
 	return false;
 }
 
-void Caregiver::spin() {
+void Caregiver2::spin() {
 	int counter = 0;
 	while (counter < 100) {
 		counter++;
@@ -94,12 +95,12 @@ void Caregiver::spin() {
 *	@brief Main function for the Caregiver process.
 *	Controls node setup and periodic events.
 */
-int Caregiver::run(int argc, char *argv[])
+int Caregiver2::run(int argc, char *argv[])
 {
 	/* -- Initialisation -- */
 	
 	//You must call ros::init() first of all. ros::init() function needs to see argc and argv. The third argument is the name of the node
-	ros::init(argc, argv, "Caregiver");
+	ros::init(argc, argv, "Caregiver2");
 
 	//NodeHandle is the main access point to communicate with ros.
 	ros::NodeHandle n;
@@ -119,10 +120,10 @@ int Caregiver::run(int argc, char *argv[])
 	ros::Publisher RobotNode_stage_pub = n.advertise<geometry_msgs::Twist>("robot_0/cmd_vel",1000);
 
 	//subscribe to listen to messages coming from stage
-	ros::Subscriber StageOdo_sub = n.subscribe<nav_msgs::Odometry>("robot_0/odom",1000, &Caregiver::StageOdom_callback,dynamic_cast<Agent*>(this));
+	ros::Subscriber StageOdo_sub = n.subscribe<nav_msgs::Odometry>("robot_0/odom",1000, &Caregiver2::StageOdom_callback,dynamic_cast<Agent*>(this));
 
 	//custom Resident subscriber to "resident/state"
-	ros::Subscriber resident_sub = n.subscribe<se306_project1::ResidentMsg>("residentStatus",1000,&Caregiver::delegate, this);
+	ros::Subscriber resident_sub = n.subscribe<se306_project1::ResidentMsg>("residentStatus",1000,&Caregiver2::delegate, this);
 
 	////messages
 	//velocity of this RobotNode
@@ -149,7 +150,6 @@ int Caregiver::run(int argc, char *argv[])
 *	@brief Redirects to main function (run()) of the node.
 */
 int main(int argc, char *argv[]) {
-	Caregiver *a = new Caregiver();
-	a->Caregiver::run(argc, argv);
+	Caregiver2 *a = new Caregiver2();
+	a->Caregiver2::run(argc, argv);
 }
-
