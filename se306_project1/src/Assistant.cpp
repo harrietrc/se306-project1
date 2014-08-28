@@ -27,21 +27,29 @@ void Assistant::medicate(se306_project1::ResidentMsg msg) {
 
 	double distanceFromCheckpoint = sqrt(pow((lastCheckpointX - px),2) + pow((lastCheckpointY - py),2));
 
-	if (!isMedicated) {
-		//move(ResidentCheckpoint);
-		if (distanceFromCheckpoint < 0.5) {
+	//if (!isMedicated) {
+		move(msg.currentCheckpoint);
+		if (distanceFromCheckpoint < 5) {
+			isMoving = false;
+			linear_x = 0;
+			ROS_INFO("close to end");
 			isMedicated == true;
+			isFacingCorrectly = false;
 
 			se306_project1::AssistantMsg amsg;
 			amsg.ResidentMedicated = true;
 			Assistant_state_pub.publish(amsg);
+
+			currentCheckpoint.first = lastCheckpointX;
+			currentCheckpoint.second = lastCheckpointY;
+			move("HouseCentre");
 		}
-	}else if (isMedicated) {
-		move(msg.currentCheckpoint);
-		if (distanceFromCheckpoint < 0.5) {
-			isMedicated == false;
-		}
-	}
+//	}else if (isMedicated) {
+	//	move("HouseCentre");
+	//	if (distanceFromCheckpoint < 0.5) {
+	//		isMedicated == false;
+	//	}
+//	}
 
 }
 
@@ -173,7 +181,6 @@ void Assistant::delegate(se306_project1::ResidentMsg msg) {
 	// alternatively we could send the status in another format.
 	// enum residentStates {hunger,healthLow,bored,emergency,tired,caregiver,friends,medication,idle};
 
-
 	if (msg.state != "emergency") {
 		// check msg if cook do cooking e.t.c
 		if (msg.state == "hunger") {
@@ -186,6 +193,8 @@ void Assistant::delegate(se306_project1::ResidentMsg msg) {
 
 		if (msg.state == "medication") {
 			medicate(msg);
+		} else {
+			move("HouseCentre");
 		}
 	}
 

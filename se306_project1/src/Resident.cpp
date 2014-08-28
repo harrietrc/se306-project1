@@ -30,7 +30,7 @@ void Resident::publishStatus(ros::Publisher Resident_state_pub) {
 	// Creating a message for residentStatus
 	residentState = stateQueue.checkCurrentState();
 	se306_project1::ResidentMsg msg;
-	//residentState = "hunger";    //hardcoded state
+	//residentState = "medication";    //hardcoded state
 	msg.state = residentState;
 	msg.currentCheckpoint = "ResidentOrigin";
 	msg.currentCheckpointX = currentCheckpoint.first;
@@ -117,9 +117,15 @@ void Resident::friend_callback(const std_msgs::String::ConstPtr& msg)
 */
 void Resident::assistant_callback(se306_project1::AssistantMsg msg)
 {
+
+	ROS_INFO("in call back");
 	if (msg.FoodDelivered == true) {
 		hunger = 100;
 		stateQueue.removeState(hungry);
+	}
+	if (msg.ResidentMedicated == true) {
+		stateQueue.removeState(medication);
+		ROS_INFO("Medicated");
 	}
 	//This is the callback function to process laser scan messages
 	//you can access the range data from msg.ranges[i]. i = sample number
@@ -197,7 +203,7 @@ int Resident::run(int argc, char *argv[]) {
 
 	//velocity of this RobotNode
 	geometry_msgs::Twist RobotNode_cmdvel;
-
+	//stateQueue.addToPQ(medication);
 	while (ros::ok())
 	{
 		//messages to stage

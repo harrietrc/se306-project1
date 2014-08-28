@@ -49,7 +49,6 @@ std::string priorityQueue::checkCurrentState() {
 }
 
 void priorityQueue::removeState(residentStates unwantedState) {
-
 	if (!isStateInPQ(unwantedState)) {
 		return;
 	}
@@ -145,6 +144,7 @@ void priorityQueue::addToPQ(residentStates currentState) {
 }
 
 residentStates priorityQueue::popFromPQ() {
+	ROS_INFO("PQ has removed state");
 
 	if (PQ.empty()) {
 		return idle;
