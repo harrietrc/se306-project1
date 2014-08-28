@@ -4,7 +4,6 @@
 #include "CheckPointGraph.hpp"
 #include <boost/bimap/bimap.hpp>
 #include <boost/bimap/set_of.hpp>
-#include <vector>
 using namespace boost; // Useful for graphs
 
 /** Array of the names of checkpoints. Necessary for the initialisation of the checkpoints vector. */
@@ -96,7 +95,7 @@ std::vector<std::pair<double, double> > path; /*!< The agent's path to a specifi
  *	@param startName The name of the start checkpoint as a string (e.g. 'kitchen')
  *	@param endName The name of the goal checkpoint as a string (e.g. 'bathroom')
  */
-std::vector<std::pair<double, double> > CheckPointGraph::shortestPath(std::string startName, std::string endName) {
+std::vector<std::pair<double, double> > CheckPointGraph::shortestPath( std::string startName, std::string endName) {
 
 	//Create vector to store the predecessors (can also make one to store distances)
   	std::vector<vector_graph_t::vertex_descriptor> p(boost::num_vertices(g));

@@ -44,7 +44,6 @@ void Agent::StageOdom_callback(nav_msgs::Odometry msg) {
 	//Update the current position
 	px = msg.pose.pose.position.x;
 	py = msg.pose.pose.position.y;
-
 	if (isMoving == true){
 		move(originName);
 	}
@@ -70,7 +69,6 @@ void Agent::move(std::string goalName){
 	if (isMoving == false){
 		isMoving = true;
 		currentCheckpoint.first = 32; // can get rid of this
-		currentCheckpoint.second = 20; // ditto
 		//Get the path stuff
 		std::string cname = g.getCheckpointName(currentCheckpoint);
 		Agent::setPath(cname, goalName);
@@ -80,7 +78,9 @@ void Agent::move(std::string goalName){
 	}
 
 	pair<double, double> nextCheckpoint = shortestPath.at(shortestPathIndex);
-	printf("Next: %f %f - %s\n", nextCheckpoint.first, nextCheckpoint.second, g.getCheckpointName(nextCheckpoint).c_str());
+	//ROS_INFO("goalx %f",nextCheckpoint.first);
+	//ROS_INFO("goaly %f",nextCheckpoint.second);
+	//printf("Next: %f %f - %s\n", nextCheckpoint.first, nextCheckpoint.second, g.getCheckpointName(nextCheckpoint).c_str());
 
 	if (currentCheckpoint.first == nextCheckpoint.first &&
 			currentCheckpoint.second == nextCheckpoint.second){

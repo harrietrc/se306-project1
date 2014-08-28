@@ -170,10 +170,10 @@ int Assistant::run(int argc, char **argv)
 	////messages
 	//velocity of this RobotNode
 	geometry_msgs::Twist RobotNode_cmdvel;
-	move("HouseCentre");
-
 	while (ros::ok())
 	{
+			ROS_INFO("px %f",px);
+			ROS_INFO("py %f",py);
 		//messages to stage
 		RobotNode_cmdvel.linear.x = linear_x;
 		RobotNode_cmdvel.angular.z = angular_z;
