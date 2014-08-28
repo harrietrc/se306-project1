@@ -9,7 +9,7 @@
 #include <iostream>
 
 #include "ros/ros.h"
-
+using namespace std;
 
 int ProcessManager::nodeProcess(std::string executableName, int nodeNumber) {
 	pid_t child = 0;
