@@ -14,8 +14,9 @@ int getNodeNumber();
 int main(int argc, char** argv) {
 	initializeNodeList();
 
-	AgentConst::AgentType agentType = AgentConst::RESIDENT;
 	AgentFactory agentFactory;
+
+	AgentConst::AgentType agentType = AgentConst::RESIDENT;
 	nodeList[agentType] = nodeList[agentType] + agentFactory.createAgent(agentType, getNodeNumber());
 	//std::cout << "now we have " << nodeList[agentType] << " resident(s)\n";
 

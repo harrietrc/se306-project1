@@ -1,4 +1,5 @@
 #include "Agent.h"
+#include "priorityQueue.h"
 
 /**
 *	@brief Class representing the Resident.
@@ -10,12 +11,18 @@ class Resident : public Agent
 		int boredom; /*!< Resident boredom */
 		int hunger; /*!< Resident hunger */
 
+		priorityQueue stateQueue;
+
+		residentStates residentState;
+
 	public:
 
 		Resident() : Agent(){
 			health = 100;
 			hunger = 0;
 			boredom = 0;
+			stateQueue = priorityQueue();
+			residentState = stateQueue.checkCurrentState();
 		}
 
 		/**
@@ -25,6 +32,7 @@ class Resident : public Agent
 
 		void doctor_callback(se306_project1::DoctorMsg msg);
 		void assistant_callback(se306_project1::AssistantMsg msg);
+		void friend_callback(const std_msgs::String::ConstPtr& msg);
 		bool doSleep(const ros::TimerEvent&);	
 		void publishStatus();
 

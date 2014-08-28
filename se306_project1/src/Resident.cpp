@@ -6,6 +6,7 @@
 #include "se306_project1/AssistantMsg.h"
 #include "se306_project1/ResidentMsg.h"
 
+#include "std_msgs/String.h"
 #include <sstream>
 #include "math.h"
 #include <cmath>
@@ -14,6 +15,8 @@
 #include "priorityQueue.h"
 
 using namespace std;
+
+
 //PriorityQueue *status_queue = PriorityQueue::getInstance();
 
 /**
@@ -21,6 +24,7 @@ using namespace std;
 *	May convert to string and publish in the standard way - do we need custom messages any more?
 */
 void Resident::publishStatus() {
+	residentState = stateQueue.checkCurrentState();
 
 }
 
@@ -38,7 +42,22 @@ bool Resident::doSleep(const ros::TimerEvent&) {
 */
 void Resident::doctor_callback(se306_project1::DoctorMsg msg)
 {
+	if (msg.heal == true) { // at this point Doctor should be next to resident and then doctor should start leaving back to his origin
+		health = 100;
+	}
+	else if (msg.hospitalise == true) { // at this point the doctor + 2 nurses should be next to the resident
+		// move(outside house)
+		// stay outside for a while?
+		// when he returns (pass the door or something)
+		//     health = 100;
+	}
+}
 
+void Resident::friend_callback(const std_msgs::String::ConstPtr& msg)
+{
+	//if (msg.data == "Done") { // friend has finished talking with Resident
+	//	boredom = 0;
+//	}
 }
 
 /**
@@ -68,6 +87,7 @@ int Resident::run(int argc, char *argv[]) {
 	shortestPath.push_back(c1);
 	shortestPath.push_back(c2);
 
+
 	//You must call ros::init() first of all. ros::init() function needs to see argc and argv. The third argument is the name of the node
 	ros::init(argc, argv, "Resident");
 
@@ -80,10 +100,18 @@ int Resident::run(int argc, char *argv[]) {
 
 	//advertise() function will tell ROS that you want to publish on a given topic_
 	//to stage
+	ros::Publisher Resident_state_pub = n.advertise<se306_project1::ResidentMsg>("residentStatus", 1000);
+
 	ros::Publisher RobotNode_stage_pub = n.advertise<geometry_msgs::Twist>("robot_0/cmd_vel",1000); 
 
 	//subscribe to listen to messages coming from stage
 	ros::Subscriber StageOdo_sub = n.subscribe("robot_0/odom",1000, &Agent::StageOdom_callback, dynamic_cast<Agent*>(this));
+	
+	// Resident subscribes to this topic by Doctor
+	ros::Subscriber doctor_sub = n.subscribe<se306_project1::DoctorMsg>("doctorStatus", 1000, &Resident::doctor_callback, this);
+	
+	// Resident subscribes to this topic by Friend
+	ros::Subscriber friend_sub = n.subscribe("visitorConvo", 1000, &Resident::friend_callback, this);
 
 	//velocity of this RobotNode
 	geometry_msgs::Twist RobotNode_cmdvel;
@@ -96,6 +124,7 @@ int Resident::run(int argc, char *argv[]) {
 
 		//publish the message
 		RobotNode_stage_pub.publish(RobotNode_cmdvel);
+
 
 		ros::spinOnce();
 		loop_rate.sleep();

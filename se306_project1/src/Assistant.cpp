@@ -4,8 +4,6 @@
 #include <nav_msgs/Odometry.h>
 #include <sensor_msgs/LaserScan.h>
 #include <stdlib.h>
-#include "se306_project1/ResidentMsg.h"
-#include "se306_project1/AssistantMsg.h"
 #include <sstream>
 #include "math.h"
 #include "time_conversion.hpp"
@@ -53,12 +51,12 @@ void Assistant::cook() {
 		move("KitchenNorthWest");
 		if (distanceFromCheckpoint < 0.5) {
 			atKitchen = true;
-			pair<double, double> p1 = make_pair(4,-24);
+			pair<double, double> p1 = make_pair(6,-24);
 			pair<double, double> p2 = make_pair(24,-24);
-			pair<double, double> p3 = make_pair(24,-32);
-			pair<double, double> p4 = make_pair(20,-32);
+			pair<double, double> p3 = make_pair(24,-30);
+			pair<double, double> p4 = make_pair(20,-30);
 			pair<double, double> p5 = make_pair(20,-28);
-			pair<double, double> p6 = make_pair(4,-24);
+			pair<double, double> p6 = make_pair(6,-24);
 
 			shortestPath.clear();
 			shortestPath.push_back(p1);
@@ -68,19 +66,21 @@ void Assistant::cook() {
 			shortestPath.push_back(p5);
 			shortestPath.push_back(p6);
 			isMoving = true;
+			//checkpointAngle = calculateGoalAngle(p1);
+			//isClockwise = isTurnClockwise();
 		}
 
 
 	} else if (atKitchen && !finishedCooking) {
-
+		ROS_INFO("goal Angle: %f", checkpointAngle);
 		// The path to simulate the cooking behaviour in the kitchen
-		if (px == 4 && py == -24) { // Final kitchen points (refer to p6)
+		if ((distanceFromCheckpoint < 0.5) ) { // Final kitchen points (refer to p6)
 			finishedCooking = true;
 		}
 
 	} else if (atKitchen && finishedCooking) {
 
-		//move("HouseCentre");
+		move("HouseCentre");
 		if (distanceFromCheckpoint < 0.5) {
 			atKitchen = false;
 			finishedCooking = false;
@@ -106,17 +106,21 @@ void Assistant::entertain() {
 	double lastCheckpointY = shortestPath.at(shortestPath.size()-1).second;
 
 	double distanceFromCheckpoint = sqrt(pow((lastCheckpointX - px),2) + pow((lastCheckpointY - py),2));
-
 	if (!atBedroom && !residentEntertained) {
-		//move("BedSouthWest");
+		entertainmenCounter = 0;
+		move("BedSouthWest");
 		if (distanceFromCheckpoint < 0.5) {
 			atBedroom = true;
 		}
 	} else if (atBedroom && !residentEntertained) {
-		//spin around
-		//if done spinning around, isEntertained = true;
+		angular_z = 2;
+		entertainmenCounter++;
+		if (entertainmenCounter > 150) {
+			angular_z = 0;
+			residentEntertained = true;
+		}
 	} else if (atBedroom && residentEntertained) {
-		//move("HouseCentre");
+		move("HouseCentre");
 	}
 }
 
@@ -137,6 +141,7 @@ void Assistant::delegate(se306_project1::ResidentMsg msg) {
 
 	if (msg.state == "bored") {
 		entertain();
+
 	}
 
 	if (msg.state == "medication") {
@@ -159,6 +164,9 @@ int Assistant::run(int argc, char **argv)
 
 	ros::Rate loop_rate(10);
 
+	px = 17;
+	py = 17;
+
 
 	/* -- Publish / Subscribe -- */
 
@@ -171,11 +179,11 @@ int Assistant::run(int argc, char **argv)
 
 	////messages
 	//velocity of this RobotNode
-	geometry_msgs::Twist RobotNode_cmdvel;
-	move("HouseCentre");
 
+	geometry_msgs::Twist RobotNode_cmdvel;
 	while (ros::ok())
 	{
+		entertain();
 		//messages to stage
 		RobotNode_cmdvel.linear.x = linear_x;
 		RobotNode_cmdvel.angular.z = angular_z;

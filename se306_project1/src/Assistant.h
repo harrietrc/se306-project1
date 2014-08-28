@@ -9,6 +9,14 @@ class Assistant : public Agent
 	public:
 
 		Assistant() : Agent(){
+
+			atKitchen = false;
+			finishedCooking = false;
+
+			atBedroom = false;
+			residentEntertained = false;
+
+			isMedicated = false;
 		}
 
 		/**
@@ -25,12 +33,15 @@ class Assistant : public Agent
 		void entertain();
 		void delegate(se306_project1::ResidentMsg msg);
 
+
 		// Boolean variables
-		bool atKitchen = false;
-		bool finishedCooking = false;
+		bool atKitchen;
+		bool finishedCooking;
 
-		bool atBedroom = false;
-		bool residentEntertained = false;
+		bool atBedroom;
+		bool residentEntertained;
 
-		bool isMedicated = false;
+		int entertainmenCounter = 0;
+
+		bool isMedicated;
 };
