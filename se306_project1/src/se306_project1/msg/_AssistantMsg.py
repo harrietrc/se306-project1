@@ -6,14 +6,15 @@ import struct
 
 
 class AssistantMsg(genpy.Message):
-  _md5sum = "a03c5f8f468a7475ee423369456ec01c"
+  _md5sum = "1ca1127bb32dee9fb76301e6f831b932"
   _type = "se306_project1/AssistantMsg"
   _has_header = False #flag to mark the presence of a Header object
-  _full_text = """int64 FoodDelivered
-
+  _full_text = """bool FoodDelivered
+bool ResidentEntertained
+bool ResidentMedicated
 """
-  __slots__ = ['FoodDelivered']
-  _slot_types = ['int64']
+  __slots__ = ['FoodDelivered','ResidentEntertained','ResidentMedicated']
+  _slot_types = ['bool','bool','bool']
 
   def __init__(self, *args, **kwds):
     """
@@ -23,7 +24,7 @@ class AssistantMsg(genpy.Message):
     changes.  You cannot mix in-order arguments and keyword arguments.
 
     The available fields are:
-       FoodDelivered
+       FoodDelivered,ResidentEntertained,ResidentMedicated
 
     :param args: complete set of field values, in .msg order
     :param kwds: use keyword arguments corresponding to message field names
@@ -33,9 +34,15 @@ class AssistantMsg(genpy.Message):
       super(AssistantMsg, self).__init__(*args, **kwds)
       #message fields cannot be None, assign default values for those that are
       if self.FoodDelivered is None:
-        self.FoodDelivered = 0
+        self.FoodDelivered = False
+      if self.ResidentEntertained is None:
+        self.ResidentEntertained = False
+      if self.ResidentMedicated is None:
+        self.ResidentMedicated = False
     else:
-      self.FoodDelivered = 0
+      self.FoodDelivered = False
+      self.ResidentEntertained = False
+      self.ResidentMedicated = False
 
   def _get_types(self):
     """
@@ -49,7 +56,8 @@ class AssistantMsg(genpy.Message):
     :param buff: buffer, ``StringIO``
     """
     try:
-      buff.write(_struct_q.pack(self.FoodDelivered))
+      _x = self
+      buff.write(_struct_3B.pack(_x.FoodDelivered, _x.ResidentEntertained, _x.ResidentMedicated))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(_x))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(_x))))
 
@@ -60,9 +68,13 @@ class AssistantMsg(genpy.Message):
     """
     try:
       end = 0
+      _x = self
       start = end
-      end += 8
-      (self.FoodDelivered,) = _struct_q.unpack(str[start:end])
+      end += 3
+      (_x.FoodDelivered, _x.ResidentEntertained, _x.ResidentMedicated,) = _struct_3B.unpack(str[start:end])
+      self.FoodDelivered = bool(self.FoodDelivered)
+      self.ResidentEntertained = bool(self.ResidentEntertained)
+      self.ResidentMedicated = bool(self.ResidentMedicated)
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -75,7 +87,8 @@ class AssistantMsg(genpy.Message):
     :param numpy: numpy python module
     """
     try:
-      buff.write(_struct_q.pack(self.FoodDelivered))
+      _x = self
+      buff.write(_struct_3B.pack(_x.FoodDelivered, _x.ResidentEntertained, _x.ResidentMedicated))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(_x))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(_x))))
 
@@ -87,12 +100,16 @@ class AssistantMsg(genpy.Message):
     """
     try:
       end = 0
+      _x = self
       start = end
-      end += 8
-      (self.FoodDelivered,) = _struct_q.unpack(str[start:end])
+      end += 3
+      (_x.FoodDelivered, _x.ResidentEntertained, _x.ResidentMedicated,) = _struct_3B.unpack(str[start:end])
+      self.FoodDelivered = bool(self.FoodDelivered)
+      self.ResidentEntertained = bool(self.ResidentEntertained)
+      self.ResidentMedicated = bool(self.ResidentMedicated)
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
 
 _struct_I = genpy.struct_I
-_struct_q = struct.Struct("<q")
+_struct_3B = struct.Struct("<3B")

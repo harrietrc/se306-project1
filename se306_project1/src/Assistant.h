@@ -9,6 +9,14 @@ class Assistant : public Agent
 	public:
 
 		Assistant() : Agent(){
+
+			atKitchen = false;
+			finishedCooking = false;
+
+			atBedroom = false;
+			residentEntertained = false;
+
+			isMedicated = false;
 		}
 
 		/**
@@ -19,18 +27,22 @@ class Assistant : public Agent
 
 	private:
 		// functions
-		void medicate();
-		void cook();
+		void medicate(se306_project1::ResidentMsg msg);
+		void cook(se306_project1::ResidentMsg msg);
 		void clean();
-		void entertain();
+		void entertain(se306_project1::ResidentMsg msg);
 		void delegate(se306_project1::ResidentMsg msg);
 
+		ros::Publisher Assistant_state_pub;
+
 		// Boolean variables
-		bool atKitchen = false;
-		bool finishedCooking = false;
+		bool atKitchen;
+		bool finishedCooking;
 
-		bool atBedroom = false;
-		bool residentEntertained = false;
+		bool atBedroom;
+		bool residentEntertained;
 
-		bool isMedicated = false;
+		int entertainmentCounter = 0;
+
+		bool isMedicated;
 };

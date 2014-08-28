@@ -16,7 +16,7 @@ residentStates state;
 std::vector<statusObj> PQ;
 
 priorityQueue::priorityQueue() {
-	// TODO Auto-generated constructor stub
+	addToPQ(tired);
 
 }
 
@@ -40,8 +40,12 @@ bool priorityQueue::isStateInPQ(residentStates currentState) {
 }
 
 
-residentStates priorityQueue::checkCurrentState() {
-	return PQ.back().state;
+std::string priorityQueue::checkCurrentState() {
+	if (PQ.empty()) {
+		return stateConvertString(idle);
+	} else {
+		return stateConvertString(PQ.back().state);
+	}
 }
 
 void priorityQueue::removeState(residentStates unwantedState) {
@@ -66,6 +70,11 @@ void priorityQueue::addToPQ(residentStates currentState) {
 	if (currentState == emergency) {
 		removeState(healthLow);
 	}
+	if (currentState == healthLow) {
+		if(isStateInPQ(emergency)) {
+			return;
+		}
+	}
 
 
 
@@ -89,7 +98,7 @@ void priorityQueue::addToPQ(residentStates currentState) {
 	case (friends):
 			currResidentStatus.priority = 5;
 			break;
-	case (hunger):
+	case (hungry):
 			currResidentStatus.priority = 6;
 			break;
 	case (tired):
@@ -145,5 +154,39 @@ residentStates priorityQueue::popFromPQ() {
 		PQ.pop_back();
 		return state;
 	}
+}
+
+std::string priorityQueue::stateConvertString(residentStates currentState){
+	switch(currentState) // assigning the priority
+		{
+		case (emergency):
+				return "emergency";
+				break;
+		case (healthLow):
+				return "healthLow";
+				break;
+		case (caregiver):
+				return "caregiver";
+				break;
+		case(medication):
+				return "medication";
+				break;
+		case (friends):
+				return "friends";
+				break;
+		case (hungry):
+				return "hungry";
+				break;
+		case (tired):
+				return "tired";
+				break;
+		case (bored):
+				return "bored";
+				break;
+		case (idle):
+				return "idle";
+				break;
+		}
+	return "Can't convert!!"; //
 }
 

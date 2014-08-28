@@ -5,12 +5,17 @@
 */
 class Caregiver : public Visitor {
 
-	protected:
-		virtual void delegate(se306_project1::ResidentMsg msg) {};
-		bool doMoralSupport();
-		bool doShowerSupport();
-		bool doExerciseSupport();
-		bool doEatSupport();
+	private:
+		// bool variables
+		bool hasShowered;
+		bool hasExercised;
+		bool atResident;
+		bool exercise(se306_project1::ResidentMsg msg);
+		bool shower(se306_project1::ResidentMsg msg);
+
+		// methods
+		void spin();
+		void delegate(se306_project1::ResidentMsg msg);
 
 	public:
 		int run(int argc, char *argv[]);

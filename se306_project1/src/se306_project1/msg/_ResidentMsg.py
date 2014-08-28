@@ -6,17 +6,17 @@ import struct
 
 
 class ResidentMsg(genpy.Message):
-  _md5sum = "a2286c83f7f83efe61c3a41a67ca0ca2"
+  _md5sum = "d4a55c59ae8655ae9644ee9979fbb7c9"
   _type = "se306_project1/ResidentMsg"
   _has_header = False #flag to mark the presence of a Header object
-  _full_text = """float64 x
-float64 y
-int64 health
-int64 hunger
+  _full_text = """float64 currentCheckpointX
+float64 currentCheckpointY
 string state
+string currentCheckpoint
+
 """
-  __slots__ = ['x','y','health','hunger','state']
-  _slot_types = ['float64','float64','int64','int64','string']
+  __slots__ = ['currentCheckpointX','currentCheckpointY','state','currentCheckpoint']
+  _slot_types = ['float64','float64','string','string']
 
   def __init__(self, *args, **kwds):
     """
@@ -26,7 +26,7 @@ string state
     changes.  You cannot mix in-order arguments and keyword arguments.
 
     The available fields are:
-       x,y,health,hunger,state
+       currentCheckpointX,currentCheckpointY,state,currentCheckpoint
 
     :param args: complete set of field values, in .msg order
     :param kwds: use keyword arguments corresponding to message field names
@@ -35,22 +35,19 @@ string state
     if args or kwds:
       super(ResidentMsg, self).__init__(*args, **kwds)
       #message fields cannot be None, assign default values for those that are
-      if self.x is None:
-        self.x = 0.
-      if self.y is None:
-        self.y = 0.
-      if self.health is None:
-        self.health = 0
-      if self.hunger is None:
-        self.hunger = 0
+      if self.currentCheckpointX is None:
+        self.currentCheckpointX = 0.
+      if self.currentCheckpointY is None:
+        self.currentCheckpointY = 0.
       if self.state is None:
         self.state = ''
+      if self.currentCheckpoint is None:
+        self.currentCheckpoint = ''
     else:
-      self.x = 0.
-      self.y = 0.
-      self.health = 0
-      self.hunger = 0
+      self.currentCheckpointX = 0.
+      self.currentCheckpointY = 0.
       self.state = ''
+      self.currentCheckpoint = ''
 
   def _get_types(self):
     """
@@ -65,8 +62,17 @@ string state
     """
     try:
       _x = self
-      buff.write(_struct_2d2q.pack(_x.x, _x.y, _x.health, _x.hunger))
+      buff.write(_struct_2d.pack(_x.currentCheckpointX, _x.currentCheckpointY))
       _x = self.state
+      length = len(_x)
+      if python3 or type(_x) == unicode:
+        _x = _x.encode('utf-8')
+        length = len(_x)
+      if python3:
+        buff.write(struct.pack('<I%sB'%length, length, *_x))
+      else:
+        buff.write(struct.pack('<I%ss'%length, length, _x))
+      _x = self.currentCheckpoint
       length = len(_x)
       if python3 or type(_x) == unicode:
         _x = _x.encode('utf-8')
@@ -87,8 +93,8 @@ string state
       end = 0
       _x = self
       start = end
-      end += 32
-      (_x.x, _x.y, _x.health, _x.hunger,) = _struct_2d2q.unpack(str[start:end])
+      end += 16
+      (_x.currentCheckpointX, _x.currentCheckpointY,) = _struct_2d.unpack(str[start:end])
       start = end
       end += 4
       (length,) = _struct_I.unpack(str[start:end])
@@ -98,6 +104,15 @@ string state
         self.state = str[start:end].decode('utf-8')
       else:
         self.state = str[start:end]
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      start = end
+      end += length
+      if python3:
+        self.currentCheckpoint = str[start:end].decode('utf-8')
+      else:
+        self.currentCheckpoint = str[start:end]
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -111,8 +126,17 @@ string state
     """
     try:
       _x = self
-      buff.write(_struct_2d2q.pack(_x.x, _x.y, _x.health, _x.hunger))
+      buff.write(_struct_2d.pack(_x.currentCheckpointX, _x.currentCheckpointY))
       _x = self.state
+      length = len(_x)
+      if python3 or type(_x) == unicode:
+        _x = _x.encode('utf-8')
+        length = len(_x)
+      if python3:
+        buff.write(struct.pack('<I%sB'%length, length, *_x))
+      else:
+        buff.write(struct.pack('<I%ss'%length, length, _x))
+      _x = self.currentCheckpoint
       length = len(_x)
       if python3 or type(_x) == unicode:
         _x = _x.encode('utf-8')
@@ -134,8 +158,8 @@ string state
       end = 0
       _x = self
       start = end
-      end += 32
-      (_x.x, _x.y, _x.health, _x.hunger,) = _struct_2d2q.unpack(str[start:end])
+      end += 16
+      (_x.currentCheckpointX, _x.currentCheckpointY,) = _struct_2d.unpack(str[start:end])
       start = end
       end += 4
       (length,) = _struct_I.unpack(str[start:end])
@@ -145,9 +169,18 @@ string state
         self.state = str[start:end].decode('utf-8')
       else:
         self.state = str[start:end]
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      start = end
+      end += length
+      if python3:
+        self.currentCheckpoint = str[start:end].decode('utf-8')
+      else:
+        self.currentCheckpoint = str[start:end]
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
 
 _struct_I = genpy.struct_I
-_struct_2d2q = struct.Struct("<2d2q")
+_struct_2d = struct.Struct("<2d")

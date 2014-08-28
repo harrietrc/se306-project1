@@ -13,16 +13,66 @@
 #include <stdlib.h>
 #include "Resident.h"
 #include "priorityQueue.h"
+#include "time_conversion.hpp"
 
 using namespace std;
+
+
 //PriorityQueue *status_queue = PriorityQueue::getInstance();
 
 /**
 *	@brief Gets current resident status and publishes it to a topic for assistants and doctors/nurses.
 *	May convert to string and publish in the standard way - do we need custom messages any more?
 */
-void Resident::publishStatus() {
+void Resident::publishStatus(ros::Publisher Resident_state_pub) {
 
+
+	// Creating a message for residentStatus
+	residentState = stateQueue.checkCurrentState();
+	se306_project1::ResidentMsg msg;
+	residentState = "hunger";
+	msg.state = residentState;
+	msg.currentCheckpoint = "ResidentOrigin";
+	//msg.currentCheckpointX = currentCheckpoint.first;
+//	msg.currentCheckpointY = currentCheckpoint.second;
+
+	Resident_state_pub.publish(msg);
+}
+
+void Resident::triggerRandomEvents(){
+
+	int randomGeneratedForEmergency = rand() % 100;
+	int randomGeneratedForIll = rand() % 100;
+
+
+	if (randomGeneratedForEmergency <= 3){
+		stateQueue.addToPQ(emergency);
+		health = 10;
+	}
+
+	if (randomGeneratedForIll <= 20){
+		health = health - 5;
+		if (health < 50){
+			stateQueue.addToPQ(healthLow);
+		}
+	}
+
+}
+
+void Resident::medicationCallback(const ros::TimerEvent&){
+	stateQueue.addToPQ(medication);
+}
+void Resident::hungerCallback(const ros::TimerEvent&){
+	stateQueue.addToPQ(hungry);
+}
+void Resident::caregiverServicesCallback(const ros::TimerEvent&){
+	stateQueue.addToPQ(caregiver);
+}
+void Resident::wakeCallback(const ros::TimerEvent&){
+	stateQueue.removeState(tired);
+}
+void Resident::sleepCallback(const ros::TimerEvent&){
+	stateQueue.addToPQ(tired);
 }
 
 /**
@@ -39,7 +89,22 @@ bool Resident::doSleep(const ros::TimerEvent&) {
 */
 void Resident::doctor_callback(se306_project1::DoctorMsg msg)
 {
+	if (msg.heal == true) { // at this point Doctor should be next to resident and then doctor should start leaving back to his origin
+		health = 100;
+	}
+	else if (msg.hospitalise == true) { // at this point the doctor + 2 nurses should be next to the resident
+		// move(outside house)
+		// stay outside for a while?
+		// when he returns (pass the door or something)
+		//     health = 100;
+	}
+}
 
+void Resident::friend_callback(const std_msgs::String::ConstPtr& msg)
+{
+//	if (msg.data == "Done") { // friend has finished talking with Resident
+//		boredom = 0;
+//	}
 }
 
 /**
@@ -69,6 +134,7 @@ int Resident::run(int argc, char *argv[]) {
 	shortestPath.push_back(c1);
 	shortestPath.push_back(c2);
 
+
 	//You must call ros::init() first of all. ros::init() function needs to see argc and argv. The third argument is the name of the node
 	ros::init(argc, argv, "Resident");
 
@@ -77,15 +143,45 @@ int Resident::run(int argc, char *argv[]) {
 
 	ros::Rate loop_rate(10);
 
+
 	/* -- Publish / Subscribe -- */
 
 	//advertise() function will tell ROS that you want to publish on a given topic_
 	//to stage
 	ros::Publisher RobotNode_stage_pub = n.advertise<geometry_msgs::Twist>("robot_0/cmd_vel",1000); 	
 	ros::Publisher GUI_publisher = n.advertise<std_msgs::String>("python/gui",1000); 
+	ros::Publisher Resident_state_pub = n.advertise<se306_project1::ResidentMsg>("residentStatus", 1000);
 
 	//subscribe to listen to messages coming from stage
 	ros::Subscriber StageOdo_sub = n.subscribe("robot_0/odom",1000, &Agent::StageOdom_callback, dynamic_cast<Agent*>(this));
+	
+	// Resident subscribes to this topic by Doctor
+	ros::Subscriber doctor_sub = n.subscribe<se306_project1::DoctorMsg>("doctorStatus", 1000, &Resident::doctor_callback, this);
+	
+	// Resident subscribes to this topic by Friend
+	ros::Subscriber friend_sub = n.subscribe("visitorConvo", 1000, &Resident::friend_callback, this);
+
+	// Periodic callback
+	int wakeup = time_conversion::simHoursToRealSecs(0);
+	int caregiverServices = time_conversion::simHoursToRealSecs(0.5);
+	int morningMedication = time_conversion::simHoursToRealSecs(5);
+	int afternoonMedication = time_conversion::simHoursToRealSecs(9);
+	int nightMedication = time_conversion::simHoursToRealSecs(14);
+	int morningHungry = time_conversion::simHoursToRealSecs(3);
+	int afternoonHungry = time_conversion::simHoursToRealSecs(7);
+	int nightHungry= time_conversion::simHoursToRealSecs(12);
+	int sleep = time_conversion::simHoursToRealSecs(15);
+	ros::Timer wakeUpTimer = n.createTimer(ros::Duration(wakeup), &Resident::wakeCallback, this);
+	ros::Timer caregiverTimer = n.createTimer(ros::Duration(caregiverServices), &Resident::caregiverServicesCallback, this);
+	ros::Timer medicationTimer = n.createTimer(ros::Duration(morningMedication), &Resident::medicationCallback, this);
+	ros::Timer medicationTimer2 = n.createTimer(ros::Duration(afternoonMedication), &Resident::medicationCallback, this);
+	ros::Timer medicationTimer3 = n.createTimer(ros::Duration(nightMedication), &Resident::medicationCallback, this);
+	ros::Timer hungryTimer = n.createTimer(ros::Duration(morningHungry), &Resident::hungerCallback, this);
+	ros::Timer hungryTimer2 = n.createTimer(ros::Duration(afternoonHungry), &Resident::hungerCallback, this);
+	ros::Timer hungryTimer3 = n.createTimer(ros::Duration(nightHungry), &Resident::hungerCallback, this);
+	ros::Timer sleepTimer = n.createTimer(ros::Duration(sleep), &Resident::sleepCallback, this);
+
+
 
 	//velocity of this RobotNode
 	geometry_msgs::Twist RobotNode_cmdvel;
@@ -99,7 +195,7 @@ int Resident::run(int argc, char *argv[]) {
 	
 		//message to pythonGUI
 		std::stringstream guiMsgString;
-		guiMsgString << "boji_sean";
+		guiMsgString << health << " " << hunger << " " << boredom << " " << residentState;
 		GUImsg.data = guiMsgString.str();
 
 		//publish the message
@@ -107,6 +203,7 @@ int Resident::run(int argc, char *argv[]) {
 
 		//publish for gui
 		GUI_publisher.publish(GUImsg);
+		publishStatus(Resident_state_pub);
 
 		ros::spinOnce();
 		loop_rate.sleep();
