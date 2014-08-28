@@ -5,6 +5,7 @@ include "doctor.inc"
 include "caregiver.inc"
 include "nurse.inc"
 include "friends.inc"
+include "resident.inc"
 
 define mylaser ranger
 (
@@ -19,25 +20,6 @@ define mylaser ranger
   
 )
 
-define myRobot position
-(
-	block
-	(
-		points 3
-		point[0] [1 0.5]
-		point[1] [0 1]
-		point[2] [0 0]				
-		z [0 1]
-	)
-
-	#fit shape to this size in meters
-	size [2 2 2.5]
-	drive "diff"
-	mylaser(pose [ 0.050 0.000 0.000 0.000 ])
-
-	localization_origin [0 0 0 0]
-	velocity_bounds [-10 10 -10 10 -10 10 -180 180]
-)
 
 define box model
 (
@@ -108,7 +90,7 @@ floorplan
 
 ########### Robots ###########
 
-myRobot( pose [ 26.000 48.000 0.000 0.000 ] name "r0" color "light green")
+resident( pose [ 26.000 48.000 0.000 0.000 ] name "r0" color "light green")
 assistant( pose [ 17.000 17.000 0.000 0.000 ] name "r1")
 assistant( pose [ 32.000 18.000 0.000 90.000 ] name "r2")
 
@@ -121,11 +103,11 @@ friends( pose [ -20.000 -46.000 0.000 90.000 ] name "r7" color "black")	#friends
 friends( pose [ -23.000 -46.000 0.000 90.000 ] name "r8" color "white")	#friends
 friends( pose [ -20.000 -48.000 0.000 90.000 ] name "r9" color "white")	#friends
 
-door( pose [ -8.5 -37.5 0 0 ] name "r8" color "light steel blue" size [12 1.5 12])			#sliding door
+door( pose [ -20.5 -37.5 0 0 ] name "r8" color "light steel blue" size [12 1.5 12])			#sliding door
 
 ########## Furniture ##########
 
-sofa( pose [ -9.000 -5.000 0.000 0.000 ] name "f1" color "steel blue")			#sofa 1
+sofa( pose [ -9.000 -3.000 0.000 0.000 ] name "f1" color "steel blue")			#sofa 1
 sofa( pose [ -19.500 12.500 0.000 90.000 ] name "f2" color "steel blue" size [7 14 7]) #sofa 2
 table( pose [ -21 0 0 0 ] name "f3" color "tan")		   #coffee table
 
