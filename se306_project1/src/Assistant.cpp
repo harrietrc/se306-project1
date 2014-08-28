@@ -53,7 +53,6 @@ void Assistant::cook(se306_project1::ResidentMsg msg) {
 	double lastCheckpointX = shortestPath.at(shortestPath.size()-1).first;
 	double lastCheckpointY = shortestPath.at(shortestPath.size()-1).second;
 
-
 	double distanceFromCheckpoint = sqrt(pow((lastCheckpointX - px),2) + pow((lastCheckpointY - py),2));
 
 	if (!atKitchen && !finishedCooking) {
@@ -62,17 +61,17 @@ void Assistant::cook(se306_project1::ResidentMsg msg) {
 			atKitchen = true;
 			pair<double, double> p1 = make_pair(6,-24);
 			pair<double, double> p2 = make_pair(24,-24);
-			pair<double, double> p3 = make_pair(24,-30);
+		//	pair<double, double> p3 = make_pair(24,-30);
 			pair<double, double> p4 = make_pair(20,-30);
-			pair<double, double> p5 = make_pair(20,-28);
+		//	pair<double, double> p5 = make_pair(20,-28);
 			pair<double, double> p6 = make_pair(6,-28);
 
 			shortestPath.clear();
 			shortestPath.push_back(p1);
 			shortestPath.push_back(p2);
-			shortestPath.push_back(p3);
+		//	shortestPath.push_back(p3);
 			shortestPath.push_back(p4);
-			shortestPath.push_back(p5);
+		//	shortestPath.push_back(p5);
 			shortestPath.push_back(p6);
 			isMoving = true;
 		}
@@ -88,33 +87,30 @@ void Assistant::cook(se306_project1::ResidentMsg msg) {
 
 	} else if (atKitchen && finishedCooking && !foodDelivered) {
 
-		ROS_INFO("delivering food");
 		move(msg.currentCheckpoint);
 		lastCheckpointX = shortestPath.at(shortestPath.size()-1).first;
 		lastCheckpointY = shortestPath.at(shortestPath.size()-1).second;
 		distanceFromCheckpoint = sqrt(pow((lastCheckpointX - px),2) + pow((lastCheckpointY - py),2));
-		ROS_INFO("distance: %f",distanceFromCheckpoint);
-		ROS_INFO("chec x %f :",lastCheckpointX);
-		ROS_INFO("chec y %f ",lastCheckpointY);
 		if (distanceFromCheckpoint < 5) {
 			isMoving = false;
-			ROS_INFO("#########################################################################################################################################################################################################################################################################################################################");
-			se306_project1::AssistantMsg amsg;
+			linear_x = 0;
+			isFacingCorrectly = false;
 			foodDelivered = true;
-			amsg.FoodDelivered = true;
-			Assistant_state_pub.publish(amsg);
+
+			currentCheckpoint.first = lastCheckpointX;
+			currentCheckpoint.second = lastCheckpointY;
+
 			move("HouseCentre");
 
 		}
 	} else if (atKitchen && finishedCooking && foodDelivered) {
-		ROS_INFO("in");
 		move("HouseCentre");
 		if (distanceFromCheckpoint < 0.5) {
-			ROS_INFO("HOME!");
 			atKitchen = false;
 			finishedCooking = false;
 			foodDelivered = false;
 		}
+
 	}
 }
 

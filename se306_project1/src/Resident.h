@@ -43,6 +43,8 @@ class Resident : public Agent
 		void sleepCallback(const ros::TimerEvent&);
 		void caregiverServicesCallback(const ros::TimerEvent&);
 		void hungerCallback(const ros::TimerEvent&);
+		void friendsCallback(const ros::TimerEvent&);
+		void friendsDoneCallback(const ros::TimerEvent&);
 
 
 };

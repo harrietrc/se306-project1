@@ -75,19 +75,17 @@ void Agent::move(std::string goalName){
 		std::string cname = g.getCheckpointName(currentCheckpoint);
 		Agent::setPath(cname, goalName);
 
-		 for (int i=0; i<shortestPath.size();i++) {
+	/*	 for (int i=0; i<shortestPath.size();i++) {
 			 ROS_INFO("checkpoint x: %f",shortestPath[i].first);
 			 ROS_INFO("checkpoint y: %f",shortestPath[i].second);
 
 		 }
-		 ROS_INFO("#########");
+		 */
 	}
 
 	pair<double, double> nextCheckpoint = shortestPath.at(shortestPathIndex);
-
 	if (currentCheckpoint.first == nextCheckpoint.first &&
 			currentCheckpoint.second == nextCheckpoint.second){
-
 		shortestPathIndex++;
 		if (shortestPathIndex >= shortestPath.size()){
 			shortestPathIndex = 0;
@@ -96,7 +94,7 @@ void Agent::move(std::string goalName){
 		}else{
 			nextCheckpoint = shortestPath.at(shortestPathIndex);
 			checkpointAngle = calculateGoalAngle(nextCheckpoint);
-			//ROS_INFO("goal Angle: %f",checkpointAngle);
+
 			isClockwise = isTurnClockwise();
 		}
 
@@ -157,11 +155,6 @@ void Agent::moveForward(pair<double,double> nextCheckpoint){
 	double distanceFromCheckpoint = sqrt(pow((nextCheckpoint.first - px),2) + pow((nextCheckpoint.second - py),2));
 
 
-//	ROS_INFO("Distance: %f", distanceFromCheckpoint);
-//	ROS_INFO("px: %f", px);
-//	ROS_INFO("py: %f", py);
-//	ROS_INFO("check x: %f", nextCheckpoint.first );
-//	ROS_INFO("check y: %f", nextCheckpoint.second);
 
 	// Check to ensure that linear velocity doesn't decrease if the distance between the checkpoints is higher than 40.
 	double distanceRatio = (distanceFromCheckpoint / 40);
