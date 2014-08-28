@@ -16,7 +16,7 @@ STDOUT = 1
 STDERR = 2
 
 subscriber = None
-
+perc = 1
 # We inherit from Tkinter.Tk, which is the base class for standard windows.
 class simpleapp_tk(Tkinter.Tk):
     # Constructor
@@ -24,7 +24,7 @@ class simpleapp_tk(Tkinter.Tk):
 		Tkinter.Tk.__init__(self,parent)
 		# Keep a reference to our parent.
 		self.parent = parent
-		self.setupNode()
+		#self.setupNode()
 		self.initialize()
 
 	def initialize(self):
@@ -57,16 +57,17 @@ class simpleapp_tk(Tkinter.Tk):
 		hungerText.grid(column=0, row=2, sticky="W")
         
 		# Health Bar (Parent)
-		healthBar = Tkinter.Canvas(statusFrame, bg="blue", height=16, width=200, highlightbackground="black")
-		healthBar.grid(column=1, row=1, sticky="E", padx=3)
-        # Health Bar (Filler)
-		healthFiller = healthBar.create_rectangle(0,0,50,100, fill="red") #Change 3rd argument to alternate health level
-        
-        # Hunger Bar (Parent)
-		hungerBar = Tkinter.Canvas(statusFrame, bg="blue", height=16, width=200, highlightbackground="black")
-		hungerBar.grid(column=1, row=2, sticky="E", padx=3)
-        # Hunger Bar (Filler)
-		hungerFiller = hungerBar.create_rectangle(0,0,50,100, fill="red") #Change 3rd argument to alternate hunger level
+		self.healthBar = Tkinter.Canvas(statusFrame, bg="blue", height=16, width=200, highlightbackground="black")
+		self.healthBar.grid(column=1, row=1, sticky="E", padx=3)
+		# Health Bar (Filler)
+		self.healthFiller = Tkinter.Canvas(statusFrame, bg="red", height=16, width=0, highlightbackground="black")
+		self.healthFiller.grid(column=1, row=1, sticky="E", padx=3)
+		# Hunger Bar (Parent)
+		self.hungerBar = Tkinter.Canvas(statusFrame, bg="blue", height=16, width=200, highlightbackground="black")
+		self.hungerBar.grid(column=1, row=2, sticky="E", padx=3)
+		# Hunger Bar (Filler)
+		self.hungerFiller = Tkinter.Canvas(statusFrame, bg="red", height=16, width=0, highlightbackground="black")
+		self.hungerFiller.grid(column=1, row=2, sticky="E", padx=3)
         
         # Position
 		posText = Tkinter.Label(statusFrame, text="Position : ")
@@ -85,16 +86,20 @@ class simpleapp_tk(Tkinter.Tk):
 		stateResident.grid(column=1, row=4, sticky="E", padx=2)
 
 		#====End of statusFrame====#
-	
+		
 		#====Start of Time Frame====#
-		timeFrame = Tkinter.Frame(self, bd=2, relief="groove")
-		timeFrame.grid(column=0, row=3, padx=5, pady= 5)
         
-		timeText = Tkinter.Label(timeFrame, text="Current Time : ")
-		timeText.grid(column=0, row=0)
+		timeFrame = Tkinter.Frame(self, bd=2, relief="groove")
+		timeFrame.grid(column=0, row=3, padx=5, pady=5)
+		
+		timeText = Tkinter.Label(timeFrame, text="Time", font=(18), anchor="center")
+		timeText.grid(column=0, row=0, sticky="W")
+        
+		currentTimeText = Tkinter.Label(timeFrame, text="Current Time : ")
+		currentTimeText.grid(column=0, row=1)
         
 		currentTime = Tkinter.Label(timeFrame, text="11:08PM, 27 August 2014")
-		currentTime.grid(column=1, row=0, sticky="E", padx=5)
+		currentTime.grid(column=1, row=1, sticky="E", padx=5)
 
 	def setupNode(self):
 		print('boji listener')
@@ -110,11 +115,24 @@ class simpleapp_tk(Tkinter.Tk):
 		#TODO self.entry.delete(0, Tkinter.END)
 		#TODO self.entry.insert(0, GUImsg.data)
 
+	def decreaseHealth(self, value):
+		self.healthFiller.config(width=200*(1-value))
+		self.hungerFiller.config(width=200*(1-value))
+
+def task():
+	global perc
+	perc -= 0.05
+	if perc > -0.05: # There is no 0 in python...
+		app.decreaseHealth(perc)
+	app.after(1000,task)  # reschedule event in 2 seconds
+	
+
 if __name__ == "__main__":
     # Instantiate class
 	app = simpleapp_tk(None)
     # Give a title to window
 	app.title('my application')
+	app.after(1000,task)
 	app.mainloop()
 
 
