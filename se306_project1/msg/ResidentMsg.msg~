@@ -1,5 +1,4 @@
-float64 x
-float64 y
-int64 health
-int64 hunger
+float64 currentCheckpointX
+float64 currentCheckpointY
 string state
+string currentCheckpoint
