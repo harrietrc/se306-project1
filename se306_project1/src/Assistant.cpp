@@ -41,6 +41,8 @@ void Assistant::medicate(se306_project1::ResidentMsg msg) {
 			currentCheckpoint.first = msg.currentCheckpointX;
 			currentCheckpoint.second = msg.currentCheckpointY;
 			move("Assistant1Origin");
+			isMedicated == false;
+
 		}
 //	}else if (isMedicated) {
 	//	move("HouseCentre");
@@ -107,10 +109,14 @@ void Assistant::cook(se306_project1::ResidentMsg msg) {
 			foodDelivered = true;
 			currentCheckpoint.first = msg.currentCheckpointX;
 			currentCheckpoint.second = msg.currentCheckpointY;
+			atKitchen = false;
+			finishedCooking = false;
+			foodDelivered = false;
 			move("HouseCentre");
 
 		}
-	} else if (atKitchen && finishedCooking && foodDelivered) {
+	}
+/*	} else if (atKitchen && finishedCooking && foodDelivered) {
 		move("HouseCentre");
 		if (g.getCheckpointName(currentCheckpoint) == "HouseCentre") {
 			atKitchen = false;
@@ -119,6 +125,7 @@ void Assistant::cook(se306_project1::ResidentMsg msg) {
 		}
 
 	}
+	*/
 }
 
 
@@ -135,14 +142,14 @@ void Assistant::clean() {
 */
 void Assistant::entertain(se306_project1::ResidentMsg msg) {
 
-	double lastCheckpointX = shortestPath.at(shortestPath.size()-1).first;
-	double lastCheckpointY = shortestPath.at(shortestPath.size()-1).second;
+	//double lastCheckpointX = shortestPath.at(shortestPath.size()-1).first;
+	//double lastCheckpointY = shortestPath.at(shortestPath.size()-1).second;
 
-	double distanceFromCheckpoint = sqrt(pow((lastCheckpointX - px),2) + pow((lastCheckpointY - py),2));
+	double distanceFromCheckpoint = sqrt(pow((msg.currentCheckpointX - px),2) + pow((msg.currentCheckpointY - py),2));
 	if (!atBedroom && !residentEntertained) {
 		entertainmentCounter = 0;
 		move(msg.currentCheckpoint);
-		if (distanceFromCheckpoint < 0.5) {
+		if (distanceFromCheckpoint < 2.5) {
 			atBedroom = true;
 		}
 	} else if (atBedroom && !residentEntertained) {
@@ -155,15 +162,18 @@ void Assistant::entertain(se306_project1::ResidentMsg msg) {
 			se306_project1::AssistantMsg amsg;
 			amsg.ResidentEntertained = residentEntertained;
 			Assistant_state_pub.publish(amsg);
+			atBedroom = false;
+			residentEntertained = false;
 
 		}
-	} else if (atBedroom && residentEntertained) {
+	} /*else if (atBedroom && residentEntertained) {
 		move("HouseCentre");
 		if (distanceFromCheckpoint < 0.5) {
 			atBedroom = false;
 			residentEntertained = false;
 		}
 	}
+	*/
 }
 
 
