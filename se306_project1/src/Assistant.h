@@ -31,7 +31,6 @@ class Assistant : public Agent
 		// functions
 		void medicate(se306_project1::ResidentMsg msg);
 		void cook(se306_project1::ResidentMsg msg);
-		void clean();
 		void entertain(se306_project1::ResidentMsg msg);
 		void delegate(se306_project1::ResidentMsg msg);
 

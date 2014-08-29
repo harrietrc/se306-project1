@@ -129,12 +129,7 @@ void Assistant::cook(se306_project1::ResidentMsg msg) {
 }
 
 
-/**
-*	@brief Causes assistant to clean the house.
-*/
-void Assistant::clean() {
 
-}	
 
 /**
 *	@brief Causes assistant to entertain the resident.
@@ -237,6 +232,7 @@ int Assistant::run(int argc, char **argv)
 	//subscribe to listen to messages coming from stage
 	ros::Subscriber StageOdo_sub = n.subscribe("robot_1/odom",1000, &Assistant::StageOdom_callback, dynamic_cast<Agent*>(this));
 	ros::Subscriber residentSub = n.subscribe("residentStatus",1000, &Assistant::delegate, this);
+	ros::Subscriber assistantCommsSub = n.subscribe("assistantComms",1000, &Assistant::delegate, this);
 
 	////messages
 	//velocity of this RobotNode

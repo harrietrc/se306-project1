@@ -10,8 +10,8 @@ class Assistant1 : public Agent
 
 		Assistant1() : Agent(){
 
-			currentCheckpoint.first = 17;
-			currentCheckpoint.second = 17;
+			currentCheckpoint.first = 32;
+			currentCheckpoint.second = 18;
 			atKitchen = false;
 			finishedCooking = false;
 
@@ -29,14 +29,10 @@ class Assistant1 : public Agent
 
 	private:
 		// functions
-		void medicate(se306_project1::ResidentMsg msg);
-		void cook(se306_project1::ResidentMsg msg);
-		void clean();
-		void entertain(se306_project1::ResidentMsg msg);
-		void delegate(se306_project1::ResidentMsg msg);
+		void clean(se306_project1::ResidentMsg msg);
 
 		ros::Publisher Assistant_state_pub;
-
+		ros::Publisher Assistant_comm_pub;
 		// Boolean variables
 		bool atKitchen;
 		bool finishedCooking;
