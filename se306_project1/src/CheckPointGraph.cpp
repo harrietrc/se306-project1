@@ -63,7 +63,12 @@ E paths[] = {
 	 E("Friend1Sofa","SofasUpper"), E("SofasUpper","SofasLeft"), E("LivingRoomNorthWest","SofasLower"),
 	 E("SofasLower","LivingRoomNorthEast"), E("SofasLower","CentrePassageNorth"), E("SofasLower","Friend3Sofa"),
 	 E("Shower","NearShower"), E("NearShower","BathroomCentre"),
-	 E("Caregiver2Origin","FrontDoorEast"), E("SofasLeft","LivingRoomNorthWest")
+	 E("Caregiver2Origin","FrontDoorEast"), E("SofasLeft","LivingRoomNorthWest"),
+	 E("ResidentSofa","SofasLower"), E("CouchesNorthEast","ResidentSofa"),
+	 E("CentrePassageSouth","HouseCentre"), E("Assistant1Origin","CouchesNorthCentre"),
+	 E("Assistant2Origin","CouchesNorthCentre"), E("CentrePassageSouth","CouchesNorthEast"),
+	 E("CentrePassageNorth","CouchesNorthEast"), E("FrontDoorEast","CentrePassageSouth"),
+	 E("FrontDoorWest","CentrePassageNorth")
 }; /*!< Defines edges between checkpoints */
 
 /* -- Temporary solution - two maps of co-ordinates to names and names to co-ordinates --*/
