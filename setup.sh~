@@ -1,5 +1,4 @@
-#!/usr/bin/env sh
-# THIS IS AN AUTO-GENERATED FILE
+# IS AN AUTO-GENERATED FILE
 # IT IS UNLIKELY YOU WANT TO EDIT THIS FILE BY HAND
 # IF YOU WANT TO CHANGE THE ROS ENVIRONMENT VARIABLES
 # USE THE rosinstall OR rosws TOOL INSTEAD.
@@ -23,7 +22,11 @@ if [ x"$_ROSINSTALL_IN_RECURSION" != x"recurse" ] ; then
   export ROS_PACKAGE_PATH=
 fi
 
+<<<<<<< HEAD
+export ROS_WORKSPACE=/home/john/se306-project1
+=======
 export ROS_WORKSPACE=/home/govindu/se306-project1
+>>>>>>> origin/feature/move
 
 if [ ! "$ROS_MASTER_URI" ] ; then export ROS_MASTER_URI=http://localhost:11311 ; fi
 unset ROS_ROOT
@@ -38,7 +41,6 @@ unset _SETUP_SH_ERROR
 # which is the ros_package_path and the list of setup_files to source
 # Using python here to benefit of the pyyaml library
 export _PARSED_CONFIG=`/usr/bin/env python << EOPYTHON
-
 import sys
 import os
 import yaml
@@ -168,8 +170,13 @@ EOPYTHON`
 unset _ROS_PACKAGE_PATH_ROSINSTALL
 
 # restore ROS_WORKSPACE in case other setup.sh changed/unset it
+<<<<<<< HEAD
+
+export ROS_WORKSPACE=/home/john/se306-project1
+=======
 export ROS_WORKSPACE=/home/govindu/se306-project1
 
+>>>>>>> origin/feature/move
 
 # if setup.sh did not set ROS_ROOT (pre-fuerte)
 if [ -z "${ROS_ROOT}" ]; then
@@ -198,3 +205,8 @@ if [ ! -z "$_SETUP_SH_ERROR" ]; then
   false
 fi
 
+<<<<<<< HEAD
+
+export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:/home/john/se306-project1
+=======
+>>>>>>> origin/feature/move

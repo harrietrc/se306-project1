@@ -189,3 +189,6 @@ std::string priorityQueue::stateConvertString(residentStates currentState){
 	return "Can't convert!!"; //
 }
 
+int somePQDummyTest(int a, int b) {
+	return a;
+}
