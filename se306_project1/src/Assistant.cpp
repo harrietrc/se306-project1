@@ -149,7 +149,8 @@ void Assistant::entertain(se306_project1::ResidentMsg msg) {
 	} else if (atBedroom && !residentEntertained) {
 		angular_z = 2;
 		entertainmentCounter++;
-		if (entertainmentCounter > 150) {
+		ROS_INFO("entertainmentCounter: %d", entertainmentCounter);
+		if (entertainmentCounter > 10) {
 			angular_z = 0;
 			residentEntertained = true;
 
