@@ -1,6 +1,15 @@
 \hypertarget{classCheckPointGraph}{\section{Check\-Point\-Graph Class Reference}
 \label{classCheckPointGraph}\index{Check\-Point\-Graph@{Check\-Point\-Graph}}
 }
+
+
+Class representing the checkpoints and the paths between them. Also used in the calculation of the shortest path between checkpoints.  
+
+
+
+
+{\ttfamily \#include $<$Check\-Point\-Graph.\-hpp$>$}
+
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -13,15 +22,36 @@
 std\-::vector$<$ std\-::pair$<$ double, \\*
 double $>$ $>$ \hyperlink{classCheckPointGraph_ab48dfe7feccab1d732901b83a0ec4612}{shortest\-Path} (std\-::string start\-Name, std\-::string end\-Name)
 \begin{DoxyCompactList}\small\item\em Finds the shortest path between 2 checkpoints, and returns the path as co-\/ordinates. Uses breadth first search -\/ Boost recommends this over Dijkstra's algorithm for graphs with uniformly weighted edges. Sets path member variable. \end{DoxyCompactList}\item 
-\hypertarget{classCheckPointGraph_a92da1b78dfbf86627397265c43143100}{std\-::string {\bfseries get\-Checkpoint\-Name} (std\-::pair$<$ double, double $>$ coords)}\label{classCheckPointGraph_a92da1b78dfbf86627397265c43143100}
+\hypertarget{classCheckPointGraph_a92da1b78dfbf86627397265c43143100}{std\-::string \hyperlink{classCheckPointGraph_a92da1b78dfbf86627397265c43143100}{get\-Checkpoint\-Name} (std\-::pair$<$ double, double $>$ coords)}\label{classCheckPointGraph_a92da1b78dfbf86627397265c43143100}
 
-\item 
-\hypertarget{classCheckPointGraph_a2200216c4d24426b2b479b3a8bb7141d}{std\-::pair$<$ double, double $>$ {\bfseries get\-Coords} (std\-::string name)}\label{classCheckPointGraph_a2200216c4d24426b2b479b3a8bb7141d}
+\begin{DoxyCompactList}\small\item\em Gets the name of. \end{DoxyCompactList}\item 
+std\-::pair$<$ double, double $>$ \hyperlink{classCheckPointGraph_a2200216c4d24426b2b479b3a8bb7141d}{get\-Coords} (std\-::string name)
+\begin{DoxyCompactList}\small\item\em Gets the co-\/ordinates of a checkpoint when given its name. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
-\end{DoxyCompactItemize}
 
+\subsection{Detailed Description}
+Class representing the checkpoints and the paths between them. Also used in the calculation of the shortest path between checkpoints. 
 
 \subsection{Member Function Documentation}
+\hypertarget{classCheckPointGraph_a2200216c4d24426b2b479b3a8bb7141d}{\index{Check\-Point\-Graph@{Check\-Point\-Graph}!get\-Coords@{get\-Coords}}
+\index{get\-Coords@{get\-Coords}!CheckPointGraph@{Check\-Point\-Graph}}
+\subsubsection[{get\-Coords}]{\setlength{\rightskip}{0pt plus 5cm}std\-::pair$<$ double, double $>$ Check\-Point\-Graph\-::get\-Coords (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{name}
+\end{DoxyParamCaption}
+)}}\label{classCheckPointGraph_a2200216c4d24426b2b479b3a8bb7141d}
+
+
+Gets the co-\/ordinates of a checkpoint when given its name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & The name of the checkpoint \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The pair of (x,y) co-\/ordinates 
+\end{DoxyReturn}
 \hypertarget{classCheckPointGraph_ab48dfe7feccab1d732901b83a0ec4612}{\index{Check\-Point\-Graph@{Check\-Point\-Graph}!shortest\-Path@{shortest\-Path}}
 \index{shortest\-Path@{shortest\-Path}!CheckPointGraph@{Check\-Point\-Graph}}
 \subsubsection[{shortest\-Path}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$ std\-::pair$<$ double, double $>$ $>$ Check\-Point\-Graph\-::shortest\-Path (
@@ -41,6 +71,9 @@ Finds the shortest path between 2 checkpoints, and returns the path as co-\/ordi
 {\em end\-Name} & The name of the goal checkpoint as a string (e.\-g. 'bathroom') \\
 \hline
 \end{DoxyParams}
+\begin{DoxyAttention}{Attention}
+The shortest path in terms of path length will not necessarily be the same as the shortest path in terms of actual distance. 
+\end{DoxyAttention}
 
 
 The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}

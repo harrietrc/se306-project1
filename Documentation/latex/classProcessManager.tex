@@ -13,13 +13,37 @@ Class for managing node processes. Should keep track of nodes and be able to ins
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{classProcessManager_ac551563da6cc98d4639a6724372815ef}{int {\bfseries node\-Process} (std\-::string executable\-Name, int node\-Number)}\label{classProcessManager_ac551563da6cc98d4639a6724372815ef}
-
-\end{DoxyCompactItemize}
+int \hyperlink{classProcessManager_ac551563da6cc98d4639a6724372815ef}{node\-Process} (std\-::string executable\-Name, int node\-Number)
+\begin{DoxyCompactList}\small\item\em Runs the node process, given a node name and number. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
 Class for managing node processes. Should keep track of nodes and be able to instantiate them. 
+
+\subsection{Member Function Documentation}
+\hypertarget{classProcessManager_ac551563da6cc98d4639a6724372815ef}{\index{Process\-Manager@{Process\-Manager}!node\-Process@{node\-Process}}
+\index{node\-Process@{node\-Process}!ProcessManager@{Process\-Manager}}
+\subsubsection[{node\-Process}]{\setlength{\rightskip}{0pt plus 5cm}int Process\-Manager\-::node\-Process (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{executable\-Name, }
+\item[{int}]{node\-Number}
+\end{DoxyParamCaption}
+)}}\label{classProcessManager_ac551563da6cc98d4639a6724372815ef}
+
+
+Runs the node process, given a node name and number. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em executable\-Name} & The name of the node to be run (e.\-g. '\hyperlink{classAssistant}{Assistant}') \\
+\hline
+{\em node\-Number} & The number of the node \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if completed successfully, 0 if failed to fork. 
+\end{DoxyReturn}
+
 
 The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
 \item 

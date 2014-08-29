@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['isset',['isSet',['../classAssistant.html#a939484adfb9673d2608282124ef348b9',1,'Assistant::isSet()'],['../classResident.html#ac5e7527b191e07372c3ea5e9aa81a65d',1,'Resident::isSet()']]]
+  ['isclockwise',['isClockwise',['../classAgent.html#ae4169e63cd18fa7785d4561746f676d1',1,'Agent']]],
+  ['isfacingcorrectly',['isFacingCorrectly',['../classAgent.html#afeaa67851b662b45d4d6fcd5eaf5acc3',1,'Agent']]],
+  ['ismoving',['isMoving',['../classAgent.html#aab5675be1775cd18ff37e3e1870d51be',1,'Agent']]]
 ];

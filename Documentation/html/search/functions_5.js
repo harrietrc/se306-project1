@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['hospitalise',['hospitalise',['../classDoctor.html#afaaaa3914c3a2fe3bbb93f7969afd3d5',1,'Doctor']]]
+  ['getcheckpointname',['getCheckpointName',['../classCheckPointGraph.html#a92da1b78dfbf86627397265c43143100',1,'CheckPointGraph']]],
+  ['getcoords',['getCoords',['../classCheckPointGraph.html#a2200216c4d24426b2b479b3a8bb7141d',1,'CheckPointGraph']]]
 ];

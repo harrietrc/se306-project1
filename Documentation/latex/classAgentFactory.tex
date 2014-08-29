@@ -16,13 +16,34 @@ Class for instantiating agents dynamically.
 \hypertarget{classAgentFactory_a8785d71f067068f09326b4c5af5007b4}{void \hyperlink{classAgentFactory_a8785d71f067068f09326b4c5af5007b4}{create\-Mock\-Agent} ()}\label{classAgentFactory_a8785d71f067068f09326b4c5af5007b4}
 
 \begin{DoxyCompactList}\small\item\em Creates a mock agent -\/ for testing. \end{DoxyCompactList}\item 
-\hypertarget{classAgentFactory_aa8899b46f620a9a31f3e40041759ae24}{int {\bfseries create\-Agent} (Agent\-Const\-::\-Agent\-Type agent\-Type, int node\-Number)}\label{classAgentFactory_aa8899b46f620a9a31f3e40041759ae24}
-
-\end{DoxyCompactItemize}
+int \hyperlink{classAgentFactory_aa8899b46f620a9a31f3e40041759ae24}{create\-Agent} (Agent\-Const\-::\-Agent\-Type agent\-Type, int node\-Number)
+\begin{DoxyCompactList}\small\item\em Creates an agent using the process manager and the provided type and number. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
 Class for instantiating agents dynamically. 
+
+\subsection{Member Function Documentation}
+\hypertarget{classAgentFactory_aa8899b46f620a9a31f3e40041759ae24}{\index{Agent\-Factory@{Agent\-Factory}!create\-Agent@{create\-Agent}}
+\index{create\-Agent@{create\-Agent}!AgentFactory@{Agent\-Factory}}
+\subsubsection[{create\-Agent}]{\setlength{\rightskip}{0pt plus 5cm}int Agent\-Factory\-::create\-Agent (
+\begin{DoxyParamCaption}
+\item[{Agent\-Const\-::\-Agent\-Type}]{agent\-Type, }
+\item[{int}]{node\-Number}
+\end{DoxyParamCaption}
+)}}\label{classAgentFactory_aa8899b46f620a9a31f3e40041759ae24}
+
+
+Creates an agent using the process manager and the provided type and number. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em agent\-Type} & The type of node -\/ e.\-g. \hyperlink{classDoctor}{Doctor}, \hyperlink{classResident}{Resident}, etc. \\
+\hline
+{\em node\-Number} & A number that uniquely identifies the node. \\
+\hline
+\end{DoxyParams}
+
 
 The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
 \item 

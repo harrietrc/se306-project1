@@ -26,31 +26,28 @@ void \hyperlink{classAgent_aef22675e420206ed848583c89f38f8f0}{Stage\-Odom\-\_\-c
 \item 
 void \hyperlink{classAgent_a20a0548f91fdfba2727ff8fddc3ce3dc}{set\-Path} (std\-::string start, std\-::string end)
 \begin{DoxyCompactList}\small\item\em Sets the path for the agent. \end{DoxyCompactList}\item 
-\hypertarget{classAgent_a49e310d66471525dfba98ee4e89e7865}{void {\bfseries turn} ()}\label{classAgent_a49e310d66471525dfba98ee4e89e7865}
+\hypertarget{classAgent_a49e310d66471525dfba98ee4e89e7865}{void \hyperlink{classAgent_a49e310d66471525dfba98ee4e89e7865}{turn} ()}\label{classAgent_a49e310d66471525dfba98ee4e89e7865}
 
-\item 
-\hypertarget{classAgent_a155537d7cbac8ba6982415e15c8e76a9}{void {\bfseries move\-Forward} (std\-::pair$<$ double, double $>$ next\-Checkpoint)}\label{classAgent_a155537d7cbac8ba6982415e15c8e76a9}
+\begin{DoxyCompactList}\small\item\em Turns the agent to face the checkpoint, using the angular\-\_\-z (angular velocity) set elsewhere. When facing the correct direction this function will set a flag to say as much. \end{DoxyCompactList}\item 
+\hypertarget{classAgent_a155537d7cbac8ba6982415e15c8e76a9}{void \hyperlink{classAgent_a155537d7cbac8ba6982415e15c8e76a9}{move\-Forward} (std\-::pair$<$ double, double $>$ next\-Checkpoint)}\label{classAgent_a155537d7cbac8ba6982415e15c8e76a9}
 
-\item 
+\begin{DoxyCompactList}\small\item\em Moves the agent forwards until it is on the checkpoint. This function uses a margin of error (0.\-5), within which the agent can be said to be facing the correct direction. \end{DoxyCompactList}\item 
 double \hyperlink{classAgent_a9455180dd9aff369e34e1527bfa6d1a9}{calculate\-Goal\-Angle} (std\-::pair$<$ double, double $>$ goal\-Checkpoint)
 \item 
-\hypertarget{classAgent_a5f9de8060bab4248d557f454265eee86}{void {\bfseries move} (std\-::string goal)}\label{classAgent_a5f9de8060bab4248d557f454265eee86}
+void \hyperlink{classAgent_a5f9de8060bab4248d557f454265eee86}{move} (std\-::string goal)
+\begin{DoxyCompactList}\small\item\em Moves the agent along a path to the specified goal. \end{DoxyCompactList}\item 
+bool \hyperlink{classAgent_acf69a5a2725a599c84ae2885d31c6d63}{is\-Turn\-Clockwise} ()
+\begin{DoxyCompactList}\small\item\em Decides whether to turn anticlockwise or clockwise, based on which angle is the smallest. Used in turning to face the checkpoint. \end{DoxyCompactList}\item 
+\hypertarget{classAgent_add59ed077172c91c9b2dddd4ca319f47}{void \hyperlink{classAgent_add59ed077172c91c9b2dddd4ca319f47}{stop\-Moving} ()}\label{classAgent_add59ed077172c91c9b2dddd4ca319f47}
 
-\item 
-\hypertarget{classAgent_acf69a5a2725a599c84ae2885d31c6d63}{bool {\bfseries is\-Turn\-Clockwise} ()}\label{classAgent_acf69a5a2725a599c84ae2885d31c6d63}
-
-\item 
-\hypertarget{classAgent_add59ed077172c91c9b2dddd4ca319f47}{void {\bfseries stop\-Moving} ()}\label{classAgent_add59ed077172c91c9b2dddd4ca319f47}
-
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Stops the agent from moving by setting flags and the variables that get sent to stage. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
 \hypertarget{classAgent_ae9ddc8a7bffee9c921d6628e6669df9c}{std\-::string {\bfseries origin\-Name}}\label{classAgent_ae9ddc8a7bffee9c921d6628e6669df9c}
 
 \item 
-\hypertarget{classAgent_a9c296226b7db0471d7a721dabe849c46}{\hyperlink{classCheckPointGraph}{Check\-Point\-Graph} {\bfseries g}}\label{classAgent_a9c296226b7db0471d7a721dabe849c46}
-
+\hyperlink{classCheckPointGraph}{Check\-Point\-Graph} \hyperlink{classAgent_a9c296226b7db0471d7a721dabe849c46}{g}
 \item 
 double \hyperlink{classAgent_a77dfc60513d8c90b2848297e09fffba7}{linear\-\_\-x}
 \item 
@@ -62,29 +59,22 @@ double \hyperlink{classAgent_a048e8b32d02a2fd58f046a444a287015}{py}
 \item 
 double \hyperlink{classAgent_a389e3229e62da28d6c686354329e25aa}{current\-Angle}
 \item 
-\hypertarget{classAgent_a0ca673bd13a3e9aa8235db73eb4b5391}{std\-::pair$<$ double, double $>$ {\bfseries current\-Checkpoint}}\label{classAgent_a0ca673bd13a3e9aa8235db73eb4b5391}
-
+std\-::pair$<$ double, double $>$ \hyperlink{classAgent_a0ca673bd13a3e9aa8235db73eb4b5391}{current\-Checkpoint}
 \item 
-\hypertarget{classAgent_ac7175c1ed11e2b571d434bd25f4c096f}{std\-::vector$<$ std\-::pair$<$ double, \\*
-double $>$ $>$ {\bfseries shortest\-Path}}\label{classAgent_ac7175c1ed11e2b571d434bd25f4c096f}
-
+std\-::vector$<$ std\-::pair$<$ double, \\*
+double $>$ $>$ \hyperlink{classAgent_ac7175c1ed11e2b571d434bd25f4c096f}{shortest\-Path}
 \item 
-\hypertarget{classAgent_aa1f106d069420fb5995338cfa4f8799b}{int {\bfseries shortest\-Path\-Index}}\label{classAgent_aa1f106d069420fb5995338cfa4f8799b}
-
+int \hyperlink{classAgent_aa1f106d069420fb5995338cfa4f8799b}{shortest\-Path\-Index}
 \item 
-\hypertarget{classAgent_afeaa67851b662b45d4d6fcd5eaf5acc3}{bool {\bfseries is\-Facing\-Correctly}}\label{classAgent_afeaa67851b662b45d4d6fcd5eaf5acc3}
-
+bool \hyperlink{classAgent_afeaa67851b662b45d4d6fcd5eaf5acc3}{is\-Facing\-Correctly}
 \item 
-\hypertarget{classAgent_aab5675be1775cd18ff37e3e1870d51be}{bool {\bfseries is\-Moving}}\label{classAgent_aab5675be1775cd18ff37e3e1870d51be}
-
+bool \hyperlink{classAgent_aab5675be1775cd18ff37e3e1870d51be}{is\-Moving}
 \item 
 int \hyperlink{classAgent_aefcf2085a669d7e91d932e7cc3ee88ce}{robot\-\_\-id}
 \item 
-\hypertarget{classAgent_a894e975009220db4a8faa7c23fc0b4d6}{double {\bfseries checkpoint\-Angle}}\label{classAgent_a894e975009220db4a8faa7c23fc0b4d6}
-
+double \hyperlink{classAgent_a894e975009220db4a8faa7c23fc0b4d6}{checkpoint\-Angle}
 \item 
-\hypertarget{classAgent_ae4169e63cd18fa7785d4561746f676d1}{bool {\bfseries is\-Clockwise}}\label{classAgent_ae4169e63cd18fa7785d4561746f676d1}
-
+bool \hyperlink{classAgent_ae4169e63cd18fa7785d4561746f676d1}{is\-Clockwise}
 \end{DoxyCompactItemize}
 
 
@@ -99,7 +89,37 @@ Superclass for all 'agents' -\/ i.\-e. Assistants, Visitors, and the \hyperlink{
 \item[{std\-::pair$<$ double, double $>$}]{goal\-Checkpoint}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [protected]}}}\label{classAgent_a9455180dd9aff369e34e1527bfa6d1a9}
-This function calculates the angle to the goal. \hypertarget{classAgent_a20a0548f91fdfba2727ff8fddc3ce3dc}{\index{Agent@{Agent}!set\-Path@{set\-Path}}
+This function calculates the angle to the goal. \hypertarget{classAgent_acf69a5a2725a599c84ae2885d31c6d63}{\index{Agent@{Agent}!is\-Turn\-Clockwise@{is\-Turn\-Clockwise}}
+\index{is\-Turn\-Clockwise@{is\-Turn\-Clockwise}!Agent@{Agent}}
+\subsubsection[{is\-Turn\-Clockwise}]{\setlength{\rightskip}{0pt plus 5cm}bool Agent\-::is\-Turn\-Clockwise (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}}\label{classAgent_acf69a5a2725a599c84ae2885d31c6d63}
+
+
+Decides whether to turn anticlockwise or clockwise, based on which angle is the smallest. Used in turning to face the checkpoint. 
+
+\begin{DoxyReturn}{Returns}
+true if the agent should turn clockwise, and false if it should turn anticlockwise. 
+\end{DoxyReturn}
+\hypertarget{classAgent_a5f9de8060bab4248d557f454265eee86}{\index{Agent@{Agent}!move@{move}}
+\index{move@{move}!Agent@{Agent}}
+\subsubsection[{move}]{\setlength{\rightskip}{0pt plus 5cm}void Agent\-::move (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{goal\-Name}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}}\label{classAgent_a5f9de8060bab4248d557f454265eee86}
+
+
+Moves the agent along a path to the specified goal. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em goal\-Name} & The name of a checkpoint (see Check\-Point\-Graph.\-cpp) \\
+\hline
+\end{DoxyParams}
+\hypertarget{classAgent_a20a0548f91fdfba2727ff8fddc3ce3dc}{\index{Agent@{Agent}!set\-Path@{set\-Path}}
 \index{set\-Path@{set\-Path}!Agent@{Agent}}
 \subsubsection[{set\-Path}]{\setlength{\rightskip}{0pt plus 5cm}void Agent\-::set\-Path (
 \begin{DoxyParamCaption}
@@ -140,10 +160,28 @@ Updates the agent's x position, y position, and angle to reflect its current pos
 \hypertarget{classAgent_affc842049c5010a5f8bd99a62d650a25}{\index{Agent@{Agent}!angular\-\_\-z@{angular\-\_\-z}}
 \index{angular\-\_\-z@{angular\-\_\-z}!Agent@{Agent}}
 \subsubsection[{angular\-\_\-z}]{\setlength{\rightskip}{0pt plus 5cm}double Agent\-::angular\-\_\-z\hspace{0.3cm}{\ttfamily [protected]}}}\label{classAgent_affc842049c5010a5f8bd99a62d650a25}
-Angular velocity of the robot \hypertarget{classAgent_a389e3229e62da28d6c686354329e25aa}{\index{Agent@{Agent}!current\-Angle@{current\-Angle}}
+Angular velocity of the robot \hypertarget{classAgent_a894e975009220db4a8faa7c23fc0b4d6}{\index{Agent@{Agent}!checkpoint\-Angle@{checkpoint\-Angle}}
+\index{checkpoint\-Angle@{checkpoint\-Angle}!Agent@{Agent}}
+\subsubsection[{checkpoint\-Angle}]{\setlength{\rightskip}{0pt plus 5cm}double Agent\-::checkpoint\-Angle\hspace{0.3cm}{\ttfamily [protected]}}}\label{classAgent_a894e975009220db4a8faa7c23fc0b4d6}
+The angle to the checkpoint \hypertarget{classAgent_a389e3229e62da28d6c686354329e25aa}{\index{Agent@{Agent}!current\-Angle@{current\-Angle}}
 \index{current\-Angle@{current\-Angle}!Agent@{Agent}}
 \subsubsection[{current\-Angle}]{\setlength{\rightskip}{0pt plus 5cm}double Agent\-::current\-Angle\hspace{0.3cm}{\ttfamily [protected]}}}\label{classAgent_a389e3229e62da28d6c686354329e25aa}
-angle of the robot \hypertarget{classAgent_a77dfc60513d8c90b2848297e09fffba7}{\index{Agent@{Agent}!linear\-\_\-x@{linear\-\_\-x}}
+angle of the robot \hypertarget{classAgent_a0ca673bd13a3e9aa8235db73eb4b5391}{\index{Agent@{Agent}!current\-Checkpoint@{current\-Checkpoint}}
+\index{current\-Checkpoint@{current\-Checkpoint}!Agent@{Agent}}
+\subsubsection[{current\-Checkpoint}]{\setlength{\rightskip}{0pt plus 5cm}std\-::pair$<$double, double$>$ Agent\-::current\-Checkpoint\hspace{0.3cm}{\ttfamily [protected]}}}\label{classAgent_a0ca673bd13a3e9aa8235db73eb4b5391}
+The agent's current (or previous, if they are moving) checkpoint \hypertarget{classAgent_a9c296226b7db0471d7a721dabe849c46}{\index{Agent@{Agent}!g@{g}}
+\index{g@{g}!Agent@{Agent}}
+\subsubsection[{g}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Check\-Point\-Graph} Agent\-::g\hspace{0.3cm}{\ttfamily [protected]}}}\label{classAgent_a9c296226b7db0471d7a721dabe849c46}
+The graph of all the checkpoints in the system \hypertarget{classAgent_ae4169e63cd18fa7785d4561746f676d1}{\index{Agent@{Agent}!is\-Clockwise@{is\-Clockwise}}
+\index{is\-Clockwise@{is\-Clockwise}!Agent@{Agent}}
+\subsubsection[{is\-Clockwise}]{\setlength{\rightskip}{0pt plus 5cm}bool Agent\-::is\-Clockwise\hspace{0.3cm}{\ttfamily [protected]}}}\label{classAgent_ae4169e63cd18fa7785d4561746f676d1}
+True if the agent should turn clockwise to face its current goal \hypertarget{classAgent_afeaa67851b662b45d4d6fcd5eaf5acc3}{\index{Agent@{Agent}!is\-Facing\-Correctly@{is\-Facing\-Correctly}}
+\index{is\-Facing\-Correctly@{is\-Facing\-Correctly}!Agent@{Agent}}
+\subsubsection[{is\-Facing\-Correctly}]{\setlength{\rightskip}{0pt plus 5cm}bool Agent\-::is\-Facing\-Correctly\hspace{0.3cm}{\ttfamily [protected]}}}\label{classAgent_afeaa67851b662b45d4d6fcd5eaf5acc3}
+True if the agent is facing the correct direction (and can therefore begin moving) \hypertarget{classAgent_aab5675be1775cd18ff37e3e1870d51be}{\index{Agent@{Agent}!is\-Moving@{is\-Moving}}
+\index{is\-Moving@{is\-Moving}!Agent@{Agent}}
+\subsubsection[{is\-Moving}]{\setlength{\rightskip}{0pt plus 5cm}bool Agent\-::is\-Moving\hspace{0.3cm}{\ttfamily [protected]}}}\label{classAgent_aab5675be1775cd18ff37e3e1870d51be}
+True if the agent is moving \hypertarget{classAgent_a77dfc60513d8c90b2848297e09fffba7}{\index{Agent@{Agent}!linear\-\_\-x@{linear\-\_\-x}}
 \index{linear\-\_\-x@{linear\-\_\-x}!Agent@{Agent}}
 \subsubsection[{linear\-\_\-x}]{\setlength{\rightskip}{0pt plus 5cm}double Agent\-::linear\-\_\-x\hspace{0.3cm}{\ttfamily [protected]}}}\label{classAgent_a77dfc60513d8c90b2848297e09fffba7}
 Linear velocity of the robot \hypertarget{classAgent_af51536ae3b511b53726b84b9226cc772}{\index{Agent@{Agent}!px@{px}}
@@ -155,7 +193,13 @@ x position of the robot \hypertarget{classAgent_a048e8b32d02a2fd58f046a444a28701
 y position of the robot \hypertarget{classAgent_aefcf2085a669d7e91d932e7cc3ee88ce}{\index{Agent@{Agent}!robot\-\_\-id@{robot\-\_\-id}}
 \index{robot\-\_\-id@{robot\-\_\-id}!Agent@{Agent}}
 \subsubsection[{robot\-\_\-id}]{\setlength{\rightskip}{0pt plus 5cm}int Agent\-::robot\-\_\-id\hspace{0.3cm}{\ttfamily [protected]}}}\label{classAgent_aefcf2085a669d7e91d932e7cc3ee88ce}
-Robot's I\-D 
+Robot's I\-D \hypertarget{classAgent_ac7175c1ed11e2b571d434bd25f4c096f}{\index{Agent@{Agent}!shortest\-Path@{shortest\-Path}}
+\index{shortest\-Path@{shortest\-Path}!Agent@{Agent}}
+\subsubsection[{shortest\-Path}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$std\-::pair$<$double,double$>$ $>$ Agent\-::shortest\-Path\hspace{0.3cm}{\ttfamily [protected]}}}\label{classAgent_ac7175c1ed11e2b571d434bd25f4c096f}
+A path of checkpoint co-\/ordinates that the agent is expected to move along \hypertarget{classAgent_aa1f106d069420fb5995338cfa4f8799b}{\index{Agent@{Agent}!shortest\-Path\-Index@{shortest\-Path\-Index}}
+\index{shortest\-Path\-Index@{shortest\-Path\-Index}!Agent@{Agent}}
+\subsubsection[{shortest\-Path\-Index}]{\setlength{\rightskip}{0pt plus 5cm}int Agent\-::shortest\-Path\-Index\hspace{0.3cm}{\ttfamily [protected]}}}\label{classAgent_aa1f106d069420fb5995338cfa4f8799b}
+Pointer to the current vertex in the path 
 
 The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
 \item 

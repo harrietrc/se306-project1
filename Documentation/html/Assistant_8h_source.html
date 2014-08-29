@@ -100,12 +100,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;        <a class="code" href="classAssistant.html">Assistant</a>() : <a class="code" href="classAgent.html">Agent</a>(){</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;            currentCheckpoint.first = 17;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;            currentCheckpoint.second = 17;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;            atKitchen = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;            finishedCooking = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;            <a class="code" href="classAgent.html#a0ca673bd13a3e9aa8235db73eb4b5391">currentCheckpoint</a>.first = 17; </div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;            <a class="code" href="classAgent.html#a0ca673bd13a3e9aa8235db73eb4b5391">currentCheckpoint</a>.second = 17; </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;            atKitchen = <span class="keyword">false</span>; </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;            finishedCooking = <span class="keyword">false</span>; </div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;            atBedroom = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;            atBedroom = <span class="keyword">false</span>; </div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;            residentEntertained = <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;            foodDelivered = <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;            isMedicated = <span class="keyword">false</span>;</div>
@@ -121,27 +121,26 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="keywordtype">void</span> entertain(<a class="code" href="structse306__project1_1_1ResidentMsg__.html">se306_project1::ResidentMsg</a> msg);</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <span class="keywordtype">void</span> delegate(<a class="code" href="structse306__project1_1_1ResidentMsg__.html">se306_project1::ResidentMsg</a> msg);</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        ros::Publisher Assistant_state_pub;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        ros::Publisher Assistant_state_pub; </div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <span class="comment">// Boolean variables</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <span class="keywordtype">bool</span> atKitchen;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="keywordtype">bool</span> finishedCooking;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keywordtype">bool</span> foodDelivered;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="keywordtype">bool</span> atBedroom;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="keywordtype">bool</span> residentEntertained;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <span class="keywordtype">bool</span> atKitchen; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="keywordtype">bool</span> finishedCooking; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keywordtype">bool</span> foodDelivered; </div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="keywordtype">bool</span> atBedroom; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="keywordtype">bool</span> residentEntertained; </div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="keywordtype">int</span> entertainmentCounter = 0;</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keywordtype">bool</span> isMedicated;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keywordtype">bool</span> isMedicated; </div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;};</div>
-<div class="ttc" id="classAssistant_html_adaee2d23c3ba9e0c7ed99642424580de"><div class="ttname"><a href="classAssistant.html#adaee2d23c3ba9e0c7ed99642424580de">Assistant::run</a></div><div class="ttdeci">int run(int argc, char *argv[])</div><div class="ttdoc">Main function that controls agent events. </div><div class="ttdef"><b>Definition:</b> Assistant.cpp:210</div></div>
+<div class="ttc" id="classAssistant_html_adaee2d23c3ba9e0c7ed99642424580de"><div class="ttname"><a href="classAssistant.html#adaee2d23c3ba9e0c7ed99642424580de">Assistant::run</a></div><div class="ttdeci">int run(int argc, char *argv[])</div><div class="ttdoc">Main function that controls agent events. </div><div class="ttdef"><b>Definition:</b> Assistant.cpp:166</div></div>
+<div class="ttc" id="classAgent_html_a0ca673bd13a3e9aa8235db73eb4b5391"><div class="ttname"><a href="classAgent.html#a0ca673bd13a3e9aa8235db73eb4b5391">Agent::currentCheckpoint</a></div><div class="ttdeci">std::pair&lt; double, double &gt; currentCheckpoint</div><div class="ttdef"><b>Definition:</b> Agent.h:56</div></div>
 <div class="ttc" id="classAgent_html"><div class="ttname"><a href="classAgent.html">Agent</a></div><div class="ttdoc">Superclass for all &#39;agents&#39; - i.e. Assistants, Visitors, and the Resident. Contains common navigation...</div><div class="ttdef"><b>Definition:</b> Agent.h:20</div></div>
 <div class="ttc" id="classAssistant_html"><div class="ttname"><a href="classAssistant.html">Assistant</a></div><div class="ttdoc">Class representing the Assistant. </div><div class="ttdef"><b>Definition:</b> Assistant.h:10</div></div>
 <div class="ttc" id="structse306__project1_1_1ResidentMsg___html"><div class="ttname"><a href="structse306__project1_1_1ResidentMsg__.html">se306_project1::ResidentMsg_</a></div><div class="ttdef"><b>Definition:</b> ResidentMsg.h:21</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Aug 29 2014 17:01:15 for SE306 Project 1 by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Aug 29 2014 20:12:25 for SE306 Project 1 by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

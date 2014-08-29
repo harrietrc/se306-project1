@@ -90,6 +90,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">CheckPointGraph Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Class representing the checkpoints and the paths between them. Also used in the calculation of the shortest path between checkpoints.  
+ <a href="classCheckPointGraph.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="CheckPointGraph_8hpp_source.html">CheckPointGraph.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -106,13 +111,41 @@ double &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el
 <tr class="memdesc:ab48dfe7feccab1d732901b83a0ec4612"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds the shortest path between 2 checkpoints, and returns the path as co-ordinates. Uses breadth first search - Boost recommends this over Dijkstra's algorithm for graphs with uniformly weighted edges. Sets path member variable.  <a href="#ab48dfe7feccab1d732901b83a0ec4612">More...</a><br/></td></tr>
 <tr class="separator:ab48dfe7feccab1d732901b83a0ec4612"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a92da1b78dfbf86627397265c43143100"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a92da1b78dfbf86627397265c43143100"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><b>getCheckpointName</b> (std::pair&lt; double, double &gt; coords)</td></tr>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCheckPointGraph.html#a92da1b78dfbf86627397265c43143100">getCheckpointName</a> (std::pair&lt; double, double &gt; coords)</td></tr>
+<tr class="memdesc:a92da1b78dfbf86627397265c43143100"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the name of. <br/></td></tr>
 <tr class="separator:a92da1b78dfbf86627397265c43143100"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2200216c4d24426b2b479b3a8bb7141d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2200216c4d24426b2b479b3a8bb7141d"></a>
-std::pair&lt; double, double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getCoords</b> (std::string name)</td></tr>
+<tr class="memitem:a2200216c4d24426b2b479b3a8bb7141d"><td class="memItemLeft" align="right" valign="top">std::pair&lt; double, double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCheckPointGraph.html#a2200216c4d24426b2b479b3a8bb7141d">getCoords</a> (std::string name)</td></tr>
+<tr class="memdesc:a2200216c4d24426b2b479b3a8bb7141d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the co-ordinates of a checkpoint when given its name.  <a href="#a2200216c4d24426b2b479b3a8bb7141d">More...</a><br/></td></tr>
 <tr class="separator:a2200216c4d24426b2b479b3a8bb7141d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Class representing the checkpoints and the paths between them. Also used in the calculation of the shortest path between checkpoints. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a2200216c4d24426b2b479b3a8bb7141d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::pair&lt; double, double &gt; CheckPointGraph::getCoords </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets the co-ordinates of a checkpoint when given its name. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>The name of the checkpoint </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The pair of (x,y) co-ordinates </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="ab48dfe7feccab1d732901b83a0ec4612"></a>
 <div class="memitem">
 <div class="memproto">
@@ -145,6 +178,7 @@ std::pair&lt; double, double &gt;&#160;</td><td class="memItemRight" valign="bot
   </table>
   </dd>
 </dl>
+<dl class="section attention"><dt>Attention</dt><dd>The shortest path in terms of path length will not necessarily be the same as the shortest path in terms of actual distance. </dd></dl>
 
 </div>
 </div>
@@ -155,7 +189,7 @@ std::pair&lt; double, double &gt;&#160;</td><td class="memItemRight" valign="bot
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Aug 29 2014 17:01:16 for SE306 Project 1 by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Aug 29 2014 20:12:26 for SE306 Project 1 by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

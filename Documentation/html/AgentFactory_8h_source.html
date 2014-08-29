@@ -97,23 +97,24 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;</div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;ros/ros.h&quot;</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">namespace </span>AgentConst {</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <span class="keyword">enum</span> AgentType { RESIDENT, ASSISTANT, ASSISTANT1, CAREGIVER, DOCTOR, NURSE, NURSE1, FRIEND, FRIEND1, FRIEND2,  DOOR };</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;}</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div>
-<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="classAgentFactory.html">   17</a></span>&#160;<span class="keyword">class </span><a class="code" href="classAgentFactory.html">AgentFactory</a> {</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classAgentFactory.html#a8785d71f067068f09326b4c5af5007b4">createMockAgent</a>();</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keywordtype">int</span> createAgent(AgentConst::AgentType agentType, <span class="keywordtype">int</span> nodeNumber);</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;};</div>
-<div class="ttc" id="classAgentFactory_html"><div class="ttname"><a href="classAgentFactory.html">AgentFactory</a></div><div class="ttdoc">Class for instantiating agents dynamically. </div><div class="ttdef"><b>Definition:</b> AgentFactory.h:17</div></div>
+<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="namespaceAgentConst.html">   13</a></span>&#160;<span class="keyword">namespace </span>AgentConst {</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="keyword">enum</span> AgentType { RESIDENT, ASSISTANT, ASSISTANT1, CAREGIVER, DOCTOR, NURSE, NURSE1, FRIEND, FRIEND1, FRIEND2,  DOOR };</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;}</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="classAgentFactory.html">   20</a></span>&#160;<span class="keyword">class </span><a class="code" href="classAgentFactory.html">AgentFactory</a> {</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classAgentFactory.html#a8785d71f067068f09326b4c5af5007b4">createMockAgent</a>();</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classAgentFactory.html#aa8899b46f620a9a31f3e40041759ae24">createAgent</a>(AgentConst::AgentType agentType, <span class="keywordtype">int</span> nodeNumber);</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    </div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;};</div>
+<div class="ttc" id="classAgentFactory_html"><div class="ttname"><a href="classAgentFactory.html">AgentFactory</a></div><div class="ttdoc">Class for instantiating agents dynamically. </div><div class="ttdef"><b>Definition:</b> AgentFactory.h:20</div></div>
+<div class="ttc" id="classAgentFactory_html_aa8899b46f620a9a31f3e40041759ae24"><div class="ttname"><a href="classAgentFactory.html#aa8899b46f620a9a31f3e40041759ae24">AgentFactory::createAgent</a></div><div class="ttdeci">int createAgent(AgentConst::AgentType agentType, int nodeNumber)</div><div class="ttdoc">Creates an agent using the process manager and the provided type and number. </div><div class="ttdef"><b>Definition:</b> AgentFactory.cpp:26</div></div>
 <div class="ttc" id="classAgentFactory_html_a8785d71f067068f09326b4c5af5007b4"><div class="ttname"><a href="classAgentFactory.html#a8785d71f067068f09326b4c5af5007b4">AgentFactory::createMockAgent</a></div><div class="ttdeci">void createMockAgent()</div><div class="ttdoc">Creates a mock agent - for testing. </div><div class="ttdef"><b>Definition:</b> AgentFactory.cpp:17</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Aug 29 2014 17:01:15 for SE306 Project 1 by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Aug 29 2014 20:12:25 for SE306 Project 1 by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

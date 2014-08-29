@@ -100,31 +100,33 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#ifndef PRIORITYQUEUE_H_</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define PRIORITYQUEUE_H_</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">enum</span> residentStates {hungry,healthLow,bored,emergency,tired,caregiver,friends,medication,idle};</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div>
-<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="classpriorityQueue.html">   17</a></span>&#160;<span class="keyword">class </span><a class="code" href="classpriorityQueue.html">priorityQueue</a> {</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <a class="code" href="classpriorityQueue.html">priorityQueue</a>();</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classpriorityQueue.html">priorityQueue</a>();</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keywordtype">void</span> addToPQ(residentStates currentState);</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    residentStates popFromPQ();</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    std::string checkCurrentState();</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keywordtype">void</span> removeState(residentStates unwantedState);</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">bool</span> isStateInPQ(residentStates currentState);</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    std::string stateConvertString(residentStates currentState);</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;};</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* PRIORITYQUEUE_H_ */</span><span class="preprocessor"></span></div>
-<div class="ttc" id="classpriorityQueue_html"><div class="ttname"><a href="classpriorityQueue.html">priorityQueue</a></div><div class="ttdef"><b>Definition:</b> priorityQueue.h:17</div></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">enum</span> residentStates {hungry,healthLow,bored,emergency,tired,caregiver,friends,medication,idle};</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="classpriorityQueue.html">   22</a></span>&#160;<span class="keyword">class </span><a class="code" href="classpriorityQueue.html">priorityQueue</a> {</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <a class="code" href="classpriorityQueue.html">priorityQueue</a>();</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classpriorityQueue.html">priorityQueue</a>();</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classpriorityQueue.html#a58658233e429bf3666dc4eb5300012c4">addToPQ</a>(residentStates currentState);</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    residentStates <a class="code" href="classpriorityQueue.html#a78d5b85232d7303cabc49c4fac41a0ec">popFromPQ</a>();</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    std::string <a class="code" href="classpriorityQueue.html#a1d4923612653d4b3f810b7451d21004d">checkCurrentState</a>();</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classpriorityQueue.html#a448eafd83ae7742c21b8f70b078ae48b">removeState</a>(residentStates unwantedState);</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keywordtype">bool</span> isStateInPQ(residentStates currentState);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    std::string stateConvertString(residentStates currentState);</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;};</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* PRIORITYQUEUE_H_ */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="classpriorityQueue_html_a78d5b85232d7303cabc49c4fac41a0ec"><div class="ttname"><a href="classpriorityQueue.html#a78d5b85232d7303cabc49c4fac41a0ec">priorityQueue::popFromPQ</a></div><div class="ttdeci">residentStates popFromPQ()</div><div class="ttdoc">Pops the highest priority off the priority queue. </div><div class="ttdef"><b>Definition:</b> priorityQueue.cpp:167</div></div>
+<div class="ttc" id="classpriorityQueue_html_a58658233e429bf3666dc4eb5300012c4"><div class="ttname"><a href="classpriorityQueue.html#a58658233e429bf3666dc4eb5300012c4">priorityQueue::addToPQ</a></div><div class="ttdeci">void addToPQ(residentStates currentState)</div><div class="ttdoc">Adds a given state to the queue. </div><div class="ttdef"><b>Definition:</b> priorityQueue.cpp:81</div></div>
+<div class="ttc" id="classpriorityQueue_html"><div class="ttname"><a href="classpriorityQueue.html">priorityQueue</a></div><div class="ttdoc">The priority queue that holds and orders the resident states. Priority, here, correlates with the urg...</div><div class="ttdef"><b>Definition:</b> priorityQueue.h:22</div></div>
+<div class="ttc" id="classpriorityQueue_html_a1d4923612653d4b3f810b7451d21004d"><div class="ttname"><a href="classpriorityQueue.html#a1d4923612653d4b3f810b7451d21004d">priorityQueue::checkCurrentState</a></div><div class="ttdeci">std::string checkCurrentState()</div><div class="ttdoc">Returns the current state (highest priority) as a string. </div><div class="ttdef"><b>Definition:</b> priorityQueue.cpp:51</div></div>
+<div class="ttc" id="classpriorityQueue_html_a448eafd83ae7742c21b8f70b078ae48b"><div class="ttname"><a href="classpriorityQueue.html#a448eafd83ae7742c21b8f70b078ae48b">priorityQueue::removeState</a></div><div class="ttdeci">void removeState(residentStates unwantedState)</div><div class="ttdoc">Removes a given state from the priority queue. </div><div class="ttdef"><b>Definition:</b> priorityQueue.cpp:63</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Aug 29 2014 17:01:15 for SE306 Project 1 by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Aug 29 2014 20:12:26 for SE306 Project 1 by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

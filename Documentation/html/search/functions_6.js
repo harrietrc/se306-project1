@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['makegraph',['makeGraph',['../classCheckPointGraph.html#a417bcd9db81360b38575569f3900b0c0',1,'CheckPointGraph']]]
+  ['hospitalise',['hospitalise',['../classDoctor.html#afaaaa3914c3a2fe3bbb93f7969afd3d5',1,'Doctor']]],
+  ['hungercallback',['hungerCallback',['../classResident.html#a22df12e23657cb49429d052d0168b957',1,'Resident']]]
 ];

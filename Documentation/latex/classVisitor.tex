@@ -32,11 +32,9 @@ bool \hyperlink{classVisitor_a0dc0a203978b84f73a887d1f1de54225}{do\-Converse} ()
 \subsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{classVisitor_a9379136efaf219f1c539d0b0a6cce429}{bool {\bfseries emergency} = false}\label{classVisitor_a9379136efaf219f1c539d0b0a6cce429}
-
+bool \hyperlink{classVisitor_a9379136efaf219f1c539d0b0a6cce429}{emergency} = false
 \item 
-\hypertarget{classVisitor_a2be4e2c43d571a46668b8c22abc664bc}{bool {\bfseries finished\-Convo} = false}\label{classVisitor_a2be4e2c43d571a46668b8c22abc664bc}
-
+bool \hyperlink{classVisitor_a2be4e2c43d571a46668b8c22abc664bc}{finished\-Convo} = false
 \end{DoxyCompactItemize}
 
 
@@ -73,6 +71,15 @@ Visit the resident. May be simple -\/ e.\-g. toggling visitor visibility, or mov
 true if this has moved next to the \hyperlink{classResident}{Resident} 
 \end{DoxyReturn}
 
+
+\subsection{Member Data Documentation}
+\hypertarget{classVisitor_a9379136efaf219f1c539d0b0a6cce429}{\index{Visitor@{Visitor}!emergency@{emergency}}
+\index{emergency@{emergency}!Visitor@{Visitor}}
+\subsubsection[{emergency}]{\setlength{\rightskip}{0pt plus 5cm}bool Visitor\-::emergency = false\hspace{0.3cm}{\ttfamily [protected]}}}\label{classVisitor_a9379136efaf219f1c539d0b0a6cce429}
+True if the resident is ready to hospitalise (nurse must be adjacent to them). required if timing/scheduling is done within this class \hypertarget{classVisitor_a2be4e2c43d571a46668b8c22abc664bc}{\index{Visitor@{Visitor}!finished\-Convo@{finished\-Convo}}
+\index{finished\-Convo@{finished\-Convo}!Visitor@{Visitor}}
+\subsubsection[{finished\-Convo}]{\setlength{\rightskip}{0pt plus 5cm}bool Visitor\-::finished\-Convo = false\hspace{0.3cm}{\ttfamily [protected]}}}\label{classVisitor_a2be4e2c43d571a46668b8c22abc664bc}
+True if the visitor has finished conversing with the resident. 
 
 The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
 \item 

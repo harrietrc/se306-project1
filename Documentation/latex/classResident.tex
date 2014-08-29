@@ -34,39 +34,39 @@ void \hyperlink{classResident_aa715d491e917de6f621593f0d1f01bd6}{assistant\-\_\-
 \hypertarget{classResident_a98b4c44b2cc5f0212f8889088bc881e1}{void \hyperlink{classResident_a98b4c44b2cc5f0212f8889088bc881e1}{publish\-Status} (ros\-::\-Publisher Resident\-\_\-state\-\_\-pub)}\label{classResident_a98b4c44b2cc5f0212f8889088bc881e1}
 
 \begin{DoxyCompactList}\small\item\em Gets current resident status and publishes it to a topic for assistants and doctors/nurses. May convert to string and publish in the standard way -\/ do we need custom messages any more? \end{DoxyCompactList}\item 
-\hypertarget{classResident_afb1119b2ff73ad3aa48732caee7b3d60}{void {\bfseries trigger\-Random\-Events} ()}\label{classResident_afb1119b2ff73ad3aa48732caee7b3d60}
+\hypertarget{classResident_afb1119b2ff73ad3aa48732caee7b3d60}{void \hyperlink{classResident_afb1119b2ff73ad3aa48732caee7b3d60}{trigger\-Random\-Events} ()}\label{classResident_afb1119b2ff73ad3aa48732caee7b3d60}
 
-\item 
-\hypertarget{classResident_a385c83c3916a4d27d2a25ef8b370bec9}{void {\bfseries medication\-Callback} (const ros\-::\-Timer\-Event \&)}\label{classResident_a385c83c3916a4d27d2a25ef8b370bec9}
+\begin{DoxyCompactList}\small\item\em Called to 'roll' for a random event such as an emergency or a decrease in overall health. \end{DoxyCompactList}\item 
+\hypertarget{classResident_a385c83c3916a4d27d2a25ef8b370bec9}{void \hyperlink{classResident_a385c83c3916a4d27d2a25ef8b370bec9}{medication\-Callback} (const ros\-::\-Timer\-Event \&)}\label{classResident_a385c83c3916a4d27d2a25ef8b370bec9}
 
-\item 
-\hypertarget{classResident_a077344652ee8d61fb8af7b79f6694514}{void {\bfseries wake\-Callback} (const ros\-::\-Timer\-Event \&)}\label{classResident_a077344652ee8d61fb8af7b79f6694514}
+\begin{DoxyCompactList}\small\item\em Adds medication status to queue. \end{DoxyCompactList}\item 
+\hypertarget{classResident_a077344652ee8d61fb8af7b79f6694514}{void \hyperlink{classResident_a077344652ee8d61fb8af7b79f6694514}{wake\-Callback} (const ros\-::\-Timer\-Event \&)}\label{classResident_a077344652ee8d61fb8af7b79f6694514}
 
-\item 
-\hypertarget{classResident_ac66d104fcc8722a2d5888171eecfbd69}{void {\bfseries sleep\-Callback} (const ros\-::\-Timer\-Event \&)}\label{classResident_ac66d104fcc8722a2d5888171eecfbd69}
+\begin{DoxyCompactList}\small\item\em Removes tired status to queue. \end{DoxyCompactList}\item 
+\hypertarget{classResident_ac66d104fcc8722a2d5888171eecfbd69}{void \hyperlink{classResident_ac66d104fcc8722a2d5888171eecfbd69}{sleep\-Callback} (const ros\-::\-Timer\-Event \&)}\label{classResident_ac66d104fcc8722a2d5888171eecfbd69}
 
-\item 
-\hypertarget{classResident_ac83ee402243f607d6026b9f2796f8ef1}{void {\bfseries caregiver\-Services\-Callback} (const ros\-::\-Timer\-Event \&)}\label{classResident_ac83ee402243f607d6026b9f2796f8ef1}
+\begin{DoxyCompactList}\small\item\em Adds tired status to queue. \end{DoxyCompactList}\item 
+\hypertarget{classResident_ac83ee402243f607d6026b9f2796f8ef1}{void \hyperlink{classResident_ac83ee402243f607d6026b9f2796f8ef1}{caregiver\-Services\-Callback} (const ros\-::\-Timer\-Event \&)}\label{classResident_ac83ee402243f607d6026b9f2796f8ef1}
 
-\item 
-\hypertarget{classResident_a230654cb391de275302021decf9baa53}{void {\bfseries caregiver\-Services\-Done\-Callback} (const ros\-::\-Timer\-Event \&)}\label{classResident_a230654cb391de275302021decf9baa53}
+\begin{DoxyCompactList}\small\item\em Adds caregiver status to queue (caregiver is visiting) \end{DoxyCompactList}\item 
+\hypertarget{classResident_a230654cb391de275302021decf9baa53}{void \hyperlink{classResident_a230654cb391de275302021decf9baa53}{caregiver\-Services\-Done\-Callback} (const ros\-::\-Timer\-Event \&)}\label{classResident_a230654cb391de275302021decf9baa53}
 
-\item 
-\hypertarget{classResident_a22df12e23657cb49429d052d0168b957}{void {\bfseries hunger\-Callback} (const ros\-::\-Timer\-Event \&)}\label{classResident_a22df12e23657cb49429d052d0168b957}
+\begin{DoxyCompactList}\small\item\em Removes caregiver status to queue (caregiver has completed tasks) \end{DoxyCompactList}\item 
+\hypertarget{classResident_a22df12e23657cb49429d052d0168b957}{void \hyperlink{classResident_a22df12e23657cb49429d052d0168b957}{hunger\-Callback} (const ros\-::\-Timer\-Event \&)}\label{classResident_a22df12e23657cb49429d052d0168b957}
 
-\item 
-\hypertarget{classResident_a03c057e1ce1f34456e71a35eb1b39c93}{void {\bfseries friends\-Callback} (const ros\-::\-Timer\-Event \&)}\label{classResident_a03c057e1ce1f34456e71a35eb1b39c93}
+\begin{DoxyCompactList}\small\item\em Adds hunger status to queue. \end{DoxyCompactList}\item 
+\hypertarget{classResident_a03c057e1ce1f34456e71a35eb1b39c93}{void \hyperlink{classResident_a03c057e1ce1f34456e71a35eb1b39c93}{friends\-Callback} (const ros\-::\-Timer\-Event \&)}\label{classResident_a03c057e1ce1f34456e71a35eb1b39c93}
 
-\item 
-\hypertarget{classResident_aa1d45bfcd3798bcd907d605cf95e467d}{void {\bfseries friends\-Done\-Callback} (const ros\-::\-Timer\-Event \&)}\label{classResident_aa1d45bfcd3798bcd907d605cf95e467d}
+\begin{DoxyCompactList}\small\item\em Adds friends status to queue (friends are visitng) \end{DoxyCompactList}\item 
+\hypertarget{classResident_aa1d45bfcd3798bcd907d605cf95e467d}{void \hyperlink{classResident_aa1d45bfcd3798bcd907d605cf95e467d}{friends\-Done\-Callback} (const ros\-::\-Timer\-Event \&)}\label{classResident_aa1d45bfcd3798bcd907d605cf95e467d}
 
-\item 
-\hypertarget{classResident_a142ba60229302edcf6bc69db55ee78ca}{void {\bfseries caregiver\-\_\-callback} (const std\-\_\-msgs\-::\-String\-::\-Const\-Ptr \&msg)}\label{classResident_a142ba60229302edcf6bc69db55ee78ca}
+\begin{DoxyCompactList}\small\item\em Removes friends status to queue (friends are leaving) \end{DoxyCompactList}\item 
+\hypertarget{classResident_a142ba60229302edcf6bc69db55ee78ca}{void \hyperlink{classResident_a142ba60229302edcf6bc69db55ee78ca}{caregiver\-\_\-callback} (const std\-\_\-msgs\-::\-String\-::\-Const\-Ptr \&msg)}\label{classResident_a142ba60229302edcf6bc69db55ee78ca}
 
-\item 
-\hypertarget{classResident_a68e4438b39d8a0bacf1d85254587b029}{void {\bfseries check\-Status} ()}\label{classResident_a68e4438b39d8a0bacf1d85254587b029}
+\begin{DoxyCompactList}\small\item\em Move to the shower if the caregiver is adjacent to the resident. \end{DoxyCompactList}\item 
+\hypertarget{classResident_a68e4438b39d8a0bacf1d85254587b029}{void \hyperlink{classResident_a68e4438b39d8a0bacf1d85254587b029}{check\-Status} ()}\label{classResident_a68e4438b39d8a0bacf1d85254587b029}
 
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Checks the resident's status and performs the appropriate behaviour for that status. May involve adding a new status to the queue -\/ checks resident's hunger and boredom as well as its status queue. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Additional Inherited Members}
 
 

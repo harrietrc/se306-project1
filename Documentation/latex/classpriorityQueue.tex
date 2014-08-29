@@ -1,21 +1,92 @@
 \hypertarget{classpriorityQueue}{\section{priority\-Queue Class Reference}
 \label{classpriorityQueue}\index{priority\-Queue@{priority\-Queue}}
 }
+
+
+The priority queue that holds and orders the resident states. Priority, here, correlates with the urgency of the corresponding behaviour to be performed.  
+
+
+
+
+{\ttfamily \#include $<$priority\-Queue.\-h$>$}
+
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{classpriorityQueue_a58658233e429bf3666dc4eb5300012c4}{void {\bfseries add\-To\-P\-Q} (resident\-States current\-State)}\label{classpriorityQueue_a58658233e429bf3666dc4eb5300012c4}
+void \hyperlink{classpriorityQueue_a58658233e429bf3666dc4eb5300012c4}{add\-To\-P\-Q} (resident\-States current\-State)
+\begin{DoxyCompactList}\small\item\em Adds a given state to the queue. \end{DoxyCompactList}\item 
+resident\-States \hyperlink{classpriorityQueue_a78d5b85232d7303cabc49c4fac41a0ec}{pop\-From\-P\-Q} ()
+\begin{DoxyCompactList}\small\item\em Pops the highest priority off the priority queue. \end{DoxyCompactList}\item 
+std\-::string \hyperlink{classpriorityQueue_a1d4923612653d4b3f810b7451d21004d}{check\-Current\-State} ()
+\begin{DoxyCompactList}\small\item\em Returns the current state (highest priority) as a string. \end{DoxyCompactList}\item 
+void \hyperlink{classpriorityQueue_a448eafd83ae7742c21b8f70b078ae48b}{remove\-State} (resident\-States unwanted\-State)
+\begin{DoxyCompactList}\small\item\em Removes a given state from the priority queue. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
-\item 
-\hypertarget{classpriorityQueue_a78d5b85232d7303cabc49c4fac41a0ec}{resident\-States {\bfseries pop\-From\-P\-Q} ()}\label{classpriorityQueue_a78d5b85232d7303cabc49c4fac41a0ec}
 
-\item 
-\hypertarget{classpriorityQueue_a1d4923612653d4b3f810b7451d21004d}{std\-::string {\bfseries check\-Current\-State} ()}\label{classpriorityQueue_a1d4923612653d4b3f810b7451d21004d}
+\subsection{Detailed Description}
+The priority queue that holds and orders the resident states. Priority, here, correlates with the urgency of the corresponding behaviour to be performed. 
 
-\item 
-\hypertarget{classpriorityQueue_a448eafd83ae7742c21b8f70b078ae48b}{void {\bfseries remove\-State} (resident\-States unwanted\-State)}\label{classpriorityQueue_a448eafd83ae7742c21b8f70b078ae48b}
+\subsection{Member Function Documentation}
+\hypertarget{classpriorityQueue_a58658233e429bf3666dc4eb5300012c4}{\index{priority\-Queue@{priority\-Queue}!add\-To\-P\-Q@{add\-To\-P\-Q}}
+\index{add\-To\-P\-Q@{add\-To\-P\-Q}!priorityQueue@{priority\-Queue}}
+\subsubsection[{add\-To\-P\-Q}]{\setlength{\rightskip}{0pt plus 5cm}void priority\-Queue\-::add\-To\-P\-Q (
+\begin{DoxyParamCaption}
+\item[{resident\-States}]{current\-State}
+\end{DoxyParamCaption}
+)}}\label{classpriorityQueue_a58658233e429bf3666dc4eb5300012c4}
 
-\end{DoxyCompactItemize}
+
+Adds a given state to the queue. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em current\-State} & The state to be added. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classpriorityQueue_a1d4923612653d4b3f810b7451d21004d}{\index{priority\-Queue@{priority\-Queue}!check\-Current\-State@{check\-Current\-State}}
+\index{check\-Current\-State@{check\-Current\-State}!priorityQueue@{priority\-Queue}}
+\subsubsection[{check\-Current\-State}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string priority\-Queue\-::check\-Current\-State (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classpriorityQueue_a1d4923612653d4b3f810b7451d21004d}
+
+
+Returns the current state (highest priority) as a string. 
+
+\begin{DoxyReturn}{Returns}
+The top of the priority queue as a string. 
+\end{DoxyReturn}
+\hypertarget{classpriorityQueue_a78d5b85232d7303cabc49c4fac41a0ec}{\index{priority\-Queue@{priority\-Queue}!pop\-From\-P\-Q@{pop\-From\-P\-Q}}
+\index{pop\-From\-P\-Q@{pop\-From\-P\-Q}!priorityQueue@{priority\-Queue}}
+\subsubsection[{pop\-From\-P\-Q}]{\setlength{\rightskip}{0pt plus 5cm}resident\-States priority\-Queue\-::pop\-From\-P\-Q (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classpriorityQueue_a78d5b85232d7303cabc49c4fac41a0ec}
+
+
+Pops the highest priority off the priority queue. 
+
+\begin{DoxyReturn}{Returns}
+the highest priority resident status. 
+\end{DoxyReturn}
+\hypertarget{classpriorityQueue_a448eafd83ae7742c21b8f70b078ae48b}{\index{priority\-Queue@{priority\-Queue}!remove\-State@{remove\-State}}
+\index{remove\-State@{remove\-State}!priorityQueue@{priority\-Queue}}
+\subsubsection[{remove\-State}]{\setlength{\rightskip}{0pt plus 5cm}void priority\-Queue\-::remove\-State (
+\begin{DoxyParamCaption}
+\item[{resident\-States}]{unwanted\-State}
+\end{DoxyParamCaption}
+)}}\label{classpriorityQueue_a448eafd83ae7742c21b8f70b078ae48b}
+
+
+Removes a given state from the priority queue. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em unwanted\-State} & The state to remove. \\
+\hline
+\end{DoxyParams}
 
 
 The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
