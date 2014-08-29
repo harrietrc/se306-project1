@@ -27,7 +27,6 @@ using namespace std;
 *	@param msg A custom ResidentMsg message that contains information about the resident's current status.
 */
 void Assistant1::clean(se306_project1::ResidentMsg msg) {
-	ROS_INFO("Clean");
 	move("Assistant2Origin");
 	if (g.getCheckpointName(currentCheckpoint) == "Assistant2Origin" ) {
 		shortestPath.push_back(g.getCoords("CentreStool"));

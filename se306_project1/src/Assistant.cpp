@@ -40,7 +40,7 @@ void Assistant::medicate(se306_project1::ResidentMsg msg) {
 
 			currentCheckpoint.first = msg.currentCheckpointX;
 			currentCheckpoint.second = msg.currentCheckpointY;
-			move("Assistant1Origin");
+			//move("Assistant1Origin");
 			isMedicated == false;
 
 		}
@@ -112,7 +112,6 @@ void Assistant::cook(se306_project1::ResidentMsg msg) {
 			atKitchen = false;
 			finishedCooking = false;
 			foodDelivered = false;
-			move("HouseCentre");
 
 		}
 	}
@@ -185,7 +184,6 @@ void Assistant::delegate(se306_project1::ResidentMsg msg) {
 	if (msg.state != "emergency") {
 		// check msg if cook do cooking e.t.c
 		if (msg.state == "hungry") {
-			ROS_INFO("inside");
 			cook(msg);
 		}
 

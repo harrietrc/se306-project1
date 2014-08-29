@@ -134,7 +134,7 @@ void Resident::assistant_callback(se306_project1::AssistantMsg msg)
 
 
 	if (msg.FoodDelivered == true) {
-		hunger = 100;
+		hunger = 0;
 		stateQueue.removeState(hungry);
 		ROS_INFO("FED");
 	}
@@ -211,9 +211,12 @@ int Resident::run(int argc, char *argv[]) {
 
 	//velocity of this RobotNode
 	geometry_msgs::Twist RobotNode_cmdvel;
-
+//	stateQueue.addToPQ(hungry);
+//stateQueue.addToPQ(bored);
+//stateQueue.addToPQ(medication);
 	while (ros::ok())
 	{
+
 		//messages to stage
 		RobotNode_cmdvel.linear.x = linear_x;
 		RobotNode_cmdvel.angular.z = angular_z;
