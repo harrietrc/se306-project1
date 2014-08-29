@@ -1,47 +1,31 @@
 #include "Visitor.h"
 #include "std_msgs/String.h"
 
+/**
+*	@brief Class for the Doctor nodes.
+*/
 class Doctor : public Visitor
 {
+	private:
+		bool healing = false;
+		bool readyToHeal = false;
+		bool hospitalised = false;
+		bool readyToHospitalise = false;
+		bool isHealed = false;
+
+		ros::Publisher Doctor_state_pub;
+
 	protected:
-		bool healResident;
-		int health;
-		int boredom;
-		int hunger;
-		
-		//goal pose and orientation
-		double goal_x;
-		double goal_y;
-		double px;
-		double py;
-		double goal_angle;
-
-		bool running;
-
-		//current pose and orientation of the robot
-		double cur_angle;
-
-		int cc = 1; //current_checkpoint = 0;
-
-		bool is_called; 
-
-		std::pair<double,bool> goal_pair;
-		std::pair<double, double> ret;	
-
+		void doHeal(se306_project1::ResidentMsg msg);
+		void hospitalise(se306_project1::ResidentMsg msg);
+		void delegate(se306_project1::ResidentMsg msg);
 
 	public:
-		void StageOdom_callback(nav_msgs::Odometry msg);
-		void StageLaser_callback(sensor_msgs::LaserScan msg);
-		int run(int argc, char **argv);
-
-		double calc_goal_angle(double goal_x, double goal_y, double cur_angle, double px, double py);
-		std::pair<double, double> move(double goal_x, double goal_y, double cur_angle, double goal_angle, double px, double py);
-		void randomCheckpointCallback(const ros::TimerEvent&);
-		std::pair<double, double>  movePath(int path[][2], int pathLength);
-		void residentStatusCallback(se306_project1::ResidentMsg msg);
-		void medicationCallback(const ros::TimerEvent&);
-
-		// Restores health of the resident
-		//void restore_Health()
+		int run(int argc, char *argv[]);
+		Doctor() {
+			originName = "DoctorOrigin";
+			currentCheckpoint.first = -33;
+			currentCheckpoint.second = -42;
+		}
 		
 };

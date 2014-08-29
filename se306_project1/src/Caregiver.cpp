@@ -3,38 +3,99 @@
 #include <geometry_msgs/Twist.h>
 #include <nav_msgs/Odometry.h>
 #include <sensor_msgs/LaserScan.h>
-
 #include <sstream>
 #include "math.h"
 #include "Caregiver.h"
 
-void Caregiver::StageOdom_callback(nav_msgs::Odometry msg)
+
+/**
+*	@brief Callback function that unpacks and processes resident status messages.
+*	Assistant should subscribe to the ResidentMsg topic in order for this callback to be called. ResidentMsg is published by the Resident.
+*	@note Currently this callback processes only resident hunger, controlling the cooking behaviour. More behaviours 
+*	can be implemented later.
+*	@param msg A custom ResidentMsg message that contains information about the resident's current status.
+*/
+void Caregiver::delegate(se306_project1::ResidentMsg msg)
 {
-	//This is the call back function to process odometry messages coming from Stage. 	
-	px = 5 + msg.pose.pose.position.x;
-	py =10 + msg.pose.pose.position.y;
-	ROS_INFO("Current x position is: %f", px);
-	ROS_INFO("Current y position is: %f", py);
+
+	if (msg.state == "caregiver") {
+		if (!atResident) {
+			move(msg.currentCheckpoint); //to resident
+
+			if (true) { // next to resident
+				atResident = true;
+				std_msgs::String cMsg;
+				std::stringstream ss;
+				ss << "Here"; // Ready to start routine
+				cMsg.data = ss.str();
+			}
+			
+		}
+
+		if (!hasShowered && atResident) {
+			hasShowered = shower(msg); //Will return true when shower is completed
+		}
+
+		if (hasShowered && !hasExercised) {
+			hasExercised = exercise(msg);
+		}
+
+		if (hasExercised) {
+			move("FrontDoorEast"); //leave or something
+		}
+	}
 }
 
-void Caregiver::StageLaser_callback(sensor_msgs::LaserScan msg)
-{
-	//This is the callback function to process laser scan messages
-	//you can access the range data from msg.ranges[i]. i = sample number
-	
+
+/**
+*	@brief Caregiver helps the resident to shower, by taking them to the shower and helping them clean themseld.
+*	@return Returns true if behaviour was successful, and false otherwise.
+*/
+bool Caregiver::shower(se306_project1::ResidentMsg msg) {
+
+	move("NearShower");
+
+	if (msg.currentCheckpoint == "Shower"){
+		//showering
+		spin();
+		return true;
+	}
+	return false;
 }
 
-int Caregiver::run(int argc, char **argv)
-{
-	//initialize robot parameters
-	//Initial pose. This is same as the pose that you used in the world file to set	the robot pose.
-	theta = M_PI/2.0;
-	px = 10;
-	py = 20;
+/**
+*	@brief Caregiver helps the resident to do exercise. Will arrive when excercise scheduled.
+*	@return Returns true if behaviour was successful, and false otherwise.
+*/
+bool Caregiver::exercise(se306_project1::ResidentMsg msg) {
 	
-	//Initial velocity
-	linear_x = 0.2;
-	angular_z = 0.2;
+	move("BedroomEntranceWest");
+
+	if (msg.currentCheckpoint == "BedSouthEast") {
+		//exercising
+		spin();
+		return true;
+	}
+	return false;
+}
+
+void Caregiver::spin() {
+	int counter = 0;
+	while (counter < 100) {
+		counter++;
+		angular_z = 2;
+	}
+	angular_z = 0;
+		
+}
+
+/**
+*	@brief Main function for the Caregiver process.
+*	Controls node setup and periodic events.
+*/
+int Caregiver::run(int argc, char *argv[])
+{
+	/* -- Initialisation -- */
 	
 	//You must call ros::init() first of all. ros::init() function needs to see argc and argv. The third argument is the name of the node
 	ros::init(argc, argv, "Caregiver");
@@ -42,22 +103,33 @@ int Caregiver::run(int argc, char **argv)
 	//NodeHandle is the main access point to communicate with ros.
 	ros::NodeHandle n;
 
-	//advertise() function will tell ROS that you want to publish on a given topic_
-	//to stage
-	ros::Publisher RobotNode_stage_pub = n.advertise<geometry_msgs::Twist>("robot_0/cmd_vel",1000); 
-
-	//subscribe to listen to messages coming from stage
-	ros::Subscriber StageOdo_sub = n.subscribe<nav_msgs::Odometry>("robot_0/odom",1000, &Caregiver::StageOdom_callback,this);
-	ros::Subscriber StageLaser_sub = n.subscribe<sensor_msgs::LaserScan>("robot_0/base_scan",1000,&Caregiver::StageLaser_callback,this);
-
 	ros::Rate loop_rate(10);
 
-	//a count of howmany messages we have sent
-	int count = 0;
+	//Booleans
+	atResident = false;
+	hasShowered = false;
+	hasExercised = false;
+
+
+	/* -- Publish / Subscribe -- */
+
+	//advertise() function will tell ROS that you want to publish on a given topic_
+	//to stage
+	ros::Publisher RobotNode_stage_pub = n.advertise<geometry_msgs::Twist>("robot_3/cmd_vel",1000);
+
+	//subscribe to listen to messages coming from stage
+	ros::Subscriber StageOdo_sub = n.subscribe<nav_msgs::Odometry>("robot_3/odom",1000, &Caregiver::StageOdom_callback,dynamic_cast<Agent*>(this));
+
+	//custom Resident subscriber to "resident/state"
+	ros::Subscriber resident_sub = n.subscribe<se306_project1::ResidentMsg>("residentStatus",1000,&Caregiver::delegate, this);
+
+	//tells the resident when the caregiver has arrived
+	ros::Publisher care_pub = n.advertise<std_msgs::String>("caregiverStatus",1000);
 
 	////messages
 	//velocity of this RobotNode
 	geometry_msgs::Twist RobotNode_cmdvel;
+	
 
 	while (ros::ok())
 	{
@@ -69,19 +141,17 @@ int Caregiver::run(int argc, char **argv)
 		RobotNode_stage_pub.publish(RobotNode_cmdvel);
 		
 		ros::spinOnce();
-
 		loop_rate.sleep();
-		++count;
 	}
 
 	return 0;
-
 }
 
-/* 
-	Redirects to main function (run()) of the node.
+/**
+*	@brief Redirects to main function (run()) of the node.
 */
-int main(int argc, char **argv) {
+int main(int argc, char *argv[]) {
 	Caregiver *a = new Caregiver();
 	a->Caregiver::run(argc, argv);
 }
+

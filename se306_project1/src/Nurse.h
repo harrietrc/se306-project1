@@ -1,12 +1,18 @@
 #include "Visitor.h"
 
-class Nurse : public Visitor
-{
+/**
+*	@brief Class for Nurse nodes.
+*/
+class Nurse : public Visitor {
+
+	private:
+		bool readyToHospitalise = false;
+	
+	protected:
+		void doHospitalise();
+		void delegate(se306_project1::ResidentMsg msg);
+
 	public:
-		void StageOdom_callback(nav_msgs::Odometry msg);
-		void StageLaser_callback(sensor_msgs::LaserScan msg);
-		int run(int argc, char **argv);
-		
-		// restore health of the resident
-		//void restore_health()
+		int run(int argc, char *argv[]);
+
 };

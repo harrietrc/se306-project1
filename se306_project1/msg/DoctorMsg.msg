@@ -1,1 +1,2 @@
-int64 healResident
+bool ResidentHealed
+bool hospitalise

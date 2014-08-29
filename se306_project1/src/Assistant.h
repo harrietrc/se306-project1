@@ -1,80 +1,52 @@
-#include "Agent.h"
 #include "std_msgs/String.h"
+#include "Agent.h"
+#include "se306_project1/AssistantMsg.h"
+#include "se306_project1/ResidentMsg.h"
 
+
+/**
+*	@brief Class representing the Assistant.
+*/
 class Assistant : public Agent
 {
-
-	protected:
-		int health;
-		int boredom;
-		int hunger;
-		
-		//goal pose and orientation
-		double goal_x;
-		double goal_y;
-		double px;
-		double py;
-		double goal_angle;
-
-		bool running;
-		bool isSet;
-
-		//current pose and orientation of the robot
-		double cur_angle;
-
-		int cc; //current_checkpoint = 0;
-
-		bool is_called; 
-
-		std::pair<double,bool> goal_pair;
-		std::pair<double, double> ret;	
-
-		int checkpoints[12][2] = {  
-		{30, 25},
-		{30, 7}, 
-		{40, 7},
-		{40, 8},
-		{38,8},
-		{38,7},
-		{40,7},
-		{30,7},
-		{30, 25},
-		{34,20},
-		{30, 25},
-		{30,50}
-		};
-
-		bool cooking;
-
-
 	public:
-		void StageOdom_callback(nav_msgs::Odometry msg);
-		void StageLaser_callback(sensor_msgs::LaserScan msg);
-		int run(int argc, char **argv);
 
+		Assistant() : Agent(){
+
+			currentCheckpoint.first = 17;
+			currentCheckpoint.second = 17;
+			atKitchen = false;
+			finishedCooking = false;
+
+			atBedroom = false;
+			residentEntertained = false;
+			foodDelivered = false;
+			isMedicated = false;
+		}
+
+		/**
+		*	@brief Main function that controls agent events.
+		*/
+		int run(int argc, char *argv[]);
 		
-		double calc_goal_angle(double goal_x, double goal_y, double cur_angle, double px, double py);
-		std::pair<double, double> move(double goal_x, double goal_y, double cur_angle, double goal_angle, double px, double py);
-		void randomCheckpointCallback(const ros::TimerEvent&);
-		std::pair<double, double>  movePath(int path[][2], int pathLength);
-		void residentStatusCallback(se306_project1::ResidentMsg msg);
-		void medicationCallback(const ros::TimerEvent&);
 
-		//// Return type of robot
-		//Type get_Type()
-	
-		//// Get id of robot
-		//int get_id()
-	
-		//// Gives medication to the resident
-		//void give_medication()
-	
-		//// Cooks for the resident
-		//void cook()
-	
-		//// Entertain the resident
-		//void entertain()
-	
-		//// Gives companionship to resident
-		//void give_companionship()
+	private:
+		// functions
+		void medicate(se306_project1::ResidentMsg msg);
+		void cook(se306_project1::ResidentMsg msg);
+		void entertain(se306_project1::ResidentMsg msg);
+		void delegate(se306_project1::ResidentMsg msg);
+
+		ros::Publisher Assistant_state_pub;
+
+		// Boolean variables
+		bool atKitchen;
+		bool finishedCooking;
+		bool foodDelivered;
+		bool atBedroom;
+		bool residentEntertained;
+
+		int entertainmentCounter = 0;
+
+		bool isMedicated;
 };

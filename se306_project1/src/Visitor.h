@@ -1,22 +1,22 @@
+#include "ros/ros.h"
 #include "Agent.h"
 
-class Visitor : public Agent
-{
-	/*
+/**
+*	@brief Class for the implementation of visitors - i.e. Caregivers, Nurses, Doctors, Friends, and Relatives.
+*/
+class Visitor : public Agent {
+
+	protected:
+		bool emergency = false; // required if timing/scheduling is done within this class
+		bool finishedConvo = false;
+
+		bool visitResident();
+		bool doConverse();
+
 	public:
-			// Return type of robot
-		Type get_Type(){
-	
+		virtual int run(int argc, char *argv[]) = 0; 
+		Visitor() : Agent(){
+
 		}
-	
-		// Get id of robot
-		int get_id(){
-	
-		}
-	
-		// Visit the resident
-		void visit(){
-		
-		}
-	*/
+
 };

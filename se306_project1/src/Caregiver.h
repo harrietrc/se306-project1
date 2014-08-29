@@ -1,27 +1,28 @@
 #include "Visitor.h"
 
-class Caregiver : public Visitor
-{
-	public:
-		void StageOdom_callback(nav_msgs::Odometry msg);
-		void StageLaser_callback(sensor_msgs::LaserScan msg);
-		int run(int argc, char **argv);
-		
-		// Get id of robot
-		//int get_id()
+/**
+*	@brief Superclass for visitors - i.e. Caregivers, Nurses, Doctors, Friends, Relatives
+*/
+class Caregiver : public Visitor {
 
-		// Helps resident with shower
-		//void shower()
-	
-		// Feeds the resident
-		//void feed()
-	
-		// Helps resident with exercise
-		//void exercise()
-	
-		// Have a conversation with the resident
-		//void converse()
-	
-		// Receives moral support
-		//void moral_support()
+	private:
+		// bool variables
+		bool hasShowered;
+		bool hasExercised;
+		bool atResident;
+		bool exercise(se306_project1::ResidentMsg msg);
+		bool shower(se306_project1::ResidentMsg msg);
+
+		// methods
+		void spin();
+		void delegate(se306_project1::ResidentMsg msg);
+
+	public:
+		int run(int argc, char *argv[]);
+		Caregiver() : Visitor(){
+			originName = "Caregiver2Origin";
+			currentCheckpoint = std::make_pair(-6, -42); // Could just use g.getCoords(originName)
+			px = -6;
+			py= -42;
+		}
 };

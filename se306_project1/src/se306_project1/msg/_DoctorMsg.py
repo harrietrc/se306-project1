@@ -6,14 +6,15 @@ import struct
 
 
 class DoctorMsg(genpy.Message):
-  _md5sum = "adcd587ba691a57fd4852480ac57651e"
+  _md5sum = "f0a76f62c11fe6af65e3891c9a66e278"
   _type = "se306_project1/DoctorMsg"
   _has_header = False #flag to mark the presence of a Header object
-  _full_text = """int64 healResident
+  _full_text = """bool ResidentHealed
+bool hospitalise
 
 """
-  __slots__ = ['healResident']
-  _slot_types = ['int64']
+  __slots__ = ['ResidentHealed','hospitalise']
+  _slot_types = ['bool','bool']
 
   def __init__(self, *args, **kwds):
     """
@@ -23,7 +24,7 @@ class DoctorMsg(genpy.Message):
     changes.  You cannot mix in-order arguments and keyword arguments.
 
     The available fields are:
-       healResident
+       ResidentHealed,hospitalise
 
     :param args: complete set of field values, in .msg order
     :param kwds: use keyword arguments corresponding to message field names
@@ -32,10 +33,13 @@ class DoctorMsg(genpy.Message):
     if args or kwds:
       super(DoctorMsg, self).__init__(*args, **kwds)
       #message fields cannot be None, assign default values for those that are
-      if self.healResident is None:
-        self.healResident = 0
+      if self.ResidentHealed is None:
+        self.ResidentHealed = False
+      if self.hospitalise is None:
+        self.hospitalise = False
     else:
-      self.healResident = 0
+      self.ResidentHealed = False
+      self.hospitalise = False
 
   def _get_types(self):
     """
@@ -49,7 +53,8 @@ class DoctorMsg(genpy.Message):
     :param buff: buffer, ``StringIO``
     """
     try:
-      buff.write(_struct_q.pack(self.healResident))
+      _x = self
+      buff.write(_struct_2B.pack(_x.ResidentHealed, _x.hospitalise))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(_x))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(_x))))
 
@@ -60,9 +65,12 @@ class DoctorMsg(genpy.Message):
     """
     try:
       end = 0
+      _x = self
       start = end
-      end += 8
-      (self.healResident,) = _struct_q.unpack(str[start:end])
+      end += 2
+      (_x.ResidentHealed, _x.hospitalise,) = _struct_2B.unpack(str[start:end])
+      self.ResidentHealed = bool(self.ResidentHealed)
+      self.hospitalise = bool(self.hospitalise)
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -75,7 +83,8 @@ class DoctorMsg(genpy.Message):
     :param numpy: numpy python module
     """
     try:
-      buff.write(_struct_q.pack(self.healResident))
+      _x = self
+      buff.write(_struct_2B.pack(_x.ResidentHealed, _x.hospitalise))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(_x))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(_x))))
 
@@ -87,12 +96,15 @@ class DoctorMsg(genpy.Message):
     """
     try:
       end = 0
+      _x = self
       start = end
-      end += 8
-      (self.healResident,) = _struct_q.unpack(str[start:end])
+      end += 2
+      (_x.ResidentHealed, _x.hospitalise,) = _struct_2B.unpack(str[start:end])
+      self.ResidentHealed = bool(self.ResidentHealed)
+      self.hospitalise = bool(self.hospitalise)
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
 
 _struct_I = genpy.struct_I
-_struct_q = struct.Struct("<q")
+_struct_2B = struct.Struct("<2B")

@@ -3,39 +3,56 @@
 #include <geometry_msgs/Twist.h>
 #include <nav_msgs/Odometry.h>
 #include <sensor_msgs/LaserScan.h>
-
+#include "se306_project1/ResidentMsg.h"
 #include <sstream>
 #include "math.h"
 #include "Nurse.h"
 
-void Nurse::StageOdom_callback(nav_msgs::Odometry msg)
-{
-	//This is the call back function to process odometry messages coming from Stage. 	
-	px = 5 + msg.pose.pose.position.x;
-	py =10 + msg.pose.pose.position.y;
-	ROS_INFO("Current x position is: %f", px);
-	ROS_INFO("Current y position is: %f", py);
+/**
+*	@brief Callback function that unpacks and processes resident status messages.
+*	Nurse should subscribe to the ResidentMsg topic in order for this callback to be called. ResidentMsg is published by the Resident.
+*	@param msg A custom ResidentMsg message that contains information about the resident's current status.
+*/
+void Nurse::delegate(se306_project1::ResidentMsg msg) {
+	if (msg.state == "sill") { // seriously ill - emergency
+		doHospitalise();
+	} else {
+		readyToHospitalise = false;
+	}
 }
 
-void Nurse::StageLaser_callback(sensor_msgs::LaserScan msg)
-{
-	//This is the callback function to process laser scan messages
-	//you can access the range data from msg.ranges[i]. i = sample number
+/**
+*	@brief Takes the resident to hospital 
+*	(non-doctor-induced emergency, despite the function name...)
+*/
+void Nurse::doHospitalise() {
+
+	double lastCheckpointX = shortestPath.at(shortestPath.size()-1).first;
+	double lastCheckpointY = shortestPath.at(shortestPath.size()-1).second;
+
+	double distanceFromCheckpoint = sqrt(pow((lastCheckpointX - px),2) + pow((lastCheckpointY - py),2));
 	
+	if (readyToHospitalise == false) {
+		// move(<toResident>);
+		if (distanceFromCheckpoint < 0.5) { // next to resident
+			readyToHospitalise = true;
+		}
+	}
+	
+	if (readyToHospitalise == true) { // go back outside once Nurse is next to resident
+		// move(<outsideHouse>);
+	}
+
 }
 
-int Nurse::run(int argc, char **argv)
+/**
+*	@brief Main function for the Nurse process.
+*	Controls node setup and periodic events.
+*/
+int Nurse::run(int argc, char *argv[])
 {
 
-	//initialize robot parameters
-	//Initial pose. This is same as the pose that you used in the world file to set	the robot pose.
-	theta = M_PI/2.0;
-	px = 10;
-	py = 20;
-	
-	//Initial velocity
-	linear_x = 0.2;
-	angular_z = 0.2;
+	/* -- Initialisation -- */
 	
 	//You must call ros::init() first of all. ros::init() function needs to see argc and argv. The third argument is the name of the node
 	ros::init(argc, argv, "Nurse");
@@ -43,46 +60,46 @@ int Nurse::run(int argc, char **argv)
 	//NodeHandle is the main access point to communicate with ros.
 	ros::NodeHandle n;
 
+	ros::Rate loop_rate(10);
+
+
+	/* -- Publish / Subscribe -- */
+
 	//advertise() function will tell ROS that you want to publish on a given topic_
 	//to stage
 	ros::Publisher RobotNode_stage_pub = n.advertise<geometry_msgs::Twist>("robot_0/cmd_vel",1000); 
 
+	// Nurse subscribes to the Resident status topic
+	ros::Subscriber resident_sub = n.subscribe<se306_project1::ResidentMsg>("residentStatus",1000, &Nurse::delegate, this);
+
 	//subscribe to listen to messages coming from stage
-	ros::Subscriber StageOdo_sub = n.subscribe<nav_msgs::Odometry>("robot_0/odom",1000, &Nurse::StageOdom_callback,this);
-	ros::Subscriber StageLaser_sub = n.subscribe<sensor_msgs::LaserScan>("robot_0/base_scan",1000,&Nurse::StageLaser_callback,this);
-
-	ros::Rate loop_rate(10);
-
-	//a count of howmany messages we have sent
-	int count = 0;
+	ros::Subscriber StageOdo_sub = n.subscribe("robot_0/odom",1000, &Agent::StageOdom_callback, dynamic_cast<Agent*>(this));
 
 	////messages
 	//velocity of this RobotNode
 	geometry_msgs::Twist RobotNode_cmdvel;
+	
 
 	while (ros::ok())
 	{
 		//messages to stage
-		RobotNode_cmdvel.linear.x = linear_x;
-		RobotNode_cmdvel.angular.z = angular_z;
+		//RobotNode_cmdvel.linear.x = linear_x;
+		//RobotNode_cmdvel.angular.z = angular_z;
 			
 		//publish the message
 		RobotNode_stage_pub.publish(RobotNode_cmdvel);
 		
 		ros::spinOnce();
-
 		loop_rate.sleep();
-		++count;
 	}
 
 	return 0;
-
 }
 	
-/* 
-	Redirects to main function (run()) of the node.
+/**
+*	@brief Redirects to main function (run()) of the node.
 */
-int main(int argc, char **argv) {
+int main(int argc, char *argv[]) {
 	Nurse *a = new Nurse();
 	a->Nurse::run(argc, argv);
 }
