@@ -13,11 +13,14 @@ class Doctor : public Visitor
 		bool readyToHospitalise = false;
 		
 	protected:
-		bool doHeal();
-		bool doHospitalise();
+		bool doHeal(se306_project1::ResidentMsg msg);
+		bool doHospitalise(se306_project1::ResidentMsg msg);
 		void delegate(se306_project1::ResidentMsg msg);
 
 	public:
 		int run(int argc, char *argv[]);
+		Doctor() {
+			originName = "DoctorOrigin";
+		}
 		
 };

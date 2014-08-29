@@ -26,8 +26,8 @@ class Agent
 			px = 0;
 			py = 0;
 			currentAngle = 0;
-			currentCheckpoint = std::make_pair(0,0); // Needs to be initialised in subclasses!!
-			shortestPath.push_back(currentCheckpoint); // Needs to be removed later!!
+			//currentCheckpoint = std::make_pair(0,0); // Needs to be initialised in subclasses!!
+			//shortestPath.push_back(currentCheckpoint); // Needs to be removed later!!
 			isMoving = false;
 			isFacingCorrectly = false;
 			shortestPathIndex = 0;
@@ -39,16 +39,12 @@ class Agent
 		void StageOdom_callback(nav_msgs::Odometry msg);
 
 	protected:
-		// Sets origin name
-		void setOriginName(int agentNum, char* agentName);
+		std::string originName;
 
 		void setPath(std::string start, std::string end);
 
 		// Checkpoint graph object
 		CheckPointGraph g;
-
-		// The name of this agent's origin checkpoint
-		std::string originName = "Assistant1Origin"; //Temporary!
 
 		//velocity of the robot
 		double linear_x; /*!< Linear velocity of the robot */
@@ -80,7 +76,7 @@ class Agent
 		double calculateGoalAngle(std::pair<double,double> goalCheckpoint);
 		void move(std::string goal);
 		bool isTurnClockwise();
-
+		void stopMoving();
 		/* -- Communication and co-ordination -- */
 	
 };

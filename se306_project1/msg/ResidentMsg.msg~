@@ -1,0 +1,4 @@
+float64 currentCheckpointX
+float64 currentCheckpointY
+string state
+string currentCheckpoint

@@ -4,7 +4,6 @@
 #include "CheckPointGraph.hpp"
 #include <boost/bimap/bimap.hpp>
 #include <boost/bimap/set_of.hpp>
-
 using namespace boost; // Useful for graphs
 
 /** Array of the names of checkpoints. Necessary for the initialisation of the checkpoints vector. */
@@ -13,7 +12,9 @@ const char* nameArr[] = {
 		"KitchenNorthWest","KitchenSouthWest","KitchenSouthEast","KitchenNorthEast","HouseCentre","CentreStool","NextToCentreStool",
 		"BedroomEntranceWest","BedroomEntranceEast","CouchesNorthEast","CouchesNorthCentre","BathroomEntranceWest","BathroomEntranceEast",
 		"Shower","BathroomCentre","BedSouthWest","BedSouthEast","BedNorthEast","ResidentOrigin", "Assistant1Origin", "Assistant2Origin",
-		"DoctorOrigin","Nurse1Origin","Nurse2Origin","CaregiverOrigin","Friend1Origin","Friend2Origin","Friend3Origin"
+		"DoctorOrigin","Nurse1Origin","Nurse2Origin","Caregiver1Origin","Friend1Origin","Friend2Origin","Friend3Origin",
+		"Friend1Sofa", "Friend2Sofa", "ResidentSofa", "Friend3Sofa", "SofasUpper", "SofasLower", "NearShower",
+		"Caregiver2Origin", "SofasLeft"
 };
 
 /**
@@ -21,9 +22,10 @@ const char* nameArr[] = {
 * 	Gives x position and y position for each co-ordinate
 */
 int checkpoints[][2] = {
-	{-27,-40},{-20,-40},{-24,-12},{-18,-18},{0,-18},{0,-12},{6,-24},{6,-28},{24,-28},{24,-24},{0,6},{24,-10},{20,-6},{0,22},
-	{6,22},{-6,18},{-24,18},{-26,22},{-18,22},{-32,45},{-24,36},{6,30},{26,30},{30,45},
-	{26,48}, {17,17}, {32,18}, {-33,-46}, {-36,-48}, {-30,-48}, {-8,-46}, {-20,-46}, {-23,-46}, {-20,-48}
+	{-27,-40},{-20,-40},{-28,-12},{-18,-18},{0,-18},{0,-12},{6,-24},{6,-28},{24,-28},{24,-24},{0,6},{24,-10},{20,-6},{0,20},
+	{4,22},{0,18},{-24,18},{-26,22},{-18,22},{-32,45},{-24,36},{6,30},{26,30},{30,45},
+	{26,48}, {17,17}, {32,18}, {-33,-46}, {-36,-48}, {-30,-48}, {-8,-46}, {-20,-46}, {-23,-46}, {-20,-48}, {-24,6}, {-14,6},
+	{-16,0}, {-16,-8}, {-28,4}, {-16,-16}, {-32,34}, {-6,-42}, {-28,-8}
 };
 
 std::vector<std::string> checkpointNames(begin(nameArr), end(nameArr)); /*!< Vector of checkpoint names. See nameArr[]. */
@@ -43,36 +45,31 @@ E paths[] = {
 	 E("FrontDoorWest","LivingRoomNorthWest"), E("FrontDoorEast", "LivingRoomNorthEast"), E("LivingRoomNorthWest","CentrePassageNorth"),
 	 E("LivingRoomNorthEast","CentrePassageSouth"), E("CentrePassageNorth","KitchenNorthWest"), E("CentrePassageSouth","KitchenNorthWest"),
 	 E("KitchenNorthWest","KitchenNorthEast"), E("KitchenNorthEast","KitchenSouthEast"), E("KitchenSouthEast","KitchenSouthWest"),
-	 E("KitchenSouthWest","KitchenNorthWest"), E("CentrePassageSouth","NextToCentreStool"), E("CentrePassageNorth","NextToCentreStool"),
-	 E("NextToCentreStool","CentreStool"), E("NextToCentreStool","HouseCentre"), E("CentrePassageNorth","HouseCentre"),
+	 E("KitchenSouthWest","KitchenNorthWest"), E("CentrePassageSouth","CentrePassageNorth"), E("CentrePassageNorth","NextToCentreStool"),
+	 E("NextToCentreStool","CentreStool"), E("NextToCentreStool","HouseCentre"), 
 	 E("CentrePassageNorth","HouseCentre"), E("HouseCentre", "CouchesNorthEast"), E("CouchesNorthEast","CouchesNorthCentre"),
 	 E("CouchesNorthEast","BedroomEntranceEast"), E("CouchesNorthEast","BedroomEntranceWest"), E("CouchesNorthCentre","BathroomEntranceEast"),
-	 E("CouchesNorthCentre","BedroomEntranceWest"), E("BathroomEntranceEast","BathroomCentre"), E("BathroomEntranceWest","BathroomCentre"),
-	 E("BathroomCentre","Shower"), E("BedroomEntranceWest","BedSouthWest"), E("BedroomEntranceEast","BedSouthEast"), 
-	 E("BedSouthEast","BedNorthEast"), E("Origin","BedSouthEast"),
+	 E("BathroomEntranceEast","BathroomCentre"), E("BathroomEntranceWest","BathroomCentre"),
+	 E("BathroomCentre","Shower"), E("BedroomEntranceWest","BedSouthWest"),  
+	 E("BedSouthEast","BedNorthEast"), E("ResidentOrigin","BedSouthEast"),
 	 E("DoctorOrigin","FrontDoorWest"), E("Nurse1Origin","FrontDoorWest"), E("Nurse2Origin","FrontDoorWest"),
 	 E("Friend1Origin","FrontDoorEast"), E("Friend2Origin","FrontDoorEast"), E("Friend3Origin","FrontDoorEast"),
-	 E("CaregiverOrigin","FrontDoorEast"),
+	 E("Caregiver1Origin","FrontDoorEast"), E("BedSouthEast","BedSouthWest"),
 	 E("Assistant1Origin","CouchesNorthEast"), E("Assistant2Origin","CouchesNorthEast"), E("ResidentOrigin","BedNorthEast"),
-	 E("HouseCentre","CentrePassageSouth")
+	 E("HouseCentre","CentrePassageSouth"), E("Assistant1Origin","BedroomEntranceWest"),
+	 E("Assistant1Origin","BedroomEntranceWest"), E("Assistant2Origin","Assistant1Origin"), E("BedSouthWest","BedroomEntranceWest"),
+	 E("AboveSofa", "HouseCentre"),
+	 E("Friend1Sofa","Friend2Sofa"), E("Friend2Sofa","ResidentSofa"),E("ResidentSofa","Friend3Sofa"),
+	 E("Friend1Sofa","SofasUpper"), E("SofasUpper","SofasLeft"), E("LivingRoomNorthWest","SofasLower"),
+	 E("SofasLower","LivingRoomNorthEast"), E("SofasLower","CentrePassageNorth"), E("SofasLower","Friend3Sofa"),
+	 E("Shower","NearShower"), E("NearShower","BathroomCentre"),
+	 E("Caregiver2Origin","FrontDoorEast"), E("SofasLeft","LivingRoomNorthWest"),
+	 E("ResidentSofa","SofasLower"), E("CouchesNorthEast","ResidentSofa"),
+	 E("CentrePassageSouth","HouseCentre"), E("Assistant1Origin","CouchesNorthCentre"),
+	 E("Assistant2Origin","CouchesNorthCentre"), E("CentrePassageSouth","CouchesNorthEast"),
+	 E("CentrePassageNorth","CouchesNorthEast"), E("FrontDoorEast","CentrePassageSouth"),
+	 E("FrontDoorWest","CentrePassageNorth")
 }; /*!< Defines edges between checkpoints */
-
-/* -- Map of names to co-ordinates -- */
-
-// // typedef std::string CheckpointName; // Key
-// // typedef std::pair<int, int> Checkpoint; // Value
-// typedef boost::bimaps::bimap< boost::bimaps::set_of<std::string>, boost::bimaps::set_of<std::pair<int, int> > > CheckpointMap;
-// CheckpointMap c;
-
-// typedef CheckpointMap::left_map CheckpointNames;
-// CheckpointNames& names = c.left;
-// typedef CheckpointNames::value_type CheckpointName;
-// typedef CheckpointNames::const_iterator CheckpointNamesIterator;
-
-// typedef CheckpointMap::right_map CheckpointCoords;
-// CheckpointCoords& coords = c.right;
-// typedef CheckpointCoords::value_type CheckpointCoord;
-// typedef CheckpointCoords::const_iterator CheckpointCoordsIterator;
 
 /* -- Temporary solution - two maps of co-ordinates to names and names to co-ordinates --*/
 
@@ -96,7 +93,7 @@ std::vector<std::pair<double, double> > path; /*!< The agent's path to a specifi
  *	@param startName The name of the start checkpoint as a string (e.g. 'kitchen')
  *	@param endName The name of the goal checkpoint as a string (e.g. 'bathroom')
  */
-std::vector<std::pair<double, double> > CheckPointGraph::shortestPath(std::string startName, std::string endName) {
+std::vector<std::pair<double, double> > CheckPointGraph::shortestPath( std::string startName, std::string endName) {
 
 	//Create vector to store the predecessors (can also make one to store distances)
   	std::vector<vector_graph_t::vertex_descriptor> p(boost::num_vertices(g));
@@ -164,9 +161,9 @@ void CheckPointGraph::makeGraph() {
 	  boost::add_edge(indices[paths[i].first], indices[paths[i].second], g);
 	}
 
-	// //Prints a pretty graph
-	// std::ofstream ofs("test.dot");
-    // write_graphviz(ofs, g); // dot -Tps test.dot -o outfile.ps	
+	//Prints a pretty graph
+	std::ofstream ofs("test.dot");
+    write_graphviz(ofs, g); // dot -Tps test.dot -o outfile.ps	
 
 }
 

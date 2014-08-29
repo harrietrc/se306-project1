@@ -31,6 +31,10 @@ void Friend::doTimedVisit(const ros::TimerEvent&) { // don't know whether if tim
 	}
 }
 
+void Friend::friendsDoneCallback(const ros::TimerEvent&){
+
+}
+
 /**
 *	@brief Callback function that unpacks and processes resident status messages.
 *	Friend should subscribe to the ResidentMsg topic in order for this callback to be called. ResidentMsg is published by the Resident.
@@ -81,8 +85,8 @@ int Friend::run(int argc, char *argv[])
 	ros::Subscriber resident_sub = n.subscribe<se306_project1::ResidentMsg>("residentStatus",1000, &Friend::delegate, this);
 
 	// Periodic callback
-	int dur2 = time_conversion::simHoursToRealSecs(2); // Perform callback every 2 simulation hours
-	ros::Timer VisitorSchedule = n.createTimer(ros::Duration(dur2), &Friend::doTimedVisit, this);
+	int friendsDone = time_conversion::simHoursToRealSecs(11.5);
+	ros::Timer friendsDoneTimer = n.createTimer(ros::Duration(friendsDone), &Friend::friendsDoneCallback, this);
 
 	////messages
 	//velocity of this RobotNode
@@ -96,18 +100,14 @@ int Friend::run(int argc, char *argv[])
 	while (ros::ok())
 	{
 		//messages to stage
-		//RobotNode_cmdvel.linear.x = linear_x;
-		//RobotNode_cmdvel.angular.z = angular_z;
+		RobotNode_cmdvel.linear.x = linear_x;
+		RobotNode_cmdvel.angular.z = angular_z;
 			
 		//publish the message
 		RobotNode_stage_pub.publish(RobotNode_cmdvel);
 
 		// publish message to Resident once this Visitor has finished conversing
-		if (finishedConvo == true) {
-			ROS_INFO("Finished conversation");
-			friend_pub.publish(vMsg);
-			finishedConvo = false;
-		}
+
 		
 		ros::spinOnce();
 		loop_rate.sleep();

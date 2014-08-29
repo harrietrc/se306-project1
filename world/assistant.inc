@@ -4,7 +4,7 @@ define assistant position
   color "gray50"
 	drive "diff"
 	mylaser(pose [ 0.050 0.000 0.000 0.000 ])
-  size [2.5 2.5 5]
+  size [2 2.5 7.5]
 
 	localization_origin [0 0 0 0]
 	velocity_bounds [-10 10 -10 10 -10 10 -180 180]
@@ -60,14 +60,14 @@ define assistant position
   block
   (
 	 points 4
-	 point[0] [0.8 0.20]
-	 point[1] [0.8 0.80]
-	 point[2] [0.6 0.80]
-	 point[3] [0.6 0.20]
-	 z [0.7 0.95]
+	 point[0] [0.8 0.10]
+	 point[1] [0.8 0.90]
+	 point[2] [0.6 0.90]
+	 point[3] [0.6 0.10]
+	 z [0.7 1]
   )
 
-  # right eye rear
+  # left eye rear
   block
   (
 	 points 4

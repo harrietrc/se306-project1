@@ -9,6 +9,16 @@ class Assistant : public Agent
 	public:
 
 		Assistant() : Agent(){
+
+			currentCheckpoint.first = 17;
+			currentCheckpoint.second = 17;
+			atKitchen = false;
+			finishedCooking = false;
+
+			atBedroom = false;
+			residentEntertained = false;
+			foodDelivered = false;
+			isMedicated = false;
 		}
 
 		/**
@@ -19,18 +29,22 @@ class Assistant : public Agent
 
 	private:
 		// functions
-		void medicate();
-		void cook();
+		void medicate(se306_project1::ResidentMsg msg);
+		void cook(se306_project1::ResidentMsg msg);
 		void clean();
-		void entertain();
+		void entertain(se306_project1::ResidentMsg msg);
 		void delegate(se306_project1::ResidentMsg msg);
 
+		ros::Publisher Assistant_state_pub;
+
 		// Boolean variables
-		bool atKitchen = false;
-		bool finishedCooking = false;
+		bool atKitchen;
+		bool finishedCooking;
+		bool foodDelivered;
+		bool atBedroom;
+		bool residentEntertained;
 
-		bool atBedroom = false;
-		bool residentEntertained = false;
+		int entertainmentCounter = 0;
 
-		bool isMedicated = false;
+		bool isMedicated;
 };

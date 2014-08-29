@@ -1,11 +1,11 @@
 include "assistant.inc"
-include "sofa.inc"
-include "bed.inc"
-include "table.inc"
-include "box.inc"
-include "counter.inc"
-include "circle.inc"
-include "chair.inc"
+include "furniture.inc"
+include "door.inc"
+include "doctor.inc"
+include "caregiver.inc"
+include "nurse.inc"
+include "friends.inc"
+include "resident.inc"
 
 define mylaser ranger
 (
@@ -20,39 +20,35 @@ define mylaser ranger
   
 )
 
-define myRobot position
+define box model
 (
+	# top
 	block
 	(
-		points 3
-		point[0] [1 0.5]
-		point[1] [0 1]
-		point[2] [0 0]				
+		points 8
+		point[0] [0 0]
+		point[1] [0 4.8]  
+		point[2] [-0.2 5.0]
+		point[3] [-2.8 5.0]
+		point[4] [-3.0 4.8]
+		point[5] [-3.0 0]
+		point[6] [-2.8 -0.2]
+		point[7] [-0.2 -0.2]
 		z [0 1]
+
 	)
 
-	#fit shape to this size in meters
-	size [2.5 2.5 0.5]
-	drive "diff"
-	mylaser(pose [ 0.050 0.000 0.000 0.000 ])
-
-	localization_origin [0 0 0 0]
-	velocity_bounds [-10 10 -10 10 -10 10 -180 180]
+	size [5 12 10]
+	
 )
-
-define doctor position
+define circle model
 (
-	bitmap "doctor.png"
-	size [2.5 2.5 0.5]
-	drive "diff"
-	mylaser(pose [ 0.050 0.000 0.000 0.000 ])
-    localization_origin [0 0 0 0]
-  velocity_bounds [-10 10 -10 10 -10 10 -180 180]
+	bitmap "circle.pgm"
+	size [14 8 1]
 )
 
 define floorplan model
 (
-  # sombre, sensible, artistic, swagful
   color "gray30"
 
   # most maps will need a bounding box
@@ -71,7 +67,7 @@ define my_block model
 
 resolution 0.02 #resolution of the underline bitmap model in meters. 
 
-interval_sim 100  # simulation timestep in milliseconds. length of each simulation update cycle. does nothing.
+interval_sim 50  # simulation timestep in milliseconds. length of each simulation update cycle. does nothing.
 
 
 window
@@ -86,26 +82,37 @@ floorplan
 ( 
   name "swarm"
   bitmap "house.pgm"
-  color "light yellow"
+  color "light steel blue"
   size [75.000 105.000 12.000]
   pose [ 0.000 0.000 0.000 0.000 ]
 ) 
 
 ########### Robots ###########
 
-myRobot( pose [ 30.000 25.000 0.000 0.000 ] name "r0" color "blue")
-assistant( pose [ 17.000 17.000 1.000 0.000 ] name "r1")
-doctor( pose [ 10.000 -7.000 0.000 0.000 ] name "r2" color "red")
+resident( pose [ 26.000 48.000 0.000 0.000 ] name "r0" color "light green")
+assistant( pose [ 17.000 17.000 0.000 0.000 ] name "r1")
+assistant( pose [ 32.000 18.000 0.000 90.000 ] name "r2")
+
+caregiver( pose [ -8.000 -46.000 0.000 0.000 ] name "r3" color "light green")	#caregiver
+doctor( pose [ -33.000 -46.000 0.000 0.000 ] name "r4" color "white")	
+nurse( pose [ -36.000 -48.000 0.000 180.000 ] name "r5" color "yellow")	#nurse
+nurse( pose [ -30.000 -48.000 0.000 180.000 ] name "r6" color "yellow")	#nurse
+
+friends( pose [ -20.000 -46.000 0.000 90.000 ] name "r7" color "black")	#friends
+friends( pose [ -23.000 -46.000 0.000 90.000 ] name "r8" color "white")	#friends
+friends( pose [ -20.000 -48.000 0.000 90.000 ] name "r9" color "white")	#friends
+
+door( pose [ -20.5 -37.5 0 0 ] name "r8" color "light steel blue" size [12 1.5 12])			#sliding door
 
 ########## Furniture ##########
 
-sofa( pose [ -9.000 0.000 0.000 0.000 ] name "f1" color "steel blue")			#sofa 1
+sofa( pose [ -9.000 -3.000 0.000 0.000 ] name "f1" color "steel blue")			#sofa 1
 sofa( pose [ -19.500 12.500 0.000 90.000 ] name "f2" color "steel blue" size [7 14 7]) #sofa 2
 table( pose [ -21 0 0 0 ] name "f3" color "tan")		   #coffee table
 
-bed( pose [ 17.500 42.000 0.000 0.000 ] name "f4")	#bed
-table( pose [ 3 47 0 90 ] name "f5" color "tan")		   #bed table
-box( pose [ 33 36 0 0 ] name "f6" color "tan")			   #cabinet
+bed( pose [ 17.500 43.000 0.000 0.000 ] name "f4")	#bed
+#table( pose [ 3 47 0 90 ] name "f5" color "tan")		   #bed table
+#box( pose [ 33 36 0 0 ] name "f6" color "tan")			   #cabinet
 
 box( pose [ -32 43 9 0 ] name "f7" color "white" size [9 1 1]) #shower part
 box( pose [ -28 47 0 0 ] name "f7" color "white" size [1 9 10]) #shower part
@@ -115,26 +122,24 @@ box( pose [ -22 49 4 0 ] name "f9" color "white" size [5.5 3 3]) #toilet part
 box( pose [ -22 45.5 0 0 ] name "f9" color "white" size [2 2 2]) #toilet part
 box( pose [ -12.5 44 0 0 ] name "f10" color "snow" size [7 15 4]) 	   #bath tub
 box( pose [ -12.5 44 0 0 ] name "f10" color "light blue" size [4 12 4.2])	#water
-box( pose [ -32 26 0 0 ] name "f11" color "white" size [8 5 4.2])	#bathroom sink
+#box( pose [ -32 26 0 0 ] name "f11" color "white" size [8 5 4.2])	#bathroom sink
 
-box( pose [ -33 0 4 0 ] name "f12" color "dark grey" size [4 15 7]) #tv
-box( pose [ -33 0 0 0 ] name "f12" color "dark grey" size [2 2 4]) #tv stand
+box( pose [ -33 0 4 0 ] name "f12" color "dark grey" size [3 12 7]) #tv
+box( pose [ -33 0 0 0 ] name "f12" color "dark grey" size [1.5 1.5 4]) #tv stand
 
 
 circle( pose [ 15 6.5 4 0 ] name "f13" color "tan" )		   #oval table top
 box( pose [ 15 6.5 0 0 ] name "f13" color "tan" size [2 2 4]) 	   #table stand
-chair( pose [ 5.5 5.5 0 270 ] name "f14" color "tan") 	   #table chair
-chair( pose [ 22 5 0 180 ] name "f14" color "tan") 	   #table chair
 chair( pose [ 15 1 0 90 ] name "f14" color "tan") 	   #table chair
 chair( pose [ 15 11.5 0 270 ] name "f14" color "tan") 	   #table chair
+#chair( pose [ 22 6 0 180 ] name "f14" color "tan") 	   #table chair
 
 
-circle( pose [ 16 -12 0 0 ] name "f15" color "thistle" size [4 4 4.2])		   #oval stool
-circle( pose [ 24 -12 0 0 ] name "f15" color "thistle" size [4 4 4.2])		   #oval stool
-circle( pose [ 32 -12 0 0 ] name "f15" color "thistle" size [4 4 4.2])		   #oval stool
-box( pose [ 14 -34 0 0 ] name "f16" color "light steel blue" size [7 8 10]) #fridge
+#circle( pose [ 16 -12 0 0 ] name "f15" color "thistle" size [4 4 4.2])		   #oval stool
+#circle( pose [ 24 -12 0 0 ] name "f15" color "thistle" size [4 4 4.2])		   #oval stool
+#circle( pose [ 32 -12 0 0 ] name "f15" color "thistle" size [4 4 4.2])		   #oval stool
+box( pose [ 13 -35 0 0 ] name "f16" color "grey" size [9 6 10]) #fridge
 counter( pose [ 24 -27 0 0 ] name "f17" color "steel blue")		   #kitchen counter
 box( pose [ 32 -27 0 0 ] name "f18" color "grey" size [5 7 6]) 	   #stove
-
-
+#box( pose [ 0 -46 10 0 ] name "f19" color "white" size [70 12 2]) 	   #cover
 
