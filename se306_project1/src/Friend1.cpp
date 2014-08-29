@@ -12,7 +12,7 @@
 
 
 void Friend1::friendsDoneCallback(const ros::TimerEvent&){
-
+	move("Friend1Origin");
 }
 
 /**
@@ -23,11 +23,13 @@ void Friend1::friendsDoneCallback(const ros::TimerEvent&){
 void Friend1::delegate(se306_project1::ResidentMsg msg) {
 	if (msg.state == "emergency") {
 		emergency = true; // required variable if timing/scheduling is done within this class
-	} else if (msg.state == "friends") { // resident state when it needs friends to converse with
-		emergency = false; // required variable if timing/scheduling is done within this class
-		if (Visitor::visitResident() == true) { // next to resident
-			finishedConvo = Visitor::doConverse();
-		}
+	}
+	if (msg.state == "friends") { // resident state when it needs friends to converse with
+		move("Friend2Sofa");
+//		linear_x = 1;
+//		for (int i = 0; i < shortestPath.size(); i++){
+//			ROS_INFO("%s", g.getCheckpointName(shortestPath.at(i)).c_str());
+
 	}
 }
 
@@ -53,13 +55,13 @@ int Friend1::run(int argc, char *argv[])
 
 	//advertise() function will tell ROS that you want to publish on a given topic_
 	//to stage
-	ros::Publisher RobotNode_stage_pub = n.advertise<geometry_msgs::Twist>("robot_0/cmd_vel",1000); 
+	ros::Publisher RobotNode_stage_pub = n.advertise<geometry_msgs::Twist>("robot_8/cmd_vel",1000);
 
 	//publish message to Resident once conversation is over
 	ros::Publisher friend_pub = n.advertise<std_msgs::String>("visitorConvo",1000);
 
 	//subscribe to listen to messages coming from stage
-	ros::Subscriber StageOdo_sub = n.subscribe("robot_0/odom",1000, &Agent::StageOdom_callback, dynamic_cast<Agent*>(this));
+	ros::Subscriber StageOdo_sub = n.subscribe("robot_8/odom",1000, &Agent::StageOdom_callback, dynamic_cast<Agent*>(this));
 
 	//custom Resident subscriber to "resident/state"
 	ros::Subscriber resident_sub = n.subscribe<se306_project1::ResidentMsg>("residentStatus",1000, &Friend1::delegate, this);
@@ -73,26 +75,15 @@ int Friend1::run(int argc, char *argv[])
 	//velocity of this RobotNode
 	geometry_msgs::Twist RobotNode_cmdvel;
 
-	std_msgs::String vMsg; // message to indicate that convo is "Done"
-	std::stringstream ss;
-	ss << "Done";
-	vMsg.data = ss.str();	
 
 	while (ros::ok())
 	{
 		//messages to stage
-		//RobotNode_cmdvel.linear.x = linear_x;
-		//RobotNode_cmdvel.angular.z = angular_z;
+		RobotNode_cmdvel.linear.x = linear_x;
+		RobotNode_cmdvel.angular.z = angular_z;
 			
 		//publish the message
 		RobotNode_stage_pub.publish(RobotNode_cmdvel);
-
-		// publish message to Resident once this Visitor has finished conversing
-		if (finishedConvo == true) {
-			ROS_INFO("Finished conversation");
-			friend_pub.publish(vMsg);
-			finishedConvo = false;
-		}
 		
 		ros::spinOnce();
 		loop_rate.sleep();

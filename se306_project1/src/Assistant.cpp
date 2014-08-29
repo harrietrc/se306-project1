@@ -22,17 +22,15 @@ using namespace std;
 */
 void Assistant::medicate(se306_project1::ResidentMsg msg) {
 
-	double lastCheckpointX = shortestPath.at(shortestPath.size()-1).first;
-	double lastCheckpointY = shortestPath.at(shortestPath.size()-1).second;
+//	double lastCheckpointX = shortestPath.at(shortestPath.size()-1).first;
+//	double lastCheckpointY = shortestPath.at(shortestPath.size()-1).second;
 
-	double distanceFromCheckpoint = sqrt(pow((lastCheckpointX - px),2) + pow((lastCheckpointY - py),2));
+	double distanceFromCheckpoint = sqrt(pow((msg.currentCheckpointX - px),2) + pow((msg.currentCheckpointY - py),2));
 
 	//if (!isMedicated) {
 		move(msg.currentCheckpoint);
 		if (distanceFromCheckpoint < 5) {
-			isMoving = false;
-			linear_x = 0;
-			ROS_INFO("close to end");
+			stopMoving();
 			isMedicated == true;
 			isFacingCorrectly = false;
 
@@ -40,9 +38,11 @@ void Assistant::medicate(se306_project1::ResidentMsg msg) {
 			amsg.ResidentMedicated = true;
 			Assistant_state_pub.publish(amsg);
 
-			currentCheckpoint.first = lastCheckpointX;
-			currentCheckpoint.second = lastCheckpointY;
-			move("HouseCentre");
+			currentCheckpoint.first = msg.currentCheckpointX;
+			currentCheckpoint.second = msg.currentCheckpointY;
+			//move("Assistant1Origin");
+			isMedicated == false;
+
 		}
 //	}else if (isMedicated) {
 	//	move("HouseCentre");
@@ -58,10 +58,10 @@ void Assistant::medicate(se306_project1::ResidentMsg msg) {
 */
 void Assistant::cook(se306_project1::ResidentMsg msg) {
 
-	//double lastCheckpointX = shortestPath.at(shortestPath.size()-1).first; //fucking throws errors if shortestPath size is 0
-	//double lastCheckpointY = shortestPath.at(shortestPath.size()-1).second;
+//	double lastCheckpointX = shortestPath.at(shortestPath.size()-1).first; //fucking throws errors if shortestPath size is 0
+//	double lastCheckpointY = shortestPath.at(shortestPath.size()-1).second;
 
-	//double distanceFromCheckpoint = sqrt(pow((lastCheckpointX - px),2) + pow((lastCheckpointY - py),2));
+	double distanceFromCheckpoint = sqrt(pow((msg.currentCheckpointX - px),2) + pow((msg.currentCheckpointY - py),2));
 
 	if (!atKitchen && !finishedCooking) {
 		move("KitchenNorthWest");
@@ -109,10 +109,13 @@ void Assistant::cook(se306_project1::ResidentMsg msg) {
 			foodDelivered = true;
 			currentCheckpoint.first = msg.currentCheckpointX;
 			currentCheckpoint.second = msg.currentCheckpointY;
-			move("HouseCentre");
+			atKitchen = false;
+			finishedCooking = false;
+			foodDelivered = false;
 
 		}
-	} else if (atKitchen && finishedCooking && foodDelivered) {
+	}
+/*	} else if (atKitchen && finishedCooking && foodDelivered) {
 		move("HouseCentre");
 		if (g.getCheckpointName(currentCheckpoint) == "HouseCentre") {
 			atKitchen = false;
@@ -121,15 +124,11 @@ void Assistant::cook(se306_project1::ResidentMsg msg) {
 		}
 
 	}
+	*/
 }
 
 
-/**
-*	@brief Causes assistant to clean the house.
-*/
-void Assistant::clean() {
 
-}	
 
 /**
 *	@brief Causes assistant to entertain the resident.
@@ -137,35 +136,39 @@ void Assistant::clean() {
 */
 void Assistant::entertain(se306_project1::ResidentMsg msg) {
 
-	double lastCheckpointX = shortestPath.at(shortestPath.size()-1).first;
-	double lastCheckpointY = shortestPath.at(shortestPath.size()-1).second;
+	//double lastCheckpointX = shortestPath.at(shortestPath.size()-1).first;
+	//double lastCheckpointY = shortestPath.at(shortestPath.size()-1).second;
 
-	double distanceFromCheckpoint = sqrt(pow((lastCheckpointX - px),2) + pow((lastCheckpointY - py),2));
+	double distanceFromCheckpoint = sqrt(pow((msg.currentCheckpointX - px),2) + pow((msg.currentCheckpointY - py),2));
 	if (!atBedroom && !residentEntertained) {
 		entertainmentCounter = 0;
 		move(msg.currentCheckpoint);
-		if (distanceFromCheckpoint < 0.5) {
+		if (distanceFromCheckpoint < 2.5) {
 			atBedroom = true;
 		}
 	} else if (atBedroom && !residentEntertained) {
 		angular_z = 2;
 		entertainmentCounter++;
-		if (entertainmentCounter > 150) {
+		ROS_INFO("entertainmentCounter: %d", entertainmentCounter);
+		if (entertainmentCounter > 10) {
 			angular_z = 0;
 			residentEntertained = true;
 
 			se306_project1::AssistantMsg amsg;
 			amsg.ResidentEntertained = residentEntertained;
 			Assistant_state_pub.publish(amsg);
+			atBedroom = false;
+			residentEntertained = false;
 
 		}
-	} else if (atBedroom && residentEntertained) {
+	} /*else if (atBedroom && residentEntertained) {
 		move("HouseCentre");
 		if (distanceFromCheckpoint < 0.5) {
 			atBedroom = false;
 			residentEntertained = false;
 		}
 	}
+	*/
 }
 
 
@@ -179,22 +182,24 @@ void Assistant::delegate(se306_project1::ResidentMsg msg) {
 	// alternatively we could send the status in another format.
 	// enum residentStates {hunger,healthLow,bored,emergency,tired,caregiver,friends,medication,idle};
 
-
 	if (msg.state != "emergency") {
 		// check msg if cook do cooking e.t.c
 		if (msg.state == "hungry") {
 			cook(msg);
 		}
 
-		if (msg.state == "bored") {
+		else if (msg.state == "bored") {
 			entertain(msg);
 		}
 
-		if (msg.state == "medication") {
+		else if (msg.state == "medication") {
 			medicate(msg);
 		} else {
-			move("HouseCentre");
+			move("Assistant1Origin");
 		}
+	} else {
+		move("Assistant1Origin");
+
 	}
 
 }
@@ -226,6 +231,7 @@ int Assistant::run(int argc, char **argv)
 	//subscribe to listen to messages coming from stage
 	ros::Subscriber StageOdo_sub = n.subscribe("robot_1/odom",1000, &Assistant::StageOdom_callback, dynamic_cast<Agent*>(this));
 	ros::Subscriber residentSub = n.subscribe("residentStatus",1000, &Assistant::delegate, this);
+	ros::Subscriber assistantCommsSub = n.subscribe("assistantComms",1000, &Assistant::delegate, this);
 
 	////messages
 	//velocity of this RobotNode

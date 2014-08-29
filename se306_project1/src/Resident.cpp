@@ -29,8 +29,7 @@ void Resident::publishStatus(ros::Publisher Resident_state_pub) {
 	// Creating a message for residentStatus
 	residentState = stateQueue.checkCurrentState();
 	se306_project1::ResidentMsg msg;
-
-	residentState = "hungry";    //hardcoded state
+	residentState = "friends";    //hardcoded state
 	msg.state = residentState;
 	msg.currentCheckpoint = g.getCheckpointName(currentCheckpoint);
 	msg.currentCheckpointX = currentCheckpoint.first;
@@ -75,29 +74,29 @@ void Resident::checkStatus(){
 }
 
 void Resident::medicationCallback(const ros::TimerEvent&){
-	stateQueue.addToPQ(medication);
+	//stateQueue.addToPQ(medication);
 }
 void Resident::hungerCallback(const ros::TimerEvent&){
-	stateQueue.addToPQ(hungry);
+	//stateQueue.addToPQ(hungry);
 }
 void Resident::caregiverServicesCallback(const ros::TimerEvent&){
 	//stateQueue.addToPQ(caregiver);
 }
 void Resident::caregiverServicesDoneCallback(const ros::TimerEvent&){
-	stateQueue.removeState(caregiver);
+	//stateQueue.removeState(caregiver);
 }
 void Resident::wakeCallback(const ros::TimerEvent&){
 	stateQueue.removeState(tired);
 	ROS_INFO ("Wake up!");
 }
 void Resident::sleepCallback(const ros::TimerEvent&){
-	stateQueue.addToPQ(tired);
+//	stateQueue.addToPQ(tired);
 }
 void Resident::friendsCallback(const ros::TimerEvent&){
-	stateQueue.addToPQ(friends);
+//	stateQueue.addToPQ(friends);
 }
 void Resident::friendsDoneCallback(const ros::TimerEvent&){
-	stateQueue.removeState(friends);
+//	stateQueue.removeState(friends);
 }
 
 
@@ -133,14 +132,19 @@ void Resident::friend_callback(const std_msgs::String::ConstPtr& msg)
 void Resident::assistant_callback(se306_project1::AssistantMsg msg)
 {
 
-	ROS_INFO("in call back");
+
 	if (msg.FoodDelivered == true) {
-		hunger = 100;
+		hunger = 0;
 		stateQueue.removeState(hungry);
+		ROS_INFO("FED");
 	}
 	if (msg.ResidentMedicated == true) {
 		stateQueue.removeState(medication);
 		ROS_INFO("Medicated");
+	}
+	if (msg.ResidentEntertained == true) {
+		boredom = 0;
+		stateQueue.removeState(bored);
 	}
 	//This is the callback function to process laser scan messages
 	//you can access the range data from msg.ranges[i]. i = sample number
@@ -211,9 +215,12 @@ int Resident::run(int argc, char *argv[]) {
 
 	//velocity of this RobotNode
 	geometry_msgs::Twist RobotNode_cmdvel;
-	//stateQueue.addToPQ(medication);
+	//stateQueue.addToPQ(hungry);
+	//move("ResidentSofa");
+
 	while (ros::ok())
 	{
+
 		//messages to stage
 		RobotNode_cmdvel.linear.x = linear_x;
 		RobotNode_cmdvel.angular.z = angular_z;

@@ -14,8 +14,8 @@
 *	@param msg A custom ResidentMsg message that contains information about the resident's current status.
 */
 void Nurse2::delegate(se306_project1::ResidentMsg msg) {
-	if (msg.state == "sill") { // seriously ill - emergency
-		doHospitalise();
+	if (msg.state == "emergency") { // seriously ill - emergency
+		doHospitalise(msg);
 	} else {
 		readyToHospitalise = false;
 	}
@@ -25,24 +25,19 @@ void Nurse2::delegate(se306_project1::ResidentMsg msg) {
 *	@brief Takes the resident to hospital 
 *	(non-doctor-induced emergency, despite the function name...)
 */
-void Nurse2::doHospitalise() {
+void Nurse2::doHospitalise(se306_project1::ResidentMsg msg) {
 
-	double lastCheckpointX = shortestPath.at(shortestPath.size()-1).first;
-	double lastCheckpointY = shortestPath.at(shortestPath.size()-1).second;
+	double distanceFromCheckpoint = sqrt(pow((msg.currentCheckpointX - px),2) + pow((msg.currentCheckpointY - py),2));
 
-	double distanceFromCheckpoint = sqrt(pow((lastCheckpointX - px),2) + pow((lastCheckpointY - py),2));
-	
-	if (readyToHospitalise == false) {
-		// move(<toResident>);
-		if (distanceFromCheckpoint < 0.5) { // next to resident
-			readyToHospitalise = true;
-		}
+	move(msg.currentCheckpoint);
+	if (distanceFromCheckpoint < 15) { // next to nurse1
+		stopMoving();
+        readyToHospitalise = true;
 	}
 	
 	if (readyToHospitalise == true) { // go back outside once Nurse is next to resident
-		// move(<outsideHouse>);
+		move("Nurse2Origin");
 	}
-
 }
 
 /**

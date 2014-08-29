@@ -14,7 +14,7 @@ const char* nameArr[] = {
 		"Shower","BathroomCentre","BedSouthWest","BedSouthEast","BedNorthEast","ResidentOrigin", "Assistant1Origin", "Assistant2Origin",
 		"DoctorOrigin","Nurse1Origin","Nurse2Origin","Caregiver1Origin","Friend1Origin","Friend2Origin","Friend3Origin",
 		"Friend1Sofa", "Friend2Sofa", "ResidentSofa", "Friend3Sofa", "SofasUpper", "SofasLower", "NearShower",
-		"Caregiver2Origin"
+		"Caregiver2Origin", "SofasLeft"
 };
 
 /**
@@ -25,7 +25,7 @@ int checkpoints[][2] = {
 	{-27,-40},{-20,-40},{-28,-12},{-18,-18},{0,-18},{0,-12},{6,-24},{6,-28},{24,-28},{24,-24},{0,6},{24,-10},{20,-6},{0,20},
 	{4,22},{0,18},{-24,18},{-26,22},{-18,22},{-32,45},{-24,36},{6,30},{26,30},{30,45},
 	{26,48}, {17,17}, {32,18}, {-33,-46}, {-36,-48}, {-30,-48}, {-8,-46}, {-20,-46}, {-23,-46}, {-20,-48}, {-24,6}, {-14,6},
-	{-16,0}, {-16,-8}, {-28,4}, {-16,-16}, {-32,34}, {-6,-42}
+	{-16,0}, {-16,-8}, {-28,4}, {-16,-16}, {-32,34}, {-6,-42}, {-28,-8}
 };
 
 std::vector<std::string> checkpointNames(begin(nameArr), end(nameArr)); /*!< Vector of checkpoint names. See nameArr[]. */
@@ -60,10 +60,15 @@ E paths[] = {
 	 E("Assistant1Origin","BedroomEntranceWest"), E("Assistant2Origin","Assistant1Origin"), E("BedSouthWest","BedroomEntranceWest"),
 	 E("AboveSofa", "HouseCentre"),
 	 E("Friend1Sofa","Friend2Sofa"), E("Friend2Sofa","ResidentSofa"),E("ResidentSofa","Friend3Sofa"),
-	 E("Friend1Sofa","SofasUpper"), E("SofasUpper","LivingRoomNorthWest"), E("LivingRoomNorthWest","SofasLower"),
+	 E("Friend1Sofa","SofasUpper"), E("SofasUpper","SofasLeft"), E("LivingRoomNorthWest","SofasLower"),
 	 E("SofasLower","LivingRoomNorthEast"), E("SofasLower","CentrePassageNorth"), E("SofasLower","Friend3Sofa"),
 	 E("Shower","NearShower"), E("NearShower","BathroomCentre"),
-	 E("Caregiver2Origin","FrontDoorEast")
+	 E("Caregiver2Origin","FrontDoorEast"), E("SofasLeft","LivingRoomNorthWest"),
+	 E("ResidentSofa","SofasLower"), E("CouchesNorthEast","ResidentSofa"),
+	 E("CentrePassageSouth","HouseCentre"), E("Assistant1Origin","CouchesNorthCentre"),
+	 E("Assistant2Origin","CouchesNorthCentre"), E("CentrePassageSouth","CouchesNorthEast"),
+	 E("CentrePassageNorth","CouchesNorthEast"), E("FrontDoorEast","CentrePassageSouth"),
+	 E("FrontDoorWest","CentrePassageNorth")
 }; /*!< Defines edges between checkpoints */
 
 /* -- Temporary solution - two maps of co-ordinates to names and names to co-ordinates --*/
@@ -128,6 +133,10 @@ std::vector<std::pair<double, double> > CheckPointGraph::shortestPath( std::stri
 	std::reverse(a.begin(), a.end()); // as search starts from goal; we can access only predecessors, not successors
 
     return a;
+}
+
+std::pair<double,double> CheckPointGraph::getCoords(std::string name) {
+	return c.at(name);
 }
 
 // checked

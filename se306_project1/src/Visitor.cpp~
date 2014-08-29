@@ -7,17 +7,14 @@
 *	May be simple - e.g. toggling visitor visibility, or moving to the door.
 *	@returns true if this has moved next to the Resident
 */
-bool Visitor::visitResident() {
-	double lastCheckpointX = shortestPath.at(shortestPath.size()-1).first;
-	double lastCheckpointY = shortestPath.at(shortestPath.size()-1).second;
+bool Visitor::visitResident(se306_project1::ResidentMsg msg) {
+	double distanceFromCheckpoint = sqrt(pow((msg.currentCheckpointX - px),2) + pow((msg.currentCheckpointY - py),2));
 
-	double distanceFromCheckpoint = sqrt(pow((lastCheckpointX - px),2) + pow((lastCheckpointY - py),2));
-	
-	// move(<toResident>); // maybe move to living room area instead?
-	if (distanceFromCheckpoint < 0.5) { // next to resident
-		return true;
-	}
-	
+	move(msg.currentCheckpoint);
+	if (distanceFromCheckpoint < 5) {
+		stopMoving();
+        return true;
+    }
 	return false;
 }
 

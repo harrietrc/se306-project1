@@ -19,7 +19,7 @@
 
 
 void Friend::friendsDoneCallback(const ros::TimerEvent&){
-
+	move("Friend1Origin");
 }
 
 /**
@@ -30,11 +30,9 @@ void Friend::friendsDoneCallback(const ros::TimerEvent&){
 void Friend::delegate(se306_project1::ResidentMsg msg) {
 	if (msg.state == "emergency") {
 		emergency = true; // required variable if timing/scheduling is done within this class
-	} else if (msg.state == "friends") { // resident state when it needs friends to converse with
-		emergency = false; // required variable if timing/scheduling is done within this class
-		if (Visitor::visitResident() == true) { // next to resident
-			finishedConvo = Visitor::doConverse();
-		}
+	}
+	if (msg.state == "friends") { // resident state when it needs friends to converse with
+		move("Friend1Sofa");
 	}
 }
 
@@ -79,11 +77,6 @@ int Friend::run(int argc, char *argv[])
 	//velocity of this RobotNode
 	geometry_msgs::Twist RobotNode_cmdvel;
 
-	move("Friend1Sofa");
-
-	for (int i = 0; i < shortestPath.size(); i++){
-		ROS_INFO ("%s", g.getCheckpointName(shortestPath.at(i)).c_str());
-	}
 
 	while (ros::ok())
 	{
