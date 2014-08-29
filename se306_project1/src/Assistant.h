@@ -1,5 +1,8 @@
 #include "std_msgs/String.h"
 #include "Agent.h"
+#include "se306_project1/AssistantMsg.h"
+#include "se306_project1/ResidentMsg.h"
+
 
 /**
 *	@brief Class representing the Assistant.

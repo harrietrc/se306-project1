@@ -102,7 +102,11 @@ nurse( pose [ -30.000 -48.000 0.000 180.000 ] name "r6" color "yellow")	#nurse
 friends( pose [ -23.000 -46.000 0.000 -180.000 ] name "r7" color "white")	#friends
 friends( pose [ -20.000 -48.000 0.000 -90.000 ] name "r8" color "white")	#friends
 
+<<<<<<< HEAD
+door( pose [ -20.5 -37.5 0 0 ] name "r10" color "light steel blue" size [12 1.5 12])			#sliding door
+=======
 #door( pose [ -20.5 -37.5 0 0 ] name "r8" color "light steel blue" size [12 1.5 12])			#sliding door
+>>>>>>> 64d668d5c0f5f3fef82335324b429b4384d3abd8
 
 ########## Furniture ##########
 

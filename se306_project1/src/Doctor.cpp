@@ -87,12 +87,11 @@ int Doctor::run(int argc, char *argv[])
 
 	//advertise() function will tell ROS that you want to publish on a given topic_
 	//to stage
-	ros::Publisher RobotNode_stage_pub = n.advertise<geometry_msgs::Twist>("robot_0/cmd_vel",1000); 
-	Doctor_state_pub = n.advertise<se306_project1::DoctorMsg>("doctorStatus",1000);
-
+	ros::Publisher RobotNode_stage_pub = n.advertise<geometry_msgs::Twist>("robot_4/cmd_vel",1000);
+	ros::Publisher Doctor_pub = n.advertise<se306_project1::DoctorMsg>("doctorStatus",1000);
 
 	//subscribe to listen to messages coming from stage
-	ros::Subscriber StageOdo_sub = n.subscribe("robot_0/odom",1000, &Agent::StageOdom_callback, dynamic_cast<Agent*>(this));
+	ros::Subscriber StageOdo_sub = n.subscribe("robot_4/odom",1000, &Agent::StageOdom_callback, dynamic_cast<Agent*>(this));
 
 	// Doctor subscribes to the Resident status topic
 	ros::Subscriber resident_sub = n.subscribe<se306_project1::ResidentMsg>("residentStatus",1000, &Doctor::delegate, this);

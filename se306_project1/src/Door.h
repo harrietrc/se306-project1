@@ -13,6 +13,7 @@ class Door
 		double py; /*!< y position of the robot */
 		
 		bool opened = false;
+        int waitTime = 0;
 		
 		std::string resStateWhenOpened = "";
 		
@@ -20,7 +21,7 @@ class Door
 		void StageOdom_callback(nav_msgs::Odometry msg);
 		void delegate(se306_project1::ResidentMsg msg);
 		void open();
-		void close();
+		void close(int waitTime);
 
 	public:
 		int run(int argc, char *argv[]);
