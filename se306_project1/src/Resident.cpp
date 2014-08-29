@@ -29,7 +29,7 @@ void Resident::publishStatus(ros::Publisher Resident_state_pub) {
 	// Creating a message for residentStatus
 	residentState = stateQueue.checkCurrentState();
 	se306_project1::ResidentMsg msg;
-	//residentState = "hungry";    //hardcoded state
+	residentState = "friends";    //hardcoded state
 	msg.state = residentState;
 	msg.currentCheckpoint = g.getCheckpointName(currentCheckpoint);
 	msg.currentCheckpointX = currentCheckpoint.first;
@@ -235,7 +235,7 @@ int Resident::run(int argc, char *argv[]) {
 			checkStatus();
 			publishStatus(Resident_state_pub);
 			residentState = stateQueue.checkCurrentState();
-			ROS_INFO("State is: %s",residentState.c_str());
+			//ROS_INFO("State is: %s",residentState.c_str());
 		}
 
 		ros::spinOnce();

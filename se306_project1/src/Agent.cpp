@@ -96,8 +96,9 @@ void Agent::move(std::string goalName){
 		}else{
 
 			nextCheckpoint = shortestPath.at(shortestPathIndex);
-			checkpointAngle = calculateGoalAngle(nextCheckpoint);
 
+			checkpointAngle = calculateGoalAngle(nextCheckpoint);
+			ROS_INFO("Checkpoint Angle: %f", checkpointAngle);
 			isClockwise = isTurnClockwise();
 		}
 
@@ -200,6 +201,9 @@ double Agent::calculateGoalAngle(pair<double, double> goalCheckpoint){
 	//Finding the vector that the robot is facing and the goal vector
 	double goalVectorX = goalCheckpoint.first - px;
 	double goalVectorY = goalCheckpoint.second - py;
+
+	ROS_INFO("px: %f", px);
+	ROS_INFO("py: %f", py);
 
 	double goalAngle = atan2(goalVectorY, goalVectorX); //pi <= goalAngle < -pi
 
