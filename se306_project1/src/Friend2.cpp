@@ -24,9 +24,18 @@ void Friend2::delegate(se306_project1::ResidentMsg msg) {
 		emergency = true; // required variable if timing/scheduling is done within this class
 	} else if (msg.state == "friends") { // resident state when it needs friends to converse with
 		emergency = false; // required variable if timing/scheduling is done within this class
-		if (Visitor::visitResident() == true) { // next to resident
+
+		/*double distanceFromCheckpoint = sqrt(pow((msg.currentCheckpointX - px),2) + pow((msg.currentCheckpointY - py),2));
+	    move(msg.currentCheckpoint);
+	    if (distanceFromCheckpoint < 20) { // next to friend 1
+		    stopMoving();
 			finishedConvo = Visitor::doConverse();
+            move("Friend2Origin"); // go back to origin
 		}
+        */
+        move("Friend2Sofa");
+        finishedConvo = Visitor::doConverse();
+        move("Friend2Origin"); // go back to origin
 	}
 }
 
@@ -52,13 +61,13 @@ int Friend2::run(int argc, char *argv[])
 
 	//advertise() function will tell ROS that you want to publish on a given topic_
 	//to stage
-	ros::Publisher RobotNode_stage_pub = n.advertise<geometry_msgs::Twist>("robot_0/cmd_vel",1000); 
+	ros::Publisher RobotNode_stage_pub = n.advertise<geometry_msgs::Twist>("robot_8/cmd_vel",1000);
 
 	//publish message to Resident once conversation is over
 	ros::Publisher friend_pub = n.advertise<std_msgs::String>("visitorConvo",1000);
 
 	//subscribe to listen to messages coming from stage
-	ros::Subscriber StageOdo_sub = n.subscribe("robot_0/odom",1000, &Agent::StageOdom_callback, dynamic_cast<Agent*>(this));
+	ros::Subscriber StageOdo_sub = n.subscribe("robot_8/odom",1000, &Agent::StageOdom_callback, dynamic_cast<Agent*>(this));
 
 	//custom Resident subscriber to "resident/state"
 	ros::Subscriber resident_sub = n.subscribe<se306_project1::ResidentMsg>("residentStatus",1000, &Friend2::delegate, this);

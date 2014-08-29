@@ -31,6 +31,7 @@ rosrun stage_ros stageros world/house.world &
 #rosrun se306_project1 Main
 rosrun se306_project1 Resident &
 rosrun se306_project1 Assistant &
+rosrun se306_project1 Assistant1 &
 #rosrun se306_project1 caregiver &
 for i in `seq 1 5`; do
     sleep 200000

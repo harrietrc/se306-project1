@@ -31,6 +31,8 @@ rosbuild_genmsg()
 
 rosbuild_add_executable(Resident src/Resident.cpp src/time_conversion.cpp src/Agent.cpp src/CheckPointGraph.cpp src/priorityQueue.cpp)
 rosbuild_add_executable(Assistant src/Assistant.cpp src/time_conversion.cpp src/Agent.cpp src/CheckPointGraph.cpp)
+rosbuild_add_executable(Assistant1 src/Assistant1.cpp src/time_conversion.cpp src/Agent.cpp src/CheckPointGraph.cpp)
+
 rosbuild_add_executable(Doctor src/Doctor.cpp src/Agent.cpp src/Visitor.cpp src/CheckPointGraph.cpp)
 rosbuild_add_executable(Caregiver src/Caregiver.cpp src/Agent.cpp src/CheckPointGraph.cpp)
 rosbuild_add_executable(Friend src/Friend.cpp src/Agent.cpp src/Visitor.cpp src/time_conversion.cpp src/CheckPointGraph.cpp)

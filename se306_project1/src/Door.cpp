@@ -112,10 +112,10 @@ int Door::run(int argc, char *argv[])
 
 	//advertise() function will tell ROS that you want to publish on a given topic_
 	//to stage
-	ros::Publisher RobotNode_stage_pub = n.advertise<geometry_msgs::Twist>("robot_0/cmd_vel",1000); 
+	ros::Publisher RobotNode_stage_pub = n.advertise<geometry_msgs::Twist>("robot_10/cmd_vel",1000);
 
 	//subscribe to listen to messages coming from stage
-	ros::Subscriber StageOdo_sub = n.subscribe("robot_0/odom",1000, &Door::StageOdom_callback, this);
+	ros::Subscriber StageOdo_sub = n.subscribe("robot_10/odom",1000, &Door::StageOdom_callback, this);
 
 	// Door subscribes to the Resident status topic
 	ros::Subscriber resident_sub = n.subscribe<se306_project1::ResidentMsg>("residentStatus",1000, &Door::delegate, this);
