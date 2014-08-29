@@ -86,8 +86,8 @@ class ros_gui(Tkinter.Tk):
 		posText.grid(column=0, row=4, sticky="W")
         
         # Position values e.g.(x,y)
-		posVal = Tkinter.Label(statusFrame, text="(x,y)") #Dummy at the moment
-		posVal.grid(column=1, row=4, sticky="E", padx=2)
+		self.posVal = Tkinter.Label(statusFrame, text="(x,y)")
+		self.posVal.grid(column=1, row=4, sticky="E", padx=2)
         
         # State of Resident (Text)
 		stateText = Tkinter.Label(statusFrame, text="State : ")
@@ -167,8 +167,8 @@ class ros_gui(Tkinter.Tk):
 		self.healthFiller.config(width=200*(1-(float(dataList[0])/100)))
 		self.hungerFiller.config(width=200*(1-(float(dataList[1])/100)))
 		self.boredomFiller.config(width=200*(1-(float(dataList[2])/100)))
-		self.stateResident.config(text=dataList[3])
-
+		self.stateResident.config(text=dataList[5])
+		self.posVal.config(text="x="dataList[3]+", y="+dataList[4])
 
 	# Function that changes width of the bars
 	def decreaseHealth(self, value):

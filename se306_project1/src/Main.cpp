@@ -36,8 +36,8 @@ int main(int argc, char** argv) {
 	nodeList[agentType] = nodeList[agentType] + agentFactory.createAgent(agentType, getNodeNumber());
 	nodeList[agentType] = nodeList[agentType] + agentFactory.createAgent(agentType, getNodeNumber());
 
-	agentType = AgentConst::FRIEND;
-	nodeList[agentType] = nodeList[agentType] + agentFactory.createAgent(agentType, getNodeNumber());
+	//agentType = AgentConst::FRIEND;
+	//nodeList[agentType] = nodeList[agentType] + agentFactory.createAgent(agentType, getNodeNumber());
 	agentType = AgentConst::FRIEND1;
 	nodeList[agentType] = nodeList[agentType] + agentFactory.createAgent(agentType, getNodeNumber());
 	agentType = AgentConst::FRIEND2;

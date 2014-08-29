@@ -235,7 +235,7 @@ int Resident::run(int argc, char *argv[]) {
 	
 		//message to pythonGUI
 		std::stringstream guiMsgString;
-		guiMsgString << health << " " << hunger << " " << boredom << " " << residentState;
+		guiMsgString << health << " " << hunger << " " << boredom << " " << px << " " << py << " " << residentState;
 		GUImsg.data = guiMsgString.str();
 
 		//publish the message
