@@ -19,4 +19,7 @@ class Caregiver1 : public Visitor {
 
 	public:
 		int run(int argc, char *argv[]);
+		Caregiver1() {
+			originName = "Caregiver1Origin";
+		}
 };

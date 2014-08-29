@@ -14,7 +14,7 @@
 *	@param msg A custom ResidentMsg message that contains information about the resident's current status.
 */
 void Nurse2::delegate(se306_project1::ResidentMsg msg) {
-	if (msg.state == "sill") { // seriously ill - emergency
+	if (msg.state == "emergency") { // seriously ill - emergency
 		doHospitalise(msg);
 	} else {
 		readyToHospitalise = false;
