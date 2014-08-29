@@ -12,7 +12,9 @@
 
 
 void Friend1::friendsDoneCallback(const ros::TimerEvent&){
+
 	move("Friend1Origin");
+
 }
 
 /**

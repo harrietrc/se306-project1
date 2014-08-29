@@ -20,7 +20,7 @@ void Doctor::delegate(se306_project1::ResidentMsg msg) {
 		doHeal(msg);
 	}
 
-	if (msg.state == "sill") { // seriously ill - emergency
+	if (msg.state == "emergency") { // seriously ill - emergency
 		doHospitalise(msg);
 	}
 }
@@ -118,7 +118,7 @@ int Doctor::run(int argc, char *argv[])
 	ros::Subscriber resident_sub = n.subscribe<se306_project1::ResidentMsg>("residentStatus",1000, &Doctor::delegate, this);
 	
 	// Resident subscribes to this topic.
-	ros::Publisher doctor_pub = n.advertise<se306_project1::DoctorMsg>("healResident",1000);
+	ros::Publisher doctor_pub = n.advertise<se306_project1::DoctorMsg>("doctorStatus",1000);
 
 	////messages
 	//velocity of this RobotNode

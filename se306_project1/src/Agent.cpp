@@ -63,33 +63,43 @@ void Agent::setPath(std::string start, std::string end) {
 
 
 void Agent::move(std::string goalName){
+	int temp = 0;
 
 	if (isMoving == false){
 		isMoving = true;
 	//	currentCheckpoint.first = 17; // can get rid of this
 	//	currentCheckpoint.second = 17; // ditto
 
-		//Get the path stuff
-		std::string cname = g.getCheckpointName(currentCheckpoint);
-		Agent::setPath(cname, goalName);
+		//Get the path stuff);
 
-	/*	 for (int i=0; i<shortestPath.size();i++) {
+		std::string cname = g.getCheckpointName(currentCheckpoint);
+		ROS_INFO("got ceckpoint");
+
+		Agent::setPath(cname, goalName);
+		ROS_INFO("path");
+
+		 for (int i=0; i<shortestPath.size();i++) {
 			 ROS_INFO("checkpoint x: %f",shortestPath[i].first);
 			 ROS_INFO("checkpoint y: %f",shortestPath[i].second);
-
+			 temp =i;
 		 }
-		 */
+			ROS_INFO("shortestPathsize: %d",temp);
+
 	}
 
 	pair<double, double> nextCheckpoint = shortestPath.at(shortestPathIndex);
 	if (currentCheckpoint.first == nextCheckpoint.first &&
 			currentCheckpoint.second == nextCheckpoint.second){
 		shortestPathIndex++;
-		if (shortestPathIndex >= shortestPath.size()){
+		ROS_INFO("shortestPathIndex: %f",shortestPathIndex);
+		ROS_INFO("shortestPathsize: %d",temp);
+
+		if (shortestPathIndex >= temp ){
 			shortestPathIndex = 0;
 			isMoving = false;
 			return;
 		}else{
+
 			nextCheckpoint = shortestPath.at(shortestPathIndex);
 
 			checkpointAngle = calculateGoalAngle(nextCheckpoint);

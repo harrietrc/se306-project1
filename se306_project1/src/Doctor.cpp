@@ -10,18 +10,18 @@
 #include "math.h"
 #include "Doctor.h"
 
+
 /**
 *	@brief Callback function that unpacks and processes resident status messages.
 *	Doctor should subscribe to the ResidentMsg topic in order for this callback to be called. ResidentMsg is published by the Resident.
 *	@param msg A custom ResidentMsg message that contains information about the resident's current status.
 */
 void Doctor::delegate(se306_project1::ResidentMsg msg) {
-	if (msg.state == "ill") { // ill
+	if (msg.state == "healthLow") { // ill
 		doHeal(msg);
-	}
-
-	if (msg.state == "emergency") { // seriously ill - emergency
-		doHospitalise(msg);
+	}else if (msg.state == "emergency") { // seriously ill - emergency
+	}else{
+		move("DoctorOrigin");
 	}
 }
 
@@ -29,28 +29,28 @@ void Doctor::delegate(se306_project1::ResidentMsg msg) {
 *	@brief Medicates/heals/diagnoses resident, improving their health.
 *	@returns true if behaviour is successful.
 */
-bool Doctor::doHeal(se306_project1::ResidentMsg msg) {
-	
-	if (healing == false && readyToHeal == false) {
-		ROS_INFO("Doctor is on the way"); // print once that the doctor is coming
-		healing = true;
-	}
-	if (healing == true && readyToHeal == false) {
-        double distanceFromCheckpoint = sqrt(pow((msg.currentCheckpointX - px),2) + pow((msg.currentCheckpointY - py),2));
+void Doctor::doHeal(se306_project1::ResidentMsg msg) {
+	ROS_INFO("here");
 
-	    move(msg.currentCheckpoint);
-	    if (distanceFromCheckpoint < 5) { // next to resident
-		    stopMoving();
-			readyToHeal = true;
+	double distanceFromCheckpoint = sqrt(pow((msg.currentCheckpointX - px),2) + pow((msg.currentCheckpointY - py),2));
+
+		move(msg.currentCheckpoint);
+
+		if (distanceFromCheckpoint < 5) {
+			stopMoving();
+			isHealed == true;
+			isFacingCorrectly = false;
+
+			se306_project1::DoctorMsg dmsg;
+			dmsg.ResidentHealed = true;
+			Doctor_state_pub.publish(dmsg);
+
+			currentCheckpoint.first = msg.currentCheckpointX;
+			currentCheckpoint.second = msg.currentCheckpointY;
+			//move("Assistant1Origin");
+			isHealed == false;
+
 		}
-	}
-
-	if (readyToHeal == true && healing == true) { // Resident should be healed by now so go back outside
-		healing = false;
-		move("DoctorOrigin");
-	}
-	
-	return readyToHeal; // This method doesn't have to return a bool but idk
 }
 
 /**
@@ -58,30 +58,9 @@ bool Doctor::doHeal(se306_project1::ResidentMsg msg) {
 *	(non-doctor-induced emergency, despite the function name...)
 *	@returns true if behaviour is successful.
 */
-bool Doctor::doHospitalise(se306_project1::ResidentMsg msg) {
+void Doctor::hospitalise(se306_project1::ResidentMsg msg) {
 
-	if (hospitalise == false && hospitalise == false) {
-		// behaviour is that when the resident is seriously ill, the doctor including two nurses will come to the resident
-		// once the doctor is next to the resident, they will all move together back outside of the house
-		ROS_INFO("Doctor and nurses are on the way to take Resident to the hospital"); // print once that the doctor is coming
-		hospitalise = true;
-	}
-	if (hospitalise == true && readyToHospitalise == false) {
-		double distanceFromCheckpoint = sqrt(pow((msg.currentCheckpointX - px),2) + pow((msg.currentCheckpointY - py),2));
 
-	    move(msg.currentCheckpoint);
-	    if (distanceFromCheckpoint < 5) { // next to resident
-		    stopMoving();
-			readyToHospitalise = true;
-		}
-	}
-	
-	if (readyToHospitalise == true && hospitalise == true) { // go back outside once Doctor is next to resident
-		hospitalise = false;
-		move("DoctorOrigin");
-	}
-	
-	return readyToHospitalise; // This method doesn't have to return a bool but idk
 }
 
 /**
@@ -110,7 +89,8 @@ int Doctor::run(int argc, char *argv[])
 	//advertise() function will tell ROS that you want to publish on a given topic_
 	//to stage
 	ros::Publisher RobotNode_stage_pub = n.advertise<geometry_msgs::Twist>("robot_0/cmd_vel",1000); 
-	ros::Publisher Doctor_pub = n.advertise<se306_project1::DoctorMsg>("doctorStatus",1000);
+	Doctor_state_pub = n.advertise<se306_project1::DoctorMsg>("doctorStatus",1000);
+
 
 	//subscribe to listen to messages coming from stage
 	ros::Subscriber StageOdo_sub = n.subscribe("robot_0/odom",1000, &Agent::StageOdom_callback, dynamic_cast<Agent*>(this));
@@ -119,7 +99,7 @@ int Doctor::run(int argc, char *argv[])
 	ros::Subscriber resident_sub = n.subscribe<se306_project1::ResidentMsg>("residentStatus",1000, &Doctor::delegate, this);
 	
 	// Resident subscribes to this topic.
-	ros::Publisher doctor_pub = n.advertise<se306_project1::DoctorMsg>("healResident",1000);
+	ros::Publisher doctor_pub = n.advertise<se306_project1::DoctorMsg>("doctorStatus",1000);
 
 	////messages
 	//velocity of this RobotNode
@@ -129,8 +109,8 @@ int Doctor::run(int argc, char *argv[])
 	while (ros::ok())
 	{
 		//messages to stage
-		//RobotNode_cmdvel.linear.x = linear_x;
-		//RobotNode_cmdvel.angular.z = angular_z;
+		RobotNode_cmdvel.linear.x = linear_x;
+		RobotNode_cmdvel.angular.z = angular_z;
 			
 		//publish the message
 		RobotNode_stage_pub.publish(RobotNode_cmdvel);
@@ -140,18 +120,6 @@ int Doctor::run(int argc, char *argv[])
 		* heal = heal resident if true
 		* hospitalise = hospitalise resident if true
 		*/
-		if (readyToHeal == true) {
-			dMsg.heal = true;
-			dMsg.hospitalise = false;
-			readyToHeal = false;
-			doctor_pub.publish(dMsg);
-		} else if (readyToHospitalise == true) {
-			dMsg.heal = false;
-			dMsg.hospitalise = true;
-			readyToHospitalise = false;
-			doctor_pub.publish(dMsg);
-		}
-		
 		ros::spinOnce();
 		loop_rate.sleep();
 	}

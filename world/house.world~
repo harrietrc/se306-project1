@@ -102,7 +102,7 @@ friends( pose [ -20.000 -46.000 0.000 90.000 ] name "r7" color "black")	#friends
 friends( pose [ -23.000 -46.000 0.000 90.000 ] name "r8" color "white")	#friends
 friends( pose [ -20.000 -48.000 0.000 90.000 ] name "r9" color "white")	#friends
 
-door( pose [ -20.5 -37.5 0 0 ] name "r8" color "light steel blue" size [12 1.5 12])			#sliding door
+#door( pose [ -20.5 -37.5 0 0 ] name "r8" color "light steel blue" size [12 1.5 12])			#sliding door
 
 ########## Furniture ##########
 
