@@ -13,15 +13,68 @@ Class for the implementation of visitors -\/ i.\-e. Caregivers, Nurses, Doctors,
 Inheritance diagram for Visitor\-:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=3.000000cm]{classVisitor}
+\includegraphics[height=12.000000cm]{classVisitor}
 \end{center}
 \end{figure}
-\subsection*{Additional Inherited Members}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classVisitor_a39bbfe26aece491b11f47a2d1baca377}{virtual int {\bfseries run} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})=0}\label{classVisitor_a39bbfe26aece491b11f47a2d1baca377}
+
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{classVisitor_ad32450b21924b7d581b99c9e1c20c829}{visit\-Resident} ()
+\begin{DoxyCompactList}\small\item\em Visit the resident. May be simple -\/ e.\-g. toggling visitor visibility, or moving to the door. \end{DoxyCompactList}\item 
+bool \hyperlink{classVisitor_a0dc0a203978b84f73a887d1f1de54225}{do\-Converse} ()
+\begin{DoxyCompactList}\small\item\em Initiates conversation with the resident. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classVisitor_a9379136efaf219f1c539d0b0a6cce429}{bool {\bfseries emergency} = false}\label{classVisitor_a9379136efaf219f1c539d0b0a6cce429}
+
+\item 
+\hypertarget{classVisitor_a2be4e2c43d571a46668b8c22abc664bc}{bool {\bfseries finished\-Convo} = false}\label{classVisitor_a2be4e2c43d571a46668b8c22abc664bc}
+
+\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
 Class for the implementation of visitors -\/ i.\-e. Caregivers, Nurses, Doctors, Friends, and Relatives. 
 
-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\subsection{Member Function Documentation}
+\hypertarget{classVisitor_a0dc0a203978b84f73a887d1f1de54225}{\index{Visitor@{Visitor}!do\-Converse@{do\-Converse}}
+\index{do\-Converse@{do\-Converse}!Visitor@{Visitor}}
+\subsubsection[{do\-Converse}]{\setlength{\rightskip}{0pt plus 5cm}bool Visitor\-::do\-Converse (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}}\label{classVisitor_a0dc0a203978b84f73a887d1f1de54225}
+
+
+Initiates conversation with the resident. 
+
+\begin{DoxyReturn}{Returns}
+true if the behaviour completes successfully. 
+\end{DoxyReturn}
+\hypertarget{classVisitor_ad32450b21924b7d581b99c9e1c20c829}{\index{Visitor@{Visitor}!visit\-Resident@{visit\-Resident}}
+\index{visit\-Resident@{visit\-Resident}!Visitor@{Visitor}}
+\subsubsection[{visit\-Resident}]{\setlength{\rightskip}{0pt plus 5cm}bool Visitor\-::visit\-Resident (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}}\label{classVisitor_ad32450b21924b7d581b99c9e1c20c829}
+
+
+Visit the resident. May be simple -\/ e.\-g. toggling visitor visibility, or moving to the door. 
+
+\begin{DoxyReturn}{Returns}
+true if this has moved next to the \hyperlink{classResident}{Resident} 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
 \item 
-se306\-\_\-project1/src/Visitor.\-h\end{DoxyCompactItemize}
+se306\-\_\-project1/src/Visitor.\-h\item 
+se306\-\_\-project1/src/Visitor.\-cpp\end{DoxyCompactItemize}

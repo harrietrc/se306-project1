@@ -19,13 +19,17 @@ Inheritance diagram for Nurse\-:\begin{figure}[H]
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \hyperlink{classNurse_a3ff47edb35f171a538fe62b3abdca948}{Stage\-Odom\-\_\-callback} (nav\-\_\-msgs\-::\-Odometry msg)
-\begin{DoxyCompactList}\small\item\em Updates the \hyperlink{classNurse}{Nurse}'s x position, y position, and angle to reflect its current pose. \end{DoxyCompactList}\item 
-void \hyperlink{classNurse_aa709fbc5dc09b8db82db59c1a2829d4a}{Stage\-Laser\-\_\-callback} (sensor\-\_\-msgs\-::\-Laser\-Scan msg)
-\begin{DoxyCompactList}\small\item\em Callback function to process laser scan messsages. You can access the range data from msg.\-ranges\mbox{[}i\mbox{]}. i = sample number. \end{DoxyCompactList}\item 
 \hypertarget{classNurse_ab58da68573cbe6f62dab9298acfd6ba6}{int \hyperlink{classNurse_ab58da68573cbe6f62dab9298acfd6ba6}{run} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})}\label{classNurse_ab58da68573cbe6f62dab9298acfd6ba6}
 
 \begin{DoxyCompactList}\small\item\em Main function for the \hyperlink{classNurse}{Nurse} process. Controls node setup and periodic events. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classNurse_aa84201e0e9fd8628847a720f74de68b5}{void \hyperlink{classNurse_aa84201e0e9fd8628847a720f74de68b5}{do\-Hospitalise} ()}\label{classNurse_aa84201e0e9fd8628847a720f74de68b5}
+
+\begin{DoxyCompactList}\small\item\em Takes the resident to hospital (non-\/doctor-\/induced emergency, despite the function name...) \end{DoxyCompactList}\item 
+void \hyperlink{classNurse_a5791a1e191c2025b0a7d3522fe101f64}{delegate} (\hyperlink{structse306__project1_1_1ResidentMsg__}{se306\-\_\-project1\-::\-Resident\-Msg} msg)
+\begin{DoxyCompactList}\small\item\em Callback function that unpacks and processes resident status messages. \hyperlink{classNurse}{Nurse} should subscribe to the Resident\-Msg topic in order for this callback to be called. Resident\-Msg is published by the \hyperlink{classResident}{Resident}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Additional Inherited Members}
 
 
@@ -33,52 +37,22 @@ void \hyperlink{classNurse_aa709fbc5dc09b8db82db59c1a2829d4a}{Stage\-Laser\-\_\-
 Class for \hyperlink{classNurse}{Nurse} nodes. 
 
 \subsection{Member Function Documentation}
-\hypertarget{classNurse_aa709fbc5dc09b8db82db59c1a2829d4a}{\index{Nurse@{Nurse}!Stage\-Laser\-\_\-callback@{Stage\-Laser\-\_\-callback}}
-\index{Stage\-Laser\-\_\-callback@{Stage\-Laser\-\_\-callback}!Nurse@{Nurse}}
-\subsubsection[{Stage\-Laser\-\_\-callback}]{\setlength{\rightskip}{0pt plus 5cm}void Nurse\-::\-Stage\-Laser\-\_\-callback (
+\hypertarget{classNurse_a5791a1e191c2025b0a7d3522fe101f64}{\index{Nurse@{Nurse}!delegate@{delegate}}
+\index{delegate@{delegate}!Nurse@{Nurse}}
+\subsubsection[{delegate}]{\setlength{\rightskip}{0pt plus 5cm}void Nurse\-::delegate (
 \begin{DoxyParamCaption}
-\item[{sensor\-\_\-msgs\-::\-Laser\-Scan}]{msg}
+\item[{{\bf se306\-\_\-project1\-::\-Resident\-Msg}}]{msg}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classNurse_aa709fbc5dc09b8db82db59c1a2829d4a}
+)\hspace{0.3cm}{\ttfamily [protected]}}}\label{classNurse_a5791a1e191c2025b0a7d3522fe101f64}
 
 
-Callback function to process laser scan messsages. You can access the range data from msg.\-ranges\mbox{[}i\mbox{]}. i = sample number. 
+Callback function that unpacks and processes resident status messages. \hyperlink{classNurse}{Nurse} should subscribe to the Resident\-Msg topic in order for this callback to be called. Resident\-Msg is published by the \hyperlink{classResident}{Resident}. 
 
-\begin{DoxyNote}{Note}
-Currently blank as it is not in use. Navigation operates through a checkpoint system. 
-\end{DoxyNote}
 
 \begin{DoxyParams}{Parameters}
-{\em msg} & Single scan from a planar laser range finder \\
+{\em msg} & A custom Resident\-Msg message that contains information about the resident's current status. \\
 \hline
 \end{DoxyParams}
-
-
-Implements \hyperlink{classAgent_adfe1de8bbeaa7e4a5f7f2ff3e45593e8}{Agent}.
-
-\hypertarget{classNurse_a3ff47edb35f171a538fe62b3abdca948}{\index{Nurse@{Nurse}!Stage\-Odom\-\_\-callback@{Stage\-Odom\-\_\-callback}}
-\index{Stage\-Odom\-\_\-callback@{Stage\-Odom\-\_\-callback}!Nurse@{Nurse}}
-\subsubsection[{Stage\-Odom\-\_\-callback}]{\setlength{\rightskip}{0pt plus 5cm}void Nurse\-::\-Stage\-Odom\-\_\-callback (
-\begin{DoxyParamCaption}
-\item[{nav\-\_\-msgs\-::\-Odometry}]{msg}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classNurse_a3ff47edb35f171a538fe62b3abdca948}
-
-
-Updates the \hyperlink{classNurse}{Nurse}'s x position, y position, and angle to reflect its current pose. 
-
-\begin{DoxyNote}{Note}
-Rounding is used to calculate the current angle. This approximation is accounted for by using threshholds when processing angles. 
-\end{DoxyNote}
-
-\begin{DoxyParams}{Parameters}
-{\em msg} & Odometry message from odom topic \\
-\hline
-\end{DoxyParams}
-
-
-Implements \hyperlink{classAgent_a4b1182b9ee5dccaa871d71beef94a7d2}{Agent}.
-
 
 
 The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}

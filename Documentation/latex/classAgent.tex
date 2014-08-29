@@ -3,7 +3,7 @@
 }
 
 
-Superclass for all 'agents' -\/ i.\-e. Assistants, Visitors, and the \hyperlink{classResident}{Resident}.  
+Superclass for all 'agents' -\/ i.\-e. Assistants, Visitors, and the \hyperlink{classResident}{Resident}. Contains common navigation functionality and properties.  
 
 
 
@@ -13,35 +13,44 @@ Superclass for all 'agents' -\/ i.\-e. Assistants, Visitors, and the \hyperlink{
 Inheritance diagram for Agent\-:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=3.000000cm]{classAgent}
+\includegraphics[height=12.000000cm]{classAgent}
 \end{center}
 \end{figure}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-virtual void \hyperlink{classAgent_a4b1182b9ee5dccaa871d71beef94a7d2}{Stage\-Odom\-\_\-callback} (nav\-\_\-msgs\-::\-Odometry msg)=0
-\begin{DoxyCompactList}\small\item\em Updates the \hyperlink{classResident}{Resident}'s x position, y position, and angle to reflect its current pose. \end{DoxyCompactList}\item 
-virtual void \hyperlink{classAgent_adfe1de8bbeaa7e4a5f7f2ff3e45593e8}{Stage\-Laser\-\_\-callback} (sensor\-\_\-msgs\-::\-Laser\-Scan msg)=0
-\begin{DoxyCompactList}\small\item\em Virtual callback function to process laser scan messsages. \end{DoxyCompactList}\item 
-\hypertarget{classAgent_a3de32bf3de5baf5a996b874f2ba7cf75}{virtual int \hyperlink{classAgent_a3de32bf3de5baf5a996b874f2ba7cf75}{run} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})=0}\label{classAgent_a3de32bf3de5baf5a996b874f2ba7cf75}
-
-\begin{DoxyCompactList}\small\item\em Main function that controls agent events. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsection*{Protected Types}
+void \hyperlink{classAgent_aef22675e420206ed848583c89f38f8f0}{Stage\-Odom\-\_\-callback} (nav\-\_\-msgs\-::\-Odometry msg)
+\begin{DoxyCompactList}\small\item\em Updates the agent's x position, y position, and angle to reflect its current pose. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-enum {\bfseries Type} \{ \\*
-{\bfseries F\-R\-I\-E\-N\-D}, 
-{\bfseries R\-E\-L\-A\-T\-I\-V\-E}, 
-{\bfseries D\-O\-C\-T\-O\-R}, 
-{\bfseries N\-U\-R\-S\-E}, 
-\\*
-{\bfseries C\-A\-R\-E\-G\-I\-V\-E\-R}, 
-{\bfseries A\-S\-S\-I\-S\-T\-A\-N\-T}, 
-{\bfseries R\-E\-S\-I\-D\-E\-N\-T}
- \}
+void \hyperlink{classAgent_a20a0548f91fdfba2727ff8fddc3ce3dc}{set\-Path} (std\-::string start, std\-::string end)
+\begin{DoxyCompactList}\small\item\em Sets the path for the agent. \end{DoxyCompactList}\item 
+\hypertarget{classAgent_a49e310d66471525dfba98ee4e89e7865}{void {\bfseries turn} ()}\label{classAgent_a49e310d66471525dfba98ee4e89e7865}
+
+\item 
+\hypertarget{classAgent_a155537d7cbac8ba6982415e15c8e76a9}{void {\bfseries move\-Forward} (std\-::pair$<$ double, double $>$ next\-Checkpoint)}\label{classAgent_a155537d7cbac8ba6982415e15c8e76a9}
+
+\item 
+double \hyperlink{classAgent_a9455180dd9aff369e34e1527bfa6d1a9}{calculate\-Goal\-Angle} (std\-::pair$<$ double, double $>$ goal\-Checkpoint)
+\item 
+\hypertarget{classAgent_a5f9de8060bab4248d557f454265eee86}{void {\bfseries move} (std\-::string goal)}\label{classAgent_a5f9de8060bab4248d557f454265eee86}
+
+\item 
+\hypertarget{classAgent_acf69a5a2725a599c84ae2885d31c6d63}{bool {\bfseries is\-Turn\-Clockwise} ()}\label{classAgent_acf69a5a2725a599c84ae2885d31c6d63}
+
+\item 
+\hypertarget{classAgent_add59ed077172c91c9b2dddd4ca319f47}{void {\bfseries stop\-Moving} ()}\label{classAgent_add59ed077172c91c9b2dddd4ca319f47}
+
 \end{DoxyCompactItemize}
 \subsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
+\item 
+\hypertarget{classAgent_ae9ddc8a7bffee9c921d6628e6669df9c}{std\-::string {\bfseries origin\-Name}}\label{classAgent_ae9ddc8a7bffee9c921d6628e6669df9c}
+
+\item 
+\hypertarget{classAgent_a9c296226b7db0471d7a721dabe849c46}{\hyperlink{classCheckPointGraph}{Check\-Point\-Graph} {\bfseries g}}\label{classAgent_a9c296226b7db0471d7a721dabe849c46}
+
 \item 
 double \hyperlink{classAgent_a77dfc60513d8c90b2848297e09fffba7}{linear\-\_\-x}
 \item 
@@ -51,48 +60,74 @@ double \hyperlink{classAgent_af51536ae3b511b53726b84b9226cc772}{px}
 \item 
 double \hyperlink{classAgent_a048e8b32d02a2fd58f046a444a287015}{py}
 \item 
+double \hyperlink{classAgent_a389e3229e62da28d6c686354329e25aa}{current\-Angle}
+\item 
+\hypertarget{classAgent_a0ca673bd13a3e9aa8235db73eb4b5391}{std\-::pair$<$ double, double $>$ {\bfseries current\-Checkpoint}}\label{classAgent_a0ca673bd13a3e9aa8235db73eb4b5391}
+
+\item 
+\hypertarget{classAgent_ac7175c1ed11e2b571d434bd25f4c096f}{std\-::vector$<$ std\-::pair$<$ double, \\*
+double $>$ $>$ {\bfseries shortest\-Path}}\label{classAgent_ac7175c1ed11e2b571d434bd25f4c096f}
+
+\item 
+\hypertarget{classAgent_aa1f106d069420fb5995338cfa4f8799b}{int {\bfseries shortest\-Path\-Index}}\label{classAgent_aa1f106d069420fb5995338cfa4f8799b}
+
+\item 
+\hypertarget{classAgent_afeaa67851b662b45d4d6fcd5eaf5acc3}{bool {\bfseries is\-Facing\-Correctly}}\label{classAgent_afeaa67851b662b45d4d6fcd5eaf5acc3}
+
+\item 
+\hypertarget{classAgent_aab5675be1775cd18ff37e3e1870d51be}{bool {\bfseries is\-Moving}}\label{classAgent_aab5675be1775cd18ff37e3e1870d51be}
+
+\item 
 int \hyperlink{classAgent_aefcf2085a669d7e91d932e7cc3ee88ce}{robot\-\_\-id}
+\item 
+\hypertarget{classAgent_a894e975009220db4a8faa7c23fc0b4d6}{double {\bfseries checkpoint\-Angle}}\label{classAgent_a894e975009220db4a8faa7c23fc0b4d6}
+
+\item 
+\hypertarget{classAgent_ae4169e63cd18fa7785d4561746f676d1}{bool {\bfseries is\-Clockwise}}\label{classAgent_ae4169e63cd18fa7785d4561746f676d1}
+
 \end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
-Superclass for all 'agents' -\/ i.\-e. Assistants, Visitors, and the \hyperlink{classResident}{Resident}. 
-
-\begin{DoxyRefDesc}{Todo}
-\item[\hyperlink{todo__todo000001}{Todo}]Shift all common functionality (such as navigation) and properties to this class from subclasses.\end{DoxyRefDesc}
-
+Superclass for all 'agents' -\/ i.\-e. Assistants, Visitors, and the \hyperlink{classResident}{Resident}. Contains common navigation functionality and properties. 
 
 \subsection{Member Function Documentation}
-\hypertarget{classAgent_adfe1de8bbeaa7e4a5f7f2ff3e45593e8}{\index{Agent@{Agent}!Stage\-Laser\-\_\-callback@{Stage\-Laser\-\_\-callback}}
-\index{Stage\-Laser\-\_\-callback@{Stage\-Laser\-\_\-callback}!Agent@{Agent}}
-\subsubsection[{Stage\-Laser\-\_\-callback}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Agent\-::\-Stage\-Laser\-\_\-callback (
+\hypertarget{classAgent_a9455180dd9aff369e34e1527bfa6d1a9}{\index{Agent@{Agent}!calculate\-Goal\-Angle@{calculate\-Goal\-Angle}}
+\index{calculate\-Goal\-Angle@{calculate\-Goal\-Angle}!Agent@{Agent}}
+\subsubsection[{calculate\-Goal\-Angle}]{\setlength{\rightskip}{0pt plus 5cm}double Agent\-::calculate\-Goal\-Angle (
 \begin{DoxyParamCaption}
-\item[{sensor\-\_\-msgs\-::\-Laser\-Scan}]{msg}
+\item[{std\-::pair$<$ double, double $>$}]{goal\-Checkpoint}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classAgent_adfe1de8bbeaa7e4a5f7f2ff3e45593e8}
+)\hspace{0.3cm}{\ttfamily [protected]}}}\label{classAgent_a9455180dd9aff369e34e1527bfa6d1a9}
+This function calculates the angle to the goal. \hypertarget{classAgent_a20a0548f91fdfba2727ff8fddc3ce3dc}{\index{Agent@{Agent}!set\-Path@{set\-Path}}
+\index{set\-Path@{set\-Path}!Agent@{Agent}}
+\subsubsection[{set\-Path}]{\setlength{\rightskip}{0pt plus 5cm}void Agent\-::set\-Path (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{start, }
+\item[{std\-::string}]{end}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}}\label{classAgent_a20a0548f91fdfba2727ff8fddc3ce3dc}
 
 
-Virtual callback function to process laser scan messsages. 
+Sets the path for the agent. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em msg} & Single scan from a planar laser range finder \\
+{\em start} & The name of the start checkpoint \\
+\hline
+{\em end} & The name of the end checkpoint \\
 \hline
 \end{DoxyParams}
-
-
-Implemented in \hyperlink{classAssistant_aaf1fe61dc3d3aac3f0ec603531ad9ad7}{Assistant}, \hyperlink{classDoctor_ab0b46ba92bd2069733f304858b7e4495}{Doctor}, \hyperlink{classResident_a6745ec218b7e451eb7ba2ca88fa2aca9}{Resident}, \hyperlink{classCaregiver_a3dc0edd8065745e6f355f80f2b293ba1}{Caregiver}, \hyperlink{classFriend_a1334996a432a7d435d40169bad684dc4}{Friend}, \hyperlink{classNurse_aa709fbc5dc09b8db82db59c1a2829d4a}{Nurse}, and \hyperlink{classRelative_a556d177e5d1562ab9af5018ef382c836}{Relative}.
-
-\hypertarget{classAgent_a4b1182b9ee5dccaa871d71beef94a7d2}{\index{Agent@{Agent}!Stage\-Odom\-\_\-callback@{Stage\-Odom\-\_\-callback}}
+\hypertarget{classAgent_aef22675e420206ed848583c89f38f8f0}{\index{Agent@{Agent}!Stage\-Odom\-\_\-callback@{Stage\-Odom\-\_\-callback}}
 \index{Stage\-Odom\-\_\-callback@{Stage\-Odom\-\_\-callback}!Agent@{Agent}}
-\subsubsection[{Stage\-Odom\-\_\-callback}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Agent\-::\-Stage\-Odom\-\_\-callback (
+\subsubsection[{Stage\-Odom\-\_\-callback}]{\setlength{\rightskip}{0pt plus 5cm}void Agent\-::\-Stage\-Odom\-\_\-callback (
 \begin{DoxyParamCaption}
 \item[{nav\-\_\-msgs\-::\-Odometry}]{msg}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classAgent_a4b1182b9ee5dccaa871d71beef94a7d2}
+)}}\label{classAgent_aef22675e420206ed848583c89f38f8f0}
 
 
-Updates the \hyperlink{classResident}{Resident}'s x position, y position, and angle to reflect its current pose. 
+Updates the agent's x position, y position, and angle to reflect its current pose. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -101,15 +136,14 @@ Updates the \hyperlink{classResident}{Resident}'s x position, y position, and an
 \end{DoxyParams}
 
 
-Implemented in \hyperlink{classAssistant_ad016061136f3fa5c3ed733e23a54aa00}{Assistant}, \hyperlink{classDoctor_a92b20f52198c6137d8858152cba77640}{Doctor}, \hyperlink{classResident_ae1406a27c978147c7816e57f9ed13aed}{Resident}, \hyperlink{classCaregiver_aa326466c62614b84d6a750dc0e59fa48}{Caregiver}, \hyperlink{classFriend_ab336b2a40bc6b9787bd0e9283f29f468}{Friend}, \hyperlink{classNurse_a3ff47edb35f171a538fe62b3abdca948}{Nurse}, and \hyperlink{classRelative_a13fc6c65f7338cfa29c9f31958134c56}{Relative}.
-
-
-
 \subsection{Member Data Documentation}
 \hypertarget{classAgent_affc842049c5010a5f8bd99a62d650a25}{\index{Agent@{Agent}!angular\-\_\-z@{angular\-\_\-z}}
 \index{angular\-\_\-z@{angular\-\_\-z}!Agent@{Agent}}
 \subsubsection[{angular\-\_\-z}]{\setlength{\rightskip}{0pt plus 5cm}double Agent\-::angular\-\_\-z\hspace{0.3cm}{\ttfamily [protected]}}}\label{classAgent_affc842049c5010a5f8bd99a62d650a25}
-Angular velocity of the robot \hypertarget{classAgent_a77dfc60513d8c90b2848297e09fffba7}{\index{Agent@{Agent}!linear\-\_\-x@{linear\-\_\-x}}
+Angular velocity of the robot \hypertarget{classAgent_a389e3229e62da28d6c686354329e25aa}{\index{Agent@{Agent}!current\-Angle@{current\-Angle}}
+\index{current\-Angle@{current\-Angle}!Agent@{Agent}}
+\subsubsection[{current\-Angle}]{\setlength{\rightskip}{0pt plus 5cm}double Agent\-::current\-Angle\hspace{0.3cm}{\ttfamily [protected]}}}\label{classAgent_a389e3229e62da28d6c686354329e25aa}
+angle of the robot \hypertarget{classAgent_a77dfc60513d8c90b2848297e09fffba7}{\index{Agent@{Agent}!linear\-\_\-x@{linear\-\_\-x}}
 \index{linear\-\_\-x@{linear\-\_\-x}!Agent@{Agent}}
 \subsubsection[{linear\-\_\-x}]{\setlength{\rightskip}{0pt plus 5cm}double Agent\-::linear\-\_\-x\hspace{0.3cm}{\ttfamily [protected]}}}\label{classAgent_a77dfc60513d8c90b2848297e09fffba7}
 Linear velocity of the robot \hypertarget{classAgent_af51536ae3b511b53726b84b9226cc772}{\index{Agent@{Agent}!px@{px}}
@@ -123,6 +157,7 @@ y position of the robot \hypertarget{classAgent_aefcf2085a669d7e91d932e7cc3ee88c
 \subsubsection[{robot\-\_\-id}]{\setlength{\rightskip}{0pt plus 5cm}int Agent\-::robot\-\_\-id\hspace{0.3cm}{\ttfamily [protected]}}}\label{classAgent_aefcf2085a669d7e91d932e7cc3ee88ce}
 Robot's I\-D 
 
-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
 \item 
-se306\-\_\-project1/src/Agent.\-h\end{DoxyCompactItemize}
+se306\-\_\-project1/src/Agent.\-h\item 
+se306\-\_\-project1/src/Agent.\-cpp\end{DoxyCompactItemize}

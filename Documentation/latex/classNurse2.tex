@@ -1,0 +1,61 @@
+\hypertarget{classNurse2}{\section{Nurse2 Class Reference}
+\label{classNurse2}\index{Nurse2@{Nurse2}}
+}
+
+
+Class for \hyperlink{classNurse}{Nurse} nodes.  
+
+
+
+
+{\ttfamily \#include $<$Nurse2.\-h$>$}
+
+Inheritance diagram for Nurse2\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classNurse2}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classNurse2_a5f7eae9d158eb137b5fcb465c84d1c82}{int \hyperlink{classNurse2_a5f7eae9d158eb137b5fcb465c84d1c82}{run} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})}\label{classNurse2_a5f7eae9d158eb137b5fcb465c84d1c82}
+
+\begin{DoxyCompactList}\small\item\em Main function for the \hyperlink{classNurse}{Nurse} process. Controls node setup and periodic events. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classNurse2_a506228f056abb95488c436d3440c6119}{void \hyperlink{classNurse2_a506228f056abb95488c436d3440c6119}{do\-Hospitalise} (\hyperlink{structse306__project1_1_1ResidentMsg__}{se306\-\_\-project1\-::\-Resident\-Msg} msg)}\label{classNurse2_a506228f056abb95488c436d3440c6119}
+
+\begin{DoxyCompactList}\small\item\em Takes the resident to hospital (non-\/doctor-\/induced emergency, despite the function name...) \end{DoxyCompactList}\item 
+void \hyperlink{classNurse2_a97b9ad49242153b9d1d35ef6e4c88dd6}{delegate} (\hyperlink{structse306__project1_1_1ResidentMsg__}{se306\-\_\-project1\-::\-Resident\-Msg} msg)
+\begin{DoxyCompactList}\small\item\em Callback function that unpacks and processes resident status messages. \hyperlink{classNurse}{Nurse} should subscribe to the Resident\-Msg topic in order for this callback to be called. Resident\-Msg is published by the \hyperlink{classResident}{Resident}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Class for \hyperlink{classNurse}{Nurse} nodes. 
+
+\subsection{Member Function Documentation}
+\hypertarget{classNurse2_a97b9ad49242153b9d1d35ef6e4c88dd6}{\index{Nurse2@{Nurse2}!delegate@{delegate}}
+\index{delegate@{delegate}!Nurse2@{Nurse2}}
+\subsubsection[{delegate}]{\setlength{\rightskip}{0pt plus 5cm}void Nurse2\-::delegate (
+\begin{DoxyParamCaption}
+\item[{{\bf se306\-\_\-project1\-::\-Resident\-Msg}}]{msg}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}}\label{classNurse2_a97b9ad49242153b9d1d35ef6e4c88dd6}
+
+
+Callback function that unpacks and processes resident status messages. \hyperlink{classNurse}{Nurse} should subscribe to the Resident\-Msg topic in order for this callback to be called. Resident\-Msg is published by the \hyperlink{classResident}{Resident}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & A custom Resident\-Msg message that contains information about the resident's current status. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+se306\-\_\-project1/src/Nurse2.\-h\item 
+se306\-\_\-project1/src/Nurse2.\-cpp\end{DoxyCompactItemize}

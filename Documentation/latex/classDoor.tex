@@ -1,0 +1,75 @@
+\hypertarget{classDoor}{\section{Door Class Reference}
+\label{classDoor}\index{Door@{Door}}
+}
+
+
+Class for the \hyperlink{classDoor}{Door} nodes.  
+
+
+
+
+{\ttfamily \#include $<$Door.\-h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classDoor_a6b8d9bba2d7cbaa3262887a209c3ffca}{int \hyperlink{classDoor_a6b8d9bba2d7cbaa3262887a209c3ffca}{run} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})}\label{classDoor_a6b8d9bba2d7cbaa3262887a209c3ffca}
+
+\begin{DoxyCompactList}\small\item\em Main function for the \hyperlink{classDoor}{Door} process. Controls node setup and periodic events. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classDoor_ae2c0e2da31af301f0761fad9618df595}{Stage\-Odom\-\_\-callback} (nav\-\_\-msgs\-::\-Odometry msg)
+\begin{DoxyCompactList}\small\item\em Updates the door's x position, y position, and angle to reflect its current pose. \end{DoxyCompactList}\item 
+void \hyperlink{classDoor_afe7ef9a01779f3cc6285ed0350175261}{delegate} (\hyperlink{structse306__project1_1_1ResidentMsg__}{se306\-\_\-project1\-::\-Resident\-Msg} msg)
+\begin{DoxyCompactList}\small\item\em Callback function that unpacks and processes resident status messages. \hyperlink{classDoor}{Door} should subscribe to the Resident\-Msg topic in order for this callback to be called. Resident\-Msg is published by the \hyperlink{classResident}{Resident}. \end{DoxyCompactList}\item 
+\hypertarget{classDoor_a141b8ac2ab99e1d7a218cdfb52004937}{void \hyperlink{classDoor_a141b8ac2ab99e1d7a218cdfb52004937}{open} ()}\label{classDoor_a141b8ac2ab99e1d7a218cdfb52004937}
+
+\begin{DoxyCompactList}\small\item\em opens the \hyperlink{classDoor}{Door} \end{DoxyCompactList}\item 
+\hypertarget{classDoor_a1610991c042246a8d66421201667e361}{void \hyperlink{classDoor_a1610991c042246a8d66421201667e361}{close} (int wait\-Time)}\label{classDoor_a1610991c042246a8d66421201667e361}
+
+\begin{DoxyCompactList}\small\item\em closes the \hyperlink{classDoor}{Door} after being opened for 20 seconds \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class for the \hyperlink{classDoor}{Door} nodes. 
+
+\subsection{Member Function Documentation}
+\hypertarget{classDoor_afe7ef9a01779f3cc6285ed0350175261}{\index{Door@{Door}!delegate@{delegate}}
+\index{delegate@{delegate}!Door@{Door}}
+\subsubsection[{delegate}]{\setlength{\rightskip}{0pt plus 5cm}void Door\-::delegate (
+\begin{DoxyParamCaption}
+\item[{{\bf se306\-\_\-project1\-::\-Resident\-Msg}}]{msg}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}}\label{classDoor_afe7ef9a01779f3cc6285ed0350175261}
+
+
+Callback function that unpacks and processes resident status messages. \hyperlink{classDoor}{Door} should subscribe to the Resident\-Msg topic in order for this callback to be called. Resident\-Msg is published by the \hyperlink{classResident}{Resident}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & A custom Resident\-Msg message that contains information about the resident's current status. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classDoor_ae2c0e2da31af301f0761fad9618df595}{\index{Door@{Door}!Stage\-Odom\-\_\-callback@{Stage\-Odom\-\_\-callback}}
+\index{Stage\-Odom\-\_\-callback@{Stage\-Odom\-\_\-callback}!Door@{Door}}
+\subsubsection[{Stage\-Odom\-\_\-callback}]{\setlength{\rightskip}{0pt plus 5cm}void Door\-::\-Stage\-Odom\-\_\-callback (
+\begin{DoxyParamCaption}
+\item[{nav\-\_\-msgs\-::\-Odometry}]{msg}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}}\label{classDoor_ae2c0e2da31af301f0761fad9618df595}
+
+
+Updates the door's x position, y position, and angle to reflect its current pose. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & Odometry message from odom topic \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+se306\-\_\-project1/src/Door.\-h\item 
+se306\-\_\-project1/src/Door.\-cpp\end{DoxyCompactItemize}

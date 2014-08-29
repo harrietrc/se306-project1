@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['calc_5fgoal_5fangle',['calc_goal_angle',['../classAssistant.html#a8fce345025f32bcd0e45d83960d4b3f7',1,'Assistant::calc_goal_angle()'],['../classDoctor.html#a55fe6c06a3ce07fd9014a03000df43db',1,'Doctor::calc_goal_angle()'],['../classResident.html#ae8e00862499c8a502b5c99f8267d3345',1,'Resident::calc_goal_angle()']]],
+  ['calculategoalangle',['calculateGoalAngle',['../classAgent.html#a9455180dd9aff369e34e1527bfa6d1a9',1,'Agent']]],
+  ['checkpointmap',['checkpointMap',['../classCheckPointGraph.html#a07e2e7cf2afa95d82076f87600761728',1,'CheckPointGraph']]],
+  ['close',['close',['../classDoor.html#a1610991c042246a8d66421201667e361',1,'Door']]],
   ['createmockagent',['createMockAgent',['../classAgentFactory.html#a8785d71f067068f09326b4c5af5007b4',1,'AgentFactory']]]
 ];

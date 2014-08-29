@@ -84,9 +84,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classVisitor-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">Visitor Class Reference</div>  </div>
+<div class="title">Visitor Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -100,42 +103,76 @@ Inheritance diagram for Visitor:</div>
  <div class="center">
   <img src="classVisitor.png" usemap="#Visitor_map" alt=""/>
   <map id="Visitor_map" name="Visitor_map">
-<area href="classAgent.html" title="Superclass for all &#39;agents&#39; - i.e. Assistants, Visitors, and the Resident. " alt="Agent" shape="rect" coords="158,0,227,24"/>
-<area href="classCaregiver.html" title="Superclass for visitors - i.e. Caregivers, Nurses, Doctors, Friends, Relatives. " alt="Caregiver" shape="rect" coords="0,112,69,136"/>
-<area href="classDoctor.html" title="Class for the Doctor nodes. " alt="Doctor" shape="rect" coords="79,112,148,136"/>
-<area href="classFriend.html" title="Class for Friend nodes. " alt="Friend" shape="rect" coords="158,112,227,136"/>
-<area href="classNurse.html" title="Class for Nurse nodes. " alt="Nurse" shape="rect" coords="237,112,306,136"/>
-<area href="classRelative.html" title="Class for Relative nodes. " alt="Relative" shape="rect" coords="316,112,385,136"/>
+<area href="classAgent.html" title="Superclass for all &#39;agents&#39; - i.e. Assistants, Visitors, and the Resident. Contains common navigation..." alt="Agent" shape="rect" coords="0,0,76,24"/>
+<area href="classCaregiver.html" title="Superclass for visitors - i.e. Caregivers, Nurses, Doctors, Friends, Relatives. " alt="Caregiver" shape="rect" coords="86,112,162,136"/>
+<area href="classCaregiver1.html" title="Superclass for visitors - i.e. Caregivers, Nurses, Doctors, Friends, Relatives. " alt="Caregiver1" shape="rect" coords="86,168,162,192"/>
+<area href="classCaregiver2.html" title="Superclass for visitors - i.e. Caregivers, Nurses, Doctors, Friends, Relatives. " alt="Caregiver2" shape="rect" coords="86,224,162,248"/>
+<area href="classDoctor.html" title="Class for the Doctor nodes. " alt="Doctor" shape="rect" coords="86,280,162,304"/>
+<area href="classFriend.html" title="Class for Friend nodes. " alt="Friend" shape="rect" coords="86,336,162,360"/>
+<area href="classFriend1.html" title="Class for Friend nodes. " alt="Friend1" shape="rect" coords="86,392,162,416"/>
+<area href="classFriend2.html" title="Class for Friend nodes. " alt="Friend2" shape="rect" coords="86,448,162,472"/>
+<area href="classNurse.html" title="Class for Nurse nodes. " alt="Nurse" shape="rect" coords="86,504,162,528"/>
+<area href="classNurse1.html" title="Class for Nurse nodes. " alt="Nurse1" shape="rect" coords="86,560,162,584"/>
+<area href="classNurse2.html" title="Class for Nurse nodes. " alt="Nurse2" shape="rect" coords="86,616,162,640"/>
+<area href="classRelative.html" title="Class for Relative nodes. " alt="Relative" shape="rect" coords="86,672,162,696"/>
 </map>
  </div></div>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
-Additional Inherited Members</h2></td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a39bbfe26aece491b11f47a2d1baca377"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a39bbfe26aece491b11f47a2d1baca377"></a>
+virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>run</b> (int argc, char *argv[])=0</td></tr>
+<tr class="separator:a39bbfe26aece491b11f47a2d1baca377"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classAgent"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classAgent')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classAgent.html">Agent</a></td></tr>
-<tr class="memitem:a4b1182b9ee5dccaa871d71beef94a7d2 inherit pub_methods_classAgent"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAgent.html#a4b1182b9ee5dccaa871d71beef94a7d2">StageOdom_callback</a> (nav_msgs::Odometry msg)=0</td></tr>
-<tr class="memdesc:a4b1182b9ee5dccaa871d71beef94a7d2 inherit pub_methods_classAgent"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the <a class="el" href="classResident.html" title="Class representing the Resident. ">Resident</a>'s x position, y position, and angle to reflect its current pose.  <a href="#a4b1182b9ee5dccaa871d71beef94a7d2">More...</a><br/></td></tr>
-<tr class="separator:a4b1182b9ee5dccaa871d71beef94a7d2 inherit pub_methods_classAgent"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adfe1de8bbeaa7e4a5f7f2ff3e45593e8 inherit pub_methods_classAgent"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAgent.html#adfe1de8bbeaa7e4a5f7f2ff3e45593e8">StageLaser_callback</a> (sensor_msgs::LaserScan msg)=0</td></tr>
-<tr class="memdesc:adfe1de8bbeaa7e4a5f7f2ff3e45593e8 inherit pub_methods_classAgent"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual callback function to process laser scan messsages.  <a href="#adfe1de8bbeaa7e4a5f7f2ff3e45593e8">More...</a><br/></td></tr>
-<tr class="separator:adfe1de8bbeaa7e4a5f7f2ff3e45593e8 inherit pub_methods_classAgent"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3de32bf3de5baf5a996b874f2ba7cf75 inherit pub_methods_classAgent"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3de32bf3de5baf5a996b874f2ba7cf75"></a>
-virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAgent.html#a3de32bf3de5baf5a996b874f2ba7cf75">run</a> (int argc, char *argv[])=0</td></tr>
-<tr class="memdesc:a3de32bf3de5baf5a996b874f2ba7cf75 inherit pub_methods_classAgent"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main function that controls agent events. <br/></td></tr>
-<tr class="separator:a3de32bf3de5baf5a996b874f2ba7cf75 inherit pub_methods_classAgent"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pro_types_classAgent"><td colspan="2" onclick="javascript:toggleInherit('pro_types_classAgent')"><img src="closed.png" alt="-"/>&#160;Protected Types inherited from <a class="el" href="classAgent.html">Agent</a></td></tr>
-<tr class="memitem:a74c335b513eeb92231976477006c63bf inherit pro_types_classAgent"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><b>Type</b> { <br/>
-&#160;&#160;<b>FRIEND</b>, 
-<b>RELATIVE</b>, 
-<b>DOCTOR</b>, 
-<b>NURSE</b>, 
-<br/>
-&#160;&#160;<b>CAREGIVER</b>, 
-<b>ASSISTANT</b>, 
-<b>RESIDENT</b>
-<br/>
- }</td></tr>
-<tr class="separator:a74c335b513eeb92231976477006c63bf inherit pro_types_classAgent"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef22675e420206ed848583c89f38f8f0 inherit pub_methods_classAgent"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAgent.html#aef22675e420206ed848583c89f38f8f0">StageOdom_callback</a> (nav_msgs::Odometry msg)</td></tr>
+<tr class="memdesc:aef22675e420206ed848583c89f38f8f0 inherit pub_methods_classAgent"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the agent's x position, y position, and angle to reflect its current pose.  <a href="#aef22675e420206ed848583c89f38f8f0">More...</a><br/></td></tr>
+<tr class="separator:aef22675e420206ed848583c89f38f8f0 inherit pub_methods_classAgent"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:ad32450b21924b7d581b99c9e1c20c829"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVisitor.html#ad32450b21924b7d581b99c9e1c20c829">visitResident</a> ()</td></tr>
+<tr class="memdesc:ad32450b21924b7d581b99c9e1c20c829"><td class="mdescLeft">&#160;</td><td class="mdescRight">Visit the resident. May be simple - e.g. toggling visitor visibility, or moving to the door.  <a href="#ad32450b21924b7d581b99c9e1c20c829">More...</a><br/></td></tr>
+<tr class="separator:ad32450b21924b7d581b99c9e1c20c829"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0dc0a203978b84f73a887d1f1de54225"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVisitor.html#a0dc0a203978b84f73a887d1f1de54225">doConverse</a> ()</td></tr>
+<tr class="memdesc:a0dc0a203978b84f73a887d1f1de54225"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initiates conversation with the resident.  <a href="#a0dc0a203978b84f73a887d1f1de54225">More...</a><br/></td></tr>
+<tr class="separator:a0dc0a203978b84f73a887d1f1de54225"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_methods_classAgent"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classAgent')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classAgent.html">Agent</a></td></tr>
+<tr class="memitem:a20a0548f91fdfba2727ff8fddc3ce3dc inherit pro_methods_classAgent"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAgent.html#a20a0548f91fdfba2727ff8fddc3ce3dc">setPath</a> (std::string start, std::string end)</td></tr>
+<tr class="memdesc:a20a0548f91fdfba2727ff8fddc3ce3dc inherit pro_methods_classAgent"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the path for the agent.  <a href="#a20a0548f91fdfba2727ff8fddc3ce3dc">More...</a><br/></td></tr>
+<tr class="separator:a20a0548f91fdfba2727ff8fddc3ce3dc inherit pro_methods_classAgent"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49e310d66471525dfba98ee4e89e7865 inherit pro_methods_classAgent"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a49e310d66471525dfba98ee4e89e7865"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>turn</b> ()</td></tr>
+<tr class="separator:a49e310d66471525dfba98ee4e89e7865 inherit pro_methods_classAgent"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a155537d7cbac8ba6982415e15c8e76a9 inherit pro_methods_classAgent"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a155537d7cbac8ba6982415e15c8e76a9"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>moveForward</b> (std::pair&lt; double, double &gt; nextCheckpoint)</td></tr>
+<tr class="separator:a155537d7cbac8ba6982415e15c8e76a9 inherit pro_methods_classAgent"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9455180dd9aff369e34e1527bfa6d1a9 inherit pro_methods_classAgent"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAgent.html#a9455180dd9aff369e34e1527bfa6d1a9">calculateGoalAngle</a> (std::pair&lt; double, double &gt; goalCheckpoint)</td></tr>
+<tr class="separator:a9455180dd9aff369e34e1527bfa6d1a9 inherit pro_methods_classAgent"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f9de8060bab4248d557f454265eee86 inherit pro_methods_classAgent"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5f9de8060bab4248d557f454265eee86"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>move</b> (std::string goal)</td></tr>
+<tr class="separator:a5f9de8060bab4248d557f454265eee86 inherit pro_methods_classAgent"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf69a5a2725a599c84ae2885d31c6d63 inherit pro_methods_classAgent"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acf69a5a2725a599c84ae2885d31c6d63"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>isTurnClockwise</b> ()</td></tr>
+<tr class="separator:acf69a5a2725a599c84ae2885d31c6d63 inherit pro_methods_classAgent"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add59ed077172c91c9b2dddd4ca319f47 inherit pro_methods_classAgent"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="add59ed077172c91c9b2dddd4ca319f47"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>stopMoving</b> ()</td></tr>
+<tr class="separator:add59ed077172c91c9b2dddd4ca319f47 inherit pro_methods_classAgent"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:a9379136efaf219f1c539d0b0a6cce429"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9379136efaf219f1c539d0b0a6cce429"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>emergency</b> = false</td></tr>
+<tr class="separator:a9379136efaf219f1c539d0b0a6cce429"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2be4e2c43d571a46668b8c22abc664bc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2be4e2c43d571a46668b8c22abc664bc"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>finishedConvo</b> = false</td></tr>
+<tr class="separator:a2be4e2c43d571a46668b8c22abc664bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classAgent"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classAgent')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classAgent.html">Agent</a></td></tr>
+<tr class="memitem:ae9ddc8a7bffee9c921d6628e6669df9c inherit pro_attribs_classAgent"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae9ddc8a7bffee9c921d6628e6669df9c"></a>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><b>originName</b></td></tr>
+<tr class="separator:ae9ddc8a7bffee9c921d6628e6669df9c inherit pro_attribs_classAgent"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c296226b7db0471d7a721dabe849c46 inherit pro_attribs_classAgent"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9c296226b7db0471d7a721dabe849c46"></a>
+<a class="el" href="classCheckPointGraph.html">CheckPointGraph</a>&#160;</td><td class="memItemRight" valign="bottom"><b>g</b></td></tr>
+<tr class="separator:a9c296226b7db0471d7a721dabe849c46 inherit pro_attribs_classAgent"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a77dfc60513d8c90b2848297e09fffba7 inherit pro_attribs_classAgent"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAgent.html#a77dfc60513d8c90b2848297e09fffba7">linear_x</a></td></tr>
 <tr class="separator:a77dfc60513d8c90b2848297e09fffba7 inherit pro_attribs_classAgent"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:affc842049c5010a5f8bd99a62d650a25 inherit pro_attribs_classAgent"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAgent.html#affc842049c5010a5f8bd99a62d650a25">angular_z</a></td></tr>
@@ -144,18 +181,96 @@ virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hre
 <tr class="separator:af51536ae3b511b53726b84b9226cc772 inherit pro_attribs_classAgent"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a048e8b32d02a2fd58f046a444a287015 inherit pro_attribs_classAgent"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAgent.html#a048e8b32d02a2fd58f046a444a287015">py</a></td></tr>
 <tr class="separator:a048e8b32d02a2fd58f046a444a287015 inherit pro_attribs_classAgent"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a389e3229e62da28d6c686354329e25aa inherit pro_attribs_classAgent"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAgent.html#a389e3229e62da28d6c686354329e25aa">currentAngle</a></td></tr>
+<tr class="separator:a389e3229e62da28d6c686354329e25aa inherit pro_attribs_classAgent"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ca673bd13a3e9aa8235db73eb4b5391 inherit pro_attribs_classAgent"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0ca673bd13a3e9aa8235db73eb4b5391"></a>
+std::pair&lt; double, double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>currentCheckpoint</b></td></tr>
+<tr class="separator:a0ca673bd13a3e9aa8235db73eb4b5391 inherit pro_attribs_classAgent"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac7175c1ed11e2b571d434bd25f4c096f inherit pro_attribs_classAgent"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac7175c1ed11e2b571d434bd25f4c096f"></a>
+std::vector&lt; std::pair&lt; double, <br class="typebreak"/>
+double &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>shortestPath</b></td></tr>
+<tr class="separator:ac7175c1ed11e2b571d434bd25f4c096f inherit pro_attribs_classAgent"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1f106d069420fb5995338cfa4f8799b inherit pro_attribs_classAgent"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa1f106d069420fb5995338cfa4f8799b"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>shortestPathIndex</b></td></tr>
+<tr class="separator:aa1f106d069420fb5995338cfa4f8799b inherit pro_attribs_classAgent"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afeaa67851b662b45d4d6fcd5eaf5acc3 inherit pro_attribs_classAgent"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afeaa67851b662b45d4d6fcd5eaf5acc3"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>isFacingCorrectly</b></td></tr>
+<tr class="separator:afeaa67851b662b45d4d6fcd5eaf5acc3 inherit pro_attribs_classAgent"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab5675be1775cd18ff37e3e1870d51be inherit pro_attribs_classAgent"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aab5675be1775cd18ff37e3e1870d51be"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>isMoving</b></td></tr>
+<tr class="separator:aab5675be1775cd18ff37e3e1870d51be inherit pro_attribs_classAgent"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aefcf2085a669d7e91d932e7cc3ee88ce inherit pro_attribs_classAgent"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAgent.html#aefcf2085a669d7e91d932e7cc3ee88ce">robot_id</a></td></tr>
 <tr class="separator:aefcf2085a669d7e91d932e7cc3ee88ce inherit pro_attribs_classAgent"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a894e975009220db4a8faa7c23fc0b4d6 inherit pro_attribs_classAgent"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a894e975009220db4a8faa7c23fc0b4d6"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>checkpointAngle</b></td></tr>
+<tr class="separator:a894e975009220db4a8faa7c23fc0b4d6 inherit pro_attribs_classAgent"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4169e63cd18fa7785d4561746f676d1 inherit pro_attribs_classAgent"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae4169e63cd18fa7785d4561746f676d1"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>isClockwise</b></td></tr>
+<tr class="separator:ae4169e63cd18fa7785d4561746f676d1 inherit pro_attribs_classAgent"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Class for the implementation of visitors - i.e. Caregivers, Nurses, Doctors, Friends, and Relatives. </p>
-</div><hr/>The documentation for this class was generated from the following file:<ul>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a0dc0a203978b84f73a887d1f1de54225"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Visitor::doConverse </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Initiates conversation with the resident. </p>
+<dl class="section return"><dt>Returns</dt><dd>true if the behaviour completes successfully. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ad32450b21924b7d581b99c9e1c20c829"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Visitor::visitResident </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Visit the resident. May be simple - e.g. toggling visitor visibility, or moving to the door. </p>
+<dl class="section return"><dt>Returns</dt><dd>true if this has moved next to the <a class="el" href="classResident.html" title="Class representing the Resident. ">Resident</a> </dd></dl>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
 <li>se306_project1/src/<a class="el" href="Visitor_8h_source.html">Visitor.h</a></li>
+<li>se306_project1/src/Visitor.cpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Aug 15 2014 13:20:38 for SE306 Project 1 by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Aug 29 2014 17:01:17 for SE306 Project 1 by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

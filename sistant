@@ -1,0 +1,2320 @@
+[33mcommit 91c38632ad133ddcfb969e80d4eea5f802088e3f[m
+Merge: 22d5f90 059fb52
+Author: mshehadeh <mshe246@gmail.com>
+Date:   Fri Aug 29 15:38:35 2014 +1200
+
+    merged
+
+[33mcommit 22d5f90f24293d40ab956ac403a8b188331e5e4c[m
+Author: mshehadeh <mshe246@gmail.com>
+Date:   Fri Aug 29 15:36:09 2014 +1200
+
+    friends now go to pos
+
+[33mcommit 059fb52ae20b4b333cd6538c2b1d9b574f34e6a6[m
+Author: John <clee842@aucklanduni.ac.nz>
+Date:   Fri Aug 29 15:17:02 2014 +1200
+
+    built
+
+[33mcommit 8f7c9edd2782e129f2bd646994fefc04f6644666[m
+Merge: f86b123 f84900d
+Author: John <clee842@aucklanduni.ac.nz>
+Date:   Fri Aug 29 14:55:17 2014 +1200
+
+    doesnt compile on my machine
+
+[33mcommit f86b123745f70956b235c9e604b11383882c0101[m
+Merge: 3b90ebb 64d668d
+Author: John <clee842@aucklanduni.ac.nz>
+Date:   Fri Aug 29 14:39:03 2014 +1200
+
+    Main spawn all
+
+[33mcommit f84900dea0b9116832dddeca96eab2adee492ee8[m
+Author: Alan Lau <alau645@aucklanduni.ac.nz>
+Date:   Fri Aug 29 14:34:49 2014 +1200
+
+    Made door close after 20 seconds of being opened
+
+[33mcommit 1fda3ac6f986638b1b090357bbc66d1cdd702115[m
+Merge: 1b40dd9 211b416
+Author: mshehadeh <mshe246@gmail.com>
+Date:   Fri Aug 29 14:19:07 2014 +1200
+
+    Merge branch 'feature/move' of https://github.com/clee842/se306-project1 into feature/move
+
+[33mcommit 1b40dd9bffa3cd3c812187cf727697f6812f0f8f[m
+Author: mshehadeh <mshe246@gmail.com>
+Date:   Fri Aug 29 14:18:57 2014 +1200
+
+    pulling
+
+[33mcommit 211b41610370afe78b4b5768585138abcb4a2f1e[m
+Merge: 8d19f45 64d668d
+Author: Samanyu Kansara <skan729@aucklanduni.ac.nz>
+Date:   Fri Aug 29 14:18:04 2014 +1200
+
+    Resolved merge conflicts
+
+[33mcommit 3b90ebb8809b4149d442d4f97ed4dda0c9fbbf4f[m
+Merge: f22ec47 08e19e4
+Author: John <clee842@aucklanduni.ac.nz>
+Date:   Fri Aug 29 14:17:03 2014 +1200
+
+    Main working with all
+
+[33mcommit 8d19f45cf49dd7a17b0d4aeb91fcd4d3f2d5eb66[m
+Merge: 4bdca26 08e19e4
+Author: Samanyu Kansara <skan729@aucklanduni.ac.nz>
+Date:   Fri Aug 29 14:13:13 2014 +1200
+
+    Implemented methods for all 3 friends
+
+[33mcommit 64d668d5c0f5f3fef82335324b429b4384d3abd8[m
+Merge: 2f9a90c 591928c
+Author: mshehadeh <mshe246@gmail.com>
+Date:   Fri Aug 29 14:06:12 2014 +1200
+
+    ficed merging
+
+[33mcommit 2f9a90c7697e19e9c7966a5e0389aa9cfbdde586[m
+Author: mshehadeh <mshe246@gmail.com>
+Date:   Fri Aug 29 14:04:46 2014 +1200
+
+    pushing doctor not working for sam to fix
+
+[33mcommit 591928cbfc532557a2997f3d6439914ea3bbf119[m
+Author: Harriet Robinson-Chen <harrietrc@gmail.com>
+Date:   Fri Aug 29 13:18:11 2014 +1200
+
+    New checkpoint near table
+    
+    By the way I changed Assistant2 origin a couple of commits back
+
+[33mcommit def7a095b07e6942fc6af77bb5d7577dc9a66129[m
+Merge: 10792ff 2898d8d
+Author: Alan Lau <alau645@aucklanduni.ac.nz>
+Date:   Fri Aug 29 13:13:19 2014 +1200
+
+    Merge branch 'feature/move' of https://github.com/clee842/se306-project1 into feature/move
+
+[33mcommit 10792ff5563a51432f7fbe616b507c8b31c01ad0[m
+Author: Alan Lau <alau645@aucklanduni.ac.nz>
+Date:   Fri Aug 29 13:12:46 2014 +1200
+
+    fixed some stuff in doctor/friend/nurse classes
+
+[33mcommit 2898d8d4e5423dd5aa8f9acc4534f0a636c3ba06[m
+Merge: fafba3f e37206c
+Author: Harriet <harrietrc@gmail.com>
+Date:   Fri Aug 29 13:09:58 2014 +1200
+
+    Merged
+
+[33mcommit e37206cce2e59baa67f2b1362e782712d0b6aa46[m
+Author: Alan Lau <alau645@aucklanduni.ac.nz>
+Date:   Fri Aug 29 13:05:03 2014 +1200
+
+    fixed doctor publisher
+
+[33mcommit fafba3f03e220a77f40a7c2fff8880c3065cd9bc[m
+Author: Harriet Robinson-Chen <harrietrc@gmail.com>
+Date:   Fri Aug 29 13:04:15 2014 +1200
+
+    More edges, added originName to caregiver constructors
+
+[33mcommit 947c4d7bf39c8f1bc453dbdf9e753f21015faf6d[m
+Merge: 59d3634 08e19e4
+Author: Alan Lau <alau645@aucklanduni.ac.nz>
+Date:   Fri Aug 29 13:03:47 2014 +1200
+
+    Merge branch 'feature/move' of https://github.com/clee842/se306-project1 into feature/move
+
+[33mcommit 59d3634bd20f34a48ac008176df903c190d9d8ae[m
+Author: Alan Lau <alau645@aucklanduni.ac.nz>
+Date:   Fri Aug 29 13:03:34 2014 +1200
+
+    fixed friend callback in resident
+
+[33mcommit f22ec479b05ee93a0df23972812c0012e29bfd42[m
+Merge: be47f19 0e51fde
+Author: John <clee842@aucklanduni.ac.nz>
+Date:   Fri Aug 29 13:01:56 2014 +1200
+
+    merge
+
+[33mcommit 08e19e4a5bc58016c913159b84cb18801ef6cffe[m
+Merge: 648916c 6b3668e
+Author: mshehadeh <mshe246@gmail.com>
+Date:   Fri Aug 29 13:01:26 2014 +1200
+
+    Merge branch 'feature/move' of https://github.com/clee842/se306-project1 into feature/move
+
+[33mcommit 648916c5b1fe34051d029f8fb39e3481a0bf44fd[m
+Author: mshehadeh <mshe246@gmail.com>
+Date:   Fri Aug 29 13:00:50 2014 +1200
+
+    added missing files
+
+[33mcommit 6b3668e161d8a43d36f0a4795571ff1b344a22ba[m
+Merge: c1829f8 4a8f4c0
+Author: Alan Lau <alau645@aucklanduni.ac.nz>
+Date:   Fri Aug 29 12:56:45 2014 +1200
+
+    Merge branch 'feature/move' of https://github.com/clee842/se306-project1 into feature/move
+
+[33mcommit 4a8f4c00386be22e7d2c0a82b33cd8ac6b8eabee[m
+Author: mshehadeh <mshe246@gmail.com>
+Date:   Fri Aug 29 12:56:04 2014 +1200
+
+    fixing push mistake
+
+[33mcommit c1829f852679ea6093d2db114f069d09204a8057[m
+Merge: f1a2fe2 15e6233
+Author: Alan Lau <alau645@aucklanduni.ac.nz>
+Date:   Fri Aug 29 12:55:51 2014 +1200
+
+    Merge branch 'feature/move' of https://github.com/clee842/se306-project1 into feature/move
+
+[33mcommit f1a2fe2078ec375e6d2eb9d889caf10b3ec01154[m
+Author: Alan Lau <alau645@aucklanduni.ac.nz>
+Date:   Fri Aug 29 12:55:36 2014 +1200
+
+    added move func. for friends
+
+[33mcommit 15e62337aa510fbf4e2812946609cbb9f239984f[m
+Merge: 33ee284 0e51fde
+Author: mshehadeh <mshe246@gmail.com>
+Date:   Fri Aug 29 12:55:07 2014 +1200
+
+    Merge branch 'feature/move' of https://github.com/clee842/se306-project1 into feature/move
+
+[33mcommit 33ee2840379181cbf75b6c916937c0e8084ec7e9[m
+Merge: 9167a7c 26128db
+Author: mshehadeh <mshe246@gmail.com>
+Date:   Fri Aug 29 12:54:25 2014 +1200
+
+    Fixed entertaining mistake
+
+[33mcommit 4bdca26b8f1101f53acab5e36c5a5d4475ce4c41[m
+Author: Samanyu Kansara <skan729@aucklanduni.ac.nz>
+Date:   Fri Aug 29 12:53:02 2014 +1200
+
+    Friend moves to his spot near the couch.
+
+[33mcommit 0e51fdefed9b8725b51107fda9cd2e806bbd10b5[m
+Merge: 32693dd 26128db
+Author: Alan Lau <alau645@aucklanduni.ac.nz>
+Date:   Fri Aug 29 12:44:18 2014 +1200
+
+    Merge branch 'feature/move' of https://github.com/clee842/se306-project1 into feature/move
+
+[33mcommit 32693dd42a4de850302fc611cb4c44588157f36e[m
+Author: Alan Lau <alau645@aucklanduni.ac.nz>
+Date:   Fri Aug 29 12:43:09 2014 +1200
+
+    added move func. to Doctor/nurses
+
+[33mcommit 9167a7c3314854a70f9f729d95b458d51495690b[m
+Author: mshehadeh <mshe246@gmail.com>
+Date:   Fri Aug 29 12:39:27 2014 +1200
+
+    Assistant can now clean
+
+[33mcommit 26128db48e90110e6f25c0d74716b770a64d9408[m
+Author: Harriet Robinson-Chen <harrietrc@gmail.com>
+Date:   Fri Aug 29 12:39:09 2014 +1200
+
+    More edges
+
+[33mcommit 1f513bc3f2cb50c3a1f4d762421c6dda4a2328d7[m
+Author: Harriet Robinson-Chen <harrietrc@gmail.com>
+Date:   Fri Aug 29 12:15:40 2014 +1200
+
+    Added another checkpoint and edge
+    
+    Robot was probably taking a long path because it was technically the
+    shortest path in terms of vertices, but not distance - if this doesn't
+    work I'll add another vertex to weight that long edge even more.
+
+[33mcommit 375a59c19fe3dcb405938041add0239a4318c660[m
+Author: mshehadeh <mshe246@gmail.com>
+Date:   Fri Aug 29 12:12:43 2014 +1200
+
+    Robots now clean stuff Contributors: Earl, Mustafa
+
+[33mcommit f18bef8128306be14ae3016d13978db37c27e95e[m
+Author: mshehadeh <mshe246@gmail.com>
+Date:   Fri Aug 29 10:59:08 2014 +1200
+
+    Made a second assistant
+
+[33mcommit bfb1f83113fe98844813a9ed9d8bcb80e2891ac5[m
+Author: mshehadeh <mshe246@gmail.com>
+Date:   Fri Aug 29 10:33:03 2014 +1200
+
+    removed from dead code
+
+[33mcommit 77f4fc3b19e8b424efac0568e343f371ec75e751[m
+Merge: df21ca4 587fa95
+Author: mshehadeh <mshe246@gmail.com>
+Date:   Fri Aug 29 10:21:06 2014 +1200
+
+    fixed bug where resident will attempt to go back to origin and d oanother task
+
+[33mcommit df21ca4705e4d3e23b9e3ab066d4c2982091b764[m
+Author: mshehadeh <mshe246@gmail.com>
+Date:   Fri Aug 29 10:18:16 2014 +1200
+
+    changed how medicate method works
+
+[33mcommit 587fa95b99e182c6df4169c34e9f2dd6cf02a545[m
+Author: Earl Balmes <ebal155@aucklanduni.ac.nz>
+Date:   Fri Aug 29 10:17:04 2014 +1200
+
+    Made minor changes to Assistant medicate(). Contributors: Samanyu, Earl, Mustafa
+
+[33mcommit 486a3f8b3f9d2e34b3ff3c5563a77915b2627ea8[m
+Author: mshehadeh <mshe246@gmail.com>
+Date:   Fri Aug 29 10:03:11 2014 +1200
+
+    fixing github error
+
+[33mcommit 59d3e2bffdb75eab406a5a5da1e6388543351366[m
+Author: mshehadeh <mshe246@gmail.com>
+Date:   Fri Aug 29 09:45:02 2014 +1200
+
+    fixed Assistants return origin
+
+[33mcommit 73003ee0f4ff4a02e34d781141b6f04d8ae36d74[m
+Merge: 9907fae d8deddd
+Author: mshehadeh <mshe246@gmail.com>
+Date:   Fri Aug 29 08:07:40 2014 +1200
+
+    Merge branch 'feature/move' of https://github.com/clee842/se306-project1 into feature/move
+
+[33mcommit 9907faea86904e178bc810de94043151688a0684[m
+Merge: 21c7310 3406726
+Author: mshehadeh <mshe246@gmail.com>
+Date:   Fri Aug 29 08:07:27 2014 +1200
+
+    pulling
+
+[33mcommit d8deddd8297ec448c6fb4d947eecf5eee2d4a73d[m
+Author: Samanyu Kansara <skan729@aucklanduni.ac.nz>
+Date:   Fri Aug 29 08:05:09 2014 +1200
+
+    Fixed Assistant's cook method.
+
+[33mcommit 34067269a5f18cdcad0f9a772eb1e3f6b31e5908[m
+Author: Samanyu Kansara <skan729@aucklanduni.ac.nz>
+Date:   Fri Aug 29 08:02:53 2014 +1200
+
+    Fixed Assistant's cook method.
+
+[33mcommit 21c7310596f73a7ea74196c56387af957532ae5c[m
+Merge: 426efcc d202a64
+Author: mshehadeh <mshe246@gmail.com>
+Date:   Fri Aug 29 08:01:36 2014 +1200
+
+    fixed some merging erorrs
+
+[33mcommit 426efcc78f4852f033124e376997837051370adc[m
+Author: mshehadeh <mshe246@gmail.com>
+Date:   Fri Aug 29 08:00:02 2014 +1200
+
+    Change return area of Robot back to origin
+
+[33mcommit d202a642a780630e4af99e7a9137091d0f59870b[m
+Merge: 7d81134 864ff29
+Author: Samanyu Kansara <skan729@aucklanduni.ac.nz>
+Date:   Fri Aug 29 06:38:47 2014 +1200
+
+    Resident's health, hunger and boredom now go down.
+
+[33mcommit 7d81134f7b79bb9124b5cfe20253d76f4f41da8e[m
+Author: Samanyu Kansara <skan729@aucklanduni.ac.nz>
+Date:   Fri Aug 29 05:25:34 2014 +1200
+
+    Made resident tom move to living room when friends are over
+
+[33mcommit 864ff29452f12cecf3ee273fbc37bdccf217fc09[m
+Author: Harriet Robinson-Chen <harrietrc@gmail.com>
+Date:   Fri Aug 29 04:03:48 2014 +1200
+
+    originName inheritance seems to be working
+    
+    but not tested
+
+[33mcommit f6dd5b8f388f89459d637b60bbbbef5f68acefe0[m
+Merge: fee7d1c a792b19
+Author: mshehadeh <mshe246@gmail.com>
+Date:   Fri Aug 29 03:40:28 2014 +1200
+
+    Merge branch 'feature/move' of https://github.com/clee842/se306-project1 into feature/move
+
+[33mcommit fee7d1c4108dc47a0df90eaecb89d788fff19d5a[m
+Author: mshehadeh <mshe246@gmail.com>
+Date:   Fri Aug 29 03:40:06 2014 +1200
+
+    Assistant now medicates Resident, Contributors: Earl, Mustafa
+
+[33mcommit a792b192e6a61a282a32776ac0b9e009b948914b[m
+Author: Harriet Robinson-Chen <harrietrc@gmail.com>
+Date:   Fri Aug 29 03:02:26 2014 +1200
+
+    Added duplicate files for nurse, caregiver, friend
+    
+    Need to sort out inheritance of originName, which is currently declared
+    and defined in subclasses (should be declared in superclass, defined in
+    subclasses)
+
+[33mcommit 74d1f9039c186378a9b8fae27a28a29a40df3266[m
+Merge: 5be53aa a323d4c
+Author: mshehadeh <mshe246@gmail.com>
+Date:   Fri Aug 29 02:48:59 2014 +1200
+
+    Merge branch 'feature/move' of https://github.com/clee842/se306-project1 into feature/move
+
+[33mcommit 5be53aaf994980b644019d98b4336d12485c46cd[m
+Author: mshehadeh <mshe246@gmail.com>
+Date:   Fri Aug 29 02:48:41 2014 +1200
+
+    Assistant now sending messages to Resident now, Set up a subscriber in Resident - Earl,mustafa
+
+[33mcommit a323d4cf7e0e6ae72279ae2b9de218f8c7bbee30[m
+Author: Alan <alau645@aucklanduni.ac.nz>
+Date:   Fri Aug 29 02:41:55 2014 +1200
+
+    Added timing for when door opens and closes - Contributors: RJ, me
+
+[33mcommit a6823a7589985d867c616ff12a921f3d44e599c5[m
+Merge: e5a0604 d578765
+Author: mshehadeh <mshe246@gmail.com>
+Date:   Fri Aug 29 02:31:07 2014 +1200
+
+    Merge branch 'feature/move' of https://github.com/clee842/se306-project1 into feature/move
+
+[33mcommit e5a0604d702a4f67b88e7bf1987a452b96aa23bf[m
+Merge: 8d92966 68c6b9c
+Author: mshehadeh <mshe246@gmail.com>
+Date:   Fri Aug 29 02:30:50 2014 +1200
+
+    Assistant now goes to resident and returns to home centre when the resident is hunger. Contributors: Earl,Mustafa
+
+[33mcommit d57876566d55fb2293e9972f323821f3d6d541f7[m
+Author: Alan <alau645@aucklanduni.ac.nz>
+Date:   Fri Aug 29 02:19:18 2014 +1200
+
+    Door able to close and open - Contributors - RJ, me
+
+[33mcommit cc54383dfc9657ee853c949cc6a7b39a83704aca[m
+Author: Alan <alau645@aucklanduni.ac.nz>
+Date:   Fri Aug 29 01:19:11 2014 +1200
+
+    Class for Door
+
+[33mcommit 18bf691d37391cf530a055c53a4801a96b522c08[m
+Author: RodelJasper <rroj173@aucklanduni.ac.nz>
+Date:   Thu Aug 28 06:03:42 2014 -0700
+
+    sliding door is initially closed and changed resident node to a human form
+
+[33mcommit 3caed62395b3d3a4a4a1e82459f9d2d1a5c3b74e[m
+Author: Alan <alau645@aucklanduni.ac.nz>
+Date:   Fri Aug 29 00:17:00 2014 +1200
+
+    Revert "Revert "Fixed build error""
+    
+    This reverts commit 59dc1d3c054704cfa0ac807c3b1ba41f2fcd0685.
+
+[33mcommit d123c601b16b170ff7bade07c82f7d9faca24f7d[m
+Author: Alan <alau645@aucklanduni.ac.nz>
+Date:   Fri Aug 29 00:15:54 2014 +1200
+
+    Revert "Added in the move into the Visitor/nurse/doctor/friend"
+    
+    This reverts commit 0339f0a946a9e2683d10df7338fb7f66dbe8738b.
+
+[33mcommit 59dc1d3c054704cfa0ac807c3b1ba41f2fcd0685[m
+Author: Alan <alau645@aucklanduni.ac.nz>
+Date:   Fri Aug 29 00:15:48 2014 +1200
+
+    Revert "Fixed build error"
+    
+    This reverts commit f414151009808d510065a74b7909f34bbc021ebf.
+
+[33mcommit f414151009808d510065a74b7909f34bbc021ebf[m
+Author: Alan <alau645@aucklanduni.ac.nz>
+Date:   Fri Aug 29 00:03:28 2014 +1200
+
+    Fixed build error
+
+[33mcommit 0339f0a946a9e2683d10df7338fb7f66dbe8738b[m
+Author: Alan <alau645@aucklanduni.ac.nz>
+Date:   Thu Aug 28 23:56:14 2014 +1200
+
+    Added in the move into the Visitor/nurse/doctor/friend
+
+[33mcommit 7e538b8066902e04c5fcaaabc18be1c0a9da294d[m
+Author: Alan <alau645@aucklanduni.ac.nz>
+Date:   Thu Aug 28 23:55:12 2014 +1200
+
+    Fixed build error
+
+[33mcommit 84c177932daee37aadbf37aff276a58570236fd3[m
+Merge: f270b46 11f4695
+Author: Samanyu Kansara <skan729@aucklanduni.ac.nz>
+Date:   Thu Aug 28 23:07:48 2014 +1200
+
+    Merge branch 'feature/move' of https://github.com/clee842/se306-project1 into feature/move
+
+[33mcommit f270b464266ac2e24f62eeef8da43cd8bb18bbb0[m
+Author: Samanyu Kansara <skan729@aucklanduni.ac.nz>
+Date:   Thu Aug 28 23:06:28 2014 +1200
+
+    Added friend files. Added checkStatus method in Resident.
+
+[33mcommit 11f4695d7069710afd6749add6561ac70d9338dd[m
+Author: Harriet Robinson-Chen <harrietrc@gmail.com>
+Date:   Thu Aug 28 22:30:06 2014 +1200
+
+    New checkpoints for sofas and shower
+    
+    For friend/caregiver/resident behaviours
+
+[33mcommit e214b512962c9a4cabef15a54db0e43ace0ae540[m
+Author: Samanyu Kansara <skan729@aucklanduni.ac.nz>
+Date:   Thu Aug 28 22:15:08 2014 +1200
+
+    Added stopMoving method.
+
+[33mcommit 8d9296672ba134f6f4361aceff12c3e0aa7b8be9[m
+Merge: ea26004 580d723
+Author: mshehadeh <mshe246@gmail.com>
+Date:   Thu Aug 28 21:46:38 2014 +1200
+
+    merging
+
+[33mcommit 68c6b9c40f87b606710091c16b3c8cb1044d1e94[m
+Author: Samanyu Kansara <skan729@aucklanduni.ac.nz>
+Date:   Thu Aug 28 21:33:17 2014 +1200
+
+    Added friends to schedule.
+
+[33mcommit ea2600470e3464979fe113f7c25009b6a2e955ef[m
+Author: mshehadeh <mshe246@gmail.com>
+Date:   Thu Aug 28 20:35:25 2014 +1200
+
+    added a file
+
+[33mcommit 2bc8c3db634f788314b623d42e5031a58dff7527[m
+Author: mshehadeh <mshe246@gmail.com>
+Date:   Thu Aug 28 20:33:56 2014 +1200
+
+    ASSISTANT NOW STOPS AT RESIDENT AND FEEDS IT./buildfile.sh! Contributors: EARL KESTER BALMES, Mustafa
+
+[33mcommit 580d723b1c82492e7bc244e294d3d35ed57898bd[m
+Merge: 777160f df9f021
+Author: Samanyu Kansara <skan729@aucklanduni.ac.nz>
+Date:   Thu Aug 28 19:59:32 2014 +1200
+
+    Merge branch 'feature/move' of https://github.com/clee842/se306-project1 into feature/move
+
+[33mcommit 777160f38e68dfda2fe3234fc284320909e532cf[m
+Author: Samanyu Kansara <skan729@aucklanduni.ac.nz>
+Date:   Thu Aug 28 19:56:28 2014 +1200
+
+    Created scheduled events for a day. Specific timer callbacks are called at specific time.
+
+[33mcommit 48000338894e68ba00531297b3fc3a80b27f2290[m
+Author: mshehadeh <mshe246@gmail.com>
+Date:   Thu Aug 28 19:40:14 2014 +1200
+
+    added message passing Contributors: Earl, mustafa
+
+[33mcommit df9f021f0250afb608442c7f2abfaca866ef60d6[m
+Author: Harriet Robinson-Chen <harrietrc@gmail.com>
+Date:   Thu Aug 28 18:50:33 2014 +1200
+
+    pushing minus an edge
+
+[33mcommit 060ab4556f483f0a79f2f8bf3617dc944ba25a2b[m
+Merge: 106a48a 41b4b66
+Author: Samanyu Kansara <skan729@aucklanduni.ac.nz>
+Date:   Thu Aug 28 18:44:13 2014 +1200
+
+    Merge branch 'feature/move' of https://github.com/clee842/se306-project1 into feature/move
+
+[33mcommit 41b4b66099fdbaf398701375642fabe55ab5ab62[m
+Author: mshehadeh <mshe246@gmail.com>
+Date:   Thu Aug 28 18:42:29 2014 +1200
+
+    fixed residnt err
+
+[33mcommit 106a48a03f277812baba1f45f92deedfbb951243[m
+Merge: f1c206b c1bdb05
+Author: Samanyu Kansara <skan729@aucklanduni.ac.nz>
+Date:   Thu Aug 28 18:41:50 2014 +1200
+
+    Merge branch 'feature/move' of https://github.com/clee842/se306-project1 into feature/move
+
+[33mcommit f1c206bad1fa2c14673cfb093c29bc6799ea4ac4[m
+Author: Samanyu Kansara <skan729@aucklanduni.ac.nz>
+Date:   Thu Aug 28 18:40:59 2014 +1200
+
+    Added scheduled medication for Resident.
+
+[33mcommit c1bdb0506bbd0be6c5b137467a782477dca11e34[m
+Merge: 95abac1 255e4e1
+Author: mshehadeh <mshe246@gmail.com>
+Date:   Thu Aug 28 18:01:43 2014 +1200
+
+    Merge branch 'feature/move' of https://github.com/clee842/se306-project1 into feature/move
+
+[33mcommit 95abac1bf135b5dce4407d482ee6fda192c0519e[m
+Author: mshehadeh <mshe246@gmail.com>
+Date:   Thu Aug 28 18:00:49 2014 +1200
+
+    fixing build erors in caregiver
+
+[33mcommit 255e4e1fbab9a9b3a1e0012f744426efdd231364[m
+Author: Harriet Robinson-Chen <harrietrc@gmail.com>
+Date:   Thu Aug 28 17:14:49 2014 +1200
+
+    Changed the checkpoints and edges a little
+    
+    Earl and Mustafa found a fault
+
+[33mcommit 0c5192df61ee005950808311d3f8572909192f1a[m
+Merge: a451d12 316b697
+Author: mshehadeh <mshe246@gmail.com>
+Date:   Thu Aug 28 17:06:04 2014 +1200
+
+    Merge branch 'feature/move' of https://github.com/clee842/se306-project1 into feature/move
+
+[33mcommit a451d12e464ebe31246e45bbd03970b22f5d36ca[m
+Merge: 65db745 d32f0b1
+Author: mshehadeh <mshe246@gmail.com>
+Date:   Thu Aug 28 17:02:51 2014 +1200
+
+    Merge branch 'feature/move' of https://github.com/clee842/se306-project1 into feature/move
+
+[33mcommit 316b6979988d5ddb8f891a6b6600956189369315[m
+Merge: fab085b d32f0b1
+Author: Govindu <govindu7@hotmail.com>
+Date:   Thu Aug 28 17:01:45 2014 +1200
+
+    Merge branch 'feature/move' of https://github.com/clee842/se306-project1 into feature/move
+
+[33mcommit 65db745954bd82f5300c43d96e1efe9f719e97e5[m
+Author: mshehadeh <mshe246@gmail.com>
+Date:   Thu Aug 28 17:01:05 2014 +1200
+
+    Added a publisher to Assitant, which sends its current state to assistantStatus. Contributors: Mustafa, Earl
+
+[33mcommit fab085bc2c55c12521f96a4e20ec72ffb9c86c7a[m
+Author: Govindu <govindu7@hotmail.com>
+Date:   Thu Aug 28 17:00:43 2014 +1200
+
+    Fixed minor error in Caregiver.cpp
+
+[33mcommit d32f0b1e769a49dcc7e0985823b149a375923627[m
+Merge: 7edc1ea f5b3e8a
+Author: Samanyu Kansara <skan729@aucklanduni.ac.nz>
+Date:   Thu Aug 28 16:54:24 2014 +1200
+
+    Merge branch 'feature/move' of https://github.com/clee842/se306-project1 into feature/move
+    
+    Push changed resident file to repo
+
+[33mcommit 7edc1eab714efc0223f5c4d092b5d2f45acbaaea[m
+Merge: 85969bd 00e3ca8
+Author: Samanyu Kansara <skan729@aucklanduni.ac.nz>
+Date:   Thu Aug 28 16:51:40 2014 +1200
+
+    Resident pulishes its status (position, state).
+
+[33mcommit f5b3e8a4df9cae9ca8d2c8129145285bb0574a52[m
+Author: Govindu <govindu7@hotmail.com>
+Date:   Thu Aug 28 16:42:58 2014 +1200
+
+    Added commenting
+
+[33mcommit 189c4a18a6c60473c5f09cf6b1dd06231ec7b366[m
+Author: Govindu <govindu7@hotmail.com>
+Date:   Thu Aug 28 16:31:18 2014 +1200
+
+    fixing commit errors
+
+[33mcommit 85969bdac2263ec5e87a64fae715187ae07b6020[m
+Author: Samanyu Kansara <skan729@aucklanduni.ac.nz>
+Date:   Thu Aug 28 16:25:30 2014 +1200
+
+    Added code to publish state method
+
+[33mcommit e25af4c694198559d3b0873c761ddefe1197bf4c[m
+Merge: 5e22498 00e3ca8
+Author: Govindu <govindu7@hotmail.com>
+Date:   Thu Aug 28 16:25:24 2014 +1200
+
+    Merge branch 'feature/move' of https://github.com/clee842/se306-project1 into feature/move
+
+[33mcommit 5e22498732bd90ee5d5b153dfb1c0479469f0a49[m
+Author: Govindu <govindu7@hotmail.com>
+Date:   Thu Aug 28 16:18:00 2014 +1200
+
+    Added movement functionality to caregiver, untested
+
+[33mcommit 00e3ca8638908a85c99b98cbea1214b7a9083d86[m
+Author: mshehadeh <mshe246@gmail.com>
+Date:   Thu Aug 28 16:16:11 2014 +1200
+
+    fixed build error in the branch
+
+[33mcommit b556a9810e8f9de19d0327ecf6390a14fd9da9d6[m
+Merge: 449eafd 7b7589b
+Author: mshehadeh <mshe246@gmail.com>
+Date:   Thu Aug 28 16:13:03 2014 +1200
+
+    Merge branch 'feature/move' of https://github.com/clee842/se306-project1 into feature/move
+
+[33mcommit 449eafd9d4c5d6c1da23b78fe9afa6ba8388053d[m
+Author: mshehadeh <mshe246@gmail.com>
+Date:   Thu Aug 28 16:12:13 2014 +1200
+
+    added a PQ to string method
+
+[33mcommit be47f19ae4b2d4f120ee03e1728fe520b5cf85f4[m
+Author: John <clee842@aucklanduni.ac.nz>
+Date:   Thu Aug 28 15:54:56 2014 +1200
+
+    new pythongui branch
+
+[33mcommit 7b7589baf242d63f14803d6139f7da67abdadf69[m
+Merge: b1ee698 c705e68
+Author: Samanyu Kansara <skan729@aucklanduni.ac.nz>
+Date:   Thu Aug 28 15:45:17 2014 +1200
+
+    Merge branch 'feature/move' of https://github.com/clee842/se306-project1 into feature/move
+    
+    Changes from local repo need to be pushed. Merging changes from remote to local.
+
+[33mcommit b1ee698e169df591ca34fe0e27fc8e05a27d7d5b[m
+Author: Samanyu Kansara <skan729@aucklanduni.ac.nz>
+Date:   Thu Aug 28 15:41:14 2014 +1200
+
+    Modified Resident message. Added publisher in resident to publish its state.
+
+[33mcommit c705e68ebba9d0c73d54de75fd060b992571560d[m
+Author: Alan <alau645@aucklanduni.ac.nz>
+Date:   Thu Aug 28 14:51:30 2014 +1200
+
+    Implemented Doctor & Friend callbacks in Resident. still needs move()
+
+[33mcommit bf9c1e5db4131f846806ebdd56ee60601d6a3150[m
+Merge: 871af45 1622d88
+Author: mshehadeh <mshe246@gmail.com>
+Date:   Thu Aug 28 14:24:50 2014 +1200
+
+    Merge branch 'feature/move' of https://github.com/clee842/se306-project1 into feature/move
+
+[33mcommit 871af456c5f451c57be4a6a4492ce53a9ac53934[m
+Merge: cca06e5 055cff2
+Author: mshehadeh <mshe246@gmail.com>
+Date:   Thu Aug 28 14:23:12 2014 +1200
+
+    pull
+
+[33mcommit ba4617749aca6d98f6edbae6bd3fd3418334e198[m
+Author: John <clee842@aucklanduni.ac.nz>
+Date:   Thu Aug 28 13:59:57 2014 +1200
+
+    reverted procman to before yesterday
+
+[33mcommit cca06e53799e42f0ff58e0c5f13f2be40adcdf93[m
+Merge: 2d81602 afae5a6
+Author: mshehadeh <mshe246@gmail.com>
+Date:   Thu Aug 28 13:57:56 2014 +1200
+
+    updated buildfile to work again and made it smarter to errors
+
+[33mcommit 1622d888ecfb1fb8a07f6151c895cd67c6793ae6[m
+Merge: d7ffac3 ba46177
+Author: RodelJasper <rroj173@aucklanduni.ac.nz>
+Date:   Wed Aug 27 18:34:22 2014 -0700
+
+    Merge branch 'feature/move' of https://github.com/clee842/se306-project1 into feature/move
+
+[33mcommit d7ffac320a8ace404f29e9a585b5616e3bcfb9f8[m
+Author: RodelJasper <rroj173@aucklanduni.ac.nz>
+Date:   Wed Aug 27 18:26:57 2014 -0700
+
+    New Stage set up with less lag, all nodes implemented and in correct origin. Human model for robots have been made, sliding door is put in place but not operating.
+
+[33mcommit 9f566b86d3bdc1c1ea1803a70fda0e05e3ca5d03[m
+Merge: 93f052b 055cff2
+Author: John <clee842@aucklanduni.ac.nz>
+Date:   Thu Aug 28 13:19:56 2014 +1200
+
+    Merge branch 'feature/move' of https://github.com/clee842/se306-project1 into feature/move
+
+[33mcommit 055cff2a4eff997c679f2dde4a98a70e130b3a22[m
+Author: Earl Balmes <ebal155@aucklanduni.ac.nz>
+Date:   Thu Aug 28 13:15:03 2014 +1200
+
+    Adjusted linear and angular velocity values, to increase accuracy. Contributors: Harriet, Mustafa, Earl
+
+[33mcommit 2d81602655784a81cc53dcdacb526e1d381a4fda[m
+Author: mshehadeh <mshe246@gmail.com>
+Date:   Thu Aug 28 12:56:52 2014 +1200
+
+    pull
+
+[33mcommit afae5a6c804f23599cade33b4433b85a0cfbad7f[m
+Author: Harriet Robinson-Chen <harrietrc@gmail.com>
+Date:   Thu Aug 28 12:52:46 2014 +1200
+
+    Fixed the move code
+    
+    Mustafa figured out that you have to set px and py in run
+
+[33mcommit 93f052bbdd4b98a1e4f4be48044202a0bae4908f[m
+Merge: b598f91 8366696
+Author: John <clee842@aucklanduni.ac.nz>
+Date:   Thu Aug 28 12:13:10 2014 +1200
+
+    Merge branch 'feature/move' of https://github.com/clee842/se306-project1 into feature/move
+
+[33mcommit b598f910abc2b1fcddf511c504a27f60a66bcfe0[m
+Merge: 584564e a69338c
+Author: John <clee842@aucklanduni.ac.nz>
+Date:   Thu Aug 28 12:12:22 2014 +1200
+
+    merge
+
+[33mcommit f6e590250fea4ecc226921e178990f9c90774b3c[m
+Merge: 300c347 8366696
+Author: mshehadeh <mshe246@gmail.com>
+Date:   Thu Aug 28 11:57:33 2014 +1200
+
+    Merge branch 'feature/move' of https://github.com/clee842/se306-project1 into feature/move
+
+[33mcommit 300c3473a8bfa711952d0dedc3910a91d8e09d25[m
+Merge: 5ade0af 3fdfd3a
+Author: mshehadeh <mshe246@gmail.com>
+Date:   Thu Aug 28 11:55:07 2014 +1200
+
+    succesfully p pulled and merged
+
+[33mcommit 836669649dde8d78dfc214b14e5b8b9878c73590[m
+Author: Harriet Robinson-Chen <harrietrc@gmail.com>
+Date:   Thu Aug 28 11:54:51 2014 +1200
+
+    Earl's work - no more sentient couch
+    
+    Assistant moves instead of couch
+
+[33mcommit 3fdfd3a401f77e950500dd94b8b366a28684d989[m
+Author: Harriet Robinson-Chen <harrietrc@gmail.com>
+Date:   Thu Aug 28 10:27:32 2014 +1200
+
+    Alan's changes to visitor classes
+    
+    **NOT MY WORK** - this is Alan's work, which must have been overwritten
+    during one of my more careless merges (and has now been added back in)
+
+[33mcommit 5ade0af185e1d19aae31d66abfd7e06109a8edb4[m
+Author: mshehadeh <mshe246@gmail.com>
+Date:   Thu Aug 28 09:33:22 2014 +1200
+
+    pulling
+
+[33mcommit f52a6135cbae9e22e21c6b9dedcdd2b16ef0776e[m
+Author: Harriet Robinson-Chen <harrietrc@gmail.com>
+Date:   Thu Aug 28 08:13:15 2014 +1200
+
+    removed redundancy
+    
+    Couch moves in wrong direction, though, but nextCheckpoint and path set
+    correctly. Will check to see if coordinate system is same for newer
+    house.
+
+[33mcommit 512ca6f61889eb9a9af2157c7a19560f253da0d1[m
+Author: Harriet Robinson-Chen <harrietrc@gmail.com>
+Date:   Thu Aug 28 07:19:01 2014 +1200
+
+    Fixed bugs, added an edge
+    
+    Turns out all the graph code was fine - it was the print statement that
+    was wrong. Also added an edge.
+
+[33mcommit de08d8e853eca3ff2b2038e8707c3ee2c4a99dc4[m
+Author: Harriet Robinson-Chen <harrietrc@gmail.com>
+Date:   Thu Aug 28 05:08:13 2014 +1200
+
+    Debugging
+    
+    There's still an error in there somewhere (something to do with the last
+    few lines of shortestPath() or whether the graph and maps are there when
+    they should be). Will fix it in a bit. Excuse the print statements...
+
+[33mcommit fa956c60b8dc9943f38da2c1162c3f79323f856c[m
+Merge: 2987037 8d75f28
+Author: Harriet <harrietrc@gmail.com>
+Date:   Thu Aug 28 01:08:56 2014 +1200
+
+    merge
+
+[33mcommit 298703702fc5b7092f2060b9ee69837541ec2b15[m
+Author: Harriet Robinson-Chen <harrietrc@gmail.com>
+Date:   Thu Aug 28 01:01:41 2014 +1200
+
+    move works
+    
+    Naïve version of bidirectional map implemented in the form of 2 maps.
+    Going to see if I can debug/implement some behaviours before morning.
+
+[33mcommit 8d75f28e3ee398b3bf0d48093f3915f02d3c9ada[m
+Author: Alan <alau645@aucklanduni.ac.nz>
+Date:   Wed Aug 27 23:44:26 2014 +1200
+
+    Better use of inheritance for Visitors
+
+[33mcommit f0329a81c558c2d2bf396c823a1c251d01df0cd2[m
+Author: Alan <alau645@aucklanduni.ac.nz>
+Date:   Wed Aug 27 22:18:54 2014 +1200
+
+    Implemented Visitor behaviour. still needs move(toResident) and move(outside)
+
+[33mcommit ba127094334f53dc303b28e51509684d41cb197a[m
+Merge: c0226f5 a69338c
+Author: Govindu <govindu7@hotmail.com>
+Date:   Wed Aug 27 21:46:30 2014 +1200
+
+    Merge branch 'feature/move' of https://github.com/clee842/se306-project1 into feature/move
+
+[33mcommit c0226f51d22ba31c707143c3cd3c8134b34bb0e6[m
+Author: Govindu <govindu7@hotmail.com>
+Date:   Wed Aug 27 21:44:56 2014 +1200
+
+    Implemented methods for caregiver, move still incomplete
+
+[33mcommit 584564e89ac46354b93bd959972eee5dfa27a823[m
+Author: John <clee842@aucklanduni.ac.nz>
+Date:   Wed Aug 27 21:13:54 2014 +1200
+
+    reverted my changes
+
+[33mcommit 338279137195c91fdc8264eca7fe2b6d2b8c8f3f[m
+Merge: b9ad00b 4424912
+Author: mshehadeh <mshe246@gmail.com>
+Date:   Wed Aug 27 20:58:34 2014 +1200
+
+    commiting for the merge
+
+[33mcommit a69338c04598ea9a04e24e1baee7aac4d1d559a2[m
+Author: Alan <alau645@aucklanduni.ac.nz>
+Date:   Wed Aug 27 20:49:57 2014 +1200
+
+    Implemented Nurse behaviour. still needs move(toResident) and move(outside)
+
+[33mcommit a923210814b4d9877c5770a15ba86f501225be8f[m
+Author: Alan <alau645@aucklanduni.ac.nz>
+Date:   Wed Aug 27 20:48:41 2014 +1200
+
+    Implemented Doctor behaviour. still needs move(toResident) and move(outside)
+
+[33mcommit b9ad00be294cd4e5ac6f1607847f8406f44ed665[m
+Author: mshehadeh <mshe246@gmail.com>
+Date:   Wed Aug 27 20:36:29 2014 +1200
+
+    pulling
+
+[33mcommit 44249127efcd6324c318da505b2d5c093b4a2235[m
+Merge: 5552492 74ed55c
+Author: Harriet <harrietrc@gmail.com>
+Date:   Wed Aug 27 20:32:37 2014 +1200
+
+    merged
+
+[33mcommit 5552492297fbfbdfc3f85374561cad1733b72f13[m
+Author: Harriet <harrietrc@gmail.com>
+Date:   Wed Aug 27 20:31:53 2014 +1200
+
+    Now builds? Had to comment out some behaviour code
+
+[33mcommit 052111f40c67764514cab8b51cb86c20fa474ad0[m
+Author: Harriet <harrietrc@gmail.com>
+Date:   Wed Aug 27 20:04:05 2014 +1200
+
+    fixed merge conflicts
+
+[33mcommit 2216d2c9aaf64121db28e611abc88486e02f340c[m
+Author: Harriet Robinson-Chen <harrietrc@gmail.com>
+Date:   Wed Aug 27 19:46:59 2014 +1200
+
+    shortestPath() now returns a vector of strings rather than double pairs
+    
+    because it seems that currentCheckpoint needs to be passed as the start
+    of a path at some point? Still need to have a way to get the
+    origin/start position of each node.
+
+[33mcommit 74ed55cc4b5aab2bea8331b75e0f162d09a43013[m
+Merge: 1f0576c b953e0a
+Author: Earl Balmes <ebal155@aucklanduni.ac.nz>
+Date:   Wed Aug 27 18:03:45 2014 +1200
+
+    Merge branch 'feature/move' of https://github.com/clee842/se306-project1 into feature/move
+
+[33mcommit 1f0576c343d931a5a83f7c5fbb79ed1118ca35ec[m
+Author: Earl Balmes <ebal155@aucklanduni.ac.nz>
+Date:   Wed Aug 27 18:00:12 2014 +1200
+
+    Added an allowance for checking if the assistant is at a certain point, instead of its position being exactly on the point. Contributors: Mustafa, Earl.
+
+[33mcommit b953e0a28be788031f379a432b1de9c8850f08fb[m
+Merge: a6e4200 a064dd6
+Author: Harriet <harrietrc@gmail.com>
+Date:   Wed Aug 27 17:49:08 2014 +1200
+
+    Concluding merge...
+
+[33mcommit a6e4200ca5cdd880420618e943a051088f6a6ee3[m
+Author: Harriet <harrietrc@gmail.com>
+Date:   Wed Aug 27 17:44:52 2014 +1200
+
+    Merged (only changed CheckPointGraph.cpp)
+
+[33mcommit 08576c57e88ea813fcc4f3571315ac09cc477294[m
+Author: Harriet Robinson-Chen <harrietrc@gmail.com>
+Date:   Wed Aug 27 17:37:14 2014 +1200
+
+    Graph/checkpoints integrated with move
+    
+    Need to implement way to get origin of each agent.
+
+[33mcommit 85dd8e3ab96c0ec01ec4b6a38a8ccd4c3db4cf49[m
+Author: Earl Balmes <ebal155@aucklanduni.ac.nz>
+Date:   Wed Aug 27 17:32:58 2014 +1200
+
+    Added skeleton code for entertain(). Will finish later, when move() is integrated with graph. Contributors: Earl, Mustafa
+
+[33mcommit 5a1377c9a1e9ce9075ebb5b27af31b070493224c[m
+Author: Earl Balmes <ebal155@aucklanduni.ac.nz>
+Date:   Wed Aug 27 16:58:16 2014 +1200
+
+    Added skeleton code to cook(). Commented out for now. Contributors: Earl, Mustafa
+
+[33mcommit a064dd6a2d8ab528525a7b7a91edf83243d4defc[m
+Author: Mshehadeh <mshe246@gmail.com>
+Date:   Wed Aug 27 16:12:46 2014 +1200
+
+    added a remove state for PQ and made it so that if emergency is in PQ, health low is removed
+
+[33mcommit 67f4e39f379af4dcfdc1823e6d82d4992bddb941[m
+Author: Mshehadeh <mshe246@gmail.com>
+Date:   Wed Aug 27 15:59:12 2014 +1200
+
+    Moved abstract method delegate from Agent to Assistant as only Assistant needs to use it Contributors: Earl,Mustafa,Sam
+
+[33mcommit 73651d0a295941ef0227826dc067e49b00be0827[m
+Author: Mshehadeh <mshe246@gmail.com>
+Date:   Wed Aug 27 15:27:46 2014 +1200
+
+    fixed small error
+
+[33mcommit 3711817a9401d2aacefb0b012639c5c6f097072b[m
+Author: Mshehadeh <mshe246@gmail.com>
+Date:   Wed Aug 27 15:26:01 2014 +1200
+
+    allow resident to check front of pq
+
+[33mcommit a739faa61cc95ebdb14889fddcd8a59bc08c48cc[m
+Author: Mshehadeh <mshe246@gmail.com>
+Date:   Wed Aug 27 15:19:54 2014 +1200
+
+    fixed a bug
+
+[33mcommit 11503144801a8b36c5121247f2631c73b845ebd5[m
+Author: Mshehadeh <mshe246@gmail.com>
+Date:   Wed Aug 27 15:19:03 2014 +1200
+
+    resident can now access PQ
+
+[33mcommit 3bd8e05afe3250557e245583505df097180e81c7[m
+Merge: b77b968 d24ef10
+Author: Mshehadeh <mshe246@gmail.com>
+Date:   Wed Aug 27 14:59:29 2014 +1200
+
+    Merge branch 'feature/move' of https://github.com/clee842/se306-project1 into feature/move
+
+[33mcommit d24ef105efbf3a7f299c019e9c59b26c7b37305f[m
+Author: Harriet Robinson-Chen <harrietrc@gmail.com>
+Date:   Wed Aug 27 14:52:45 2014 +1200
+
+    Added checkpoints and edges
+    
+    All temporary and subject to change. See house.png in main folder for
+    checkpoint names.
+
+[33mcommit b77b9687a91fbe00b7c74b184a4024f7f47b63fe[m
+Author: Mshehadeh <mshe246@gmail.com>
+Date:   Wed Aug 27 14:48:16 2014 +1200
+
+    Reimplemented PQ
+
+[33mcommit 5da680765bf9b2b917ac008f623f14c953f05807[m
+Author: RodelJasper <rroj173@aucklanduni.ac.nz>
+Date:   Tue Aug 26 18:11:02 2014 -0700
+
+    swapped the world folder with the world folder from branch feature/world to get the most updated stage
+
+[33mcommit cb4468b0214d52909590e20e7e66e2bfe5be78a9[m
+Author: Harriet Robinson-Chen <harrietrc@gmail.com>
+Date:   Wed Aug 27 11:03:40 2014 +1200
+
+    Fixed CMakeLists
+    
+    Was missing references to Agent and new CheckPointGraph.cpp
+
+[33mcommit 040e13b5cf186cddf3ad15cf28db2aacf3f353b7[m
+Author: Harriet Robinson-Chen <harrietrc@gmail.com>
+Date:   Wed Aug 27 09:47:29 2014 +1200
+
+    Revert "Revert "Shifted graph/shortest path functionality out of agent""
+    
+    This reverts commit e0f38c975daa9342577dfad75c13391a8af21146.
+
+[33mcommit e0f38c975daa9342577dfad75c13391a8af21146[m
+Author: Harriet Robinson-Chen <harrietrc@gmail.com>
+Date:   Wed Aug 27 09:47:05 2014 +1200
+
+    Revert "Shifted graph/shortest path functionality out of agent"
+    
+    This reverts commit 73828f302e5ede45c933716fcf3ba2893974ae55.
+
+[33mcommit 73828f302e5ede45c933716fcf3ba2893974ae55[m
+Author: Harriet Robinson-Chen <harrietrc@gmail.com>
+Date:   Wed Aug 27 09:46:34 2014 +1200
+
+    Shifted graph/shortest path functionality out of agent
+    
+    (see CheckPointGraph.cpp and .hpp)
+
+[33mcommit 4ea07b59ff99b47b60b7936780152b73daf0c790[m
+Merge: 45e2da7 364454d
+Author: Harriet <harrietrc@gmail.com>
+Date:   Wed Aug 27 09:27:35 2014 +1200
+
+    Merge branch 'feature/move' of https://github.com/clee842/se306-project1 into feature/move
+
+[33mcommit 45e2da749a6442ee977719f9a86f5aad7b6ecbdb[m
+Author: Harriet Robinson-Chen <harrietrc@gmail.com>
+Date:   Wed Aug 27 09:25:07 2014 +1200
+
+    Committing to pull - created files for graph class
+
+[33mcommit 364454d0dec3095e0a7f34c12981b26a57d83cca[m
+Author: Samanyu Kansara <skan729@aucklanduni.ac.nz>
+Date:   Tue Aug 26 15:57:27 2014 +1200
+
+    Refactored Agent, Resident and Assistant.
+
+[33mcommit 18744c4c8bc273e8f52a6ba3db6d0b54e55b2a46[m
+Author: Harriet Robinson-Chen <harrietrc@gmail.com>
+Date:   Tue Aug 26 15:15:07 2014 +1200
+
+    Fixed newlines in msg files
+    
+    Build errors from coding in Windows (and building in Linux) fixed
+
+[33mcommit 5052ed52db8daec86c2c1c805e5b589080a397b4[m
+Author: Harriet Robinson-Chen <harrietrc@gmail.com>
+Date:   Tue Aug 26 15:09:44 2014 +1200
+
+    Fixed build errors from merging
+
+[33mcommit c89837e844d45090dede988e03d6d7c5db5e4c85[m
+Author: Samanyu Kansara <skan729@aucklanduni.ac.nz>
+Date:   Sat Aug 23 23:51:40 2014 +1200
+
+    Multiple robots working fine with move integrated. Removed extraneous stuff from Assistant. Tested with multiple robots.
+
+[33mcommit f71bb51ef4f8bb19a420ef77185870f1bb08bda8[m
+Author: Samanyu Kansara <skan729@aucklanduni.ac.nz>
+Date:   Sat Aug 23 23:19:53 2014 +1200
+
+    Add localisation and velocity bounds for assistant in house file
+
+[33mcommit 5d4cd756fe3a5006518c8a86b614596ce3f620f8[m
+Author: Samanyu Kansara <skan729@aucklanduni.ac.nz>
+Date:   Sat Aug 23 22:45:49 2014 +1200
+
+    Moved all the move methods to the superclass agent.
+
+[33mcommit a90a7080b2a0ac50397e626415b98f357cbe92ad[m
+Author: Samanyu Kansara <skan729@aucklanduni.ac.nz>
+Date:   Sat Aug 23 21:49:50 2014 +1200
+
+    Created constructors in Resident.h and Agent.h. Pushed all the common node variables to the superclass Agent.
+
+[33mcommit d7366da3b49c1201624dc85a58c7648d1e559eaf[m
+Author: Samanyu Kansara <skan729@aucklanduni.ac.nz>
+Date:   Sat Aug 23 21:37:34 2014 +1200
+
+    Put a check to ensure that linear velocity doesn't decrease if the distance between the checkpoints is higher than 40.
+
+[33mcommit 531230466bcfe2bca312b07a1e4588448ba37a8b[m
+Author: Samanyu Kansara <skan729@aucklanduni.ac.nz>
+Date:   Sat Aug 23 21:32:16 2014 +1200
+
+    Mapped linear velocity to sin function. Varies according to the distance from checkpoint. Minimum limit set to 1.5.
+
+[33mcommit 626c9088426dc4921a1834bf44bfc54fff0fc586[m
+Author: Samanyu Kansara <skan729@aucklanduni.ac.nz>
+Date:   Sat Aug 23 21:12:28 2014 +1200
+
+    Made the turn even finer.
+
+[33mcommit 53690e47e05cbc5b27851d2e1868096fd9f72f77[m
+Author: Samanyu Kansara <skan729@aucklanduni.ac.nz>
+Date:   Sat Aug 23 20:49:49 2014 +1200
+
+    Fine tuned the turn so that the angle error is no more than 0.45 degrees
+
+[33mcommit 230ebb20fc0ce2cd7d3bf575e23943727a449a6d[m
+Author: Samanyu Kansara <skan729@aucklanduni.ac.nz>
+Date:   Sat Aug 23 20:39:54 2014 +1200
+
+    Changed the mapping of turn from sin to cos. Angular velocity is highest when the angle to turn is 180. Decreases according to sine function.
+
+[33mcommit 45cbaa1db15c183f67ea1fdec983a45aff3d9b35[m
+Author: Earl Balmes <ebal155@aucklanduni.ac.nz>
+Date:   Fri Aug 22 17:50:32 2014 +1200
+
+    Mapped the angular velocity of robots to a sine function, so that it accelerates at the start and decelerates near the end of the turn.
+
+[33mcommit 308cf919d0843d3d73bc8d9803b351fc36f1b42b[m
+Author: Samanyu Kansara <skan729@aucklanduni.ac.nz>
+Date:   Fri Aug 22 16:29:51 2014 +1200
+
+    Implemented moveForward method. Moves node from one checkpoint to other. Contributors: Earl, Samanyu
+
+[33mcommit 617b3711d3b89ef1dd848c960a14ec8194743286[m
+Author: Samanyu Kansara <skan729@aucklanduni.ac.nz>
+Date:   Thu Aug 21 20:18:27 2014 +1200
+
+    Implemented turn method. Contributors: Earl, Samanyu
+
+[33mcommit 565a0603c67d1431bf4cbc1c6cef6de51f96f607[m
+Author: Samanyu Kansara <skan729@aucklanduni.ac.nz>
+Date:   Thu Aug 21 20:17:25 2014 +1200
+
+    Implemented isTurnClockwise method that determines whether robot needs to turn clockwise or anticlockwise given the checkpoint and current angle. Contributors: Earl, Samanyu
+
+[33mcommit a67f3796a55e38f61f649f8231ab0b78547bc6c9[m
+Author: Samanyu Kansara <skan729@aucklanduni.ac.nz>
+Date:   Thu Aug 21 18:30:43 2014 +1200
+
+    Implemented calculateGoalAngle. Returns angle between a checkpoint and x-axis. Contributors: Earl, Samanyu
+
+[33mcommit 561c7ca044ca63653bc3089af704f2b2b4020e73[m
+Author: Samanyu Kansara <skan729@aucklanduni.ac.nz>
+Date:   Thu Aug 21 16:38:53 2014 +1200
+
+    Added turn and moveForward methods. Implemented the move method. Move method uses turn and moveForward methods. Contributors : Earl, Samanyu
+
+[33mcommit 0b70111b54e41412a153402498210295ff5b34d1[m
+Author: Samanyu Kansara <skan729@aucklanduni.ac.nz>
+Date:   Thu Aug 21 15:44:32 2014 +1200
+
+    Refactored Resident.h ,Agent.h and Resident.cpp. Removed methods and variables not used by move. Changed nodes to use stage coordinate system in house.world file. Defined methods and variables for navigation. Contributors: Earl, Samanyu
+
+[33mcommit 0cdfa751edbc6e63cb88dfb0334967d7e565f229[m
+Author: Harriet <harrietrc@gmail.com>
+Date:   Sun Aug 17 09:41:29 2014 +1200
+
+    Added annotations to new methods in Resident and put method declarations in the header file.
+
+[33mcommit 10b10d53b73f605c491f8fab02ba614aa7b640b3[m
+Author: Harriet <harrietrc@gmail.com>
+Date:   Sat Aug 16 22:31:52 2014 +1200
+
+    Checkpoint graph is go. Pass it the names of the start and end checkpoints (e.g. ' kitchen' and 'bathroom' - currently they're 'cp0', 'cp1', 'cp2') and get the shortest path as a vector of checkpoint co-ordinates back. Still need to annotate.
+
+[33mcommit 9968020ef5962681af02285e115e66442b32b252[m
+Author: Harriet <harrietrc@gmail.com>
+Date:   Sat Aug 16 21:46:46 2014 +1200
+
+    Graph of checkpoint names and shortest path algorithm are working in Resident. To do: hook up names to co-ordinates, more thorough testing, doxygen annotations for new methods, refactoring (my new code is very messy, sorry)
+
+[33mcommit 1e77f1eeadd4a572b133244d93af67142486f719[m
+Author: Harriet <harrietrc@gmail.com>
+Date:   Fri Aug 15 13:23:22 2014 +1200
+
+    Added documentation to Agent.
+
+[33mcommit c967e99b4df5a56d3b18d4f299b69f1fb06ce044[m
+Merge: d3f60c4 678e334
+Author: Harriet <harrietrc@gmail.com>
+Date:   Fri Aug 15 12:55:19 2014 +1200
+
+    Merge
+
+[33mcommit d3f60c47454988fd3fcdbcdb68c93b63b2cf9b7c[m
+Author: Harriet <harrietrc@gmail.com>
+Date:   Fri Aug 15 12:54:08 2014 +1200
+
+    Added file for customised index.html (doxygen)
+
+[33mcommit cef5b40ad5f2197629701e7ad24b419acf32f77c[m
+Author: Harriet <harrietrc@gmail.com>
+Date:   Fri Aug 15 12:35:48 2014 +1200
+
+    Merge conflicts resolved
+
+[33mcommit 678e3342c9f846fd70041f51f0e704004c09f049[m
+Merge: 1efb0b9 1b88f6c
+Author: John <clee842@aucklanduni.ac.nz>
+Date:   Fri Aug 15 12:26:39 2014 +1200
+
+    merge
+
+[33mcommit 1efb0b9b1ba0c0a2af52306ef07ad98c37afccb2[m
+Author: John <clee842@aucklanduni.ac.nz>
+Date:   Fri Aug 15 12:21:18 2014 +1200
+
+    ProcessManager now relatie path
+
+[33mcommit 4a50716dcd01464af746e69b64c5960620c65c57[m
+Author: Harriet <harrietrc@gmail.com>
+Date:   Fri Aug 15 12:20:14 2014 +1200
+
+    Doxygen done. Just need to create a landing page.
+
+[33mcommit 1b88f6c13163e72b65a0148bc742fe5278bf51f6[m
+Merge: a8902e0 e48352a
+Author: eatyourhummus247 <mshe246@gmail.com>
+Date:   Fri Aug 15 12:13:42 2014 +1200
+
+    fixed merge conflicts. Contributors: Earl, Mustafa, Sam
+
+[33mcommit d0ba53e3c9456b85b05b403162a30b71191d3dbe[m
+Author: Harriet <harrietrc@gmail.com>
+Date:   Fri Aug 15 12:00:27 2014 +1200
+
+    More documentation - all Agent subclasses + Agent done. Still need to do fields.
+
+[33mcommit a8902e0a4acc58027ade7f77b83944f8c6e8d1f0[m
+Author: eatyourhummus247 <mshe246@gmail.com>
+Date:   Fri Aug 15 11:58:13 2014 +1200
+
+    Working Alpha version, ready for presentation. Contributors: Earl, Mustafa, Sam
+
+[33mcommit e48352a7877f1a2f53257b513f4ae8c3a2ce3e3b[m
+Merge: 5860afc ed5837d
+Author: John <clee842@aucklanduni.ac.nz>
+Date:   Fri Aug 15 11:36:01 2014 +1200
+
+    commented out some debug statements
+
+[33mcommit 5860afc88922da83683c1f8ef635b01de85697de[m
+Author: John <clee842@aucklanduni.ac.nz>
+Date:   Fri Aug 15 11:29:05 2014 +1200
+
+    fully dynamic
+
+[33mcommit ed5837df2e380e06c3fffa0f4240964c661b4166[m
+Merge: 5ef705c 5f526f0
+Author: Alan Lau <alau645@aucklanduni.ac.nz>
+Date:   Fri Aug 15 11:17:17 2014 +1200
+
+    Merge branch 'develop' of https://github.com/clee842/se306-project1 into develop
+
+[33mcommit 5f526f04d8dc70e08a4d4308ee3c06737a7f6079[m
+Author: Harriet <harrietrc@gmail.com>
+Date:   Fri Aug 15 11:05:23 2014 +1200
+
+    Removed merging artefacts
+
+[33mcommit 9b827addb19ab9ed937cde6fe234813310672c11[m
+Merge: 70c0a21 1ae465c
+Author: Harriet <harrietrc@gmail.com>
+Date:   Fri Aug 15 10:53:59 2014 +1200
+
+    Still merging
+
+[33mcommit 70c0a21e8140ee67eaa738768dac89b80f7d0d4c[m
+Author: Harriet <harrietrc@gmail.com>
+Date:   Fri Aug 15 10:53:21 2014 +1200
+
+    fixed merge conflicts
+
+[33mcommit 5ef705c9b011ba337f31f1b056abea712128571a[m
+Author: Alan Lau <alau645@aucklanduni.ac.nz>
+Date:   Fri Aug 15 10:52:08 2014 +1200
+
+    added assistant robot model
+
+[33mcommit 7633c29e9a20270c309ce4c419f24909f5251c01[m
+Author: eatyourhummus247 <mshe246@gmail.com>
+Date:   Fri Aug 15 10:38:23 2014 +1200
+
+    Doctor now implements the correct behaviour for alpha. Contributors: Earl, Mustafa
+
+[33mcommit 1ae465cfd860db044efb794e22889fe576edd5cb[m
+Author: John <clee842@aucklanduni.ac.nz>
+Date:   Fri Aug 15 10:34:52 2014 +1200
+
+    removed a doctor from main
+
+[33mcommit 9bbe005b7c17f6da6bcdc860ee1b8c8075547905[m
+Merge: 3b0399a fa058ee
+Author: Harriet <harrietrc@gmail.com>
+Date:   Fri Aug 15 10:31:46 2014 +1200
+
+    Merge
+
+[33mcommit 314b89ce953c68df4ebc1bd6474948beda73d0f9[m
+Author: John <clee842@aucklanduni.ac.nz>
+Date:   Fri Aug 15 10:31:41 2014 +1200
+
+    removed pm~
+
+[33mcommit 9eca971adf11eb5bbd74f7bf50dbb1c86285aa15[m
+Author: John <clee842@aucklanduni.ac.nz>
+Date:   Fri Aug 15 10:31:00 2014 +1200
+
+    removed pm
+
+[33mcommit 9fbb0e54591e4e007d6b0b7a0d1953a2559dc76a[m
+Merge: 71c9c43 6f4325d
+Author: John <clee842@aucklanduni.ac.nz>
+Date:   Fri Aug 15 10:29:33 2014 +1200
+
+    merge
+
+[33mcommit 3b0399ae6fdd3034d0aa41eef74e10253212c8cb[m
+Author: Harriet <harrietrc@gmail.com>
+Date:   Fri Aug 15 10:28:21 2014 +1200
+
+    Fixed merge conflicts
+
+[33mcommit 71c9c434aa3c432b32c298f777ae65dbc1746196[m
+Author: John <clee842@aucklanduni.ac.nz>
+Date:   Fri Aug 15 10:23:39 2014 +1200
+
+    merge
+
+[33mcommit f6be441df13d92319110a33f75a7804d3af4b619[m
+Author: John <clee842@aucklanduni.ac.nz>
+Date:   Fri Aug 15 10:22:48 2014 +1200
+
+    removed pm
+
+[33mcommit 665e6d605e9593f68e8ea0d2ba8d4ab0a2c5f98a[m
+Author: John <clee842@aucklanduni.ac.nz>
+Date:   Fri Aug 15 10:22:21 2014 +1200
+
+    removed pm
+
+[33mcommit 53b131a35f54603be2f0ccc52fab8eae2e4da49d[m
+Author: eatyourhummus247 <mshe246@gmail.com>
+Date:   Fri Aug 15 10:19:04 2014 +1200
+
+    removed debug statements
+
+[33mcommit 6f4325dfcc39ce8764a381daccd2cd95122ba38d[m
+Author: eatyourhummus247 <mshe246@gmail.com>
+Date:   Fri Aug 15 10:17:51 2014 +1200
+
+    Doctor no longer moves right automatically rather than going towards to path. Contributors: Earl, Mustafa
+
+[33mcommit 15878766ef3d7c873f2934e844034dd69305d0af[m
+Author: Harriet <harrietrc@gmail.com>
+Date:   Fri Aug 15 10:01:50 2014 +1200
+
+    Created doxygen documentation for the Assistant class. Pulling before applying to other files/classes. Need to find out why after-member comments don't work.
+
+[33mcommit 96cd83753325ecc056997065c6274e7b7a6c0d39[m
+Author: John <clee842@aucklanduni.ac.nz>
+Date:   Fri Aug 15 09:58:36 2014 +1200
+
+    merge
+
+[33mcommit fa058eeb93c497c8e31c3ca10f39dbafe862d087[m
+Author: eatyourhummus247 <mshe246@gmail.com>
+Date:   Fri Aug 15 08:36:21 2014 +1200
+
+    took out debug statements and test code
+
+[33mcommit f2859eb7ed028fee099e3d7544e8414886fae12e[m
+Author: eatyourhummus247 <mshe246@gmail.com>
+Date:   Fri Aug 15 08:30:15 2014 +1200
+
+    Assistant now moves away from Resident after feeding him
+
+[33mcommit 5a21f0506d5eb68108d2c9e904f9a10c74ce9fe9[m
+Author: Alan <alau645@aucklanduni.ac.nz>
+Date:   Thu Aug 14 23:01:17 2014 +1200
+
+    Added doctor robot model to world
+
+[33mcommit 39159188b20a8c5697a1e4e8498177d2097bc4d0[m
+Author: Earl Balmes <ebal155@aucklanduni.ac.nz>
+Date:   Thu Aug 14 21:37:33 2014 +1200
+
+    made the assistant deliver food to the resisdent and stop once close …Contributors: Mustafa, Sam
+
+[33mcommit e029d467a68fbb7d2e2525b409dbe17113f2c289[m
+Merge: 87a6df3 d12a02d
+Author: John <clee842@aucklanduni.ac.nz>
+Date:   Thu Aug 14 21:23:33 2014 +1200
+
+    mere
+
+[33mcommit 87a6df3f57472e5025daa42666080969711ae61d[m
+Merge: f0b2fb1 be9c7da
+Author: John <clee842@aucklanduni.ac.nz>
+Date:   Thu Aug 14 20:36:25 2014 +1200
+
+    merge
+
+[33mcommit d12a02d28979274d40510b16966e99345a11e862[m
+Merge: d6eadc1 9c51572
+Author: Earl Balmes <ebal155@aucklanduni.ac.nz>
+Date:   Thu Aug 14 20:29:38 2014 +1200
+
+    Merge branch 'develop' of https://github.com/clee842/se306-project1 into develop
+
+[33mcommit d6eadc1c2de3a347a1169878de37e143f5a340e9[m
+Author: Earl Balmes <ebal155@aucklanduni.ac.nz>
+Date:   Thu Aug 14 20:29:19 2014 +1200
+
+    fixed movement bug where resident will go to 0,0 at end of movement, Contributors: Mustafa, Earl
+
+[33mcommit 9c51572f05fe2f2110a69fe2807576a37f78b664[m
+Author: Govindu Samarasinghe <gsam265@aucklanduni.ac.nz>
+Date:   Thu Aug 14 20:11:46 2014 +1200
+
+    Fixed issues with Doctor.cpp (segfault and failure to compile)
+
+[33mcommit a9155060f2eb182a6a086d7f4a1c419641d4a8f3[m
+Merge: 0c2905b be9c7da
+Author: Govindu Samarasinghe <gsam265@aucklanduni.ac.nz>
+Date:   Thu Aug 14 19:52:43 2014 +1200
+
+    Merge branch 'develop' of https://github.com/clee842/se306-project1 into develop
+
+[33mcommit f0b2fb1133b7e45fb588f08a7075c24ff839ffe2[m
+Author: John <clee842@aucklanduni.ac.nz>
+Date:   Thu Aug 14 19:52:24 2014 +1200
+
+    merge
+
+[33mcommit be9c7dabd1c26810613aad9ec7cc7dfff28c72d6[m
+Author: Earl Balmes <ebal155@aucklanduni.ac.nz>
+Date:   Thu Aug 14 19:51:35 2014 +1200
+
+    Commit for push
+
+[33mcommit cb0cf6083f7db6ba4a6bfab86cda9729bcf22f94[m
+Author: Earl Balmes <ebal155@aucklanduni.ac.nz>
+Date:   Thu Aug 14 19:21:28 2014 +1200
+
+    Implemented move logic to Resident (he/she now moves when his hunger level is below the threshold)
+
+[33mcommit 0c2905b28b79d6ef7be08bdabbd88c6cc9be1132[m
+Merge: 951a53d 8075b6e
+Author: Govindu Samarasinghe <gsam265@aucklanduni.ac.nz>
+Date:   Thu Aug 14 18:35:22 2014 +1200
+
+    Merge branch 'develop' of https://github.com/clee842/se306-project1 into develop
+    
+    Conflicts:
+    	se306_project1/src/ProcessManager.cpp
+
+[33mcommit 951a53d44ca2b2d2c845afde946af4146850474b[m
+Author: Govindu Samarasinghe <gsam265@aucklanduni.ac.nz>
+Date:   Thu Aug 14 18:34:30 2014 +1200
+
+    Changed processmanager.cpp
+
+[33mcommit 8075b6eb81d370e50583f9328515682913c0a533[m
+Merge: 44a5833 f4543a2
+Author: Earl Balmes <ebal155@aucklanduni.ac.nz>
+Date:   Thu Aug 14 18:04:23 2014 +1200
+
+    Merge branch 'develop' of https://github.com/clee842/se306-project1 into develop
+
+[33mcommit bb597d20e99e8824fc77648a94db826afbd3cc33[m
+Merge: 6a4c10f f4543a2
+Author: John <clee842@aucklanduni.ac.nz>
+Date:   Thu Aug 14 18:04:12 2014 +1200
+
+    Merge branch 'develop' of https://github.com/clee842/se306-project1 into develop
+
+[33mcommit 44a5833510bd44e23a18f851faac63445a4ea058[m
+Author: Earl Balmes <ebal155@aucklanduni.ac.nz>
+Date:   Thu Aug 14 18:03:23 2014 +1200
+
+    Deleted some comments (commit for push)
+
+[33mcommit f4543a2b9e0a44bccf0346cc96fa9d448f975ee2[m
+Merge: 0298196 0081297
+Author: Govindu Samarasinghe <gsam265@aucklanduni.ac.nz>
+Date:   Thu Aug 14 17:48:44 2014 +1200
+
+    Merge branch 'develop' of https://github.com/clee842/se306-project1 into develop
+
+[33mcommit 0298196a29075a1d357fc38ce934625950e21efd[m
+Author: Govindu Samarasinghe <gsam265@aucklanduni.ac.nz>
+Date:   Thu Aug 14 17:47:36 2014 +1200
+
+    Attempted to implement navigation for Doctor buy failed.
+
+[33mcommit 5e4f944ceab3f92916f1708db47049ef619b0744[m
+Author: Earl Balmes <ebal155@aucklanduni.ac.nz>
+Date:   Thu Aug 14 17:47:03 2014 +1200
+
+    Fix rotational bugs to do with accuracy (increased search range when correcting the angle), implemented assistant to move when resident hunger is below 60. Contributors: Mustafa, Earl
+
+[33mcommit 0081297323b789f3f2a52d6714aee56cf260d6d4[m
+Author: eatyourhummus247 <mshe246@gmail.com>
+Date:   Thu Aug 14 16:54:30 2014 +1200
+
+    Moved movement logic out of odometry callback into another function. Odom callback now only updates current pose and orientation of the robot. Contributors: Earl, Mustafa
+
+[33mcommit 6a4c10fdeb4b41c018f385dd9ec13b4dd97935f0[m
+Author: John <clee842@aucklanduni.ac.nz>
+Date:   Thu Aug 14 16:35:59 2014 +1200
+
+    merge
+
+[33mcommit f87e9ac4d1b2463b0c1ee191f7734ec8b7adb31b[m
+Merge: 9b103b1 3556873
+Author: John <clee842@aucklanduni.ac.nz>
+Date:   Thu Aug 14 16:28:54 2014 +1200
+
+    Merge branch 'develop' of https://github.com/clee842/se306-project1 into develop
+
+[33mcommit 9b103b149b919805aaaaa7dafbb7fdae9b3220db[m
+Author: John <clee842@aucklanduni.ac.nz>
+Date:   Thu Aug 14 16:28:41 2014 +1200
+
+    multiple agents
+
+[33mcommit 3556873dc21795d9583fd23ba09a504e6e914057[m
+Author: eatyourhummus247 <mshe246@gmail.com>
+Date:   Thu Aug 14 16:23:02 2014 +1200
+
+    updated x,y values to new map,buildfile.sh is now useless. fixed the bug where assistant and resident files were updating the same node. Added a path for resident when hungry. Earl,John,Mustafa,Sam
+
+[33mcommit 99d4f74e563b4ca403eb73c0dbd307b7836e675c[m
+Merge: cf290af ca97f35
+Author: eatyourhummus247 <mshe246@gmail.com>
+Date:   Thu Aug 14 15:14:45 2014 +1200
+
+    Merge branch 'develop' of https://github.com/clee842/se306-project1 into develop
+
+[33mcommit cf290afe230be7cc56daab25548238a728c96e39[m
+Author: eatyourhummus247 <mshe246@gmail.com>
+Date:   Thu Aug 14 15:14:26 2014 +1200
+
+    commit for the pull
+
+[33mcommit ca97f358f9c5b38fbae72a27ecb02880f1c0bf87[m
+Author: Rodel Jasper Rojos <rroj173@aucklanduni.zc.nz>
+Date:   Thu Aug 14 15:09:34 2014 +1200
+
+    improved stage aesthetics and created an outside background to allow visitors to enter house
+
+[33mcommit 6a0b662cf7fef5d8b1aa995c0cc3f94074c47729[m
+Merge: a8616e1 309e1bc
+Author: eatyourhummus247 <mshe246@gmail.com>
+Date:   Thu Aug 14 14:41:07 2014 +1200
+
+    Merge branch 'develop' of https://github.com/clee842/se306-project1 into develop
+
+[33mcommit a8616e1d62b5e7157e8d4121ed6ce279fe08a8c4[m
+Author: eatyourhummus247 <mshe246@gmail.com>
+Date:   Thu Aug 14 14:40:16 2014 +1200
+
+    assistant now looks busy when cooking
+
+[33mcommit 309e1bc5677cedf312a81f34456e73e6efda005d[m
+Author: John <clee842@aucklanduni.ac.nz>
+Date:   Thu Aug 14 14:20:58 2014 +1200
+
+    added doctor behaviour to heal resident on emergencies
+
+[33mcommit bd64ae90dd34f6f69bc9cbdef9d3bb38ecaddec2[m
+Merge: c601d9d c11c55b
+Author: John <clee842@aucklanduni.ac.nz>
+Date:   Thu Aug 14 14:10:36 2014 +1200
+
+    Merge branch 'develop' of https://github.com/clee842/se306-project1 into develop
+
+[33mcommit c601d9ddc9b1ef062e363442c625780df6e1d623[m
+Merge: 3a1c8b8 280db0c
+Author: John <clee842@aucklanduni.ac.nz>
+Date:   Thu Aug 14 14:07:09 2014 +1200
+
+    Merge branch 'develop' of https://github.com/clee842/se306-project1 into develop
+
+[33mcommit 3a1c8b8dabe4192b483d5087e613a653ae154fe1[m
+Author: John <clee842@aucklanduni.ac.nz>
+Date:   Thu Aug 14 14:06:41 2014 +1200
+
+    added doctor behaviour to heal resident on emergencies
+
+[33mcommit c11c55becfe647ba1c46d2f01fde89fa85027fa9[m
+Merge: 29725a4 280db0c
+Author: Samanyu Kansara <skan729@aucklanduni.ac.nz>
+Date:   Thu Aug 14 14:06:11 2014 +1200
+
+    Merge branch 'develop' of https://github.com/clee842/se306-project1 into develop
+
+[33mcommit 29725a498a003829d9e190d8b5e9fa416c27dac6[m
+Merge: e441ed9 86a7310
+Author: Samanyu Kansara <skan729@aucklanduni.ac.nz>
+Date:   Thu Aug 14 14:04:36 2014 +1200
+
+    Fixed merge conflicts in Assistant.cpp, Assistant.h and Resident.cpp. Contributors: Samanyu, Govindu
+
+[33mcommit 280db0c4f36518fd1a96a032b85caa2c469036a6[m
+Merge: 6fca01c 86a7310
+Author: Harriet <harrietrc@gmail.com>
+Date:   Thu Aug 14 14:03:30 2014 +1200
+
+    Merge branch 'develop' of https://github.com/clee842/se306-project1 into develop
+
+[33mcommit e441ed92e79605faa1a3ed53fdbce80e3c4a34b3[m
+Author: Samanyu Kansara <skan729@aucklanduni.ac.nz>
+Date:   Thu Aug 14 13:52:52 2014 +1200
+
+    Added movement code to Assisstant. Fixed existing bugs. Fixed relevant header files. Contributors: Govindu, Samanyu
+
+[33mcommit 6fca01c18b095baea0cd83239de2b8790685ffe8[m
+Author: Harriet <harrietrc@gmail.com>
+Date:   Thu Aug 14 13:52:06 2014 +1200
+
+    Graph setup, but need to sort out adding edges.
+
+[33mcommit 86a7310d962ad08dd7eb54894b8bf2da78eff5d3[m
+Merge: 34da701 8b38171
+Author: John <clee842@aucklanduni.ac.nz>
+Date:   Thu Aug 14 13:45:16 2014 +1200
+
+    added assistant message to handle resident hunger
+
+[33mcommit 34da7010c276d2f2b17553fbd953d38c827b71e9[m
+Author: John <clee842@aucklanduni.ac.nz>
+Date:   Thu Aug 14 13:36:04 2014 +1200
+
+    added assistant message to handle resident hunger
+
+[33mcommit 8b381714f33313cc0bf6bdd93d24d6d31db6358c[m
+Author: Harriet <harrietrc@gmail.com>
+Date:   Thu Aug 14 13:10:51 2014 +1200
+
+    Made map with checkpoint names and checkpoints. Graph of paths soon to follow.
+
+[33mcommit 122ec413b41fc5a802fac533d958125fbc73af30[m
+Merge: a368bf8 9e4e7d9
+Author: John <clee842@aucklanduni.ac.nz>
+Date:   Thu Aug 14 12:24:29 2014 +1200
+
+    Merge branch 'develop' of https://github.com/clee842/se306-project1 into develop
+
+[33mcommit a368bf83c3caf2c295f1462fc5b9427ade410293[m
+Author: John <clee842@aucklanduni.ac.nz>
+Date:   Thu Aug 14 12:13:44 2014 +1200
+
+    need new movement method
+
+[33mcommit 9e4e7d96123a4c9c3365cc7739f65d0e183c76b2[m
+Author: Samanyu Kansara <skan729@aucklanduni.ac.nz>
+Date:   Thu Aug 14 11:55:56 2014 +1200
+
+    Added movement code to the Resident. Contributers: Govindu, Samanyu
+
+[33mcommit 5e78ec2e84e0b6c588f7171a96635be001a3d6b0[m
+Merge: 86ca255 9efc571
+Author: John <clee842@aucklanduni.ac.nz>
+Date:   Thu Aug 14 10:52:11 2014 +1200
+
+    merged feature/process-manager to develop branch
+
+[33mcommit 9efc57123979101adea07fa3888f6b62637149e2[m
+Author: John <clee842@aucklanduni.ac.nz>
+Date:   Thu Aug 14 10:35:54 2014 +1200
+
+    factory no longer hard codes
+
+[33mcommit 86ca255c9e0fe1978d65a0329b53c8f492b89217[m
+Merge: 4796e82 60e7959
+Author: Alan <alau645@aucklanduni.ac.nz>
+Date:   Thu Aug 14 00:37:52 2014 +1200
+
+    Merge remote-tracking branch 'origin/develop' into develop
+    
+    Conflicts:
+    	buildfile.sh
+    	buildfile.sh~
+    	ros.bash
+    	ros.bash~
+    	se306_project1/CMakeLists.txt
+    	se306_project1/src/Agent.cpp
+    	se306_project1/src/R0.cpp
+    	se306_project1/src/Resident.cpp
+    	se306_project1/src/factoryFiles/Agent.h
+    	se306_project1/src/factoryFiles/Main.cpp
+    	se306_project1/src/factoryFiles/MyFactory.cpp
+    	se306_project1/src/factoryFiles/MyFactory.h
+    	se306_project1/src/factoryFiles/WhiteAgent.cpp
+    	se306_project1/src/factoryFiles/WhiteAgent.h
+    	setup.sh~
+
+[33mcommit 4796e8218c5ec609b517553aab1633baebc3f364[m
+Author: Alan <alau645@aucklanduni.ac.nz>
+Date:   Wed Aug 13 22:16:00 2014 +1200
+
+    Added a Doctor msg that Resident subscribes to
+
+[33mcommit 2da61e1eec0c2393125ae17c3b3160060afce9a5[m
+Author: John <clee842@aucklanduni.ac.nz>
+Date:   Wed Aug 13 22:13:02 2014 +1200
+
+    working process manager, factory hard codes executable name for now
+
+[33mcommit 60e795961513541275a144a32254ebbdc728a36c[m
+Author: Earl Balmes <ebal155@aucklanduni.ac.nz>
+Date:   Wed Aug 13 21:07:42 2014 +1200
+
+    Refactored code more, added more comments and deleted unused statements
+
+[33mcommit 56e4c28ad0b34662dd53fb3248a3b5a850ea82e0[m
+Author: Earl Balmes <ebal155@aucklanduni.ac.nz>
+Date:   Wed Aug 13 20:53:43 2014 +1200
+
+    Refactored code: deleted unused variables, debug statements, etc
+
+[33mcommit 8b2370b92ae78ba7f6819d497f472fda406253e8[m
+Author: John <clee842@aucklanduni.ac.nz>
+Date:   Wed Aug 13 19:16:33 2014 +1200
+
+    Creational module including Main, AgentFactory, ProcessManager
+
+[33mcommit 6ffd64e266559a8d26c4e9bfc5df29b986c71781[m
+Merge: 45bebcf badbd0f
+Author: eatyourhummus247 <mshe246@gmail.com>
+Date:   Wed Aug 13 19:07:10 2014 +1200
+
+    Merge branch 'develop' of https://github.com/clee842/se306-project1 into develop
+
+[33mcommit 45bebcf6161c484bfe17b7f648df212b1fe8ed01[m
+Author: eatyourhummus247 <mshe246@gmail.com>
+Date:   Wed Aug 13 19:06:52 2014 +1200
+
+    cleaned up code, getting ready to start merging
+
+[33mcommit 480d36b341bf020d75486641d4c6f8b810ea1c19[m
+Author: Alan <alau645@aucklanduni.ac.nz>
+Date:   Wed Aug 13 18:39:17 2014 +1200
+
+    cleaning/Formatting/indenting the Agent classes
+
+[33mcommit 875553d7928e2bd4b4a8e1a2430b88314e68a762[m
+Author: Alan <alau645@aucklanduni.ac.nz>
+Date:   Wed Aug 13 18:28:17 2014 +1200
+
+    Properly implemented the classes of Agent
+
+[33mcommit badbd0fcf9b7f43532388436616232e79a72158d[m
+Author: Harriet <harrietrc@gmail.com>
+Date:   Wed Aug 13 18:05:16 2014 +1200
+
+    Tidied code, migrated update navigation from R0.cpp to Resident.cpp
+
+[33mcommit a51aedc583363a75b56104e04a2fff099cc9f9a9[m
+Author: eatyourhummus247 <mshe246@gmail.com>
+Date:   Wed Aug 13 17:51:32 2014 +1200
+
+    merging for the push
+
+[33mcommit fd381e3693cb53a4f6d460ffe6a38a6d2d25488a[m
+Merge: 22a7e8a 60cc3b8
+Author: eatyourhummus247 <mshe246@gmail.com>
+Date:   Wed Aug 13 17:50:44 2014 +1200
+
+    Merge branch 'develop' of https://github.com/clee842/se306-project1 into develop
+
+[33mcommit c4bbb38c31cb9d8632c03ae7982bd56e584efb3c[m
+Author: Harriet <harrietrc@gmail.com>
+Date:   Wed Aug 13 17:49:14 2014 +1200
+
+    Periodic callback skeleton set up and confirmed to be working
+
+[33mcommit 60cc3b877307289bd2bf5f8ef7451f55af3bc660[m
+Author: Harriet <harrietrc@gmail.com>
+Date:   Wed Aug 13 17:42:19 2014 +1200
+
+    Moved periodic callback and navigation to resident
+
+[33mcommit 22a7e8ad7f9cbe58cf66009140b01bc44abfd3ba[m
+Author: eatyourhummus247 <mshe246@gmail.com>
+Date:   Wed Aug 13 17:38:20 2014 +1200
+
+    Earl and me fixed problems to do with stopping that we encountered before, we also fixed rotation accuracy
+
+[33mcommit 82de107f4c9d38c3f18b0f7b79c87d2486c003e7[m
+Author: Harriet <harrietrc@gmail.com>
+Date:   Wed Aug 13 17:00:11 2014 +1200
+
+    Fiddling with rosrun parameters - doesn't quite work yet, so is commented out. Committing before I switch branches.
+
+[33mcommit f1f2caafe102c1aca0ac3e5dc940563152d8b0d7[m
+Author: eatyourhummus247 <mshe246@gmail.com>
+Date:   Wed Aug 13 15:23:22 2014 +1200
+
+    increased rotation speed but requires some extra assistance for stopping problem
+
+[33mcommit 58e693d472b61c8c4e488b55b811d8756c2b5afd[m
+Author: eatyourhummus247 <mshe246@gmail.com>
+Date:   Tue Aug 12 21:34:35 2014 +1200
+
+    merged feature/ai branch into develop branch succesfully
+
+[33mcommit 22d0e2d74183e0329a0080385adee157d0ec228e[m
+Merge: 9769276 dcd5215
+Author: eatyourhummus247 <mshe246@gmail.com>
+Date:   Tue Aug 12 21:21:37 2014 +1200
+
+    modified buildfile and merged
+
+[33mcommit dcd521595d52b11cf55f67a59fe4bc4f4805a6fd[m
+Author: Govindu Samarasinghe <gsam265@aucklanduni.ac.nz>
+Date:   Tue Aug 12 20:34:42 2014 +1200
+
+    Fully implemented motion using checkpoints, when given a list of coordinates - Govindu, RJ and Earl
+
+[33mcommit c3c1f1d9feaa305e3e1cd1d12adbec639787b329[m
+Author: Harriet <harrietrc@gmail.com>
+Date:   Tue Aug 12 18:35:13 2014 +1200
+
+    Nodes are now classes. Note that a the moment the classes don't have constructors (or proper fields).
+
+[33mcommit 0c1851c7abefe75a2cdc99d4946c398867386c0c[m
+Author: Samanyu Kansara <skan729@aucklanduni.ac.nz>
+Date:   Tue Aug 12 18:00:10 2014 +1200
+
+    Changed properties of Resident from int to double. Changed message file (ResidentMsg.msg) to accept double values.
+
+[33mcommit c13482f9f7918826e185599529f10ef7a5fb08d4[m
+Author: Samanyu Kansara <skan729@aucklanduni.ac.nz>
+Date:   Tue Aug 12 17:31:35 2014 +1200
+
+    Changed assistant to use custom messages
+
+[33mcommit 4e4a0b8b7ffda09142e334e33890e8a7ade03f88[m
+Author: Samanyu Kansara <skan729@aucklanduni.ac.nz>
+Date:   Tue Aug 12 15:18:00 2014 +1200
+
+    added msg
+
+[33mcommit 91f41ad751b2c4dff1a87ea8c44963884c45b9d1[m
+Author: Samanyu Kansara <skan729@aucklanduni.ac.nz>
+Date:   Tue Aug 12 15:01:48 2014 +1200
+
+    Modified .gitignore to keep track of .msg files. Changed Resident to resolve problems caused after merging.
+
+[33mcommit 97b85c29a0a57d371043be8fca010adaf43b6e82[m
+Author: Samanyu Kansara <skan729@aucklanduni.ac.nz>
+Date:   Tue Aug 12 14:47:29 2014 +1200
+
+    Removed setup.sh from the repo (feature/agent)
+
+[33mcommit c70b638872efcc306dd599dccd559dbf79191921[m
+Merge: c683675 ee5b35e
+Author: Harriet <harrietrc@gmail.com>
+Date:   Tue Aug 12 14:22:05 2014 +1200
+
+    Merge branch 'feature/agent' of https://github.com/clee842/se306-project1 into feature/agent
+    
+    Conflicts:
+    	se306_project1/CMakeLists.txt
+    Periodic callback added to Assistant. time_conversion dependence added to CMakeLists. Please note that currently Assistant isn't getting built - change CMakeLists if it doesn't break your build.
+
+[33mcommit c683675a4a38dfd042205a04a501ae00024e18e2[m
+Author: Harriet <harrietrc@gmail.com>
+Date:   Tue Aug 12 14:14:41 2014 +1200
+
+    Periodic callback now in assistant class.
+
+[33mcommit ee5b35e0dd29aa23fdcdb5731d1471e7fcc4b943[m
+Author: Alan Lau <alau645@aucklanduni.ac.nz>
+Date:   Tue Aug 12 14:11:09 2014 +1200
+
+    fixed doctor and messages
+
+[33mcommit 58b0ed6a1714156e21a9352cfab1a1a18e4897c1[m
+Author: Alan Lau <alau645@aucklanduni.ac.nz>
+Date:   Tue Aug 12 13:41:44 2014 +1200
+
+    added custom message objects to Resident. Doctor can subscribe
+
+[33mcommit c5c43d51696a2b8af85ad735e87c016bb424da55[m
+Author: Govindu Samarasinghe <gsam265@aucklanduni.ac.nz>
+Date:   Tue Aug 12 11:06:11 2014 +1200
+
+    Added checkpoints to array instead of hardcoding.
+
+[33mcommit 4814a03d8e7bdfdd3f667b56712d03cfdfe24752[m
+Author: John <clee842@aucklanduni.ac.nz>
+Date:   Mon Aug 11 21:55:36 2014 +1200
+
+    fixed build script rosmake
+
+[33mcommit c0cf65405bd6b2f6e45fb71a201dfbc788d16f19[m
+Author: John <clee842@aucklanduni.ac.nz>
+Date:   Mon Aug 11 21:47:25 2014 +1200
+
+    removed setup sh
+
+[33mcommit 654792b437dcadb3c60556856c629c7fb86a3543[m
+Merge: 5751c6e 08858fe
+Author: John <clee842@aucklanduni.ac.nz>
+Date:   Mon Aug 11 21:45:38 2014 +1200
+
+    Merge branch 'feature/process-manager' of https://github.com/clee842/se306-project1 into feature/process-manager
+
+[33mcommit 5751c6eaf657a5064ec6976d542424799a620bc5[m
+Author: eatyourhummus247 <mshe246@gmail.com>
+Date:   Mon Aug 11 12:59:36 2014 +1200
+
+    removed extra file
+
+[33mcommit 6c7366653345061707efdebeb946ea83710ef38e[m
+Author: Alan <alau645@aucklanduni.ac.nz>
+Date:   Mon Aug 11 21:19:13 2014 +1200
+
+    Changed Doctor node name to "Doctor"
+
+[33mcommit 6aa9ac046c4eb5b16bd7812c4c4c8228831529ab[m
+Author: Alan <alau645@aucklanduni.ac.nz>
+Date:   Mon Aug 11 21:16:52 2014 +1200
+
+    Added Doctor to CMakeList rosbuild
+
+[33mcommit e534a256e8b3ab2ffc6afda0d3e5f07580820a19[m
+Author: Alan <alau645@aucklanduni.ac.nz>
+Date:   Mon Aug 11 21:14:06 2014 +1200
+
+    Added subscriber to Doctor
+
+[33mcommit 1c264f66b4aac973b8e2d47197f5a462a892c4db[m
+Author: Samanyu Kansara <skan729@aucklanduni.ac.nz>
+Date:   Mon Aug 11 18:57:32 2014 +1200
+
+    Resident health linear reduction implemented. Reduction rate can be set at the start of the Resident file. Currently set at 0.1 hunger point reduction per second
+
+[33mcommit cd68cd85dc94363e606aab3142e8be8f93b4589b[m
+Author: Samanyu Kansara <skan729@aucklanduni.ac.nz>
+Date:   Mon Aug 11 18:45:41 2014 +1200
+
+    Resident hunger linear reduction implemented. Reduction rate can be set at the start of the file. Currently set at 1 hunger point reduction per second
+
+[33mcommit 87249f479f22b64856da48955c1b4d8eb0f75f06[m
+Author: Rodel Jasper Rojos <rroj173@aucklanduni.zc.nz>
+Date:   Mon Aug 11 18:21:47 2014 +1200
+
+    Successfully navigate assistant to kitchen destination
+
+[33mcommit 78a97b5d2f758b490bcf61c5ec6bb44999869a09[m
+Author: Rodel Jasper Rojos <rroj173@aucklanduni.zc.nz>
+Date:   Mon Aug 11 17:51:11 2014 +1200
+
+    Improved Goal Theta calculation
+
+[33mcommit 5c1d92827b48813ca62688e7be8e2b68977c9a98[m
+Author: Dae Kyung Kim <toyman93@gmail.com>
+Date:   Mon Aug 11 17:38:38 2014 +1200
+
+    Resident and Assistant susuccessfully send and receive messages using standard messages provided by ROS.
+
+[33mcommit 395505fc6dbf455d20ea3f802dfcb15b4094ce29[m
+Author: Earl Balmes <ebal155@aucklanduni.ac.nz>
+Date:   Mon Aug 11 16:18:30 2014 +1200
+
+    Improved rotation functionality, allowing both counter-clockwise and clockwise movement
+
+[33mcommit 97692766d9bca48b6eeb8dfd4c502bc939f22602[m
+Author: eatyourhummus247 <mshe246@gmail.com>
+Date:   Mon Aug 11 13:21:46 2014 +1200
+
+    merged feature/process-manager into develop branch
+
+[33mcommit 08858fe7ce09584add54ab556c7e8722ad1056f2[m
+Author: eatyourhummus247 <mshe246@gmail.com>
+Date:   Mon Aug 11 13:03:52 2014 +1200
+
+    added rosmake to build file
+
+[33mcommit 26eb94f64eac64a8dc9ab4036792c5e25ca00b17[m
+Author: eatyourhummus247 <mshe246@gmail.com>
+Date:   Mon Aug 11 12:59:36 2014 +1200
+
+    removed extra file
+
+[33mcommit 9121f8b41aedcba1c5fb54b139424247069d2fc3[m
+Author: eatyourhummus247 <mshe246@gmail.com>
+Date:   Mon Aug 11 12:54:07 2014 +1200
+
+    fixed up mistake in R0.cpp i commited
+
+[33mcommit b0201b5e63489ccb56af81bc211efa62136664d6[m
+Author: eatyourhummus247 <mshe246@gmail.com>
+Date:   Mon Aug 11 12:51:33 2014 +1200
+
+    made a build script for ros
+
+[33mcommit e7a7a9f4d914a46759c75e3b6c0d98e42e3f80f9[m
+Author: Harriet <harrietrc@gmail.com>
+Date:   Mon Aug 11 11:49:51 2014 +1200
+
+    Added periodic scheduling and utility methods for converting between simulation and real time. Currently this is only implemented in the R0 node, as Agent and subclasses need more work before they will be functional.
+
+[33mcommit e501b453da92a602ebc3217cee5d505a8466831c[m
+Author: Earl Balmes <ebal155@aucklanduni.ac.nz>
+Date:   Mon Aug 11 11:38:37 2014 +1200
+
+    Assigned pair.first and pair.second to linear and angular velocity
+
+[33mcommit 43242c7ebdac1538bbda5fed4f4c8085ff671a1f[m
+Author: Earl Balmes <ebal155@aucklanduni.ac.nz>
+Date:   Mon Aug 11 11:26:50 2014 +1200
+
+    Removed setup.sh
+
+[33mcommit a7759cd7a0a7dec71a8832ccf8230d15fd3671fa[m
+Author: Earl Balmes <ebal155@aucklanduni.ac.nz>
+Date:   Mon Aug 11 11:23:14 2014 +1200
+
+    Changed the initial goal to kitchen corner checkpoint
+
+[33mcommit d708e3820bb59a0bfe984879ffd17a7546d4351c[m
+Author: Govindu Samarasinghe <gsam265@aucklanduni.ac.nz>
+Date:   Mon Aug 11 11:07:37 2014 +1200
+
+    Refactored the move method, fixed return type.
+
+[33mcommit 12ee2ab880b0554cb77131c6a96f3c591f5afb18[m
+Merge: eb0de13 89261d5
+Author: eatyourhummus247 <mshe246@gmail.com>
+Date:   Mon Aug 11 11:01:42 2014 +1200
+
+    factory test files added
+
+[33mcommit a2ba63d0affd2e8f129ac1a0fbe9647e4eb705ee[m
+Author: Alan <alau645@aucklanduni.ac.nz>
+Date:   Sun Aug 10 20:34:26 2014 +1200
+
+    include header in Assistant
+    
+    i forgot :(
+
+[33mcommit 119548337130c331fc457e1a7bfa543f5478f8f9[m
+Author: Alan <alau645@aucklanduni.ac.nz>
+Date:   Sun Aug 10 20:29:29 2014 +1200
+
+    added a message subscriber to Assistant
+
+[33mcommit 91ab8232ed9255b80b1eb4689512483f1e7dba5a[m
+Author: Alan <alau645@aucklanduni.ac.nz>
+Date:   Sun Aug 10 20:20:31 2014 +1200
+
+    added a message publisher to Resident
+
+[33mcommit 6df7b0e7808bd1bd6dbdb71f8f77803e35cc2288[m
+Author: Alan <alau645@aucklanduni.ac.nz>
+Date:   Sun Aug 10 20:19:57 2014 +1200
+
+    created resident message in new msg dir.
+
+[33mcommit a994bc244cf589663499361992294b78f4d6cc24[m
+Author: Alan <alau645@aucklanduni.ac.nz>
+Date:   Sun Aug 10 19:59:29 2014 +1200
+
+    deleted some redundant readme file in the src dir.
+
+[33mcommit dfe7de1503572f1d9f2ab0a9ab213d53db62c615[m
+Author: Govindu Samarasinghe <gsam265@aucklanduni.ac.nz>
+Date:   Sun Aug 10 19:57:14 2014 +1200
+
+    Refactored code, moved movemoved movement logic into their own functions.
+
+[33mcommit ba9d38de2e288ba05ae446cd35d9ba42bdaf0e40[m
+Author: Alan <alau645@aucklanduni.ac.nz>
+Date:   Sun Aug 10 19:53:02 2014 +1200
+
+    uncommented  #rosbuild_genmsg()
+    
+    required to create custom message header files
+
+[33mcommit 939d8e57c9e9989e829e862ec5444d9deaddc95e[m
+Author: Govindu Samarasinghe <gsam265@aucklanduni.ac.nz>
+Date:   Sun Aug 10 15:58:54 2014 +1200
+
+    Moved goal calculation code to a method to use later
+
+[33mcommit 367c135b8101641d3226b30b231d9619504c4175[m
+Author: Govindu Samarasinghe <gsam265@aucklanduni.ac.nz>
+Date:   Sun Aug 10 15:48:38 2014 +1200
+
+    Defined checkpoints
+
+[33mcommit 0ab7787138e105c4de4e573a53e53c2631e10783[m
+Author: Govindu Samarasinghe <gsam265@aucklanduni.ac.nz>
+Date:   Sun Aug 10 15:30:49 2014 +1200
+
+    Changed the world file to new coord system
+
+[33mcommit e3c069ce8180e41aa660f8426b339bee783f24db[m
+Merge: 39bcaa6 37fd2c9
+Author: john <clee842@aucklanduni.ac.nz>
+Date:   Sat Aug 9 10:18:25 2014 +1200
+
+    merged
+
+[33mcommit 39bcaa6b6413d053eee7be99084180c5f6db9825[m
+Author: john <clee842@aucklanduni.ac.nz>
+Date:   Sat Aug 9 10:12:49 2014 +1200
+
+    want to create feature/ai branch
+
+[33mcommit 89261d5baace9542a0fe965a8cd8d97f3dbca7a7[m
+Author: john <clee842@aucklanduni.ac.nz>
+Date:   Sat Aug 9 09:47:56 2014 +1200
+
+    want to create develop branch
+
+[33mcommit 37fd2c92386886ab617f993dd0e5ac0264b3d15b[m
+Merge: 7baab72 eb0de13
+Author: Earl Balmes <ebal155@aucklanduni.ac.nz>
+Date:   Fri Aug 8 14:31:53 2014 +1200
+
+    Merge branch 'AI' of https://github.com/clee842/se306-project1 into AI
+
+[33mcommit 7baab721f4ae4699feb33c7d2c3cb47f9df5c6be[m
+Author: Earl Balmes <ebal155@aucklanduni.ac.nz>
+Date:   Fri Aug 8 14:17:35 2014 +1200
+
+    Removed unused variables
+
+[33mcommit f46b315c46c951670db9e970ab9c1cbe5202c7f1[m
+Author: Earl Balmes <ebal155@aucklanduni.ac.nz>
+Date:   Fri Aug 8 14:10:02 2014 +1200
+
+    Improved accuracy of rotation and pathfinding
+
+[33mcommit eb0de132cbd1c0cfb66095abd360bec981dfbd1e[m
+Author: Harriet Robinson-Chen <harrietrc@gmail.com>
+Date:   Thu Aug 7 21:52:13 2014 +1200
+
+    Project plan moved to separate folder
+
+[33mcommit 973b97671878b9cefb4e855945192133d151532e[m
+Author: Harriet Robinson-Chen <harrietrc@gmail.com>
+Date:   Thu Aug 7 21:47:16 2014 +1200
+
+    Uploaded the project plan
+    
+    2 files for marking
+
+[33mcommit 9263c5908695a49c5df2d8eea7cc50cef7c0ab44[m
+Merge: 0646515 7649429
+Author: Earl Balmes <ebal155@aucklanduni.ac.nz>
+Date:   Thu Aug 7 15:32:31 2014 +1200
+
+    Fixed merge conflicts in R0.cpp
+
+[33mcommit 0646515c93d857ed35e969cd6514c4f7d4c4ac88[m
+Author: Earl Balmes <ebal155@aucklanduni.ac.nz>
+Date:   Thu Aug 7 15:27:04 2014 +1200
+
+    Move robot from current position to a specified point
+
+[33mcommit 76494295c320955c21390092ec30323e84ff62a2[m
+Author: john <clee842@aucklanduni.ac.nz>
+Date:   Wed Aug 6 14:31:02 2014 +1200
+
+    moved skeleton files to src folder
+
+[33mcommit 98e034a4f09269b399dc36bf0053af2552f163d9[m
+Author: Dae Kyung Kim <toyman93@gmail.com>
+Date:   Tue Aug 5 16:07:17 2014 +1200
+
+    code skeleton uploaded
+
+[33mcommit b43f23d963251c641c826fc9b25f946e9186c546[m
+Author: Govindu Samarasinghe <gsam265@aucklanduni.ac.nz>
+Date:   Wed Jul 30 14:25:24 2014 +1200
+
+    initial project
+
+[33mcommit c8d41dc3c1e72b0ae85738aeed0babcab8c04c6d[m
+Author: clee842 <clee842@aucklanduni.ac.nz>
+Date:   Tue Jul 29 20:40:37 2014 +1200
+
+    Update README.md
+
+[33mcommit dc91d60a441cc162cbfd9b6f418b0515626c628b[m
+Author: clee842 <clee842@aucklanduni.ac.nz>
+Date:   Tue Jul 29 18:18:29 2014 +1200
+
+    As discussed in meeting
+
+[33mcommit 5aafa93dcf09f43e9d75912199acc0c320ea80c6[m
+Author: clee842 <clee842@aucklanduni.ac.nz>
+Date:   Sat Jul 26 17:32:26 2014 +1200
+
+    Update README.md
+
+[33mcommit dcc9dbf482951f29987b8322127bfd8106d7e304[m
+Author: clee842 <clee842@aucklanduni.ac.nz>
+Date:   Sat Jul 26 17:08:08 2014 +1200
+
+    Update README.md
+
+[33mcommit 6b904954980c05251a41bfe3edd00a9438492843[m
+Author: clee842 <clee842@aucklanduni.ac.nz>
+Date:   Sat Jul 26 17:07:04 2014 +1200
+
+    Update README.md
+
+[33mcommit 34c07bb18fbd5bb38b172225729a0e5e42458933[m
+Author: clee842 <clee842@aucklanduni.ac.nz>
+Date:   Sat Jul 26 17:05:58 2014 +1200
+
+    Update README.md
+
+[33mcommit 9c622d8b7f844aa37cabfb59a9a5aae4ab489d91[m
+Author: clee842 <clee842@aucklanduni.ac.nz>
+Date:   Sat Jul 26 16:46:43 2014 +1200
+
+    Update README.md
+
+[33mcommit 6428a09afc76ab12178e3a5b9e9c7f8b2834d27a[m
+Author: clee842 <clee842@aucklanduni.ac.nz>
+Date:   Sat Jul 26 16:40:56 2014 +1200
+
+    draft
+
+[33mcommit 0bd7832a3601d21f5e079bcccb0ae0e8f4f39f87[m
+Author: clee842 <clee842@aucklanduni.ac.nz>
+Date:   Sat Jul 26 16:11:44 2014 +1200
+
+    Initial commit

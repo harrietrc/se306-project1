@@ -80,7 +80,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_94f504ad8617a7f6875346a6285e2dc9.html">se306_project1</a></li><li class="navelem"><a class="el" href="dir_6ab918c5c44577bc31aee0727c82ce1e.html">src</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_303e56cf332aba0c39c59d51fd4f987c.html">se306_project1</a></li><li class="navelem"><a class="el" href="dir_7a0210602b71743ddfb08cbed2ac1be5.html">src</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -88,34 +88,33 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">Visitor.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &quot;Agent.h&quot;</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;</div>
-<div class="line"><a name="l00006"></a><span class="lineno"><a class="line" href="classVisitor.html">    6</a></span>&#160;<span class="keyword">class </span><a class="code" href="classVisitor.html">Visitor</a> : <span class="keyword">public</span> <a class="code" href="classAgent.html">Agent</a></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;{</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    <span class="comment">/*</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">    public:</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">            // Return type of robot</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">        Type get_Type(){</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">    </span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">        }</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">    </span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">        // Get id of robot</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">        int get_id(){</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">    </span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">        }</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">    </span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">        // Visit the resident</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">        void visit(){</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">        </span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">        }</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">    */</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;};</div>
-<div class="ttc" id="classVisitor_html"><div class="ttname"><a href="classVisitor.html">Visitor</a></div><div class="ttdoc">Class for the implementation of visitors - i.e. Caregivers, Nurses, Doctors, Friends, and Relatives. </div><div class="ttdef"><b>Definition:</b> Visitor.h:6</div></div>
-<div class="ttc" id="classAgent_html"><div class="ttname"><a href="classAgent.html">Agent</a></div><div class="ttdoc">Superclass for all &#39;agents&#39; - i.e. Assistants, Visitors, and the Resident. </div><div class="ttdef"><b>Definition:</b> Agent.h:6</div></div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &quot;ros/ros.h&quot;</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &quot;Agent.h&quot;</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
+<div class="line"><a name="l00007"></a><span class="lineno"><a class="line" href="classVisitor.html">    7</a></span>&#160;<span class="keyword">class </span><a class="code" href="classVisitor.html">Visitor</a> : <span class="keyword">public</span> <a class="code" href="classAgent.html">Agent</a> {</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;        <span class="keywordtype">bool</span> emergency = <span class="keyword">false</span>; <span class="comment">// required if timing/scheduling is done within this class</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;        <span class="keywordtype">bool</span> finishedConvo = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;        <span class="keywordtype">bool</span> <a class="code" href="classVisitor.html#ad32450b21924b7d581b99c9e1c20c829">visitResident</a>();</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;        <span class="keywordtype">bool</span> <a class="code" href="classVisitor.html#a0dc0a203978b84f73a887d1f1de54225">doConverse</a>();</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">int</span> run(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> *argv[]) = 0; </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        <a class="code" href="classVisitor.html">Visitor</a>() : <a class="code" href="classAgent.html">Agent</a>(){</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        }</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;};</div>
+<div class="ttc" id="classVisitor_html_a0dc0a203978b84f73a887d1f1de54225"><div class="ttname"><a href="classVisitor.html#a0dc0a203978b84f73a887d1f1de54225">Visitor::doConverse</a></div><div class="ttdeci">bool doConverse()</div><div class="ttdoc">Initiates conversation with the resident. </div><div class="ttdef"><b>Definition:</b> Visitor.cpp:28</div></div>
+<div class="ttc" id="classVisitor_html"><div class="ttname"><a href="classVisitor.html">Visitor</a></div><div class="ttdoc">Class for the implementation of visitors - i.e. Caregivers, Nurses, Doctors, Friends, and Relatives. </div><div class="ttdef"><b>Definition:</b> Visitor.h:7</div></div>
+<div class="ttc" id="classAgent_html"><div class="ttname"><a href="classAgent.html">Agent</a></div><div class="ttdoc">Superclass for all &#39;agents&#39; - i.e. Assistants, Visitors, and the Resident. Contains common navigation...</div><div class="ttdef"><b>Definition:</b> Agent.h:20</div></div>
+<div class="ttc" id="classVisitor_html_ad32450b21924b7d581b99c9e1c20c829"><div class="ttname"><a href="classVisitor.html#ad32450b21924b7d581b99c9e1c20c829">Visitor::visitResident</a></div><div class="ttdeci">bool visitResident()</div><div class="ttdoc">Visit the resident. May be simple - e.g. toggling visitor visibility, or moving to the door...</div><div class="ttdef"><b>Definition:</b> Visitor.cpp:10</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Aug 15 2014 13:20:37 for SE306 Project 1 by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Aug 29 2014 17:01:15 for SE306 Project 1 by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

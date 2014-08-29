@@ -85,15 +85,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pro-types">Protected Types</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classAgent-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">Agent Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
+<div class="title">Agent Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Superclass for all 'agents' - i.e. Assistants, Visitors, and the <a class="el" href="classResident.html" title="Class representing the Resident. ">Resident</a>.  
+<p>Superclass for all 'agents' - i.e. Assistants, Visitors, and the <a class="el" href="classResident.html" title="Class representing the Resident. ">Resident</a>. Contains common navigation functionality and properties.  
  <a href="classAgent.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="Agent_8h_source.html">Agent.h</a>&gt;</code></p>
@@ -103,47 +103,61 @@ Inheritance diagram for Agent:</div>
  <div class="center">
   <img src="classAgent.png" usemap="#Agent_map" alt=""/>
   <map id="Agent_map" name="Agent_map">
-<area href="classAssistant.html" title="Class for robot assistants. " alt="Assistant" shape="rect" coords="0,56,69,80"/>
-<area href="classResident.html" title="Class representing the Resident. " alt="Resident" shape="rect" coords="79,56,148,80"/>
-<area href="classVisitor.html" title="Class for the implementation of visitors - i.e. Caregivers, Nurses, Doctors, Friends, and Relatives. " alt="Visitor" shape="rect" coords="158,56,227,80"/>
-<area href="classCaregiver.html" title="Superclass for visitors - i.e. Caregivers, Nurses, Doctors, Friends, Relatives. " alt="Caregiver" shape="rect" coords="0,112,69,136"/>
-<area href="classDoctor.html" title="Class for the Doctor nodes. " alt="Doctor" shape="rect" coords="79,112,148,136"/>
-<area href="classFriend.html" title="Class for Friend nodes. " alt="Friend" shape="rect" coords="158,112,227,136"/>
-<area href="classNurse.html" title="Class for Nurse nodes. " alt="Nurse" shape="rect" coords="237,112,306,136"/>
-<area href="classRelative.html" title="Class for Relative nodes. " alt="Relative" shape="rect" coords="316,112,385,136"/>
+<area href="classAssistant.html" title="Class representing the Assistant. " alt="Assistant" shape="rect" coords="0,56,76,80"/>
+<area href="classAssistant1.html" title="Class representing the Assistant. " alt="Assistant1" shape="rect" coords="86,56,162,80"/>
+<area href="classResident.html" title="Class representing the Resident. " alt="Resident" shape="rect" coords="172,56,248,80"/>
+<area href="classVisitor.html" title="Class for the implementation of visitors - i.e. Caregivers, Nurses, Doctors, Friends, and Relatives. " alt="Visitor" shape="rect" coords="258,56,334,80"/>
+<area href="classCaregiver.html" title="Superclass for visitors - i.e. Caregivers, Nurses, Doctors, Friends, Relatives. " alt="Caregiver" shape="rect" coords="344,112,420,136"/>
+<area href="classCaregiver1.html" title="Superclass for visitors - i.e. Caregivers, Nurses, Doctors, Friends, Relatives. " alt="Caregiver1" shape="rect" coords="344,168,420,192"/>
+<area href="classCaregiver2.html" title="Superclass for visitors - i.e. Caregivers, Nurses, Doctors, Friends, Relatives. " alt="Caregiver2" shape="rect" coords="344,224,420,248"/>
+<area href="classDoctor.html" title="Class for the Doctor nodes. " alt="Doctor" shape="rect" coords="344,280,420,304"/>
+<area href="classFriend.html" title="Class for Friend nodes. " alt="Friend" shape="rect" coords="344,336,420,360"/>
+<area href="classFriend1.html" title="Class for Friend nodes. " alt="Friend1" shape="rect" coords="344,392,420,416"/>
+<area href="classFriend2.html" title="Class for Friend nodes. " alt="Friend2" shape="rect" coords="344,448,420,472"/>
+<area href="classNurse.html" title="Class for Nurse nodes. " alt="Nurse" shape="rect" coords="344,504,420,528"/>
+<area href="classNurse1.html" title="Class for Nurse nodes. " alt="Nurse1" shape="rect" coords="344,560,420,584"/>
+<area href="classNurse2.html" title="Class for Nurse nodes. " alt="Nurse2" shape="rect" coords="344,616,420,640"/>
+<area href="classRelative.html" title="Class for Relative nodes. " alt="Relative" shape="rect" coords="344,672,420,696"/>
 </map>
  </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a4b1182b9ee5dccaa871d71beef94a7d2"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAgent.html#a4b1182b9ee5dccaa871d71beef94a7d2">StageOdom_callback</a> (nav_msgs::Odometry msg)=0</td></tr>
-<tr class="memdesc:a4b1182b9ee5dccaa871d71beef94a7d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the <a class="el" href="classResident.html" title="Class representing the Resident. ">Resident</a>'s x position, y position, and angle to reflect its current pose.  <a href="#a4b1182b9ee5dccaa871d71beef94a7d2">More...</a><br/></td></tr>
-<tr class="separator:a4b1182b9ee5dccaa871d71beef94a7d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adfe1de8bbeaa7e4a5f7f2ff3e45593e8"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAgent.html#adfe1de8bbeaa7e4a5f7f2ff3e45593e8">StageLaser_callback</a> (sensor_msgs::LaserScan msg)=0</td></tr>
-<tr class="memdesc:adfe1de8bbeaa7e4a5f7f2ff3e45593e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual callback function to process laser scan messsages.  <a href="#adfe1de8bbeaa7e4a5f7f2ff3e45593e8">More...</a><br/></td></tr>
-<tr class="separator:adfe1de8bbeaa7e4a5f7f2ff3e45593e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3de32bf3de5baf5a996b874f2ba7cf75"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3de32bf3de5baf5a996b874f2ba7cf75"></a>
-virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAgent.html#a3de32bf3de5baf5a996b874f2ba7cf75">run</a> (int argc, char *argv[])=0</td></tr>
-<tr class="memdesc:a3de32bf3de5baf5a996b874f2ba7cf75"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main function that controls agent events. <br/></td></tr>
-<tr class="separator:a3de32bf3de5baf5a996b874f2ba7cf75"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef22675e420206ed848583c89f38f8f0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAgent.html#aef22675e420206ed848583c89f38f8f0">StageOdom_callback</a> (nav_msgs::Odometry msg)</td></tr>
+<tr class="memdesc:aef22675e420206ed848583c89f38f8f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the agent's x position, y position, and angle to reflect its current pose.  <a href="#aef22675e420206ed848583c89f38f8f0">More...</a><br/></td></tr>
+<tr class="separator:aef22675e420206ed848583c89f38f8f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-types"></a>
-Protected Types</h2></td></tr>
-<tr class="memitem:a74c335b513eeb92231976477006c63bf"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><b>Type</b> { <br/>
-&#160;&#160;<b>FRIEND</b>, 
-<b>RELATIVE</b>, 
-<b>DOCTOR</b>, 
-<b>NURSE</b>, 
-<br/>
-&#160;&#160;<b>CAREGIVER</b>, 
-<b>ASSISTANT</b>, 
-<b>RESIDENT</b>
-<br/>
- }</td></tr>
-<tr class="separator:a74c335b513eeb92231976477006c63bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a20a0548f91fdfba2727ff8fddc3ce3dc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAgent.html#a20a0548f91fdfba2727ff8fddc3ce3dc">setPath</a> (std::string start, std::string end)</td></tr>
+<tr class="memdesc:a20a0548f91fdfba2727ff8fddc3ce3dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the path for the agent.  <a href="#a20a0548f91fdfba2727ff8fddc3ce3dc">More...</a><br/></td></tr>
+<tr class="separator:a20a0548f91fdfba2727ff8fddc3ce3dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49e310d66471525dfba98ee4e89e7865"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a49e310d66471525dfba98ee4e89e7865"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>turn</b> ()</td></tr>
+<tr class="separator:a49e310d66471525dfba98ee4e89e7865"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a155537d7cbac8ba6982415e15c8e76a9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a155537d7cbac8ba6982415e15c8e76a9"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>moveForward</b> (std::pair&lt; double, double &gt; nextCheckpoint)</td></tr>
+<tr class="separator:a155537d7cbac8ba6982415e15c8e76a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9455180dd9aff369e34e1527bfa6d1a9"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAgent.html#a9455180dd9aff369e34e1527bfa6d1a9">calculateGoalAngle</a> (std::pair&lt; double, double &gt; goalCheckpoint)</td></tr>
+<tr class="separator:a9455180dd9aff369e34e1527bfa6d1a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f9de8060bab4248d557f454265eee86"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5f9de8060bab4248d557f454265eee86"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>move</b> (std::string goal)</td></tr>
+<tr class="separator:a5f9de8060bab4248d557f454265eee86"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf69a5a2725a599c84ae2885d31c6d63"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acf69a5a2725a599c84ae2885d31c6d63"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>isTurnClockwise</b> ()</td></tr>
+<tr class="separator:acf69a5a2725a599c84ae2885d31c6d63"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add59ed077172c91c9b2dddd4ca319f47"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="add59ed077172c91c9b2dddd4ca319f47"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>stopMoving</b> ()</td></tr>
+<tr class="separator:add59ed077172c91c9b2dddd4ca319f47"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
+<tr class="memitem:ae9ddc8a7bffee9c921d6628e6669df9c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae9ddc8a7bffee9c921d6628e6669df9c"></a>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><b>originName</b></td></tr>
+<tr class="separator:ae9ddc8a7bffee9c921d6628e6669df9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c296226b7db0471d7a721dabe849c46"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9c296226b7db0471d7a721dabe849c46"></a>
+<a class="el" href="classCheckPointGraph.html">CheckPointGraph</a>&#160;</td><td class="memItemRight" valign="bottom"><b>g</b></td></tr>
+<tr class="separator:a9c296226b7db0471d7a721dabe849c46"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a77dfc60513d8c90b2848297e09fffba7"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAgent.html#a77dfc60513d8c90b2848297e09fffba7">linear_x</a></td></tr>
 <tr class="separator:a77dfc60513d8c90b2848297e09fffba7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:affc842049c5010a5f8bd99a62d650a25"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAgent.html#affc842049c5010a5f8bd99a62d650a25">angular_z</a></td></tr>
@@ -152,14 +166,37 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:af51536ae3b511b53726b84b9226cc772"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a048e8b32d02a2fd58f046a444a287015"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAgent.html#a048e8b32d02a2fd58f046a444a287015">py</a></td></tr>
 <tr class="separator:a048e8b32d02a2fd58f046a444a287015"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a389e3229e62da28d6c686354329e25aa"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAgent.html#a389e3229e62da28d6c686354329e25aa">currentAngle</a></td></tr>
+<tr class="separator:a389e3229e62da28d6c686354329e25aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ca673bd13a3e9aa8235db73eb4b5391"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0ca673bd13a3e9aa8235db73eb4b5391"></a>
+std::pair&lt; double, double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>currentCheckpoint</b></td></tr>
+<tr class="separator:a0ca673bd13a3e9aa8235db73eb4b5391"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac7175c1ed11e2b571d434bd25f4c096f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac7175c1ed11e2b571d434bd25f4c096f"></a>
+std::vector&lt; std::pair&lt; double, <br class="typebreak"/>
+double &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>shortestPath</b></td></tr>
+<tr class="separator:ac7175c1ed11e2b571d434bd25f4c096f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1f106d069420fb5995338cfa4f8799b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa1f106d069420fb5995338cfa4f8799b"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>shortestPathIndex</b></td></tr>
+<tr class="separator:aa1f106d069420fb5995338cfa4f8799b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afeaa67851b662b45d4d6fcd5eaf5acc3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afeaa67851b662b45d4d6fcd5eaf5acc3"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>isFacingCorrectly</b></td></tr>
+<tr class="separator:afeaa67851b662b45d4d6fcd5eaf5acc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab5675be1775cd18ff37e3e1870d51be"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aab5675be1775cd18ff37e3e1870d51be"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>isMoving</b></td></tr>
+<tr class="separator:aab5675be1775cd18ff37e3e1870d51be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aefcf2085a669d7e91d932e7cc3ee88ce"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAgent.html#aefcf2085a669d7e91d932e7cc3ee88ce">robot_id</a></td></tr>
 <tr class="separator:aefcf2085a669d7e91d932e7cc3ee88ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a894e975009220db4a8faa7c23fc0b4d6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a894e975009220db4a8faa7c23fc0b4d6"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>checkpointAngle</b></td></tr>
+<tr class="separator:a894e975009220db4a8faa7c23fc0b4d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4169e63cd18fa7785d4561746f676d1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae4169e63cd18fa7785d4561746f676d1"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>isClockwise</b></td></tr>
+<tr class="separator:ae4169e63cd18fa7785d4561746f676d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Superclass for all 'agents' - i.e. Assistants, Visitors, and the <a class="el" href="classResident.html" title="Class representing the Resident. ">Resident</a>. </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd>Shift all common functionality (such as navigation) and properties to this class from subclasses.</dd></dl>
+<div class="textblock"><p>Superclass for all 'agents' - i.e. Assistants, Visitors, and the <a class="el" href="classResident.html" title="Class representing the Resident. ">Resident</a>. Contains common navigation functionality and properties. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="adfe1de8bbeaa7e4a5f7f2ff3e45593e8"></a>
+<a class="anchor" id="a9455180dd9aff369e34e1527bfa6d1a9"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -167,33 +204,24 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void Agent::StageLaser_callback </td>
+          <td class="memname">double Agent::calculateGoalAngle </td>
           <td>(</td>
-          <td class="paramtype">sensor_msgs::LaserScan&#160;</td>
-          <td class="paramname"><em>msg</em></td><td>)</td>
+          <td class="paramtype">std::pair&lt; double, double &gt;&#160;</td>
+          <td class="paramname"><em>goalCheckpoint</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Virtual callback function to process laser scan messsages. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">msg</td><td>Single scan from a planar laser range finder </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Implemented in <a class="el" href="classAssistant.html#aaf1fe61dc3d3aac3f0ec603531ad9ad7">Assistant</a>, <a class="el" href="classDoctor.html#ab0b46ba92bd2069733f304858b7e4495">Doctor</a>, <a class="el" href="classResident.html#a6745ec218b7e451eb7ba2ca88fa2aca9">Resident</a>, <a class="el" href="classCaregiver.html#a3dc0edd8065745e6f355f80f2b293ba1">Caregiver</a>, <a class="el" href="classFriend.html#a1334996a432a7d435d40169bad684dc4">Friend</a>, <a class="el" href="classNurse.html#aa709fbc5dc09b8db82db59c1a2829d4a">Nurse</a>, and <a class="el" href="classRelative.html#a556d177e5d1562ab9af5018ef382c836">Relative</a>.</p>
+<p>This function calculates the angle to the goal. </p>
 
 </div>
 </div>
-<a class="anchor" id="a4b1182b9ee5dccaa871d71beef94a7d2"></a>
+<a class="anchor" id="a20a0548f91fdfba2727ff8fddc3ce3dc"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -201,29 +229,62 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void Agent::StageOdom_callback </td>
+          <td class="memname">void Agent::setPath </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>start</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>end</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sets the path for the agent. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">start</td><td>The name of the start checkpoint </td></tr>
+    <tr><td class="paramname">end</td><td>The name of the end checkpoint </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="aef22675e420206ed848583c89f38f8f0"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Agent::StageOdom_callback </td>
           <td>(</td>
           <td class="paramtype">nav_msgs::Odometry&#160;</td>
           <td class="paramname"><em>msg</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p>Updates the <a class="el" href="classResident.html" title="Class representing the Resident. ">Resident</a>'s x position, y position, and angle to reflect its current pose. </p>
+<p>Updates the agent's x position, y position, and angle to reflect its current pose. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">msg</td><td>Odometry message from odom topic </td></tr>
   </table>
   </dd>
 </dl>
-
-<p>Implemented in <a class="el" href="classAssistant.html#ad016061136f3fa5c3ed733e23a54aa00">Assistant</a>, <a class="el" href="classDoctor.html#a92b20f52198c6137d8858152cba77640">Doctor</a>, <a class="el" href="classResident.html#ae1406a27c978147c7816e57f9ed13aed">Resident</a>, <a class="el" href="classCaregiver.html#aa326466c62614b84d6a750dc0e59fa48">Caregiver</a>, <a class="el" href="classFriend.html#ab336b2a40bc6b9787bd0e9283f29f468">Friend</a>, <a class="el" href="classNurse.html#a3ff47edb35f171a538fe62b3abdca948">Nurse</a>, and <a class="el" href="classRelative.html#a13fc6c65f7338cfa29c9f31958134c56">Relative</a>.</p>
 
 </div>
 </div>
@@ -246,6 +307,27 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <p>Angular velocity of the robot </p>
+
+</div>
+</div>
+<a class="anchor" id="a389e3229e62da28d6c686354329e25aa"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Agent::currentAngle</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>angle of the robot </p>
 
 </div>
 </div>
@@ -333,13 +415,14 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following file:<ul>
+<hr/>The documentation for this class was generated from the following files:<ul>
 <li>se306_project1/src/<a class="el" href="Agent_8h_source.html">Agent.h</a></li>
+<li>se306_project1/src/Agent.cpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Aug 15 2014 13:20:37 for SE306 Project 1 by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Aug 29 2014 17:01:15 for SE306 Project 1 by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

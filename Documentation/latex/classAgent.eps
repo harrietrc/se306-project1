@@ -5,7 +5,7 @@
 %%For: 
 %Magnification: 1.00
 %%Orientation: Portrait
-%%BoundingBox: 0 0 500 155.844156
+%%BoundingBox: 0 0 500 619.047619
 %%Pages: 0
 %%BeginSetup
 %%EndSetup
@@ -19,12 +19,12 @@
 /marginwidth 10 def
 /distx 20 def
 /disty 40 def
-/boundaspect 3.208333 def  % aspect ratio of the BoundingBox (width/height)
+/boundaspect 0.807692 def  % aspect ratio of the BoundingBox (width/height)
 /boundx 500 def
 /boundy boundx boundaspect div def
 /xspacing 0 def
 /yspacing 0 def
-/rows 3 def
+/rows 13 def
 /cols 5 def
 /scalefactor 0 def
 /boxfont /Times-Roman findfont fontheight scalefont def
@@ -175,12 +175,19 @@ boxfont setfont
 1 boundaspect scale
 (Agent) cw
 (Assistant) cw
+(Assistant1) cw
 (Resident) cw
 (Visitor) cw
 (Caregiver) cw
+(Caregiver1) cw
+(Caregiver2) cw
 (Doctor) cw
 (Friend) cw
+(Friend1) cw
+(Friend2) cw
 (Nurse) cw
+(Nurse1) cw
+(Nurse2) cw
 (Relative) cw
 /boxwidth boxwidth marginwidth 2 mul add def
 /xspacing boxwidth distx add def
@@ -193,39 +200,60 @@ boundx scalefactor div boundy scalefactor div scale
 
 % ----- classes -----
 
- (Agent) 1.000000 2.000000 box
- (Assistant) 0.000000 1.000000 box
- (Resident) 1.000000 1.000000 box
- (Visitor) 2.000000 1.000000 box
- (Caregiver) 0.000000 0.000000 box
- (Doctor) 1.000000 0.000000 box
- (Friend) 2.000000 0.000000 box
- (Nurse) 3.000000 0.000000 box
+ (Agent) 1.500000 12.000000 box
+ (Assistant) 0.000000 11.000000 box
+ (Assistant1) 1.000000 11.000000 box
+ (Resident) 2.000000 11.000000 box
+ (Visitor) 3.000000 11.000000 box
+ (Caregiver) 4.000000 10.000000 box
+ (Caregiver1) 4.000000 9.000000 box
+ (Caregiver2) 4.000000 8.000000 box
+ (Doctor) 4.000000 7.000000 box
+ (Friend) 4.000000 6.000000 box
+ (Friend1) 4.000000 5.000000 box
+ (Friend2) 4.000000 4.000000 box
+ (Nurse) 4.000000 3.000000 box
+ (Nurse1) 4.000000 2.000000 box
+ (Nurse2) 4.000000 1.000000 box
  (Relative) 4.000000 0.000000 box
 
 % ----- relations -----
 
 solid
-1 1.000000 1.250000 out
+1 1.500000 11.250000 out
 solid
-0.000000 2.000000 2.000000 conn
+0.000000 3.000000 12.000000 conn
 solid
-0 0.000000 1.750000 in
+0 0.000000 11.750000 in
 solid
-0 1.000000 1.750000 in
+0 1.000000 11.750000 in
 solid
-0 2.000000 1.750000 in
+0 2.000000 11.750000 in
 solid
-1 2.000000 0.250000 out
+0 3.000000 11.750000 in
 solid
-0.000000 4.000000 1.000000 conn
+1 3.000000 10.250000 out
 solid
-0 0.000000 0.750000 in
+0 3.000000 10.500000 hedge
 solid
-0 1.000000 0.750000 in
+0 3.000000 9.500000 hedge
 solid
-0 2.000000 0.750000 in
+0 3.000000 8.500000 hedge
 solid
-0 3.000000 0.750000 in
+0 3.000000 7.500000 hedge
 solid
-0 4.000000 0.750000 in
+0 3.000000 6.500000 hedge
+solid
+0 3.000000 5.500000 hedge
+solid
+0 3.000000 4.500000 hedge
+solid
+0 3.000000 3.500000 hedge
+solid
+0 3.000000 2.500000 hedge
+solid
+0 3.000000 1.500000 hedge
+solid
+0 3.000000 0.500000 hedge
+solid
+3.000000 11.000000 0.500000 vedge

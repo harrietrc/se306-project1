@@ -1,15 +1,7 @@
 var searchData=
 [
-  ['datatype_3c_20_3a_3ase306_5fproject1_3a_3aassistantmsg_5f_3c_20containerallocator_20_3e_20_3e',['DataType&lt; ::se306_project1::AssistantMsg_&lt; ContainerAllocator &gt; &gt;',['../structros_1_1message__traits_1_1DataType_3_01_1_1se306__project1_1_1AssistantMsg___3_01ContainerAllocator_01_4_01_4.html',1,'ros::message_traits']]],
-  ['datatype_3c_20_3a_3ase306_5fproject1_3a_3adoctormsg_5f_3c_20containerallocator_20_3e_20_3e',['DataType&lt; ::se306_project1::DoctorMsg_&lt; ContainerAllocator &gt; &gt;',['../structros_1_1message__traits_1_1DataType_3_01_1_1se306__project1_1_1DoctorMsg___3_01ContainerAllocator_01_4_01_4.html',1,'ros::message_traits']]],
-  ['datatype_3c_20_3a_3ase306_5fproject1_3a_3aresidentmsg_5f_3c_20containerallocator_20_3e_20_3e',['DataType&lt; ::se306_project1::ResidentMsg_&lt; ContainerAllocator &gt; &gt;',['../structros_1_1message__traits_1_1DataType_3_01_1_1se306__project1_1_1ResidentMsg___3_01ContainerAllocator_01_4_01_4.html',1,'ros::message_traits']]],
-  ['definition_3c_20_3a_3ase306_5fproject1_3a_3aassistantmsg_5f_3c_20containerallocator_20_3e_20_3e',['Definition&lt; ::se306_project1::AssistantMsg_&lt; ContainerAllocator &gt; &gt;',['../structros_1_1message__traits_1_1Definition_3_01_1_1se306__project1_1_1AssistantMsg___3_01ContainerAllocator_01_4_01_4.html',1,'ros::message_traits']]],
-  ['definition_3c_20_3a_3ase306_5fproject1_3a_3adoctormsg_5f_3c_20containerallocator_20_3e_20_3e',['Definition&lt; ::se306_project1::DoctorMsg_&lt; ContainerAllocator &gt; &gt;',['../structros_1_1message__traits_1_1Definition_3_01_1_1se306__project1_1_1DoctorMsg___3_01ContainerAllocator_01_4_01_4.html',1,'ros::message_traits']]],
-  ['definition_3c_20_3a_3ase306_5fproject1_3a_3aresidentmsg_5f_3c_20containerallocator_20_3e_20_3e',['Definition&lt; ::se306_project1::ResidentMsg_&lt; ContainerAllocator &gt; &gt;',['../structros_1_1message__traits_1_1Definition_3_01_1_1se306__project1_1_1ResidentMsg___3_01ContainerAllocator_01_4_01_4.html',1,'ros::message_traits']]],
-  ['deserialize',['deserialize',['../classse306__project1_1_1msg_1_1__AssistantMsg_1_1AssistantMsg.html#aa8700e1054cba903da6a3e14051c4c04',1,'se306_project1.msg._AssistantMsg.AssistantMsg.deserialize()'],['../classse306__project1_1_1msg_1_1__DoctorMsg_1_1DoctorMsg.html#ae585ea7a7ad1bf035a68ad1d5eebd081',1,'se306_project1.msg._DoctorMsg.DoctorMsg.deserialize()'],['../classse306__project1_1_1msg_1_1__ResidentMsg_1_1ResidentMsg.html#ac11744354ea648bc3df1aa92e8c799d7',1,'se306_project1.msg._ResidentMsg.ResidentMsg.deserialize()']]],
-  ['deserialize_5fnumpy',['deserialize_numpy',['../classse306__project1_1_1msg_1_1__AssistantMsg_1_1AssistantMsg.html#a1572c60a75384a707bf4200a39a0a295',1,'se306_project1.msg._AssistantMsg.AssistantMsg.deserialize_numpy()'],['../classse306__project1_1_1msg_1_1__DoctorMsg_1_1DoctorMsg.html#afb7de726ee1e81daf506f49c726d4d6c',1,'se306_project1.msg._DoctorMsg.DoctorMsg.deserialize_numpy()'],['../classse306__project1_1_1msg_1_1__ResidentMsg_1_1ResidentMsg.html#a8608a64edc2229ed55f0669caf76153d',1,'se306_project1.msg._ResidentMsg.ResidentMsg.deserialize_numpy()']]],
-  ['doctor',['Doctor',['../classDoctor.html',1,'']]],
-  ['doctor_5fcallback',['doctor_callback',['../classResident.html#a6d8fbbc8a60508ec913fb41d7e743094',1,'Resident']]],
-  ['doctormsg',['DoctorMsg',['../classse306__project1_1_1msg_1_1__DoctorMsg_1_1DoctorMsg.html',1,'se306_project1::msg::_DoctorMsg']]],
-  ['doctormsg_5f',['DoctorMsg_',['../structse306__project1_1_1DoctorMsg__.html',1,'se306_project1']]]
+  ['friend',['Friend',['../classFriend.html',1,'']]],
+  ['friend1',['Friend1',['../classFriend1.html',1,'']]],
+  ['friend2',['Friend2',['../classFriend2.html',1,'']]],
+  ['friendsdonecallback',['friendsDoneCallback',['../classFriend.html#a1cee00d4939701c7f3d53bea1cb9e8ae',1,'Friend']]]
 ];

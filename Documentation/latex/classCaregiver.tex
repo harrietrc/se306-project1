@@ -19,10 +19,6 @@ Inheritance diagram for Caregiver\-:\begin{figure}[H]
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \hyperlink{classCaregiver_aa326466c62614b84d6a750dc0e59fa48}{Stage\-Odom\-\_\-callback} (nav\-\_\-msgs\-::\-Odometry msg)
-\begin{DoxyCompactList}\small\item\em Updates the \hyperlink{classCaregiver}{Caregiver}'s x position, y position, and angle to reflect its current pose. \end{DoxyCompactList}\item 
-void \hyperlink{classCaregiver_a3dc0edd8065745e6f355f80f2b293ba1}{Stage\-Laser\-\_\-callback} (sensor\-\_\-msgs\-::\-Laser\-Scan msg)
-\begin{DoxyCompactList}\small\item\em Callback function to process laser scan messsages. You can access the range data from msg.\-ranges\mbox{[}i\mbox{]}. i = sample number. \end{DoxyCompactList}\item 
 \hypertarget{classCaregiver_a8d1eccbe63af5842970daa69fedb40cc}{int \hyperlink{classCaregiver_a8d1eccbe63af5842970daa69fedb40cc}{run} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})}\label{classCaregiver_a8d1eccbe63af5842970daa69fedb40cc}
 
 \begin{DoxyCompactList}\small\item\em Main function for the \hyperlink{classCaregiver}{Caregiver} process. Controls node setup and periodic events. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -31,55 +27,6 @@ void \hyperlink{classCaregiver_a3dc0edd8065745e6f355f80f2b293ba1}{Stage\-Laser\-
 
 \subsection{Detailed Description}
 Superclass for visitors -\/ i.\-e. Caregivers, Nurses, Doctors, Friends, Relatives. 
-
-\subsection{Member Function Documentation}
-\hypertarget{classCaregiver_a3dc0edd8065745e6f355f80f2b293ba1}{\index{Caregiver@{Caregiver}!Stage\-Laser\-\_\-callback@{Stage\-Laser\-\_\-callback}}
-\index{Stage\-Laser\-\_\-callback@{Stage\-Laser\-\_\-callback}!Caregiver@{Caregiver}}
-\subsubsection[{Stage\-Laser\-\_\-callback}]{\setlength{\rightskip}{0pt plus 5cm}void Caregiver\-::\-Stage\-Laser\-\_\-callback (
-\begin{DoxyParamCaption}
-\item[{sensor\-\_\-msgs\-::\-Laser\-Scan}]{msg}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classCaregiver_a3dc0edd8065745e6f355f80f2b293ba1}
-
-
-Callback function to process laser scan messsages. You can access the range data from msg.\-ranges\mbox{[}i\mbox{]}. i = sample number. 
-
-\begin{DoxyNote}{Note}
-Currently blank as it is not in use. Navigation operates through a checkpoint system. 
-\end{DoxyNote}
-
-\begin{DoxyParams}{Parameters}
-{\em msg} & Single scan from a planar laser range finder \\
-\hline
-\end{DoxyParams}
-
-
-Implements \hyperlink{classAgent_adfe1de8bbeaa7e4a5f7f2ff3e45593e8}{Agent}.
-
-\hypertarget{classCaregiver_aa326466c62614b84d6a750dc0e59fa48}{\index{Caregiver@{Caregiver}!Stage\-Odom\-\_\-callback@{Stage\-Odom\-\_\-callback}}
-\index{Stage\-Odom\-\_\-callback@{Stage\-Odom\-\_\-callback}!Caregiver@{Caregiver}}
-\subsubsection[{Stage\-Odom\-\_\-callback}]{\setlength{\rightskip}{0pt plus 5cm}void Caregiver\-::\-Stage\-Odom\-\_\-callback (
-\begin{DoxyParamCaption}
-\item[{nav\-\_\-msgs\-::\-Odometry}]{msg}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classCaregiver_aa326466c62614b84d6a750dc0e59fa48}
-
-
-Updates the \hyperlink{classCaregiver}{Caregiver}'s x position, y position, and angle to reflect its current pose. 
-
-\begin{DoxyNote}{Note}
-Rounding is used to calculate the current angle. This approximation is accounted for by using threshholds when processing angles. 
-\end{DoxyNote}
-
-\begin{DoxyParams}{Parameters}
-{\em msg} & Odometry message from odom topic \\
-\hline
-\end{DoxyParams}
-
-
-Implements \hyperlink{classAgent_a4b1182b9ee5dccaa871d71beef94a7d2}{Agent}.
-
-
 
 The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
 \item 

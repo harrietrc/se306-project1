@@ -1,0 +1,64 @@
+\hypertarget{classFriend2}{\section{Friend2 Class Reference}
+\label{classFriend2}\index{Friend2@{Friend2}}
+}
+
+
+Class for \hyperlink{classFriend}{Friend} nodes.  
+
+
+
+
+{\ttfamily \#include $<$Friend2.\-h$>$}
+
+Inheritance diagram for Friend2\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classFriend2}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classFriend2_ad03c02e64256ea572ca3dfbf4bba0d0e}{int \hyperlink{classFriend2_ad03c02e64256ea572ca3dfbf4bba0d0e}{run} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})}\label{classFriend2_ad03c02e64256ea572ca3dfbf4bba0d0e}
+
+\begin{DoxyCompactList}\small\item\em Main function for the \hyperlink{classFriend}{Friend} process. Controls node setup and periodic events. \end{DoxyCompactList}\item 
+\hypertarget{classFriend2_a4d8cfc5c44393e2353349197894d8393}{void {\bfseries friends\-Done\-Callback} (const ros\-::\-Timer\-Event \&)}\label{classFriend2_a4d8cfc5c44393e2353349197894d8393}
+
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classFriend2_a9739a9f4fe4e8768cfbf0849efc2d9c2}{delegate} (\hyperlink{structse306__project1_1_1ResidentMsg__}{se306\-\_\-project1\-::\-Resident\-Msg} msg)
+\begin{DoxyCompactList}\small\item\em Callback function that unpacks and processes resident status messages. \hyperlink{classFriend}{Friend} should subscribe to the Resident\-Msg topic in order for this callback to be called. Resident\-Msg is published by the \hyperlink{classResident}{Resident}. \end{DoxyCompactList}\item 
+\hypertarget{classFriend2_a6271e3b801a54915dbcc87cca56ba168}{void {\bfseries do\-Timed\-Visit} (const ros\-::\-Timer\-Event \&)}\label{classFriend2_a6271e3b801a54915dbcc87cca56ba168}
+
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Class for \hyperlink{classFriend}{Friend} nodes. 
+
+\subsection{Member Function Documentation}
+\hypertarget{classFriend2_a9739a9f4fe4e8768cfbf0849efc2d9c2}{\index{Friend2@{Friend2}!delegate@{delegate}}
+\index{delegate@{delegate}!Friend2@{Friend2}}
+\subsubsection[{delegate}]{\setlength{\rightskip}{0pt plus 5cm}void Friend2\-::delegate (
+\begin{DoxyParamCaption}
+\item[{{\bf se306\-\_\-project1\-::\-Resident\-Msg}}]{msg}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}}\label{classFriend2_a9739a9f4fe4e8768cfbf0849efc2d9c2}
+
+
+Callback function that unpacks and processes resident status messages. \hyperlink{classFriend}{Friend} should subscribe to the Resident\-Msg topic in order for this callback to be called. Resident\-Msg is published by the \hyperlink{classResident}{Resident}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & A custom Resident\-Msg message that contains information about the resident's current status. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+se306\-\_\-project1/src/Friend2.\-h\item 
+se306\-\_\-project1/src/Friend2.\-cpp\end{DoxyCompactItemize}

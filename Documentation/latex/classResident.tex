@@ -19,59 +19,53 @@ Inheritance diagram for Resident\-:\begin{figure}[H]
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \hyperlink{classResident_ae1406a27c978147c7816e57f9ed13aed}{Stage\-Odom\-\_\-callback} (nav\-\_\-msgs\-::\-Odometry msg)
-\begin{DoxyCompactList}\small\item\em Updates the \hyperlink{classResident}{Resident}'s x position, y position, and angle to reflect its current pose. \end{DoxyCompactList}\item 
-void \hyperlink{classResident_a6745ec218b7e451eb7ba2ca88fa2aca9}{Stage\-Laser\-\_\-callback} (sensor\-\_\-msgs\-::\-Laser\-Scan msg)
-\begin{DoxyCompactList}\small\item\em Callback function to process laser scan messsages. You can access the range data from msg.\-ranges\mbox{[}i\mbox{]}. i = sample number. \end{DoxyCompactList}\item 
-\hypertarget{classResident_aa4cbafa8f6cf586b53a774a8f1d81aa6}{int \hyperlink{classResident_aa4cbafa8f6cf586b53a774a8f1d81aa6}{run} (int argc, char $\ast$$\ast$argv) = checkpoints\mbox{[}cc-\/1\mbox{]}\mbox{[}0\mbox{]}}\label{classResident_aa4cbafa8f6cf586b53a774a8f1d81aa6}
-
-\begin{DoxyCompactList}\small\item\em Main function for the \hyperlink{classResident}{Resident} process. Controls node setup and periodic events. \end{DoxyCompactList}\item 
+int \hyperlink{classResident_a43dac53b6516e2d30c3df845efc2e547}{run} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Main function that controls agent events. \end{DoxyCompactList}\item 
 void \hyperlink{classResident_a6d8fbbc8a60508ec913fb41d7e743094}{doctor\-\_\-callback} (\hyperlink{structse306__project1_1_1DoctorMsg__}{se306\-\_\-project1\-::\-Doctor\-Msg} msg)
 \begin{DoxyCompactList}\small\item\em Increases the resident's health when the doctor heals them. \end{DoxyCompactList}\item 
-double \hyperlink{classResident_ae8e00862499c8a502b5c99f8267d3345}{calc\-\_\-goal\-\_\-angle} (double \hyperlink{classResident_adee57a6649dfa4a41d027fbb8d961226}{goal\-\_\-x}, double \hyperlink{classResident_a30e28a999b67c4db3500c9c3c9989a10}{goal\-\_\-y}, double \hyperlink{classResident_a4781565db7a2e58566d2120623fbc13e}{cur\-\_\-angle}, double \hyperlink{classResident_aa147b3e473b2ea32b732eb5146ec7e34}{px}, double \hyperlink{classResident_ac757cac74a1712dd5746d1c3f5702a21}{py})
-\begin{DoxyCompactList}\small\item\em Given the agent's current angle, this function calculates the angle to the goal. cur\-\_\-angle, goal\-\_\-x, goal\-\_\-y, px, and py are class fields but are also passed as parameters. \end{DoxyCompactList}\item 
-std\-::pair$<$ double, double $>$ \hyperlink{classResident_a6f48fd57a638a2b4599777a1be766296}{move} (double \hyperlink{classResident_adee57a6649dfa4a41d027fbb8d961226}{goal\-\_\-x}, double \hyperlink{classResident_a30e28a999b67c4db3500c9c3c9989a10}{goal\-\_\-y}, double \hyperlink{classResident_a4781565db7a2e58566d2120623fbc13e}{cur\-\_\-angle}, double \hyperlink{classResident_a194117576f1937cac43ac1b05b884085}{goal\-\_\-angle}, double \hyperlink{classResident_aa147b3e473b2ea32b732eb5146ec7e34}{px}, double \hyperlink{classResident_ac757cac74a1712dd5746d1c3f5702a21}{py})
-\begin{DoxyCompactList}\small\item\em Keeps the agent moving by changing linear\-\_\-x ad angular\-\_\-z. \end{DoxyCompactList}\item 
-\hypertarget{classResident_a538db1d9cce0d967a78e7d10876d76ca}{void {\bfseries random\-Checkpoint\-Callback} (const ros\-::\-Timer\-Event \&)}\label{classResident_a538db1d9cce0d967a78e7d10876d76ca}
-
-\item 
 void \hyperlink{classResident_aa715d491e917de6f621593f0d1f01bd6}{assistant\-\_\-callback} (\hyperlink{structse306__project1_1_1AssistantMsg__}{se306\-\_\-project1\-::\-Assistant\-Msg} msg)
 \begin{DoxyCompactList}\small\item\em Increases the \hyperlink{classResident}{Resident}'s hunger (towards full) if food has been delivered. \end{DoxyCompactList}\item 
-std\-::pair$<$ double, double $>$ \hyperlink{classResident_a0cfe1d9b185beed7d3438157cc69db05}{move\-Path} (int path\mbox{[}$\,$\mbox{]}\mbox{[}2\mbox{]}, int path\-Length)
-\begin{DoxyCompactList}\small\item\em Causes the agent to move until the goal is reached. When the goal is reached, the next checkpoint becomes the goal or if the list of checkpoints is exhausted, the agent returns to its initial position (the first checkpoint) \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsection*{Protected Attributes}
-\begin{DoxyCompactItemize}
-\item 
-int \hyperlink{classResident_ac603d9684120e1ab66a4340797bb7e90}{health}
-\item 
-int \hyperlink{classResident_acc61e75ef963ee7a6945b4d2ae9c55e6}{boredom}
-\item 
-int \hyperlink{classResident_a337df4272a4640a4039dfbe5c5c4a6d6}{hunger}
-\item 
-double \hyperlink{classResident_adee57a6649dfa4a41d027fbb8d961226}{goal\-\_\-x}
-\item 
-double \hyperlink{classResident_a30e28a999b67c4db3500c9c3c9989a10}{goal\-\_\-y}
-\item 
-double \hyperlink{classResident_aa147b3e473b2ea32b732eb5146ec7e34}{px}
-\item 
-double \hyperlink{classResident_ac757cac74a1712dd5746d1c3f5702a21}{py}
-\item 
-double \hyperlink{classResident_a194117576f1937cac43ac1b05b884085}{goal\-\_\-angle}
-\item 
-bool \hyperlink{classResident_ac5e7527b191e07372c3ea5e9aa81a65d}{is\-Set}
-\item 
-double \hyperlink{classResident_a4781565db7a2e58566d2120623fbc13e}{cur\-\_\-angle}
-\item 
-\hypertarget{classResident_ab17c0dfd1b011b6e166f987f823892da}{int {\bfseries cc}}\label{classResident_ab17c0dfd1b011b6e166f987f823892da}
+\hypertarget{classResident_a33352541969842e16e716ba61fb242f1}{void {\bfseries friend\-\_\-callback} (const std\-\_\-msgs\-::\-String\-::\-Const\-Ptr \&msg)}\label{classResident_a33352541969842e16e716ba61fb242f1}
 
 \item 
-\hypertarget{classResident_aa2c1d458eb7b852af9aaa39132e0d85a}{bool {\bfseries is\-\_\-called}}\label{classResident_aa2c1d458eb7b852af9aaa39132e0d85a}
+\hypertarget{classResident_accf6a08b67397acdbcc9c81226e5d746}{bool {\bfseries do\-Sleep} (const ros\-::\-Timer\-Event \&)}\label{classResident_accf6a08b67397acdbcc9c81226e5d746}
 
 \item 
-\hypertarget{classResident_af86d17339240199486745bdd27da0ca5}{std\-::pair$<$ double, bool $>$ {\bfseries goal\-\_\-pair}}\label{classResident_af86d17339240199486745bdd27da0ca5}
+\hypertarget{classResident_a98b4c44b2cc5f0212f8889088bc881e1}{void \hyperlink{classResident_a98b4c44b2cc5f0212f8889088bc881e1}{publish\-Status} (ros\-::\-Publisher Resident\-\_\-state\-\_\-pub)}\label{classResident_a98b4c44b2cc5f0212f8889088bc881e1}
+
+\begin{DoxyCompactList}\small\item\em Gets current resident status and publishes it to a topic for assistants and doctors/nurses. May convert to string and publish in the standard way -\/ do we need custom messages any more? \end{DoxyCompactList}\item 
+\hypertarget{classResident_afb1119b2ff73ad3aa48732caee7b3d60}{void {\bfseries trigger\-Random\-Events} ()}\label{classResident_afb1119b2ff73ad3aa48732caee7b3d60}
 
 \item 
-std\-::pair$<$ double, double $>$ \hyperlink{classResident_a790131eeebec8aed96b90bd1d9ce7fef}{ret}
+\hypertarget{classResident_a385c83c3916a4d27d2a25ef8b370bec9}{void {\bfseries medication\-Callback} (const ros\-::\-Timer\-Event \&)}\label{classResident_a385c83c3916a4d27d2a25ef8b370bec9}
+
+\item 
+\hypertarget{classResident_a077344652ee8d61fb8af7b79f6694514}{void {\bfseries wake\-Callback} (const ros\-::\-Timer\-Event \&)}\label{classResident_a077344652ee8d61fb8af7b79f6694514}
+
+\item 
+\hypertarget{classResident_ac66d104fcc8722a2d5888171eecfbd69}{void {\bfseries sleep\-Callback} (const ros\-::\-Timer\-Event \&)}\label{classResident_ac66d104fcc8722a2d5888171eecfbd69}
+
+\item 
+\hypertarget{classResident_ac83ee402243f607d6026b9f2796f8ef1}{void {\bfseries caregiver\-Services\-Callback} (const ros\-::\-Timer\-Event \&)}\label{classResident_ac83ee402243f607d6026b9f2796f8ef1}
+
+\item 
+\hypertarget{classResident_a230654cb391de275302021decf9baa53}{void {\bfseries caregiver\-Services\-Done\-Callback} (const ros\-::\-Timer\-Event \&)}\label{classResident_a230654cb391de275302021decf9baa53}
+
+\item 
+\hypertarget{classResident_a22df12e23657cb49429d052d0168b957}{void {\bfseries hunger\-Callback} (const ros\-::\-Timer\-Event \&)}\label{classResident_a22df12e23657cb49429d052d0168b957}
+
+\item 
+\hypertarget{classResident_a03c057e1ce1f34456e71a35eb1b39c93}{void {\bfseries friends\-Callback} (const ros\-::\-Timer\-Event \&)}\label{classResident_a03c057e1ce1f34456e71a35eb1b39c93}
+
+\item 
+\hypertarget{classResident_aa1d45bfcd3798bcd907d605cf95e467d}{void {\bfseries friends\-Done\-Callback} (const ros\-::\-Timer\-Event \&)}\label{classResident_aa1d45bfcd3798bcd907d605cf95e467d}
+
+\item 
+\hypertarget{classResident_a142ba60229302edcf6bc69db55ee78ca}{void {\bfseries caregiver\-\_\-callback} (const std\-\_\-msgs\-::\-String\-::\-Const\-Ptr \&msg)}\label{classResident_a142ba60229302edcf6bc69db55ee78ca}
+
+\item 
+\hypertarget{classResident_a68e4438b39d8a0bacf1d85254587b029}{void {\bfseries check\-Status} ()}\label{classResident_a68e4438b39d8a0bacf1d85254587b029}
+
 \end{DoxyCompactItemize}
 \subsection*{Additional Inherited Members}
 
@@ -96,36 +90,6 @@ Increases the \hyperlink{classResident}{Resident}'s hunger (towards full) if foo
 {\em msg} & A custom message from an \hyperlink{classAssistant}{Assistant} robot. \\
 \hline
 \end{DoxyParams}
-\hypertarget{classResident_ae8e00862499c8a502b5c99f8267d3345}{\index{Resident@{Resident}!calc\-\_\-goal\-\_\-angle@{calc\-\_\-goal\-\_\-angle}}
-\index{calc\-\_\-goal\-\_\-angle@{calc\-\_\-goal\-\_\-angle}!Resident@{Resident}}
-\subsubsection[{calc\-\_\-goal\-\_\-angle}]{\setlength{\rightskip}{0pt plus 5cm}double Resident\-::calc\-\_\-goal\-\_\-angle (
-\begin{DoxyParamCaption}
-\item[{double}]{goal\-\_\-x, }
-\item[{double}]{goal\-\_\-y, }
-\item[{double}]{cur\-\_\-angle, }
-\item[{double}]{px, }
-\item[{double}]{py}
-\end{DoxyParamCaption}
-)}}\label{classResident_ae8e00862499c8a502b5c99f8267d3345}
-
-
-Given the agent's current angle, this function calculates the angle to the goal. cur\-\_\-angle, goal\-\_\-x, goal\-\_\-y, px, and py are class fields but are also passed as parameters. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em goal\-\_\-x} & The x co-\/ordinate of the goal \\
-\hline
-{\em goal\-\_\-y} & The y co-\/ordinate of the goal \\
-\hline
-{\em cur\-\_\-angle} & The agent's current angle, in reference to the co-\/ordinate system \\
-\hline
-{\em px} & The agent's initial x position \\
-\hline
-{\em py} & The agent's initial y position \\
-\hline
-{\em goal\-\_\-angle} & The angle that the robot must rotate to face the goal, in reference to the co-\/ordinate system. \\
-\hline
-\end{DoxyParams}
 \hypertarget{classResident_a6d8fbbc8a60508ec913fb41d7e743094}{\index{Resident@{Resident}!doctor\-\_\-callback@{doctor\-\_\-callback}}
 \index{doctor\-\_\-callback@{doctor\-\_\-callback}!Resident@{Resident}}
 \subsubsection[{doctor\-\_\-callback}]{\setlength{\rightskip}{0pt plus 5cm}void Resident\-::doctor\-\_\-callback (
@@ -145,145 +109,19 @@ Increases the resident's health when the doctor heals them.
 \begin{DoxyRemark}{Remarks}
 Perhaps add a delay between medication/diagnosis and healing? 
 \end{DoxyRemark}
-\hypertarget{classResident_a6f48fd57a638a2b4599777a1be766296}{\index{Resident@{Resident}!move@{move}}
-\index{move@{move}!Resident@{Resident}}
-\subsubsection[{move}]{\setlength{\rightskip}{0pt plus 5cm}std\-::pair$<$ double, double $>$ Resident\-::move (
+\hypertarget{classResident_a43dac53b6516e2d30c3df845efc2e547}{\index{Resident@{Resident}!run@{run}}
+\index{run@{run}!Resident@{Resident}}
+\subsubsection[{run}]{\setlength{\rightskip}{0pt plus 5cm}int Resident\-::run (
 \begin{DoxyParamCaption}
-\item[{double}]{goal\-\_\-x, }
-\item[{double}]{goal\-\_\-y, }
-\item[{double}]{cur\-\_\-angle, }
-\item[{double}]{goal\-\_\-angle, }
-\item[{double}]{px, }
-\item[{double}]{py}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
 \end{DoxyParamCaption}
-)}}\label{classResident_a6f48fd57a638a2b4599777a1be766296}
+)}}\label{classResident_a43dac53b6516e2d30c3df845efc2e547}
 
 
-Keeps the agent moving by changing linear\-\_\-x ad angular\-\_\-z. 
+Main function that controls agent events. 
 
-
-\begin{DoxyParams}{Parameters}
-{\em goal\-\_\-x} & The x position of the robot's goal \\
-\hline
-{\em goal\-\_\-y} & The y position of the robot's goal \\
-\hline
-{\em cur\-\_\-angle} & The agent's current facing, in reference to the co-\/ordinate system. \\
-\hline
-{\em goal\-\_\-angle} & The angle that the agent must face in order to reach the goal. \\
-\hline
-{\em px} & Initial x position \\
-\hline
-{\em py} & Initial y position \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-\-\_\-ret linear\-\_\-x and angular\-\_\-z 
-\end{DoxyReturn}
-\hypertarget{classResident_a0cfe1d9b185beed7d3438157cc69db05}{\index{Resident@{Resident}!move\-Path@{move\-Path}}
-\index{move\-Path@{move\-Path}!Resident@{Resident}}
-\subsubsection[{move\-Path}]{\setlength{\rightskip}{0pt plus 5cm}std\-::pair$<$ double, double $>$ Resident\-::move\-Path (
-\begin{DoxyParamCaption}
-\item[{int}]{path\mbox{[}$\,$\mbox{]}\mbox{[}2\mbox{]}, }
-\item[{int}]{path\-Length}
-\end{DoxyParamCaption}
-)}}\label{classResident_a0cfe1d9b185beed7d3438157cc69db05}
-
-
-Causes the agent to move until the goal is reached. When the goal is reached, the next checkpoint becomes the goal or if the list of checkpoints is exhausted, the agent returns to its initial position (the first checkpoint) 
-
-
-\begin{DoxyParams}{Parameters}
-{\em path\mbox{[}$\,$\mbox{]}\mbox{[}2\mbox{]}} & An array of checkpoints that forms a path. \\
-\hline
-{\em path\-Length} & The number of checkpoints in the path (-\/1, as counting starts at 0) \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-linear\-\_\-x and angular\-\_\-z 
-\end{DoxyReturn}
-\hypertarget{classResident_a6745ec218b7e451eb7ba2ca88fa2aca9}{\index{Resident@{Resident}!Stage\-Laser\-\_\-callback@{Stage\-Laser\-\_\-callback}}
-\index{Stage\-Laser\-\_\-callback@{Stage\-Laser\-\_\-callback}!Resident@{Resident}}
-\subsubsection[{Stage\-Laser\-\_\-callback}]{\setlength{\rightskip}{0pt plus 5cm}void Resident\-::\-Stage\-Laser\-\_\-callback (
-\begin{DoxyParamCaption}
-\item[{sensor\-\_\-msgs\-::\-Laser\-Scan}]{msg}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classResident_a6745ec218b7e451eb7ba2ca88fa2aca9}
-
-
-Callback function to process laser scan messsages. You can access the range data from msg.\-ranges\mbox{[}i\mbox{]}. i = sample number. 
-
-\begin{DoxyNote}{Note}
-Currently blank as it is not in use. Navigation operates through a checkpoint system. 
-\end{DoxyNote}
-
-\begin{DoxyParams}{Parameters}
-{\em msg} & Single scan from a planar laser range finder \\
-\hline
-\end{DoxyParams}
-
-
-Implements \hyperlink{classAgent_adfe1de8bbeaa7e4a5f7f2ff3e45593e8}{Agent}.
-
-\hypertarget{classResident_ae1406a27c978147c7816e57f9ed13aed}{\index{Resident@{Resident}!Stage\-Odom\-\_\-callback@{Stage\-Odom\-\_\-callback}}
-\index{Stage\-Odom\-\_\-callback@{Stage\-Odom\-\_\-callback}!Resident@{Resident}}
-\subsubsection[{Stage\-Odom\-\_\-callback}]{\setlength{\rightskip}{0pt plus 5cm}void Resident\-::\-Stage\-Odom\-\_\-callback (
-\begin{DoxyParamCaption}
-\item[{nav\-\_\-msgs\-::\-Odometry}]{msg}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classResident_ae1406a27c978147c7816e57f9ed13aed}
-
-
-Updates the \hyperlink{classResident}{Resident}'s x position, y position, and angle to reflect its current pose. 
-
-\begin{DoxyNote}{Note}
-Rounding is used to calculate the current angle. This approximation is accounted for by using threshholds when processing angles. 
-\end{DoxyNote}
-
-\begin{DoxyParams}{Parameters}
-{\em msg} & Odometry message from odom topic \\
-\hline
-\end{DoxyParams}
-
-
-Implements \hyperlink{classAgent_a4b1182b9ee5dccaa871d71beef94a7d2}{Agent}.
-
-
-
-\subsection{Member Data Documentation}
-\hypertarget{classResident_acc61e75ef963ee7a6945b4d2ae9c55e6}{\index{Resident@{Resident}!boredom@{boredom}}
-\index{boredom@{boredom}!Resident@{Resident}}
-\subsubsection[{boredom}]{\setlength{\rightskip}{0pt plus 5cm}int Resident\-::boredom\hspace{0.3cm}{\ttfamily [protected]}}}\label{classResident_acc61e75ef963ee7a6945b4d2ae9c55e6}
-\hyperlink{classResident}{Resident} boredom \hypertarget{classResident_a4781565db7a2e58566d2120623fbc13e}{\index{Resident@{Resident}!cur\-\_\-angle@{cur\-\_\-angle}}
-\index{cur\-\_\-angle@{cur\-\_\-angle}!Resident@{Resident}}
-\subsubsection[{cur\-\_\-angle}]{\setlength{\rightskip}{0pt plus 5cm}double Resident\-::cur\-\_\-angle\hspace{0.3cm}{\ttfamily [protected]}}}\label{classResident_a4781565db7a2e58566d2120623fbc13e}
-The agent's current facing in reference to the co-\/ordinate system \hypertarget{classResident_a194117576f1937cac43ac1b05b884085}{\index{Resident@{Resident}!goal\-\_\-angle@{goal\-\_\-angle}}
-\index{goal\-\_\-angle@{goal\-\_\-angle}!Resident@{Resident}}
-\subsubsection[{goal\-\_\-angle}]{\setlength{\rightskip}{0pt plus 5cm}double Resident\-::goal\-\_\-angle\hspace{0.3cm}{\ttfamily [protected]}}}\label{classResident_a194117576f1937cac43ac1b05b884085}
-The angle that the agent must face to approach the goal, defined in reference to the co-\/ordinate system \hypertarget{classResident_adee57a6649dfa4a41d027fbb8d961226}{\index{Resident@{Resident}!goal\-\_\-x@{goal\-\_\-x}}
-\index{goal\-\_\-x@{goal\-\_\-x}!Resident@{Resident}}
-\subsubsection[{goal\-\_\-x}]{\setlength{\rightskip}{0pt plus 5cm}double Resident\-::goal\-\_\-x\hspace{0.3cm}{\ttfamily [protected]}}}\label{classResident_adee57a6649dfa4a41d027fbb8d961226}
-The x position of the agent's goal \hypertarget{classResident_a30e28a999b67c4db3500c9c3c9989a10}{\index{Resident@{Resident}!goal\-\_\-y@{goal\-\_\-y}}
-\index{goal\-\_\-y@{goal\-\_\-y}!Resident@{Resident}}
-\subsubsection[{goal\-\_\-y}]{\setlength{\rightskip}{0pt plus 5cm}double Resident\-::goal\-\_\-y\hspace{0.3cm}{\ttfamily [protected]}}}\label{classResident_a30e28a999b67c4db3500c9c3c9989a10}
-The y position of the agent's goal \hypertarget{classResident_ac603d9684120e1ab66a4340797bb7e90}{\index{Resident@{Resident}!health@{health}}
-\index{health@{health}!Resident@{Resident}}
-\subsubsection[{health}]{\setlength{\rightskip}{0pt plus 5cm}int Resident\-::health\hspace{0.3cm}{\ttfamily [protected]}}}\label{classResident_ac603d9684120e1ab66a4340797bb7e90}
-\hyperlink{classResident}{Resident} health \hypertarget{classResident_a337df4272a4640a4039dfbe5c5c4a6d6}{\index{Resident@{Resident}!hunger@{hunger}}
-\index{hunger@{hunger}!Resident@{Resident}}
-\subsubsection[{hunger}]{\setlength{\rightskip}{0pt plus 5cm}int Resident\-::hunger\hspace{0.3cm}{\ttfamily [protected]}}}\label{classResident_a337df4272a4640a4039dfbe5c5c4a6d6}
-\hyperlink{classResident}{Resident} hunger \hypertarget{classResident_ac5e7527b191e07372c3ea5e9aa81a65d}{\index{Resident@{Resident}!is\-Set@{is\-Set}}
-\index{is\-Set@{is\-Set}!Resident@{Resident}}
-\subsubsection[{is\-Set}]{\setlength{\rightskip}{0pt plus 5cm}bool Resident\-::is\-Set\hspace{0.3cm}{\ttfamily [protected]}}}\label{classResident_ac5e7527b191e07372c3ea5e9aa81a65d}
-The angle that the agent must face to approach the goal, defined in reference to the co-\/ordinate system \hypertarget{classResident_aa147b3e473b2ea32b732eb5146ec7e34}{\index{Resident@{Resident}!px@{px}}
-\index{px@{px}!Resident@{Resident}}
-\subsubsection[{px}]{\setlength{\rightskip}{0pt plus 5cm}double Resident\-::px\hspace{0.3cm}{\ttfamily [protected]}}}\label{classResident_aa147b3e473b2ea32b732eb5146ec7e34}
-The agent's initial x position \hypertarget{classResident_ac757cac74a1712dd5746d1c3f5702a21}{\index{Resident@{Resident}!py@{py}}
-\index{py@{py}!Resident@{Resident}}
-\subsubsection[{py}]{\setlength{\rightskip}{0pt plus 5cm}double Resident\-::py\hspace{0.3cm}{\ttfamily [protected]}}}\label{classResident_ac757cac74a1712dd5746d1c3f5702a21}
-The agent's initial y position \hypertarget{classResident_a790131eeebec8aed96b90bd1d9ce7fef}{\index{Resident@{Resident}!ret@{ret}}
-\index{ret@{ret}!Resident@{Resident}}
-\subsubsection[{ret}]{\setlength{\rightskip}{0pt plus 5cm}std\-::pair$<$double, double$>$ Resident\-::ret\hspace{0.3cm}{\ttfamily [protected]}}}\label{classResident_a790131eeebec8aed96b90bd1d9ce7fef}
-linear\-\_\-x and angular\-\_\-z for the robot 
+Main function for the \hyperlink{classResident}{Resident} process. Controls node setup and periodic events. 
 
 The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
 \item 
