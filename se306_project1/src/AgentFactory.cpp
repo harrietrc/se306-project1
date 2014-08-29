@@ -23,7 +23,7 @@ int AgentFactory::createAgent(AgentConst::AgentType agentType, int nodeNumber) {
 	ProcessManager processManager;
 	std::string stringType = "";
 
-	std::string agentTypes[] = { "Resident", "Assistant", "Doctor" };
+	std::string agentTypes[] = { "Resident", "Assistant", "Doctor", "Caregiver" };
 
 	stringType = agentTypes[(int)agentType];
 

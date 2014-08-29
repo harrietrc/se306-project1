@@ -80,7 +80,7 @@ void Resident::hungerCallback(const ros::TimerEvent&){
 	//stateQueue.addToPQ(hungry);
 }
 void Resident::caregiverServicesCallback(const ros::TimerEvent&){
-	//stateQueue.addToPQ(caregiver);
+	stateQueue.addToPQ(caregiver);
 }
 void Resident::caregiverServicesDoneCallback(const ros::TimerEvent&){
 	//stateQueue.removeState(caregiver);
@@ -122,6 +122,13 @@ void Resident::friend_callback(const std_msgs::String::ConstPtr& msg)
 {
 	if (msg->data.c_str() == "Done") { // friend has finished talking with Resident
 		boredom = 0;
+	}
+}
+
+void Resident::caregiver_callback(const std_msgs::String::ConstPtr& msg)
+{
+	if (msg->data.c_str() == "Here") {
+		move("Shower");
 	}
 }
 
@@ -188,6 +195,9 @@ int Resident::run(int argc, char *argv[]) {
 	
 	// Resident subscribes to this topic by Friend
 	ros::Subscriber friend_sub = n.subscribe("visitorConvo", 1000, &Resident::friend_callback, this);
+
+	// Resident subscribes to this topic by Caregiver
+	ros::Subscriber care_sub = n.subscribe("caregiverStatus", 1000, &Resident::caregiver_callback, this);
 
 	// Periodic callback
 	int wakeup = time_conversion::simHoursToRealSecs(0);

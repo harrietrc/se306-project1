@@ -76,6 +76,9 @@ define caregiver position
 	size [1.5 2.5 7.5]
 	drive "diff"
 	mylaser(pose [ 0.050 0.000 0.000 0.000 ])
+
+	localization_origin [0 0 0 0]
+	velocity_bounds [-10 10 -10 10 -10 10 -180 180]
 )
 
 define CGImage model
