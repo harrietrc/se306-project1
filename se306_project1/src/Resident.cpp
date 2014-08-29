@@ -215,7 +215,7 @@ int Resident::run(int argc, char *argv[]) {
 
 	//velocity of this RobotNode
 	geometry_msgs::Twist RobotNode_cmdvel;
-	stateQueue.addToPQ(bored);
+	//stateQueue.addToPQ(bored);
 	move("ResidentSofa");
 
 	while (ros::ok())
