@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # Using Tkinter to create a GUI
-
 import os
 from multiprocessing import Process, Pipe
 import roslib
@@ -16,9 +15,10 @@ STDOUT = 1
 STDERR = 2
 
 subscriber = None
+# Subscribed value of health/hunger/boredom goes here
 perc = 1
 # We inherit from Tkinter.Tk, which is the base class for standard windows.
-class simpleapp_tk(Tkinter.Tk):
+class ros_gui(Tkinter.Tk):
     # Constructor
 	def __init__(self,parent):
 		Tkinter.Tk.__init__(self,parent)
@@ -100,16 +100,20 @@ class simpleapp_tk(Tkinter.Tk):
 		
 		#====Start of timeFrame====#
         
+		# Parent Frame
 		timeFrame = Tkinter.Frame(self, bd=2, relief="groove", width=280, height=50)
 		timeFrame.grid(column=0, row=3, padx=5, pady=2.5)
 		timeFrame.grid_propagate(False)
 		
+		# Text that outputs header "Time"
 		timeText = Tkinter.Label(timeFrame, text="Time", font=(18), anchor="center")
 		timeText.grid(column=0, row=0, sticky="W")
         
+		# Text that displays "Current Time"
 		currentTimeText = Tkinter.Label(timeFrame, text="Current Time : ")
 		currentTimeText.grid(column=0, row=1)
         
+		# Text that displays simulation time
 		currentTime = Tkinter.Label(timeFrame, text="11:08PM, 27 August 2014")
 		currentTime.grid(column=1, row=1, sticky="E", padx=5)
 
@@ -117,13 +121,16 @@ class simpleapp_tk(Tkinter.Tk):
 
 		#====Start of infoFrame====#
 
+		# Parent frame
 		infoFrame = Tkinter.Frame(self, bd=2, relief="groove", width=280, height=90)
 		infoFrame.grid(column=0, row=4, padx=5, pady=2.5)
 		infoFrame.grid_propagate(False)
 
+		# Text that outputs header "Time"
 		infoText = Tkinter.Label(infoFrame, text="Information", font=(18), anchor="w")
 		infoText.grid(column=0, row=0, sticky="W")
 
+		# Information display
 		genderText = Tkinter.Label(infoFrame, text="Gender : M")
 		genderText.grid(column=0, row=1, sticky="W")
 
@@ -158,11 +165,13 @@ class simpleapp_tk(Tkinter.Tk):
 		#TODO self.entry.delete(0, Tkinter.END)
 		#TODO self.entry.insert(0, GUImsg.data)
 
+	# Function that changes width of the bars
 	def decreaseHealth(self, value):
 		self.healthFiller.config(width=200*(1-value))
 		self.hungerFiller.config(width=200*(1-value))
 		self.boredomFiller.config(width=200*(1-value))
 
+# Semi recursive function that updates components in GUI i.e. changes bar
 def task():
 	global perc
 	perc -= 0.05
@@ -173,9 +182,9 @@ def task():
 
 if __name__ == "__main__":
     # Instantiate class
-	app = simpleapp_tk(None)
+	app = ros_gui(None)
     # Give a title to window
-	app.title('my application')
+	app.title('Resident')
 	app.after(1000,task)
 	app.mainloop()
 
