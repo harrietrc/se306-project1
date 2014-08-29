@@ -63,7 +63,6 @@ void Agent::setPath(std::string start, std::string end) {
 
 
 void Agent::move(std::string goalName){
-	int temp = 0;
 
 	if (isMoving == false){
 		isMoving = true;
@@ -73,17 +72,14 @@ void Agent::move(std::string goalName){
 		//Get the path stuff);
 
 		std::string cname = g.getCheckpointName(currentCheckpoint);
-		ROS_INFO("got ceckpoint");
 
 		Agent::setPath(cname, goalName);
-		ROS_INFO("path");
 
-		 for (int i=0; i<shortestPath.size();i++) {
+		/* for (int i=0; i<shortestPath.size();i++) {
 			 ROS_INFO("checkpoint x: %f",shortestPath[i].first);
 			 ROS_INFO("checkpoint y: %f",shortestPath[i].second);
 			 temp =i;
-		 }
-			ROS_INFO("shortestPathsize: %d",temp);
+		 }*/
 
 	}
 
@@ -92,9 +88,8 @@ void Agent::move(std::string goalName){
 			currentCheckpoint.second == nextCheckpoint.second){
 		shortestPathIndex++;
 		ROS_INFO("shortestPathIndex: %f",shortestPathIndex);
-		ROS_INFO("shortestPathsize: %d",temp);
 
-		if (shortestPathIndex >= temp ){
+		if (shortestPathIndex >= shortestPath.size() ){
 			shortestPathIndex = 0;
 			isMoving = false;
 			return;

@@ -215,7 +215,7 @@ int Resident::run(int argc, char *argv[]) {
 
 	//velocity of this RobotNode
 	geometry_msgs::Twist RobotNode_cmdvel;
-
+	stateQueue.addToPQ(healthLow);
 	while (ros::ok())
 	{
 
