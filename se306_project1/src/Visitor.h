@@ -12,8 +12,11 @@ class Visitor : public Agent {
 
 		bool visitResident();
 		bool doConverse();
-		virtual void delegate(se306_project1::ResidentMsg msg) = 0;
 
 	public:
 		virtual int run(int argc, char *argv[]) = 0; 
+		Visitor() : Agent(){
+
+		}
+
 };

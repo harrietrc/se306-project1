@@ -23,10 +23,14 @@ void Door::StageOdom_callback(nav_msgs::Odometry msg)
 	if (opened == false){
 		open();
 		ROS_INFO("Opening door");
+        int tnow = ros::Time::now().toSec(); // The simulation time now
+        ROS_INFO("time is %d", tnow);
+	    waitTime = tnow + 20; // 20 seconds before door begins to close
 	} else {
-		if (opened == true)
-			close();
+		if (opened == true) {
+			close(waitTime);
 			ROS_INFO("Closing door");
+        }
 	}
 }
 
@@ -40,12 +44,15 @@ void Door::delegate(se306_project1::ResidentMsg msg) {
 		if (opened == false && resStateWhenOpened != msg.state) {
 			resStateWhenOpened = msg.state;
 			open();
-			ROS_INFO("Opening door");
+			//ROS_INFO("Opening door");
+            int tnow = ros::Time::now().toSec(); // The simulation time now
+            //ROS_INFO("time is %d", tnow);
+	        waitTime = tnow + 20; // 20 seconds before door begins to close
 		}
 	} else {
 		if (opened == true) {
-			close();
-			ROS_INFO("Closing door");
+			close(waitTime);
+			//ROS_INFO("Closing door");
 		}
 	}
 
@@ -65,25 +72,23 @@ void Door::open() {
 }
 
 /**
-*	@brief closes the Door
+*	@brief closes the Door after being opened for 20 seconds
 */
-void Door::close() {
+void Door::close(int waitTime) {
 	//opened = false;
 	
 	// time for door to automatically close
 	int tnow = ros::Time::now().toSec(); // The simulation time now
-	int wait = tnow + 1; // one hour later
-	// make door wait for an hour? before closing
-	while (tnow < wait) {
-		tnow = ros::Time::now().toSec(); // The simulation time now
-	}
-	
-	linear_x = -100;
-	double distanceFromCheckpoint = sqrt(pow((-20.5 - px),2) + pow((-37.5 - py),2)); // closed is -20.5 and -37.5
-	if (distanceFromCheckpoint < 0.5) {
-		linear_x = 0;
-		opened = false;
-	}
+
+	if (tnow > waitTime) {
+
+	    linear_x = -100;
+	    double distanceFromCheckpoint = sqrt(pow((-20.5 - px),2) + pow((-37.5 - py),2)); // closed is -20.5 and -37.5
+	    if (distanceFromCheckpoint < 0.5) {
+		    linear_x = 0;
+		    opened = false;
+	    }
+    }
 }
 
 /**
