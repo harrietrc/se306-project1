@@ -8,7 +8,7 @@
 #include "ros/ros.h"
 
 namespace AgentConst {
-	enum AgentType { RESIDENT, ASSISTANT, CAREGIVER, DOCTOR, NURSE, FRIENDS, DOOR };
+	enum AgentType { RESIDENT, ASSISTANT, ASSISTANT1, CAREGIVER, DOCTOR, NURSE, NURSE1, FRIEND, FRIEND1, FRIEND2,  DOOR };
 }
 
 /**
