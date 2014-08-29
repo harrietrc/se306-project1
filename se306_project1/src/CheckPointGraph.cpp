@@ -14,7 +14,7 @@ const char* nameArr[] = {
 		"Shower","BathroomCentre","BedSouthWest","BedSouthEast","BedNorthEast","ResidentOrigin", "Assistant1Origin", "Assistant2Origin",
 		"DoctorOrigin","Nurse1Origin","Nurse2Origin","Caregiver1Origin","Friend1Origin","Friend2Origin","Friend3Origin",
 		"Friend1Sofa", "Friend2Sofa", "ResidentSofa", "Friend3Sofa", "SofasUpper", "SofasLower", "NearShower",
-		"Caregiver2Origin", "SofasLeft"
+		"Caregiver2Origin", "SofasLeft","NearTable"
 };
 
 /**
@@ -25,7 +25,7 @@ int checkpoints[][2] = {
 	{-27,-40},{-20,-40},{-28,-12},{-18,-18},{0,-18},{0,-12},{6,-24},{6,-28},{24,-28},{24,-24},{0,6},{24,-10},{20,-6},{0,20},
 	{4,22},{0,18},{-24,18},{-26,22},{-18,22},{-32,45},{-24,36},{6,30},{26,30},{30,45},
 	{26,48}, {17,17}, {30,-6}, {-33,-46}, {-36,-48}, {-30,-48}, {-8,-46}, {-20,-46}, {-23,-46}, {-20,-48}, {-24,6}, {-14,6},
-	{-16,0}, {-16,-8}, {-28,4}, {-16,-16}, {-32,34}, {-6,-42}, {-28,-8}
+	{-16,0}, {-16,-8}, {-28,4}, {-16,-16}, {-32,34}, {-6,-42}, {-28,-8}, {10,-3}
 };
 
 std::vector<std::string> checkpointNames(begin(nameArr), end(nameArr)); /*!< Vector of checkpoint names. See nameArr[]. */
@@ -69,7 +69,9 @@ E paths[] = {
 	 E("CentrePassageSouth","CouchesNorthEast"),
 	 E("CentrePassageNorth","CouchesNorthEast"), E("FrontDoorEast","CentrePassageSouth"),
 	 E("FrontDoorWest","CentrePassageNorth"), E("Assistant2Origin","NextToCentreStool"),
-	 E("Assistant2Origin","CentrePassageNorth"), E("FrontDoorWest","CentrePassageNorth")
+	 E("Assistant2Origin","CentrePassageNorth"), E("FrontDoorWest","CentrePassageNorth"),
+	 E("NearTable","NextToCentreStool"), E("NearTable","CentreStool"), E("NearTable","HouseCentre"),
+	 E("NearTable","CentrePassageNorth"), E("NearTable","KitchenNorthWest"), E("NearTable","CentrePassageSouth")
 }; /*!< Defines edges between checkpoints */
 
 /* -- Temporary solution - two maps of co-ordinates to names and names to co-ordinates --*/
