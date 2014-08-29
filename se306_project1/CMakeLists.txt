@@ -55,3 +55,4 @@ rosbuild_add_executable(Nurse1 src/Nurse1.cpp src/Agent.cpp src/Visitor.cpp src/
 rosbuild_add_executable(Nurse2 src/Nurse2.cpp src/Agent.cpp src/Visitor.cpp src/CheckPointGraph.cpp src/time_conversion.cpp )
 rosbuild_add_executable(Caregiver1 src/Caregiver1.cpp src/Agent.cpp src/Visitor.cpp src/CheckPointGraph.cpp src/time_conversion.cpp )
 rosbuild_add_executable(Caregiver2 src/Caregiver2.cpp src/Agent.cpp src/Visitor.cpp src/CheckPointGraph.cpp src/time_conversion.cpp )
+rosbuild_add_gtest(test/utest test/utest.cpp)

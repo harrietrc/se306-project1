@@ -19,4 +19,10 @@ class Caregiver : public Visitor {
 
 	public:
 		int run(int argc, char *argv[]);
+		Caregiver() : Visitor(){
+			originName = "Caregiver2Origin";
+			currentCheckpoint = std::make_pair(-6, -42); // Could just use g.getCoords(originName)
+			px = -6;
+			py= -42;
+		}
 };

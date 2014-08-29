@@ -15,15 +15,19 @@
 *	can be implemented later.
 *	@param msg A custom ResidentMsg message that contains information about the resident's current status.
 */
-//void Caregiver::delegate(se306_project1::ResidentMsg r_msg, se306_project1::AssistantMsg a_msg) no?
 void Caregiver::delegate(se306_project1::ResidentMsg msg)
 {
+
 	if (msg.state == "caregiver") {
 		if (!atResident) {
 			move(msg.currentCheckpoint); //to resident
 
 			if (true) { // next to resident
 				atResident = true;
+				std_msgs::String cMsg;
+				std::stringstream ss;
+				ss << "Here"; // Ready to start routine
+				cMsg.data = ss.str();
 			}
 			
 		}
@@ -49,12 +53,9 @@ void Caregiver::delegate(se306_project1::ResidentMsg msg)
 */
 bool Caregiver::shower(se306_project1::ResidentMsg msg) {
 
+	move("NearShower");
 
-	std::string position;
-	position = "Shower";
-	move(position);
-
-	if (msg.currentCheckpoint == position){
+	if (msg.currentCheckpoint == "Shower"){
 		//showering
 		spin();
 		return true;
@@ -68,11 +69,9 @@ bool Caregiver::shower(se306_project1::ResidentMsg msg) {
 */
 bool Caregiver::exercise(se306_project1::ResidentMsg msg) {
 	
-	std::string position;
-	position = "BedSouthEast";
-	move(position);
+	move("BedroomEntranceWest");
 
-	if (msg.currentCheckpoint == position){
+	if (msg.currentCheckpoint == "BedSouthEast") {
 		//exercising
 		spin();
 		return true;
@@ -123,6 +122,9 @@ int Caregiver::run(int argc, char *argv[])
 
 	//custom Resident subscriber to "resident/state"
 	ros::Subscriber resident_sub = n.subscribe<se306_project1::ResidentMsg>("residentStatus",1000,&Caregiver::delegate, this);
+
+	//tells the resident when the caregiver has arrived
+	ros::Publisher care_pub = n.advertise<std_msgs::String>("caregiverStatus",1000);
 
 	////messages
 	//velocity of this RobotNode

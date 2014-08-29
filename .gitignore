@@ -26,6 +26,7 @@ frames.pdf
 
 #machine specific
 setup.sh
+setup.sh~
 #se306_project1/src/ProcessManager.cpp
 se306_project1/src/ProcessManager.cpp~
 
