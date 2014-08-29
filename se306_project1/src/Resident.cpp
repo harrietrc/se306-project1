@@ -230,7 +230,7 @@ int Resident::run(int argc, char *argv[]) {
 			checkStatus();
 			publishStatus(Resident_state_pub);
 			residentState = stateQueue.checkCurrentState();
-			ROS_INFO("State is: %s",residentState.c_str());
+			//ROS_INFO("State is: %s",residentState.c_str());
 		}
 
 		ros::spinOnce();

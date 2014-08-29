@@ -16,4 +16,7 @@ class Visitor : public Agent {
 
 	public:
 		virtual int run(int argc, char *argv[]) = 0; 
+		Visitor() : Agent(){
+
+		}
 };
