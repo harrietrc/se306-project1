@@ -40,7 +40,7 @@ void Assistant::medicate(se306_project1::ResidentMsg msg) {
 
 			currentCheckpoint.first = msg.currentCheckpointX;
 			currentCheckpoint.second = msg.currentCheckpointY;
-			move("Assistant1Origin");
+			//move("Assistant1Origin");
 			isMedicated == false;
 
 		}
@@ -112,7 +112,6 @@ void Assistant::cook(se306_project1::ResidentMsg msg) {
 			atKitchen = false;
 			finishedCooking = false;
 			foodDelivered = false;
-			move("HouseCentre");
 
 		}
 	}
@@ -129,12 +128,7 @@ void Assistant::cook(se306_project1::ResidentMsg msg) {
 }
 
 
-/**
-*	@brief Causes assistant to clean the house.
-*/
-void Assistant::clean() {
 
-}	
 
 /**
 *	@brief Causes assistant to entertain the resident.
@@ -155,7 +149,8 @@ void Assistant::entertain(se306_project1::ResidentMsg msg) {
 	} else if (atBedroom && !residentEntertained) {
 		angular_z = 2;
 		entertainmentCounter++;
-		if (entertainmentCounter > 150) {
+		ROS_INFO("entertainmentCounter: %d", entertainmentCounter);
+		if (entertainmentCounter > 10) {
 			angular_z = 0;
 			residentEntertained = true;
 
@@ -190,7 +185,6 @@ void Assistant::delegate(se306_project1::ResidentMsg msg) {
 	if (msg.state != "emergency") {
 		// check msg if cook do cooking e.t.c
 		if (msg.state == "hungry") {
-			ROS_INFO("inside");
 			cook(msg);
 		}
 
@@ -237,6 +231,7 @@ int Assistant::run(int argc, char **argv)
 	//subscribe to listen to messages coming from stage
 	ros::Subscriber StageOdo_sub = n.subscribe("robot_1/odom",1000, &Assistant::StageOdom_callback, dynamic_cast<Agent*>(this));
 	ros::Subscriber residentSub = n.subscribe("residentStatus",1000, &Assistant::delegate, this);
+	ros::Subscriber assistantCommsSub = n.subscribe("assistantComms",1000, &Assistant::delegate, this);
 
 	////messages
 	//velocity of this RobotNode
