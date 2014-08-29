@@ -13,6 +13,7 @@ class Resident : public Agent
 		int day;
 		priorityQueue stateQueue;
 		std::string residentState;
+		bool hasShowered = false;
 
 	public:
 

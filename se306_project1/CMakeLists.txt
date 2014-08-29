@@ -35,7 +35,7 @@ rosbuild_add_executable(Assistant1 src/Assistant1.cpp src/time_conversion.cpp sr
 
 rosbuild_add_executable(Doctor src/Doctor.cpp src/Agent.cpp src/Visitor.cpp src/CheckPointGraph.cpp)
 rosbuild_add_executable(Caregiver src/Caregiver.cpp src/Agent.cpp src/CheckPointGraph.cpp)
-rosbuild_add_executable(Friend src/Friend.cpp src/Agent.cpp src/Visitor.cpp src/time_conversion.cpp src/CheckPointGraph.cpp)
+#rosbuild_add_executable(Friend src/Friend.cpp src/Agent.cpp src/Visitor.cpp src/time_conversion.cpp src/CheckPointGraph.cpp)
 rosbuild_add_executable(Nurse src/Nurse.cpp src/Agent.cpp src/Visitor.cpp src/CheckPointGraph.cpp)
 #rosbuild_add_executable(Relative src/Relative.cpp src/Agent.cpp src/CheckPointGraph.cpp)
 rosbuild_add_executable(Door src/Door.cpp)
@@ -50,7 +50,7 @@ rosbuild_add_executable(Main src/Main.cpp src/AgentFactory.cpp src/ProcessManage
 
 rosbuild_add_executable(Friend1 src/Friend1.cpp src/Agent.cpp src/Visitor.cpp src/CheckPointGraph.cpp src/time_conversion.cpp )
 rosbuild_add_executable(Friend2 src/Friend2.cpp src/Agent.cpp src/Visitor.cpp src/CheckPointGraph.cpp src/time_conversion.cpp )
-rosbuild_add_executable(Friend3 src/Friend3.cpp src/Agent.cpp src/Visitor.cpp src/CheckPointGraph.cpp src/time_conversion.cpp )
+#rosbuild_add_executable(Friend3 src/Friend3.cpp src/Agent.cpp src/Visitor.cpp src/CheckPointGraph.cpp src/time_conversion.cpp )
 rosbuild_add_executable(Nurse1 src/Nurse1.cpp src/Agent.cpp src/Visitor.cpp src/CheckPointGraph.cpp src/time_conversion.cpp )
 rosbuild_add_executable(Nurse2 src/Nurse2.cpp src/Agent.cpp src/Visitor.cpp src/CheckPointGraph.cpp src/time_conversion.cpp )
 rosbuild_add_executable(Caregiver1 src/Caregiver1.cpp src/Agent.cpp src/Visitor.cpp src/CheckPointGraph.cpp src/time_conversion.cpp )

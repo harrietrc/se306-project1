@@ -143,13 +143,12 @@ void Assistant::entertain(se306_project1::ResidentMsg msg) {
 	if (!atBedroom && !residentEntertained) {
 		entertainmentCounter = 0;
 		move(msg.currentCheckpoint);
-		if (distanceFromCheckpoint < 2.5) {
+		if (distanceFromCheckpoint < 5) {
 			atBedroom = true;
 		}
 	} else if (atBedroom && !residentEntertained) {
 		angular_z = 2;
 		entertainmentCounter++;
-		ROS_INFO("entertainmentCounter: %d", entertainmentCounter);
 		if (entertainmentCounter > 10) {
 			angular_z = 0;
 			residentEntertained = true;

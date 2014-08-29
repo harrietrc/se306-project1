@@ -27,11 +27,7 @@ void Friend1::delegate(se306_project1::ResidentMsg msg) {
 		emergency = true; // required variable if timing/scheduling is done within this class
 	}
 	if (msg.state == "friends") { // resident state when it needs friends to converse with
-		move("Friend2Sofa");
-//		linear_x = 1;
-//		for (int i = 0; i < shortestPath.size(); i++){
-//			ROS_INFO("%s", g.getCheckpointName(shortestPath.at(i)).c_str());
-
+		move("ResidentSofa");
 	}
 }
 
@@ -57,15 +53,15 @@ int Friend1::run(int argc, char *argv[])
 
 	//advertise() function will tell ROS that you want to publish on a given topic_
 	//to stage
+	ros::Publisher RobotNode_stage_pub = n.advertise<geometry_msgs::Twist>("robot_7/cmd_vel",1000);
 
-	ros::Publisher RobotNode_stage_pub = n.advertise<geometry_msgs::Twist>("robot_8/cmd_vel",1000);
 
 	//publish message to Resident once conversation is over
 	ros::Publisher friend_pub = n.advertise<std_msgs::String>("visitorConvo",1000);
 
 	//subscribe to listen to messages coming from stage
+	ros::Subscriber StageOdo_sub = n.subscribe("robot_7/odom",1000, &Agent::StageOdom_callback, dynamic_cast<Agent*>(this));
 
-	ros::Subscriber StageOdo_sub = n.subscribe("robot_8/odom",1000, &Agent::StageOdom_callback, dynamic_cast<Agent*>(this));
 
 	//custom Resident subscriber to "resident/state"
 	ros::Subscriber resident_sub = n.subscribe<se306_project1::ResidentMsg>("residentStatus",1000, &Friend1::delegate, this);

@@ -10,8 +10,8 @@ class Assistant1 : public Agent
 
 		Assistant1() : Agent(){
 
-			currentCheckpoint.first = 32;
-			currentCheckpoint.second = 18;
+			currentCheckpoint.first = 30;
+			currentCheckpoint.second = -6;
 			atKitchen = false;
 			finishedCooking = false;
 

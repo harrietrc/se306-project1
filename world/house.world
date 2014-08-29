@@ -91,16 +91,16 @@ floorplan
 
 resident( pose [ 26.000 48.000 0.000 0.000 ] name "r0" color "light green")
 assistant( pose [ 17.000 17.000 0.000 0.000 ] name "r1")
-assistant( pose [ 32.000 18.000 0.000 90.000 ] name "r2")
+assistant( pose [ 30.000 -6.000 0.000 90.000 ] name "r2")
 
 caregiver( pose [ -8.000 -46.000 0.000 0.000 ] name "r3" color "light green")	#caregiver
 doctor( pose [ -33.000 -42.000 0.000 0.000 ] name "r4" color "white")	
 nurse( pose [ -36.000 -48.000 0.000 180.000 ] name "r5" color "yellow")	#nurse
 nurse( pose [ -30.000 -48.000 0.000 180.000 ] name "r6" color "yellow")	#nurse
 
-friends( pose [ -20.000 -46.000 0.000 90.000 ] name "r7" color "black")	#friends
-friends( pose [ -23.000 -46.000 0.000 90.000 ] name "r8" color "white")	#friends
-friends( pose [ -20.000 -48.000 0.000 90.000 ] name "r9" color "white")	#friends
+#friends( pose [ -20.000 -46.000 0.000 90.000 ] name "r7" color "black")	#friends
+friends( pose [ -23.000 -46.000 0.000 -180.000 ] name "r7" color "white")	#friends
+friends( pose [ -20.000 -48.000 0.000 -90.000 ] name "r8" color "white")	#friends
 
 #door( pose [ -20.5 -37.5 0 0 ] name "r8" color "light steel blue" size [12 1.5 12])			#sliding door
 

@@ -15,12 +15,6 @@
 
 using namespace std;
 
-
-
-
-
-
-
 /*	@brief Callback function that unpacks and processes resident status messages.
 * 	Calls other callback (do) functions.
 *	Assistant should subscribe to the ResidentMsg topic in order for this callback to be called. ResidentMsg is published by the Resident.

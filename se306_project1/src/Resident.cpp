@@ -27,10 +27,9 @@ void Resident::publishStatus(ros::Publisher Resident_state_pub) {
 
 
 	// Creating a message for residentStatus
-	stateQueue.addToPQ(healthLow);
 	residentState = stateQueue.checkCurrentState();
 	se306_project1::ResidentMsg msg;
-   //hardcoded state
+
 	msg.state = residentState;
 	msg.currentCheckpoint = g.getCheckpointName(currentCheckpoint);
 	msg.currentCheckpointX = currentCheckpoint.first;
@@ -61,43 +60,46 @@ void Resident::triggerRandomEvents(){
 void Resident::checkStatus(){
 	residentState = stateQueue.checkCurrentState();
 	if (residentState == "friends"){
-		move("ResidentSofa");
+		move("Friend2Sofa");
 	}
 	if (residentState == "caregiver"){
 		move("BedSouthWest");
+
 	}
+
 	if (hunger > 70){
 		stateQueue.addToPQ(hungry);
 	}
 	if (boredom > 70){
 		stateQueue.addToPQ(bored);
 	}
+
 }
 
 void Resident::medicationCallback(const ros::TimerEvent&){
-	//stateQueue.addToPQ(medication);
+	stateQueue.addToPQ(medication);
 }
 void Resident::hungerCallback(const ros::TimerEvent&){
-	//stateQueue.addToPQ(hungry);
+	stateQueue.addToPQ(hungry);
 }
 void Resident::caregiverServicesCallback(const ros::TimerEvent&){
-	//stateQueue.addToPQ(caregiver);
+	stateQueue.addToPQ(caregiver);
 }
 void Resident::caregiverServicesDoneCallback(const ros::TimerEvent&){
-	//stateQueue.removeState(caregiver);
+	stateQueue.removeState(caregiver);
 }
 void Resident::wakeCallback(const ros::TimerEvent&){
 	stateQueue.removeState(tired);
-	ROS_INFO ("Wake up!");
 }
 void Resident::sleepCallback(const ros::TimerEvent&){
-//	stateQueue.addToPQ(tired);
+	stateQueue.addToPQ(tired);
 }
 void Resident::friendsCallback(const ros::TimerEvent&){
-//	stateQueue.addToPQ(friends);
+	stateQueue.addToPQ(friends);
 }
 void Resident::friendsDoneCallback(const ros::TimerEvent&){
-//	stateQueue.removeState(friends);
+	stateQueue.removeState(friends);
+	boredom = 0;
 }
 
 
@@ -117,13 +119,6 @@ void Resident::doctor_callback(se306_project1::DoctorMsg msg)
 		// stay outside for a while?
 		// when he returns (pass the door or something)
 		//     health = 100;
-	}
-}
-
-void Resident::friend_callback(const std_msgs::String::ConstPtr& msg)
-{
-	if (msg->data.c_str() == "Done") { // friend has finished talking with Resident
-		boredom = 0;
 	}
 }
 
@@ -188,21 +183,18 @@ int Resident::run(int argc, char *argv[]) {
 	// Resident subscribes to this topic by Doctor
 	ros::Subscriber doctor_sub = n.subscribe<se306_project1::DoctorMsg>("doctorStatus", 1000, &Resident::doctor_callback, this);
 	
-	// Resident subscribes to this topic by Friend
-	ros::Subscriber friend_sub = n.subscribe("visitorConvo", 1000, &Resident::friend_callback, this);
-
 	// Periodic callback
 	int wakeup = time_conversion::simHoursToRealSecs(0);
-	int caregiverServices = time_conversion::simHoursToRealSecs(0.5);
+	int caregiverServices = time_conversion::simHoursToRealSecs(0);
 	int morningMedication = time_conversion::simHoursToRealSecs(5);
 	int nightMedication = time_conversion::simHoursToRealSecs(14);
-	int morningHungry = time_conversion::simHoursToRealSecs(3);
-	int afternoonHungry = time_conversion::simHoursToRealSecs(7);
+	int morningHungry = time_conversion::simHoursToRealSecs(1);
+	int afternoonHungry = time_conversion::simHoursToRealSecs(6);
 	int nightHungry= time_conversion::simHoursToRealSecs(12);
 	int sleep = time_conversion::simHoursToRealSecs(15);
 	int friends = time_conversion::simHoursToRealSecs(9);
 	int friendsDone = time_conversion::simHoursToRealSecs(11.5);
-	int caregiverServicesDone = time_conversion::simHoursToRealSecs(3);
+	int caregiverServicesDone = time_conversion::simHoursToRealSecs(1);
 	ros::Timer wakeUpTimer = n.createTimer(ros::Duration(wakeup), &Resident::wakeCallback,this, true);
 	ros::Timer caregiverTimer = n.createTimer(ros::Duration(caregiverServices), &Resident::caregiverServicesCallback, this, true);
 	ros::Timer caregiverDoneTimer = n.createTimer(ros::Duration(caregiverServicesDone), &Resident::caregiverServicesDoneCallback, this, true);
@@ -217,7 +209,6 @@ int Resident::run(int argc, char *argv[]) {
 
 	//velocity of this RobotNode
 	geometry_msgs::Twist RobotNode_cmdvel;
-
 	while (ros::ok())
 	{
 
@@ -237,7 +228,7 @@ int Resident::run(int argc, char *argv[]) {
 			checkStatus();
 			publishStatus(Resident_state_pub);
 			residentState = stateQueue.checkCurrentState();
-			//ROS_INFO("State is: %s",residentState.c_str());
+			ROS_INFO("State is: %s",residentState.c_str());
 		}
 
 		ros::spinOnce();

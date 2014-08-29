@@ -66,15 +66,12 @@ void Agent::move(std::string goalName){
 
 	if (isMoving == false){
 		isMoving = true;
-	//	currentCheckpoint.first = 17; // can get rid of this
-	//	currentCheckpoint.second = 17; // ditto
 
 		//Get the path stuff);
 
 		std::string cname = g.getCheckpointName(currentCheckpoint);
 
 		Agent::setPath(cname, goalName);
-
 
 	}
 
@@ -195,8 +192,6 @@ double Agent::calculateGoalAngle(pair<double, double> goalCheckpoint){
 	double goalVectorX = goalCheckpoint.first - px;
 	double goalVectorY = goalCheckpoint.second - py;
 
-	ROS_INFO("px: %f", px);
-	ROS_INFO("py: %f", py);
 
 	double goalAngle = atan2(goalVectorY, goalVectorX); //pi <= goalAngle < -pi
 

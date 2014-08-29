@@ -48,7 +48,7 @@ E paths[] = {
 	 E("KitchenSouthWest","KitchenNorthWest"), E("CentrePassageSouth","CentrePassageNorth"), E("CentrePassageNorth","NextToCentreStool"),
 	 E("NextToCentreStool","CentreStool"), E("NextToCentreStool","HouseCentre"), 
 	 E("CentrePassageNorth","HouseCentre"), E("HouseCentre", "CouchesNorthEast"), E("CouchesNorthEast","CouchesNorthCentre"),
-	 E("CouchesNorthEast","BedroomEntranceEast"), E("CouchesNorthEast","BedroomEntranceWest"), E("CouchesNorthCentre","BathroomEntranceEast"),
+	 E("CouchesNorthEast","BedroomEntranceEast"),E("CouchesNorthEast","Friend2Sofa"), E("CouchesNorthEast","BedroomEntranceWest"), E("CouchesNorthCentre","BathroomEntranceEast"),
 	 E("BathroomEntranceEast","BathroomCentre"), E("BathroomEntranceWest","BathroomCentre"),
 	 E("BathroomCentre","Shower"), E("BedroomEntranceWest","BedSouthWest"),  
 	 E("BedSouthEast","BedNorthEast"), E("ResidentOrigin","BedSouthEast"),
@@ -72,7 +72,7 @@ E paths[] = {
 	 E("Assistant2Origin","CentrePassageNorth"), E("FrontDoorWest","CentrePassageNorth"),
 	 E("NearTable","NextToCentreStool"), E("NearTable","CentreStool"), E("NearTable","HouseCentre"),
 	 E("NearTable","CentrePassageNorth"), E("NearTable","KitchenNorthWest"), E("NearTable","CentrePassageSouth"),
-	 E("BeforeDoor","FrontDoorWest")
+	 E("BeforeDoor","FrontDoorWest"), E("BedSouthWest", "BathroomCentre")
 }; /*!< Defines edges between checkpoints */
 
 /* -- Temporary solution - two maps of co-ordinates to names and names to co-ordinates --*/
