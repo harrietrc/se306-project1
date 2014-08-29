@@ -180,14 +180,11 @@ int Resident::run(int argc, char *argv[]) {
 
 	//advertise() function will tell ROS that you want to publish on a given topic_
 	//to stage
+	ros::Publisher RobotNode_stage_pub = n.advertise<geometry_msgs::Twist>("robot_0/cmd_vel",1000); 	
+	ros::Publisher GUI_publisher = n.advertise<std_msgs::String>("python/gui",1000); 
 	ros::Publisher Resident_state_pub = n.advertise<se306_project1::ResidentMsg>("residentStatus", 1000);
 
-	ros::Publisher RobotNode_stage_pub = n.advertise<geometry_msgs::Twist>("robot_0/cmd_vel",1000); 
-
 	ros::Subscriber assistantSub = n.subscribe("assistantStatus",1000, &Resident::assistant_callback, this);
-
-
-
 	//subscribe to listen to messages coming from stage
 	ros::Subscriber StageOdo_sub = n.subscribe("robot_0/odom",1000, &Agent::StageOdom_callback, dynamic_cast<Agent*>(this));
 	
@@ -226,12 +223,20 @@ int Resident::run(int argc, char *argv[]) {
 
 	//velocity of this RobotNode
 	geometry_msgs::Twist RobotNode_cmdvel;
+	std_msgs::String GUImsg;
+
+
 	while (ros::ok())
 	{
 
 		//messages to stage
 		RobotNode_cmdvel.linear.x = linear_x;
 		RobotNode_cmdvel.angular.z = angular_z;
+	
+		//message to pythonGUI
+		std::stringstream guiMsgString;
+		guiMsgString << health << " " << hunger << " " << boredom << " " << residentState;
+		GUImsg.data = guiMsgString.str();
 
 		//publish the message
 		RobotNode_stage_pub.publish(RobotNode_cmdvel);
@@ -247,6 +252,10 @@ int Resident::run(int argc, char *argv[]) {
 			residentState = stateQueue.checkCurrentState();
 			//ROS_INFO("State is: %s",residentState.c_str());
 		}
+
+		//publish for gui
+		GUI_publisher.publish(GUImsg);
+		publishStatus(Resident_state_pub);
 
 		ros::spinOnce();
 		loop_rate.sleep();
