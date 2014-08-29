@@ -24,8 +24,8 @@ class Doctor : public Visitor
 		int run(int argc, char *argv[]);
 		Doctor() {
 			originName = "DoctorOrigin";
-			currentCheckpoint.first = -36;
-			currentCheckpoint.second = -48;
+			currentCheckpoint.first = -33;
+			currentCheckpoint.second = -42;
 		}
 		
 };

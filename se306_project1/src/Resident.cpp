@@ -27,9 +27,10 @@ void Resident::publishStatus(ros::Publisher Resident_state_pub) {
 
 
 	// Creating a message for residentStatus
+	stateQueue.addToPQ(healthLow);
 	residentState = stateQueue.checkCurrentState();
 	se306_project1::ResidentMsg msg;
-	residentState = "friends";    //hardcoded state
+   //hardcoded state
 	msg.state = residentState;
 	msg.currentCheckpoint = g.getCheckpointName(currentCheckpoint);
 	msg.currentCheckpointX = currentCheckpoint.first;
@@ -109,6 +110,7 @@ void Resident::doctor_callback(se306_project1::DoctorMsg msg)
 {
 	if (msg.ResidentHealed == true) { // at this point Doctor should be next to resident and then doctor should start leaving back to his origin
 		health = 100;
+		stateQueue.removeState(healthLow);
 	}
 	else if (msg.hospitalise == true) { // at this point the doctor + 2 nurses should be next to the resident
 		// move(outside house)
