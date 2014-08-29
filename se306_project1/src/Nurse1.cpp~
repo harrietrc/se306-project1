@@ -38,6 +38,7 @@ void Nurse1::doHospitalise(se306_project1::ResidentMsg msg) {
 	if (readyToHospitalise == true) { // go back outside once Nurse is next to resident
 		move("Nurse1Origin");
 	}
+
 }
 
 /**
