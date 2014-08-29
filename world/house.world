@@ -91,7 +91,7 @@ floorplan
 
 resident( pose [ 26.000 48.000 0.000 0.000 ] name "r0" color "light green")
 assistant( pose [ 17.000 17.000 0.000 0.000 ] name "r1")
-assistant( pose [ 32.000 18.000 0.000 90.000 ] name "r2")
+assistant( pose [ 30.000 -6.000 0.000 90.000 ] name "r2")
 
 caregiver( pose [ -8.000 -46.000 0.000 0.000 ] name "r3" color "light green")	#caregiver
 doctor( pose [ -33.000 -46.000 0.000 0.000 ] name "r4" color "white")	

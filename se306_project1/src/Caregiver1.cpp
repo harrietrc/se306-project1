@@ -7,8 +7,6 @@
 #include "math.h"
 #include "Caregiver1.h"
 
-std::string originName = "Caregiver1Origin";
-
 /**
 *	@brief Callback function that unpacks and processes resident status messages.
 *	Assistant should subscribe to the ResidentMsg topic in order for this callback to be called. ResidentMsg is published by the Resident.
