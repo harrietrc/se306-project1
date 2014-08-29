@@ -107,7 +107,7 @@ void Resident::friendsDoneCallback(const ros::TimerEvent&){
 */
 void Resident::doctor_callback(se306_project1::DoctorMsg msg)
 {
-	if (msg.heal == true) { // at this point Doctor should be next to resident and then doctor should start leaving back to his origin
+	if (msg.ResidentHealed == true) { // at this point Doctor should be next to resident and then doctor should start leaving back to his origin
 		health = 100;
 	}
 	else if (msg.hospitalise == true) { // at this point the doctor + 2 nurses should be next to the resident
@@ -216,8 +216,8 @@ int Resident::run(int argc, char *argv[]) {
 	//velocity of this RobotNode
 	geometry_msgs::Twist RobotNode_cmdvel;
 	//stateQueue.addToPQ(bored);
-	move("ResidentSofa");
-
+	//move("ResidentSofa");
+	stateQueue.addToPQ(healthLow);
 	while (ros::ok())
 	{
 
