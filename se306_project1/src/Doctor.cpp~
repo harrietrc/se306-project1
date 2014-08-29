@@ -20,7 +20,7 @@ void Doctor::delegate(se306_project1::ResidentMsg msg) {
 		doHeal(msg);
 	}
 
-	if (msg.state == "emergency") { // seriously ill - emergency
+	if (msg.state == "sill") { // seriously ill - emergency
 		doHospitalise(msg);
 	}
 }
