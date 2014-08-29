@@ -7,9 +7,9 @@ class Caregiver2 : public Visitor {
 
 	private:
 		// bool variables
-		bool hasShowered;
-		bool hasExercised;
-		bool atResident;
+		bool hasShowered; /*!< true if the resident has showered */
+		bool hasExercised; /*!< true if the resident has exercised */
+		bool atResident; /*!< True if the assistant is at the resident's position */
 		bool exercise(se306_project1::ResidentMsg msg);
 		bool shower(se306_project1::ResidentMsg msg);
 

@@ -12,6 +12,6 @@
 *	Should keep track of nodes and be able to instantiate them.
 */
 class ProcessManager {
-public:
-	int nodeProcess(std::string executableName, int nodeNumber);
+	public:
+		int nodeProcess(std::string executableName, int nodeNumber);
 };

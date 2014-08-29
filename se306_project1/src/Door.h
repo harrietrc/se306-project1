@@ -12,10 +12,10 @@ class Door
 		double px; /*!< x position of the robot */
 		double py; /*!< y position of the robot */
 		
-		bool opened = false;
-        int waitTime = 0;
+		bool opened = false; /*!< True if the door is open */
+        int waitTime = 0; 
 		
-		std::string resStateWhenOpened = "";
+		std::string resStateWhenOpened = ""; 
 		
 	protected:
 		void StageOdom_callback(nav_msgs::Odometry msg);

@@ -10,10 +10,15 @@
 #ifndef PRIORITYQUEUE_H_
 #define PRIORITYQUEUE_H_
 
-
-
+/**
+*	@brief All the possible states of the resident.
+*/
 enum residentStates {hungry,healthLow,bored,emergency,tired,caregiver,friends,medication,idle};
 
+/**
+*	@brief The priority queue that holds and orders the resident states.
+*	Priority, here, correlates with the urgency of the corresponding behaviour to be performed.
+*/
 class priorityQueue {
 public:
 	priorityQueue();

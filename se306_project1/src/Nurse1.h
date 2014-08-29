@@ -6,7 +6,7 @@
 class Nurse1 : public Visitor {
 
 	private:
-		bool readyToHospitalise = false;
+		bool readyToHospitalise = false; /*!< True if the resident is ready to hospitalise (nurse must be adjacent to them) */
 	
 	protected:
 		void doHospitalise(se306_project1::ResidentMsg msg);

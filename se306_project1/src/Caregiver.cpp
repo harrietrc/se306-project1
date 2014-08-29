@@ -7,7 +7,6 @@
 #include "math.h"
 #include "Caregiver.h"
 
-
 /**
 *	@brief Callback function that unpacks and processes resident status messages.
 *	Assistant should subscribe to the ResidentMsg topic in order for this callback to be called. ResidentMsg is published by the Resident.
@@ -79,6 +78,9 @@ bool Caregiver::exercise(se306_project1::ResidentMsg msg) {
 	return false;
 }
 
+/**
+*	@brief Spins the Caregiver around as a signal that an action is being performed.
+*/
 void Caregiver::spin() {
 	int counter = 0;
 	while (counter < 100) {

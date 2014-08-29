@@ -7,6 +7,9 @@
 
 #include "ros/ros.h"
 
+/**
+*	@brief Enum representing the different types of agent.
+*/
 namespace AgentConst {
 	enum AgentType { RESIDENT, ASSISTANT, ASSISTANT1, CAREGIVER, DOCTOR, NURSE, NURSE1, FRIEND, FRIEND1, FRIEND2,  DOOR };
 }

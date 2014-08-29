@@ -9,7 +9,9 @@
 #include "se306_project1/ResidentMsg.h"
 #include "time_conversion.hpp"
 
-
+/**
+*	@brief Returns the friend to its start point once its interaction with the resident is done.
+*/
 void Friend3::friendsDoneCallback(const ros::TimerEvent&) { // don't know whether if timing is still required in this class? if not then use delegate
 	move("Friend3Origin"); // go back to origin
 }
@@ -24,16 +26,6 @@ void Friend3::delegate(se306_project1::ResidentMsg msg) {
 		emergency = true; // required variable if timing/scheduling is done within this class
 	} else if (msg.state == "friends") { // resident state when it needs friends to converse with
 		emergency = false; // required variable if timing/scheduling is done within this class
-
-		/*double distanceFromCheckpoint = sqrt(pow((msg.currentCheckpointX - px),2) + pow((msg.currentCheckpointY - py),2));
-	    move(msg.currentCheckpoint);
-
-	    if (distanceFromCheckpoint < 30) { // next to friend2
-		    stopMoving();
-			finishedConvo = Visitor::doConverse();
-            move("Friend3Origin"); // go back to origin
-		}
-        */
         move("Friend3Sofa");
         finishedConvo = Visitor::doConverse();
         move("Friend3Origin"); // go back to origin

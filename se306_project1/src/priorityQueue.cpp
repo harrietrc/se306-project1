@@ -11,9 +11,9 @@
 struct statusObj { //
 int priority;
 residentStates state;
-};
+}; /*!< Associates priority with resident state. */
 
-std::vector<statusObj> PQ;
+std::vector<statusObj> PQ; /*!< The priority queue takes the form of a vector of statuses (state + priority) */
 
 priorityQueue::priorityQueue() {
 	addToPQ(tired);
@@ -24,6 +24,11 @@ priorityQueue::~priorityQueue() {
 	// TODO Auto-generated destructor stub
 }
 
+/**
+*	@brief Returns true if the given state is in the priority queu.
+*	@param currentState the state to find.
+*	@returns true if the state is in the queue, false otherwise.
+*/
 bool priorityQueue::isStateInPQ(residentStates currentState) {
 
 
@@ -39,7 +44,10 @@ bool priorityQueue::isStateInPQ(residentStates currentState) {
 
 }
 
-
+/**
+*	@brief Returns the current state (highest priority) as a string.
+*	@returns The top of the priority queue as a string.
+*/
 std::string priorityQueue::checkCurrentState() {
 	if (PQ.empty()) {
 		return stateConvertString(idle);
@@ -48,6 +56,10 @@ std::string priorityQueue::checkCurrentState() {
 	}
 }
 
+/**
+*	@brief Removes a given state from the priority queue.
+*	@param unwantedState The state to remove.
+*/
 void priorityQueue::removeState(residentStates unwantedState) {
 	if (!isStateInPQ(unwantedState)) {
 		return;
@@ -62,6 +74,10 @@ void priorityQueue::removeState(residentStates unwantedState) {
 
 }
 
+/**
+*	@brief Adds a given state to the queue.
+*	@param currentState The state to be added.
+*/
 void priorityQueue::addToPQ(residentStates currentState) {
 	if (isStateInPQ(currentState)) { // if state is in PQ, don't add again
 		return;
@@ -144,6 +160,10 @@ void priorityQueue::addToPQ(residentStates currentState) {
 	}
 }
 
+/**
+*	@brief Pops the highest priority off the priority queue.
+*	@returns the highest priority resident status.
+*/
 residentStates priorityQueue::popFromPQ() {
 	if (PQ.empty()) {
 		return idle;
@@ -155,6 +175,11 @@ residentStates priorityQueue::popFromPQ() {
 	}
 }
 
+/**
+*	@brief Converts a state to a string.
+*	@param currentState The state to be converted
+*	@returns The state as a string
+*/
 std::string priorityQueue::stateConvertString(residentStates currentState){
 	switch(currentState) // assigning the priority
 		{

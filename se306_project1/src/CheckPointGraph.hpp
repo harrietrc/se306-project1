@@ -4,6 +4,10 @@
 #include "boost/graph/breadth_first_search.hpp"
 #include <vector>
 
+/**
+*	@brief Class representing the checkpoints and the paths between them.
+*	Also used in the calculation of the shortest path between checkpoints.
+*/
 class CheckPointGraph {
 
 	public:

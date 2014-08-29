@@ -9,8 +9,9 @@
 #include "se306_project1/ResidentMsg.h"
 #include "time_conversion.hpp"
 
-
-
+/**
+*	@brief Returns the friend to its start point once its interaction with the resident is done.
+*/
 void Friend1::friendsDoneCallback(const ros::TimerEvent&){
 
 	move("Friend1Origin");

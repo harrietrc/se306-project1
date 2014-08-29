@@ -13,6 +13,7 @@
 #include "se306_project1/ResidentMsg.h"
 
 using namespace std;
+
 /**
 *	@brief Periodic callback for the provision of medication.
 *	Called by the ros::Timer in the run() function. Can specify start time, end time, and period.
@@ -21,44 +22,30 @@ using namespace std;
 */
 void Assistant::medicate(se306_project1::ResidentMsg msg) {
 
-//	double lastCheckpointX = shortestPath.at(shortestPath.size()-1).first;
-//	double lastCheckpointY = shortestPath.at(shortestPath.size()-1).second;
-
 	double distanceFromCheckpoint = sqrt(pow((msg.currentCheckpointX - px),2) + pow((msg.currentCheckpointY - py),2));
 
-	//if (!isMedicated) {
-		move(msg.currentCheckpoint);
-		if (distanceFromCheckpoint < 5) {
-			stopMoving();
-			isMedicated == true;
-			isFacingCorrectly = false;
+	move(msg.currentCheckpoint);
+	if (distanceFromCheckpoint < 5) {
+		stopMoving();
+		isMedicated == true;
+		isFacingCorrectly = false;
 
-			se306_project1::AssistantMsg amsg;
-			amsg.ResidentMedicated = true;
-			Assistant_state_pub.publish(amsg);
+		se306_project1::AssistantMsg amsg;
+		amsg.ResidentMedicated = true;
+		Assistant_state_pub.publish(amsg);
 
-			currentCheckpoint.first = msg.currentCheckpointX;
-			currentCheckpoint.second = msg.currentCheckpointY;
-			//move("Assistant1Origin");
-			isMedicated == false;
+		currentCheckpoint.first = msg.currentCheckpointX;
+		currentCheckpoint.second = msg.currentCheckpointY;
+		//move("Assistant1Origin");
+		isMedicated == false;
 
-		}
-//	}else if (isMedicated) {
-	//	move("HouseCentre");
-	//	if (distanceFromCheckpoint < 0.5) {
-	//		isMedicated == false;
-	//	}
-//	}
-
+	}
 }
 
 /**
 *	@brief Causes assistant to cook for resident and return to them with the food, feeding them.
 */
 void Assistant::cook(se306_project1::ResidentMsg msg) {
-
-//	double lastCheckpointX = shortestPath.at(shortestPath.size()-1).first; //fucking throws errors if shortestPath size is 0
-//	double lastCheckpointY = shortestPath.at(shortestPath.size()-1).second;
 
 	double distanceFromCheckpoint = sqrt(pow((msg.currentCheckpointX - px),2) + pow((msg.currentCheckpointY - py),2));
 
@@ -68,17 +55,13 @@ void Assistant::cook(se306_project1::ResidentMsg msg) {
 			atKitchen = true;
 			pair<double, double> p1 = make_pair(6,-24);
 			pair<double, double> p2 = make_pair(24,-24);
-		//	pair<double, double> p3 = make_pair(24,-30);
 			pair<double, double> p4 = make_pair(20,-30);
-		//	pair<double, double> p5 = make_pair(20,-28);
 			pair<double, double> p6 = make_pair(6,-28);
 
 			shortestPath.clear();
 			shortestPath.push_back(p1);
 			shortestPath.push_back(p2);
-		//	shortestPath.push_back(p3);
 			shortestPath.push_back(p4);
-		//	shortestPath.push_back(p5);
 			shortestPath.push_back(p6);
 			isMoving = true;
 		}
@@ -95,8 +78,6 @@ void Assistant::cook(se306_project1::ResidentMsg msg) {
 	} else if (atKitchen && finishedCooking && !foodDelivered) {
 
 		move(msg.currentCheckpoint);
-		//lastCheckpointX = shortestPath.at(shortestPath.size()-1).first;
-		//lastCheckpointY = shortestPath.at(shortestPath.size()-1).second;
 		double distanceFromCheckpoint = sqrt(pow((msg.currentCheckpointX - px),2) + pow((msg.currentCheckpointY - py),2));
 		if (distanceFromCheckpoint < 5) {
 			stopMoving();
@@ -115,29 +96,13 @@ void Assistant::cook(se306_project1::ResidentMsg msg) {
 
 		}
 	}
-/*	} else if (atKitchen && finishedCooking && foodDelivered) {
-		move("HouseCentre");
-		if (g.getCheckpointName(currentCheckpoint) == "HouseCentre") {
-			atKitchen = false;
-			finishedCooking = false;
-			foodDelivered = false;
-		}
-
-	}
-	*/
 }
-
-
-
 
 /**
 *	@brief Causes assistant to entertain the resident.
 *	@returns true if behaviour was successful, false otherwise
 */
 void Assistant::entertain(se306_project1::ResidentMsg msg) {
-
-	//double lastCheckpointX = shortestPath.at(shortestPath.size()-1).first;
-	//double lastCheckpointY = shortestPath.at(shortestPath.size()-1).second;
 
 	double distanceFromCheckpoint = sqrt(pow((msg.currentCheckpointX - px),2) + pow((msg.currentCheckpointY - py),2));
 	if (!atBedroom && !residentEntertained) {
@@ -160,26 +125,17 @@ void Assistant::entertain(se306_project1::ResidentMsg msg) {
 			residentEntertained = false;
 
 		}
-	} /*else if (atBedroom && residentEntertained) {
-		move("HouseCentre");
-		if (distanceFromCheckpoint < 0.5) {
-			atBedroom = false;
-			residentEntertained = false;
-		}
-	}
-	*/
+	} 
 }
 
 
-/*	@brief Callback function that unpacks and processes resident status messages.
+/**
+*	@brief Callback function that unpacks and processes resident status messages.
 * 	Calls other callback (do) functions.
 *	Assistant should subscribe to the ResidentMsg topic in order for this callback to be called. ResidentMsg is published by the Resident.
 *	@param msg A custom ResidentMsg message that contains information about the resident's current status.
 */
 void Assistant::delegate(se306_project1::ResidentMsg msg) {
-	// Resident status will be a string - one among SILL, ILL, HUNGRY, TIRED BORED, and HEALTHCARE - see Mustafa's pq.
-	// alternatively we could send the status in another format.
-	// enum residentStates {hunger,healthLow,bored,emergency,tired,caregiver,friends,medication,idle};
 
 	if (msg.state != "emergency") {
 		// check msg if cook do cooking e.t.c
@@ -233,9 +189,6 @@ int Assistant::run(int argc, char **argv)
 	ros::Subscriber residentSub = n.subscribe("residentStatus",1000, &Assistant::delegate, this);
 	ros::Subscriber assistantCommsSub = n.subscribe("assistantComms",1000, &Assistant::delegate, this);
 
-	////messages
-	//velocity of this RobotNode
-
 	geometry_msgs::Twist RobotNode_cmdvel;
 	std_msgs::String GUImsg;
 	move("HouseCentre");
@@ -254,10 +207,6 @@ int Assistant::run(int argc, char **argv)
 		guiMsgString << "boji_sean";
 		GUImsg.data = guiMsgString.str();
 
-		//publish for gui
-		//GUI_publisher.publish(GUImsg);
-
-
 		ros::spinOnce();
 
 		loop_rate.sleep();
@@ -272,6 +221,5 @@ int Assistant::run(int argc, char **argv)
 */
 int main(int argc, char *argv[]) {
 	Assistant *a = new Assistant();
-	//setOriginName(argc, argv[0]); // Set the name of the starting checkpoint
 	a->Assistant::run(argc, argv);
 }

@@ -14,6 +14,9 @@
 
 using namespace std;
 
+/**
+*	@brief Stops the agent from moving by setting flags and the variables that get sent to stage.
+*/
 void Agent::stopMoving(){
 	isMoving = false;
 	linear_x = 0;
@@ -61,7 +64,10 @@ void Agent::setPath(std::string start, std::string end) {
 	shortestPathIndex = 0;
 }
 
-
+/**
+*	@brief Moves the agent along a path to the specified goal.
+*	@param goalName The name of a checkpoint (see CheckPointGraph.cpp)
+*/
 void Agent::move(std::string goalName){
 
 	if (isMoving == false){
@@ -101,8 +107,10 @@ void Agent::move(std::string goalName){
 	}
 }
 
-
-
+/**
+*	@brief Turns the agent to face the checkpoint, using the angular_z (angular velocity) set elsewhere. 
+*	When facing the correct direction this function will set a flag to say as much.
+*/
 void Agent::turn(){
 	//	if (a % 10 == 0){
 	//		ROS_INFO("Goal Angle: %f", checkpointAngle * 180 / M_PI);
@@ -139,8 +147,10 @@ void Agent::turn(){
 	}
 }
 
-
-
+/**
+*	@brief Moves the agent forwards until it is on the checkpoint.
+*	This function uses a margin of error (0.5), within which the agent can be said to be facing the correct direction.
+*/
 void Agent::moveForward(pair<double,double> nextCheckpoint){
 
 	linear_x = 5;
@@ -166,7 +176,11 @@ void Agent::moveForward(pair<double,double> nextCheckpoint){
 
 }
 
-
+/**
+*	@brief Decides whether to turn anticlockwise or clockwise, based on which angle is the smallest.
+*	Used in turning to face the checkpoint.
+*	@returns true if the agent should turn clockwise, and false if it should turn anticlockwise.
+*/
 bool Agent::isTurnClockwise(){
 
 	double angleDifference = checkpointAngle - currentAngle;

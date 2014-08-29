@@ -16,14 +16,11 @@
 #include "time_conversion.hpp"
 using namespace std;
 
-//PriorityQueue *status_queue = PriorityQueue::getInstance();
-
 /**
 *	@brief Gets current resident status and publishes it to a topic for assistants and doctors/nurses.
 *	May convert to string and publish in the standard way - do we need custom messages any more?
 */
 void Resident::publishStatus(ros::Publisher Resident_state_pub) {
-
 
 	// Creating a message for residentStatus
 	residentState = stateQueue.checkCurrentState();
@@ -36,6 +33,9 @@ void Resident::publishStatus(ros::Publisher Resident_state_pub) {
 	Resident_state_pub.publish(msg);
 }
 
+/**
+*	@brief Called to 'roll' for a random event such as an emergency or a decrease in overall health.
+*/
 void Resident::triggerRandomEvents(){
 
 	int randomGeneratedForEmergency = rand() % 100;
@@ -56,6 +56,10 @@ void Resident::triggerRandomEvents(){
 
 }
 
+/**
+*	@brief Checks the resident's status and performs the appropriate behaviour for that status.
+*	May involve adding a new status to the queue - checks resident's hunger and boredom as well as its status queue.
+*/
 void Resident::checkStatus(){
 	residentState = stateQueue.checkCurrentState();
 	if (residentState == "friends"){
@@ -75,27 +79,58 @@ void Resident::checkStatus(){
 
 }
 
+/**
+*	@brief Adds medication status to queue.
+*/
 void Resident::medicationCallback(const ros::TimerEvent&){
 	stateQueue.addToPQ(medication);
 }
+
+/**
+*	@brief Adds hunger status to queue.
+*/
 void Resident::hungerCallback(const ros::TimerEvent&){
 	stateQueue.addToPQ(hungry);
 }
+
+/**
+*	@brief Adds caregiver status to queue (caregiver is visiting)
+*/
 void Resident::caregiverServicesCallback(const ros::TimerEvent&){
 	stateQueue.addToPQ(caregiver);
 }
+
+/**
+*	@brief Removes caregiver status to queue (caregiver has completed tasks)
+*/
 void Resident::caregiverServicesDoneCallback(const ros::TimerEvent&){
 	stateQueue.removeState(caregiver);
 }
+
+/**
+*	@brief Removes tired status to queue.
+*/
 void Resident::wakeCallback(const ros::TimerEvent&){
 	stateQueue.removeState(tired);
 }
+
+/**
+*	@brief Adds tired status to queue.
+*/
 void Resident::sleepCallback(const ros::TimerEvent&){
 	stateQueue.addToPQ(tired);
 }
+
+/**
+*	@brief Adds friends status to queue (friends are visitng)
+*/
 void Resident::friendsCallback(const ros::TimerEvent&){
 	stateQueue.addToPQ(friends);
 }
+
+/**
+*	@brief Removes friends status to queue (friends are leaving)
+*/
 void Resident::friendsDoneCallback(const ros::TimerEvent&){
 	stateQueue.removeState(friends);
 	boredom = 0;
@@ -121,7 +156,9 @@ void Resident::doctor_callback(se306_project1::DoctorMsg msg)
 	}
 }
 
-
+/**
+*	@brief Move to the shower if the caregiver is adjacent to the resident
+*/
 void Resident::caregiver_callback(const std_msgs::String::ConstPtr& msg)
 {
 	if (msg->data.c_str() == "Here") {

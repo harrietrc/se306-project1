@@ -62,9 +62,6 @@ int Assistant1::run(int argc, char **argv)
 	ros::Subscriber StageOdo_sub = n.subscribe("robot_2/odom",1000, &Assistant1::StageOdom_callback, dynamic_cast<Agent*>(this));
 	ros::Subscriber residentSub = n.subscribe("residentStatus",1000, &Assistant1::clean, this);
 
-	////messages
-	//velocity of this RobotNode
-
 	geometry_msgs::Twist RobotNode_cmdvel;
 
 	while (ros::ok())

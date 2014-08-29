@@ -16,8 +16,6 @@
 *	@param endTime The hour to end the periodic visits.
 *	@remarks If start time and end time are unnecessary, they can be removed
 */
-
-
 void Friend::friendsDoneCallback(const ros::TimerEvent&){
 	move("Friend1Origin");
 }

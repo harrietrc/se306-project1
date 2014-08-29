@@ -11,6 +11,12 @@
 #include "ros/ros.h"
 using namespace std;
 
+/**
+*	@brief Runs the node process, given a node name and number.
+*	@param executableName The name of the node to be run (e.g. 'Assistant')
+*	@param nodeNumber The number of the node
+*	@returns 1 if completed successfully, 0 if failed to fork.
+*/
 int ProcessManager::nodeProcess(std::string executableName, int nodeNumber) {
 	pid_t child = 0;
 	child = fork();

@@ -26,9 +26,6 @@ class Agent
 			px = 0;
 			py = 0;
 			currentAngle = 0;
-			//currentCheckpoint = std::make_pair(0,0); // Needs to be initialised in subclasses!!
-			//shortestPath.push_back(currentCheckpoint); // Needs to be removed later!!
-			isMoving = false;
 			isFacingCorrectly = false;
 			shortestPathIndex = 0;
 			checkpointAngle = 0;
@@ -44,7 +41,7 @@ class Agent
 		void setPath(std::string start, std::string end);
 
 		// Checkpoint graph object
-		CheckPointGraph g;
+		CheckPointGraph g; /*!< The graph of all the checkpoints in the system */
 
 		//velocity of the robot
 		double linear_x; /*!< Linear velocity of the robot */
@@ -56,20 +53,20 @@ class Agent
 		double currentAngle; /*!< angle of the robot*/
 
 		//current checkpoint
-		std::pair<double, double> currentCheckpoint;
+		std::pair<double, double> currentCheckpoint; /*!< The agent's current (or  previous, if they are moving) checkpoint */
 
 		//shortestPath
-		std::vector <std::pair<double,double> > shortestPath;
-		int shortestPathIndex;
-		bool isFacingCorrectly;
+		std::vector <std::pair<double,double> > shortestPath;  /*!< A path of checkpoint co-ordinates that the agent is expected to move along */
+		int shortestPathIndex; /*!< Pointer to the current vertex in the path */
+		bool isFacingCorrectly; /*!< True if the agent is facing the correct direction (and can therefore begin moving) */
 
 		//moving status of the robot
-		bool isMoving;
+		bool isMoving; /*!< True if the agent is moving */
 
 		int robot_id; /*!< Robot's ID */
 
-		double checkpointAngle;
-		bool isClockwise;
+		double checkpointAngle; /*!< The angle to the checkpoint*/
+		bool isClockwise; /*!< True if the agent should turn clockwise to face its current goal */
 
 		void turn();
 		void moveForward(std::pair<double,double> nextCheckpoint);
@@ -77,6 +74,5 @@ class Agent
 		void move(std::string goal);
 		bool isTurnClockwise();
 		void stopMoving();
-		/* -- Communication and co-ordination -- */
 	
 };

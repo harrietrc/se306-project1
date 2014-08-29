@@ -6,6 +6,9 @@
 #include <boost/bimap/set_of.hpp>
 using namespace boost; // Useful for graphs
 
+// These two would definitely have been better implemented as a map! Unfortunately we ran out of time. At the time I decided to separate them for a reason,
+// but unfortunately I cant remember what it was...
+
 /** Array of the names of checkpoints. Necessary for the initialisation of the checkpoints vector. */
 const char* nameArr[] = { 
 		"FrontDoorWest","FrontDoorEast","LivingRoomNorthWest","LivingRoomNorthEast","CentrePassageSouth","CentrePassageNorth",
@@ -40,7 +43,8 @@ std::map<std::string, vector_graph_t::vertex_descriptor> indices; /*!< Map that 
 
 /* -- Edges -- */
 
-typedef std::pair <std::string, std::string> E;
+typedef std::pair <std::string, std::string> E; /*!< Definition of the edge type, which links two checkpoint names. */
+
 E paths[] = {
 	 E("FrontDoorWest","LivingRoomNorthWest"), E("FrontDoorEast", "LivingRoomNorthEast"), E("LivingRoomNorthWest","CentrePassageNorth"),
 	 E("LivingRoomNorthEast","CentrePassageSouth"), E("CentrePassageNorth","KitchenNorthWest"), E("CentrePassageSouth","KitchenNorthWest"),
@@ -77,13 +81,15 @@ E paths[] = {
 
 /* -- Temporary solution - two maps of co-ordinates to names and names to co-ordinates --*/
 
-typedef std::string CheckpointName; // Key
-typedef std::pair<int, int> Checkpoint; // Value
+typedef std::string CheckpointName; /*!< Key for the checkpoint map - the checkpoint name */
+typedef std::pair<int, int> Checkpoint; /*!< Value for the checkpoint map - a pair of co-ordinates */
 typedef std::map<CheckpointName, Checkpoint> CheckpointMap; /*!< Map with checkpoint names as keys and checkpoint co-ordinates as values */
-CheckpointMap c;
+CheckpointMap c; /*!< Map that maps checkpoint names (keys) to checkpoint co-ordinates (values) */
 
 typedef std::map<Checkpoint, CheckpointName> CheckpointMapReverse; /*!< Map with checkpoint names as keys and checkpoint co-ordinates as values */
-CheckpointMapReverse crev;
+CheckpointMapReverse crev; /*!< Map that maps checkpoint co-ordinates (keys) to checkpoint names (values) */
+
+// I realise that the above 2 maps could be replaced by a bidirectional map, but I had trouble getting this working.
 
 /* -- Pathing -- */
 
@@ -96,6 +102,7 @@ std::vector<std::pair<double, double> > path; /*!< The agent's path to a specifi
  * 	Sets path member variable.
  *	@param startName The name of the start checkpoint as a string (e.g. 'kitchen')
  *	@param endName The name of the goal checkpoint as a string (e.g. 'bathroom')
+ *	@attention The shortest path in terms of path length will not necessarily be the same as the shortest path in terms of actual distance.
  */
 std::vector<std::pair<double, double> > CheckPointGraph::shortestPath( std::string startName, std::string endName) {
 
@@ -139,11 +146,18 @@ std::vector<std::pair<double, double> > CheckPointGraph::shortestPath( std::stri
     return a;
 }
 
+/**	
+*	@brief Gets the co-ordinates of a checkpoint when given its name.
+*	@param name The name of the checkpoint
+*	@returns The pair of (x,y) co-ordinates 
+*/
 std::pair<double,double> CheckPointGraph::getCoords(std::string name) {
 	return c.at(name);
 }
 
-// checked
+/**
+*	@brief Gets the name of
+*/
 std::string CheckPointGraph::getCheckpointName(std::pair<double, double> cpcoords) {
 	return crev.at(cpcoords);
 }

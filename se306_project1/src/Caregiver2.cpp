@@ -79,6 +79,9 @@ bool Caregiver2::exercise(se306_project1::ResidentMsg msg) {
 	return false;
 }
 
+/**
+*	@brief Spins the Caregiver around as a signal that an action is being performed.
+*/
 void Caregiver2::spin() {
 	int counter = 0;
 	while (counter < 100) {
