@@ -120,9 +120,9 @@ void Resident::doctor_callback(se306_project1::DoctorMsg msg)
 
 void Resident::friend_callback(const std_msgs::String::ConstPtr& msg)
 {
-	if (msg->data.c_str() == "Done") { // friend has finished talking with Resident
-		boredom = 0;
-	}
+//	if (msg.data == "Done") { // friend has finished talking with Resident
+//		boredom = 0;
+//	}
 }
 
 /**
@@ -215,6 +215,8 @@ int Resident::run(int argc, char *argv[]) {
 
 	//velocity of this RobotNode
 	geometry_msgs::Twist RobotNode_cmdvel;
+	//stateQueue.addToPQ(bored);
+	move("ResidentSofa");
 
 	while (ros::ok())
 	{

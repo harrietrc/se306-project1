@@ -136,6 +136,10 @@ std::vector<std::pair<double, double> > CheckPointGraph::shortestPath( std::stri
     return a;
 }
 
+std::pair<double,double> CheckPointGraph::getCoords(std::string name) {
+	return c.at(name);
+}
+
 // checked
 std::string CheckPointGraph::getCheckpointName(std::pair<double, double> cpcoords) {
 	return crev.at(cpcoords);
