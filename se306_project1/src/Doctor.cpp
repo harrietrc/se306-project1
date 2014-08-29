@@ -30,7 +30,6 @@ void Doctor::delegate(se306_project1::ResidentMsg msg) {
 *	@returns true if behaviour is successful.
 */
 void Doctor::doHeal(se306_project1::ResidentMsg msg) {
-	ROS_INFO("here");
 
 	double distanceFromCheckpoint = sqrt(pow((msg.currentCheckpointX - px),2) + pow((msg.currentCheckpointY - py),2));
 

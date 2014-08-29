@@ -66,8 +66,6 @@ void Agent::move(std::string goalName){
 
 	if (isMoving == false){
 		isMoving = true;
-	//	currentCheckpoint.first = 17; // can get rid of this
-	//	currentCheckpoint.second = 17; // ditto
 
 		//Get the path stuff);
 
@@ -87,7 +85,6 @@ void Agent::move(std::string goalName){
 	if (currentCheckpoint.first == nextCheckpoint.first &&
 			currentCheckpoint.second == nextCheckpoint.second){
 		shortestPathIndex++;
-		ROS_INFO("shortestPathIndex: %f",shortestPathIndex);
 
 		if (shortestPathIndex >= shortestPath.size() ){
 			shortestPathIndex = 0;
@@ -98,7 +95,6 @@ void Agent::move(std::string goalName){
 			nextCheckpoint = shortestPath.at(shortestPathIndex);
 
 			checkpointAngle = calculateGoalAngle(nextCheckpoint);
-			ROS_INFO("Checkpoint Angle: %f", checkpointAngle);
 			isClockwise = isTurnClockwise();
 		}
 
@@ -202,8 +198,6 @@ double Agent::calculateGoalAngle(pair<double, double> goalCheckpoint){
 	double goalVectorX = goalCheckpoint.first - px;
 	double goalVectorY = goalCheckpoint.second - py;
 
-	ROS_INFO("px: %f", px);
-	ROS_INFO("py: %f", py);
 
 	double goalAngle = atan2(goalVectorY, goalVectorX); //pi <= goalAngle < -pi
 

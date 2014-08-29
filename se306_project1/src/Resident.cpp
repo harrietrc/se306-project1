@@ -60,7 +60,7 @@ void Resident::triggerRandomEvents(){
 void Resident::checkStatus(){
 	residentState = stateQueue.checkCurrentState();
 	if (residentState == "friends"){
-		move("ResidentSofa");
+		move("Friend2Sofa");
 	}
 	if (residentState == "caregiver"){
 		move("BedSouthWest");
@@ -71,6 +71,7 @@ void Resident::checkStatus(){
 	if (boredom > 70){
 		stateQueue.addToPQ(bored);
 	}
+
 }
 
 void Resident::medicationCallback(const ros::TimerEvent&){
@@ -215,7 +216,6 @@ int Resident::run(int argc, char *argv[]) {
 
 	//velocity of this RobotNode
 	geometry_msgs::Twist RobotNode_cmdvel;
-	stateQueue.addToPQ(healthLow);
 	while (ros::ok())
 	{
 

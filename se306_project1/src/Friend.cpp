@@ -28,6 +28,7 @@ void Friend::friendsDoneCallback(const ros::TimerEvent&){
 *	@param msg A custom ResidentMsg message that contains information about the resident's current status.
 */
 void Friend::delegate(se306_project1::ResidentMsg msg) {
+
 	if (msg.state == "emergency") {
 		emergency = true; // required variable if timing/scheduling is done within this class
 	}
@@ -42,6 +43,7 @@ void Friend::delegate(se306_project1::ResidentMsg msg) {
 */
 int Friend::run(int argc, char *argv[])
 {
+	ROS_INFO("move");
 
 	/* -- Initialisation -- */
 	
