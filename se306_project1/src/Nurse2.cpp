@@ -78,8 +78,8 @@ int Nurse2::run(int argc, char *argv[])
 	while (ros::ok())
 	{
 		//messages to stage
-		//RobotNode_cmdvel.linear.x = linear_x;
-		//RobotNode_cmdvel.angular.z = angular_z;
+		RobotNode_cmdvel.linear.x = linear_x;
+		RobotNode_cmdvel.angular.z = angular_z;
 			
 		//publish the message
 		RobotNode_stage_pub.publish(RobotNode_cmdvel);
