@@ -25,6 +25,8 @@ class Resident : public Agent
 			residentState = stateQueue.checkCurrentState();
 			originName = "ResidentOrigin";
 			currentCheckpoint = std::make_pair(26,48);
+			px = 26;
+			py = 48;
 		}
 
 		/**

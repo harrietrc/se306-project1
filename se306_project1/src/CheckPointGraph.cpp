@@ -48,7 +48,7 @@ E paths[] = {
 	 E("KitchenSouthWest","KitchenNorthWest"), E("CentrePassageSouth","CentrePassageNorth"), E("CentrePassageNorth","NextToCentreStool"),
 	 E("NextToCentreStool","CentreStool"), E("NextToCentreStool","HouseCentre"), 
 	 E("CentrePassageNorth","HouseCentre"), E("HouseCentre", "CouchesNorthEast"), E("CouchesNorthEast","CouchesNorthCentre"),
-	 E("CouchesNorthEast","BedroomEntranceEast"), E("CouchesNorthEast","BedroomEntranceWest"), E("CouchesNorthCentre","BathroomEntranceEast"),
+	 E("CouchesNorthEast","BedroomEntranceEast"),E("CouchesNorthEast","Friend2Sofa"), E("CouchesNorthEast","BedroomEntranceWest"), E("CouchesNorthCentre","BathroomEntranceEast"),
 	 E("BathroomEntranceEast","BathroomCentre"), E("BathroomEntranceWest","BathroomCentre"),
 	 E("BathroomCentre","Shower"), E("BedroomEntranceWest","BedSouthWest"),  
 	 E("BedSouthEast","BedNorthEast"), E("ResidentOrigin","BedSouthEast"),

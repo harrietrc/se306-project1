@@ -9,18 +9,23 @@ class Doctor : public Visitor
 	private:
 		bool healing = false;
 		bool readyToHeal = false;
-		bool hospitalise = false;
+		bool hospitalised = false;
 		bool readyToHospitalise = false;
-		
+		bool isHealed = false;
+
+		ros::Publisher Doctor_state_pub;
+
 	protected:
-		bool doHeal(se306_project1::ResidentMsg msg);
-		bool doHospitalise(se306_project1::ResidentMsg msg);
+		void doHeal(se306_project1::ResidentMsg msg);
+		void hospitalise(se306_project1::ResidentMsg msg);
 		void delegate(se306_project1::ResidentMsg msg);
 
 	public:
 		int run(int argc, char *argv[]);
 		Doctor() {
 			originName = "DoctorOrigin";
+			currentCheckpoint.first = -36;
+			currentCheckpoint.second = -48;
 		}
 		
 };

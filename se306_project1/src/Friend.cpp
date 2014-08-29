@@ -16,23 +16,10 @@
 *	@param endTime The hour to end the periodic visits.
 *	@remarks If start time and end time are unnecessary, they can be removed
 */
-void Friend::doTimedVisit(const ros::TimerEvent&) { // don't know whether if timing is still required in this class? if not then use delegate
-	int startTime = time_conversion::simHoursToRealSecs(6); // Start callback at 6am
-	int endTime = time_conversion::simHoursToRealSecs(12); // Stop callback at 12pm
-	int tnow = ros::Time::now().toSec(); // The simulation time now
-	int dlen = time_conversion::getDayLength(); // The length of a simulation day, in seconds
-	
-	// Behaviour should only occur if the simulation time is between the specified start and end times.
-	if (((tnow % dlen) > startTime) && ((tnow % dlen) < endTime)) { // Note that this will run at the end of the duration specified for the timer.
-		if (emergency == false && finishedConvo == false) {
-			while (Visitor::visitResident() == false) // true when this is next to resident then do convo
-			finishedConvo = Visitor::doConverse();
-		}
-	}
-}
+
 
 void Friend::friendsDoneCallback(const ros::TimerEvent&){
-
+	move("Friend1Origin");
 }
 
 /**
@@ -41,13 +28,12 @@ void Friend::friendsDoneCallback(const ros::TimerEvent&){
 *	@param msg A custom ResidentMsg message that contains information about the resident's current status.
 */
 void Friend::delegate(se306_project1::ResidentMsg msg) {
+
 	if (msg.state == "emergency") {
 		emergency = true; // required variable if timing/scheduling is done within this class
-	} else if (msg.state == "friends") { // resident state when it needs friends to converse with
-		emergency = false; // required variable if timing/scheduling is done within this class
-		if (Visitor::visitResident() == true) { // next to resident
-			finishedConvo = Visitor::doConverse();
-		}
+	}
+	if (msg.state == "friends") { // resident state when it needs friends to converse with
+		move("Friend1Sofa");
 	}
 }
 
@@ -57,6 +43,7 @@ void Friend::delegate(se306_project1::ResidentMsg msg) {
 */
 int Friend::run(int argc, char *argv[])
 {
+	ROS_INFO("move");
 
 	/* -- Initialisation -- */
 	
@@ -73,13 +60,13 @@ int Friend::run(int argc, char *argv[])
 
 	//advertise() function will tell ROS that you want to publish on a given topic_
 	//to stage
-	ros::Publisher RobotNode_stage_pub = n.advertise<geometry_msgs::Twist>("robot_0/cmd_vel",1000); 
+	ros::Publisher RobotNode_stage_pub = n.advertise<geometry_msgs::Twist>("robot_7/cmd_vel",1000);
 
 	//publish message to Resident once conversation is over
 	ros::Publisher friend_pub = n.advertise<std_msgs::String>("visitorConvo",1000);
 
 	//subscribe to listen to messages coming from stage
-	ros::Subscriber StageOdo_sub = n.subscribe("robot_0/odom",1000, &Agent::StageOdom_callback, dynamic_cast<Agent*>(this));
+	ros::Subscriber StageOdo_sub = n.subscribe("robot_7/odom",1000, &Agent::StageOdom_callback, dynamic_cast<Agent*>(this));
 
 	//custom Resident subscriber to "resident/state"
 	ros::Subscriber resident_sub = n.subscribe<se306_project1::ResidentMsg>("residentStatus",1000, &Friend::delegate, this);
@@ -92,10 +79,6 @@ int Friend::run(int argc, char *argv[])
 	//velocity of this RobotNode
 	geometry_msgs::Twist RobotNode_cmdvel;
 
-	std_msgs::String vMsg; // message to indicate that convo is "Done"
-	std::stringstream ss;
-	ss << "Done";
-	vMsg.data = ss.str();	
 
 	while (ros::ok())
 	{

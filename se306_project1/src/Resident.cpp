@@ -29,7 +29,7 @@ void Resident::publishStatus(ros::Publisher Resident_state_pub) {
 	// Creating a message for residentStatus
 	residentState = stateQueue.checkCurrentState();
 	se306_project1::ResidentMsg msg;
-	//residentState = "hungry";    //hardcoded state
+	residentState = "friends";    //hardcoded state
 	msg.state = residentState;
 	msg.currentCheckpoint = g.getCheckpointName(currentCheckpoint);
 	msg.currentCheckpointX = currentCheckpoint.first;
@@ -60,7 +60,7 @@ void Resident::triggerRandomEvents(){
 void Resident::checkStatus(){
 	residentState = stateQueue.checkCurrentState();
 	if (residentState == "friends"){
-		move("ResidentSofa");
+		move("Friend2Sofa");
 	}
 	if (residentState == "caregiver"){
 		move("BedSouthWest");
@@ -71,6 +71,7 @@ void Resident::checkStatus(){
 	if (boredom > 70){
 		stateQueue.addToPQ(bored);
 	}
+
 }
 
 void Resident::medicationCallback(const ros::TimerEvent&){
@@ -107,7 +108,7 @@ void Resident::friendsDoneCallback(const ros::TimerEvent&){
 */
 void Resident::doctor_callback(se306_project1::DoctorMsg msg)
 {
-	if (msg.heal == true) { // at this point Doctor should be next to resident and then doctor should start leaving back to his origin
+	if (msg.ResidentHealed == true) { // at this point Doctor should be next to resident and then doctor should start leaving back to his origin
 		health = 100;
 	}
 	else if (msg.hospitalise == true) { // at this point the doctor + 2 nurses should be next to the resident
@@ -225,7 +226,6 @@ int Resident::run(int argc, char *argv[]) {
 
 	//velocity of this RobotNode
 	geometry_msgs::Twist RobotNode_cmdvel;
-
 	while (ros::ok())
 	{
 
@@ -245,7 +245,7 @@ int Resident::run(int argc, char *argv[]) {
 			checkStatus();
 			publishStatus(Resident_state_pub);
 			residentState = stateQueue.checkCurrentState();
-			ROS_INFO("State is: %s",residentState.c_str());
+			//ROS_INFO("State is: %s",residentState.c_str());
 		}
 
 		ros::spinOnce();
