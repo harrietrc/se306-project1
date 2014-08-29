@@ -40,8 +40,8 @@ int main(int argc, char** argv) {
 	nodeList[agentType] = nodeList[agentType] + agentFactory.createAgent(agentType, getNodeNumber());
 	nodeList[agentType] = nodeList[agentType] + agentFactory.createAgent(agentType, getNodeNumber());
 
-	agentType = AgentConst::DOOR;
-	nodeList[agentType] = nodeList[agentType] + agentFactory.createAgent(agentType, getNodeNumber());
+	//agentType = AgentConst::DOOR;
+	//nodeList[agentType] = nodeList[agentType] + agentFactory.createAgent(agentType, getNodeNumber());
 
 	//std::cout << "now we have " << nodeList[agentType] << "doctor(s)\n";
 	
@@ -62,6 +62,11 @@ void initializeNodeList() {
 }
 
 int getNodeNumber() {
-	return nodeList[AgentConst::RESIDENT] + nodeList[AgentConst::ASSISTANT] + nodeList[AgentConst::DOCTOR];
+	return nodeList[AgentConst::RESIDENT] +
+			nodeList[AgentConst::ASSISTANT] +
+			nodeList[AgentConst::DOCTOR] +
+			nodeList[AgentConst::CAREGIVER] +
+			nodeList[AgentConst::NURSE] +
+			nodeList[AgentConst::FRIENDS];
 
 }
