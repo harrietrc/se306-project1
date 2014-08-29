@@ -17,7 +17,7 @@
 *	@remarks If start time and end time are unnecessary, they can be removed
 */
 void Friend3::doTimedVisit(const ros::TimerEvent&) { // don't know whether if timing is still required in this class? if not then use delegate
-	int startTime = time_conversion::simHoursToRealSecs(6); // Start callback at 6am
+	/*int startTime = time_conversion::simHoursToRealSecs(6); // Start callback at 6am
 	int endTime = time_conversion::simHoursToRealSecs(12); // Stop callback at 12pm
 	int tnow = ros::Time::now().toSec(); // The simulation time now
 	int dlen = time_conversion::getDayLength(); // The length of a simulation day, in seconds
@@ -28,7 +28,7 @@ void Friend3::doTimedVisit(const ros::TimerEvent&) { // don't know whether if ti
 			while (Visitor::visitResident() == false) // true when this is next to resident then do convo
 			finishedConvo = Visitor::doConverse();
 		}
-	}
+	}*/
 }
 
 /**
@@ -41,9 +41,19 @@ void Friend3::delegate(se306_project1::ResidentMsg msg) {
 		emergency = true; // required variable if timing/scheduling is done within this class
 	} else if (msg.state == "friends") { // resident state when it needs friends to converse with
 		emergency = false; // required variable if timing/scheduling is done within this class
-		if (Visitor::visitResident() == true) { // next to resident
+
+		/*double distanceFromCheckpoint = sqrt(pow((msg.currentCheckpointX - px),2) + pow((msg.currentCheckpointY - py),2));
+	    move(msg.currentCheckpoint);
+
+	    if (distanceFromCheckpoint < 30) { // next to friend2
+		    stopMoving();
 			finishedConvo = Visitor::doConverse();
+            move("Friend3Origin"); // go back to origin
 		}
+        */
+        move("Friend3Sofa");
+        finishedConvo = Visitor::doConverse();
+        move("Friend3Origin"); // go back to origin
 	}
 }
 

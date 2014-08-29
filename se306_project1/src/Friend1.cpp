@@ -25,9 +25,18 @@ void Friend1::delegate(se306_project1::ResidentMsg msg) {
 		emergency = true; // required variable if timing/scheduling is done within this class
 	} else if (msg.state == "friends") { // resident state when it needs friends to converse with
 		emergency = false; // required variable if timing/scheduling is done within this class
-		if (Visitor::visitResident() == true) { // next to resident
+
+		/*double distanceFromCheckpoint = sqrt(pow((msg.currentCheckpointX - px),2) + pow((msg.currentCheckpointY - py),2));
+	    move(msg.currentCheckpoint);
+	    if (distanceFromCheckpoint < 10) { // next to resident
+		    stopMoving();
 			finishedConvo = Visitor::doConverse();
+            move("Friend1Origin"); // go back to origin
 		}
+        */
+        move("Friend1Sofa");
+        finishedConvo = Visitor::doConverse();
+        move("Friend1Origin"); // go back to origin
 	}
 }
 
