@@ -41,7 +41,7 @@ class ros_gui(Tkinter.Tk):
 		#====Start of statusFrame====#
         
 		# Frame containing status of resident (health, hunger)
-		statusFrame = Tkinter.Frame(self, bd=2, relief="groove", width=280, height=130)
+		statusFrame = Tkinter.Frame(self, bd=2, relief="groove", width=285, height=130)
 		statusFrame.grid(column=0, row=2, padx=5, pady=2.5)
 		statusFrame.grid_propagate(False)
         
@@ -101,7 +101,7 @@ class ros_gui(Tkinter.Tk):
 		#====Start of timeFrame====#
         
 		# Parent Frame
-		timeFrame = Tkinter.Frame(self, bd=2, relief="groove", width=280, height=50)
+		timeFrame = Tkinter.Frame(self, bd=2, relief="groove", width=285, height=50)
 		timeFrame.grid(column=0, row=3, padx=5, pady=2.5)
 		timeFrame.grid_propagate(False)
 		
@@ -122,7 +122,7 @@ class ros_gui(Tkinter.Tk):
 		#====Start of infoFrame====#
 
 		# Parent frame
-		infoFrame = Tkinter.Frame(self, bd=2, relief="groove", width=280, height=90)
+		infoFrame = Tkinter.Frame(self, bd=2, relief="groove", width=285, height=90)
 		infoFrame.grid(column=0, row=4, padx=5, pady=2.5)
 		infoFrame.grid_propagate(False)
 
